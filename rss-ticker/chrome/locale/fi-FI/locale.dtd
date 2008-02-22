@@ -1,0 +1,78 @@
+<!ENTITY extension.title "RSS Ticker">
+<!ENTITY cm.open "Avaa">
+<!ENTITY cm.open.key "O">
+<!ENTITY cm.openInNewWindow "Avaa uudessa ikkunassa">
+<!ENTITY cm.openInNewWindow.key "N">
+<!ENTITY cm.openInNewTab "Avaa uuteen välilehteen">
+<!ENTITY cm.openInNewTab.key "T">
+<!ENTITY cm.openAllInTabs "Avaa kaikki välilehtiin">
+<!ENTITY cm.openUnreadInTabs "Avaa lukemattomat välilehtiin">
+<!ENTITY cm.openFeedInTabs "Avaa syöte välilehtiin">
+<!ENTITY cm.openFeedUnreadInTabs "Avaa lukematon syöte välilehtiin">
+<!ENTITY cm.copyLinkTitle "Kopioi linkin nimi">
+<!ENTITY cm.copyLinkTitle.key "L">
+<!ENTITY cm.copyLinkURL "Kopioi linkin osoite">
+<!ENTITY cm.copyLinkURL.key "C">
+<!ENTITY cm.refreshFeeds "Päivitä syötteet">
+<!ENTITY cm.refreshFeeds.key "R">
+<!ENTITY cm.manageFeeds "Hallinnoi syötteitä">
+<!ENTITY cm.manageFeeds.key "G">
+<!ENTITY cm.markAsRead "Merkitse luetuksi">
+<!ENTITY cm.markAsRead.key "M">
+<!ENTITY cm.markFeedAsRead "Merkitse syöte luetuksi">
+<!ENTITY cm.markFeedAsRead.key "F">
+<!ENTITY cm.markAllAsRead "Merkitse kaikki luetuksi">
+<!ENTITY cm.markAllAsRead.key "A">
+<!ENTITY options.speed.tt "Syötenauhan vieritysnopeus (&apos;1&apos; on nopein).">
+<!ENTITY options.dw.itemWidth.tt "Yksittäisen kohteen leveys syötenauhassa (oletus 200 pistettä).">
+<!ENTITY options.smoothness.tt "Nauhan vierityksen tasaisuus (arvon kasvattaminen saa nauhan vierimään tasaisemmin, mutta vieritys hidastuu samalla).">
+<!ENTITY options.updateInterval.tt "Syötteiden päivitysväli minuuteissa.">
+<!ENTITY options.updateInterval "Päivitystiheys">
+<!ENTITY options.speed "Vieritysnopeus">
+<!ENTITY options.dw.itemWidth "Leveys">
+<!ENTITY pixelAbbrev "px">
+<!ENTITY options.smooothness "Syötenauhan vierityksen tasaisuus">
+<!ENTITY cmOptionsDescription "Valitse syötenauhan aihevalikossa näytettävät kohteet. Aihevalikon saat esille klikkaamalla syötenauhaa hiiren oikealla näppäimellä.">
+<!ENTITY tt.summary "Yhteenveto">
+<!ENTITY options "Asetukset">
+<!ENTITY options.restartNotice "Tähdellä (*) merkityt asetukset tulevat voimaan vasta kun suljet ja avaat uudelleen selainikkunan.">
+<!ENTITY options.general "Yleiset">
+<!ENTITY options.advanced "Lisäasetukset">
+<!ENTITY options.contextMenu "Aihevalikko">
+<!ENTITY options.placement.tt "Syötenauhan sijainti selaimessa.">
+<!ENTITY options.random.tt "Näytä syötteen kohteet satunnaisessa järjestyksessä.">
+<!ENTITY options.pause.tt "Pysäytä syötenauha vietäessä hiiri sen päälle.">
+<!ENTITY options.disable.tt "Kytke RSS Ticker pois päältä.">
+<!ENTITY options.hide.tt "Piilota syötteen kohteet, jotka olet jo lukenut.">
+<!ENTITY options.bold.tt "Lihavoi kohteet, joita et ole lukenut.">
+<!ENTITY options.openInNewTab.tt "Avaa linkit aina uuteen välilehteen riippumatta siitä, mitä hiiren nappia painettiin.">
+<!ENTITY disableTicker "Kytke syötenauha pois päältä">
+<!ENTITY options.tickerPlacement "Syötenauhan sijainti">
+<!ENTITY tickerPlacement.belowStatusBar "Tilapalkin alapuolella">
+<!ENTITY tickerPlacement.belowBMTB "Kirjanmerkkipalkin alapuolella">
+<!ENTITY options.random "Sekoita syötteen kohteet">
+<!ENTITY options.pause "Pysäytä syötenauha kun hiiri on sen päällä.">
+<!ENTITY options.hide "Piilota luetut kohteet.">
+<!ENTITY options.bold "Lihavoi kohteet, joita ei ole luettu.">
+<!ENTITY options.openInNewTab "Avaa linkit aina uuteen välilehteen.">
+<!ENTITY toggleTicker "Syötenauha päälle/pois">
+<!ENTITY options.dw.limitWidth "Rajoita kohteiden leveys">
+<!ENTITY options.dw.isMaxWidth "Käytä enimmäisleveyttä">
+<!ENTITY options.disableRefresh "Poista automaattinen päivitys käytöstä">
+<!ENTITY options.limitItemsPerFeed "Rajoita kohteiden lukumäärä syötteissä">
+<!ENTITY options.itemsPerFeed "Kohteita syötteessä">
+<!ENTITY about "Tietoja">
+<!ENTITY noFeedsFoundTitle "Live-kirjanmerkkejä ei ole">
+<!ENTITY noFeedsFound "Live-kirjanmerkkejä (uutissyötteitä, RSS-syötteitä) ei löytynyt">
+<!ENTITY howToLiveBookmark1 "RSS Ticker lataa ja vierittää live-kirjanmerkeiksi talletettuja uutissyötteitä. Live-kirjanmerkkejä voidaan lisätä Firefoxissa kahdella eri tavalla:">
+<!ENTITY howToLiveBookmark2 "Jos selaimessa auki oleva sivu on saatavilla myös RSS-syötteenä (esimerkiksi http://www.mozilla.org/ ), näkyy osoitepalkin oikeassa reunassa pieni oranssi kuvake. Klikkaamalla tätä kuvaketta avautuu &apos;Lisää live-kirjanmerkki&apos; -ikkuna.">
+<!ENTITY howToLiveBookmark3 "Kirjanmerkkien muokkaus -ikkunassa (Kirjanmerkit &gt; Muokkaa kirjanmerkkejä...) voidaan lisätä uusi syöte valitsemalla Tiedosto-valikon kohdasta &apos;Uusi live-kirjanmerkki&apos;.">
+<!ENTITY howToLiveBookmark4 "Uusi syöte tulee syötenauhaan uudelleenkäynnistämällä Firefox tai valitsemalla syötenauhan aihevalikosta &apos;Päivitä syötteet&apos;.">
+<!ENTITY dontShowAgain "Älä näytä tätä viestiä enää.">
+<!ENTITY feed "Syöte">
+<!ENTITY feeds "Syötteet">
+<!ENTITY feedManagement "Lisää (poista) syöte valitsemalla se alla olevasta luettelosta ja klikkaamalla Lisää (Poista) .">
+<!ENTITY add "Lisää">
+<!ENTITY remove "Poista">
+<!ENTITY URL "URL">
+<!ENTITY hideWhenEmpty "Piilota syötenauha jos se on tyhjä">

@@ -1,0 +1,37 @@
+content    rss-ticker     chrome/content/
+
+locale     rss-ticker     da-DK            chrome/locale/da-DK/
+locale     rss-ticker     de-DE            chrome/locale/de-DE/
+locale     rss-ticker     en-US            chrome/locale/en-US/
+locale     rss-ticker     es-AR            chrome/locale/es-AR/
+locale     rss-ticker     fi-FI            chrome/locale/fi-FI/
+locale     rss-ticker     fr-FR            chrome/locale/fr-FR/
+locale     rss-ticker     ko-KR            chrome/locale/ko-KR/
+locale     rss-ticker     pt-BR            chrome/locale/pt-BR/
+locale     rss-ticker     ru-RU            chrome/locale/ru-RU/
+locale     rss-ticker     sv-SE            chrome/locale/sv-SE/
+locale     rss-ticker     tr-TR            chrome/locale/tr-TR/
+locale     rss-ticker     uk-UA            chrome/locale/tr-TR/
+locale     rss-ticker     zh-CN            chrome/locale/uk-UA/
+locale     rss-ticker     zh-TW            chrome/locale/zh-TW/
+
+skin       rss-ticker     classic/1.0      chrome/skin/
+
+# overlay file-to-be-overlayed                                       overlay-file
+overlay   chrome://browser/content/browser.xul                       chrome://rss-ticker/content/overlay.xul
+overlay   chrome://browser/content/bookmarks/addBookmark2.xul        chrome://rss-ticker/content/addBMOverlay.xul
+overlay   chrome://browser/content/bookmarks/bookmarksProperties.xul chrome://rss-ticker/content/bmPropsOverlay.xul
+
+overlay   chrome://browser/content/places/bookmarkProperties2.xul    chrome://rss-ticker/content/addBMOverlay-places.xul
+overlay   chrome://browser/content/places/bookmarkProperties.xul     chrome://rss-ticker/content/bmPropsOverlay-places.xul
+
+# style   file-to-be-styled                                          stylesheet
+style     chrome://rss-ticker/content/about.xul                      chrome://global/skin/global.css
+style     chrome://rss-ticker/content/noFeedsFound.xul               chrome://global/skin/global.css
+style     chrome://rss-ticker/content/about.xul                      chrome://browser/skin/browser.css
+style     chrome://rss-ticker/content/noFeedsFound.xul               chrome://browser/skin/browser.css
+style     chrome://rss-ticker/content/options.xul                    chrome://global/skin/global.css
+style     chrome://rss-ticker/content/options.xul                    chrome://browser/skin/browser.css
+style     chrome://rss-ticker/content/options.xul                    chrome://rss-ticker/skin/style.css
+style     chrome://browser/content/browser.xul                       chrome://rss-ticker/skin/style.css
+style     chrome://global/content/customizeToolbar.xul               chrome://rss-ticker/skin/style.css

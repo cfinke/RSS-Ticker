@@ -1,0 +1,78 @@
+<!ENTITY extension.title "RSS Ticker">
+<!ENTITY cm.open "Aç">
+<!ENTITY cm.open.key "O">
+<!ENTITY cm.openInNewWindow "Yeni Pencerede Aç">
+<!ENTITY cm.openInNewWindow.key "N">
+<!ENTITY cm.openInNewTab "Yeni Sekmede Aç">
+<!ENTITY cm.openInNewTab.key "T">
+<!ENTITY cm.openAllInTabs "Tümünü Sekmelerde Aç">
+<!ENTITY cm.openUnreadInTabs "Okunmayanları Sekmelerde Aç">
+<!ENTITY cm.openFeedInTabs "Yayanı Sekmede Aç">
+<!ENTITY cm.openFeedUnreadInTabs "Okunmayan Yayını Sekmede Aç">
+<!ENTITY cm.copyLinkTitle "Bağlantının Başlığını Kopyala">
+<!ENTITY cm.copyLinkTitle.key "L">
+<!ENTITY cm.copyLinkURL "Bağlantı URL&apos;sini Kopyala">
+<!ENTITY cm.copyLinkURL.key "C">
+<!ENTITY cm.refreshFeeds "Yayınları Tazele">
+<!ENTITY cm.refreshFeeds.key "R">
+<!ENTITY cm.manageFeeds "Yayınları Yönet">
+<!ENTITY cm.manageFeeds.key "G">
+<!ENTITY cm.markAsRead "Okunmuş Olarak İşaretle">
+<!ENTITY cm.markAsRead.key "M">
+<!ENTITY cm.markFeedAsRead "Yayını Okunmuş Olarak İşaretle">
+<!ENTITY cm.markFeedAsRead.key "F">
+<!ENTITY cm.markAllAsRead "Tümünü Okunmuş Olarak İşaretle">
+<!ENTITY cm.markAllAsRead.key "A">
+<!ENTITY options.speed.tt "Şerit&apos;in hızı. 1 en hızlısı">
+<!ENTITY options.dw.itemWidth.tt "Şeritteki özel öğelerin genişliği. Varsayılan 200 (px)">
+<!ENTITY options.smoothness.tt "Şeridin başında bir öğenin kaybolması için gerekli im sayısı. Yumuşak kayış için yüksek sayıya ayarlayın.">
+<!ENTITY options.updateInterval.tt "Yayınların güncelleme aralığı, dakika olarak.">
+<!ENTITY options.updateInterval "Güncelleme Sıklığı">
+<!ENTITY options.speed "Şerit Hızı">
+<!ENTITY options.dw.itemWidth "Öğe genişliği">
+<!ENTITY pixelAbbrev "px">
+<!ENTITY options.smooothness "Şeritteki Kayma Yumuşaklığı">
+<!ENTITY cmOptionsDescription "Şeritin içerik menüsünü aşağıdaki seçenekleri onaylayarak veya iptal ederek değiştirebilirsiniz.">
+<!ENTITY tt.summary "Özet">
+<!ENTITY options "Seçenekler">
+<!ENTITY options.restartNotice "Seçeneklerde * ile belirtilenler tarayıcınızı tekrar başlatana kadar etkili olmayacaktır.">
+<!ENTITY options.general "Genel">
+<!ENTITY options.advanced "Gelişmiş">
+<!ENTITY options.contextMenu "İçerik Menüsü">
+<!ENTITY options.placement.tt "Şeritin tarayıcı içindeki yeri">
+<!ENTITY options.random.tt "Şeritteki yayın öğelerinin rastgele sırada göstermesini istermisiniz.">
+<!ENTITY options.pause.tt "Fare şeridin üzerine geldiğinde duraklat.">
+<!ENTITY options.disable.tt "RSS ticker&apos;ı iptal et. Bu uzantının kaldırılması gibidir fakat kaldırma işlemi yapmaz.">
+<!ENTITY options.hide.tt "Zaten okuduğunuz yayın öğelerini gizle (tarayıcınızın geçmişine göre karar verir).">
+<!ENTITY options.bold.tt "Okunmamış öğeler (tarayıcınızın geçmişine göre) kalın harflerle gösterilsin.">
+<!ENTITY options.openInNewTab.tt "Bağlantılar, üzerine hangi fare tuşuyla basıldığına bakılmaksızın yeni sekmede açılsın.">
+<!ENTITY disableTicker "Şeridi iptal et">
+<!ENTITY options.tickerPlacement "Şerit Yerleşimi">
+<!ENTITY tickerPlacement.belowStatusBar "Durum çubuğunun altında">
+<!ENTITY tickerPlacement.belowBMTB "Yerimleri çubuğunun altında">
+<!ENTITY options.random "Rastgele şerit öğeleri">
+<!ENTITY options.pause "Fare şeridin üzerine geldiğinde duraklat.">
+<!ENTITY options.hide "Zaten okuduğunuz öğeleri gizle.">
+<!ENTITY options.bold "Okunmamış öğeleri kalın harflerle göster.">
+<!ENTITY options.openInNewTab "Bağlantıları herzaman yeni sekmede aç.">
+<!ENTITY toggleTicker "Şerit aç/kapa geçiş tuşu">
+<!ENTITY options.dw.limitWidth "Şerit içinde öğe genişliğini sınırla">
+<!ENTITY options.dw.isMaxWidth "Yalnızca en fazla değerleri kullan">
+<!ENTITY options.disableRefresh "Otomatik yenilemeyi iptal et">
+<!ENTITY options.limitItemsPerFeed "Her yayın için görülen öğeyi sınırla">
+<!ENTITY options.itemsPerFeed "Her yayın için öğeler">
+<!ENTITY about "Hakkında">
+<!ENTITY noFeedsFoundTitle "Hiçbir Canlı Yerimi Bulunamadı">
+<!ENTITY noFeedsFound "RSS Ticker herhangi bir canlı yerimi bulamadı (aka newsfeeds, RSS feed vb.)">
+<!ENTITY howToLiveBookmark1 "RSS Ticker Canlı Yerimleri olarak kaydettiğiniz haber yayınlarını bilgi şeridi olarak gösterir. Eğer firefox&apos;un Canlı Yerimleri sistemini kullanmaya alışık değilseniz, Firefox&apos;da bir Canlı Yerimi eklenmesinin iki yolu vardır:">
+<!ENTITY howToLiveBookmark2 "Eğer tarayıcınızda baktığınız web sayfası bir RSS yayını içeriyorsa, adres çubuğunuzun sağ yanında küçük bir turuncu simge görülecektir. Eğer bu simgeye tıklarsanız tarayıcı &apos;Canlı Yerimi Ekle&apos; penceresini açacaktır.">
+<!ENTITY howToLiveBookmark3 "Yerimleri Yöneticisinde (Yer İmleri -&gt; Yer İmlerini Düzenle), Dosya menüsü içinde &apos;Yeni canlı yer imi&apos; adında bir seçenek vardır. Burası XML yayının URL&apos;sini girebileceğiniz bir alandır.">
+<!ENTITY howToLiveBookmark4 "Bu adımlardan herhangi birini yaptıktan sonra, yayınların şeritte görülmesi için ya Firefox&apos;u tekrar başlatın veya Şeridin içerik menüsünden &apos;Yayınları Tazele&apos; seçeneğini seçin.">
+<!ENTITY dontShowAgain "Bu iletiyi tekrar gösterme.">
+<!ENTITY feed "Yayın">
+<!ENTITY feeds "Yayınlar">
+<!ENTITY feedManagement "Şeride yayınları eklemek veya çıkarmak için aşağıdaki listede Ekle veya Kaldır tuşlarını kullanabilirsiniz.">
+<!ENTITY add "Ekle">
+<!ENTITY remove "Kaldır">
+<!ENTITY URL "URL">
+<!ENTITY hideWhenEmpty "Boş olduğunda Şeridi gizle">

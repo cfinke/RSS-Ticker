@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript" src="chrome://rss-ticker/content/ticker.object.js"></script>
+	<script type="application/x-javascript">
+		<![CDATA[
+		
+		if(window.arguments.length < 4 && gArg && gArg.feedURL) {
+			// Firefox 1.5
+			window.addEventListener("load", function () { RSSTICKER.bmAddDialogInit(gArg.feedURL); }, false);
+			window.addEventListener("dialogaccept", function () { RSSTICKER.bmAddDialogAccept(gArg.feedURL); }, true);
+		}
+		else if (window.arguments[10]){
+			// Firefox 1.0.*
+			window.addEventListener("load", function () { RSSTICKER.bmAddDialogInit(window.arguments[10]); }, false);
+			window.addEventListener("dialogaccept", function () { RSSTICKER.bmAddDialogAccept(window.arguments[10]); }, true);
+		}
+
+		]]>
+	</script>
+	<dialog id="addBookmarkDialog">
+		<stringbundle id="RSSTICKER-bundle" src="chrome://rss-ticker/locale/locale.properties" />
+	</dialog>
+</overlay>

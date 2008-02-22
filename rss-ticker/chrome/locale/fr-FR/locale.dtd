@@ -1,0 +1,78 @@
+<!ENTITY extension.title "RSS Ticker">
+<!ENTITY cm.open "Ouvrir">
+<!ENTITY cm.open.key "O">
+<!ENTITY cm.openInNewWindow "Ouvrir dans une nouvelle fenêtre">
+<!ENTITY cm.openInNewWindow.key "f">
+<!ENTITY cm.openInNewTab "Ouvrir dans un nouvel onglet">
+<!ENTITY cm.openInNewTab.key "t">
+<!ENTITY cm.openAllInTabs "Ouvrir tous les éléments dans des onglets">
+<!ENTITY cm.openUnreadInTabs "Ouvrir les éléments non lus dans des onglets">
+<!ENTITY cm.openFeedInTabs "Ouvrir le fil dans des onglets">
+<!ENTITY cm.openFeedUnreadInTabs "Ouvrir le fil non lu dans des onglets">
+<!ENTITY cm.copyLinkTitle "Copier le titre du lien">
+<!ENTITY cm.copyLinkTitle.key "C">
+<!ENTITY cm.copyLinkURL "Copier l&apos;URL du lien">
+<!ENTITY cm.copyLinkURL.key "U">
+<!ENTITY cm.refreshFeeds "Rafraîchir les fils">
+<!ENTITY cm.refreshFeeds.key "R">
+<!ENTITY cm.manageFeeds "Gerer les fils">
+<!ENTITY cm.manageFeeds.key "G">
+<!ENTITY cm.markAsRead "Marquer comme lu">
+<!ENTITY cm.markAsRead.key "M">
+<!ENTITY cm.markFeedAsRead "Marquer le fil comme lu">
+<!ENTITY cm.markFeedAsRead.key "a">
+<!ENTITY cm.markAllAsRead "Marquer tous comme lus">
+<!ENTITY cm.markAllAsRead.key "l">
+<!ENTITY options.speed.tt "Vitesse du défilement de la bande. 1 est le plus rapide.">
+<!ENTITY options.dw.itemWidth.tt "Largeur des éléments individuels dans la bande défilante. Par défaut : 200 (px).">
+<!ENTITY options.smoothness.tt "Nombre de déplacements des éléments pour traverser l&apos;écran. Augmenter pour avoir un défilement plus doux.">
+<!ENTITY options.updateInterval.tt "Nombre de minutes entre les mises à jour des fils.">
+<!ENTITY options.updateInterval "Fréquence des mises à jour">
+<!ENTITY options.speed "Vitesse du défilement de la bande déroulante">
+<!ENTITY options.dw.itemWidth "Largeur des éléments">
+<!ENTITY pixelAbbrev "px">
+<!ENTITY options.smooothness "Fluidité du défilement de la bande déroulante">
+<!ENTITY cmOptionsDescription "Personaliser le menu contextuel de la bande en activant ou désactivant les options ci-dessous.">
+<!ENTITY tt.summary "Sommaire">
+<!ENTITY options "Options">
+<!ENTITY options.restartNotice "Les changements sur les options marquées d&apos;un astérisque (*) ne seront effectifs qu&apos;après le redémarrage de votre navigateur.">
+<!ENTITY options.general "Général">
+<!ENTITY options.advanced "Avancé">
+<!ENTITY options.contextMenu "Menu contextuel">
+<!ENTITY options.placement.tt "Emplacement de la bande défilante dans le navigateur.">
+<!ENTITY options.random.tt "Forcer l&apos;affichage des éléments du fil dans un ordre aléatoire pour plus de variété.">
+<!ENTITY options.pause.tt "Arrêter le défilement au passage de la souris.">
+<!ENTITY options.disable.tt "Désactiver RSS ticker. Cela a le même effet qu&apos;une désinstallation mais sans désinstaller l&apos;extension.">
+<!ENTITY options.hide.tt "Masquer les éléments du fil que vous avez déjà lus (selon l&apos;historique de votre  navigateur).">
+<!ENTITY options.bold.tt "Afficher en gras les éléments que vous n&apos;avez pas lus (selon l&apos;historique de votre  navigateur).">
+<!ENTITY options.openInNewTab.tt "Toujours ouvrir les liens dans de nouveaux onglets, quel que soit le bouton de la souris cliqué.">
+<!ENTITY disableTicker "Désactiver la bande défilante">
+<!ENTITY options.tickerPlacement "Emplacement de la bande défilante">
+<!ENTITY tickerPlacement.belowStatusBar "Sous la barre d&apos;état">
+<!ENTITY tickerPlacement.belowBMTB "Sous la barre personnelle">
+<!ENTITY options.random "Afficher au hasard les éléments dans la bande défilante">
+<!ENTITY options.pause "Arrêter le défilement au passage de la souris.">
+<!ENTITY options.hide "Masquer les éléments que vous avez déjà lus.">
+<!ENTITY options.bold "Mettre en gras les éléments que vous n&apos;avez pas lus.">
+<!ENTITY options.openInNewTab "Toujours ouvrir les liens dans de nouveaux onglets.">
+<!ENTITY toggleTicker "Activer / désactiver la bande défilante">
+<!ENTITY options.dw.limitWidth "Limiter la largeur des éléments dans la bande défilante">
+<!ENTITY options.dw.isMaxWidth "Utiliser seulement comme largeur maximale">
+<!ENTITY options.disableRefresh "Désactiver le rafraîchissement automatique">
+<!ENTITY options.limitItemsPerFeed "Limiter le nombre d&apos;éléments par fil">
+<!ENTITY options.itemsPerFeed "Éléments par fil">
+<!ENTITY about "À propos">
+<!ENTITY noFeedsFoundTitle "Aucun marque-page dynamique trouvé">
+<!ENTITY noFeedsFound "RSS Ticker n&apos;a pas pu localiser de marque-page dynamique (fils de news, fils RSS)">
+<!ENTITY howToLiveBookmark1 "RSS Ticker charge et fait défiler les fils de news que vous avez ajoutés dans les marque-pages en tant que marque-pages dynamiques. Si vous n&apos;êtes pas familier avec le système des marque-pages dynamiques de Firefox, il y a deux façons d&apos;en ajouter dans Firefox :">
+<!ENTITY howToLiveBookmark2 "Si la page que vous visualisez dans votre navigateur contient un fil RSS (http://www.mozilla.org/, par exemple), il y a  une petite icône orange à la droite de la barre d&apos;adresse. Si vous cliquez sur cette icône, la fenêtre &apos;Ajouter un marque-page dynamique&apos; s&apos;ouvrira.">
+<!ENTITY howToLiveBookmark3 "Dans le gestionnaire des marque-pages ( Marque-pages &gt; Gérer les marque-pages...), cliquer sur &apos;Nouveau marque-page dynamique&apos; dans le menu Fichier. Entrer alors l&apos;adresse du fil XML dans le champ &apos;Emplacement du fil&apos;.">
+<!ENTITY howToLiveBookmark4 "Après avoir utilisé l&apos;une ou l&apos;autre de ces méthodes, redémarrez Firefox ou choisissez &apos;Rafraîchir les fils&apos; dans le menu contextuel de la bande déroulante pour afficher le fil dans la bande.">
+<!ENTITY dontShowAgain "Ne plus afficher ce message.">
+<!ENTITY feed "Fil">
+<!ENTITY feeds "Fils">
+<!ENTITY feedManagement "Vous pouvez ajouter ou supprimer des fils en les sélectionnant dans la liste ci-dessous et en cliquant sur les boutons  Ajouter ou Supprimer.">
+<!ENTITY add "Ajouter">
+<!ENTITY remove "Supprimer">
+<!ENTITY URL "URL">
+<!ENTITY hideWhenEmpty "Masquer la bande déroulante quand elle est vide">

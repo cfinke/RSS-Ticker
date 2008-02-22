@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dialog SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+<dialog
+	title="&extension.title; - &about;"
+	orient="vertical"
+	buttons="accept"
+	autostretch="always"
+	onload="window.focus(); sizeToContent(); centerWindowOnScreen();"
+	style="max-width: 35em; background-color: #ffffff;"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<vbox>
+		<description>&howToLiveBookmark1;</description>
+		<description>1. &howToLiveBookmark2;</description>
+		<description>2. &howToLiveBookmark3;</description>
+		<description>&howToLiveBookmark4;</description>
+	</vbox>
+</dialog>

@@ -1,0 +1,78 @@
+<!ENTITY extension.title "RSS Ticker">
+<!ENTITY cm.open "Åbn">
+<!ENTITY cm.open.key "b">
+<!ENTITY cm.openInNewWindow "Åbn i nyt vindue">
+<!ENTITY cm.openInNewWindow.key "n">
+<!ENTITY cm.openInNewTab "Åbn i nyt faneblad">
+<!ENTITY cm.openInNewTab.key "t">
+<!ENTITY cm.openAllInTabs "Åbn alle i faneblade">
+<!ENTITY cm.openUnreadInTabs "Åbn ulæste i faneblade">
+<!ENTITY cm.openFeedInTabs "Åbn feeds i faneblade">
+<!ENTITY cm.openFeedUnreadInTabs "Åbn ulæste feeds i faneblade">
+<!ENTITY cm.copyLinkTitle "Kopiér link titel">
+<!ENTITY cm.copyLinkTitle.key "l">
+<!ENTITY cm.copyLinkURL "Kopiér link URL">
+<!ENTITY cm.copyLinkURL.key "K">
+<!ENTITY cm.refreshFeeds "Genindlæs feeds">
+<!ENTITY cm.refreshFeeds.key "G">
+<!ENTITY cm.manageFeeds "Administrer feeds">
+<!ENTITY cm.manageFeeds.key "d">
+<!ENTITY cm.markAsRead "Markér som læst">
+<!ENTITY cm.markAsRead.key "M">
+<!ENTITY cm.markFeedAsRead "Markér feed som værende læst">
+<!ENTITY cm.markFeedAsRead.key "f">
+<!ENTITY cm.markAllAsRead "Markér alle som læste">
+<!ENTITY cm.markAllAsRead.key "a">
+<!ENTITY options.speed.tt "Hastighed på tickeren. 1 er det hurtigste.">
+<!ENTITY options.dw.itemWidth.tt "Bredden på individuelle emner i tickeren. Standard er 200 (px).">
+<!ENTITY options.smoothness.tt "Antal trin det tager at fjerne et emne fra forrest på tickeren. Sæt højere for en mere jævn rulning.">
+<!ENTITY options.updateInterval.tt "Antal minutter mellem opdatering af feedene.">
+<!ENTITY options.updateInterval "Opdateringsfrekvens">
+<!ENTITY options.speed "Ticker-hastighed">
+<!ENTITY options.dw.itemWidth "Emne-bredde">
+<!ENTITY pixelAbbrev "px">
+<!ENTITY options.smooothness "Ticker rulningsglathed">
+<!ENTITY cmOptionsDescription "Tilret tickerens">
+<!ENTITY tt.summary "Sammendrag">
+<!ENTITY options "Indstillinger">
+<!ENTITY options.restartNotice "Indstillinger mærket med * vil ikke træde i kraft før browservinduet genåbnes.">
+<!ENTITY options.general "Generelt">
+<!ENTITY options.advanced "Avanceret">
+<!ENTITY options.contextMenu "Kontekstmenu">
+<!ENTITY options.placement.tt "Placering af tickeren i browseren.">
+<!ENTITY options.random.tt "Lad tickeren vise feedemner i tilfældig rækkefølge for afvekslingens skyld.">
+<!ENTITY options.pause.tt "Stands tickeren når musen er over den.">
+<!ENTITY options.disable.tt "Slå RSS Ticker fra. Dette svarer til at afinstallere den, men uden at afinstallere den.">
+<!ENTITY options.hide.tt "Skjul feedemner du allerede har læst (ifølge din browsers historik).">
+<!ENTITY options.bold.tt "Viser emner du ikke har læst (i henhold til din browsers historik) med fed.">
+<!ENTITY options.openInNewTab.tt "Åbn altid links i nye faneblade, uanset hvilken museknap du klikker med.">
+<!ENTITY disableTicker "Slå ticker fra">
+<!ENTITY options.tickerPlacement "Ticker placering">
+<!ENTITY tickerPlacement.belowStatusBar "Under statuslinien">
+<!ENTITY tickerPlacement.belowBMTB "Under bogmærker-værktøjslinien">
+<!ENTITY options.random "Tilfældige ticker emner">
+<!ENTITY options.pause "Stands tickeren når musen er over den.">
+<!ENTITY options.hide "Skjul emner du allerede har læst.">
+<!ENTITY options.bold "Fremhæv ulæste emner.">
+<!ENTITY options.openInNewTab "Åbn altid links i nye faneblade.">
+<!ENTITY toggleTicker "Slå ticker til/fra">
+<!ENTITY options.dw.limitWidth "Begræns længden på emner i tickeren">
+<!ENTITY options.dw.isMaxWidth "Brug kun som maksimumbredde">
+<!ENTITY options.disableRefresh "Slå automatisk opdatering fra">
+<!ENTITY options.limitItemsPerFeed "Begræns antallet af emner pr. feed">
+<!ENTITY options.itemsPerFeed "Emner pr. feed">
+<!ENTITY about "Om">
+<!ENTITY noFeedsFoundTitle "Ingen live-bogmærker fundet">
+<!ENTITY noFeedsFound "RSS Ticker kunne ikke finde nogen live-bogmærker (nyhedsfeeds, RSS-feeds)">
+<!ENTITY howToLiveBookmark1 "RSS Ticker indlæser og ruller nyhedsfeeds som du har bogmærket som live-bogmærker. Hvis du ikke kender Firefox&apos; live-bogmærke-system, er der 2 måder at tilføje live-bogmærker i Firefox:">
+<!ENTITY howToLiveBookmark2 "Hvis siden du kigger på i din browser tilbyder en RSS-feed ( http://mozilla.org/ f.eks.) vil der være et lille orange ikon i højre side af adresselinien. Hvis du klikker dette, åbnes &apos;Tilføj live bogmærke&apos; dialogboksen.">
+<!ENTITY howToLiveBookmark3 "I Bogmærkeadministrationen, (under Bogmærker &gt; Arranger bogmærker) er der en indstilling under Fil-menuen for &apos;Nyt live-bogmærke&apos;. Her kan du indtaste stien til XML-feeden i feed placeringsfeltet.">
+<!ENTITY howToLiveBookmark4 "Efter at have gennemført et af disse trin, kan du genstarte Firefox eller vælge &apos;Opdater feeds&apos; fra Tickerens kontekstmenu for at vise feeds i Tickeren.">
+<!ENTITY dontShowAgain "Vis ikke denne meddelelse igen.">
+<!ENTITY feed "Feed">
+<!ENTITY feeds "Feeds">
+<!ENTITY feedManagement "Du kan tilføje eller fjerne feeds fra tickeren ved at vælge dem i nedenstående liste og trykke på enten Tilføj eller Fjern knappen.">
+<!ENTITY add "Tilføj">
+<!ENTITY remove "Fjern">
+<!ENTITY URL "URL">
+<!ENTITY hideWhenEmpty "Skjul ticker når tom">

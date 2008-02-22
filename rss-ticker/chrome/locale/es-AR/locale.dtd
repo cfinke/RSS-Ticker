@@ -1,0 +1,78 @@
+<!ENTITY extension.title "RSS Ticker">
+<!ENTITY cm.open "Open">
+<!ENTITY cm.open.key "O">
+<!ENTITY cm.openInNewWindow "Open in New Window">
+<!ENTITY cm.openInNewWindow.key "N">
+<!ENTITY cm.openInNewTab "Open in New Tab">
+<!ENTITY cm.openInNewTab.key "T">
+<!ENTITY cm.openAllInTabs "Open All in Tabs">
+<!ENTITY cm.openUnreadInTabs "Open Unread in Tabs">
+<!ENTITY cm.openFeedInTabs "Open Feed in Tabs">
+<!ENTITY cm.openFeedUnreadInTabs "Open Feed Unread in Tabs">
+<!ENTITY cm.copyLinkTitle "Copy Link Title">
+<!ENTITY cm.copyLinkTitle.key "L">
+<!ENTITY cm.copyLinkURL "Copy Link URL">
+<!ENTITY cm.copyLinkURL.key "C">
+<!ENTITY cm.refreshFeeds "Refresh Feeds">
+<!ENTITY cm.refreshFeeds.key "R">
+<!ENTITY cm.manageFeeds "Manage Feeds">
+<!ENTITY cm.manageFeeds.key "G">
+<!ENTITY cm.markAsRead "Mark as Read">
+<!ENTITY cm.markAsRead.key "M">
+<!ENTITY cm.markFeedAsRead "Mark Feed as Read">
+<!ENTITY cm.markFeedAsRead.key "F">
+<!ENTITY cm.markAllAsRead "Mark All as Read">
+<!ENTITY cm.markAllAsRead.key "A">
+<!ENTITY options.speed.tt "The speed of the ticker.  1 is the fastest.">
+<!ENTITY options.dw.itemWidth.tt "The width of the individual items in the ticker.  The default is 200 (px).">
+<!ENTITY options.smoothness.tt "The number of ticks that it takes to remove one item from the front of the ticker.  Set higher for a smoother scroll.">
+<!ENTITY options.updateInterval.tt "The number of minutes between updates of the feeds.">
+<!ENTITY options.updateInterval "Update Frequency">
+<!ENTITY options.speed "Tick Speed">
+<!ENTITY options.dw.itemWidth "Item width">
+<!ENTITY pixelAbbrev "px">
+<!ENTITY options.smooothness "Ticker Scroll Smoothness">
+<!ENTITY cmOptionsDescription "Customize the ticker&apos;s context menu by selecting	or deselecting options below.">
+<!ENTITY tt.summary "Summary">
+<!ENTITY options "Options">
+<!ENTITY options.restartNotice "Options denoted by * will not be changed until you reopen your browser window.">
+<!ENTITY options.general "General">
+<!ENTITY options.advanced "Advanced">
+<!ENTITY options.contextMenu "Context Menu">
+<!ENTITY options.placement.tt "Placement of the ticker in the browser.">
+<!ENTITY options.random.tt "Have the ticker show the feed items in a random order for variety.">
+<!ENTITY options.pause.tt "Pause the ticker when the mouse is over it.">
+<!ENTITY options.disable.tt "Disable the RSS ticker. This has the same effect as uninstalling it, but without uninstalling it.">
+<!ENTITY options.hide.tt "Hide feed items that you&apos;ve already read (according to your browser&apos;s history).">
+<!ENTITY options.bold.tt "Show items that you haven&apos;t read (according to your browser&apos;s history) in bold.">
+<!ENTITY options.openInNewTab.tt "Always open links in new tabs, no matter which mouse button you click with.">
+<!ENTITY disableTicker "Disable ticker">
+<!ENTITY options.tickerPlacement "Ticker Placement">
+<!ENTITY tickerPlacement.belowStatusBar "Below status bar">
+<!ENTITY tickerPlacement.belowBMTB "Below bookmarks toolbar">
+<!ENTITY options.random "Randomize ticker items ">
+<!ENTITY options.pause "Pause the ticker when the mouse is over it.">
+<!ENTITY options.hide "Hide items you&apos;ve already read.">
+<!ENTITY options.bold "Bold items you haven&apos;t read.">
+<!ENTITY options.openInNewTab "Always open links in new tabs.">
+<!ENTITY toggleTicker "Toggle ticker on/off">
+<!ENTITY options.dw.limitWidth "Limit the width of the items in the ticker">
+<!ENTITY options.dw.isMaxWidth "Use only as a maximum width">
+<!ENTITY options.disableRefresh "Disable auto-refresh">
+<!ENTITY options.limitItemsPerFeed "Limit the number of items per feed">
+<!ENTITY options.itemsPerFeed "Items per feed">
+<!ENTITY about "About">
+<!ENTITY noFeedsFoundTitle "No Live Bookmarks Found">
+<!ENTITY noFeedsFound "RSS Ticker could not locate any Live Bookmarks (aka newsfeeds, RSS feeds).">
+<!ENTITY howToLiveBookmark1 "RSS Ticker loads and scrolls the newsfeeds that you have bookmarked as Live Bookmarks. If you are unfamiliar with Firefox&apos;s Live Bookmarking system, there are two ways to add a Live Bookmark in Firefox:">
+<!ENTITY howToLiveBookmark2 "If the page you are looking at in your browser offers an RSS feed ( http://www.mozilla.org/ , for example), there will be a small orange icon on the right side of the address bar. If you click on that icon, it will open the &apos;Add Live Bookmark&apos; dialog.">
+<!ENTITY howToLiveBookmark3 "In the Bookmarks Manager, (found under Bookmarks &gt; Manage Bookmarks), there is an option under the File menu for &apos;New Live Bookmark.&apos; Here you can put the location of the XML feed in the Location field.">
+<!ENTITY howToLiveBookmark4 "After doing either of these steps, restarting Firefox or choosing &apos;Refresh Feeds&apos; from the Ticker&apos;s context menu will show the feed in the ticker.">
+<!ENTITY dontShowAgain "Don&apos;t show this message again.">
+<!ENTITY feed "Feed">
+<!ENTITY feeds "Feeds">
+<!ENTITY feedManagement "You can add or remove feeds from the ticker by selecting them in the list below and pressing either the Add or Remove button.">
+<!ENTITY add "Add">
+<!ENTITY remove "Remove">
+<!ENTITY URL "URL">
+<!ENTITY hideWhenEmpty "Hide Ticker When Empty">

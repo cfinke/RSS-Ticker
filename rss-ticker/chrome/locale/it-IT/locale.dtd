@@ -1,0 +1,78 @@
+<!ENTITY extension.title "RSS Ticker">
+<!ENTITY cm.open "Apri">
+<!ENTITY cm.open.key "A">
+<!ENTITY cm.openInNewWindow "Apri in nuova finestra">
+<!ENTITY cm.openInNewWindow.key "f">
+<!ENTITY cm.openInNewTab "Apri in nuova scheda">
+<!ENTITY cm.openInNewTab.key "s">
+<!ENTITY cm.openAllInTabs "Apri tutti in schede">
+<!ENTITY cm.openUnreadInTabs "Apri non letti in schede">
+<!ENTITY cm.openFeedInTabs "Apri feed in schede">
+<!ENTITY cm.openFeedUnreadInTabs "Apri feed non letti in schede">
+<!ENTITY cm.copyLinkTitle "Copia titolo del link">
+<!ENTITY cm.copyLinkTitle.key "C">
+<!ENTITY cm.copyLinkURL "Copia URL del link">
+<!ENTITY cm.copyLinkURL.key "U">
+<!ENTITY cm.refreshFeeds "Ricarica feed">
+<!ENTITY cm.refreshFeeds.key "R">
+<!ENTITY cm.manageFeeds "Gestisci feed">
+<!ENTITY cm.manageFeeds.key "G">
+<!ENTITY cm.markAsRead "Segna come letto">
+<!ENTITY cm.markAsRead.key "M">
+<!ENTITY cm.markFeedAsRead "Segna feed come letto">
+<!ENTITY cm.markFeedAsRead.key "o">
+<!ENTITY cm.markAllAsRead "Segna tutti come letti">
+<!ENTITY cm.markAllAsRead.key "e">
+<!ENTITY options.speed.tt "Velocità di visualizzazione della barra di RSS Ticker. Il valore 1 corrisponde alla massima velocità">
+<!ENTITY options.dw.itemWidth.tt "Larghezza di ogni elemento nella barra di RSS Ticker. Il valore predefinito è 200 pixel">
+<!ENTITY options.smoothness.tt "Numero di movimenti necessari per eliminare un elemento dall&apos;inizio della barra di RSS Ticker. Più alto sarà il valore, più scorrevole sarà il movimento degli elementi">
+<!ENTITY options.updateInterval.tt "Intervallo di tempo in minuti per la ricerca di aggiornamenti dei feed">
+<!ENTITY options.updateInterval "Frequenza di aggiornamento">
+<!ENTITY options.speed "Velocità di visualizzazione">
+<!ENTITY options.dw.itemWidth "Larghezza degli elementi">
+<!ENTITY pixelAbbrev "px">
+<!ENTITY options.smooothness "Scorrevolezza di movimento">
+<!ENTITY cmOptionsDescription "Personalizzare il menu contestuale della barra di RSS Ticker selezionando o deselezionando le opzioni qui sotto">
+<!ENTITY tt.summary "Sommario">
+<!ENTITY options "Opzioni">
+<!ENTITY options.restartNotice "Le opzioni contrassegnate da * verranno attivate/disattivate dopo il riavvio del browser">
+<!ENTITY options.general "Generali">
+<!ENTITY options.advanced "Avanzate">
+<!ENTITY options.contextMenu "Menu contestuale">
+<!ENTITY options.placement.tt "Collocazione della barra di RSS Ticker nel browser">
+<!ENTITY options.random.tt "Selezionando questa opzione la barra di RSS Ticker mostrerà i feed in ordine casuale">
+<!ENTITY options.pause.tt "Selezionando questa opzione verrà interrotto lo scorrimento della barra di RSS Ticker al passaggio del mouse">
+<!ENTITY options.disable.tt "Selezionando questa opzione verrà disattivata la barra di RSS Ticker. Ciò avrà lo stesso effetto di disinstallare l&apos;estensione pur mantenendola installata">
+<!ENTITY options.hide.tt "Selezionando questa opzione verranno nascosti gli elementi di feed già letti (conformemente alla cronologia del browser)">
+<!ENTITY options.bold.tt "Selezionando questa opzione gli elementi di feed non letti verranno visualizzati in grassetto (conformemente alla cronologia del browser)">
+<!ENTITY options.openInNewTab.tt "Selezionando questa opzione i link verranno sempre aperti in nuove schede, indipendentemente dal pulsante del mouse premuto">
+<!ENTITY disableTicker "Disattiva la barra di RSS Ticker">
+<!ENTITY options.tickerPlacement "Posizionamento della barra di RSS Ticker">
+<!ENTITY tickerPlacement.belowStatusBar "Sotto la barra di stato">
+<!ENTITY tickerPlacement.belowBMTB "Sotto la barra dei segnalibri">
+<!ENTITY options.random "Visualizza gli elementi in modo casuale ">
+<!ENTITY options.pause "Interrompi lo scorrimento della barra di RSS Ticker al passaggio del mouse">
+<!ENTITY options.hide "Nascondi gli elementi già letti">
+<!ENTITY options.bold "Visualizza gli elementi non letti in grassetto">
+<!ENTITY options.openInNewTab "Apri sempre i link in nuove schede">
+<!ENTITY toggleTicker "Attiva/disattiva la barra di RSS Ticker">
+<!ENTITY options.dw.limitWidth "Imposta la larghezza degli elementi nella barra di RSS Ticker">
+<!ENTITY options.dw.isMaxWidth "Utilizza solo come larghezza massima">
+<!ENTITY options.disableRefresh "Disattiva aggiornamento automatico">
+<!ENTITY options.limitItemsPerFeed "Imposta il numero di elementi visualizzabili per ogni feed">
+<!ENTITY options.itemsPerFeed "Elementi per feed">
+<!ENTITY about "Informazioni">
+<!ENTITY noFeedsFoundTitle "Non sono stati trovati segnalibri Live">
+<!ENTITY noFeedsFound "RSS Ticker non ha trovato alcun tipo di segnalibro Live">
+<!ENTITY howToLiveBookmark1 "RSS Ticker permette di caricare e visualizzare tramite scorrimento nella propria barra di visualizzazione i feed salvati come segnalibri Live. Ci sono due modi per aggiungere i segnalibri Live in Firefox:">
+<!ENTITY howToLiveBookmark2 "Se nella pagina che si sta visualizzando nel browser è disponibile un feed RSS (ad esempio: http://www.mozilla.org/), sarà presente una piccola icona arancione nel lato destro della barra degli indirizzi. Facendo clic su tale icona si aprirà la finestra di dialogo &apos;Aggiungi segnalibro Live&apos;">
+<!ENTITY howToLiveBookmark3 "Inserire l&apos;indirizzo web del feed da aggiungere nel campo &apos;Indirizzo feed:&apos; della finestra &apos;Proprietà per &quot;Nuovo segnalibro Live&quot;&apos;, raggiungibile aprendo la Gestione segnalibri di Firefox (menu Segnalibri &gt; Gestione segnalibri...), e selezionando poi il menu File &gt; Nuovo segnalibro Live...">
+<!ENTITY howToLiveBookmark4 "Dopo aver effettuato una delle precedenti operazioni, riavviare Firefox o fare clic sul pilsante &apos;Ricarica feed&apos; dal menu contestuale della barra di RSS Ticker per visualizzare i feed aggiunti">
+<!ENTITY dontShowAgain "Non mostrare questo messaggio ancora">
+<!ENTITY feed "Feed">
+<!ENTITY feeds "Feed">
+<!ENTITY feedManagement "È possibile aggiungere o eliminare i feed dalla barra di RSS Ticker selezionandoli nella lista qui sotto e facendo clic sui pulsanti &apos;Aggiungi&apos; o &apos;Elimina&apos;">
+<!ENTITY add "Aggiungi">
+<!ENTITY remove "Elimina">
+<!ENTITY URL "URL">
+<!ENTITY hideWhenEmpty "Nascondi la barra di RSS Ticker quando è vuota">

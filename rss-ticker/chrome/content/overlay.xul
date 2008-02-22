@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript" src="chrome://rss-ticker/content/feed.class.js"></script>
+	<script type="application/x-javascript" src="chrome://rss-ticker/content/ticker.object.js"></script>
+	<script type="application/x-javascript">
+		<![CDATA[
+
+			window.addEventListener("load", function (event) { RSSTICKER.onload(event); }, false);
+			window.addEventListener("resize", function (event) { RSSTICKER.adjustSpacerWidth(event); }, false);
+			window.addEventListener("DOMMouseScroll", function (event) { RSSTICKER.scrollTicker(event); }, false)
+			
+		]]>
+	</script>
+	<stringbundleset id="stringbundleset">
+		<stringbundle id="RSSTICKER-bundle" src="chrome://rss-ticker/locale/locale.properties" />
+	</stringbundleset>
+	<commandset id="mainCommandSet">
+		<command id="rss-ticker_cmd_open" oncommand="document.popupNode.onContextOpen();" label="&cm.open;"/>
+		<command id="rss-ticker_cmd_openInNewWindow" oncommand="document.popupNode.onContextOpen('window');" label="&cm.openInNewWindow;"/>
+		<command id="rss-ticker_cmd_openInTab" oncommand="document.popupNode.onContextOpen('tab');" label="&cm.openInNewTab;"/>
+		<command id="rss-ticker_cmd_openAllInTabs" oncommand="RSSTICKER.openAllInTabs();" label="&cm.openAllInTabs;"/>
+		<command id="rss-ticker_cmd_openUnreadInTabs" oncommand="RSSTICKER.openAllInTabs(true);" label="&cm.openUnreadInTabs;"/>
+		<command id="rss-ticker_cmd_openFeedInTabs" oncommand="RSSTICKER.openAllInTabs(false, document.popupNode.feed);" label="&cm.openFeedInTabs;"/>
+		<command id="rss-ticker_cmd_openFeedUnreadInTabs" oncommand="RSSTICKER.openAllInTabs(true, document.popupNode.feed);" label="&cm.openFeedUnreadInTabs;"/>
+		<command id="rss-ticker_cmd_copyLinkTitle" oncommand="RSSTICKER.clipboard.copyString(document.popupNode.attributes['label'].value);" label="&cm.copyLinkTitle;"/>
+		<command id="rss-ticker_cmd_copyLinkURL" oncommand="RSSTICKER.clipboard.copyString(document.popupNode.href);" label="&cm.copyLinkURL;"/>
+		<command id="rss-ticker_cmd_refreshFeeds" oncommand="RSSTICKER.ticksSinceLastUpdate = RSSTICKER.ticksBetweenUpdates; RSSTICKER.mouseOverFlag = false;" label="&cm.refreshFeeds;"/>
+		<command id="rss-ticker_cmd_manageFeeds" oncommand="window.openDialog('chrome://rss-ticker/content/options.xul','','chrome,titlebar,toolbar,centerscreen','manage-pane');" label="&cm.manageFeeds;"/>
+		<command id="rss-ticker_cmd_markAsRead" oncommand="document.popupNode.markAsRead(true);" label="&cm.markAsRead;"/>
+		<command id="rss-ticker_cmd_markFeedAsRead" oncommand="RSSTICKER.markAllAsRead(document.popupNode.feed);" label="&cm.markFeedAsRead;"/>
+		<command id="rss-ticker_cmd_markAllAsRead" oncommand="RSSTICKER.markAllAsRead();" label="&cm.markAllAsRead;"/>
+		<command id="rss-ticker_cmd_options" oncommand="window.openDialog('chrome://rss-ticker/content/options.xul','','chrome,titlebar,toolbar,centerscreen');" label="&options;" />
+		<command id="rss-ticker_cmd_disableTicker" oncommand="RSSTICKER.toggleDisabled();" label="&disableTicker;"/>
+	</commandset>
+	<popupset id="mainPopupSet">
+		<popup id="RSSTICKERItemCM">
+			<menuitem option="open" accesskey="&cm.open.key;" command="rss-ticker_cmd_open" />
+			<menuitem option="openInWindow" accesskey="&cm.openInNewWindow.key;" command="rss-ticker_cmd_openInNewWindow"/>
+			<menuitem option="openInTab" accesskey="&cm.openInNewTab.key;" command="rss-ticker_cmd_openInTab"/>
+			<menuseparator />
+			<menuitem option="openAllInTabs" command="rss-ticker_cmd_openAllInTabs"/>
+			<menuitem option="openUnreadInTabs" command="rss-ticker_cmd_openUnreadInTabs"/>
+			<menuitem option="openFeedInTabs" command="rss-ticker_cmd_openFeedInTabs"/>
+			<menuitem option="openFeedUnreadInTabs" command="rss-ticker_cmd_openFeedUnreadInTabs"/>
+			<menuseparator />
+			<menuitem option="copyLinkTitle" accesskey="&cm.copyLinkTitle.key;" command="rss-ticker_cmd_copyLinkTitle"/>
+			<menuitem option="copyLinkURL" accesskey="&cm.copyLinkURL.key;" command="rss-ticker_cmd_copyLinkURL"/>
+			<menuseparator />
+			<menuitem option="refreshFeeds" accesskey="&cm.refreshFeeds.key;" command="rss-ticker_cmd_refreshFeeds"/>
+			<menuitem option="manageFeeds" accesskey="&cm.manageFeeds.key;" command="rss-ticker_cmd_manageFeeds"/>
+			<menuseparator />
+			<menuitem option="markAsRead" accesskey="&cm.markAsRead.key;" command="rss-ticker_cmd_markAsRead"/>
+			<menuitem option="markFeedAsRead" accesskey="&cm.markFeedAsRead.key;" command="rss-ticker_cmd_markFeedAsRead"/>
+			<menuitem option="markAllAsRead" accesskey="&cm.markAllAsRead.key;" command="rss-ticker_cmd_markAllAsRead"/>
+			<menuseparator />
+			<menuitem option="options" command="rss-ticker_cmd_options"/>
+			<menuitem option="disableTicker" command="rss-ticker_cmd_disableTicker"/>
+		</popup>
+		<popup id="RSSTICKERCM">
+			<menuitem option="openAllInTabs" command="rss-ticker_cmd_openAllInTabs"/>
+			<menuitem option="openUnreadInTabs" command="rss-ticker_cmd_openUnreadInTabs"/>
+			<menuseparator />
+			<menuitem option="refreshFeeds" accesskey="&cm.refreshFeeds.key;" command="rss-ticker_cmd_refreshFeeds"/>
+			<menuitem option="manageFeeds" accesskey="&cm.manageFeeds.key;" command="rss-ticker_cmd_manageFeeds"/>
+			<menuseparator />
+			<menuitem option="markAllAsRead" accesskey="&cm.markAllAsRead.key;" command="rss-ticker_cmd_markAllAsRead"/>
+			<menuseparator />
+			<menuitem option="options" command="rss-ticker_cmd_options"/>
+			<menuitem option="disableTicker" command="rss-ticker_cmd_disableTicker"/>
+		</popup>
+		<popup id="RSSTICKERButtonCM">
+			<menuitem option="refreshFeeds" accesskey="&cm.refreshFeeds.key;" command="rss-ticker_cmd_refreshFeeds"/>
+			<menuitem option="manageFeeds" accesskey="&cm.manageFeeds.key;" command="rss-ticker_cmd_manageFeeds"/>
+			<menuseparator />
+			<menuitem option="options" command="rss-ticker_cmd_options"/>
+		</popup>
+		<tooltip id="RSSTICKERTooltip" noautohide="true" orient="vertical" onpopupshowing="return RSSTICKER.fillInTooltip(document.tooltipNode, this);">
+			<hbox align="center">
+				<image id="RSSTICKERTooltipImage" style="vertical-align: middle; margin-left: 1ex; margin-right: 1ex;"/>
+				<vbox>
+					<label style="font-weight: bold;" id="RSSTICKERTooltipFeedName" crop="end"/>
+					<label style="text-decoration: underline;" id="RSSTICKERTooltipName" crop="end"/>
+					<label id="RSSTICKERTooltipURL" crop="end"/>
+				</vbox>
+			</hbox>
+			<groupbox id="RSSTICKERTooltipSummaryGroupbox">
+				<caption label="&tt.summary;" style="background-color: #ffffff;" />
+				<description id="RSSTICKERTooltipSummary"></description>
+			</groupbox>
+		</tooltip>
+		<tooltip id="RSSTICKERLoadingNoticeTooltip" noautohide="true" orient="vertical">
+			<description id="RSSTICKERLoadingNoticeText"></description>
+		</tooltip>
+	</popupset>
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="RSSTICKER-button" contextmenu="RSSTICKERButtonCM" tooltiptext="&toggleTicker;" class="toolbarbutton-1" label="&extension.title;" oncommand="RSSTICKER.toggleDisabled();" />
+	</toolbarpalette>
+</overlay>

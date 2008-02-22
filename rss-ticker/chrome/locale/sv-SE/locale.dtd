@@ -1,0 +1,78 @@
+<!ENTITY extension.title "RSS Ticker">
+<!ENTITY cm.open "Öppna">
+<!ENTITY cm.open.key "Ö">
+<!ENTITY cm.openInNewWindow "Öppna i Nytt Fönster">
+<!ENTITY cm.openInNewWindow.key "N">
+<!ENTITY cm.openInNewTab "Öppna i Ny Flik">
+<!ENTITY cm.openInNewTab.key "F">
+<!ENTITY cm.openAllInTabs "Öppna Alla i Flikar">
+<!ENTITY cm.openUnreadInTabs "Öppna Olästa i Flikar">
+<!ENTITY cm.openFeedInTabs "Öppna Flöde i Flikar">
+<!ENTITY cm.openFeedUnreadInTabs "Öppna Flödets Olästa i Flikar">
+<!ENTITY cm.copyLinkTitle "Kopiera Länkens Titel">
+<!ENTITY cm.copyLinkTitle.key "T">
+<!ENTITY cm.copyLinkURL "Kopiera Länkens URL">
+<!ENTITY cm.copyLinkURL.key "C">
+<!ENTITY cm.refreshFeeds "Uppdatera Flöden">
+<!ENTITY cm.refreshFeeds.key "U">
+<!ENTITY cm.manageFeeds "Hantera Flöden">
+<!ENTITY cm.manageFeeds.key "H">
+<!ENTITY cm.markAsRead "Markera som Läst">
+<!ENTITY cm.markAsRead.key "M">
+<!ENTITY cm.markFeedAsRead "Markera Flödet som Läst">
+<!ENTITY cm.markFeedAsRead.key "L">
+<!ENTITY cm.markAllAsRead "Markera Alla som Lästa">
+<!ENTITY cm.markAllAsRead.key "A">
+<!ENTITY options.speed.tt "Hastigheten på textremsan. 1 är snabbast.">
+<!ENTITY options.dw.itemWidth.tt "Bredden på de enskilda objekten i textremsan. Standard är 200 (px).">
+<!ENTITY options.smoothness.tt "Antal tick som det tar att ta bort ett objekt från starten på textremsan. Sätt ett högre värde för en mjukare rullning.">
+<!ENTITY options.updateInterval.tt "Antalet minuter mellan uppdatering av flödena.">
+<!ENTITY options.updateInterval "Uppdateringsfrekvens">
+<!ENTITY options.speed "Rullningshastighet">
+<!ENTITY options.dw.itemWidth "Objektbredd">
+<!ENTITY pixelAbbrev "px">
+<!ENTITY options.smooothness "Textremsans rullningsmjukhet">
+<!ENTITY cmOptionsDescription "Anpassa textremsans snabbvalsmeny genom att välja alternativ nedan.">
+<!ENTITY tt.summary "Sammanfattning">
+<!ENTITY options "Alternativ">
+<!ENTITY options.restartNotice "Alternativt märkta med * kommer inte att ändras förrän du öppnar ditt webbläsarfönster igen.">
+<!ENTITY options.general "Allmänt">
+<!ENTITY options.advanced "Avancerat">
+<!ENTITY options.contextMenu "Snabbvalsmeny">
+<!ENTITY options.placement.tt "Placering av textremsan i webbläsaren.">
+<!ENTITY options.random.tt "Låt textremsan visa flödenas innehåll i slumpvis ordning för att skapa variation.">
+<!ENTITY options.pause.tt "Pausa textremsan när musen är över den.">
+<!ENTITY options.disable.tt "Avaktivera RSS Ticker. Detta har samma effekt som att avinstallera den, men utan att avinstallera den.">
+<!ENTITY options.hide.tt "Göm flödesinnehåll du redan har läst (enligt historiken i din webbläsare)">
+<!ENTITY options.bold.tt "Visa innehåll som du inte har läst (enligt webbläsarens historik) i fet stil.">
+<!ENTITY options.openInNewTab.tt "Öppna alltid länkar i nya flikar, oavsett vilken musknapp du klickar med.">
+<!ENTITY disableTicker "Avaktivera textremsan">
+<!ENTITY options.tickerPlacement "Textremsans placering">
+<!ENTITY tickerPlacement.belowStatusBar "Nedanför statusraden">
+<!ENTITY tickerPlacement.belowBMTB "Nedanför bokmärkesverktygsfältet.">
+<!ENTITY options.random "Slumpa textremsans innehåll">
+<!ENTITY options.pause "Pausa textremsan när musen är över den.">
+<!ENTITY options.hide "Göm innehåll du redan har läst.">
+<!ENTITY options.bold "Visa innehåll du inte läst med fet stil.">
+<!ENTITY options.openInNewTab "Öppna alltid länkar i nya flikar.">
+<!ENTITY toggleTicker "Växla textremsan av/på">
+<!ENTITY options.dw.limitWidth "Begränsa bredden på objekt i textremsan">
+<!ENTITY options.dw.isMaxWidth "Använd endast som maxbredd">
+<!ENTITY options.disableRefresh "Avaktivera autouppdatering">
+<!ENTITY options.limitItemsPerFeed "Begränsa antalet objekt per flöde">
+<!ENTITY options.itemsPerFeed "Objekt per flöde">
+<!ENTITY about "Om">
+<!ENTITY noFeedsFoundTitle "Inga aktiva bokmärken funna">
+<!ENTITY noFeedsFound "RSS Ticker kunde inte hitta några aktiva bokmärken (också kända som newsfeeds, RSS feeds).">
+<!ENTITY howToLiveBookmark1 "RSS Ticker laddar och rullar de nyhetsflöden du har sparat som aktiva bokmärken. Om du inte känner till Firefox aktiva bokmärkessystem så finns det två sätt att lägga till ett aktivt bokmärke i Firefox:">
+<!ENTITY howToLiveBookmark2 "Om sidan du ser i webbläsaren erbjuder ett RSS-flöde (till exempel http://www.mozilla.org/), så kommer det att finnas en liten orange ikon till höger i adressfältet. Om du klickar på den ikonen kommer en &quot;Lägg till aktivt bokmärke&quot;-dialogruta att öppnas.">
+<!ENTITY howToLiveBookmark3 "I bokmärkeshanteraren (finns under Bokmärken &gt; Hantera bokmärken) finns det ett alternativ under Arkiv-menyn som heter &quot;Nytt Aktivt Bokmärke&quot;. Där kan du skriva in platsen för XML-flödet i Plats-fältet.">
+<!ENTITY howToLiveBookmark4 "Efter att du har utfört något av dessa steg kommer flödet att visas i textremsan när du startar om Firefox eller väljer &quot;Uppdatera Flöden&quot; från snabbvalsmenyn.">
+<!ENTITY dontShowAgain "Visa inte detta meddelande igen.">
+<!ENTITY feed "Flöde">
+<!ENTITY feeds "Flöden">
+<!ENTITY feedManagement "Du kan lägga till eller ta bort flöden från textremsan genom att välja dem i listan nedan och trycka på antingen Lägg till- eller Ta bort-knappen.">
+<!ENTITY add "Lägg till">
+<!ENTITY remove "Ta bort">
+<!ENTITY URL "URL">
+<!ENTITY hideWhenEmpty "Göm textremsan när den är tom">

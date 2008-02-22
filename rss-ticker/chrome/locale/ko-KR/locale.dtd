@@ -1,0 +1,78 @@
+<!ENTITY extension.title "RSS Ticker">
+<!ENTITY cm.open "열기">
+<!ENTITY cm.open.key "O">
+<!ENTITY cm.openInNewWindow "새 창으로 열기">
+<!ENTITY cm.openInNewWindow.key "N">
+<!ENTITY cm.openInNewTab "새 탭으로 열기">
+<!ENTITY cm.openInNewTab.key "T">
+<!ENTITY cm.openAllInTabs "탭에 모두 열기">
+<!ENTITY cm.openUnreadInTabs "탭에 읽지 않은 것을 열기">
+<!ENTITY cm.openFeedInTabs "탭에 피드 열기">
+<!ENTITY cm.openFeedUnreadInTabs "탭에 읽지 않은 피드 열기">
+<!ENTITY cm.copyLinkTitle "링크 제목 복사">
+<!ENTITY cm.copyLinkTitle.key "L">
+<!ENTITY cm.copyLinkURL "링크 URL 복사">
+<!ENTITY cm.copyLinkURL.key "C">
+<!ENTITY cm.refreshFeeds "피드 새로고침">
+<!ENTITY cm.refreshFeeds.key "R">
+<!ENTITY cm.manageFeeds "피드 관리">
+<!ENTITY cm.manageFeeds.key "G">
+<!ENTITY cm.markAsRead "읽은 것으로 표시">
+<!ENTITY cm.markAsRead.key "M">
+<!ENTITY cm.markFeedAsRead "피드를 읽은 것으로 표시">
+<!ENTITY cm.markFeedAsRead.key "F">
+<!ENTITY cm.markAllAsRead "모두 읽은 것으로 표시">
+<!ENTITY cm.markAllAsRead.key "A">
+<!ENTITY options.speed.tt "티커 속도. 1이 가장 빠름.">
+<!ENTITY options.dw.itemWidth.tt "티커 내 개별 항목의 폭. 기본값은 200(px).">
+<!ENTITY options.smoothness.tt "티커 전면에서 1개의 항목을 사라지는데 걸리는 순간. 더 부드러운 스크롤을 위한 높이 설정.">
+<!ENTITY options.updateInterval.tt "피드 갱신 사이의 분수">
+<!ENTITY options.updateInterval "갱신 주기">
+<!ENTITY options.speed "틱 속도">
+<!ENTITY options.dw.itemWidth "항목 폭">
+<!ENTITY pixelAbbrev "px">
+<!ENTITY options.smooothness "티커 스크롤 유연도">
+<!ENTITY cmOptionsDescription "환경설정에서의 선택/비선택를 통해 티커 문맥메뉴를 자신에 맞춥니다.">
+<!ENTITY tt.summary "개요">
+<!ENTITY options "환경설정">
+<!ENTITY options.restartNotice "*로 표시된 설정은 브라우저 창을 다시 열 때까지 변경되지 않습니다.">
+<!ENTITY options.general "일반">
+<!ENTITY options.advanced "고급">
+<!ENTITY options.contextMenu "문맥 메뉴">
+<!ENTITY options.placement.tt "브라우저 내 티커 배치">
+<!ENTITY options.random.tt "다양하게 즐기기 위해 임의 순서로 피드 항목을 보이게 합니다.">
+<!ENTITY options.pause.tt "마우스를 위에 올려 놓으면 티커가 잠시 멈춥니다.">
+<!ENTITY options.disable.tt "RSS 티커를 끕니다. 설치 제거와 동일한 효과를 가지지만, 설치 제거를 하지는 않습니다.">
+<!ENTITY options.hide.tt "브라우저의 기록에 따라 이미 읽은 피드 항목을 숨깁니다.">
+<!ENTITY options.bold.tt "브라우저의 기록에 따라 읽지 않은 피드 항목을 진하게 표시합니다.">
+<!ENTITY options.openInNewTab.tt "누르는 마우스 버튼에 상관없이 언제나 새탭으로 링크를 열기">
+<!ENTITY disableTicker "티커 끔">
+<!ENTITY options.tickerPlacement "티커 배치">
+<!ENTITY tickerPlacement.belowStatusBar "상태바 밑에">
+<!ENTITY tickerPlacement.belowBMTB "북마크 도구상자 밑에">
+<!ENTITY options.random "티커 항목 무작위">
+<!ENTITY options.pause "마우스를 위에 올려 놓으면 티커가 잠시 멈춥니다.">
+<!ENTITY options.hide "이미 읽은 항목 숨기기">
+<!ENTITY options.bold "읽지 않은 항목 강조">
+<!ENTITY options.openInNewTab "언제나 새 탭으로 링크 열기">
+<!ENTITY toggleTicker "티커 끄기/켜기 전환">
+<!ENTITY options.dw.limitWidth "티커내 항목의 폭을 제한">
+<!ENTITY options.dw.isMaxWidth "최대 폭으로만 사용">
+<!ENTITY options.disableRefresh "자동 새로고침 끔">
+<!ENTITY options.limitItemsPerFeed "피드 당 항목의 수를 제한">
+<!ENTITY options.itemsPerFeed "피드 당 항목">
+<!ENTITY about "이 확장기능에 대하여">
+<!ENTITY noFeedsFoundTitle "발견된 라이브 북마크 없음">
+<!ENTITY noFeedsFound "RSS 티커는 (뉴스 피드, RSS 피드 같은) 어떤 라이브 북마크도 찾아낼 수 없었습니다.">
+<!ENTITY howToLiveBookmark1 "RSS티커는 라이브 북마크 지정을 통해 뉴스 피드를 읽어 돌아가며 표시합니다. Firefox의 라이브북마크 체계가 생소한 경우, Firefox에 라이브 북마크를 추가하는 2가지의 방법이 있습니다:">
+<!ENTITY howToLiveBookmark2 "브라우저를 통해 보고 있는 페이지가 RSS 피드 (예를 들면, http://www.mozilla.org/)를 제공하는 경우에, 주소창의 오른쪽에 작은 주황색 아이콘이 있을 것입니다. 저 아이콘을 클릭하면, [라이브 북마크 추가] 대화상자가 열릴 것입니다.">
+<!ENTITY howToLiveBookmark3 "북마크 관리자 (북마크 &gt; 북마크 구성 에서 찾을 수 있음)내, 파일 메뉴 아래에 있는 [새 북마크]의 등록정보에서 RSS주소 창을 통해 XML 피드의 위치를 넣을 수 있습니다.">
+<!ENTITY howToLiveBookmark4 "이 단계를 한 이후, Firefox를 재시작하거나 티커내 문맥메뉴에서 [피드 새로고침] 선택을 하면 티커에 피드가 보여질 겁니다.">
+<!ENTITY dontShowAgain "이 메시지를 다시 표시 하지 않음.">
+<!ENTITY feed "피드">
+<!ENTITY feeds "피드">
+<!ENTITY feedManagement "추가 또는 삭제 버튼을 눌러 목록내에서 선택한 피드를 티커에 추가하거나 삭제할 수 있습니다">
+<!ENTITY add "추가">
+<!ENTITY remove "삭제">
+<!ENTITY URL "URL">
+<!ENTITY hideWhenEmpty "아무것도 없을 경우 티커 숨김.">

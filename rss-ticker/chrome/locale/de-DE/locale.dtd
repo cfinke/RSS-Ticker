@@ -1,0 +1,78 @@
+<!ENTITY extension.title "RSS Ticker">
+<!ENTITY cm.open "Öffnen">
+<!ENTITY cm.open.key "Ö">
+<!ENTITY cm.openInNewWindow "In neuem Fenster öffnen">
+<!ENTITY cm.openInNewWindow.key "F">
+<!ENTITY cm.openInNewTab "In neuem Tab öffnen">
+<!ENTITY cm.openInNewTab.key "T">
+<!ENTITY cm.openAllInTabs "Alle in Tabs öffnen">
+<!ENTITY cm.openUnreadInTabs "Alle ungelesenen in Tabs öffnen">
+<!ENTITY cm.openFeedInTabs "Feed in Tabs öffnen">
+<!ENTITY cm.openFeedUnreadInTabs "Ungelesene dieses Feeds in Tabs öffnen">
+<!ENTITY cm.copyLinkTitle "Link-Titel kopieren">
+<!ENTITY cm.copyLinkTitle.key "i">
+<!ENTITY cm.copyLinkURL "Link-Adresse kopieren">
+<!ENTITY cm.copyLinkURL.key "k">
+<!ENTITY cm.refreshFeeds "Feeds aktualisieren">
+<!ENTITY cm.refreshFeeds.key "u">
+<!ENTITY cm.manageFeeds "Feeds verwalten">
+<!ENTITY cm.manageFeeds.key "v">
+<!ENTITY cm.markAsRead "Als gelesenen markieren">
+<!ENTITY cm.markAsRead.key "g">
+<!ENTITY cm.markFeedAsRead "Feed als gelesenen markieren">
+<!ENTITY cm.markFeedAsRead.key "F">
+<!ENTITY cm.markAllAsRead "Alle als gelesenen markieren">
+<!ENTITY cm.markAllAsRead.key "l">
+<!ENTITY options.speed.tt "Bestimmt die Geschwindigkeit des Tickers. 1 ist am schnellsten.">
+<!ENTITY options.dw.itemWidth.tt "Legt die Breite der einzelnen Einträge im Ticker fest. Standard ist 200 (px).">
+<!ENTITY options.smoothness.tt "Regelt das Laufverhalten des Tickers. Je größer die Zahl, um so weicher ist der Tickerlauf.">
+<!ENTITY options.updateInterval.tt "Die Anzahl an Minuten zwischen den automatischen Aktualisierungen der Feeds.">
+<!ENTITY options.updateInterval "Aktualisierungsintervall (in Minuten)">
+<!ENTITY options.speed "Laufgeschwindigkeit">
+<!ENTITY options.dw.itemWidth "Breite der Einträge">
+<!ENTITY pixelAbbrev "px">
+<!ENTITY options.smooothness "Laufruhe des Tickers">
+<!ENTITY cmOptionsDescription "Einträge auswählen, die im Kontextmenü des Tickers angezeigt werden sollen:">
+<!ENTITY tt.summary "Zusammenfassung">
+<!ENTITY options "Einstellungen">
+<!ENTITY options.restartNotice "Die mit * markierten Optionen werden erst für neue Fenster übernommen.">
+<!ENTITY options.general "Allgemein">
+<!ENTITY options.advanced "Erweitert">
+<!ENTITY options.contextMenu "Kontextmenü">
+<!ENTITY options.placement.tt "Bestimmt die Platzierung des Tickers im Browser.">
+<!ENTITY options.random.tt "Zeigt die Feed-Einträge im Ticker für mehr Abwechslung in zufälliger Reihenfolge an.">
+<!ENTITY options.pause.tt "Hält den Ticker an, wenn sich der Mauszeiger darüber befindet.">
+<!ENTITY options.disable.tt "Deaktiviert den RSS-Ticker. Dies hat den gleichen Effekt, wie ihn zu deinstallieren, ohne dies tun zu müssen.">
+<!ENTITY options.hide.tt "Blendet gelesene Einträge aus (gemäß der Browser-Chronik).">
+<!ENTITY options.bold.tt "Zeigt ungelesene Einträge fett hervorgehoben an (gemäß der Browser-Chronik).">
+<!ENTITY options.openInNewTab.tt "Öffnet Links immer in neuen Tabs, egal, welche Maustaste gedrückt wird.">
+<!ENTITY disableTicker "Ticker deaktivieren">
+<!ENTITY options.tickerPlacement "Ticker-Platzierung">
+<!ENTITY tickerPlacement.belowStatusBar "Unterhalb der Statusleiste">
+<!ENTITY tickerPlacement.belowBMTB "Unterhalb der Lesezeichen-Symbolleiste">
+<!ENTITY options.random "Ticker-Einträge in zufälliger Reihenfolge anzeigen">
+<!ENTITY options.pause "Ticker beim Überfahren mit der Maus anhalten">
+<!ENTITY options.hide "Gelesene Einträge ausblenden">
+<!ENTITY options.bold "Ungelesene Einträge fett markieren">
+<!ENTITY options.openInNewTab "Links immer in neuen Tabs öffnen">
+<!ENTITY toggleTicker "Ticker ein-/ausschalten">
+<!ENTITY options.dw.limitWidth "Breite der Einträge im Ticker begrenzen">
+<!ENTITY options.dw.isMaxWidth "Flexible Breite mit Wert als Maximum benutzen">
+<!ENTITY options.disableRefresh "Automatische Aktualisierung deaktivieren">
+<!ENTITY options.limitItemsPerFeed "Anzahl der Einträge pro Feed begrenzen">
+<!ENTITY options.itemsPerFeed "Einträge pro Feed">
+<!ENTITY about "Über">
+<!ENTITY noFeedsFoundTitle "Keine dynamischen Lesezeichen gefunden">
+<!ENTITY noFeedsFound "RSS Ticker konnte keine dynamischen Lesezeichen (d.h. Newsfeeds, RSS-Feeds) finden.">
+<!ENTITY howToLiveBookmark1 "RSS Ticker lädt Ihre als dynamische Lesezeichen angelegten Nachrichten-Feeds als Lauftext in eine eigene Leiste. Für den Fall, dass Sie mit der Systematik der dynamischen Lesezeichen in Firefox nicht vertraut sind, existieren zwei Wege, um dynamische Lesezeichen hinzuzufügen:">
+<!ENTITY howToLiveBookmark2 "Falls eine Seite, die sie besuchen, einen RSS-Feed anbietet (z.B. http://www.erweiterungen.de/), erscheint ein kleines oranges Symbol rechts in der Adressleiste. Bei einem Klick öffnet sich der Dialog &apos;Dynamisches Lesezeichen anlegen&apos;.">
+<!ENTITY howToLiveBookmark3 "Im Lesezeichen-Manager (zu finden unter &apos;Lesezeichen &gt; Lesezeichen-Manager&apos;) gibt es im Datei-Menü einen Eintrag &apos;Neues dynamisches Lesezeichen&apos;. Im entsprechenden Dialogfenster können Sie die Adresse eines XML-Feeds eingeben.">
+<!ENTITY howToLiveBookmark4 "Nachdem einer diese Schritte vollzogen wurde, wird der Feed nach einem Neustart von Firefox oder nach der Auswahl des Menüpunkts &apos;Feeds aktualisieren&apos; im Ticker-Kontextmenü als Lauftext angezeigt.">
+<!ENTITY dontShowAgain "Diese Meldung nicht mehr anzeigen">
+<!ENTITY feed "Feed">
+<!ENTITY feeds "Feeds">
+<!ENTITY feedManagement "Um Feeds zum Ticker hinzuzufügen oder daraus zu entfernen, wählen Sie die Einträge aus untenstehender Liste aus und klicken Sie entweder auf die Schaltfläche &apos;Hinzufügen&apos; oder &apos;Entfernen&apos;.">
+<!ENTITY add "Hinzufügen">
+<!ENTITY remove "Entfernen">
+<!ENTITY URL "Adresse">
+<!ENTITY hideWhenEmpty "Ticker ausblenden, wenn keine Einträge vorhanden sind">

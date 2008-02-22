@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript" src="chrome://rss-ticker/content/ticker.object.js"></script>
+	<script type="application/x-javascript">
+		<![CDATA[
+		
+		window.addEventListener("load", function () { RSSTICKER.bmPropsDialogPlacesInit(); }, false);
+		window.addEventListener("dialogaccept", function () { RSSTICKER.bmPropsDialogPlacesAccept(); }, true);
+
+		]]>
+	</script>
+	<dialog id="bookmarkproperties">
+		<stringbundle id="RSSTICKER-bundle" src="chrome://rss-ticker/locale/locale.properties" />
+	</dialog>
+</overlay>

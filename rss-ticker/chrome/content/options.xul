@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<!DOCTYPE dialog SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+<prefwindow
+	onload="findTicker(); getFeeds();"
+	title="&extension.title; - &options;"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<prefpane id="general-pane" label="&options.general;">
+		<preferences>
+			<preference id="p_disabled" name="extensions.rssticker.disabled" type="bool" />
+			<preference id="p_hideWhenEmpty" name="extensions.rssticker.hideWhenEmpty" type="bool" />
+			<preference id="p_tickerPlacement" name="extensions.rssticker.tickerPlacement" type="int" />
+			<preference id="p_randomizeItems" name="extensions.rssticker.randomizeItems" type="bool" />
+			<preference id="p_limitItemsPerFeed" name="extensions.rssticker.limitItemsPerFeed" type="bool" />
+			<preference id="p_itemsPerFeed" name="extensions.rssticker.itemsPerFeed" type="int" />
+			<preference id="p_hideVisited" name="extensions.rssticker.hideVisited" type="bool" />
+			<preference id="p_boldUnvisited" name="extensions.rssticker.boldUnvisited" type="bool" />
+			<preference id="p_alwaysOpenInNewTab" name="extensions.rssticker.alwaysOpenInNewTab" type="bool" />
+		</preferences>
+		<vbox>
+			<description>&options.restartNotice;</description>
+			<groupbox>
+				<checkbox preference="p_disabled" label="&disableTicker;" />
+				<checkbox preference="p_hideWhenEmpty" label="&hideWhenEmpty;" />
+			</groupbox>
+			<groupbox>
+				<caption label="&options.tickerPlacement;" />
+				<menulist preference="p_tickerPlacement">
+					<menupopup>
+						<menuitem label="&tickerPlacement.belowStatusBar;" value="1" />
+						<menuitem label="&tickerPlacement.belowBMTB;" value="2" />
+					</menupopup>
+				</menulist>
+			</groupbox>
+			<groupbox>
+				<checkbox preference="p_randomizeItems" label="&options.random;" />
+			</groupbox>
+			<groupbox>
+				<checkbox preference="p_limitItemsPerFeed" label="&options.limitItemsPerFeed;" />
+				<hbox>
+					<label value="&options.itemsPerFeed;:" />
+					<textbox flex="1" preference="p_itemsPerFeed" />
+				</hbox>									
+			</groupbox>
+			<groupbox>
+				<checkbox preference="p_hideVisited" label="&options.hide; *"/>
+				<checkbox preference="p_boldUnvisited" label="&options.bold; *"/>
+			</groupbox>
+			<groupbox>
+				<checkbox preference="p_alwaysOpenInNewTab" label="&options.openInNewTab;"/>
+			</groupbox>
+		</vbox>
+	</prefpane>
+	<prefpane id="advanced-pane" label="&options.advanced;">
+		<preferences>
+			<preference id="p_updateFrequency" name="extensions.rssticker.updateFrequency" type="int" />
+			<preference id="p_tickSpeed" name="extensions.rssticker.tickSpeed" type="int" />
+			<preference id="p_dw_limitWidth" name="extensions.rssticker.dw.limitWidth" type="bool" />
+			<preference id="p_dw_isMaxWidth" name="extensions.rssticker.dw.isMaxWidth" type="bool" />
+			<preference id="p_dw_itemWidth" name="extensions.rssticker.dw.itemWidth" type="int" />
+			<preference id="p_ticksPerItem" name="extensions.rssticker.ticksPerItem" type="int" />
+		</preferences>
+		<vbox>
+			<description>&options.restartNotice;</description>
+			<groupbox>
+				<caption label="&options.updateInterval;" />
+				<textbox flex="1" preference="p_updateFrequency" />
+			</groupbox>
+			<groupbox>
+				<caption label="&options.speed;" />
+				<textbox flex="1" preference="p_tickSpeed" />
+			</groupbox>
+			<groupbox>
+				<caption label="&options.dw.itemWidth;" />
+				<checkbox preference="p_dw_limitWidth" label="&options.dw.limitWidth; *" />
+				<checkbox preference="p_dw_isMaxWidth" label="&options.dw.isMaxWidth; *" />
+				<hbox flex="1">
+					<label value="&options.dw.itemWidth; : *" />
+					<textbox flex="1" preference="p_dw_itemWidth" />
+					<label value="&pixelAbbrev;" />
+				</hbox>
+			</groupbox>
+			<groupbox>
+				<caption label="&options.smooothness;" />
+				<hbox flex="1">
+					<textbox flex="1" size="40" preference="p_ticksPerItem" onchange="this.value = Math.max(this.value, 1);" />
+				</hbox>
+			</groupbox>
+		</vbox>
+	</prefpane>
+	<prefpane id="context-pane" label="&options.contextMenu;">
+		<preferences>
+			<preference id="p_cm_open" name="extensions.rssticker.cm.open" type="bool" />
+			<preference id="p_cm_openInWindow" name="extensions.rssticker.cm.openInWindow" type="bool" />
+			<preference id="p_cm_openInTab" name="extensions.rssticker.cm.openInNewTab" type="bool" />
+			<preference id="p_cm_openAllInTabs" name="extensions.rssticker.cm.openAllInTabs" type="bool" />
+			<preference id="p_cm_openUnreadInTabs" name="extensions.rssticker.cm.openUnreadInTabs" type="bool" />
+			<preference id="p_cm_openFeedInTabs" name="extensions.rssticker.cm.openFeedInTabs" type="bool" />
+			<preference id="p_cm_openFeedUnreadInTabs" name="extensions.rssticker.cm.openFeedUnreadInTabs" type="bool" />
+			<preference id="p_cm_copyLinkTitle" name="extensions.rssticker.cm.copyLinkTitle" type="bool" />
+			<preference id="p_cm_copyLinkURL" name="extensions.rssticker.cm.copyLinkURL" type="bool" />
+			<preference id="p_cm_refreshFeeds" name="extensions.rssticker.cm.refreshFeeds" type="bool" />
+			<preference id="p_cm_manageFeeds" name="extensions.rssticker.cm.manageFeeds" type="bool" />
+			<preference id="p_cm_markAsRead" name="extensions.rssticker.cm.markAsRead" type="bool" />
+			<preference id="p_cm_markFeedAsRead" name="extensions.rssticker.cm.markFeedAsRead" type="bool" />
+			<preference id="p_cm_markAllAsRead" name="extensions.rssticker.cm.markAllAsRead" type="bool" />
+			<preference id="p_cm_options" name="extensions.rssticker.cm.options" type="bool" />
+			<preference id="p_cm_disableTicker" name="extensions.rssticker.cm.disableTicker" type="bool" />
+		</preferences>
+		<vbox>
+			<description style="max-width: 40em;">&cmOptionsDescription;</description>
+			<grid>
+				<columns>
+					<column flex="1" />
+					<column flex="1" />
+				</columns>
+				<rows>
+					<row>
+						<vbox>
+							<checkbox label="&cm.open;" preference="p_cm_open" />
+							<checkbox label="&cm.openInNewWindow;" preference="p_cm_openInWindow" />
+							<checkbox label="&cm.openInNewTab;" preference="p_cm_openInTab" />
+						</vbox>
+						<vbox>
+							<checkbox label="&cm.openAllInTabs;" preference="p_cm_openAllInTabs" />
+							<checkbox label="&cm.openUnreadInTabs;" preference="p_cm_openUnreadInTabs" />
+							<checkbox label="&cm.openFeedInTabs;" preference="p_cm_openFeedInTabs" />
+							<checkbox label="&cm.openFeedUnreadInTabs;" preference="p_cm_openFeedUnreadInTabs" />
+						</vbox>
+					</row>
+					<row>
+						<separator/>
+						<separator/>
+					</row>
+					<row>
+						<vbox>
+							<checkbox label="&cm.copyLinkTitle;" preference="p_cm_copyLinkTitle" />
+							<checkbox label="&cm.copyLinkURL;" preference="p_cm_copyLinkURL" />
+							<checkbox label="&cm.refreshFeeds;" preference="p_cm_refreshFeeds" />
+							<checkbox label="&cm.manageFeeds;" preference="p_cm_manageFeeds" />
+						</vbox>
+						<vbox>
+							<checkbox label="&cm.markAsRead;" preference="p_cm_markAsRead" />
+							<checkbox label="&cm.markFeedAsRead;" preference="p_cm_markFeedAsRead" />
+							<checkbox label="&cm.markAllAsRead;" preference="p_cm_markAllAsRead" />
+						</vbox>
+					</row>
+					<row>
+						<separator/>
+						<separator/>
+					</row>
+					<row>
+						<vbox>
+							<checkbox label="&options;" preference="p_cm_options" />
+							<checkbox label="&disableTicker;" preference="p_cm_disableTicker" />
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+		</vbox>
+	</prefpane>		
+	<prefpane id="manage-pane" label="&feeds;">
+		<script type="application/x-javascript" src="chrome://browser/content/bookmarks/bookmarks.js"></script>
+		<script type="application/x-javascript" src="chrome://rss-ticker/content/ticker.object.js"></script>
+		<script type="application/x-javascript" src="chrome://rss-ticker/content/options.js"></script>
+		<vbox>
+			<description style="max-width: 35em;">&feedManagement;</description>
+			<listbox id="feeds" flex="1" seltype="multiple">
+				<listhead>
+					<listheader label="&feed;"/>
+					<listheader label="&URL;"/>
+				</listhead>
+				<listcols>
+					<listcol flex="1" />
+					<listcol flex="1" />
+				</listcols>
+			</listbox>
+			<hbox>
+				<button flex="1" label="&add;" onclick="observeFeeds();" />
+				<button flex="1" label="&remove;" onclick="ignoreFeeds();" />
+			</hbox>
+		</vbox>
+	</prefpane>
+</prefwindow>
