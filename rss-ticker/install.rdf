@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
-         xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="{1f91cde0-c040-11da-a94d-0800200c9a66}"

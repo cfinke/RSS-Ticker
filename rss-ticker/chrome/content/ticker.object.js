@@ -1,7 +1,6 @@
 var RSSTICKER = {
 	// Config information for customization:
 	
-	objectName : "RSSTICKER",
 	objectPathName : "rss-ticker",
 	prefBranch : "extensions.rssticker.",
 	ignoreFilename : "rss-ticker.ignore.txt",
@@ -148,6 +147,14 @@ var RSSTICKER = {
 			return;
 		}
 		else {
+			var db = this.getDB();
+
+			if (!db.tableExists("history")) {
+				db.executeSimpleSQL("CREATE TABLE IF NOT EXISTS history (id TEXT PRIMARY KEY, date INTEGER)");
+			}
+
+			try { db.close(); } catch (e) { }
+
 			if (document.getElementById("RSSTICKER-button")){
 				document.getElementById("RSSTICKER-button").setAttribute("greyed","false");
 			}
@@ -168,7 +175,7 @@ var RSSTICKER = {
 			
 			if (!this.ticker){
 				this.ticker = this.ce('toolbar');
-				this.ticker.setAttribute("id",this.objectName + this.strings.getString("toolbar"));
+				this.ticker.setAttribute("id","RSSTICKER" + this.strings.getString("toolbar"));
 				this.ticker.setAttribute("class","chromeclass-toolbar");
 				this.ticker.setAttribute("hidden",false);
 				this.ticker.setAttribute("iconsize","small");
@@ -183,33 +190,29 @@ var RSSTICKER = {
 				this.toolbar.appendChild(this.toolbar.spacer);
 				this.toolbar.style.maxHeight = '24px';
 				
-				this.ticker.setAttribute("contextmenu",this.objectName + "CM");
+				this.ticker.setAttribute("contextmenu","RSSTICKERCM");
 				
-				this.ticker.setAttribute("onmouseover",this.objectName + ".mouseOverFlag = true;");
-				this.ticker.setAttribute("onmouseout",this.objectName + ".mouseOverFlag = false;");
+				this.ticker.setAttribute("onmouseover","RSSTICKER.mouseOverFlag = true;");
+				this.ticker.setAttribute("onmouseout","RSSTICKER.mouseOverFlag = false;");
 
-				document.getElementById(this.objectName + "ItemCM").setAttribute("onmouseover",this.objectName + ".mouseOverFlag = true;");
-				document.getElementById(this.objectName + "ItemCM").setAttribute("onmouseout",this.objectName + ".mouseOverFlag = false;");
+				document.getElementById("RSSTICKERItemCM").setAttribute("onmouseover","RSSTICKER.mouseOverFlag = true;");
+				document.getElementById("RSSTICKERItemCM").setAttribute("onmouseout","RSSTICKER.mouseOverFlag = false;");
 				
 				this.ticker.appendChild(this.toolbar);
 				
-				this.loadingNoticeParent = this.ce('toolbaritem');
-				this.loadingNoticeParent.setAttribute("tooltip",this.objectName + "LoadingNoticeTooltip");
-				this.loadingNoticeParent.id = this.objectName + "-throbber-box";
-				this.loadingNoticeParent.setAttribute("title","RSS Ticker Activity Indicator");
-				this.loadingNoticeParent.setAttribute("align","center");
-				this.loadingNoticeParent.setAttribute("pack","center");
-				
-				this.loadingNotice = this.ce('image');
-				this.loadingNotice.setAttribute("src","chrome://rss-ticker/skin/throbber.gif");
-				this.loadingNotice.setAttribute("onclick","this.parent.browser.openInNewTab('http://www.efinke.com/rss-ticker/');");
-				this.loadingNotice.id = this.objectName + "-throbber";
+				this.loadingNotice = this.ce('toolbarbutton');
+				this.loadingNotice.setAttribute("class","toolbarbutton-1");
+				this.loadingNotice.setAttribute("tooltip","RSSTICKERLoadingNoticeTooltip");
+				this.loadingNotice.id = "RSSTICKER-throbber";
+				this.loadingNotice.parent = this;
+				this.loadingNotice.setAttribute("title","Loading feeds...");
+				this.loadingNotice.setAttribute("align","center");
+				this.loadingNotice.setAttribute("pack","center");
 				this.loadingNotice.setAttribute("busy","false");
-				this.loadingNotice.style.marginRight = '4px';
-				this.loadingNoticeParent.appendChild(this.loadingNotice);
+				this.loadingNotice.setAttribute("oncommand","this.parent.browser.openInNewTab('http://www.chrisfinke.com/addons/rss-ticker/');");
 				
 				try {
-					document.getElementById("nav-bar").appendChild(this.loadingNoticeParent);
+					document.getElementById("nav-bar").appendChild(this.loadingNotice);
 				} catch (e) {
 					this.logMessage(e);
 				}
@@ -220,7 +223,7 @@ var RSSTICKER = {
 			this.attachTicker();
 			
 			// For some reason, the boookmark API functions aren't available right away.
-			setTimeout(this.objectName + ".init();", 300);
+			setTimeout("RSSTICKER.init();", 300);
 		}
 	},
 	
@@ -326,11 +329,11 @@ var RSSTICKER = {
 			
 			var text = document.createTextNode(message);
 			
-			while (document.getElementById(this.objectName + "LoadingNoticeText").childNodes.length > 0){
-				document.getElementById(this.objectName + "LoadingNoticeText").removeChild(document.getElementById(this.objectName + "LoadingNoticeText").lastChild);
+			while (document.getElementById("RSSTICKERLoadingNoticeText").childNodes.length > 0){
+				document.getElementById("RSSTICKERLoadingNoticeText").removeChild(document.getElementById("RSSTICKERLoadingNoticeText").lastChild);
 			}
 			
-			document.getElementById(this.objectName + "LoadingNoticeText").appendChild(text);
+			document.getElementById("RSSTICKERLoadingNoticeText").appendChild(text);
 			
 			this.loadingNotice.setAttribute("busy", "true");
 		}
@@ -380,9 +383,9 @@ var RSSTICKER = {
 		this.cmOptions.options = this.prefs.getBoolPref("cm.options");
 		this.cmOptions.disableTicker = this.prefs.getBoolPref("cm.disableTicker");
 			
-		this.customizeContextMenu(this.objectName + "ItemCM");
-		this.customizeContextMenu(this.objectName + "CM");
-		this.customizeContextMenu(this.objectName + "ButtonCM");
+		this.customizeContextMenu("RSSTICKERItemCM");
+		this.customizeContextMenu("RSSTICKERCM");
+		this.customizeContextMenu("RSSTICKERButtonCM");
 	},
 	
 	customizeContextMenu : function(menuID){
@@ -394,7 +397,7 @@ var RSSTICKER = {
 			var option = menu.childNodes[i];
 			
 			if (option.nodeName == 'menuitem'){
-				if (eval(this.objectName + ".cmOptions." + option.getAttribute("option") + " == false")){
+				if (eval("RSSTICKER.cmOptions." + option.getAttribute("option") + " == false")){
 					option.style.display = 'none';
 				}
 				else {
@@ -601,7 +604,6 @@ var RSSTICKER = {
 				
 				try {
 					req.open("GET",url,true);
-					req.overrideMimeType("application/xml");
 					req.onreadystatechange = function (event) {
 						if (req.readyState == 4) {
 							try {
@@ -615,17 +617,14 @@ var RSSTICKER = {
 										req.parent.addLoadingNotice(req.parent.strings.getString("loadedXFeeds").replace("#1", req.parent.feedsLoaded).replace("#2",req.parent.feedsFound));
 									}
 									
-									var feed = null;
-									
 									try {
-										feed = new TickerFeed(req.responseXML, url);
+										// Trim it.
+										req.parent.queueForParsing(req.responseText.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
 									} catch (e) {
-										if (req.parent.DEBUG) req.parent.logMessage("Invalid feed: " + url);
+										// Parse error
+										req.parent.logMessage("Empty feed: " + url + " " + e);
+										req.parent.loadNextLivemark();
 									}
-									
-									if (req.parent.DEBUG) req.parent.logMessage("Feed: " + feed);
-									
-									req.parent.getFavicon(feed);
 								}
 								else {
 									if (req.parent.DEBUG) req.parent.logMessage("Status not 200.");
@@ -656,59 +655,102 @@ var RSSTICKER = {
 		}
 	},
 	
-	getFavicon : function (feed){
+	queueForParsing : function (feedText, feedURL) {
+		var ioService = Components.classes["@mozilla.org/network/io-service;1"]
+						.getService(Components.interfaces.nsIIOService);
+
+		var data = feedText;
+		var uri = ioService.newURI(feedURL, null, null);
+
+		if (data.length) {
+			var parser = Components.classes["@mozilla.org/feed-processor;1"]
+							.createInstance(Components.interfaces.nsIFeedProcessor);
+			var listener = new TickerParseListener();
+
+			try {
+				parser.listener = listener;
+				parser.parseFromString(data, uri);
+			} catch (e) {
+				throw (e);
+			}
+		}
+		else {
+			throw({ message : "Feed has no content." });
+		}
+
+		return this;
+	},
+	
+	getFavicon : function (feedObject){
 		if (this.unloadNow){
 			this.unloadNow = false;
 			this.doUnload();
 		}
 		else if (!this.disabled){
-			if (!feed) {
+			if (!feedObject) {
 				this.loadNextLivemark();
 			}
 			else {
-				if (this.DEBUG) this.logMessage("Root link: " + feed.rootLink);
+				try {
+					var faviconService = Components.classes["@mozilla.org/browser/favicon-service;1"]
+					                               .getService(Components.interfaces.nsIFaviconService);
+					var ioService = Components.classes["@mozilla.org/network/io-service;1"]
+									.getService(Components.interfaces.nsIIOService);
+					var uri = ioService.newURI(feedObject.siteLink, null, null);
+					feedObject.image = faviconService.getFaviconImageForPage(uri).spec;
+					this.logMessage("Favicon for " + uri.spec + " = " + feedObject.image);
+					this.writeFeed(feedObject);
+					this.loadNextLivemark();
+					return;
+				} catch (e) {
+					// FF2 - faviconService doesn't exist
+					feedObject.rootLink = feedObject.siteLink.substr(0, feedObject.link.indexOf("/",10)) + "/";
+					this.logMessage(e);
+				}
+				
+				if (this.DEBUG) this.logMessage("Root link: " + feedObject.link);
 				
 				// Default
-				feed.image = "chrome://browser/skin/page-livemarks.png";
+				feedObject.image = "chrome://browser/skin/page-livemarks.png";
 				
 				for (var i = 0; i < this.favicons.length; i++){
-					if (this.favicons[i].site == feed.rootLink){
+					if (this.favicons[i].site == feedObject.rootLink){
 						if (this.favicons[i].hasIcon){
-							feed.image = feed.rootLink + "favicon.ico";
+							feedObject.image = feedObject.rootLink + "favicon.ico";
 						}
 						
-						this.writeFeed(feed);
+						this.writeFeed(feedObject);
 						this.loadNextLivemark();
 						
 						return;
 					}
 				}
 				
-				if (this.DEBUG) this.logMessage(feed.rootLink + "favicon.ico" + " status");
+				if (this.DEBUG) this.logMessage(feedObject.rootLink + "favicon.ico status");
 				
 				var req = new XMLHttpRequest();
 				req.parent = this;
 				
 				try {
-					req.open("GET", feed.rootLink + "favicon.ico", true);
+					req.open("GET", feedObject.rootLink + "favicon.ico", true);
 					req.onreadystatechange = function (event) {
 						if (req.readyState == 4){
 							try {
 								if (req.parent.DEBUG) req.parent.logMessage(req.status);
 								
 								if (req.status == 200){
-									feed.image = feed.rootLink + "favicon.ico";
-									req.parent.favicons.push({"site" : feed.rootLink, "hasIcon" : true});
+									feedObject.image = feedObject.rootLink + "favicon.ico";
+									req.parent.favicons.push({"site" : feedObject.rootLink, "hasIcon" : true});
 								}
 								else {
-									req.parent.favicons.push({"site" : feed.rootLink, "hasIcon" : false});
+									req.parent.favicons.push({"site" : feedObject.rootLink, "hasIcon" : false});
 								}
 							} catch (e) {
 								if (req.parent.DEBUG) req.parent.logMessage("status error");
-								req.parent.favicons.push({"site" : feed.rootLink, "hasIcon" : false});
+								req.parent.favicons.push({"site" : feedObject.rootLink, "hasIcon" : false});
 							}
 							
-							req.parent.writeFeed(feed);
+							req.parent.writeFeed(feedObject);
 							req.parent.loadNextLivemark();
 						}
 					};
@@ -717,16 +759,16 @@ var RSSTICKER = {
 				} catch (e) {
 					if (this.DEBUG) this.logMessage("request error");
 					
-					this.favicons.push({"site" : feed.rootLink, "hasIcon" : false});
+					this.favicons.push({"site" : feedObject.rootLink, "hasIcon" : false});
 					
-					this.writeFeed(feed);
+					this.writeFeed(feedObject);
 					this.loadNextLivemark();
 				}
 			}
 		}
 	},
 	
-	writeFeed : function (feed) {
+	writeFeed : function (feedObject) {
 		var doTick, i, j;
 		
 		if (this.unloadNow){
@@ -734,7 +776,7 @@ var RSSTICKER = {
 			this.doUnload();
 		}
 		else if (!this.disabled){
-			var feedItems = feed.getItems();
+			var feedItems = feedObject.items;
 			
 			this.internalPause = true;
 			
@@ -742,7 +784,7 @@ var RSSTICKER = {
 			for (var i = this.toolbar.childNodes.length - 1; i >= 0; i--){
 				var item = this.toolbar.childNodes[i];
 				
-				if ((item.nodeName == 'toolbarbutton') && (item.feed == feed.title)){
+				if ((item.nodeName == 'toolbarbutton') && (item.feed == feedObject.link)){
 					var itemFound = false;
 					
 					for (var j = 0; j < feedItems.length; j++){
@@ -758,14 +800,14 @@ var RSSTICKER = {
 				}
 			}
 			
-			var itemsShowing = this.itemsInTicker(feed.title);
+			var itemsShowing = this.itemsInTicker(feedObject.link);
 			
 			for (j = 0; j < feedItems.length; j++){
-				if (!document.getElementById(this.objectName + feedItems[j].link)){
+				if (!document.getElementById("RSSTICKER" + feedItems[j].link)){
 					if (this.limitItemsPerFeed && (this.itemsPerFeed <= itemsShowing.length)){
 						// Determine if this item is newer than the oldest item showing.
-						if ((this.itemsPerFeed > 0) && feedItems[j].pubDate && itemsShowing[0].pubDate && (feedItems[j].pubDate.getTime() > itemsShowing[0].pubDate.getTime())){
-							this.toolbar.removeChild(document.getElementById(this.objectName + itemsShowing[0].href));
+						if ((this.itemsPerFeed > 0) && feedItems[j].published && itemsShowing[0].published && (feedItems[j].published > itemsShowing[0].published)){
+							this.toolbar.removeChild(document.getElementById("RSSTICKER" + itemsShowing[0].href));
 							itemsShowing.shift();
 						}
 						else {					
@@ -775,7 +817,7 @@ var RSSTICKER = {
 				
 					var item = {};
 					
-					item.visited = this.historyService.isVisitedURL(feedItems[j].link);
+					item.visited = this.historyService.isVisitedURL(feedItems[j].link, feedItems[j].guid);
 					
 					if (item.visited && this.hideVisited){
 						continue;
@@ -783,33 +825,32 @@ var RSSTICKER = {
 					
 					doTick = true;
 					
-					feedItems[j].content = feedItems[j].content.replace(/<[^>]+>/g, "");
-					
-					if ((feedItems[j].title == '') && (feedItems[j].content != '')){
-						if (feedItems[j].content.length > 40){
-							feedItems[j].title = feedItems[j].content.substr(0,40) + "...";
+					if ((feedItems[j].title == '') && (feedItems[j].description != '')){
+						if (feedItems[j].description.length > 40){
+							feedItems[j].title = feedItems[j].description.substr(0,40) + "...";
 						}
 						else {
-							feedItems[j].title = feedItems[j].content;
+							feedItems[j].title = feedItems[j].description;
 						}
 					}
 					
 					item.label = feedItems[j].title;
 					item.link = feedItems[j].link;
-					item.feed = feed.title;
-					item.feedURL = feed.feedURL;
-					item.image = feed.image;
-					item.description = feedItems[j].content;
-					item.pubDate = feedItems[j].pubDate;
+					item.feed = feedObject.link;
+					item.feedURL = feedObject.feedURL;
+					item.image = feedObject.image;
+					item.description = feedItems[j].description;
+					item.published = feedItems[j].published;
+					item.guid = feedItems[j].guid;
 					
 					var tbb = this.ce('toolbarbutton');
-					tbb.id = this.objectName + item.link;
+					tbb.id = "RSSTICKER" + item.link;
 					tbb.setAttribute("label",item.label);
-					tbb.setAttribute("tooltip",this.objectName + "Tooltip");
+					tbb.setAttribute("tooltip","RSSTICKERTooltip");
 					tbb.setAttribute("image",item.image);
-					tbb.setAttribute("contextmenu",this.objectName + "ItemCM");
+					tbb.setAttribute("contextmenu","RSSTICKERItemCM");
 					
-					tbb.setAttribute("onclick","if (event.ctrlKey) { this.markAsRead(true); } else if ((this.parent.alwaysOpenInNewTab && (event.which == 1)) || (event.which == 2)) { this.parent.browser.openInNewTab('" + item.link + "');  this.markAsRead();} else if (event.which == 1) { window._content.document.location.href = '" + item.link + "';  this.markAsRead(); }");
+					tbb.setAttribute("onclick","if (event.ctrlKey) { this.markAsRead(); } else if ((event.which == 1 && event.metaKey) || (this.parent.alwaysOpenInNewTab && (event.which == 1)) || (event.which == 2)) { this.parent.browser.openInNewTab('" + item.link + "');  this.markAsRead();} else if (event.which == 1) { window._content.document.location.href = '" + item.link + "';  this.markAsRead(); }");
 					
 					if (this.displayWidth.limitWidth){
 						if (this.displayWidth.isMaxWidth){
@@ -827,18 +868,17 @@ var RSSTICKER = {
 					tbb.feedURL = item.feedURL;
 					tbb.href = item.link
 					tbb.parent = this;
-					tbb.pubDate = item.pubDate;
+					tbb.published = item.published;
+					tbb.guid = item.guid;
 					
 					if (this.hideVisited){
-						tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
+						tbb.markAsRead = function (dontAdjustSpacer) {
 							this.parentNode.removeChild(this);
 							this.visited = true;
 							
 							if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
 												
-							if (addToHist){
-								this.parent.historyService.addToHistory(this.href, this.label);
-							}
+							this.parent.historyService.addToHistory(this.guid);
 							
 							this.parent.checkForEmptiness();
 						};
@@ -848,23 +888,17 @@ var RSSTICKER = {
 							tbb.style.fontWeight = 'bold';
 						}
 					
-						tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
+						tbb.markAsRead = function (dontAdjustSpacer) {
 							this.style.fontWeight = '';
 							this.visited = true;
-							
 							if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
-							
-							if (addToHist){
-								this.parent.historyService.addToHistory(this.href, this.label);
-							}
+							this.parent.historyService.addToHistory(this.guid);
 						};
 					}
 					else {
-						tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
+						tbb.markAsRead = function (dontAdjustSpacer) {
 							this.visited = true;
-							if (addToHist){
-								this.parent.historyService.addToHistory(this.href, this.label);
-							}
+							this.parent.historyService.addToHistory(this.guid);
 						};
 					}
 					
@@ -1034,13 +1068,13 @@ var RSSTICKER = {
 			this.tickTimer = null;
 			
 			if (this.internalPause){
-				this.tickTimer = setTimeout(this.objectName + '.tick();', this.tickSpeed * (500 / this.ticksPerItem));
+				this.tickTimer = setTimeout("RSSTICKER" + '.tick();', this.tickSpeed * (500 / this.ticksPerItem));
 				this.ticksSinceLastUpdate++;
 			}
 			else {
 				if (this.ticksSinceLastUpdate >= this.ticksBetweenUpdates){
 					this.ticksSinceLastUpdate = 0;
-					this.tickTimer = setTimeout(this.objectName + '.tick();', this.tickSpeed * (500 / this.ticksPerItem));
+					this.tickTimer = setTimeout("RSSTICKER" + '.tick();', this.tickSpeed * (500 / this.ticksPerItem));
 					this.init();
 				}
 				else {
@@ -1062,7 +1096,7 @@ var RSSTICKER = {
 								this.toolbar.appendChild(node);
 								
 								if (node.nodeName == 'toolbarbutton' && !node.visited){
-									if (this.historyService.isVisitedURL(node.href)){
+									if (this.historyService.isVisitedURL(node.href, node.guid)){
 										node.markAsRead();
 									}
 								}
@@ -1083,7 +1117,7 @@ var RSSTICKER = {
 							}
 						}
 						
-						this.tickTimer = setTimeout(this.objectName + '.tick();', this.tickSpeed * (500 / this.ticksPerItem));
+						this.tickTimer = setTimeout("RSSTICKER" + '.tick();', this.tickSpeed * (500 / this.ticksPerItem));
 						this.ticksSinceLastUpdate++;
 					}
 					else {
@@ -1096,7 +1130,7 @@ var RSSTICKER = {
 								this.toolbar.appendChild(node);
 								
 								if (node.nodeName == 'toolbarbutton' && !node.visited){
-									if (this.historyService.isVisitedURL(node.href)){
+									if (this.historyService.isVisitedURL(node.href, node.guid)){
 										node.markAsRead();
 									}
 								}
@@ -1121,7 +1155,7 @@ var RSSTICKER = {
 							}
 						}
 						
-						this.tickTimer = setTimeout(this.objectName + '.tick();', this.tickSpeed * (500 / this.ticksPerItem));
+						this.tickTimer = setTimeout("RSSTICKER" + '.tick();', this.tickSpeed * (500 / this.ticksPerItem));
 						this.ticksSinceLastUpdate++;
 					}
 				}
@@ -1153,7 +1187,7 @@ var RSSTICKER = {
 			if (this.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
 				if (!feed || (this.toolbar.childNodes[i].feed == feed)){
 					this.historyService.addToHistory(this.toolbar.childNodes[i].href, this.toolbar.childNodes[i].getAttribute("label"));
-					this.toolbar.childNodes[i].markAsRead(false, true);
+					this.toolbar.childNodes[i].markAsRead(true);
 				}
 			}
 		}
@@ -1236,29 +1270,29 @@ var RSSTICKER = {
 		tt.removeAttribute("height");
 		tt.removeAttribute("width");
 		
-		document.getElementById(this.objectName + "TooltipImage").src = image;
+		document.getElementById("RSSTICKERTooltipImage").src = image;
 		
-		document.getElementById(this.objectName + "TooltipURL").value = this.strings.getString("URL") + ": " + url;
+		document.getElementById("RSSTICKERTooltipURL").value = this.strings.getString("URL") + ": " + url;
 		
-		var maxw = document.getElementById(this.objectName + "TooltipURL").boxObject.width;
+		var maxw = document.getElementById("RSSTICKERTooltipURL").boxObject.width;
 		
-		document.getElementById(this.objectName + "TooltipFeedName").value = feedName;
+		document.getElementById("RSSTICKERTooltipFeedName").value = feedName;
 		
-		maxw = Math.max(maxw, document.getElementById(this.objectName + "TooltipFeedName").boxObject.width);
+		maxw = Math.max(maxw, document.getElementById("RSSTICKERTooltipFeedName").boxObject.width);
 		
 		if (title != ''){
-			document.getElementById(this.objectName + "TooltipName").value = title;;
-			document.getElementById(this.objectName + "TooltipName").style.display = '';
+			document.getElementById("RSSTICKERTooltipName").value = title;;
+			document.getElementById("RSSTICKERTooltipName").style.display = '';
 			
-			maxw = Math.max(document.getElementById(this.objectName + "TooltipName").boxObject.width, maxw);
+			maxw = Math.max(document.getElementById("RSSTICKERTooltipName").boxObject.width, maxw);
 		}
 		else {
-			document.getElementById(this.objectName + "TooltipName").style.display = 'none';
+			document.getElementById("RSSTICKERTooltipName").style.display = 'none';
 		}
 				
 		if (descr != ''){
-			for (var i = 0; i < document.getElementById(this.objectName + "TooltipSummary").childNodes.length; i++){
-				document.getElementById(this.objectName + "TooltipSummary").removeChild(document.getElementById(this.objectName + "TooltipSummary").lastChild);
+			for (var i = 0; i < document.getElementById("RSSTICKERTooltipSummary").childNodes.length; i++){
+				document.getElementById("RSSTICKERTooltipSummary").removeChild(document.getElementById("RSSTICKERTooltipSummary").lastChild);
 			}
 			
 			if (descr.length > 200){
@@ -1267,12 +1301,12 @@ var RSSTICKER = {
 			
 			var text = document.createTextNode(descr);
 			
-			document.getElementById(this.objectName + "TooltipSummary").appendChild(text);
-			document.getElementById(this.objectName + "TooltipSummary").style.maxWidth = (maxw + 15) + 'px';
-			document.getElementById(this.objectName + "TooltipSummaryGroupbox").setAttribute("hidden",false);
+			document.getElementById("RSSTICKERTooltipSummary").appendChild(text);
+			document.getElementById("RSSTICKERTooltipSummary").style.maxWidth = (maxw + 15) + 'px';
+			document.getElementById("RSSTICKERTooltipSummaryGroupbox").setAttribute("hidden",false);
 		}
 		else {
-			document.getElementById(this.objectName + "TooltipSummaryGroupbox").setAttribute("hidden",true);
+			document.getElementById("RSSTICKERTooltipSummaryGroupbox").setAttribute("hidden",true);
 		}
 		
 		tt.sizeTo(tt.boxObject.width, tt.boxObject.height);
@@ -1282,7 +1316,7 @@ var RSSTICKER = {
 	
 	logMessage : function (message) {
 		var consoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
-		consoleService.logStringMessage(this.objectName + ": " + message);
+		consoleService.logStringMessage("RSSTICKER: " + message);
 	},
 	
 	historyService : {
@@ -1291,21 +1325,59 @@ var RSSTICKER = {
 		
 		URI : null,
 		
-		addToHistory : function (url, title) {
-			try {
-				this.URI = this.ioService.newURI(url, null, null);
-				this.hService.addURI(this.URI, false, true, null);
-				this.hService.setPageTitle(this.URI, title);
-			} catch (e) {
-			}
+		addToHistory : function (guid) {
+			var db = RSSTICKER.getDB();
+
+			var insert = db.createStatement("INSERT INTO history (id, date) VALUES (?1, ?2)");
+			insert.bindUTF8StringParameter(0, guid);
+			insert.bindInt64Parameter(1, (new Date().getTime()));
+
+			try { insert.execute(); } catch (duplicateKey) { }
+
+			try { db.close(); } catch (e) { }
 		},
 		
-		isVisitedURL : function(url){
+		isVisitedURL : function(url, guid){
 			try {
 				this.URI = this.ioService.newURI(url, null, null);
-				return this.hService.isVisited(this.URI);
+				var visited = this.hService.isVisited(this.URI);
+				
+				if (!visited) {
+					var db = RSSTICKER.getDB();
+
+					var select = db.createStatement("SELECT id FROM history WHERE id=?1");
+					select.bindStringParameter(0, guid);
+
+					try {
+						while (select.executeStep()) {
+							visited = true;
+							break;
+						}
+					} catch (e) {
+						logFeedbarMsg(e);
+					} finally {	
+						select.reset();
+					}
+					
+					try { db.close(); } catch (e) {}					
+				}
+				else {
+					// Add to DB
+					var db = RSSTICKER.getDB();
+
+					var insert = db.createStatement("INSERT INTO history (id, date) VALUES (?1, ?2)");
+					insert.bindUTF8StringParameter(0, guid);
+					insert.bindInt64Parameter(1, (new Date().getTime()));
+					
+					try { insert.execute(); } catch (alreadyExists) { }
+
+					try { db.close(); } catch (e) { }
+				}
+				
+				return visited;
 			} catch (e) {
 				// Malformed URI, probably
+				RSSTICKER.logMessage(e);
 				return false;
 			}
 		}
@@ -1343,7 +1415,7 @@ var RSSTICKER = {
 	},
 	
 	ce : function (name){
-		return document.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", name);
+		return document.createElement(name);
 	},
 	
 	bmPropsDialogInit : function () {
@@ -1674,30 +1746,134 @@ var RSSTICKER = {
 				}
 			}
 		}
+	},
+	
+	getDB : function () {
+		var file = Components.classes["@mozilla.org/file/directory_service;1"]
+		                     .getService(Components.interfaces.nsIProperties)
+		                     .get("ProfD", Components.interfaces.nsIFile);
+		file.append("rssticker.sqlite");
+
+		var storageService = Components.classes["@mozilla.org/storage/service;1"]
+		                        .getService(Components.interfaces.mozIStorageService);
+		var mDBConn = storageService.openDatabase(file);
+		
+		return mDBConn;
+	}
+};
+
+
+function TickerParseListener() {
+	return this;
+}
+
+TickerParseListener.prototype = {
+	handleResult: function(result) {
+		if (result.bozo) {
+			return;
+		}
+		
+		var feed = result.doc;
+		
+		if (!feed) {
+			return;
+		}
+		
+		try {
+			feed.QueryInterface(Components.interfaces.nsIFeed);
+		} catch (e) {
+			return;
+		}
+		
+		var feedObject = {
+			title : "",
+			link : "",
+			siteLink : "",
+			items : [],
+			id : ""
+		};
+		
+		feedObject.id = feed.link.resolve("");
+		feedObject.link = result.uri.resolve("");
+		feedObject.siteLink = feed.link.resolve("");
+		feedObject.title = feed.title.plainText();
+		
+		var numItems = feed.items.length;
+		
+		for (var i = 0; i < numItems; i++) {
+			var item = feed.items.queryElementAt(i, Components.interfaces.nsIFeedEntry);
+			
+			var itemObject = {
+				link : "",
+				published : "",
+				title : "",
+				description : "",
+				favicon : "",
+				id : "",
+				guid : ""
+			};
+			
+			try {
+				itemObject.id = item.id;
+				itemObject.guid = item.id;
+				
+				itemObject.link = item.link.resolve("");
+				
+				if (itemObject.link.match(/\/\/news\.google\.com\/.*\?/)){
+					var q = itemObject.link.indexOf("?");
+					itemObject.link = itemObject.link.substring(0, q) + ("&" + itemObject.link.substring(q)).replace(/&(ct|cid|ei)=[^&]*/g, "").substring(1);
+				}
+
+				if (!itemObject.link.match(/\/~r\//i)) {
+					if (itemObject.link.match(/\/\/news\.google\.com\//)){
+						// Google news
+						var root = itemObject.link.match(/url=(https?:\/\/[^\/]+\/)/i)[1];
+						itemObject.favicon = root + "favicon.ico";
+					}
+					else {
+						itemObject.favicon = itemObject.link.substr(0, (itemObject.link.indexOf("/", 9) + 1)) + "favicon.ico";
+					}
+				}
+				else {
+					// Feedburner
+					itemObject.favicon = feedObject.siteLink.substr(0, (feedObject.siteLink.indexOf("/", 9) + 1)) + "favicon.ico";
+				}
+			
+				itemObject.published = Date.parse(item.updated);
+				itemObject.title = item.title.plainText();
+				
+				if (item.summary) {
+					itemObject.description = item.summary.plainText();
+				}
+				else if (item.content) {
+					itemObject.description = item.content.plainText();
+				}
+				else {
+					itemObject.description = "No summary.";
+				}
+				
+				feedObject.items.push(itemObject);
+			} catch (e) {
+			}
+		}
+		
+		RSSTICKER.getFavicon(feedObject);
+		
+		return;
 	}
 };
 
 function sortByPubDate(a, b){
-	var atime, btime;
-	
-	if (a.pubDate){
-		atime = a.pubDate.getTime();
-	}
-	
-	if (b.pubDate){
-		btime = b.pubDate.getTime();
-	}
-	
-	if (!atime && !btime){
+	if (!a.published && !b.published){
 		return 0;
 	}
-	else if (!btime){
+	else if (!b.published){
 		return 1;
 	}
-	else if (!atime){
+	else if (!a.published){
 		return -1;
 	}
 	else {
-		return atime - btime;
+		return a.published - b.published;
 	}
 }

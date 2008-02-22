@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay SYSTEM "chrome://rss-ticker/locale/locale.dtd">
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<script type="application/x-javascript" src="chrome://rss-ticker/content/feed.class.js"></script>
 	<script type="application/x-javascript" src="chrome://rss-ticker/content/ticker.object.js"></script>
 	<script type="application/x-javascript">
 		<![CDATA[
@@ -75,7 +74,7 @@
 			<menuseparator />
 			<menuitem option="options" command="rss-ticker_cmd_options"/>
 		</popup>
-		<tooltip id="RSSTICKERTooltip" noautohide="true" orient="vertical" onpopupshowing="return RSSTICKER.fillInTooltip(document.tooltipNode, this);">
+		<tooltip id="RSSTICKERTooltip" noautohide="true" orient="vertical" onpopupshowing="RSSTICKER.mouseoverFlag = true;return RSSTICKER.fillInTooltip(document.tooltipNode, this);" onpopuphidden="RSSTICKER.mouseoverFlag = false;" style="background-color: #fff;">
 			<hbox align="center">
 				<image id="RSSTICKERTooltipImage" style="vertical-align: middle; margin-left: 1ex; margin-right: 1ex;"/>
 				<vbox>
