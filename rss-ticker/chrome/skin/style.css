@@ -1,15 +1,5 @@
 #RSSTICKER-throbber {
 	-moz-user-focus: ignore;
-	-moz-appearance: none;
-	margin-top: 0px;
-	margin-right:4px;
-	margin-left: 4px;
-	margin-bottom: 0px;
-	border: 0;
-	background-color: transparent;
-	list-style-image: url(chrome://rss-ticker/skin/throbber.gif);
-	width: 16px;
-	height: 16px;
 }
 
 #RSSTICKER-throbber[busy="false"] {
@@ -61,8 +51,4 @@ toolbar[iconsize="small"] #RSSTICKER-button:hover:active {
 
 toolbar[iconsize="small"] #RSSTICKER-button[greyed="true"] {
 	-moz-image-region: rect(48px, 16px, 64px, 0px);
-}
-
-#RSSTICKER-loadingNotice {
-	
 }
