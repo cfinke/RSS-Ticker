@@ -1,23 +1,22 @@
-content    rss-ticker     chrome/content/
+content    rss-ticker     jar:chrome/rss-ticker.jar!/content/
 
-locale     rss-ticker     da-DK            chrome/locale/da-DK/
-locale     rss-ticker     de-DE            chrome/locale/de-DE/
-locale     rss-ticker     en-US            chrome/locale/en-US/
-locale     rss-ticker     es-AR            chrome/locale/es-AR/
-locale     rss-ticker     fi-FI            chrome/locale/fi-FI/
-locale     rss-ticker     fr-FR            chrome/locale/fr-FR/
-locale     rss-ticker     ko-KR            chrome/locale/ko-KR/
-locale     rss-ticker     pt-BR            chrome/locale/pt-BR/
-locale     rss-ticker     ru-RU            chrome/locale/ru-RU/
-locale     rss-ticker     sv-SE            chrome/locale/sv-SE/
-locale     rss-ticker     tr-TR            chrome/locale/tr-TR/
-locale     rss-ticker     uk-UA            chrome/locale/tr-TR/
-locale     rss-ticker     zh-CN            chrome/locale/uk-UA/
-locale     rss-ticker     zh-TW            chrome/locale/zh-TW/
+locale     rss-ticker     da-DK            jar:chrome/rss-ticker.jar!/locale/da-DK/
+locale     rss-ticker     de-DE            jar:chrome/rss-ticker.jar!/locale/de-DE/
+locale     rss-ticker     en-US            jar:chrome/rss-ticker.jar!/locale/en-US/
+locale     rss-ticker     es-AR            jar:chrome/rss-ticker.jar!/locale/es-AR/
+locale     rss-ticker     fi-FI            jar:chrome/rss-ticker.jar!/locale/fi-FI/
+locale     rss-ticker     fr-FR            jar:chrome/rss-ticker.jar!/locale/fr-FR/
+locale     rss-ticker     ko-KR            jar:chrome/rss-ticker.jar!/locale/ko-KR/
+locale     rss-ticker     pt-BR            jar:chrome/rss-ticker.jar!/locale/pt-BR/
+locale     rss-ticker     ru-RU            jar:chrome/rss-ticker.jar!/locale/ru-RU/
+locale     rss-ticker     sv-SE            jar:chrome/rss-ticker.jar!/locale/sv-SE/
+locale     rss-ticker     tr-TR            jar:chrome/rss-ticker.jar!/locale/tr-TR/
+locale     rss-ticker     uk-UA            jar:chrome/rss-ticker.jar!/locale/tr-TR/
+locale     rss-ticker     zh-CN            jar:chrome/rss-ticker.jar!/locale/uk-UA/
+locale     rss-ticker     zh-TW            jar:chrome/rss-ticker.jar!/locale/zh-TW/
 
-skin       rss-ticker     classic/1.0      chrome/skin/
+skin       rss-ticker     classic/1.0      jar:chrome/rss-ticker.jar!/skin/
 
-# overlay file-to-be-overlayed                                       overlay-file
 overlay   chrome://browser/content/browser.xul                       chrome://rss-ticker/content/overlay.xul
 overlay   chrome://browser/content/bookmarks/addBookmark2.xul        chrome://rss-ticker/content/addBMOverlay.xul
 overlay   chrome://browser/content/bookmarks/bookmarksProperties.xul chrome://rss-ticker/content/bmPropsOverlay.xul
@@ -25,7 +24,6 @@ overlay   chrome://browser/content/bookmarks/bookmarksProperties.xul chrome://rs
 overlay   chrome://browser/content/places/bookmarkProperties2.xul    chrome://rss-ticker/content/addBMOverlay-places.xul
 overlay   chrome://browser/content/places/bookmarkProperties.xul     chrome://rss-ticker/content/bmPropsOverlay-places.xul
 
-# style   file-to-be-styled                                          stylesheet
 style     chrome://rss-ticker/content/about.xul                      chrome://global/skin/global.css
 style     chrome://rss-ticker/content/noFeedsFound.xul               chrome://global/skin/global.css
 style     chrome://rss-ticker/content/about.xul                      chrome://browser/skin/browser.css

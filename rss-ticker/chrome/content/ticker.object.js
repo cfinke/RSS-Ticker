@@ -132,6 +132,9 @@ var RSSTICKER = {
 	
 	unloadNow : false,
 	
+	currentRequest : null,
+	loadTimer : null,
+	
 	onload : function (event) {
 		this.loadPrefs();
 		
@@ -600,48 +603,62 @@ var RSSTICKER = {
 			if (url){
 				if (this.DEBUG) this.logMessage("Loading " + url);
 				var req = new XMLHttpRequest();
+				this.currentRequest = req;
 				req.parent = this;
 				
 				try {
 					req.open("GET",url,true);
 					req.onreadystatechange = function (event) {
 						if (req.readyState == 4) {
+							clearTimeout(RSSTICKER.loadTimer);
+							RSSTICKER.currentRequest = null;
+							
 							try {
 								if (req.status == 200){
-									req.parent.feedsLoaded++;
-									
-									if (req.parent.feedsLoaded == 1){
-										req.parent.addLoadingNotice(req.parent.strings.getString("loaded1Feed").replace("#", req.parent.feedsFound));
-									}
-									else {
-										req.parent.addLoadingNotice(req.parent.strings.getString("loadedXFeeds").replace("#1", req.parent.feedsLoaded).replace("#2",req.parent.feedsFound));
-									}
-									
 									try {
 										// Trim it.
 										req.parent.queueForParsing(req.responseText.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
 									} catch (e) {
 										// Parse error
 										req.parent.logMessage("Empty feed: " + url + " " + e);
-										req.parent.loadNextLivemark();
 									}
 								}
 								else {
 									if (req.parent.DEBUG) req.parent.logMessage("Status not 200.");
-									req.parent.loadNextLivemark();
 								}
 							}
 							catch (e) {
 								if (req.parent.DEBUG) req.parent.logMessage("Error in determining feed status:" + e);
-								req.parent.loadNextLivemark();
 							}
+							
+							req.parent.feedsLoaded++;
+							
+							if (req.parent.feedsLoaded == 1){
+								req.parent.addLoadingNotice(req.parent.strings.getString("loaded1Feed").replace("#", req.parent.feedsFound));
+							}
+							else {
+								req.parent.addLoadingNotice(req.parent.strings.getString("loadedXFeeds").replace("#1", req.parent.feedsLoaded).replace("#2",req.parent.feedsFound));
+							}
+							
+							req.parent.loadNextLivemark();
 						}
 					};
 					
 					req.send(null);
+					this.loadTimer = setTimeout('RSSTICKER.currentRequest.abort();', 1000 * 15);
 				}
 				catch (e) {
 					if (this.DEBUG) this.logMessage("Error in requesting feed.");
+					
+					this.feedsLoaded++;
+					
+					if (this.feedsLoaded == 1){
+						this.addLoadingNotice(this.strings.getString("loaded1Feed").replace("#", this.feedsFound));
+					}
+					else {
+						this.addLoadingNotice(this.strings.getString("loadedXFeeds").replace("#1", this.feedsLoaded).replace("#2", this.feedsFound));
+					}
+					
 					this.loadNextLivemark();
 				}
 			}
@@ -705,7 +722,6 @@ var RSSTICKER = {
 				} catch (e) {
 					// FF2 - faviconService doesn't exist
 					feedObject.rootLink = feedObject.siteLink.substr(0, feedObject.link.indexOf("/",10)) + "/";
-					this.logMessage(e);
 				}
 				
 				if (this.DEBUG) this.logMessage("Root link: " + feedObject.link);
@@ -1815,7 +1831,6 @@ TickerParseListener.prototype = {
 			
 			try {
 				itemObject.id = item.id;
-				itemObject.guid = item.id;
 				
 				itemObject.link = item.link.resolve("");
 				
@@ -1823,7 +1838,13 @@ TickerParseListener.prototype = {
 					var q = itemObject.link.indexOf("?");
 					itemObject.link = itemObject.link.substring(0, q) + ("&" + itemObject.link.substring(q)).replace(/&(ct|cid|ei)=[^&]*/g, "").substring(1);
 				}
-
+				
+				if (!itemObject.id) {
+					itemObject.id = itemObject.link;
+				}
+				
+				itemObject.guid = item.id;
+				
 				if (!itemObject.link.match(/\/~r\//i)) {
 					if (itemObject.link.match(/\/\/news\.google\.com\//)){
 						// Google news
@@ -1842,14 +1863,14 @@ TickerParseListener.prototype = {
 				itemObject.published = Date.parse(item.updated);
 				itemObject.title = item.title.plainText();
 				
-				if (item.summary) {
+				if (item.summary && item.summary.text) {
 					itemObject.description = item.summary.plainText();
 				}
-				else if (item.content) {
+				else if (item.content && item.content.text) {
 					itemObject.description = item.content.plainText();
 				}
 				else {
-					itemObject.description = "No summary.";
+					itemObject.description = "No summary";
 				}
 				
 				feedObject.items.push(itemObject);
