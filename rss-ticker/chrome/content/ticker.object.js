@@ -120,7 +120,7 @@ var RSSTICKER = {
 	ticker : null,
 	
 	// Toggles on/off debugging messages in the console.
-	DEBUG : false,
+	DEBUG : true,
 	
 	feedsFound : 0,
 	feedsLoaded : 0,
@@ -135,6 +135,12 @@ var RSSTICKER = {
 	
 	onload : function (event) {
 		this.loadPrefs();
+		
+		var db = this.getDB();
+		
+		if (!db.tableExists("history")) {
+			db.executeSimpleSQL("CREATE TABLE IF NOT EXISTS history (id TEXT PRIMARY KEY, date INTEGER)");
+		}
 		
 		if (this.disabled){
 			// ticker completely disabled
@@ -202,7 +208,7 @@ var RSSTICKER = {
 				
 				this.loadingNotice = this.ce('image');
 				this.loadingNotice.setAttribute("src","chrome://rss-ticker/skin/throbber.gif");
-				this.loadingNotice.setAttribute("onclick","this.parent.browser.openInNewTab('http://www.efinke.com/rss-ticker/');");
+				this.loadingNotice.setAttribute("onclick","this.parent.browser.openInNewTab('http://www.chrisfinke.com/addons/rss-ticker/');");
 				this.loadingNotice.id = this.objectName + "-throbber";
 				this.loadingNotice.setAttribute("busy","false");
 				this.loadingNotice.style.marginRight = '4px';
@@ -586,6 +592,32 @@ var RSSTICKER = {
 		}
 	},
 	
+	queueForParsing : function (feedText, feedURL) {
+		var ioService = Components.classes["@mozilla.org/network/io-service;1"]
+						.getService(Components.interfaces.nsIIOService);
+
+		var data = feedText;
+		var uri = ioService.newURI(feedURL, null, null);
+
+		if (data.length) {
+			var parser = Components.classes["@mozilla.org/feed-processor;1"]
+							.createInstance(Components.interfaces.nsIFeedProcessor);
+			var listener = new TickerParseListener();
+
+			try {
+				parser.listener = listener;
+				parser.parseFromString(data, uri);
+			} catch (e) {
+				throw (e);
+			}
+		}
+		else {
+			// throw({ message : FEED_GETTER.strings.getString("feedbar.noContent") });
+		}
+
+		return this;
+	},
+	
 	loadNextLivemark : function () {
 		if (this.unloadNow){
 			this.unloadNow = false;
@@ -602,6 +634,7 @@ var RSSTICKER = {
 				try {
 					req.open("GET",url,true);
 					req.overrideMimeType("application/xml");
+					
 					req.onreadystatechange = function (event) {
 						if (req.readyState == 4) {
 							try {
@@ -615,17 +648,13 @@ var RSSTICKER = {
 										req.parent.addLoadingNotice(req.parent.strings.getString("loadedXFeeds").replace("#1", req.parent.feedsLoaded).replace("#2",req.parent.feedsFound));
 									}
 									
-									var feed = null;
-									
 									try {
-										feed = new TickerFeed(req.responseXML, url);
+										RSSTICKER.queueForParsing(req.responseText.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
 									} catch (e) {
 										if (req.parent.DEBUG) req.parent.logMessage("Invalid feed: " + url);
 									}
 									
-									if (req.parent.DEBUG) req.parent.logMessage("Feed: " + feed);
-									
-									req.parent.getFavicon(feed);
+									// req.parent.getFavicon(feed);
 								}
 								else {
 									if (req.parent.DEBUG) req.parent.logMessage("Status not 200.");
@@ -666,15 +695,15 @@ var RSSTICKER = {
 				this.loadNextLivemark();
 			}
 			else {
-				if (this.DEBUG) this.logMessage("Root link: " + feed.rootLink);
+				if (this.DEBUG) this.logMessage("Root link: " + feed.rootUri);
 				
 				// Default
 				feed.image = "chrome://browser/skin/page-livemarks.png";
 				
 				for (var i = 0; i < this.favicons.length; i++){
-					if (this.favicons[i].site == feed.rootLink){
+					if (this.favicons[i].site == feed.rootUri){
 						if (this.favicons[i].hasIcon){
-							feed.image = feed.rootLink + "favicon.ico";
+							feed.image = feed.rootUri + "favicon.ico";
 						}
 						
 						this.writeFeed(feed);
@@ -684,28 +713,28 @@ var RSSTICKER = {
 					}
 				}
 				
-				if (this.DEBUG) this.logMessage(feed.rootLink + "favicon.ico" + " status");
+				if (this.DEBUG) this.logMessage(feed.rootUri + "favicon.ico" + " status");
 				
 				var req = new XMLHttpRequest();
 				req.parent = this;
 				
 				try {
-					req.open("GET", feed.rootLink + "favicon.ico", true);
+					req.open("GET", feed.rootUri + "favicon.ico", true);
 					req.onreadystatechange = function (event) {
 						if (req.readyState == 4){
 							try {
 								if (req.parent.DEBUG) req.parent.logMessage(req.status);
 								
 								if (req.status == 200){
-									feed.image = feed.rootLink + "favicon.ico";
-									req.parent.favicons.push({"site" : feed.rootLink, "hasIcon" : true});
+									feed.image = feed.rootUri + "favicon.ico";
+									req.parent.favicons.push({"site" : feed.rootUri, "hasIcon" : true});
 								}
 								else {
-									req.parent.favicons.push({"site" : feed.rootLink, "hasIcon" : false});
+									req.parent.favicons.push({"site" : feed.rootUri, "hasIcon" : false});
 								}
 							} catch (e) {
 								if (req.parent.DEBUG) req.parent.logMessage("status error");
-								req.parent.favicons.push({"site" : feed.rootLink, "hasIcon" : false});
+								req.parent.favicons.push({"site" : feed.rootUri, "hasIcon" : false});
 							}
 							
 							req.parent.writeFeed(feed);
@@ -717,7 +746,7 @@ var RSSTICKER = {
 				} catch (e) {
 					if (this.DEBUG) this.logMessage("request error");
 					
-					this.favicons.push({"site" : feed.rootLink, "hasIcon" : false});
+					this.favicons.push({"site" : feed.rootUri, "hasIcon" : false});
 					
 					this.writeFeed(feed);
 					this.loadNextLivemark();
@@ -734,7 +763,7 @@ var RSSTICKER = {
 			this.doUnload();
 		}
 		else if (!this.disabled){
-			var feedItems = feed.getItems();
+			var feedItems = feed.items;
 			
 			this.internalPause = true;
 			
@@ -742,11 +771,11 @@ var RSSTICKER = {
 			for (var i = this.toolbar.childNodes.length - 1; i >= 0; i--){
 				var item = this.toolbar.childNodes[i];
 				
-				if ((item.nodeName == 'toolbarbutton') && (item.feed == feed.title)){
+				if ((item.nodeName == 'toolbarbutton') && (item.feed == feed.label)){
 					var itemFound = false;
 					
 					for (var j = 0; j < feedItems.length; j++){
-						if (feedItems[j].link == item.link){
+						if (feedItems[j].uri == item.uri){
 							itemFound = true;
 							break;
 						}
@@ -758,10 +787,10 @@ var RSSTICKER = {
 				}
 			}
 			
-			var itemsShowing = this.itemsInTicker(feed.title);
+			var itemsShowing = this.itemsInTicker(feed.label);
 			
 			for (j = 0; j < feedItems.length; j++){
-				if (!document.getElementById(this.objectName + feedItems[j].link)){
+				if (!document.getElementById(this.objectName + feedItems[j].uri)){
 					if (this.limitItemsPerFeed && (this.itemsPerFeed <= itemsShowing.length)){
 						// Determine if this item is newer than the oldest item showing.
 						if ((this.itemsPerFeed > 0) && feedItems[j].pubDate && itemsShowing[0].pubDate && (feedItems[j].pubDate.getTime() > itemsShowing[0].pubDate.getTime())){
@@ -775,7 +804,7 @@ var RSSTICKER = {
 				
 					var item = {};
 					
-					item.visited = this.historyService.isVisitedURL(feedItems[j].link);
+					item.visited = this.history.isVisitedURL(feedItems[j].uri, feedItems[j].id, 1);
 					
 					if (item.visited && this.hideVisited){
 						continue;
@@ -783,33 +812,36 @@ var RSSTICKER = {
 					
 					doTick = true;
 					
-					feedItems[j].content = feedItems[j].content.replace(/<[^>]+>/g, "");
+					feedItems[j].description = feedItems[j].description.replace(/<[^>]+>/g, "");
 					
-					if ((feedItems[j].title == '') && (feedItems[j].content != '')){
-						if (feedItems[j].content.length > 40){
-							feedItems[j].title = feedItems[j].content.substr(0,40) + "...";
+					if ((feedItems[j].label == '') && (feedItems[j].description != '')){
+						if (feedItems[j].description.length > 40){
+							feedItems[j].label = feedItems[j].description.substr(0,40) + "...";
 						}
 						else {
-							feedItems[j].title = feedItems[j].content;
+							feedItems[j].label = feedItems[j].description;
 						}
 					}
 					
-					item.label = feedItems[j].title;
-					item.link = feedItems[j].link;
-					item.feed = feed.title;
+					item.label = feedItems[j].label;
+					item.uri = feedItems[j].uri;
+					item.feed = feed.label;
 					item.feedURL = feed.feedURL;
 					item.image = feed.image;
-					item.description = feedItems[j].content;
+					item.description = feedItems[j].description;
 					item.pubDate = feedItems[j].pubDate;
+					item.guid = feedItems[j].id;
 					
 					var tbb = this.ce('toolbarbutton');
-					tbb.id = this.objectName + item.link;
+					tbb.uri = item.uri;
+					tbb.id = this.objectName + item.uri;
+					
 					tbb.setAttribute("label",item.label);
 					tbb.setAttribute("tooltip",this.objectName + "Tooltip");
 					tbb.setAttribute("image",item.image);
 					tbb.setAttribute("contextmenu",this.objectName + "ItemCM");
 					
-					tbb.setAttribute("onclick","if (event.ctrlKey) { this.markAsRead(true); } else if ((this.parent.alwaysOpenInNewTab && (event.which == 1)) || (event.which == 2)) { this.parent.browser.openInNewTab('" + item.link + "');  this.markAsRead();} else if (event.which == 1) { window._content.document.location.href = '" + item.link + "';  this.markAsRead(); }");
+					tbb.setAttribute("onclick","return RSSTICKER.onTickerItemClick(event, this.uri, this.guid, this);");
 					
 					if (this.displayWidth.limitWidth){
 						if (this.displayWidth.isMaxWidth){
@@ -825,9 +857,10 @@ var RSSTICKER = {
 					
 					tbb.feed = item.feed;
 					tbb.feedURL = item.feedURL;
-					tbb.href = item.link
+					tbb.href = item.uri;
 					tbb.parent = this;
 					tbb.pubDate = item.pubDate;
+					tbb.guid = item.guid;
 					
 					if (this.hideVisited){
 						tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
@@ -837,7 +870,7 @@ var RSSTICKER = {
 							if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
 												
 							if (addToHist){
-								this.parent.historyService.addToHistory(this.href, this.label);
+								this.parent.history.addToHistory(this.guid);
 							}
 							
 							this.parent.checkForEmptiness();
@@ -855,7 +888,7 @@ var RSSTICKER = {
 							if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
 							
 							if (addToHist){
-								this.parent.historyService.addToHistory(this.href, this.label);
+								this.parent.history.addToHistory(this.guid);
 							}
 						};
 					}
@@ -863,7 +896,7 @@ var RSSTICKER = {
 						tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
 							this.visited = true;
 							if (addToHist){
-								this.parent.historyService.addToHistory(this.href, this.label);
+								this.parent.history.addToHistory(this.guid);
 							}
 						};
 					}
@@ -886,7 +919,7 @@ var RSSTICKER = {
 							this.parent.browser.openInNewTab(this.href);
 						}
 						
-						this.markAsRead();
+						this.markAsRead(true);
 					};
 					
 					// Determine where to add the item
@@ -981,6 +1014,60 @@ var RSSTICKER = {
 		}
 	},
 	
+	onTickerItemClick : function (event, url, guid, node) {
+		if (event.ctrlKey) {
+			node.markAsRead(true); 
+			return false;
+		}
+		else if (event.which == 3){
+			// Discard right-clicks
+			return;
+		}
+		else if (event.which == 4 || event.shiftKey){
+			// Shift
+			window.open(url);
+		}
+		else {
+			// Left-click
+			this.launchUrl(url, event);
+			node.markAsRead(true);
+		}
+	},
+	
+	launchUrl : function (url, event) {
+		if (this.prefs.getBoolPref("alwaysOpenInNewTab") || (event.which == 2) || (event.which == 1 && (event.ctrlKey || event.metaKey) && (event.ctrlKey || event.metaKey))){
+			this._addTab(url);
+		}
+		else if (event.which == 1 || (event.which == 13 && !event.shiftKey)){
+			this._inTab(url);
+		}
+		else if (event.which == 4 || (event.which == 13 && event.shiftKey)){
+			window.open(url);
+		}
+	},
+	
+	_addTab : function (url) {
+		var browser = gBrowser;
+		var theTab = browser.addTab(url);
+		
+		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+			
+		var loadInBackground = false;
+			
+		try {
+			loadInBackground = prefs.getBoolPref("browser.tabs.loadInBackground");
+		} catch (e) {
+		}
+			
+		if (!loadInBackground){
+			browser.selectedTab = theTab;
+		}
+	},
+	
+	_inTab : function (url) {
+		content.document.location.href = url;
+	},
+	
 	adjustSpacerWidth : function () {
 		if (this.toolbar && !this.disabled){
 			var extraPadding;
@@ -1062,8 +1149,8 @@ var RSSTICKER = {
 								this.toolbar.appendChild(node);
 								
 								if (node.nodeName == 'toolbarbutton' && !node.visited){
-									if (this.historyService.isVisitedURL(node.href)){
-										node.markAsRead();
+									if (this.history.isVisitedURL(node.href, node.guid, 2)){
+										node.markAsRead(true);
 									}
 								}
 							}
@@ -1096,8 +1183,8 @@ var RSSTICKER = {
 								this.toolbar.appendChild(node);
 								
 								if (node.nodeName == 'toolbarbutton' && !node.visited){
-									if (this.historyService.isVisitedURL(node.href)){
-										node.markAsRead();
+									if (this.history.isVisitedURL(node.href, node.guid, 3)){
+										node.markAsRead(true);
 									}
 								}
 							}
@@ -1152,8 +1239,8 @@ var RSSTICKER = {
 		for (var i = this.toolbar.childNodes.length - 1; i >= 0; i--){
 			if (this.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
 				if (!feed || (this.toolbar.childNodes[i].feed == feed)){
-					this.historyService.addToHistory(this.toolbar.childNodes[i].href, this.toolbar.childNodes[i].getAttribute("label"));
-					this.toolbar.childNodes[i].markAsRead(false, true);
+					this.history.addToHistory(this.toolbar.childNodes[i].guid);
+					this.toolbar.childNodes[i].markAsRead(true, true);
 				}
 			}
 		}
@@ -1285,30 +1372,91 @@ var RSSTICKER = {
 		consoleService.logStringMessage(this.objectName + ": " + message);
 	},
 	
-	historyService : {
+	
+	
+	
+	theFile : null,
+	theDB : null,
+	
+	getDB : function () {
+		if (!this.theFile) {
+			this.theFile = Components.classes["@mozilla.org/file/directory_service;1"]
+		                     .getService(Components.interfaces.nsIProperties)
+		                     .get("ProfD", Components.interfaces.nsIFile);
+			this.theFile.append("rssticker.sqlite");
+		}
+		
+		if (!this.theDB) {
+			this.theDB = Components.classes["@mozilla.org/storage/service;1"]
+		                 .getService(Components.interfaces.mozIStorageService).openDatabase(this.theFile);
+		}
+		
+		return this.theDB;
+	},
+	
+	closeDB : function () {
+		this.theDB.close();
+		delete this.theDB;
+		this.theDB = null;
+	},
+	
+	
+	history : {
 		hService : Components.classes["@mozilla.org/browser/global-history;2"].getService(Components.interfaces.nsIGlobalHistory2),
-		ioService : Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService),
+		ioService : Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService),
 		
 		URI : null,
 		
-		addToHistory : function (url, title) {
+		isVisitedURL : function(url, guid){
 			try {
-				this.URI = this.ioService.newURI(url, null, null);
-				this.hService.addURI(this.URI, false, true, null);
-				this.hService.setPageTitle(this.URI, title);
+				RSSTICKER.history.URI = this.ioService.newURI(url, null, null);
+				var visited = RSSTICKER.history.hService.isVisited(RSSTICKER.history.URI);
+				
+				var db = RSSTICKER.getDB();
+				
+				if (!visited) {
+					var select = db.createStatement("SELECT id FROM history WHERE id=?1");
+					select.bindStringParameter(0, guid);
+
+					try {
+						while (select.executeStep()) {
+							visited = true;
+							break;
+						}
+					} catch (e) {
+						RSSTICKER.logMessage(e);
+					} finally {	
+						select.reset();
+					}
+				}
+				else {
+					// Add to DB
+					var insert = db.createStatement("INSERT INTO history (id, date) VALUES (?1, ?2)");
+					insert.bindUTF8StringParameter(0, guid);
+					insert.bindInt64Parameter(1, (new Date().getTime()));
+					
+					try { insert.execute(); } catch (alreadyExists) { }
+				}
+				
+				return visited;
 			} catch (e) {
+				// Malformed URI, probably
+				RSSTICKER.logMessage(e + " " + url);
+				return false;
 			}
 		},
 		
-		isVisitedURL : function(url){
-			try {
-				this.URI = this.ioService.newURI(url, null, null);
-				return this.hService.isVisited(this.URI);
-			} catch (e) {
-				// Malformed URI, probably
-				return false;
-			}
-		}
+		
+		addToHistory : function (guid) {
+			var db = RSSTICKER.getDB();
+			
+			// Add to DB
+			var insert = db.createStatement("INSERT INTO history (id, date) VALUES (?1, ?2)");
+			insert.bindUTF8StringParameter(0, guid);
+			insert.bindInt64Parameter(1, (new Date().getTime()));
+			
+			try { insert.execute(); } catch (alreadyExists) { }
+		},
 	},
 	
 	clipboard : {

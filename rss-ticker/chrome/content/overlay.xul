@@ -84,7 +84,7 @@
 					<label id="RSSTICKERTooltipURL" crop="end"/>
 				</vbox>
 			</hbox>
-			<groupbox id="RSSTICKERTooltipSummaryGroupbox">
+			<groupbox id="RSSTICKERTooltipSummaryGroupbox" style="width: 100%; height: 100;">
 				<caption label="&tt.summary;" style="background-color: #ffffff;" />
 				<description id="RSSTICKERTooltipSummary"></description>
 			</groupbox>
