@@ -19,11 +19,6 @@ skin       rss-ticker     classic/1.0      chrome/skin/
 
 # overlay file-to-be-overlayed                                       overlay-file
 overlay   chrome://browser/content/browser.xul                       chrome://rss-ticker/content/overlay.xul
-overlay   chrome://browser/content/bookmarks/addBookmark2.xul        chrome://rss-ticker/content/addBMOverlay.xul
-overlay   chrome://browser/content/bookmarks/bookmarksProperties.xul chrome://rss-ticker/content/bmPropsOverlay.xul
-
-overlay   chrome://browser/content/places/bookmarkProperties2.xul    chrome://rss-ticker/content/addBMOverlay-places.xul
-overlay   chrome://browser/content/places/bookmarkProperties.xul     chrome://rss-ticker/content/bmPropsOverlay-places.xul
 
 # style   file-to-be-styled                                          stylesheet
 style     chrome://rss-ticker/content/about.xul                      chrome://global/skin/global.css
