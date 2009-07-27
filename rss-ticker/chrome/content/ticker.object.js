@@ -120,7 +120,7 @@ var RSSTICKER = {
 	ticker : null,
 	
 	// Toggles on/off debugging messages in the console.
-	DEBUG : true,
+	DEBUG : false,
 	
 	feedsFound : 0,
 	feedsLoaded : 0,
@@ -793,7 +793,7 @@ var RSSTICKER = {
 				if (!document.getElementById(this.objectName + feedItems[j].uri)){
 					if (this.limitItemsPerFeed && (this.itemsPerFeed <= itemsShowing.length)){
 						// Determine if this item is newer than the oldest item showing.
-						if ((this.itemsPerFeed > 0) && feedItems[j].pubDate && itemsShowing[0].pubDate && (feedItems[j].pubDate.getTime() > itemsShowing[0].pubDate.getTime())){
+						if ((this.itemsPerFeed > 0) && feedItems[j].published && itemsShowing[0].published && (feedItems[j].published.getTime() > itemsShowing[0].published.getTime())){
 							this.toolbar.removeChild(document.getElementById(this.objectName + itemsShowing[0].href));
 							itemsShowing.shift();
 						}
@@ -826,10 +826,10 @@ var RSSTICKER = {
 					item.label = feedItems[j].label;
 					item.uri = feedItems[j].uri;
 					item.feed = feed.label;
-					item.feedURL = feed.feedURL;
+					item.feedURL = feed.uri;
 					item.image = feed.image;
 					item.description = feedItems[j].description;
-					item.pubDate = feedItems[j].pubDate;
+					item.published = feedItems[j].published;
 					item.guid = feedItems[j].id;
 					
 					var tbb = this.ce('toolbarbutton');
@@ -841,7 +841,7 @@ var RSSTICKER = {
 					tbb.setAttribute("image",item.image);
 					tbb.setAttribute("contextmenu",this.objectName + "ItemCM");
 					
-					tbb.setAttribute("onclick","return RSSTICKER.onTickerItemClick(event, this.uri, this.guid, this);");
+					tbb.setAttribute("onclick","return RSSTICKER.onTickerItemClick(event, this.uri, this);");
 					
 					if (this.displayWidth.limitWidth){
 						if (this.displayWidth.isMaxWidth){
@@ -859,7 +859,7 @@ var RSSTICKER = {
 					tbb.feedURL = item.feedURL;
 					tbb.href = item.uri;
 					tbb.parent = this;
-					tbb.pubDate = item.pubDate;
+					tbb.published = item.published;
 					tbb.guid = item.guid;
 					
 					if (this.hideVisited){
@@ -1002,7 +1002,7 @@ var RSSTICKER = {
 					}
 					
 					itemsShowing.push(tbb);
-					itemsShowing.sort(sortByPubDate);
+					itemsShowing.sort(RSSTICKER.sortByPubDate);
 				}
 			}
 			
@@ -1014,9 +1014,11 @@ var RSSTICKER = {
 		}
 	},
 	
-	onTickerItemClick : function (event, url, guid, node) {
+	onTickerItemClick : function (event, url, node) {
 		if (event.ctrlKey) {
 			node.markAsRead(true); 
+//			event.stopPropagation();
+//			event.preventDefault();
 			return false;
 		}
 		else if (event.which == 3){
@@ -1355,13 +1357,13 @@ var RSSTICKER = {
 			var text = document.createTextNode(descr);
 			
 			document.getElementById(this.objectName + "TooltipSummary").appendChild(text);
-			document.getElementById(this.objectName + "TooltipSummary").style.maxWidth = (maxw + 15) + 'px';
+			document.getElementById(this.objectName + "TooltipSummary").style.maxWidth = "300px";
 			document.getElementById(this.objectName + "TooltipSummaryGroupbox").setAttribute("hidden",false);
 		}
 		else {
 			document.getElementById(this.objectName + "TooltipSummaryGroupbox").setAttribute("hidden",true);
 		}
-		
+		RSSTICKER.logMessage(tt.boxObject.width);
 		tt.sizeTo(tt.boxObject.width, tt.boxObject.height);
   
 		return true;
@@ -1790,7 +1792,7 @@ var RSSTICKER = {
 		
 		// Sort the array by time
 		
-		items.sort(sortByPubDate);
+		items.sort(RSSTICKER.sortByPubDate);
 		
 		this.internalPause = ip;
 		
@@ -1822,30 +1824,30 @@ var RSSTICKER = {
 				}
 			}
 		}
+	},
+	
+	sortByPubDate : function (a, b){
+		var atime, btime;
+
+		if (a.published){
+			atime = a.published;
+		}
+
+		if (b.published){
+			btime = b.published;
+		}
+
+		if (!atime && !btime){
+			return 0;
+		}
+		else if (!btime){
+			return 1;
+		}
+		else if (!atime){
+			return -1;
+		}
+		else {
+			return atime - btime;
+		}
 	}
 };
-
-function sortByPubDate(a, b){
-	var atime, btime;
-	
-	if (a.pubDate){
-		atime = a.pubDate.getTime();
-	}
-	
-	if (b.pubDate){
-		btime = b.pubDate.getTime();
-	}
-	
-	if (!atime && !btime){
-		return 0;
-	}
-	else if (!btime){
-		return 1;
-	}
-	else if (!atime){
-		return -1;
-	}
-	else {
-		return atime - btime;
-	}
-}
