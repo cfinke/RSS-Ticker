@@ -309,7 +309,8 @@ var RSSTICKER = {
 		
 		if (this.tickerPlacement == 1){
 			// Beneath the status bar
-			document.getElementById('main-window').insertBefore(this.ticker, document.getElementById('status-bar').nextSibling);
+			// document.getElementById('main-window').insertBefore(this.ticker, document.getElementById('status-bar').nextSibling);
+			document.getElementById('browser-bottombox').insertBefore(this.ticker, document.getElementById('status-bar').nextSibling);
 			if (this.DEBUG) this.logMessage("Placed after status bar.");
 		}
 		else if (this.tickerPlacement == 2){
@@ -1494,80 +1495,6 @@ var RSSTICKER = {
 	
 	ce : function (name){
 		return document.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", name);
-	},
-	
-	bmPropsDialogInit : function () {
-		if (document.getElementById('feedurlrow').getAttribute('hidden') != 'true'){
-			var cb = this.ce('checkbox');
-			cb.setAttribute("id","scrollThis");
-			cb.setAttribute("label", document.getElementById("RSSTICKER-bundle").getString("scrollThis"));
-			cb.setAttribute("checked",true);
-			
-			var ignoredFeeds = this.readIgnoreFile();
-			var feedURL = document.getElementById('feedurl').value;
-			
-			for (var i = 0; i < ignoredFeeds.length; i++){
-				if (ignoredFeeds[i] == feedURL){
-					cb.setAttribute("checked",false);
-					break;
-				}
-			}
-			
-			document.getElementById('descriptionrow').parentNode.insertBefore(cb, document.getElementById('descriptionrow').nextSibling);
-			window.sizeToContent();
-			window.resizeBy(5, 5);
-    		window.resizeBy(-5, -5);
-		}
-	},
-	
-	bmPropsDialogAccept : function () {
-		if (document.getElementById('scrollThis')){
-			var feedURL = document.getElementById('feedurl').value;
-			
-			if (document.getElementById('scrollThis').checked){
-				this.observeFeed(feedURL);
-			}
-			else{
-				this.ignoreFeed(feedURL);
-			}
-		}
-	},
-	
-	bmPropsDialogPlacesInit : function () {
-		if (document.getElementById('livemarkFeedLocationRow').getAttribute('hidden') != 'true'){
-			var cb = this.ce('checkbox');
-			cb.setAttribute("id","scrollThis");
-			cb.setAttribute("label", document.getElementById("RSSTICKER-bundle").getString("scrollThis"));
-			cb.setAttribute("checked",true);
-			
-			var ignoredFeeds = this.readIgnoreFile();
-			var feedURL = document.getElementById('feedLocationTextfield').value;
-			
-			for (var i = 0; i < ignoredFeeds.length; i++){
-				if (ignoredFeeds[i] == feedURL){
-					cb.setAttribute("checked",false);
-					break;
-				}
-			}
-			
-			document.getElementById('descriptionRow').parentNode.insertBefore(cb, document.getElementById('descriptionRow').nextSibling);
-			window.sizeToContent();
-			window.resizeBy(5, 5);
-    		window.resizeBy(-5, -5);
-		}
-	},
-	
-	bmPropsDialogPlacesAccept : function () {
-		if (document.getElementById('scrollThis')){
-			var feedURL = document.getElementById('feedLocationTextfield').value;
-			
-			if (document.getElementById('scrollThis').checked){
-				this.observeFeed(feedURL);
-			}
-			else{
-				this.ignoreFeed(feedURL);
-			}
-		}
 	},
 	
 	observeFeed : function (url) {

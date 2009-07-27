@@ -17,10 +17,8 @@ locale     rss-ticker     zh-TW            chrome/locale/zh-TW/
 
 skin       rss-ticker     classic/1.0      chrome/skin/
 
-# overlay file-to-be-overlayed                                       overlay-file
 overlay   chrome://browser/content/browser.xul                       chrome://rss-ticker/content/overlay.xul
 
-# style   file-to-be-styled                                          stylesheet
 style     chrome://rss-ticker/content/about.xul                      chrome://global/skin/global.css
 style     chrome://rss-ticker/content/noFeedsFound.xul               chrome://global/skin/global.css
 style     chrome://rss-ticker/content/about.xul                      chrome://browser/skin/browser.css
