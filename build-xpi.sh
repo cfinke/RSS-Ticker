@@ -7,7 +7,6 @@ cd .xpi_work_dir/
 rm -rf `find . -name ".svn"`
 rm -rf `find . -name ".DS_Store"`
 rm -rf `find . -name "Thumbs.db"`
-zip -rq ../rss-ticker.xpi *
+zip -rq ~/Desktop/rss-ticker.xpi *
 cd ..
 rm -rf .xpi_work_dir/
-cp rss-ticker.xpi ~/Desktop/
