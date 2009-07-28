@@ -30,3 +30,5 @@ pref("extensions.rssticker.cm.markAllAsRead", true);
 pref("extensions.rssticker.cm.options", true);
 pref("extensions.rssticker.cm.disableTicker", false);
 pref("extensions.rssticker.updateToggle", true);
+
+pref("extensions.rssticker.lastVersion", "");
