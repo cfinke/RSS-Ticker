@@ -3,10 +3,12 @@
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script type="application/x-javascript" src="chrome://rss-ticker/content/feed.class.js"></script>
 	<script type="application/x-javascript" src="chrome://rss-ticker/content/ticker.object.js"></script>
+	<script type="application/x-javascript" src="chrome://rss-ticker/content/bookmark-observer.js"></script>
 	<script type="application/x-javascript">
 		<![CDATA[
 
 			window.addEventListener("load", function (event) { RSSTICKER.onload(event); }, false);
+			window.addEventListener("unload", function (event) { RSSTICKER.exit(event); }, false);
 			window.addEventListener("resize", function (event) { RSSTICKER.adjustSpacerWidth(event); }, false);
 			window.addEventListener("DOMMouseScroll", function (event) { RSSTICKER.scrollTicker(event); }, false)
 			
@@ -25,7 +27,7 @@
 		<command id="rss-ticker_cmd_openFeedUnreadInTabs" oncommand="RSSTICKER.openAllInTabs(true, document.popupNode.feed);" label="&cm.openFeedUnreadInTabs;"/>
 		<command id="rss-ticker_cmd_copyLinkTitle" oncommand="RSSTICKER.clipboard.copyString(document.popupNode.attributes['label'].value);" label="&cm.copyLinkTitle;"/>
 		<command id="rss-ticker_cmd_copyLinkURL" oncommand="RSSTICKER.clipboard.copyString(document.popupNode.href);" label="&cm.copyLinkURL;"/>
-		<command id="rss-ticker_cmd_refreshFeeds" oncommand="RSSTICKER.ticksSinceLastUpdate = RSSTICKER.ticksBetweenUpdates; RSSTICKER.mouseOverFlag = false;" label="&cm.refreshFeeds;"/>
+		<command id="rss-ticker_cmd_refreshFeeds" oncommand="RSSTICKER.updateAllFeeds(); RSSTICKER.mouseOverFlag = false;" label="&cm.refreshFeeds;"/>
 		<command id="rss-ticker_cmd_manageFeeds" oncommand="window.openDialog('chrome://rss-ticker/content/options.xul','','chrome,titlebar,toolbar,centerscreen','manage-pane');" label="&cm.manageFeeds;"/>
 		<command id="rss-ticker_cmd_markAsRead" oncommand="document.popupNode.markAsRead(true);" label="&cm.markAsRead;"/>
 		<command id="rss-ticker_cmd_markFeedAsRead" oncommand="RSSTICKER.markAllAsRead(document.popupNode.feed);" label="&cm.markFeedAsRead;"/>
