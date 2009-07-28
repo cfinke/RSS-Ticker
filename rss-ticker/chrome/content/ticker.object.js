@@ -1,16 +1,14 @@
 var RSSTICKER = {
-	// Config information for customization:
+	livemarkService : Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService),
+	bookmarkService : Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService),
+	ioService : Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService),
 	
-	objectName : "RSSTICKER",
-	objectPathName : "rss-ticker",
-	prefBranch : "extensions.rssticker.",
+	
 	ignoreFilename : "rss-ticker.ignore.txt",
+	
 	strings : null,
 	
 	profilePath : null,
-	
-	// Array that holds items that need to be added randomly.
-	randomStack : [],
 	
 	tickTimer : null,
 	internalPause : false,
@@ -34,11 +32,6 @@ var RSSTICKER = {
 	
 	// Should the ticker items be shuffled?
 	randomizeItems : false,
-	
-	// Determines where the ticker goes
-	// 1: Below status bar
-	// 2: Up by bookmark toolbar
-	tickerPlacement : 1,
 		
 	// Number of ticks that it takes to remove one item completely
 	// Set higher for a smoother scroll
@@ -114,9 +107,9 @@ var RSSTICKER = {
 	// Current width of the first feed item (the one that is being shrunk)
 	currentFirstItemMargin : 0,
 	
-	unloadNow : false,
+	tickLength : 0,
 	
-	onload : function (event) {
+	onload : function () {
 		this.loadPrefs();
 		
 		var db = this.getDB();
@@ -125,82 +118,61 @@ var RSSTICKER = {
 			db.executeSimpleSQL("CREATE TABLE IF NOT EXISTS history (id TEXT PRIMARY KEY, date INTEGER)");
 		}
 		
-		if (this.disabled){
-			// ticker completely disabled
-			
-			if (this.DEBUG) this.logMessage("Ticker disabled.");
-			
-			if (document.getElementById("RSSTICKER-button")) {
-				document.getElementById("RSSTICKER-button").setAttribute("greyed","true");
-			}
-			
+		this.strings = document.getElementById("RSSTICKER-bundle");
+		this.customizeContextMenus();
+		
+		this.ticker = this.ce('toolbar');
+		this.ticker.setAttribute("id","RSSTICKER" + this.strings.getString("toolbar"));
+		this.ticker.setAttribute("class","chromeclass-toolbar");
+		this.ticker.setAttribute("hidden",false);
+		this.ticker.setAttribute("iconsize","small");
+		this.ticker.setAttribute("inherits","collapsed,hidden");
+		this.ticker.setAttribute("mode","full");
+		this.ticker.setAttribute("persist","collapsed,hidden");
+		this.ticker.setAttribute("toolbarname",this.strings.getString("extension.name"));
+		this.ticker.style.maxHeight = '24px';
+	
+		this.toolbar = this.ce('hbox');
+		this.toolbar.spacer = this.ce('spacer');
+		this.toolbar.appendChild(this.toolbar.spacer);
+		this.toolbar.style.maxHeight = '24px';
+	
+		this.ticker.setAttribute("contextmenu","RSSTICKERCM");
+	
+		this.ticker.setAttribute("onmouseover","RSSTICKER.mouseOverFlag = true;");
+		this.ticker.setAttribute("onmouseout","RSSTICKER.mouseOverFlag = false;");
+
+		document.getElementById("RSSTICKERItemCM").setAttribute("onmouseover","RSSTICKER.mouseOverFlag = true;");
+		document.getElementById("RSSTICKERItemCM").setAttribute("onmouseout","RSSTICKER.mouseOverFlag = false;");
+	
+		this.ticker.appendChild(this.toolbar);
+		
+		this.loadingNoticeParent = this.ce('toolbaritem');
+		this.loadingNoticeParent.setAttribute("tooltip","RSSTICKERLoadingNoticeTooltip");
+		this.loadingNoticeParent.id = "RSSTICKER-throbber-box";
+		this.loadingNoticeParent.setAttribute("title","RSS Ticker Activity Indicator");
+		this.loadingNoticeParent.setAttribute("align","center");
+		this.loadingNoticeParent.setAttribute("pack","center");
+	
+		this.loadingNotice = this.ce('image');
+		this.loadingNotice.setAttribute("src","chrome://rss-ticker/content/skin-common/throbber.gif");
+		this.loadingNotice.id = "RSSTICKER-throbber";
+		this.loadingNotice.setAttribute("busy","false");
+		this.loadingNotice.style.marginRight = '4px';
+		this.loadingNoticeParent.appendChild(this.loadingNotice);
+	
+		try {
+			document.getElementById("nav-bar").appendChild(this.loadingNoticeParent);
+		} catch (e) {
+			if (this.DEBUG) this.logMessage(e);
+		}
+		
+		if (this.prefs.getBoolPref("disabled")){
+			this.disable();
 			return;
 		}
 		else {
-			if (document.getElementById("RSSTICKER-button")){
-				document.getElementById("RSSTICKER-button").setAttribute("greyed","false");
-			}
-			
-			this.strings = document.getElementById("RSSTICKER-bundle");
-			
-			this.customizeContextMenus();
-			
-			if (this.DEBUG) this.logMessage("Ticker placement: " + this.tickerPlacement);
-			
-			if (!this.ticker){
-				this.ticker = this.ce('toolbar');
-				this.ticker.setAttribute("id",this.objectName + this.strings.getString("toolbar"));
-				this.ticker.setAttribute("class","chromeclass-toolbar");
-				this.ticker.setAttribute("hidden",false);
-				this.ticker.setAttribute("iconsize","small");
-				this.ticker.setAttribute("inherits","collapsed,hidden");
-				this.ticker.setAttribute("mode","full");
-				this.ticker.setAttribute("persist","collapsed,hidden");
-				this.ticker.setAttribute("toolbarname",this.strings.getString("extension.name"));
-				this.ticker.style.maxHeight = '24px';
-				
-				this.toolbar = this.ce('hbox');
-				this.toolbar.spacer = this.ce('spacer');
-				this.toolbar.appendChild(this.toolbar.spacer);
-				this.toolbar.style.maxHeight = '24px';
-				
-				this.ticker.setAttribute("contextmenu",this.objectName + "CM");
-				
-				this.ticker.setAttribute("onmouseover",this.objectName + ".mouseOverFlag = true;");
-				this.ticker.setAttribute("onmouseout",this.objectName + ".mouseOverFlag = false;");
-
-				document.getElementById(this.objectName + "ItemCM").setAttribute("onmouseover",this.objectName + ".mouseOverFlag = true;");
-				document.getElementById(this.objectName + "ItemCM").setAttribute("onmouseout",this.objectName + ".mouseOverFlag = false;");
-				
-				this.ticker.appendChild(this.toolbar);
-				
-				this.loadingNoticeParent = this.ce('toolbaritem');
-				this.loadingNoticeParent.setAttribute("tooltip",this.objectName + "LoadingNoticeTooltip");
-				this.loadingNoticeParent.id = this.objectName + "-throbber-box";
-				this.loadingNoticeParent.setAttribute("title","RSS Ticker Activity Indicator");
-				this.loadingNoticeParent.setAttribute("align","center");
-				this.loadingNoticeParent.setAttribute("pack","center");
-				
-				this.loadingNotice = this.ce('image');
-				this.loadingNotice.setAttribute("src","chrome://rss-ticker/skin/throbber.gif");
-				this.loadingNotice.id = this.objectName + "-throbber";
-				this.loadingNotice.setAttribute("busy","false");
-				this.loadingNotice.style.marginRight = '4px';
-				this.loadingNoticeParent.appendChild(this.loadingNotice);
-				
-				try {
-					document.getElementById("nav-bar").appendChild(this.loadingNoticeParent);
-				} catch (e) {
-					if (this.DEBUG) this.logMessage(e);
-				}
-			}
-			
-			//this.addLoadingNotice(this.strings.getString("findingFeeds"));
-			
-			this.attachTicker();
-			
-			// For some reason, the boookmark API functions aren't available right away.
-			setTimeout(function () { RSSTICKER.init(); }, 300);
+			this.enable();
 		}
 		
 		setTimeout(function () { RSSTICKER.showFirstRun(); }, 1500);
@@ -223,7 +195,8 @@ var RSSTICKER = {
 		    setTimeout(
 		        function () {
 					window.openDialog("chrome://rss-ticker/content/one-riot-suggestion.xul", "trends", "chrome,dialog,centerscreen,titlebar,alwaysraised,modal", version);
-                }, 5000);
+                }, 5000
+			);
         }
 	},
 		
@@ -235,19 +208,16 @@ var RSSTICKER = {
 		switch(data) {
 			case "disabled":
 				if (this.prefs.getBoolPref("disabled")) {
-					this.disabled = true;
-					this.unload();
+					this.disable();
 				}
 				else {
-					this.disabled = false;
-					this.onload();
+					this.enable();
 				}
 			break;
 			case "hideWhenEmpty":
 				this.hideWhenEmpty = this.prefs.getBoolPref("hideWhenEmpty");
 			break;
 			case "tickerPlacement":
-				this.tickerPlacement = this.prefs.getIntPref("tickerPlacement");
 				this.attachTicker();
 			break;
 			case "randomizeItems":
@@ -268,14 +238,14 @@ var RSSTICKER = {
 				this.alwaysOpenInNewTab = this.prefs.getBooPref("alwaysOpenInNewTab");
 			break;
 			case "tickSpeed":
-				this.tickSpeed = this.prefs.getIntPref("tickSpeed");
+				this.tickLength = this.prefs.getIntPref("tickSpeed") * (500 / this.ticksPerItem);
 			break;
 			case "updateFrequency":
-				this.updateFrequency = this.prefs.getIntPref("updateFrequency");
-				RSSTICKER.setReloadInterval(RSSTICKER.prefs.getIntPref("updateFrequency"));
+				RSSTICKER.setReloadInterval(this.prefs.getIntPref("updateFrequency"));
 			break;
 			case "ticksPerItem":
 				this.ticksPerItem = this.prefs.getIntPref("ticksPerItem");
+				this.tickLength = this.prefs.getIntPref("tickSpeed") * (500 / this.ticksPerItem);
 			break;
 			case "dw.limitWidth":
 				this.displayWidth.limitWidth = this.prefs.getBoolPref("dw.limitWidth");
@@ -289,7 +259,7 @@ var RSSTICKER = {
 				}
 			break;
 			case "updateToggle":
-				//todo
+				// TODO Regenerate the ignore file.
 			break;
 		}
 		
@@ -302,21 +272,52 @@ var RSSTICKER = {
 			this.ticker.parentNode.removeChild(this.ticker);
 		}
 		
-		if (this.tickerPlacement == 1){
+		var tickerPlacement = this.prefs.getIntPref("tickerPlacement");
+		
+		if (tickerPlacement == 1){
 			// Beneath the status bar
-			// document.getElementById('main-window').insertBefore(this.ticker, document.getElementById('status-bar').nextSibling);
 			document.getElementById('browser-bottombox').insertBefore(this.ticker, document.getElementById('status-bar').nextSibling);
 			if (this.DEBUG) this.logMessage("Placed after status bar.");
 		}
-		else if (this.tickerPlacement == 2){
+		else if (tickerPlacement == 2){
 			// Up by the Bookmarks Toolbar
 			document.getElementById('navigator-toolbox').appendChild(this.ticker);
 			if (this.DEBUG) this.logMessage("Placed in navigator toolbox.");
 		}
 	},
 	
-	unload : function (){
-		this.unloadNow = true;
+	enable : function () {
+		this.disabled = false;
+		
+		if (document.getElementById("RSSTICKER-button")){
+			document.getElementById("RSSTICKER-button").setAttribute("greyed","false");
+		}
+		
+		this.attachTicker();
+		this.startFetchingFeeds();
+	},
+	
+	disable : function () {
+		if (this.DEBUG) this.logMessage("Ticker disabled.");
+		
+		this.disabled = true;
+		
+		if (this.ticker.parentNode){
+			this.ticker.parentNode.removeChild(this.ticker);
+		}
+		
+		while (this.toolbar.childNodes.length > 0){
+			this.toolbar.removeChild(this.toolbar.lastChild);
+		}
+		
+		this.toolbar.appendChild(this.toolbar.spacer);
+		
+		if (document.getElementById("RSSTICKER-button")) {
+			document.getElementById("RSSTICKER-button").setAttribute("greyed","true");
+		}
+		
+		this.prefs.setIntPref("lastUpdate", 0);
+		this.stopFetchingFeeds();
 	},
 	
 	loadingNoticeTimeout : null,
@@ -332,11 +333,11 @@ var RSSTICKER = {
 			
 			var text = document.createTextNode(message);
 			
-			while (document.getElementById(this.objectName + "LoadingNoticeText").childNodes.length > 0){
-				document.getElementById(this.objectName + "LoadingNoticeText").removeChild(document.getElementById(this.objectName + "LoadingNoticeText").lastChild);
+			while (document.getElementById("RSSTICKERLoadingNoticeText").childNodes.length > 0){
+				document.getElementById("RSSTICKERLoadingNoticeText").removeChild(document.getElementById("RSSTICKERLoadingNoticeText").lastChild);
 			}
 			
-			document.getElementById(this.objectName + "LoadingNoticeText").appendChild(text);
+			document.getElementById("RSSTICKERLoadingNoticeText").appendChild(text);
 			
 			this.loadingNotice.setAttribute("busy", "true");
 		}
@@ -345,29 +346,26 @@ var RSSTICKER = {
 	},
 	
 	loadPrefs : function () {
-		if (!this.prefs) {
-			if (this.DEBUG) this.logMessage("Loading prefs.");
+		if (this.DEBUG) this.logMessage("Loading prefs.");
+	
+		this.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker.");
+		this.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
+		this.prefs.addObserver("", this, false);
+	
+		this.disabled = this.prefs.getBoolPref("disabled");
+		this.hideWhenEmpty = this.prefs.getBoolPref("hideWhenEmpty");
+		this.randomizeItems = this.prefs.getBoolPref("randomizeItems");
+		this.ticksPerItem = this.prefs.getIntPref("ticksPerItem");
+		this.displayWidth.itemWidth = this.prefs.getIntPref("dw.itemWidth");
+		this.limitItemsPerFeed = this.prefs.getBoolPref("limitItemsPerFeed");
+		this.itemsPerFeed = this.prefs.getIntPref("itemsPerFeed");
+		this.boldUnvisited = this.prefs.getBoolPref("boldUnvisited");
+		this.hideVisited = this.prefs.getBoolPref("hideVisited");
+		this.alwaysOpenInNewTab = this.prefs.getBoolPref("alwaysOpenInNewTab");
+		this.displayWidth.limitWidth = this.prefs.getBoolPref("dw.limitWidth");
+		this.displayWidth.isMaxWidth = this.prefs.getBoolPref("dw.isMaxWidth");
 		
-			this.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch(this.prefBranch);
-			this.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
-			this.prefs.addObserver("", this, false);
-		
-			this.disabled = this.prefs.getBoolPref("disabled");
-			this.hideWhenEmpty = this.prefs.getBoolPref("hideWhenEmpty");
-			this.tickSpeed = this.prefs.getIntPref("tickSpeed");
-			this.updateFrequency = this.prefs.getIntPref("updateFrequency");
-			this.randomizeItems = this.prefs.getBoolPref("randomizeItems");
-			this.tickerPlacement = this.prefs.getIntPref("tickerPlacement");
-			this.ticksPerItem = this.prefs.getIntPref("ticksPerItem");
-			this.displayWidth.itemWidth = this.prefs.getIntPref("dw.itemWidth");
-			this.limitItemsPerFeed = this.prefs.getBoolPref("limitItemsPerFeed");
-			this.itemsPerFeed = this.prefs.getIntPref("itemsPerFeed");
-			this.boldUnvisited = this.prefs.getBoolPref("boldUnvisited");
-			this.hideVisited = this.prefs.getBoolPref("hideVisited");
-			this.alwaysOpenInNewTab = this.prefs.getBoolPref("alwaysOpenInNewTab");
-			this.displayWidth.limitWidth = this.prefs.getBoolPref("dw.limitWidth");
-			this.displayWidth.isMaxWidth = this.prefs.getBoolPref("dw.isMaxWidth");
-		}
+		this.tickLength = this.prefs.getIntPref("tickSpeed") * (500 / this.prefs.getIntPref("ticksPerItem"));
 	},
 	
 	customizeContextMenus : function () {
@@ -388,9 +386,9 @@ var RSSTICKER = {
 		this.cmOptions.options = this.prefs.getBoolPref("cm.options");
 		this.cmOptions.disableTicker = this.prefs.getBoolPref("cm.disableTicker");
 			
-		this.customizeContextMenu(this.objectName + "ItemCM");
-		this.customizeContextMenu(this.objectName + "CM");
-		this.customizeContextMenu(this.objectName + "ButtonCM");
+		this.customizeContextMenu("RSSTICKERItemCM");
+		this.customizeContextMenu("RSSTICKERCM");
+		this.customizeContextMenu("RSSTICKERButtonCM");
 	},
 	
 	customizeContextMenu : function(menuID){
@@ -402,7 +400,7 @@ var RSSTICKER = {
 			var option = menu.childNodes[i];
 			
 			if (option.nodeName == 'menuitem'){
-				if (eval(this.objectName + ".cmOptions." + option.getAttribute("option") + " == false")){
+				if (eval("RSSTICKER.cmOptions." + option.getAttribute("option") + " == false")){
 					option.style.display = 'none';
 				}
 				else {
@@ -426,13 +424,7 @@ var RSSTICKER = {
 		}
 	},
 	
-	init : function (){
-		if (this.DEBUG) this.logMessage("Updating feeds " + new Date().toString());
-		
-		this.startFetchingFeeds();
-	},
-	
-	exit : function () {
+	unload : function () {
 		this.prefs.setIntPref("lastUpdate", 0);
 	},
 	
@@ -441,12 +433,15 @@ var RSSTICKER = {
 	feedUpdateTimeout : null,
 	secondsBetweenFeeds : 0,
 	
+	stopFetchingFeeds : function () {
+		clearTimeout(RSSTICKER.feedUpdateTimeout);
+		
+		this.feedsToFetch = [];
+		this.feedIndex = 0;
+	},
+	
 	startFetchingFeeds : function () {
-		if (this.unloadNow) {
-			this.unloadNow = false;
-			this.doUnload();
-			return;
-		}
+		if (this.DEBUG) this.logMessage("Updating feeds " + new Date().toString());
 		
 		if (this.disabled) {
 			return;
@@ -471,14 +466,12 @@ var RSSTICKER = {
 	    RSSTICKER.feedsToFetch = [];
 	    RSSTICKER.feedIndex = 0;
 	    
-		var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService);
-		var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
 		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
 		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
 
 		for (var i = 0; i < livemarkIds.length; i++){
-			var feedURL = livemarkService.getFeedURI(livemarkIds[i]).spec;
-			var feedName = bookmarkService.getItemTitle(livemarkIds[i]);
+			var feedURL = RSSTICKER.livemarkService.getFeedURI(livemarkIds[i]).spec;
+			var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkIds[i]);
 			
 			if (!this.inArray(ignore, feedURL)){
 				RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkIds[i] });
@@ -534,16 +527,6 @@ var RSSTICKER = {
     },
 	
 	updateAFeed : function (indexOverride) {
-		if (this.unloadNow){
-			this.unloadNow = false;
-			this.doUnload();
-			return;
-		}
-		
-		if (this.disabled) {
-			return;
-		}
-		
         function setTimeoutForNext() {
             if (RSSTICKER.rapidUpdate) {
                 var interval = 0.5;
@@ -562,7 +545,7 @@ var RSSTICKER = {
 		
         clearTimeout(RSSTICKER.feedUpdateTimeout);
 
-        if (RSSTICKER.feedsToFetch.length == 0 || (!RSSTICKER.rapidUpdate && RSSTICKER.secondsBetweenFeeds == 0)){
+        if (this.disabled || RSSTICKER.feedsToFetch.length == 0 || (!RSSTICKER.rapidUpdate && RSSTICKER.secondsBetweenFeeds == 0)){
 		    setTimeoutForNext();
 		    return;
 		}
@@ -641,11 +624,8 @@ var RSSTICKER = {
 			setTimeoutForNext();
 		}
 		
-		this.tick();
-		//this.addLoadingNotice();
 		this.checkForEmptiness();
 		this.tick();
-		
     },
 	
 	removeFeed : function (livemarkId) {
@@ -674,11 +654,8 @@ var RSSTICKER = {
 	},
 
 	updateSingleFeed : function (livemarkId) {
-		var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"]
-								.getService(Components.interfaces.nsILivemarkService);
-		var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
-		var feedURL = livemarkService.getFeedURI(livemarkId).spec;
-		var feedName = bookmarkService.getItemTitle(livemarkId);
+		var feedURL = RSSTICKER.livemarkService.getFeedURI(livemarkId).spec;
+		var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkId);
 		
 		RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
 	    RSSTICKER.updateAFeed(RSSTICKER.feedsToFetch.length - 1);
@@ -701,11 +678,8 @@ var RSSTICKER = {
 	},
 	
 	queueForParsing : function (feedText, feedURL) {
-		var ioService = Components.classes["@mozilla.org/network/io-service;1"]
-						.getService(Components.interfaces.nsIIOService);
-
 		var data = feedText;
-		var uri = ioService.newURI(feedURL, null, null);
+		var uri = RSSTICKER.ioService.newURI(feedURL, null, null);
 
 		if (data.length) {
 			var parser = Components.classes["@mozilla.org/feed-processor;1"]
@@ -723,28 +697,8 @@ var RSSTICKER = {
 		return this;
 	},
 	
-	getFavicon : function (feed){
-		if (this.unloadNow){
-			this.unloadNow = false;
-			this.doUnload();
-			return;
-		}
-		
-		if (this.disabled) {
-			return;
-		}
-		
-		this.writeFeed(feed);
-	},
-	
 	writeFeed : function (feed) {
 		var doTick, i, j;
-		
-		if (this.unloadNow){
-			this.unloadNow = false;
-			this.doUnload();
-			return;
-		}
 		
 		if (this.disabled) {
 			return;
@@ -777,11 +731,11 @@ var RSSTICKER = {
 		var itemsShowing = this.itemsInTicker(feed.label);
 		
 		for (j = 0; j < feedItems.length; j++){
-			if (!document.getElementById(this.objectName + feedItems[j].uri)){
+			if (!document.getElementById("RSSTICKER" + feedItems[j].uri)){
 				if (this.limitItemsPerFeed && (this.itemsPerFeed <= itemsShowing.length)){
 					// Determine if this item is newer than the oldest item showing.
 					if ((this.itemsPerFeed > 0) && feedItems[j].published && itemsShowing[0].published && (feedItems[j].published.getTime() > itemsShowing[0].published.getTime())){
-						this.toolbar.removeChild(document.getElementById(this.objectName + itemsShowing[0].href));
+						this.toolbar.removeChild(document.getElementById("RSSTICKER" + itemsShowing[0].href));
 						itemsShowing.shift();
 					}
 					else {					
@@ -789,18 +743,16 @@ var RSSTICKER = {
 					}
 				}
 			
-				var item = {};
-				
-				item.visited = this.history.isVisitedURL(feedItems[j].uri, feedItems[j].id, 1);
-				
-				if (item.visited && this.hideVisited){
+				var itemIsVisited = this.history.isVisitedURL(feedItems[j].uri, feedItems[j].id, 1);
+
+				if (itemIsVisited && this.hideVisited){
 					continue;
 				}
-				
+
 				doTick = true;
-				
+
 				feedItems[j].description = feedItems[j].description.replace(/<[^>]+>/g, "");
-				
+
 				if ((feedItems[j].label == '') && (feedItems[j].description != '')){
 					if (feedItems[j].description.length > 40){
 						feedItems[j].label = feedItems[j].description.substr(0,40) + "...";
@@ -809,27 +761,18 @@ var RSSTICKER = {
 						feedItems[j].label = feedItems[j].description;
 					}
 				}
-				
-				item.label = feedItems[j].label;
-				item.uri = feedItems[j].uri;
-				item.feed = feed.label;
-				item.feedURL = feed.uri;
-				item.image = feedItems[j].image;
-				item.description = feedItems[j].description;
-				item.published = feedItems[j].published;
-				item.guid = feedItems[j].id;
-				
+
 				var tbb = this.ce('toolbarbutton');
-				tbb.uri = item.uri;
-				tbb.id = this.objectName + item.uri;
-				
-				tbb.setAttribute("label",item.label);
-				tbb.setAttribute("tooltip",this.objectName + "Tooltip");
-				tbb.setAttribute("image",item.image);
-				tbb.setAttribute("contextmenu",this.objectName + "ItemCM");
-				
+				tbb.uri = feedItems[j].uri;
+				tbb.id = "RSSTICKER" + feedItems[j].uri;
+
+				tbb.setAttribute("label",feedItems[j].label);
+				tbb.setAttribute("tooltip","RSSTICKERTooltip");
+				tbb.setAttribute("image",feedItems[j].image);
+				tbb.setAttribute("contextmenu","RSSTICKERItemCM");
+
 				tbb.setAttribute("onclick","return RSSTICKER.onTickerItemClick(event, this.uri, this);");
-				
+
 				if (this.displayWidth.limitWidth){
 					if (this.displayWidth.isMaxWidth){
 						tbb.style.maxWidth = this.displayWidth.itemWidth + "px";
@@ -838,42 +781,42 @@ var RSSTICKER = {
 						tbb.style.width = this.displayWidth.itemWidth + "px";
 					}
 				}
-				
-				tbb.description = item.description;
-				tbb.visited = item.visited;
-				
-				tbb.feed = item.feed;
-				tbb.feedURL = item.feedURL;
-				tbb.href = item.uri;
+
+				tbb.description = feedItems[j].description;
+				tbb.visited = itemIsVisited;
+
+				tbb.feed = feed.label;
+				tbb.feedURL = feed.uri;
+				tbb.href = feedItems[j].uri;
 				tbb.parent = this;
-				tbb.published = item.published;
-				tbb.guid = item.guid;
-				
+				tbb.published = feedItems[j].published;
+				tbb.guid = feedItems[j].id;
+
 				if (this.hideVisited){
 					tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
 						this.parentNode.removeChild(this);
 						this.visited = true;
-						
+
 						if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
-											
+
 						if (addToHist){
 							this.parent.history.addToHistory(this.guid);
 						}
-						
+
 						this.parent.checkForEmptiness();
 					};
 				}
 				else if (this.boldUnvisited){
-					if (!item.visited){
+					if (!itemIsVisited){
 						tbb.style.fontWeight = 'bold';
 					}
-				
+
 					tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
 						this.style.fontWeight = '';
 						this.visited = true;
-						
+
 						if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
-						
+
 						if (addToHist){
 							this.parent.history.addToHistory(this.guid);
 						}
@@ -887,14 +830,14 @@ var RSSTICKER = {
 						}
 					};
 				}
-				
+
 				if (this.boldUnvisited){
 					// Don't move this.
-					if (!item.visited){
+					if (!itemIsVisited){
 						tbb.style.fontWeight = 'bold';
 					}
 				}
-				
+
 				tbb.onContextOpen = function (target) {
 					if (!target) {
 						window._content.document.location.href = this.href;
@@ -905,12 +848,12 @@ var RSSTICKER = {
 					else if (target == 'tab') {
 						this.parent.browser.openInNewTab(this.href);
 					}
-					
+
 					this.markAsRead(true);
 				};
-				
+
 				// Determine where to add the item
-				
+
 				if (this.randomizeItems){
 					if (this.toolbar.childNodes.length == 1){
 						// Only the spacer is showing
@@ -924,7 +867,7 @@ var RSSTICKER = {
 							// Add after the 5th one just to avoid some jumpiness
 							var randomPlace = Math.floor(Math.random() * (this.toolbar.childNodes.length - 1)) + 6;
 						}
-						
+
 						if (randomPlace >= this.toolbar.childNodes.length){
 							this.toolbar.appendChild(tbb);
 						}
@@ -935,7 +878,7 @@ var RSSTICKER = {
 				}
 				else {
 					// Check for another item from this feed, if so place at end of that feed.
-					
+
 					if (itemsShowing.length > 0){
 						for (i = this.toolbar.childNodes.length - 1; i >= 0; i--){
 							if (this.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
@@ -948,7 +891,7 @@ var RSSTICKER = {
 										this.toolbar.insertBefore(tbb, this.toolbar.childNodes[i+1]);
 										addedButton = true;
 									}
-									
+
 									break;
 								}
 							}
@@ -966,7 +909,7 @@ var RSSTICKER = {
 							}
 							else {
 								var addedButton = false;
-						
+
 								for (i = this.toolbar.childNodes.length - 2; i >= 0; i--){
 									if (this.toolbar.childNodes[i].nodeName == 'spacer'){
 										this.toolbar.insertBefore(tbb, this.toolbar.childNodes[i+1]);
@@ -979,7 +922,7 @@ var RSSTICKER = {
 										break;
 									}
 								}
-								
+
 								if (!addedButton){
 									this.toolbar.appendChild(tbb);
 								}
@@ -989,6 +932,7 @@ var RSSTICKER = {
 				}
 				
 				itemsShowing.push(tbb);
+				
 				itemsShowing.sort(RSSTICKER.sortByPubDate);
 			}
 		}
@@ -1095,113 +1039,88 @@ var RSSTICKER = {
 	},
 	
 	tick : function () {
-		if (this.unloadNow){
-			this.unloadNow = false;
-			this.doUnload();
+		if (this.disabled) {
+			return;
 		}
-		else if (!this.disabled){
-			if (this.tickTimer){
-				clearTimeout(this.tickTimer);
-			}
+		
+		clearTimeout(this.tickTimer);
+		
+		if (this.internalPause){
+			this.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, this.tickLength);
+		}
+		else {
+			var node, nodeWidth, marginLeft;
 			
-			this.tickTimer = null;
-			
-			if (this.internalPause){
-				this.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, this.tickSpeed * (500 / this.ticksPerItem));
+			if (this.mouseOverFlag){
+				if (this.toolbar.childNodes.length > 1){
+					if (this.currentFirstItemMargin <= (this.toolbar.firstChild.boxObject.width * -1)){
+						node = this.toolbar.firstChild;
+						this.toolbar.removeChild(node);
+						this.currentFirstItemMargin = 0;
+						node.style.marginLeft = '0px';
+						this.toolbar.appendChild(node);
+						
+						if (node.nodeName == 'toolbarbutton' && !node.visited){
+							if (this.history.isVisitedURL(node.href, node.guid, 2)){
+								node.markAsRead(true);
+							}
+						}
+					}
+					else if (this.currentFirstItemMargin > 0){
+						// Move the last child back to the front.
+						node = this.toolbar.lastChild;
+						nodeWidth = node.boxObject.width;
+						this.toolbar.removeChild(node);
+						
+						// Set the correct margins
+						marginLeft = parseInt((0 - nodeWidth) + this.currentFirstItemMargin);
+						
+						node.style.marginLeft = marginLeft + "px";
+						this.currentFirstItemMargin = marginLeft;
+						this.toolbar.firstChild.style.marginLeft = 0;
+						this.toolbar.insertBefore(node, this.toolbar.firstChild);
+					}
+				}
+				
+				this.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, this.tickLength);
 			}
 			else {
-				var node, nodeWidth, marginLeft;
-				
-				if (this.mouseOverFlag){
-					if (this.toolbar.childNodes.length > 1){
-						if (this.currentFirstItemMargin <= (this.toolbar.firstChild.boxObject.width * -1)){
-							node = this.toolbar.firstChild;
-							this.toolbar.removeChild(node);
-							this.currentFirstItemMargin = 0;
-							node.style.marginLeft = '0px';
-							this.toolbar.appendChild(node);
-							
-							if (node.nodeName == 'toolbarbutton' && !node.visited){
-								if (this.history.isVisitedURL(node.href, node.guid, 2)){
-									node.markAsRead(true);
-								}
+				if (this.toolbar.childNodes.length > 1){
+					if (this.currentFirstItemMargin <= (this.toolbar.firstChild.boxObject.width * -1)){
+						node = this.toolbar.firstChild;
+						this.toolbar.removeChild(node);
+						this.currentFirstItemMargin = 0;
+						node.style.marginLeft = '0px';
+						this.toolbar.appendChild(node);
+						
+						if (node.nodeName == 'toolbarbutton' && !node.visited){
+							if (this.history.isVisitedURL(node.href, node.guid, 3)){
+								node.markAsRead(true);
 							}
-						}
-						else if (this.currentFirstItemMargin > 0){
-							// Move the last child back to the front.
-							node = this.toolbar.lastChild;
-							nodeWidth = node.boxObject.width;
-							this.toolbar.removeChild(node);
-							
-							// Set the correct margins
-							marginLeft = parseInt((0 - nodeWidth) + this.currentFirstItemMargin);
-							
-							node.style.marginLeft = marginLeft + "px";
-							this.currentFirstItemMargin = marginLeft;
-							this.toolbar.firstChild.style.marginLeft = 0;
-							this.toolbar.insertBefore(node, this.toolbar.firstChild);
 						}
 					}
-					
-					this.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, this.tickSpeed * (500 / this.ticksPerItem));
-				}
-				else {
-					if (this.toolbar.childNodes.length > 1){
-						if (this.currentFirstItemMargin <= (this.toolbar.firstChild.boxObject.width * -1)){
-							node = this.toolbar.firstChild;
-							this.toolbar.removeChild(node);
-							this.currentFirstItemMargin = 0;
-							node.style.marginLeft = '0px';
-							this.toolbar.appendChild(node);
-							
-							if (node.nodeName == 'toolbarbutton' && !node.visited){
-								if (this.history.isVisitedURL(node.href, node.guid, 3)){
-									node.markAsRead(true);
-								}
-							}
-						}
-						else if (this.currentFirstItemMargin > 0){
-							// Move the last child back to the front.
-							node = this.toolbar.lastChild;
-							this.toolbar.removeChild(node);
-							
-							// Set the correct margins
-							nodeWidth = node.boxObject.width;
-							marginLeft = parseInt((0 - nodeWidth) + this.currentFirstItemMargin);
+					else if (this.currentFirstItemMargin > 0){
+						// Move the last child back to the front.
+						node = this.toolbar.lastChild;
+						this.toolbar.removeChild(node);
+						
+						// Set the correct margins
+						nodeWidth = node.boxObject.width;
+						marginLeft = parseInt((0 - nodeWidth) + this.currentFirstItemMargin);
 
-							node.style.marginLeft = marginLeft + "px";
-							this.currentFirstItemMargin = marginLeft;
-							this.toolbar.firstChild.style.marginLeft = 0;
-							this.toolbar.insertBefore(node, this.toolbar.firstChild);
-						}
-						else {
-							this.currentFirstItemMargin -= (200 / this.ticksPerItem);
-							this.toolbar.firstChild.style.marginLeft = this.currentFirstItemMargin + "px";
-						}
+						node.style.marginLeft = marginLeft + "px";
+						this.currentFirstItemMargin = marginLeft;
+						this.toolbar.firstChild.style.marginLeft = 0;
+						this.toolbar.insertBefore(node, this.toolbar.firstChild);
 					}
-					
-					this.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, this.tickSpeed * (500 / this.ticksPerItem));
+					else {
+						this.currentFirstItemMargin -= (200 / this.ticksPerItem);
+						this.toolbar.firstChild.style.marginLeft = this.currentFirstItemMargin + "px";
+					}
 				}
+				
+				this.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, this.tickLength);
 			}
-		}
-	},
-	
-	doUnload : function () {
-		this.unloadNow = false;
-		
-		if (this.ticker.parentNode){
-			this.ticker.parentNode.removeChild(this.ticker);
-		}
-		
-		while (this.toolbar.childNodes.length > 0){
-			this.toolbar.removeChild(this.toolbar.lastChild);
-		}
-		
-		this.toolbar.appendChild(this.toolbar.spacer);
-		// this.loadingNotice.setAttribute("busy","false");
-		
-		if (document.getElementById("RSSTICKER-button")) {
-			document.getElementById("RSSTICKER-button").setAttribute("greyed","true");
 		}
 	},
 	
@@ -1271,7 +1190,7 @@ var RSSTICKER = {
 	},
 	
 	toggleDisabled : function () {
-		this.prefs.setBoolPref("disabled",!this.disabled);
+		this.prefs.setBoolPref("disabled", !this.prefs.getBoolPref("disabled"));
 	},
 	
 	fillInTooltip : function (item, tt){
@@ -1295,29 +1214,29 @@ var RSSTICKER = {
 		tt.removeAttribute("height");
 		tt.removeAttribute("width");
 		
-		document.getElementById(this.objectName + "TooltipImage").src = image;
+		document.getElementById("RSSTICKERTooltipImage").src = image;
 		
-		document.getElementById(this.objectName + "TooltipURL").value = this.strings.getString("URL") + ": " + url;
+		document.getElementById("RSSTICKERTooltipURL").value = this.strings.getString("URL") + ": " + url;
 		
-		var maxw = document.getElementById(this.objectName + "TooltipURL").boxObject.width;
+		var maxw = document.getElementById("RSSTICKERTooltipURL").boxObject.width;
 		
-		document.getElementById(this.objectName + "TooltipFeedName").value = feedName;
+		document.getElementById("RSSTICKERTooltipFeedName").value = feedName;
 		
-		maxw = Math.max(maxw, document.getElementById(this.objectName + "TooltipFeedName").boxObject.width);
+		maxw = Math.max(maxw, document.getElementById("RSSTICKERTooltipFeedName").boxObject.width);
 		
 		if (title != ''){
-			document.getElementById(this.objectName + "TooltipName").value = title;;
-			document.getElementById(this.objectName + "TooltipName").style.display = '';
+			document.getElementById("RSSTICKERTooltipName").value = title;;
+			document.getElementById("RSSTICKERTooltipName").style.display = '';
 			
-			maxw = Math.max(document.getElementById(this.objectName + "TooltipName").boxObject.width, maxw);
+			maxw = Math.max(document.getElementById("RSSTICKERTooltipName").boxObject.width, maxw);
 		}
 		else {
-			document.getElementById(this.objectName + "TooltipName").style.display = 'none';
+			document.getElementById("RSSTICKERTooltipName").style.display = 'none';
 		}
 				
 		if (descr != ''){
-			for (var i = 0; i < document.getElementById(this.objectName + "TooltipSummary").childNodes.length; i++){
-				document.getElementById(this.objectName + "TooltipSummary").removeChild(document.getElementById(this.objectName + "TooltipSummary").lastChild);
+			for (var i = 0; i < document.getElementById("RSSTICKERTooltipSummary").childNodes.length; i++){
+				document.getElementById("RSSTICKERTooltipSummary").removeChild(document.getElementById("RSSTICKERTooltipSummary").lastChild);
 			}
 			
 			if (descr.length > 200){
@@ -1326,11 +1245,11 @@ var RSSTICKER = {
 			
 			var text = document.createTextNode(descr);
 			
-			document.getElementById(this.objectName + "TooltipSummary").appendChild(text);
-			document.getElementById(this.objectName + "TooltipSummaryGroupbox").setAttribute("hidden",false);
+			document.getElementById("RSSTICKERTooltipSummary").appendChild(text);
+			document.getElementById("RSSTICKERTooltipSummaryGroupbox").setAttribute("hidden",false);
 		}
 		else {
-			document.getElementById(this.objectName + "TooltipSummaryGroupbox").setAttribute("hidden",true);
+			document.getElementById("RSSTICKERTooltipSummaryGroupbox").setAttribute("hidden",true);
 		}
   
 		return true;
@@ -1338,11 +1257,8 @@ var RSSTICKER = {
 	
 	logMessage : function (message) {
 		var consoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
-		consoleService.logStringMessage(this.objectName + ": " + message);
+		consoleService.logStringMessage("RSSTICKER: " + message);
 	},
-	
-	
-	
 	
 	theFile : null,
 	theDB : null,
@@ -1368,7 +1284,6 @@ var RSSTICKER = {
 		delete this.theDB;
 		this.theDB = null;
 	},
-	
 	
 	history : {
 		hService : Components.classes["@mozilla.org/browser/global-history;2"].getService(Components.interfaces.nsIGlobalHistory2),

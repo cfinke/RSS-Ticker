@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/css" href="chrome://global/skin/global.css"?>
-<dialog title="Real-time Web Trends"
+<!DOCTYPE dialog SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+<dialog title="&trendsTitle;"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     buttons="accept,cancel"
     ondialogaccept="return subscribeToFeed();"> 
@@ -8,8 +9,10 @@
     <script type="application/x-javascript">
         <![CDATA[
 			var feedUrl = "http://www.oneriot.com/rss/trendingtopics?&spid=86f2f5da-3b24-4a87-bbb3-1ad47525359d&p=rss-ticker/" + window.arguments[0]+"&ssrc=ticker";
-
+			
             var subscribeToFeed = function() {
+				var strings = document.getElementById("RSSTICKER-bundle");
+				
 				var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"];
 				var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
 				var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
@@ -18,21 +21,24 @@
 				var menu = Application.bookmarks.menu;
 				var uri = ioService.newURI(feedUrl, null, null);
 				var feedUri = ioService.newURI(feedUrl, null, null);
-				var lm = livemarkService.createLivemarkFolderOnly(Application.bookmarks.menu.id, "Latest Trending Search Terms", uri, feedUri, -1);
-				annotationService.setItemAnnotation(lm, "bookmarkProperties/description", "The latest trending search terms on Twitter, Digg, and the rest of the social Web.", 0, Components.interfaces.nsIAnnotationService.EXPIRE_NEVER);
+				var lm = livemarkService.createLivemarkFolderOnly(Application.bookmarks.menu.id, strings.getString("trendBookmarkTitle"), uri, feedUri, -1);
+				annotationService.setItemAnnotation(lm, "bookmarkProperties/description", strings.getString("trendBookmarkDescription"), 0, Components.interfaces.nsIAnnotationService.EXPIRE_NEVER);
 				
                 return true;
             }
         ]]>
     </script>
+	<stringbundleset>
+		<stringbundle id="RSSTICKER-bundle" src="chrome://rss-ticker/locale/locale.properties" />
+	</stringbundleset>
     <hbox>
         <vbox>
-            <image src="chrome://rss-ticker/skin/search-trio.png" style="padding: 20px;"/>
+            <image src="chrome://rss-ticker/content/skin-common/search-trio.png" style="padding: 20px;"/>
         </vbox>
         <vbox style="width: 350px; padding-left: 20px;" align="center" pack="center">
-            <description>RSS Ticker wants to know if you'd like to subscribe to a feed of the latest trending search terms on Twitter, Digg, and the rest of the social Web.</description>
-            <description>Click OK to subscribe to the feed; it will automatically appear in the ticker, keeping you up-to-date on the latest news and trends from around the Web.  (You can unsubscribe at any time.)</description>
-			<description>(Don't worry, you won't be asked again if you choose not to subscribe.)</description>
+            <description>&trendsP1;</description>
+            <description>&trendsP2;</description>
+			<description>&trendsP3;</description>
         </vbox>
     </hbox>
 </dialog>

@@ -7,7 +7,7 @@
 	onload="findTicker(); getFeeds(); scales();"
 	title="&extension.title; - &options;"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<prefpane id="general-pane" label="&options.general;" image="chrome://rss-ticker/skin/emblem-system.png">
+	<prefpane id="general-pane" label="&options.general;" image="chrome://rss-ticker/content/skin-common/emblem-system.png">
 		<preferences>
 			<preference id="p_disabled" name="extensions.rssticker.disabled" type="bool" />
 			<preference id="p_hideWhenEmpty" name="extensions.rssticker.hideWhenEmpty" type="bool" />
@@ -54,7 +54,7 @@
 		</vbox>
 		<spacer style="height: 30px;" />
 	</prefpane>
-	<prefpane id="advanced-pane" label="&options.advanced;" image="chrome://rss-ticker/skin/utilities-terminal.png">
+	<prefpane id="advanced-pane" label="&options.advanced;" image="chrome://rss-ticker/content/skin-common/utilities-terminal.png">
 		<preferences>
 			<preference id="p_updateFrequency" name="extensions.rssticker.updateFrequency" type="int" />
 			<preference id="p_tickSpeed" name="extensions.rssticker.tickSpeed" type="int" />
@@ -68,27 +68,27 @@
 			<groupbox>
 				<caption label="&options.updateInterval;" />
 				<hbox>
-					<label value="Every 10 minutes" />
+					<label value="&every10Minutes;" />
 					<scale flex="1" id="frequency" min="10" max="1440" increment="10" pageIncrement="60" />
-					<label value="Once per day" />
+					<label value="&oncePerDay;" />
 				</hbox>
 			</groupbox>
 			
 			<groupbox>
 				<caption label="&options.speed;" />
 				<hbox>
-					<label value="Faster" />
+					<label value="&faster;" />
 					<scale flex="1" id="speed" min="1" max="75" increment="1" pageIncrement="5" />
-					<label value="Slower" />
+					<label value="&slower;" />
 				</hbox>
 			</groupbox>
 
 			<groupbox>
 				<caption label="&options.smooothness;" />
 				<hbox>
-					<label value="Choppier (Less CPU)" />
+					<label value="&choppier;" />
 					<scale flex="1" id="smoothness" min="1" max="300" increment="1" pageIncrement="25" />
-					<label value="Smoother (More CPU)" />
+					<label value="&smoother;" />
 				</hbox>
 			</groupbox>
 
@@ -106,7 +106,7 @@
 		</vbox>
 		<spacer style="height: 30px;" />
 	</prefpane>
-	<prefpane id="context-pane" label="&options.contextMenu;" image="chrome://rss-ticker/skin/bookmark-new.png">
+	<prefpane id="context-pane" label="&options.contextMenu;" image="chrome://rss-ticker/content/skin-common/bookmark-new.png">
 		<preferences>
 			<preference id="p_cm_open" name="extensions.rssticker.cm.open" type="bool" />
 			<preference id="p_cm_openInWindow" name="extensions.rssticker.cm.openInNewWindow" type="bool" />
@@ -178,7 +178,7 @@
 		</vbox>
 		<spacer style="height: 30px;" />
 	</prefpane>		
-	<prefpane id="manage-pane" label="&feeds;" image="chrome://rss-ticker/skin/feed-icon.gif">
+	<prefpane id="manage-pane" label="&feeds;" image="chrome://rss-ticker/content/skin-common/feed-icon.gif">
 		<script type="application/x-javascript" src="chrome://browser/content/bookmarks/bookmarks.js"></script>
 		<script type="application/x-javascript" src="chrome://rss-ticker/content/ticker.object.js"></script>
 		<script type="application/x-javascript" src="chrome://rss-ticker/content/options.js"></script>

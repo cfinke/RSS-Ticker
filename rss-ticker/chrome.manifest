@@ -15,7 +15,9 @@ locale     rss-ticker     uk-UA            chrome/locale/tr-TR/
 locale     rss-ticker     zh-CN            chrome/locale/uk-UA/
 locale     rss-ticker     zh-TW            chrome/locale/zh-TW/
 
-skin       rss-ticker     classic/1.0      chrome/skin/
+skin       rss-ticker     classic             chrome/skin/lin/
+skin       rss-ticker     classic             chrome/skin/win/ os=WINNT
+skin       rss-ticker     classic             chrome/skin/mac/ os=Darwin
 
 overlay   chrome://browser/content/browser.xul                       chrome://rss-ticker/content/overlay.xul
 
@@ -25,6 +27,9 @@ style     chrome://rss-ticker/content/about.xul                      chrome://br
 style     chrome://rss-ticker/content/noFeedsFound.xul               chrome://browser/skin/browser.css
 style     chrome://rss-ticker/content/options.xul                    chrome://global/skin/global.css
 style     chrome://rss-ticker/content/options.xul                    chrome://browser/skin/browser.css
+style     chrome://rss-ticker/content/options.xul                    chrome://rss-ticker/content/skin-common/style.css
+style     chrome://browser/content/browser.xul                       chrome://rss-ticker/content/skin-common/style.css
+style     chrome://global/content/customizeToolbar.xul               chrome://rss-ticker/content/skin-common/style.css
 style     chrome://rss-ticker/content/options.xul                    chrome://rss-ticker/skin/style.css
 style     chrome://browser/content/browser.xul                       chrome://rss-ticker/skin/style.css
 style     chrome://global/content/customizeToolbar.xul               chrome://rss-ticker/skin/style.css

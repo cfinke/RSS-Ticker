@@ -9,7 +9,7 @@
                    em:description="Scrolls your RSS feeds (Live Bookmarks) in a toolbar."
                    em:creator="Christopher Finke"
                    em:homepageURL="http://www.chrisfinke.com/addons/rss-ticker/"
-                   em:iconURL="chrome://rss-ticker/skin/feed-icon.gif"
+                   em:iconURL="chrome://rss-ticker/content/skin-common/feed-icon.gif"
                    em:optionsURL="chrome://rss-ticker/content/options.xul"
                    em:aboutURL="chrome://rss-ticker/content/about.xul">
 <!--                   em:updateURL="http://www.chrisfinke.com/files/updaters/rss-ticker.rdf"

@@ -184,7 +184,7 @@ TickerParseListener.prototype = {
 			}
 		}
 		
-		RSSTICKER.getFavicon(feedObject);
+		RSSTICKER.writeFeed(feedObject);
 		
 		delete feedObject;
 	}

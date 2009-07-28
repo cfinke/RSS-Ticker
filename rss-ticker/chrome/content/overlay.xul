@@ -7,9 +7,9 @@
 	<script type="application/x-javascript">
 		<![CDATA[
 
-			window.addEventListener("load", function (event) { RSSTICKER.onload(event); }, false);
-			window.addEventListener("unload", function (event) { RSSTICKER.exit(event); }, false);
-			window.addEventListener("resize", function (event) { RSSTICKER.adjustSpacerWidth(event); }, false);
+			window.addEventListener("load", function () { RSSTICKER.onload(); }, false);
+			window.addEventListener("unload", function () { RSSTICKER.unload(); }, false);
+			window.addEventListener("resize", function () { RSSTICKER.adjustSpacerWidth(); }, false);
 			window.addEventListener("DOMMouseScroll", function (event) { RSSTICKER.scrollTicker(event); }, false)
 			
 		]]>
