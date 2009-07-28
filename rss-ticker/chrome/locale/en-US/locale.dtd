@@ -27,8 +27,8 @@
 <!ENTITY options.dw.itemWidth.tt "The width of the individual items in the ticker.  The default is 200 (px).">
 <!ENTITY options.smoothness.tt "The number of ticks that it takes to remove one item from the front of the ticker.  Set higher for a smoother scroll.">
 <!ENTITY options.updateInterval.tt "The number of minutes between updates of the feeds.">
-<!ENTITY options.updateInterval "Update Frequency (minutes between updates)">
-<!ENTITY options.speed "Tick Speed">
+<!ENTITY options.updateInterval "Feed Update Frequency">
+<!ENTITY options.speed "Ticker Speed">
 <!ENTITY options.dw.itemWidth "Item width">
 <!ENTITY pixelAbbrev "px">
 <!ENTITY options.smooothness "Ticker Scroll Smoothness">
@@ -71,7 +71,7 @@
 <!ENTITY dontShowAgain "Don&apos;t show this message again.">
 <!ENTITY feed "Feed">
 <!ENTITY feeds "Feeds">
-<!ENTITY feedManagement "You can add or remove feeds from the ticker by selecting them in the list below and pressing either the Add or Remove button.">
+<!ENTITY feedManagement "You can add or remove feeds from the ticker by selecting them in the list below and pressing either the Add or Remove button. Note: To actually subscribe to a feed, use Firefox's Live Bookmarks.  This list only allows you to set which of your Live Bookmarks appear in the ticker; it doesn't allow you to subscribe to a new feed.">
 <!ENTITY add "Add">
 <!ENTITY remove "Remove">
 <!ENTITY URL "URL">
