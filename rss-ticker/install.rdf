@@ -5,7 +5,7 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="{1f91cde0-c040-11da-a94d-0800200c9a66}"
                    em:name="RSS Ticker"
-                   em:version="2.0pre"
+                   em:version="3.0pre"
                    em:description="Scrolls your RSS feeds (Live Bookmarks) in a toolbar."
                    em:creator="Christopher Finke"
                    em:homepageURL="http://www.chrisfinke.com/addons/rss-ticker/"
