@@ -1,0 +1,78 @@
+<!ENTITY extension.title "RSS Ticker">
+<!ENTITY cm.open "Buka">
+<!ENTITY cm.open.key "B">
+<!ENTITY cm.openInNewWindow "Buka dalam tetingkap baru">
+<!ENTITY cm.openInNewWindow.key "N">
+<!ENTITY cm.openInNewTab "Buka dalam tab baru">
+<!ENTITY cm.openInNewTab.key "T">
+<!ENTITY cm.openAllInTabs "Buka semua dalam tab">
+<!ENTITY cm.openUnreadInTabs "Buka yang belum dibaca dalam tab">
+<!ENTITY cm.openFeedInTabs "Buka feed dalam tab">
+<!ENTITY cm.openFeedUnreadInTabs "Buka feed yang belum dibaca dalam tab">
+<!ENTITY cm.copyLinkTitle "Salin Tajuk Pautan">
+<!ENTITY cm.copyLinkTitle.key "S">
+<!ENTITY cm.copyLinkURL "Salin URL Pautan">
+<!ENTITY cm.copyLinkURL.key "P">
+<!ENTITY cm.refreshFeeds "Segarkan semula feed">
+<!ENTITY cm.refreshFeeds.key "G">
+<!ENTITY cm.manageFeeds "Uruskan feed">
+<!ENTITY cm.manageFeeds.key "R">
+<!ENTITY cm.markAsRead "Tanda sebagai sudah dibaca">
+<!ENTITY cm.markAsRead.key "D">
+<!ENTITY cm.markFeedAsRead "Tanda feed sebagai sudah dibaca">
+<!ENTITY cm.markFeedAsRead.key "F">
+<!ENTITY cm.markAllAsRead "Tanda semua sebagai sudah dibaca">
+<!ENTITY cm.markAllAsRead.key "A">
+<!ENTITY options.speed.tt "Kelajuan ticker. 1 adalah yang paling laju">
+<!ENTITY options.dw.itemWidth.tt "Lebar item individu dalam ticker. Nilai default adalah 200 (px).">
+<!ENTITY options.smoothness.tt "Bilangan tik yang diperlukan untuk membuang satu item didepan ticker. Pilih yang tinggi untuk skrol yang lebih licin.">
+<!ENTITY options.updateInterval.tt "Bilangan minit antara kemaskini feed.">
+<!ENTITY options.updateInterval "Frekuensi Kemaskini">
+<!ENTITY options.speed "Kelajuan Tik">
+<!ENTITY options.dw.itemWidth "Lebar item">
+<!ENTITY pixelAbbrev "px">
+<!ENTITY options.smooothness "Kelicinan Skrol Ticker">
+<!ENTITY cmOptionsDescription "Ubah menu konteks ticker dengan memilih atau tidak memilih opsyen dibawah.">
+<!ENTITY tt.summary "Ringkasan">
+<!ENTITY options "Opsyen">
+<!ENTITY options.restartNotice "Opsyen ditanda dengan * tidak akan diubah melainkan anda membuka semula browser anda.">
+<!ENTITY options.general "Am">
+<!ENTITY options.advanced "Lanjutan">
+<!ENTITY options.contextMenu "Menu konteks">
+<!ENTITY options.placement.tt "Kedudukan ticker dalam browser">
+<!ENTITY options.random.tt "Keperluan ticker memaparkan item secara rawak untuk kepelbagaian feed.">
+<!ENTITY options.pause.tt "Jeda ticker apabila tetikus menghala di atasnya.">
+<!ENTITY options.disable.tt "Jeda RSS Ticker. Efek yang sama jika ekstensi ini dibuang tetapi ia boleh dilakukan tanpa membuang ekstensi RSS Ticker.">
+<!ENTITY options.hide.tt "Sembunyikan item feed yang telah anda baca (mengikut sejarah browser anda).">
+<!ENTITY options.bold.tt "Paparkan item yang belum anda baca (mengikut sejarah browser anda) tebal.">
+<!ENTITY options.openInNewTab.tt "Selalu buka pautan dalam tab baru tanpa mengira dengan butang tetikus mana anda klik.">
+<!ENTITY disableTicker "Nyah aktifkan ticker.">
+<!ENTITY options.tickerPlacement "Kedudukan Ticker">
+<!ENTITY tickerPlacement.belowStatusBar "Dibawah bar status">
+<!ENTITY tickerPlacement.belowBMTB "Diabwah bar alatan tanda baca">
+<!ENTITY options.random "Pelbagaikan item ticker.">
+<!ENTITY options.pause "Jeda ticker apabila tetikus menghala di atasnya.">
+<!ENTITY options.hide "Sembunyika item yang telah anda baca.">
+<!ENTITY options.bold "Tebalkan item yang belum anda baca.">
+<!ENTITY options.openInNewTab "Selalu buka pautan dalam tab baru.">
+<!ENTITY toggleTicker "Tukar ticker buka/tutup.">
+<!ENTITY options.dw.limitWidth "Hadkan lebar item dalam ticker.">
+<!ENTITY options.dw.isMaxWidth "Hanya guna lebar maksimum.">
+<!ENTITY options.disableRefresh "Nyah aktif kemaskini automatik.">
+<!ENTITY options.limitItemsPerFeed "Hadkan bilangan item dalam satu feed">
+<!ENTITY options.itemsPerFeed "Item dalam satu feed">
+<!ENTITY about "Perihal">
+<!ENTITY noFeedsFoundTitle "Tiada Tandabuku Langsung dijumpai.">
+<!ENTITY noFeedsFound "RSS Ticker tidak dapat mengesan satu pun Tandabuku Langsung (newsfeeds, RSS feeds).">
+<!ENTITY howToLiveBookmark1 "RSS Ticker akan melancarkan dan skrol feed yang telah anda tanda sebagai Tandabuku Langsung. Jika anda tidak biasa dengan sistem Tandabuku Langsung Firefox, ada dua cara untuk menambah Tandabuku Langsung dalam Firefox.">
+<!ENTITY howToLiveBookmark2 "Jika halaman yang anda buka menyediakan feed RSS (contohnya: http://www.mozilla.org), ada satu ikon bewarna jingga pada sebelah kanan bar alamat. Jika anda klik ikon tersebut, ia akan membuka dialog &apos;Tambah Tandabuku Langsung&apos;.">
+<!ENTITY howToLiveBookmark3 "Dalam tetingkap Pengurusan Tandabuku, (dalam Bookmarks &gt; Manage Bookmarks), terdapat satu opsyen dibawah menu &apos;Tandabuku Langsung Baru&apos;. Di situa anda boleh meletakkan alamat feed XML dalam medan Lokasi.">
+<!ENTITY howToLiveBookmark4 "Selepas melakukan mana-mana langkah seperti yang telah dinyatakan, mula semula Firefox atau pilih &apos;Segarkan semula feed&apos; dari menu konteks RSS Ticker maka ia akan memaparkan feed dalam ticker.">
+<!ENTITY dontShowAgain "Jangan paparkan masej ini lagi.">
+<!ENTITY feed "Feed">
+<!ENTITY feeds "Feed">
+<!ENTITY feedManagement "Anda boleh menambah atau membuang feed dari ticker dengan memilih mereka dari senarai di bawah dan tekan butang Tambah atau Buang.">
+<!ENTITY add "Tambah">
+<!ENTITY remove "Buang">
+<!ENTITY URL "URL">
+<!ENTITY hideWhenEmpty "Sembunyikan ticker jika kosong">

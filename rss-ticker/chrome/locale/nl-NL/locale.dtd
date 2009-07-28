@@ -1,0 +1,78 @@
+<!ENTITY extension.title "RSS Ticker">
+<!ENTITY cm.open "Openen">
+<!ENTITY cm.open.key "O">
+<!ENTITY cm.openInNewWindow "In nieuw venster openen">
+<!ENTITY cm.openInNewWindow.key "V">
+<!ENTITY cm.openInNewTab "In nieuw tabblad openen">
+<!ENTITY cm.openInNewTab.key "T">
+<!ENTITY cm.openAllInTabs "Alles in tabbladen openen">
+<!ENTITY cm.openUnreadInTabs "Ongelezen in tabbladen openen">
+<!ENTITY cm.openFeedInTabs "Feed in tabbladen openen">
+<!ENTITY cm.openFeedUnreadInTabs "Ongelezen feed in tabbladen openen">
+<!ENTITY cm.copyLinkTitle "Koppelingstitel kopiëren">
+<!ENTITY cm.copyLinkTitle.key "K">
+<!ENTITY cm.copyLinkURL "Koppelingslocatie kopiëren">
+<!ENTITY cm.copyLinkURL.key "P">
+<!ENTITY cm.refreshFeeds "Feeds verversen">
+<!ENTITY cm.refreshFeeds.key "R">
+<!ENTITY cm.manageFeeds "Feeds beheren">
+<!ENTITY cm.manageFeeds.key "B">
+<!ENTITY cm.markAsRead "Markeren als gelezen">
+<!ENTITY cm.markAsRead.key "M">
+<!ENTITY cm.markFeedAsRead "Feed als gelezen markeren">
+<!ENTITY cm.markFeedAsRead.key "F">
+<!ENTITY cm.markAllAsRead "Alles als gelezen markeren">
+<!ENTITY cm.markAllAsRead.key "A">
+<!ENTITY options.speed.tt "De snelheid van de ticker. 1 is het snelst.">
+<!ENTITY options.dw.itemWidth.tt "De breedte van de individuele tickerberichtjes. De normale waarde is 200 (px).">
+<!ENTITY options.smoothness.tt "Het aantal ticks nodig om 1 berichtje te verwijderen van de voorkant van de ticker. Zet hoger om vlotter te scrollen.">
+<!ENTITY options.updateInterval.tt "Het aantal minuten tussen updates van de feeds.">
+<!ENTITY options.updateInterval "Updatefrequentie">
+<!ENTITY options.speed "Ticksnelheid">
+<!ENTITY options.dw.itemWidth "Breedte berichtje">
+<!ENTITY pixelAbbrev "px">
+<!ENTITY options.smooothness "Vlotheid Scrollen Ticker">
+<!ENTITY cmOptionsDescription "Ticker&apos;s contextmenu aanpassen door onderstaande opties te selecteren of te deselecteren.">
+<!ENTITY tt.summary "Samenvatting">
+<!ENTITY options "Opties">
+<!ENTITY options.restartNotice "Opties aangeduid met * zullen niet veranderd worden totdat u uw browservenster heropent.">
+<!ENTITY options.general "Algemeen">
+<!ENTITY options.advanced "Geavanceerd">
+<!ENTITY options.contextMenu "Contextmenu">
+<!ENTITY options.placement.tt "Positie van de ticker in de browser.">
+<!ENTITY options.random.tt "De ticker de feedberichten in een willekeurige volgorde laten tonen voor variatie.">
+<!ENTITY options.pause.tt "De ticker pauzeren als de muis erover gaat.">
+<!ENTITY options.disable.tt "De RSS ticker uitschakelen. Dit heeft hetzelfde effect als verwijderen, maar zonder te verwijderen.">
+<!ENTITY options.hide.tt "Feedberichten die u reeds gelezen hebt verbergen (volgens browsergeschiedenis).">
+<!ENTITY options.bold.tt "Ongelezen berichten vet weergeven (volgens browser geschiedenis).">
+<!ENTITY options.openInNewTab.tt "Koppelingen altijd in nieuwe tabbladen openen, onafhankelijk van met welke muisknop erop geklikt werd.">
+<!ENTITY disableTicker "Ticker uitschakelen">
+<!ENTITY options.tickerPlacement "Positie ticker">
+<!ENTITY tickerPlacement.belowStatusBar "Onder de statusbalk">
+<!ENTITY tickerPlacement.belowBMTB "Onder de bladwijzerwerkbalk">
+<!ENTITY options.random "Ticker items in willekeurige volgorde">
+<!ENTITY options.pause "De ticker pauzeren wanner de muis erover gaat.">
+<!ENTITY options.hide "Ongelezen berichten verbergen.">
+<!ENTITY options.bold "Vette ongelezen berichten.">
+<!ENTITY options.openInNewTab "Koppelingen altijd in nieuwe tabbladen openen.">
+<!ENTITY toggleTicker "Ticker in-/uitschakelen">
+<!ENTITY options.dw.limitWidth "De breedte van de berichten in de ticker beperken">
+<!ENTITY options.dw.isMaxWidth "Enkel als maximumbreedte gebruiken">
+<!ENTITY options.disableRefresh "Automatisch verversen uitschakelen">
+<!ENTITY options.limitItemsPerFeed "Aantal berichten per feed beperken">
+<!ENTITY options.itemsPerFeed "Berichten per feed">
+<!ENTITY about "Over">
+<!ENTITY noFeedsFoundTitle "Geen livebladwijzers gevonden">
+<!ENTITY noFeedsFound "RSS Ticker kan geen livebladwijzers (ofwel newsfeeds, RSS feeds) vinden.">
+<!ENTITY howToLiveBookmark1 "RSS Ticker laadt en scrollt de nieuwsfeeds die u al Livebladwijzers aanduidde. Als u niet weet hoe Livebladwijzer in Firefox werken: er zijn twee manieren om een Livebladwijzer in Firefox toe te voegen:">
+<!ENTITY howToLiveBookmark2 "Als de pagina waar u naar kijkt in uw browser een RSS feed ( http://www.mozilla.org/, bijvoorbeeld) bevat zal er een klein oranje pictogrammetje verschijnen in de rechterkant van de adresbalk. Als u op dat pictogrammetje klikt zal het ‘Livebladwijzer toevoegen’ dialoogvenster openen.">
+<!ENTITY howToLiveBookmark3 "In de bladwijzerbeheerder, (te vinden onder Bladwijzers &gt; Bladwijzers beheren) is er een optie in het menu Bestand ‘Nieuwe livebladwijzer’. Hier kan de locatie van de XML feed in het Feedlocatieveld geplaatst worden.">
+<!ENTITY howToLiveBookmark4 "Na een van beide stappen gedaan te hebben, kunt u Firefox herstarten of ‘Feeds Verversen’ kiezen uit het contextmenu van de Ticker om de feed in de ticker te tonen.">
+<!ENTITY dontShowAgain "Dit bericht niet opnieuw weergeven.">
+<!ENTITY feed "Feed">
+<!ENTITY feeds "Feeds">
+<!ENTITY feedManagement "U kunt feeds toevoegen of verwijderen door ze in onderstaande lijst te selecteren en door op de knoppen Toevoegen of Verwijderen te klikken.">
+<!ENTITY add "Toevoegen">
+<!ENTITY remove "Verwijderen">
+<!ENTITY URL "URL">
+<!ENTITY hideWhenEmpty "Ticker verbergen indien leeg">

@@ -1,0 +1,71 @@
+<!ENTITY extension.title "RSS Ticker">
+<!ENTITY cm.open "Abrir">
+<!ENTITY cm.open.key "A">
+<!ENTITY cm.openInNewWindow "Abrir en Nueva Ventana">
+<!ENTITY cm.openInNewWindow.key "N">
+<!ENTITY cm.openInNewTab "Abrir en Nueva Pesta&#241;a">
+<!ENTITY cm.openInNewTab.key "P">
+<!ENTITY cm.openAllInTabs "Abrir Todas en Pesta&#241;as">
+<!ENTITY cm.openUnreadInTabs "Abrir las no Le&#237;das en Pesta&#241;as">
+<!ENTITY cm.openFeedInTabs "Abrir Fuente en Pesta&#241;as">
+<!ENTITY cm.openFeedUnreadInTabs "Abrir Fuente no Le&#237;da en Pesta&#241;as">
+<!ENTITY cm.copyLinkTitle "Copiar T&#237;tulo del Enlace">
+<!ENTITY cm.copyLinkTitle.key "T">
+<!ENTITY cm.copyLinkURL "Copiar Direcci&#243;n del Enlace">
+<!ENTITY cm.copyLinkURL.key "C">
+<!ENTITY cm.refreshFeeds "Actualizar Fuentes">
+<!ENTITY cm.refreshFeeds.key "R">
+<!ENTITY cm.manageFeeds "Manage Feeds">
+<!ENTITY cm.manageFeeds.key "G">
+<!ENTITY cm.markAsRead "Marcar como Leido">
+<!ENTITY cm.markAsRead.key "M">
+<!ENTITY cm.markFeedAsRead "Marcar Fuente como Leido">
+<!ENTITY cm.markFeedAsRead.key "F">
+<!ENTITY cm.markAllAsRead "Marcar Todo como Leido">
+<!ENTITY cm.markAllAsRead.key "L">
+<!ENTITY options.speed.tt "La velocidad del ticker. 1 es la m&#225;s r&#225;pida.">
+<!ENTITY options.dw.itemWidth.tt "El ancho de cada noticia en el ticker. El valor por defecto es 200 (px).">
+<!ENTITY options.smoothness.tt "El n&#250;mero movimientos del ticker que tarda en pasar una noticia por el scroll. A mayor n&#250;mero m&#225;s suavidad de scroll.">
+<!ENTITY options.updateInterval.tt "Frecuencia de actualizaci&#243;n en minutos">
+<!ENTITY options.updateInterval "Frecuencia de Actualizaci&#243;n">
+<!ENTITY options.speed "Velocidad del ticker">
+<!ENTITY options.dw.itemWidth "Ancho de noticias">
+<!ENTITY pixelAbbrev "px">
+<!ENTITY options.smooothness "Suavidad de movimiento del ticker">
+<!ENTITY cmOptionsDescription "Parametriza el men&#250; contextual del lector marcando o no las opciones de abajo.">
+<!ENTITY tt.summary "Sumario">
+<!ENTITY options "Opciones">
+<!ENTITY options.restartNotice "Las opciones marcadas con * no cambiar&#225;n hasta que no vuelvas a abrir el navegador.">
+<!ENTITY options.general "General">
+<!ENTITY options.advanced "Avanzado">
+<!ENTITY options.contextMenu "Men&#250; Contextual">
+<!ENTITY options.placement.tt "Lugar del ticker en el navegador">
+<!ENTITY options.random.tt "Mostrar en el ticker las noticias en orden aleatorio para mayor variedad.">
+<!ENTITY options.pause.tt "Parar el ticker cuando el rat&#243;n est&#225; sobre &#233;l.">
+<!ENTITY options.disable.tt "Deshabilitar el ticker. Tiene el mismo efecto que desinstalarlo pero sin desinstalarlo.">
+<!ENTITY options.hide.tt "Ocultar noticias que ya has leido (de acuerdo con el historial del navegador).">
+<!ENTITY options.bold.tt "Mostrar noticias que no has leido en negrita (de acuerdo con el historial del navegador).">
+<!ENTITY options.openInNewTab.tt "Abrir siempre enlaces en nuevas pesta&#241;as, sin importar con que bot&#243;n del rat&#243;n pinchemos.">
+<!ENTITY disableTicker "Deshabilitar ticker">
+<!ENTITY options.tickerPlacement "Lugar del Ticker">
+<!ENTITY tickerPlacement.belowStatusBar "Bajo la barra de estado">
+<!ENTITY tickerPlacement.belowBMTB "Bajo la barra de marcadores">
+<!ENTITY options.random "Noticias aleatorias">
+<!ENTITY options.pause "Parar el lector cuando el rat&#243;n pasa sobre &#233;l">
+<!ENTITY options.hide "Ocultar noticias que ya han sido le&#237;das">
+<!ENTITY options.bold "Noticias en negrita si no han sido le&#237;das">
+<!ENTITY options.openInNewTab "Siempre abrir enlaces en nuevas pesta&#241;as">
+<!ENTITY toggleTicker "Cambiar ticker a encendido/apagado">
+<!ENTITY options.dw.limitWidth "Fije un l&#237;mite para la anchura de los art&#237;culos en el ticker">
+<!ENTITY options.dw.isMaxWidth "Utilice solamente el l&#237;mite cuando el art&#237;culo es m&#225;s largo que &#233;l">
+<!ENTITY options.disableRefresh "Deshabilitar refresco autom&#225;tico">
+<!ENTITY options.limitItemsPerFeed "Limita el n&#250;mero de noticias por fuente">
+<!ENTITY options.itemsPerFeed "Noticias por fuente">
+<!ENTITY about "Acerca de">
+<!ENTITY noFeedsFoundTitle "No se encuentran marcadores din&#225;micos">
+<!ENTITY noFeedsFound "RSS Ticker no encuentra ning&#250;n marcador din&#225;mico (es decir fuente de noticias, o fuentes RSS).">
+<!ENTITY howToLiveBookmark1 "Rss Ticker carga y muestra las fuentes de noticias que tienes en los marcadores (favoritos) como Marcadores Din&#225;micos. Si no est&#225;s acostumbrado al m&#233;todo de Firefox de Marcadores Din&#225;micos, hay dos formas de a&#241;adirlos:">
+<!ENTITY howToLiveBookmark2 "Si la p&#225;gina en la que est&#225;s tiene una fuente de noticias RSS ( http://www.mozilla.org/, por ejemplo), habr&#225; un peque&#241;o icono naranja a la derecha de la barra de direcciones o un icono gris que pone &apos;RSS&apos;. Si pinchas en ese icono se abrir&#225; el di&#225;logo de &apos;A&#241;adir un marcador din&#225;mico&apos;.">
+<!ENTITY howToLiveBookmark3 "En el Administrador de Marcadores, (opci&#243;n Marcadores &gt; Administrar Marcadores), hay una opci&#243;n bajo el men&#250; &apos;Archivo&apos; para &apos;Nuevo Marcador Din&#225;mico&apos;. Aqu&#237; puedes poner el enlace XML en el campo Direcci&#243;n del canal.">
+<!ENTITY howToLiveBookmark4 "Despu&#233;s de realizar alguno de estos pasos, reinicia Firefox o elige &apos;Actualizar fuentes&apos; del men&#250; contextual y se mostrar&#225; la fuente de noticias en el ticker.">
+<!ENTITY dontShowAgain "No mostrar este mensaje de nuevo.">
