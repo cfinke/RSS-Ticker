@@ -226,10 +226,22 @@ var RSSTICKER = {
 			this.attachTicker();
 			
 			// For some reason, the boookmark API functions aren't available right away.
-			setTimeout(this.objectName + ".init();", 300);
+			setTimeout(function () { RSSTICKER.init(); }, 300);
 		}
+		
+		setTimeout(function () { RSSTICKER.showFirstRun(); }, 1500);
 	},
 	
+	showFirstRun : function () {
+	    var version = Components.classes["@mozilla.org/extensions/manager;1"].getService(Components.interfaces.nsIExtensionManager).getItemForID("{1f91cde0-c040-11da-a94d-0800200c9a66}").version;
+
+		if (RSSTICKER.prefs.getCharPref("lastVersion") != version) {
+			RSSTICKER.prefs.setCharPref("lastVersion",version);
+			var theTab = gBrowser.addTab("http://www.chrisfinke.com/firstrun/rss-ticker.php");
+			gBrowser.selectedTab = theTab;
+		}
+	},
+		
 	observe: function(subject, topic, data) {
 		if (topic != "nsPref:changed") {
 			return;
@@ -1358,14 +1370,11 @@ var RSSTICKER = {
 			var text = document.createTextNode(descr);
 			
 			document.getElementById(this.objectName + "TooltipSummary").appendChild(text);
-			document.getElementById(this.objectName + "TooltipSummary").style.maxWidth = "300px";
 			document.getElementById(this.objectName + "TooltipSummaryGroupbox").setAttribute("hidden",false);
 		}
 		else {
 			document.getElementById(this.objectName + "TooltipSummaryGroupbox").setAttribute("hidden",true);
 		}
-		RSSTICKER.logMessage(tt.boxObject.width);
-		tt.sizeTo(tt.boxObject.width, tt.boxObject.height);
   
 		return true;
 	},
