@@ -9,13 +9,6 @@ var RSSTICKER = {
 	
 	profilePath : null,
 	
-	// Array of livemark objects
-	livemarks : [],
-	
-	// Array of hashtables for favicon statuses
-	// so we don't have to check for the favicon every time the feeds are updated.
-	favicons : [],
-	
 	// Array that holds items that need to be added randomly.
 	randomStack : [],
 	
@@ -134,6 +127,8 @@ var RSSTICKER = {
 	unloadNow : false,
 	
 	onload : function (event) {
+		addEventListener("unload", function () { RSSTICKER.exit(); }, false);
+		
 		this.loadPrefs();
 		
 		var db = this.getDB();
@@ -158,10 +153,6 @@ var RSSTICKER = {
 				document.getElementById("RSSTICKER-button").setAttribute("greyed","false");
 			}
 			
-			while (this.livemarks.length > 0){
-				this.livemarks.pop();
-			}
-						
 			this.strings = document.getElementById("RSSTICKER-bundle");
 			
 			this.ticksSinceLastUpdate = 0;
@@ -208,7 +199,6 @@ var RSSTICKER = {
 				
 				this.loadingNotice = this.ce('image');
 				this.loadingNotice.setAttribute("src","chrome://rss-ticker/skin/throbber.gif");
-				this.loadingNotice.setAttribute("onclick","this.parent.browser.openInNewTab('http://www.chrisfinke.com/addons/rss-ticker/');");
 				this.loadingNotice.id = this.objectName + "-throbber";
 				this.loadingNotice.setAttribute("busy","false");
 				this.loadingNotice.style.marginRight = '4px';
@@ -217,11 +207,11 @@ var RSSTICKER = {
 				try {
 					document.getElementById("nav-bar").appendChild(this.loadingNoticeParent);
 				} catch (e) {
-					this.logMessage(e);
+					if (this.DEBUG) this.logMessage(e);
 				}
 			}
 			
-			this.addLoadingNotice(this.strings.getString("findingFeeds"));
+			//this.addLoadingNotice(this.strings.getString("findingFeeds"));
 			
 			this.attachTicker();
 			
@@ -289,6 +279,7 @@ var RSSTICKER = {
 			break;
 			case "updateFrequency":
 				this.updateFrequency = this.prefs.getIntPref("updateFrequency");
+				RSSTICKER.setReloadInterval(RSSTICKER.prefs.getIntPref("updateFrequency"));
 			break;
 			case "ticksPerItem":
 				this.ticksPerItem = this.prefs.getIntPref("ticksPerItem");
@@ -336,7 +327,11 @@ var RSSTICKER = {
 		this.unloadNow = true;
 	},
 	
+	loadingNoticeTimeout : null,
+	
 	addLoadingNotice : function (message) {
+		clearTimeout(RSSTICKER.loadingNoticeTimeout);
+		
 		if (!message || this.disabled) {
 			this.loadingNotice.setAttribute("busy", "false");
 		}
@@ -353,6 +348,8 @@ var RSSTICKER = {
 			
 			this.loadingNotice.setAttribute("busy", "true");
 		}
+		
+		RSSTICKER.loadingNoticeTimeout = setTimeout(function () { RSSTICKER.addLoadingNotice(); }, 5000);
 	},
 	
 	loadPrefs : function () {
@@ -458,151 +455,239 @@ var RSSTICKER = {
 		
 		if (this.DEBUG) this.logMessage("Updating feeds " + new Date().toString());
 		
-		this.getLivemarks();
-		this.loadLivemarks();
+		this.startFetchingFeeds();
 	},
 	
-	getLivemarks : function (){
+	exit : function () {
+		this.prefs.setIntPref("lastUpdate", 0);
+	},
+	
+	feedsToFetch : [],
+	feedIndex : 0,
+	feedUpdateTimeout : null,
+	secondsBetweenFeeds : 0,
+	
+	startFetchingFeeds : function () {
+		if (this.unloadNow) {
+			this.unloadNow = false;
+			this.doUnload();
+			return;
+		}
+		
+		if (this.disabled) {
+			return;
+		}
+		
+		var ignore = this.readIgnoreFile();
+
+		this.internalPause = true;
+
+		for (var i = this.toolbar.childNodes.length - 1; i >= 0; i--){
+			if (this.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
+				if (this.inArray(ignore, this.toolbar.childNodes[i].feedURL)){
+					this.toolbar.removeChild(this.toolbar.childNodes[i]);
+				}
+			}
+		}
+
+		this.checkForEmptiness();
+
+		this.internalPause = false;
+
+	    RSSTICKER.feedsToFetch = [];
+	    RSSTICKER.feedIndex = 0;
+	    
+		var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService);
+		var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
+		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
+		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
+
+		for (var i = 0; i < livemarkIds.length; i++){
+			var feedURL = livemarkService.getFeedURI(livemarkIds[i]).spec;
+			var feedName = bookmarkService.getItemTitle(livemarkIds[i]);
+			
+			if (!this.inArray(ignore, feedURL)){
+				RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL });
+			}
+		}
+		
+		if (RSSTICKER.feedsToFetch.length == 0) {
+		    RSSTICKER.notifyNoFeeds();
+		}
+		
+		setTimeout(function () {
+		    RSSTICKER.setReloadInterval(RSSTICKER.prefs.getIntPref("updateFrequency"));
+		}, 5000);
+    },
+	
+	notifyNoFeeds : function () {
+		var showWindow = true;
+		
+		try {
+			showWindow = !this.prefs.getBoolPref("noFeedsFoundFlag.1.7");
+		} catch (e) {
+		}
+		
+		if (showWindow){
+			window.openDialog("chrome://rss-ticker/content/noFeedsFound.xul","noFeedsFound","chrome");
+		}
+	},
+	
+	setReloadInterval : function (minutes) {
+    	clearTimeout(RSSTICKER.feedUpdateTimeout);
+    	
+    	var numFeeds = RSSTICKER.feedsToFetch.length;
+		var interval = minutes;
+		
+		if (numFeeds == 0) {
+		    numFeeds = interval;
+		}
+		
+		RSSTICKER.secondsBetweenFeeds = Math.ceil((interval * 60) / numFeeds);
+        
+        // Check if it's been more than $minutes minutes since the last full update.
+	    var lastUpdate = this.prefs.getIntPref("lastUpdate") * 1000; 
+	    var now = new Date().getTime();
+	    
+	    var minutesSince = (now - lastUpdate) / 1000 / 60;
+	    
+	    if ((minutes != 0) && (minutesSince > minutes)) {
+	        RSSTICKER.updateAllFeeds();
+        }
+        else {
+    	    RSSTICKER.updateAFeed();
+        }
+    },
+	
+	updateAFeed : function (indexOverride) {
 		if (this.unloadNow){
 			this.unloadNow = false;
 			this.doUnload();
+			return;
 		}
-		else if (!this.disabled){
-			this.feedsFound = 0;
-			
-			var ignore = this.readIgnoreFile();
-			
-			this.internalPause = true;
-			
-			for (var i = this.toolbar.childNodes.length - 1; i >= 0; i--){
-				if (this.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
-					if (this.inArray(ignore, this.toolbar.childNodes[i].feedURL)){
-						this.toolbar.removeChild(this.toolbar.childNodes[i]);
-					}
-				}
-			}
-			
-			this.checkForEmptiness();
-			
-			this.internalPause = false;
-			
-			var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"];
 		
-			if (livemarkService) {
-				// Firefox 3+
-				livemarkService = livemarkService.getService(Components.interfaces.nsILivemarkService);
-				var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
-				var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
-				var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
-			
-				for (var i = 0; i < livemarkIds.length; i++){
-					var feedURL = livemarkService.getFeedURI(livemarkIds[i]).spec;
-					
-					if (!this.inArray(ignore, feedURL)){
-						this.feedsFound++;
-					
-						if (this.feedsFound == 1){
-							this.addLoadingNotice(this.strings.getString("found1Feed"));
-						}
-						else {
-							this.addLoadingNotice(this.strings.getString("foundXFeeds").replace("#",this.feedsFound));
-						}
-					
-						this.livemarks.push(feedURL);
-					}
-				}
-			}
-			else {
-				// Firefox 2-
-			
-				if (!RDF){
-					initServices();
-				}
-				if (!BMSVC){
-					initBMService();
-				}
+		if (this.disabled) {
+			return;
+		}
+		
+        function setTimeoutForNext() {
+            if (RSSTICKER.rapidUpdate) {
+                var interval = 0.5;
+            }
+            else {
+                if (RSSTICKER.secondsBetweenFeeds == 0) {
+                    var interval = 60;
+                }
+                else {
+                    var interval = RSSTICKER.secondsBetweenFeeds;
+                }
+            }
+            
+		    RSSTICKER.feedUpdateTimeout = setTimeout(function () { RSSTICKER.updateAFeed(); }, interval * 1000);
+	    }
+		
+        clearTimeout(RSSTICKER.feedUpdateTimeout);
 
-				var root = RDF.GetResource("NC:BookmarksRoot");
-				var urlArc = RDF.GetResource("http://home.netscape.com/NC-rdf#FeedURL");
+        if (RSSTICKER.feedsToFetch.length == 0 || (!RSSTICKER.rapidUpdate && RSSTICKER.secondsBetweenFeeds == 0)){
+		    setTimeoutForNext();
+		    return;
+		}
+		
+		if (RSSTICKER.rapidUpdate) {
+		    RSSTICKER.rapidUpdate--;
+		    
+		    if (!RSSTICKER.rapidUpdate) {
+                RSSTICKER.stopUpdate();
+	        }
+		}
+		
+        if (RSSTICKER.feedIndex >= RSSTICKER.feedsToFetch.length) {
+            RSSTICKER.feedIndex = 0;
+        }
+                
+        var feedIndex = RSSTICKER.feedIndex;
+        
+        if (indexOverride) {
+            feedIndex = indexOverride;
+        }
+        else {
+            ++RSSTICKER.feedIndex;
+        }
+        
+        if (feedIndex == 0) {
+            this.prefs.setIntPref("lastUpdate", Math.round(new Date().getTime() / 1000));
+        }
+        
+        var feed = RSSTICKER.feedsToFetch[feedIndex];
+        
+	    var url = feed.feed;
+		
+		/* START FEED FETCH HERE */
+		
+		if (this.DEBUG) this.logMessage("Loading " + url);
+		
+		var req = new XMLHttpRequest();
+		req.parent = this;
+		req.parent.addLoadingNotice("Updating " + feed.name + " (" + parseInt(RSSTICKER.feedIndex + 1, 10) + ")...");
+		
+		RSSTICKER.currentRequest = req;
+		
+		try {
+			req.open("GET", url, true);
 			
-				var folders = [ root ];
-			
-				while (folders.length > 0){
-					RDFC.Init(BMDS, folders.shift());
-		
-					var elements = RDFC.GetElements();
-		
-					while(elements.hasMoreElements()) {
-						var element = elements.getNext();
-						element.QueryInterface(Components.interfaces.nsIRDFResource);
-		
-						var type = BookmarksUtils.resolveType(element);
-		
-						if ((type == "Folder") || (type == "PersonalToolbarFolder")){
-							folders.push(element);
-						}
-						else if (type == 'Livemark') { 
-							var res = RDF.GetResource(element.Value);
-							var target = BMDS.GetTarget(res, urlArc, true);
-						
-							if (target) {
-								var feedURL = target.QueryInterface(kRDFLITIID).Value;
-	
-								if (!this.inArray(ignore, feedURL)){
-									this.feedsFound++;
-								
-									if (this.feedsFound == 1){
-										this.addLoadingNotice(this.strings.getString("found1Feed"));
-									}
-									else {
-										this.addLoadingNotice(this.strings.getString("foundXFeeds").replace("#",this.feedsFound));
-									}
-								
-									this.livemarks.push(feedURL);
-								}
+			req.onreadystatechange = function (event) {
+				if (req.readyState == 4) {
+					clearTimeout(RSSTICKER.loadTimer);
+					
+					RSSTICKER.currentRequest = null;
+					setTimeoutForNext();
+					
+					try {
+						if (req.status == 200){
+							var feedOb = null;
+							
+							try {
+								RSSTICKER.queueForParsing(req.responseText.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
+							} catch (e) {
+								// Parse error
 							}
 						}
+						else {
+						}
+					}
+					catch (e) {
 					}
 				}
-			}
+			};
+			
+			req.send(null);
+			RSSTICKER.loadTimer = setTimeout(function () { RSSTICKER.killCurrentRequest(); }, 1000 * 15);
 		}
+		catch (e) {
+			setTimeoutForNext();
+		}
+		
+		this.tick();
+		//this.addLoadingNotice();
+		this.checkForEmptiness();
+		this.tick();
+		
+    },
+    	
+	rapidUpdate : 0,
+	
+	updateAllFeeds : function () {
+	    RSSTICKER.rapidUpdate = RSSTICKER.feedsToFetch.length;
+	    RSSTICKER.updateAFeed();
 	},
 	
-	loadLivemarks : function () {
-		if (this.unloadNow){
-			this.unloadNow = false;
-			this.doUnload();
-		}
-		else if (!this.disabled){
-			this.feedsLoaded = 0;
-			
-			if (this.livemarks.length == 0){
-				var showWindow = true;
-				
-				try {
-					showWindow = !this.prefs.getBoolPref("noFeedsFoundFlag.1.7");
-				} catch (e) {
-				}
-				
-				if (showWindow){
-					window.openDialog("chrome://rss-ticker/content/noFeedsFound.xul","noFeedsFound","chrome");
-				}
-		
-				this.addLoadingNotice();
-				this.checkForEmptiness();
-				this.tick();
-			}
-			else {
-				if (this.feedsFound == 1){
-					this.addLoadingNotice(this.strings.getString("loading1Feed"));
-				}
-				else {
-					this.addLoadingNotice(this.strings.getString("loadingXFeeds").replace("#", this.feedsFound));
-				}
-				
-				this.loadNextLivemark();
-			}
-		}
+	stopUpdate : function () {
+		RSSTICKER.rapidUpdate = 0;
+		RSSTICKER.killCurrentRequest();
+	},
+	
+	killCurrentRequest : function () {
+		try { RSSTICKER.currentRequest.abort(); } catch (noCurrentRequest) { }
 	},
 	
 	queueForParsing : function (feedText, feedURL) {
@@ -624,148 +709,22 @@ var RSSTICKER = {
 				throw (e);
 			}
 		}
-		else {
-			// throw({ message : FEED_GETTER.strings.getString("feedbar.noContent") });
-		}
 
 		return this;
-	},
-	
-	loadNextLivemark : function () {
-		if (this.unloadNow){
-			this.unloadNow = false;
-			this.doUnload();
-		}
-		else if (!this.disabled){
-			var url = this.livemarks.shift();
-			
-			if (url){
-				if (this.DEBUG) this.logMessage("Loading " + url);
-				var req = new XMLHttpRequest();
-				req.parent = this;
-				
-				try {
-					req.open("GET",url,true);
-					req.overrideMimeType("application/xml");
-					
-					req.onreadystatechange = function (event) {
-						if (req.readyState == 4) {
-							try {
-								if (req.status == 200){
-									req.parent.feedsLoaded++;
-									
-									if (req.parent.feedsLoaded == 1){
-										req.parent.addLoadingNotice(req.parent.strings.getString("loaded1Feed").replace("#", req.parent.feedsFound));
-									}
-									else {
-										req.parent.addLoadingNotice(req.parent.strings.getString("loadedXFeeds").replace("#1", req.parent.feedsLoaded).replace("#2",req.parent.feedsFound));
-									}
-									
-									try {
-										RSSTICKER.queueForParsing(req.responseText.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
-									} catch (e) {
-										if (req.parent.DEBUG) req.parent.logMessage("Invalid feed: " + url);
-									}
-									
-									// req.parent.getFavicon(feed);
-								}
-								else {
-									if (req.parent.DEBUG) req.parent.logMessage("Status not 200.");
-									req.parent.loadNextLivemark();
-								}
-							}
-							catch (e) {
-								if (req.parent.DEBUG) req.parent.logMessage("Error in determining feed status:" + e);
-								req.parent.loadNextLivemark();
-							}
-						}
-					};
-					
-					req.send(null);
-				}
-				catch (e) {
-					if (this.DEBUG) this.logMessage("Error in requesting feed.");
-					this.loadNextLivemark();
-				}
-			}
-			else {
-				if (this.DEBUG) this.logMessage("Done loading and writing.");
-				
-				this.addLoadingNotice();
-				this.checkForEmptiness();
-				this.tick();
-			}
-		}
 	},
 	
 	getFavicon : function (feed){
 		if (this.unloadNow){
 			this.unloadNow = false;
 			this.doUnload();
+			return;
 		}
-		else if (!this.disabled){
-			if (!feed) {
-				this.loadNextLivemark();
-			}
-			else {
-				if (this.DEBUG) this.logMessage("Root link: " + feed.rootUri);
-				
-				// Default
-				feed.image = "chrome://browser/skin/page-livemarks.png";
-				
-				for (var i = 0; i < this.favicons.length; i++){
-					if (this.favicons[i].site == feed.rootUri){
-						if (this.favicons[i].hasIcon){
-							feed.image = feed.rootUri + "favicon.ico";
-						}
-						
-						this.writeFeed(feed);
-						this.loadNextLivemark();
-						
-						return;
-					}
-				}
-				
-				if (this.DEBUG) this.logMessage(feed.rootUri + "favicon.ico" + " status");
-				
-				var req = new XMLHttpRequest();
-				req.parent = this;
-				
-				try {
-					req.open("GET", feed.rootUri + "favicon.ico", true);
-					req.onreadystatechange = function (event) {
-						if (req.readyState == 4){
-							try {
-								if (req.parent.DEBUG) req.parent.logMessage(req.status);
-								
-								if (req.status == 200){
-									feed.image = feed.rootUri + "favicon.ico";
-									req.parent.favicons.push({"site" : feed.rootUri, "hasIcon" : true});
-								}
-								else {
-									req.parent.favicons.push({"site" : feed.rootUri, "hasIcon" : false});
-								}
-							} catch (e) {
-								if (req.parent.DEBUG) req.parent.logMessage("status error");
-								req.parent.favicons.push({"site" : feed.rootUri, "hasIcon" : false});
-							}
-							
-							req.parent.writeFeed(feed);
-							req.parent.loadNextLivemark();
-						}
-					};
-					
-					req.send(null);
-				} catch (e) {
-					if (this.DEBUG) this.logMessage("request error");
-					
-					this.favicons.push({"site" : feed.rootUri, "hasIcon" : false});
-					
-					this.writeFeed(feed);
-					this.loadNextLivemark();
-				}
-			}
+		
+		if (this.disabled) {
+			return;
 		}
+		
+		this.writeFeed(feed);
 	},
 	
 	writeFeed : function (feed) {
@@ -774,264 +733,266 @@ var RSSTICKER = {
 		if (this.unloadNow){
 			this.unloadNow = false;
 			this.doUnload();
+			return;
 		}
-		else if (!this.disabled){
-			var feedItems = feed.items;
+		
+		if (this.disabled) {
+			return;
+		}
+		
+		var feedItems = feed.items;
+		
+		this.internalPause = true;
+		
+		// Remove items that are no longer in the feed.
+		for (var i = this.toolbar.childNodes.length - 1; i >= 0; i--){
+			var item = this.toolbar.childNodes[i];
 			
-			this.internalPause = true;
-			
-			// Remove items that are no longer in the feed.
-			for (var i = this.toolbar.childNodes.length - 1; i >= 0; i--){
-				var item = this.toolbar.childNodes[i];
+			if ((item.nodeName == 'toolbarbutton') && (item.feed == feed.label)){
+				var itemFound = false;
 				
-				if ((item.nodeName == 'toolbarbutton') && (item.feed == feed.label)){
-					var itemFound = false;
-					
-					for (var j = 0; j < feedItems.length; j++){
-						if (feedItems[j].uri == item.uri){
-							itemFound = true;
-							break;
-						}
-					}
-					
-					if (!itemFound){
-						this.toolbar.removeChild(item);
+				for (var j = 0; j < feedItems.length; j++){
+					if (feedItems[j].uri == item.uri){
+						itemFound = true;
+						break;
 					}
 				}
-			}
-			
-			var itemsShowing = this.itemsInTicker(feed.label);
-			
-			for (j = 0; j < feedItems.length; j++){
-				if (!document.getElementById(this.objectName + feedItems[j].uri)){
-					if (this.limitItemsPerFeed && (this.itemsPerFeed <= itemsShowing.length)){
-						// Determine if this item is newer than the oldest item showing.
-						if ((this.itemsPerFeed > 0) && feedItems[j].published && itemsShowing[0].published && (feedItems[j].published.getTime() > itemsShowing[0].published.getTime())){
-							this.toolbar.removeChild(document.getElementById(this.objectName + itemsShowing[0].href));
-							itemsShowing.shift();
-						}
-						else {					
-							continue;
-						}
-					}
 				
-					var item = {};
-					
-					item.visited = this.history.isVisitedURL(feedItems[j].uri, feedItems[j].id, 1);
-					
-					if (item.visited && this.hideVisited){
+				if (!itemFound){
+					this.toolbar.removeChild(item);
+				}
+			}
+		}
+		
+		var itemsShowing = this.itemsInTicker(feed.label);
+		
+		for (j = 0; j < feedItems.length; j++){
+			if (!document.getElementById(this.objectName + feedItems[j].uri)){
+				if (this.limitItemsPerFeed && (this.itemsPerFeed <= itemsShowing.length)){
+					// Determine if this item is newer than the oldest item showing.
+					if ((this.itemsPerFeed > 0) && feedItems[j].published && itemsShowing[0].published && (feedItems[j].published.getTime() > itemsShowing[0].published.getTime())){
+						this.toolbar.removeChild(document.getElementById(this.objectName + itemsShowing[0].href));
+						itemsShowing.shift();
+					}
+					else {					
 						continue;
 					}
-					
-					doTick = true;
-					
-					feedItems[j].description = feedItems[j].description.replace(/<[^>]+>/g, "");
-					
-					if ((feedItems[j].label == '') && (feedItems[j].description != '')){
-						if (feedItems[j].description.length > 40){
-							feedItems[j].label = feedItems[j].description.substr(0,40) + "...";
-						}
-						else {
-							feedItems[j].label = feedItems[j].description;
-						}
-					}
-					
-					item.label = feedItems[j].label;
-					item.uri = feedItems[j].uri;
-					item.feed = feed.label;
-					item.feedURL = feed.uri;
-					item.image = feed.image;
-					item.description = feedItems[j].description;
-					item.published = feedItems[j].published;
-					item.guid = feedItems[j].id;
-					
-					var tbb = this.ce('toolbarbutton');
-					tbb.uri = item.uri;
-					tbb.id = this.objectName + item.uri;
-					
-					tbb.setAttribute("label",item.label);
-					tbb.setAttribute("tooltip",this.objectName + "Tooltip");
-					tbb.setAttribute("image",item.image);
-					tbb.setAttribute("contextmenu",this.objectName + "ItemCM");
-					
-					tbb.setAttribute("onclick","return RSSTICKER.onTickerItemClick(event, this.uri, this);");
-					
-					if (this.displayWidth.limitWidth){
-						if (this.displayWidth.isMaxWidth){
-							tbb.style.maxWidth = this.displayWidth.itemWidth + "px";
-						}
-						else {
-							tbb.style.width = this.displayWidth.itemWidth + "px";
-						}
-					}
-					
-					tbb.description = item.description;
-					tbb.visited = item.visited;
-					
-					tbb.feed = item.feed;
-					tbb.feedURL = item.feedURL;
-					tbb.href = item.uri;
-					tbb.parent = this;
-					tbb.published = item.published;
-					tbb.guid = item.guid;
-					
-					if (this.hideVisited){
-						tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
-							this.parentNode.removeChild(this);
-							this.visited = true;
-							
-							if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
-												
-							if (addToHist){
-								this.parent.history.addToHistory(this.guid);
-							}
-							
-							this.parent.checkForEmptiness();
-						};
-					}
-					else if (this.boldUnvisited){
-						if (!item.visited){
-							tbb.style.fontWeight = 'bold';
-						}
-					
-						tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
-							this.style.fontWeight = '';
-							this.visited = true;
-							
-							if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
-							
-							if (addToHist){
-								this.parent.history.addToHistory(this.guid);
-							}
-						};
+				}
+			
+				var item = {};
+				
+				item.visited = this.history.isVisitedURL(feedItems[j].uri, feedItems[j].id, 1);
+				
+				if (item.visited && this.hideVisited){
+					continue;
+				}
+				
+				doTick = true;
+				
+				feedItems[j].description = feedItems[j].description.replace(/<[^>]+>/g, "");
+				
+				if ((feedItems[j].label == '') && (feedItems[j].description != '')){
+					if (feedItems[j].description.length > 40){
+						feedItems[j].label = feedItems[j].description.substr(0,40) + "...";
 					}
 					else {
-						tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
-							this.visited = true;
-							if (addToHist){
-								this.parent.history.addToHistory(this.guid);
-							}
-						};
+						feedItems[j].label = feedItems[j].description;
 					}
-					
-					if (this.boldUnvisited){
-						// Don't move this.
-						if (!item.visited){
-							tbb.style.fontWeight = 'bold';
-						}
+				}
+				
+				item.label = feedItems[j].label;
+				item.uri = feedItems[j].uri;
+				item.feed = feed.label;
+				item.feedURL = feed.uri;
+				item.image = feedItems[j].image;
+				item.description = feedItems[j].description;
+				item.published = feedItems[j].published;
+				item.guid = feedItems[j].id;
+				
+				var tbb = this.ce('toolbarbutton');
+				tbb.uri = item.uri;
+				tbb.id = this.objectName + item.uri;
+				
+				tbb.setAttribute("label",item.label);
+				tbb.setAttribute("tooltip",this.objectName + "Tooltip");
+				tbb.setAttribute("image",item.image);
+				tbb.setAttribute("contextmenu",this.objectName + "ItemCM");
+				
+				tbb.setAttribute("onclick","return RSSTICKER.onTickerItemClick(event, this.uri, this);");
+				
+				if (this.displayWidth.limitWidth){
+					if (this.displayWidth.isMaxWidth){
+						tbb.style.maxWidth = this.displayWidth.itemWidth + "px";
 					}
-					
-					tbb.onContextOpen = function (target) {
-						if (!target) {
-							window._content.document.location.href = this.href;
-						}
-						else if (target == 'window'){
-							window.open(this.href);
-						}
-						else if (target == 'tab') {
-							this.parent.browser.openInNewTab(this.href);
+					else {
+						tbb.style.width = this.displayWidth.itemWidth + "px";
+					}
+				}
+				
+				tbb.description = item.description;
+				tbb.visited = item.visited;
+				
+				tbb.feed = item.feed;
+				tbb.feedURL = item.feedURL;
+				tbb.href = item.uri;
+				tbb.parent = this;
+				tbb.published = item.published;
+				tbb.guid = item.guid;
+				
+				if (this.hideVisited){
+					tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
+						this.parentNode.removeChild(this);
+						this.visited = true;
+						
+						if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
+											
+						if (addToHist){
+							this.parent.history.addToHistory(this.guid);
 						}
 						
-						this.markAsRead(true);
+						this.parent.checkForEmptiness();
 					};
+				}
+				else if (this.boldUnvisited){
+					if (!item.visited){
+						tbb.style.fontWeight = 'bold';
+					}
+				
+					tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
+						this.style.fontWeight = '';
+						this.visited = true;
+						
+						if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
+						
+						if (addToHist){
+							this.parent.history.addToHistory(this.guid);
+						}
+					};
+				}
+				else {
+					tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
+						this.visited = true;
+						if (addToHist){
+							this.parent.history.addToHistory(this.guid);
+						}
+					};
+				}
+				
+				if (this.boldUnvisited){
+					// Don't move this.
+					if (!item.visited){
+						tbb.style.fontWeight = 'bold';
+					}
+				}
+				
+				tbb.onContextOpen = function (target) {
+					if (!target) {
+						window._content.document.location.href = this.href;
+					}
+					else if (target == 'window'){
+						window.open(this.href);
+					}
+					else if (target == 'tab') {
+						this.parent.browser.openInNewTab(this.href);
+					}
 					
-					// Determine where to add the item
-					
-					if (this.randomizeItems){
-						if (this.toolbar.childNodes.length == 1){
-							// Only the spacer is showing
+					this.markAsRead(true);
+				};
+				
+				// Determine where to add the item
+				
+				if (this.randomizeItems){
+					if (this.toolbar.childNodes.length == 1){
+						// Only the spacer is showing
+						this.toolbar.appendChild(tbb);
+					}
+					else {
+						if ((this.toolbar.firstChild.nodeName == 'spacer') && ((this.currentFirstItemMargin * -1) < (this.toolbar.firstChild.nextSibling.boxObject.width))){
+							var randomPlace = Math.floor(Math.random() * (this.toolbar.childNodes.length - 1)) + 1;
+						}
+						else {
+							// Add after the 5th one just to avoid some jumpiness
+							var randomPlace = Math.floor(Math.random() * (this.toolbar.childNodes.length - 1)) + 6;
+						}
+						
+						if (randomPlace >= this.toolbar.childNodes.length){
 							this.toolbar.appendChild(tbb);
 						}
 						else {
-							if ((this.toolbar.firstChild.nodeName == 'spacer') && ((this.currentFirstItemMargin * -1) < (this.toolbar.firstChild.nextSibling.boxObject.width))){
-								var randomPlace = Math.floor(Math.random() * (this.toolbar.childNodes.length - 1)) + 1;
-							}
-							else {
-								// Add after the 5th one just to avoid some jumpiness
-								var randomPlace = Math.floor(Math.random() * (this.toolbar.childNodes.length - 1)) + 6;
-							}
-							
-							if (randomPlace >= this.toolbar.childNodes.length){
-								this.toolbar.appendChild(tbb);
-							}
-							else {
-								this.toolbar.insertBefore(tbb, this.toolbar.childNodes[randomPlace]);
+							this.toolbar.insertBefore(tbb, this.toolbar.childNodes[randomPlace]);
+						}
+					}
+				}
+				else {
+					// Check for another item from this feed, if so place at end of that feed.
+					
+					if (itemsShowing.length > 0){
+						for (i = this.toolbar.childNodes.length - 1; i >= 0; i--){
+							if (this.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
+								if (this.toolbar.childNodes[i].feed == tbb.feed){
+									if (i == (this.toolbar.childNodes.length - 1)){
+										this.toolbar.appendChild(tbb);
+										addedButton = true;
+									}
+									else {
+										this.toolbar.insertBefore(tbb, this.toolbar.childNodes[i+1]);
+										addedButton = true;
+									}
+									
+									break;
+								}
 							}
 						}
 					}
 					else {
-						// Check for another item from this feed, if so place at end of that feed.
-						
-						if (itemsShowing.length > 0){
-							for (i = this.toolbar.childNodes.length - 1; i >= 0; i--){
-								if (this.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
-									if (this.toolbar.childNodes[i].feed == tbb.feed){
-										if (i == (this.toolbar.childNodes.length - 1)){
-											this.toolbar.appendChild(tbb);
-											addedButton = true;
-										}
-										else {
-											this.toolbar.insertBefore(tbb, this.toolbar.childNodes[i+1]);
-											addedButton = true;
-										}
-										
-										break;
-									}
-								}
-							}
+						// None of this feed is showing; add after another feed.
+						if ((this.toolbar.firstChild.nodeName == 'spacer') || (this.toolbar.lastChild.nodeName == 'spacer')){
+							this.toolbar.appendChild(tbb);
 						}
 						else {
-							// None of this feed is showing; add after another feed.
-							if ((this.toolbar.firstChild.nodeName == 'spacer') || (this.toolbar.lastChild.nodeName == 'spacer')){
+							if (this.toolbar.firstChild.feed != this.toolbar.lastChild.feed){
+								// We're in luck - a feed just finished scrolling
 								this.toolbar.appendChild(tbb);
 							}
 							else {
-								if (this.toolbar.firstChild.feed != this.toolbar.lastChild.feed){
-									// We're in luck - a feed just finished scrolling
-									this.toolbar.appendChild(tbb);
+								var addedButton = false;
+						
+								for (i = this.toolbar.childNodes.length - 2; i >= 0; i--){
+									if (this.toolbar.childNodes[i].nodeName == 'spacer'){
+										this.toolbar.insertBefore(tbb, this.toolbar.childNodes[i+1]);
+										addedButton = true;
+										break;
+									}
+									else if (this.toolbar.childNodes[i].feed != this.toolbar.childNodes[i+1].feed){
+										this.toolbar.insertBefore(tbb, this.toolbar.childNodes[i+1]);
+										addedButton = true;
+										break;
+									}
 								}
-								else {
-									var addedButton = false;
-							
-									for (i = this.toolbar.childNodes.length - 2; i >= 0; i--){
-										if (this.toolbar.childNodes[i].nodeName == 'spacer'){
-											this.toolbar.insertBefore(tbb, this.toolbar.childNodes[i+1]);
-											addedButton = true;
-											break;
-										}
-										else if (this.toolbar.childNodes[i].feed != this.toolbar.childNodes[i+1].feed){
-											this.toolbar.insertBefore(tbb, this.toolbar.childNodes[i+1]);
-											addedButton = true;
-											break;
-										}
-									}
-									
-									if (!addedButton){
-										this.toolbar.appendChild(tbb);
-									}
+								
+								if (!addedButton){
+									this.toolbar.appendChild(tbb);
 								}
 							}
 						}
 					}
-					
-					itemsShowing.push(tbb);
-					itemsShowing.sort(RSSTICKER.sortByPubDate);
 				}
+				
+				itemsShowing.push(tbb);
+				itemsShowing.sort(RSSTICKER.sortByPubDate);
 			}
-			
-			this.internalPause = false;
-			
-			this.adjustSpacerWidth();
-			this.checkForEmptiness();
-			this.tick();
 		}
+		
+		this.internalPause = false;
+		
+		this.adjustSpacerWidth();
+		this.checkForEmptiness();
+		this.tick();
 	},
 	
 	onTickerItemClick : function (event, url, node) {
 		if (event.ctrlKey) {
 			node.markAsRead(true); 
-//			event.stopPropagation();
-//			event.preventDefault();
 			return false;
 		}
 		else if (event.which == 3){
@@ -1136,13 +1097,13 @@ var RSSTICKER = {
 			this.tickTimer = null;
 			
 			if (this.internalPause){
-				this.tickTimer = setTimeout(this.objectName + '.tick();', this.tickSpeed * (500 / this.ticksPerItem));
+				this.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, this.tickSpeed * (500 / this.ticksPerItem));
 				this.ticksSinceLastUpdate++;
 			}
 			else {
 				if (this.ticksSinceLastUpdate >= this.ticksBetweenUpdates){
 					this.ticksSinceLastUpdate = 0;
-					this.tickTimer = setTimeout(this.objectName + '.tick();', this.tickSpeed * (500 / this.ticksPerItem));
+					this.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, this.tickSpeed * (500 / this.ticksPerItem));
 					this.init();
 				}
 				else {
@@ -1185,7 +1146,7 @@ var RSSTICKER = {
 							}
 						}
 						
-						this.tickTimer = setTimeout(this.objectName + '.tick();', this.tickSpeed * (500 / this.ticksPerItem));
+						this.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, this.tickSpeed * (500 / this.ticksPerItem));
 						this.ticksSinceLastUpdate++;
 					}
 					else {
@@ -1223,7 +1184,7 @@ var RSSTICKER = {
 							}
 						}
 						
-						this.tickTimer = setTimeout(this.objectName + '.tick();', this.tickSpeed * (500 / this.ticksPerItem));
+						this.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, this.tickSpeed * (500 / this.ticksPerItem));
 						this.ticksSinceLastUpdate++;
 					}
 				}
@@ -1241,7 +1202,7 @@ var RSSTICKER = {
 		}
 		
 		this.toolbar.appendChild(this.toolbar.spacer);
-		this.loadingNotice.setAttribute("busy","false");
+		// this.loadingNotice.setAttribute("busy","false");
 		
 		if (document.getElementById("RSSTICKER-button")) {
 			document.getElementById("RSSTICKER-button").setAttribute("greyed","true");

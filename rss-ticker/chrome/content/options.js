@@ -41,14 +41,12 @@ function ignoreFeeds(){
 }
 
 function getFeeds(){
-	var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"];
+	var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService);
 
 	var feedList = document.getElementById('feeds');
 
 	var livemarks = [];
 		
-	// Firefox 3+
-	livemarkService = livemarkService.getService(Components.interfaces.nsILivemarkService);
 	var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
 	var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
 	var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});

@@ -32,3 +32,4 @@ pref("extensions.rssticker.cm.disableTicker", false);
 pref("extensions.rssticker.updateToggle", true);
 
 pref("extensions.rssticker.lastVersion", "");
+pref("extensions.rssticker.lastUpdate", 0);

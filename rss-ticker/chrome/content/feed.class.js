@@ -98,7 +98,7 @@ TickerParseListener.prototype = {
 								if (itemObject.uri.match(/\/\/news\.google\.com\//)){
 									// Google news
 									var root = itemObject.uri.match(/url=(https?:\/\/[^\/]+\/)/i)[1];
-									itemObject.favicon = root + "favicon.ico";
+									itemObject.image = root + "favicon.ico";
 									delete root;
 								}
 								else {
