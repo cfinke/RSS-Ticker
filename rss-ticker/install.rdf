@@ -5,15 +5,13 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="{1f91cde0-c040-11da-a94d-0800200c9a66}"
                    em:name="RSS Ticker"
-                   em:version="3.0pre"
+                   em:version="3.0"
                    em:description="Scrolls your RSS feeds (Live Bookmarks) in a toolbar."
                    em:creator="Christopher Finke"
                    em:homepageURL="http://www.chrisfinke.com/addons/rss-ticker/"
                    em:iconURL="chrome://rss-ticker/content/skin-common/feed-icon.gif"
                    em:optionsURL="chrome://rss-ticker/content/options.xul"
                    em:aboutURL="chrome://rss-ticker/content/about.xul">
-<!--                   em:updateURL="http://www.chrisfinke.com/files/updaters/rss-ticker.rdf"
-                   em:updateKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDojW2744Lq71yIACHOEkj5O5hvvMdhh1+ebnjiTmfrnK/Q51KfdXOHy6hRI3K/F3EyMLgWpR4sEuLCA23whhzZJAxL/3Hv+GTHnRJGJQG0zFRy69y9Docko5yJZb7nX0z6wHFKZPbza9S/qrX/beZRlK52/KlVYTmNtb2ZquXscwIDAQAB"> -->
     <em:targetApplication RDF:resource="rdf:#$Zgf3i2"/>
   </RDF:Description>
   <RDF:Description RDF:about="rdf:#$Zgf3i2"
