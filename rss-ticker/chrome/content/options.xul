@@ -4,7 +4,7 @@
 <?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://rss-ticker/locale/locale.dtd">
 <prefwindow
-	onload="findTicker(); getFeeds();"
+	onload="findTicker(); getFeeds(); scales();"
 	title="&extension.title; - &options;"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<prefpane id="general-pane" label="&options.general;" image="chrome://rss-ticker/skin/emblem-system.png">
@@ -52,6 +52,7 @@
 				<checkbox preference="p_alwaysOpenInNewTab" label="&options.openInNewTab;"/>
 			</groupbox>
 		</vbox>
+		<spacer style="height: 30px;" />
 	</prefpane>
 	<prefpane id="advanced-pane" label="&options.advanced;" image="chrome://rss-ticker/skin/utilities-terminal.png">
 		<preferences>
@@ -66,12 +67,31 @@
 			<description>&options.restartNotice;</description>
 			<groupbox>
 				<caption label="&options.updateInterval;" />
-				<textbox flex="1" preference="p_updateFrequency" />
+				<hbox>
+					<label value="Every 10 minutes" />
+					<scale flex="1" id="frequency" min="10" max="1440" increment="10" pageIncrement="60" />
+					<label value="Once per day" />
+				</hbox>
 			</groupbox>
+			
 			<groupbox>
 				<caption label="&options.speed;" />
-				<textbox flex="1" preference="p_tickSpeed" />
+				<hbox>
+					<label value="Faster" />
+					<scale flex="1" id="speed" min="1" max="75" increment="1" pageIncrement="5" />
+					<label value="Slower" />
+				</hbox>
 			</groupbox>
+
+			<groupbox>
+				<caption label="&options.smooothness;" />
+				<hbox>
+					<label value="Choppier (Less CPU)" />
+					<scale flex="1" id="smoothness" min="1" max="300" increment="1" pageIncrement="25" />
+					<label value="Smoother (More CPU)" />
+				</hbox>
+			</groupbox>
+
 			<groupbox>
 				<caption label="&options.dw.itemWidth;" />
 				<checkbox preference="p_dw_limitWidth" label="&options.dw.limitWidth; *" />
@@ -82,13 +102,9 @@
 					<label value="&pixelAbbrev;" />
 				</hbox>
 			</groupbox>
-			<groupbox>
-				<caption label="&options.smooothness;" />
-				<hbox flex="1">
-					<textbox flex="1" size="40" preference="p_ticksPerItem" onchange="this.value = Math.max(this.value, 1);" />
-				</hbox>
-			</groupbox>
+			
 		</vbox>
+		<spacer style="height: 30px;" />
 	</prefpane>
 	<prefpane id="context-pane" label="&options.contextMenu;" image="chrome://rss-ticker/skin/bookmark-new.png">
 		<preferences>
@@ -160,6 +176,7 @@
 				</rows>
 			</grid>
 		</vbox>
+		<spacer style="height: 30px;" />
 	</prefpane>		
 	<prefpane id="manage-pane" label="&feeds;" image="chrome://rss-ticker/skin/feed-icon.gif">
 		<script type="application/x-javascript" src="chrome://browser/content/bookmarks/bookmarks.js"></script>
@@ -182,5 +199,6 @@
 				<button flex="1" label="&remove;" onclick="ignoreFeeds();" />
 			</hbox>
 		</vbox>
+		<spacer style="height: 30px;" />
 	</prefpane>
 </prefwindow>

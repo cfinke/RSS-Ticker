@@ -47,75 +47,22 @@ function getFeeds(){
 
 	var livemarks = [];
 		
-	if (livemarkService) {
-		// Firefox 3+
-		livemarkService = livemarkService.getService(Components.interfaces.nsILivemarkService);
-		var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
-		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
-		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
-	
-		for (var i = 0; i < livemarkIds.length; i++){
-			var feedURL = livemarkService.getFeedURI(livemarkIds[i]).spec;
-			var feedTitle = bookmarkService.getItemTitle(livemarkIds[i]);
-			
-			livemarks.push(
-				{
-					"feedURL" : feedURL,
-					"feedTitle" : feedTitle
-				}
-			);
-		}
-	}
-	else {
-		initServices();
-		initBMService();
+	// Firefox 3+
+	livemarkService = livemarkService.getService(Components.interfaces.nsILivemarkService);
+	var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
+	var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
+	var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
+
+	for (var i = 0; i < livemarkIds.length; i++){
+		var feedURL = livemarkService.getFeedURI(livemarkIds[i]).spec;
+		var feedTitle = bookmarkService.getItemTitle(livemarkIds[i]);
 		
-		var root = RDF.GetResource("NC:BookmarksRoot");
-		var feedURLArc = RDF.GetResource("http://home.netscape.com/NC-rdf#FeedURL");
-		var feedTitleArc = RDF.GetResource("http://home.netscape.com/NC-rdf#Name");
-	
-		var folders = [ root ];
-	
-		while (folders.length > 0){
-			RDFC.Init(BMDS, folders.shift());
-
-			var elements = RDFC.GetElements();
-		
-			while(elements.hasMoreElements()) {
-				var element = elements.getNext();
-				element.QueryInterface(Components.interfaces.nsIRDFResource);
-
-				var type = BookmarksUtils.resolveType(element);
-
-				if ((type == "Folder") || (type == "PersonalToolbarFolder")){
-					folders.push(element);
-				}
-				else if (type == 'Livemark') {
-					var feedURL = '';
-					var feedTitle = '';
-				
-					var res = RDF.GetResource(element.Value);
-					var target = BMDS.GetTarget(res, feedURLArc, true);
-				
-					if (target) {
-						feedURL = target.QueryInterface(kRDFLITIID).Value;
-					
-						target = BMDS.GetTarget(res, feedTitleArc, true);
-					
-						if (target) {
-							feedTitle = target.QueryInterface(kRDFLITIID).Value;
-						}
-					
-						livemarks.push(
-							{
-								"feedURL" : feedURL,
-								"feedTitle" : feedTitle
-							}
-						);
-					}
-				}
+		livemarks.push(
+			{
+				"feedURL" : feedURL,
+				"feedTitle" : feedTitle
 			}
-		}
+		);
 	}
 	
 	for (var i = 0; i < livemarks.length; i++){
@@ -139,5 +86,18 @@ function getFeeds(){
 		if (ticker.inArray(ignore, feedList.childNodes[i].getAttribute("value"))){
 			feedList.childNodes[i].setAttribute("ignored","true");
 		}
+	}
+}
+
+function scales() {
+	var sliders = {
+		"speed" : "p_tickSpeed",
+		"smoothness" : "p_ticksPerItem",
+		"frequency" : "p_updateFrequency"
+	};
+	
+	for (var i in sliders) {
+		document.getElementById(i).value = document.getElementById(sliders[i]).value;
+		document.getElementById(i).setAttribute("preference", sliders[i]);
 	}
 }
