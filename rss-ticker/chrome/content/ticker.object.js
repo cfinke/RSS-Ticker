@@ -496,7 +496,10 @@ var RSSTICKER = {
 		}
 		
 		if (showWindow){
-			window.openDialog("chrome://rss-ticker/content/noFeedsFound.xul","noFeedsFound","chrome");
+			var url = "chrome://rss-ticker/content/noFeedsFound.xul";
+			var browser = gBrowser;
+			var theTab = browser.addTab(url);
+			browser.selectedTab = theTab;
 		}
 	},
 	
