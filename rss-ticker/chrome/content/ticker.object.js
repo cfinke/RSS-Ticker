@@ -259,7 +259,7 @@ var RSSTICKER = {
 				}
 			break;
 			case "updateToggle":
-				// TODO Regenerate the ignore file.
+				this.updateAllFeeds();
 			break;
 		}
 		
@@ -1524,12 +1524,14 @@ var RSSTICKER = {
 		this.internalPause = true;
 		
 		for (var i = this.toolbar.childNodes.length - 1; i >= 0; i--){
-			if (this.toolbar.childNodes[i].feed == feed){
+			var tbb = this.toolbar.childNodes[i];
+			
+			if (tbb.nodeName != "spacer" && tbb.feed == feed){
 				if (this.limitItemsPerFeed && (items.length == this.itemsPerFeed)){
-					this.toolbar.removeChild(this.toolbar.childNodes[i]);
+					this.toolbar.removeChild(tbb);
 				}
 				else {
-					items.push(this.toolbar.childNodes[i]);
+					items.push(tbb);
 				}
 			}
 		}
