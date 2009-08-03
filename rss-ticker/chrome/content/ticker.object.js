@@ -194,7 +194,7 @@ var RSSTICKER = {
             
 		    setTimeout(
 		        function () {
-					window.openDialog("chrome://rss-ticker/content/one-riot-suggestion.xul", "trends", "chrome,dialog,centerscreen,titlebar,alwaysraised,modal", version);
+					window.openDialog("chrome://rss-ticker/content/one-riot-suggestion.xul", "trends", "chrome,dialog,centerscreen,titlebar,alwaysraised,modal");
                 }, 5000
 			);
         }

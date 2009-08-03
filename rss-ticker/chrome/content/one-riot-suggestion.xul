@@ -8,7 +8,7 @@
 	
     <script type="application/x-javascript">
         <![CDATA[
-			var feedUrl = "http://www.oneriot.com/rss/trendingtopics?&spid=86f2f5da-3b24-4a87-bbb3-1ad47525359d&p=rss-ticker/" + window.arguments[0]+"&ssrc=ticker";
+			var feedUrl = "http://www.oneriot.com/rss/trendingtopics?&spid=86f2f5da-3b24-4a87-bbb3-1ad47525359d&p=rss-ticker&ssrc=ticker";
 			
             var subscribeToFeed = function() {
 				var strings = document.getElementById("RSSTICKER-bundle");
