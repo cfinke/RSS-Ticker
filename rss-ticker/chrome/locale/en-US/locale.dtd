@@ -63,11 +63,11 @@
 <!ENTITY options.itemsPerFeed "Items per feed">
 <!ENTITY about "About">
 <!ENTITY noFeedsFoundTitle "No Live Bookmarks Found">
-<!ENTITY noFeedsFound "RSS Ticker could not locate any Live Bookmarks (aka newsfeeds, RSS feeds).">
-<!ENTITY howToLiveBookmark1 "RSS Ticker loads and scrolls the newsfeeds that you have bookmarked as Live Bookmarks. If you are unfamiliar with Firefox&apos;s Live Bookmarking system, there are two ways to add a Live Bookmark in Firefox:">
-<!ENTITY howToLiveBookmark2 "If the page you are looking at in your browser offers an RSS feed ( http://www.mozilla.org/ , for example), there will be a small orange icon on the right side of the address bar. If you click on that icon, it will open the &apos;Add Live Bookmark&apos; dialog.">
-<!ENTITY howToLiveBookmark3 "In the Bookmarks Manager, (found under Bookmarks &gt; Manage Bookmarks), there is an option under the File menu for &apos;New Live Bookmark.&apos; Here you can put the location of the XML feed in the Location field.">
-<!ENTITY howToLiveBookmark4 "After doing either of these steps, restarting Firefox or choosing &apos;Refresh Feeds&apos; from the Ticker&apos;s context menu will show the feed in the ticker.">
+<!ENTITY noFeedsFound "RSS Ticker could not locate any Live Bookmarks">
+<!ENTITY howToSubscribe1 "RSS Ticker loads and scrolls the items from your Live Bookmarks (a.k.a. newsfeeds or RSS feeds), but you haven't subscribed to any Live Bookmarks.  Need some help?  Subscribing to a feed is easy:">
+<!ENTITY howToSubscribe2 "If the page you are looking at in your browser offers an RSS feed (www.mozilla.org, for example), there will be a small orange or blue icon on the right side of the address bar, next to the star used for bookmarking. If you click on that icon, it will open the &apos;Add Live Bookmark&apos; dialog.">
+<!ENTITY howToSubscribe3 "Click Subscribe Now, and RSS Ticker will instantly begin scrolling the items from that feed.">
+<!ENTITY closeNoFeedsPage "Close this page">
 <!ENTITY dontShowAgain "Don&apos;t show this message again.">
 <!ENTITY feed "Feed">
 <!ENTITY feeds "Feeds">

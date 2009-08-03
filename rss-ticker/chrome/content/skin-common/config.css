@@ -1,0 +1,7 @@
+image#exclam {
+	list-style-image: url("chrome://rss-ticker/content/skin-common/feed-icon.gif");
+}
+
+label#warningText {
+	margin-bottom: 10px;
+}
