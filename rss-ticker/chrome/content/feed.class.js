@@ -84,17 +84,20 @@ TickerParseListener.prototype = {
 							itemObject.id = item.id;
 				
 							itemObject.uri = item.link.resolve("");
-				
+							
+							/*
 							if (itemObject.uri.match(/\/\/news\.google\.com\/.*\?/)){
 								var q = itemObject.uri.indexOf("?");
 								itemObject.uri = itemObject.uri.match(/url=(https?:\/\/.*)$/i)[1];
 								itemObject.uri = decodeURIComponent(itemObject.uri.split("&")[0]);
 			//					itemObject.uri = itemObject.uri.substring(0, q) + ("&" + itemObject.uri.substring(q)).replace(/&(ct|cid|ei)=[^&]* /g, "").substring(1);
 							}
-				
+							*/
+							
 							if (!itemObject.id) itemObject.id = itemObject.uri;
 				
 							if (!itemObject.uri.match(/\/~r\//i)) {
+								/*
 								if (itemObject.uri.match(/\/\/news\.google\.com\//)){
 									// Google news
 									var root = itemObject.uri.match(/url=(https?:\/\/[^\/]+\/)/i)[1];
@@ -102,8 +105,11 @@ TickerParseListener.prototype = {
 									delete root;
 								}
 								else {
+									*/
 									itemObject.image = itemObject.uri.substr(0, (itemObject.uri.indexOf("/", 9) + 1)) + "favicon.ico";
+									/*
 								}
+								*/
 							}
 							else {
 								// Feedburner
