@@ -28,6 +28,8 @@
 <!ENTITY options.smoothness.tt "The number of ticks that it takes to remove one item from the front of the ticker.  Set higher for a smoother scroll.">
 <!ENTITY options.updateInterval.tt "The number of minutes between updates of the feeds.">
 <!ENTITY options.updateInterval "Feed Update Frequency">
+<!ENTITY options.update.1 "Update my feeds every">
+<!ENTITY options.update.2 "minutes.">
 <!ENTITY options.speed "Ticker Speed">
 <!ENTITY options.dw.itemWidth "Item width">
 <!ENTITY pixelAbbrev "px">
