@@ -39,7 +39,7 @@
 			</groupbox>
 			<groupbox>
 				<checkbox preference="p_limitItemsPerFeed" label="&options.limitItemsPerFeed;" />
-				<hbox>
+				<hbox align="center">
 					<label value="&options.itemsPerFeed;:" />
 					<textbox flex="1" preference="p_itemsPerFeed" />
 				</hbox>									
@@ -67,16 +67,16 @@
 			<description>&options.restartNotice;</description>
 			<groupbox>
 				<caption label="&options.updateInterval;" />
-				<hbox>
-					<label value="&every10Minutes;" />
-					<scale flex="1" id="frequency" min="10" max="1440" increment="10" pageIncrement="60" />
-					<label value="&oncePerDay;" />
+				<hbox align="center">
+					<label value="&options.update.1;" />
+					<textbox preference="p_updateFrequency" size="3" />
+					<label value="&options.update.2;" />
 				</hbox>
 			</groupbox>
 			
 			<groupbox>
 				<caption label="&options.speed;" />
-				<hbox>
+				<hbox align="center">
 					<label value="&faster;" />
 					<scale flex="1" id="speed" min="1" max="75" increment="1" pageIncrement="5" />
 					<label value="&slower;" />
@@ -85,7 +85,7 @@
 
 			<groupbox>
 				<caption label="&options.smooothness;" />
-				<hbox>
+				<hbox align="center">
 					<label value="&choppier;" />
 					<scale flex="1" id="smoothness" min="1" max="300" increment="1" pageIncrement="25" />
 					<label value="&smoother;" />
@@ -96,7 +96,7 @@
 				<caption label="&options.dw.itemWidth;" />
 				<checkbox preference="p_dw_limitWidth" label="&options.dw.limitWidth; *" />
 				<checkbox preference="p_dw_isMaxWidth" label="&options.dw.isMaxWidth; *" />
-				<hbox flex="1">
+				<hbox flex="1" align="center">
 					<label value="&options.dw.itemWidth; : *" />
 					<textbox flex="1" preference="p_dw_itemWidth" />
 					<label value="&pixelAbbrev;" />

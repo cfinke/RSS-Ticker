@@ -90,8 +90,7 @@ function getFeeds(){
 function scales() {
 	var sliders = {
 		"speed" : "p_tickSpeed",
-		"smoothness" : "p_ticksPerItem",
-		"frequency" : "p_updateFrequency"
+		"smoothness" : "p_ticksPerItem"
 	};
 	
 	for (var i in sliders) {
