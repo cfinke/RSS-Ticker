@@ -737,7 +737,7 @@ var RSSTICKER = {
 			if (!document.getElementById("RSSTICKER" + feedItems[j].uri)){
 				if (this.limitItemsPerFeed && (this.itemsPerFeed <= itemsShowing.length)){
 					// Determine if this item is newer than the oldest item showing.
-					if ((this.itemsPerFeed > 0) && feedItems[j].published && itemsShowing[0].published && (feedItems[j].published.getTime() > itemsShowing[0].published.getTime())){
+					if ((this.itemsPerFeed > 0) && feedItems[j].published && itemsShowing[0].published && (feedItems[j].published > itemsShowing[0].published)){
 						this.toolbar.removeChild(document.getElementById("RSSTICKER" + itemsShowing[0].href));
 						itemsShowing.shift();
 					}
@@ -745,7 +745,7 @@ var RSSTICKER = {
 						continue;
 					}
 				}
-			
+
 				var itemIsVisited = this.history.isVisitedURL(feedItems[j].uri, feedItems[j].id, 1);
 
 				if (itemIsVisited && this.hideVisited){
