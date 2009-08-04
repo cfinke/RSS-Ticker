@@ -76,3 +76,13 @@
 <!ENTITY remove "Remover">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Ocultar o Letreiro quando estiver Vazio">
+<!ENTITY trendsTitle "Tendências da Web em Tempo Real">
+<!ENTITY trendsP1 "O RSS Ticker deseja saber se pretende subscrever uma fonte com as tendências de busca mais recentes no Twitter, no Digg e outros locais da Web social.">
+<!ENTITY trendsP2 "Pressione OK para subscrever a fonte; aparecerá automaticamente no letreiro, mantendo-o a par das notícias e tendências mais recentes na Web. (Pode cancelar a subscrição a qualquer momento.)">
+<!ENTITY trendsP3 "Não se preocupe; não voltará a ser incomodado caso opte por não subscrever.">
+<!ENTITY every10Minutes "A cada 10 minutos">
+<!ENTITY oncePerDay "Uma vez por dia">
+<!ENTITY faster "Mais rápido">
+<!ENTITY slower "Mais lento">
+<!ENTITY smoother "Mais suave (Consome mais recursos da CPU)">
+<!ENTITY choppier "Mais brusco (Consome menos recursos da CPU)">

@@ -1,9 +1,9 @@
 <!ENTITY extension.title "RSS Ticker">
 <!ENTITY cm.open "Apri">
 <!ENTITY cm.open.key "A">
-<!ENTITY cm.openInNewWindow "Apri in nuova finestra">
+<!ENTITY cm.openInNewWindow "Apri in una nuova finestra">
 <!ENTITY cm.openInNewWindow.key "f">
-<!ENTITY cm.openInNewTab "Apri in nuova scheda">
+<!ENTITY cm.openInNewTab "Apri in una nuova scheda">
 <!ENTITY cm.openInNewTab.key "s">
 <!ENTITY cm.openAllInTabs "Apri tutti in schede">
 <!ENTITY cm.openUnreadInTabs "Apri non letti in schede">
@@ -66,13 +66,23 @@
 <!ENTITY noFeedsFound "RSS Ticker non ha trovato alcun tipo di segnalibro Live">
 <!ENTITY howToLiveBookmark1 "RSS Ticker permette di caricare e visualizzare tramite scorrimento nella propria barra di visualizzazione i feed salvati come segnalibri Live. Ci sono due modi per aggiungere i segnalibri Live in Firefox:">
 <!ENTITY howToLiveBookmark2 "Se nella pagina che si sta visualizzando nel browser è disponibile un feed RSS (ad esempio: http://www.mozilla.org/), sarà presente una piccola icona arancione nel lato destro della barra degli indirizzi. Facendo clic su tale icona si aprirà la finestra di dialogo &apos;Aggiungi segnalibro Live&apos;">
-<!ENTITY howToLiveBookmark3 "Inserire l&apos;indirizzo web del feed da aggiungere nel campo &apos;Indirizzo feed:&apos; della finestra &apos;Proprietà per &quot;Nuovo segnalibro Live&quot;&apos;, raggiungibile aprendo la Gestione segnalibri di Firefox (menu Segnalibri &gt; Gestione segnalibri...), e selezionando poi il menu File &gt; Nuovo segnalibro Live...">
+<!ENTITY howToLiveBookmark3 "Inserire l&apos;indirizzo web del feed da aggiungere nel campo &apos;Indirizzo feed:&apos; della finestra &apos;Proprietà per &quot;Nuovo segnalibro Live&quot;&apos;, raggiungibile aprendo la Gestione segnalibri di Firefox (menu Segnalibri &gt; Gestione segnalibri…), e selezionando poi il menu File &gt; Nuovo segnalibro Live…">
 <!ENTITY howToLiveBookmark4 "Dopo aver effettuato una delle precedenti operazioni, riavviare Firefox o fare clic sul pilsante &apos;Ricarica feed&apos; dal menu contestuale della barra di RSS Ticker per visualizzare i feed aggiunti">
 <!ENTITY dontShowAgain "Non mostrare questo messaggio ancora">
 <!ENTITY feed "Feed">
 <!ENTITY feeds "Feed">
-<!ENTITY feedManagement "È possibile aggiungere o eliminare i feed dalla barra di RSS Ticker selezionandoli nella lista qui sotto e facendo clic sui pulsanti &apos;Aggiungi&apos; o &apos;Elimina&apos;">
+<!ENTITY feedManagement "È possibile aggiungere o eliminare i feed dalla barra di RSS Ticker selezionandoli nella lista qui sotto e facendo clic sui pulsanti &apos;Aggiungi&apos; o &apos;Elimina&apos;. Nota: attualmente tramite la lista è possibile la selezione dei feed da visualizzare nella barra ma non la sottoscrizione. Per sottoscrivere i feed è quindi necessario utilizzare la relativa funzione dei segnalibri Live di Firefox">
 <!ENTITY add "Aggiungi">
 <!ENTITY remove "Elimina">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Nascondi la barra di RSS Ticker quando è vuota">
+<!ENTITY trendsTitle "Tendenze del web in tempo reale">
+<!ENTITY trendsP1 "È possibile sottoscrivere un feed relativo alle ultime tendenze di ricerca su Twitter, Digg ed il resto del social web">
+<!ENTITY trendsP2 "Fare clic su OK per sottoscrivere tale feed, che verrà visualizzato automaticamente nella barra di visualizzazione mantenendo aggiornati sulle ultime notizie e tendenze del web. È possibile annullare la sottoscrizione in ogni momento">
+<!ENTITY trendsP3 "Questo avviso non verrà più mostrato">
+<!ENTITY every10Minutes "Ogni 10 minuti">
+<!ENTITY oncePerDay "Una volta al giorno">
+<!ENTITY faster "Maggiore">
+<!ENTITY slower "Minore">
+<!ENTITY smoother "Maggiore (maggior uso della CPU)">
+<!ENTITY choppier "Minore (minor uso della CPU)">

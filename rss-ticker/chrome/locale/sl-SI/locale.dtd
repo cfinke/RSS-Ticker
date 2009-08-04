@@ -76,3 +76,13 @@
 <!ENTITY remove "Odstrani">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Skrij prikazovalnik, ko je prazen">
+<!ENTITY trendsTitle "Spletni trendi v realnem času">
+<!ENTITY trendsP1 "RSS Ticker vas lahko naroči na vir RSS najbolj trendovskih iskalnih gesel na Twitterju, Diggu in preostalih družabnih spletiščih.">
+<!ENTITY trendsP2 "Kliknite V redu, če se želite naročiti na vir; samodejno se bo pojavil in vas sproti obveščal o novicah in trendih na spletu. (Odjavite se lahko kadar koli.)">
+<!ENTITY trendsP3 "Ne skrbite, če se ne naročite, vas ne bomo znova spraševali.">
+<!ENTITY every10Minutes "vsakih 10 minut">
+<!ENTITY oncePerDay "enkrat na dan">
+<!ENTITY faster "hitreje">
+<!ENTITY slower "počasneje">
+<!ENTITY smoother "gladko (več CPE)">
+<!ENTITY choppier "odsekano (manj CPE)">

@@ -31,8 +31,8 @@
 <!ENTITY options.speed "Ticksnelheid">
 <!ENTITY options.dw.itemWidth "Breedte berichtje">
 <!ENTITY pixelAbbrev "px">
-<!ENTITY options.smooothness "Vlotheid Scrollen Ticker">
-<!ENTITY cmOptionsDescription "Ticker&apos;s contextmenu aanpassen door onderstaande opties te selecteren of te deselecteren.">
+<!ENTITY options.smooothness "Vlotheid scrollen ticker">
+<!ENTITY cmOptionsDescription "Het contextmenu van de ticker aanpassen door onderstaande opties te selecteren of te deselecteren.">
 <!ENTITY tt.summary "Samenvatting">
 <!ENTITY options "Opties">
 <!ENTITY options.restartNotice "Opties aangeduid met * zullen niet veranderd worden totdat u uw browservenster heropent.">
@@ -40,11 +40,11 @@
 <!ENTITY options.advanced "Geavanceerd">
 <!ENTITY options.contextMenu "Contextmenu">
 <!ENTITY options.placement.tt "Positie van de ticker in de browser.">
-<!ENTITY options.random.tt "De ticker de feedberichten in een willekeurige volgorde laten tonen voor variatie.">
+<!ENTITY options.random.tt "De ticker de feedberichten in een willekeurige volgorde laten weergeven voor variatie.">
 <!ENTITY options.pause.tt "De ticker pauzeren als de muis erover gaat.">
 <!ENTITY options.disable.tt "De RSS ticker uitschakelen. Dit heeft hetzelfde effect als verwijderen, maar zonder te verwijderen.">
 <!ENTITY options.hide.tt "Feedberichten die u reeds gelezen hebt verbergen (volgens browsergeschiedenis).">
-<!ENTITY options.bold.tt "Ongelezen berichten vet weergeven (volgens browser geschiedenis).">
+<!ENTITY options.bold.tt "Ongelezen berichten vet weergeven (volgens browsergeschiedenis).">
 <!ENTITY options.openInNewTab.tt "Koppelingen altijd in nieuwe tabbladen openen, onafhankelijk van met welke muisknop erop geklikt werd.">
 <!ENTITY disableTicker "Ticker uitschakelen">
 <!ENTITY options.tickerPlacement "Positie ticker">
@@ -63,10 +63,10 @@
 <!ENTITY options.itemsPerFeed "Berichten per feed">
 <!ENTITY about "Over">
 <!ENTITY noFeedsFoundTitle "Geen livebladwijzers gevonden">
-<!ENTITY noFeedsFound "RSS Ticker kan geen livebladwijzers (ofwel newsfeeds, RSS feeds) vinden.">
-<!ENTITY howToLiveBookmark1 "RSS Ticker laadt en scrollt de nieuwsfeeds die u al Livebladwijzers aanduidde. Als u niet weet hoe Livebladwijzer in Firefox werken: er zijn twee manieren om een Livebladwijzer in Firefox toe te voegen:">
-<!ENTITY howToLiveBookmark2 "Als de pagina waar u naar kijkt in uw browser een RSS feed ( http://www.mozilla.org/, bijvoorbeeld) bevat zal er een klein oranje pictogrammetje verschijnen in de rechterkant van de adresbalk. Als u op dat pictogrammetje klikt zal het ‘Livebladwijzer toevoegen’ dialoogvenster openen.">
-<!ENTITY howToLiveBookmark3 "In de bladwijzerbeheerder, (te vinden onder Bladwijzers &gt; Bladwijzers beheren) is er een optie in het menu Bestand ‘Nieuwe livebladwijzer’. Hier kan de locatie van de XML feed in het Feedlocatieveld geplaatst worden.">
+<!ENTITY noFeedsFound "RSS Ticker kan geen livebladwijzers (ofwel newsfeeds, RSS-feeds) vinden.">
+<!ENTITY howToLiveBookmark1 "RSS Ticker laadt en scrollt de nieuwsfeeds die u al Livebladwijzers aanduidde. Als u niet weet hoe Livebladwijzers in Firefox werken: er zijn twee manieren om een Livebladwijzer in Firefox toe te voegen:">
+<!ENTITY howToLiveBookmark2 "Als de pagina waar u naar kijkt in uw browser een RSS-feed (http://www.mozilla.org/, bijvoorbeeld) bevat zal er een klein oranje pictogrammetje verschijnen in de rechterkant van de adresbalk. Als u op dat pictogrammetje klikt zal het ‘Livebladwijzer toevoegen’ dialoogvenster openen.">
+<!ENTITY howToLiveBookmark3 "In de bladwijzerbeheerder, (te vinden onder Bladwijzers &gt; Bladwijzers beheren) is er een optie in het menu Bestand ‘Nieuwe livebladwijzer’. Hier kan de locatie van de XML-feed in het Feedlocatieveld geplaatst worden.">
 <!ENTITY howToLiveBookmark4 "Na een van beide stappen gedaan te hebben, kunt u Firefox herstarten of ‘Feeds Verversen’ kiezen uit het contextmenu van de Ticker om de feed in de ticker te tonen.">
 <!ENTITY dontShowAgain "Dit bericht niet opnieuw weergeven.">
 <!ENTITY feed "Feed">
@@ -76,3 +76,13 @@
 <!ENTITY remove "Verwijderen">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Ticker verbergen indien leeg">
+<!ENTITY trendsTitle "Realtime webtrends">
+<!ENTITY trendsP1 "RSS Ticker wil weten of u zich wilt abonneren op een feed met de laatste trendzoektermen op Twitter, Digg en de rest van het sociale web.">
+<!ENTITY trendsP2 "Klik OK om u te abonneren op de feed; deze zal automatisch in de ticker verschijnen en u up-to-date houden met het laatste nieuws en trends op het web. (U kunt uw abonnement op elk gewenst moment opzeggen.)">
+<!ENTITY trendsP3 "Wees gerust, u wordt niet meer lastiggevallen als u zich niet abonneert.">
+<!ENTITY every10Minutes "Elke 10 minuten">
+<!ENTITY oncePerDay "Eenmaal daags">
+<!ENTITY faster "Sneller">
+<!ENTITY slower "Langzamer">
+<!ENTITY smoother "Soepeler (meer CPU)">
+<!ENTITY choppier "Hakkeriger (minder CPU)">

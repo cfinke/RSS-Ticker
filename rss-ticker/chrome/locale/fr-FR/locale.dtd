@@ -7,26 +7,26 @@
 <!ENTITY cm.openInNewTab.key "t">
 <!ENTITY cm.openAllInTabs "Ouvrir tous les éléments dans des onglets">
 <!ENTITY cm.openUnreadInTabs "Ouvrir les éléments non lus dans des onglets">
-<!ENTITY cm.openFeedInTabs "Ouvrir le fil dans des onglets">
-<!ENTITY cm.openFeedUnreadInTabs "Ouvrir le fil non lu dans des onglets">
+<!ENTITY cm.openFeedInTabs "Ouvrir le flux dans des onglets">
+<!ENTITY cm.openFeedUnreadInTabs "Ouvrir le flux non lu dans des onglets">
 <!ENTITY cm.copyLinkTitle "Copier le titre du lien">
 <!ENTITY cm.copyLinkTitle.key "C">
 <!ENTITY cm.copyLinkURL "Copier l&apos;URL du lien">
 <!ENTITY cm.copyLinkURL.key "U">
-<!ENTITY cm.refreshFeeds "Rafraîchir les fils">
+<!ENTITY cm.refreshFeeds "Rafraîchir les flux">
 <!ENTITY cm.refreshFeeds.key "R">
-<!ENTITY cm.manageFeeds "Gerer les fils">
+<!ENTITY cm.manageFeeds "Gérer les flux">
 <!ENTITY cm.manageFeeds.key "G">
 <!ENTITY cm.markAsRead "Marquer comme lu">
 <!ENTITY cm.markAsRead.key "M">
-<!ENTITY cm.markFeedAsRead "Marquer le fil comme lu">
+<!ENTITY cm.markFeedAsRead "Marquer le flux comme lu">
 <!ENTITY cm.markFeedAsRead.key "a">
 <!ENTITY cm.markAllAsRead "Marquer tous comme lus">
 <!ENTITY cm.markAllAsRead.key "l">
 <!ENTITY options.speed.tt "Vitesse du défilement de la bande. 1 est le plus rapide.">
 <!ENTITY options.dw.itemWidth.tt "Largeur des éléments individuels dans la bande défilante. Par défaut : 200 (px).">
 <!ENTITY options.smoothness.tt "Nombre de déplacements des éléments pour traverser l&apos;écran. Augmenter pour avoir un défilement plus doux.">
-<!ENTITY options.updateInterval.tt "Nombre de minutes entre les mises à jour des fils.">
+<!ENTITY options.updateInterval.tt "Nombre de minutes entre les mises à jour des flux.">
 <!ENTITY options.updateInterval "Fréquence des mises à jour">
 <!ENTITY options.speed "Vitesse du défilement de la bande déroulante">
 <!ENTITY options.dw.itemWidth "Largeur des éléments">
@@ -40,10 +40,10 @@
 <!ENTITY options.advanced "Avancé">
 <!ENTITY options.contextMenu "Menu contextuel">
 <!ENTITY options.placement.tt "Emplacement de la bande défilante dans le navigateur.">
-<!ENTITY options.random.tt "Forcer l&apos;affichage des éléments du fil dans un ordre aléatoire pour plus de variété.">
+<!ENTITY options.random.tt "Forcer l&apos;affichage des éléments du flux dans un ordre aléatoire pour plus de variété.">
 <!ENTITY options.pause.tt "Arrêter le défilement au passage de la souris.">
 <!ENTITY options.disable.tt "Désactiver RSS ticker. Cela a le même effet qu&apos;une désinstallation mais sans désinstaller l&apos;extension.">
-<!ENTITY options.hide.tt "Masquer les éléments du fil que vous avez déjà lus (selon l&apos;historique de votre  navigateur).">
+<!ENTITY options.hide.tt "Masquer les éléments du flux que vous avez déjà lus (selon l&apos;historique de votre  navigateur).">
 <!ENTITY options.bold.tt "Afficher en gras les éléments que vous n&apos;avez pas lus (selon l&apos;historique de votre  navigateur).">
 <!ENTITY options.openInNewTab.tt "Toujours ouvrir les liens dans de nouveaux onglets, quel que soit le bouton de la souris cliqué.">
 <!ENTITY disableTicker "Désactiver la bande défilante">
@@ -76,3 +76,13 @@
 <!ENTITY remove "Supprimer">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Masquer la bande déroulante quand elle est vide">
+<!ENTITY trendsTitle "Les tendances Web en temps réel">
+<!ENTITY trendsP1 "RSS Ticker veut savoir si vous souhaiteriez vous abonner à un flux des dernières recherches de tendances sur Twitter, Digg et le reste du Web social.">
+<!ENTITY trendsP2 "Cliquez sur OK pour vous abonnez au flux; il apparaitra automatiquement dans la bande déroulante, et vous tiendra au courant des dernières nouveautés et tendances du Web. (Vous pourrez vous désabonner quand vous le souhaiterez.)">
+<!ENTITY trendsP3 "Nous ne vous poserons plus la question si vous choisissez de ne pas vous abonner.">
+<!ENTITY every10Minutes "Toutes les 10 minutes">
+<!ENTITY oncePerDay "Une fois par jour">
+<!ENTITY faster "Plus rapide">
+<!ENTITY slower "Plus lent">
+<!ENTITY smoother "Plus doux (plus de processeur)">
+<!ENTITY choppier "Plus saccadé (moins de processeur)">
