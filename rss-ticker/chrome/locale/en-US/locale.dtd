@@ -92,3 +92,5 @@
 
 <!ENTITY smoother "Smoother (More CPU)">
 <!ENTITY choppier "Choppier (Less CPU)">
+
+<!ENTITY checkbox_understand "Yes, I want to subscribe to a feed of trending social topics.">

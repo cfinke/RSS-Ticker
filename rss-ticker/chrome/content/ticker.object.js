@@ -99,7 +99,7 @@ var RSSTICKER = {
 	ticker : null,
 	
 	// Toggles on/off debugging messages in the console.
-	DEBUG : true,
+	DEBUG : false,
 	
 	// Button on the toolbar that shows status messages when the feeds are loading
 	loadingNotice : null,
@@ -597,9 +597,9 @@ var RSSTICKER = {
 			
 			req.onreadystatechange = function (event) {
 				if (req.readyState == 4) {
-					clearTimeout(RSSTICKER.loadTimer);
+					clearTimeout(req.parent.loadTimer);
 					
-					RSSTICKER.currentRequest = null;
+					req.parent.currentRequest = null;
 					setTimeoutForNext();
 					
 					try {
@@ -607,7 +607,7 @@ var RSSTICKER = {
 							var feedOb = null;
 							
 							try {
-								RSSTICKER.queueForParsing(req.responseText.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
+								req.parent.queueForParsing(req.responseText.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
 							} catch (e) {
 								// Parse error
 							}
