@@ -64,10 +64,6 @@
 <!ENTITY about "Tietoja">
 <!ENTITY noFeedsFoundTitle "Live-kirjanmerkkejä ei ole">
 <!ENTITY noFeedsFound "Live-kirjanmerkkejä (uutissyötteitä, RSS-syötteitä) ei löytynyt">
-<!ENTITY howToLiveBookmark1 "RSS Ticker lataa ja vierittää live-kirjanmerkeiksi talletettuja uutissyötteitä. Live-kirjanmerkkejä voidaan lisätä Firefoxissa kahdella eri tavalla:">
-<!ENTITY howToLiveBookmark2 "Jos selaimessa auki oleva sivu on saatavilla myös RSS-syötteenä (esimerkiksi http://www.mozilla.org/ ), näkyy osoitepalkin oikeassa reunassa pieni oranssi kuvake. Klikkaamalla tätä kuvaketta avautuu &apos;Lisää live-kirjanmerkki&apos; -ikkuna.">
-<!ENTITY howToLiveBookmark3 "Kirjanmerkkien muokkaus -ikkunassa (Kirjanmerkit &gt; Muokkaa kirjanmerkkejä...) voidaan lisätä uusi syöte valitsemalla Tiedosto-valikon kohdasta &apos;Uusi live-kirjanmerkki&apos;.">
-<!ENTITY howToLiveBookmark4 "Uusi syöte tulee syötenauhaan uudelleenkäynnistämällä Firefox tai valitsemalla syötenauhan aihevalikosta &apos;Päivitä syötteet&apos;.">
 <!ENTITY dontShowAgain "Älä näytä tätä viestiä enää.">
 <!ENTITY feed "Syöte">
 <!ENTITY feeds "Syötteet">

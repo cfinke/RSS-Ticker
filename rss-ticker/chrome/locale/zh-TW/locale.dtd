@@ -64,10 +64,6 @@
 <!ENTITY about "關於">
 <!ENTITY noFeedsFoundTitle "找不到即時書籤">
 <!ENTITY noFeedsFound "RSS Ticker 找不到即時書籤 (或稱「newsfeed」、「RSS feed」)。">
-<!ENTITY howToLiveBookmark1 "RSS Ticker 會載入並捲動被設為即時書籤的 newsfeed。如果您不熟悉 Firefox 的即時書籤系統，以下是兩種新增即時書籤的方法:">
-<!ENTITY howToLiveBookmark2 "如果您正在瀏覽的網頁就有提供 RSS feed (如 http://www.mozilla.org/)，則網址列的右邊將會出現一顆橘色的小小圖示。按下它即可開啟「新增即時書籤」對話框。">
-<!ENTITY howToLiveBookmark3 "請由「書籤 &gt; 組織書籤」進入「書籤管理員」，選擇「檔案 &gt; 新增即時書籤」，再將 XML feed 的位址填入「消息來源位址」欄位並按下確定。">
-<!ENTITY howToLiveBookmark4 "做完以上步驟後，重啟 Firefox 或在跑馬燈的右鍵選單中選擇「更新 Feed」，即可將 feed 顯示於跑馬燈中。">
 <!ENTITY dontShowAgain "不要再顯示這個訊息。">
 <!ENTITY feed "Feed">
 <!ENTITY feeds "Feed">

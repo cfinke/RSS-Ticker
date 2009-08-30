@@ -28,6 +28,8 @@
 <!ENTITY options.smoothness.tt "Nombre de déplacements des éléments pour traverser l&apos;écran. Augmenter pour avoir un défilement plus doux.">
 <!ENTITY options.updateInterval.tt "Nombre de minutes entre les mises à jour des flux.">
 <!ENTITY options.updateInterval "Fréquence des mises à jour">
+<!ENTITY options.update.1 "Mettre à jour mes flux toutes les">
+<!ENTITY options.update.2 "minutes">
 <!ENTITY options.speed "Vitesse du défilement de la bande déroulante">
 <!ENTITY options.dw.itemWidth "Largeur des éléments">
 <!ENTITY pixelAbbrev "px">
@@ -64,10 +66,10 @@
 <!ENTITY about "À propos">
 <!ENTITY noFeedsFoundTitle "Aucun marque-page dynamique trouvé">
 <!ENTITY noFeedsFound "RSS Ticker n&apos;a pas pu localiser de marque-page dynamique (fils de news, fils RSS)">
-<!ENTITY howToLiveBookmark1 "RSS Ticker charge et fait défiler les fils de news que vous avez ajoutés dans les marque-pages en tant que marque-pages dynamiques. Si vous n&apos;êtes pas familier avec le système des marque-pages dynamiques de Firefox, il y a deux façons d&apos;en ajouter dans Firefox :">
-<!ENTITY howToLiveBookmark2 "Si la page que vous visualisez dans votre navigateur contient un fil RSS (http://www.mozilla.org/, par exemple), il y a  une petite icône orange à la droite de la barre d&apos;adresse. Si vous cliquez sur cette icône, la fenêtre &apos;Ajouter un marque-page dynamique&apos; s&apos;ouvrira.">
-<!ENTITY howToLiveBookmark3 "Dans le gestionnaire des marque-pages ( Marque-pages &gt; Gérer les marque-pages...), cliquer sur &apos;Nouveau marque-page dynamique&apos; dans le menu Fichier. Entrer alors l&apos;adresse du fil XML dans le champ &apos;Emplacement du fil&apos;.">
-<!ENTITY howToLiveBookmark4 "Après avoir utilisé l&apos;une ou l&apos;autre de ces méthodes, redémarrez Firefox ou choisissez &apos;Rafraîchir les fils&apos; dans le menu contextuel de la bande déroulante pour afficher le fil dans la bande.">
+<!ENTITY howToSubscribe1 "RSS Ticker charge et fait défiler les éléments de vos marque-pages dynamiques (alimentation de nouvelles Usenet, flux RSS), mais vous n'avez aucun marque-page dynamique. Besoin d'aide ? S'abonner à un flux est facile :">
+<!ENTITY howToSubscribe2 "Si la page que vous regardez dans votre navigateur, offre un flux RSS (www.mozilla.org, par exemple), une petite icône orange ou bleue apparaitra sur le côté droit de la barre d'adresse, à côté de l'étoile utilisée pour marquer une page. Si vous cliquez sur cette icône, cela ouvrira la page &apos;Abonnement aux marque-pages dynamiques&apos;.">
+<!ENTITY howToSubscribe3 "Cliquez sur S'abonner maintenant et RSS Ticker commencera instantanément à faire défiler les éléments de ce flux.">
+<!ENTITY closeNoFeedsPage "Fermer cette page">
 <!ENTITY dontShowAgain "Ne plus afficher ce message.">
 <!ENTITY feed "Fil">
 <!ENTITY feeds "Fils">

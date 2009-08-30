@@ -64,10 +64,6 @@
 <!ENTITY about "Perihal">
 <!ENTITY noFeedsFoundTitle "Tiada Tandabuku Langsung dijumpai.">
 <!ENTITY noFeedsFound "RSS Ticker tidak dapat mengesan satu pun Tandabuku Langsung (newsfeeds, RSS feeds).">
-<!ENTITY howToLiveBookmark1 "RSS Ticker akan melancarkan dan skrol feed yang telah anda tanda sebagai Tandabuku Langsung. Jika anda tidak biasa dengan sistem Tandabuku Langsung Firefox, ada dua cara untuk menambah Tandabuku Langsung dalam Firefox.">
-<!ENTITY howToLiveBookmark2 "Jika halaman yang anda buka menyediakan feed RSS (contohnya: http://www.mozilla.org), ada satu ikon bewarna jingga pada sebelah kanan bar alamat. Jika anda klik ikon tersebut, ia akan membuka dialog &apos;Tambah Tandabuku Langsung&apos;.">
-<!ENTITY howToLiveBookmark3 "Dalam tetingkap Pengurusan Tandabuku, (dalam Bookmarks &gt; Manage Bookmarks), terdapat satu opsyen dibawah menu &apos;Tandabuku Langsung Baru&apos;. Di situa anda boleh meletakkan alamat feed XML dalam medan Lokasi.">
-<!ENTITY howToLiveBookmark4 "Selepas melakukan mana-mana langkah seperti yang telah dinyatakan, mula semula Firefox atau pilih &apos;Segarkan semula feed&apos; dari menu konteks RSS Ticker maka ia akan memaparkan feed dalam ticker.">
 <!ENTITY dontShowAgain "Jangan paparkan masej ini lagi.">
 <!ENTITY feed "Feed">
 <!ENTITY feeds "Feed">

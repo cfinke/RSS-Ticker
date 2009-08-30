@@ -64,10 +64,6 @@
 <!ENTITY about "O razširitvi">
 <!ENTITY noFeedsFoundTitle "Ni najdenih živih zaznamkov">
 <!ENTITY noFeedsFound "Prikazovalnik živih zaznamkov ne more najti živih zaznamkov.">
-<!ENTITY howToLiveBookmark1 "Prikazovalnik živih zaznamkov naloži in zasuka novice, ki ste jih označili kot žive zaznamke. Če vam sistem živih zaznamkov Firefoxa ni jasen, obstajata dva načina, kako v Firefox dodate živ zaznamek:">
-<!ENTITY howToLiveBookmark2 "Če stran, ki jo imate odprto v brskalniku, ponuja dovod RSS (npr. http://www.mozilla.org/ ), se na desni strani naslovne vrstice pojavi majhna oranžna ikona. Če kliknete nanjo, boste odprli pogovorno okno &apos;Dodaj živ zaznamek&apos;.">
-<!ENTITY howToLiveBookmark3 "V upravitelju zaznamkov (pod Zaznamki &gt; Upravljaj z zaznamki) je možnost pod menijem Datoteka za &apos;Nov živ zaznamek&apos;. Tukaj lahko vnesete mesto datoteke XML v polje Mesto.">
-<!ENTITY howToLiveBookmark4 "Ko opravite katerega koli od teh korakov, ponovno zaženite Firefox ali izberite &apos;Osveži žive zaznamke&apos; v pojavnem meniju, s čimer se bo živ zaznamek prikazal.">
 <!ENTITY dontShowAgain "Tega sporočila ne prikaži več.">
 <!ENTITY feed "Živ zaznamek">
 <!ENTITY feeds "Živi zaznamki">

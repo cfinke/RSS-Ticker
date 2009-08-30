@@ -64,10 +64,6 @@
 <!ENTITY about "Om">
 <!ENTITY noFeedsFoundTitle "Inga aktiva bokmärken funna">
 <!ENTITY noFeedsFound "RSS Ticker kunde inte hitta några aktiva bokmärken (också kända som newsfeeds, RSS feeds).">
-<!ENTITY howToLiveBookmark1 "RSS Ticker laddar och rullar de nyhetsflöden du har sparat som aktiva bokmärken. Om du inte känner till Firefox aktiva bokmärkessystem så finns det två sätt att lägga till ett aktivt bokmärke i Firefox:">
-<!ENTITY howToLiveBookmark2 "Om sidan du ser i webbläsaren erbjuder ett RSS-flöde (till exempel http://www.mozilla.org/), så kommer det att finnas en liten orange ikon till höger i adressfältet. Om du klickar på den ikonen kommer en &quot;Lägg till aktivt bokmärke&quot;-dialogruta att öppnas.">
-<!ENTITY howToLiveBookmark3 "I bokmärkeshanteraren (finns under Bokmärken &gt; Hantera bokmärken) finns det ett alternativ under Arkiv-menyn som heter &quot;Nytt Aktivt Bokmärke&quot;. Där kan du skriva in platsen för XML-flödet i Plats-fältet.">
-<!ENTITY howToLiveBookmark4 "Efter att du har utfört något av dessa steg kommer flödet att visas i textremsan när du startar om Firefox eller väljer &quot;Uppdatera Flöden&quot; från snabbvalsmenyn.">
 <!ENTITY dontShowAgain "Visa inte detta meddelande igen.">
 <!ENTITY feed "Flöde">
 <!ENTITY feeds "Flöden">

@@ -64,10 +64,6 @@
 <!ENTITY about "Om">
 <!ENTITY noFeedsFoundTitle "Ingen live-bogmærker fundet">
 <!ENTITY noFeedsFound "RSS Ticker kunne ikke finde nogen live-bogmærker (nyhedsfeeds, RSS-feeds)">
-<!ENTITY howToLiveBookmark1 "RSS Ticker indlæser og ruller nyhedsfeeds som du har bogmærket som live-bogmærker. Hvis du ikke kender Firefox&apos; live-bogmærke-system, er der 2 måder at tilføje live-bogmærker i Firefox:">
-<!ENTITY howToLiveBookmark2 "Hvis siden du kigger på i din browser tilbyder en RSS-feed ( http://mozilla.org/ f.eks.) vil der være et lille orange ikon i højre side af adresselinien. Hvis du klikker dette, åbnes &apos;Tilføj live bogmærke&apos; dialogboksen.">
-<!ENTITY howToLiveBookmark3 "I Bogmærkeadministrationen, (under Bogmærker &gt; Arranger bogmærker) er der en indstilling under Fil-menuen for &apos;Nyt live-bogmærke&apos;. Her kan du indtaste stien til XML-feeden i feed placeringsfeltet.">
-<!ENTITY howToLiveBookmark4 "Efter at have gennemført et af disse trin, kan du genstarte Firefox eller vælge &apos;Opdater feeds&apos; fra Tickerens kontekstmenu for at vise feeds i Tickeren.">
 <!ENTITY dontShowAgain "Vis ikke denne meddelelse igen.">
 <!ENTITY feed "Feed">
 <!ENTITY feeds "Feeds">

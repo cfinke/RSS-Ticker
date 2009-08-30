@@ -28,6 +28,8 @@
 <!ENTITY options.smoothness.tt "Het aantal ticks nodig om 1 berichtje te verwijderen van de voorkant van de ticker. Zet hoger om vlotter te scrollen.">
 <!ENTITY options.updateInterval.tt "Het aantal minuten tussen updates van de feeds.">
 <!ENTITY options.updateInterval "Updatefrequentie">
+<!ENTITY options.update.1 "Mij feeds elke">
+<!ENTITY options.update.2 "minuten bijwerken.">
 <!ENTITY options.speed "Ticksnelheid">
 <!ENTITY options.dw.itemWidth "Breedte berichtje">
 <!ENTITY pixelAbbrev "px">
@@ -64,10 +66,10 @@
 <!ENTITY about "Over">
 <!ENTITY noFeedsFoundTitle "Geen livebladwijzers gevonden">
 <!ENTITY noFeedsFound "RSS Ticker kan geen livebladwijzers (ofwel newsfeeds, RSS-feeds) vinden.">
-<!ENTITY howToLiveBookmark1 "RSS Ticker laadt en scrollt de nieuwsfeeds die u al Livebladwijzers aanduidde. Als u niet weet hoe Livebladwijzers in Firefox werken: er zijn twee manieren om een Livebladwijzer in Firefox toe te voegen:">
-<!ENTITY howToLiveBookmark2 "Als de pagina waar u naar kijkt in uw browser een RSS-feed (http://www.mozilla.org/, bijvoorbeeld) bevat zal er een klein oranje pictogrammetje verschijnen in de rechterkant van de adresbalk. Als u op dat pictogrammetje klikt zal het ‘Livebladwijzer toevoegen’ dialoogvenster openen.">
-<!ENTITY howToLiveBookmark3 "In de bladwijzerbeheerder, (te vinden onder Bladwijzers &gt; Bladwijzers beheren) is er een optie in het menu Bestand ‘Nieuwe livebladwijzer’. Hier kan de locatie van de XML-feed in het Feedlocatieveld geplaatst worden.">
-<!ENTITY howToLiveBookmark4 "Na een van beide stappen gedaan te hebben, kunt u Firefox herstarten of ‘Feeds Verversen’ kiezen uit het contextmenu van de Ticker om de feed in de ticker te tonen.">
+<!ENTITY howToSubscribe1 "RSS Ticker laadt en scrollt de berichten uit uw Livebladwijzers (ook wel bekend als nieuwsfeeds of RSS-feeds), maar u bent niet geabonneerd op een Livebladwijzer. Abonneren op een feed is eenvoudig:">
+<!ENTITY howToSubscribe2 "Als de door u in uw browser bekeken pagina een RSS-feed biedt (bijvoorbeeld www.mozilla.org) verschijnt er een klein oranje of blauw pictogram aan de rechterkant van de adresbalk, naast de ster die voor Bladwijzer maken wordt gebruikt. Als u op dat pictogram klikt wordt het dialoogvenster ‘Livebladwijzer toevoegen’ geopend.">
+<!ENTITY howToSubscribe3 "Klik op Nu abonneren en RSS Ticker begint meteen met scrollen van de berichten in die feed.">
+<!ENTITY closeNoFeedsPage "Deze pagina sluiten">
 <!ENTITY dontShowAgain "Dit bericht niet opnieuw weergeven.">
 <!ENTITY feed "Feed">
 <!ENTITY feeds "Feeds">

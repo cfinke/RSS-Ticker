@@ -64,10 +64,6 @@
 <!ENTITY about "Über">
 <!ENTITY noFeedsFoundTitle "Keine dynamischen Lesezeichen gefunden">
 <!ENTITY noFeedsFound "RSS Ticker konnte keine dynamischen Lesezeichen (d.h. Newsfeeds, RSS-Feeds) finden.">
-<!ENTITY howToLiveBookmark1 "RSS Ticker lädt Ihre als dynamische Lesezeichen angelegten Nachrichten-Feeds als Lauftext in eine eigene Leiste. Für den Fall, dass Sie mit der Systematik der dynamischen Lesezeichen in Firefox nicht vertraut sind, existieren zwei Wege, um dynamische Lesezeichen hinzuzufügen:">
-<!ENTITY howToLiveBookmark2 "Falls eine Seite, die sie besuchen, einen RSS-Feed anbietet (z.B. http://www.erweiterungen.de/), erscheint ein kleines oranges Symbol rechts in der Adressleiste. Bei einem Klick öffnet sich der Dialog &apos;Dynamisches Lesezeichen anlegen&apos;.">
-<!ENTITY howToLiveBookmark3 "Im Lesezeichen-Manager (zu finden unter &apos;Lesezeichen &gt; Lesezeichen-Manager&apos;) gibt es im Datei-Menü einen Eintrag &apos;Neues dynamisches Lesezeichen&apos;. Im entsprechenden Dialogfenster können Sie die Adresse eines XML-Feeds eingeben.">
-<!ENTITY howToLiveBookmark4 "Nachdem einer diese Schritte vollzogen wurde, wird der Feed nach einem Neustart von Firefox oder nach der Auswahl des Menüpunkts &apos;Feeds aktualisieren&apos; im Ticker-Kontextmenü als Lauftext angezeigt.">
 <!ENTITY dontShowAgain "Diese Meldung nicht mehr anzeigen">
 <!ENTITY feed "Feed">
 <!ENTITY feeds "Feeds">

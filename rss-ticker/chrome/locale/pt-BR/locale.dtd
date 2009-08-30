@@ -64,10 +64,6 @@
 <!ENTITY about "Sobre">
 <!ENTITY noFeedsFoundTitle "Nenhum Favorito Dinâmico encontrado">
 <!ENTITY noFeedsFound "O RSS Ticker não localizou nenhum Favorito Dinâmico (notícias, RSS)">
-<!ENTITY howToLiveBookmark1 "O RSS Ticker carrega e exibe as fontes que você adiciona como Favoritos Dinâmincos. Se você não conhece o sistema de Favoritos Dinâmicos do Firefox, existem duas maneiras de adicionar Favoritos Dinâmicos:">
-<!ENTITY howToLiveBookmark2 "Se a página que você estiver visitando, oferecer uma fonte RSS (por exemplo, http://www.mozilla.org/) existirá um pequeno ícone laranja no lado direito da barra de endereço. Ao clicar nesse ícone a janela de &apos;Adicionar RSS a favoritos&apos; irá aparecer.">
-<!ENTITY howToLiveBookmark3 "No gerenciador de Favoritos ( em Favoritos &gt; Organizar...), no menu Arquivo existe a opção&apos;Novo favorito RSS...&apos;. Agora é so colocar o endereço no campo End. do RSS.">
-<!ENTITY howToLiveBookmark4 "Depois de qualquer desses métodos, reinicie o Firefox, ou escolha &apos;Atualizar Fontes&apos; no menu de contexto do RSS Ticker para exibir a nova fonte no letreiro.">
 <!ENTITY dontShowAgain "Não exibir esta mensagem novamente.">
 <!ENTITY feed "Fonte">
 <!ENTITY feeds "Fontes">

@@ -28,6 +28,8 @@
 <!ENTITY options.smoothness.tt "Tempo para remover cada item do letreiro. Defina um valor alto para uma transição suave.">
 <!ENTITY options.updateInterval.tt "Minutos de intervalo entre actualizações das fontes.">
 <!ENTITY options.updateInterval "Frequência de Actualização">
+<!ENTITY options.update.1 "Actualizar as minhas fontes a cada">
+<!ENTITY options.update.2 "minutos">
 <!ENTITY options.speed "Velocidade">
 <!ENTITY options.dw.itemWidth "Largura do Item">
 <!ENTITY pixelAbbrev "px">
@@ -35,7 +37,7 @@
 <!ENTITY cmOptionsDescription "Configure o menu de contexto do RSS Ticker seleccionando os itens abaixo.">
 <!ENTITY tt.summary "Resumo">
 <!ENTITY options "Opções">
-<!ENTITY options.restartNotice "Opções com * só serão válidas depois de reiniciado o browser.">
+<!ENTITY options.restartNotice "As opções com * só serão válidas depois de reiniciado o browser.">
 <!ENTITY options.general "Geral">
 <!ENTITY options.advanced "Avançado">
 <!ENTITY options.contextMenu "Menu Contextual">
@@ -54,7 +56,7 @@
 <!ENTITY options.pause "Parar o letreiro com o rato.">
 <!ENTITY options.hide "Ocultar itens lidos.">
 <!ENTITY options.bold "Itens não lidos a negrito.">
-<!ENTITY options.openInNewTab "Abrir ligações em novas abas.">
+<!ENTITY options.openInNewTab "Abrir ligações em novos separadores.">
 <!ENTITY toggleTicker "Alternar entre letreiro ligado ou desligado">
 <!ENTITY options.dw.limitWidth "Limitar a largura dos itens no letreiro">
 <!ENTITY options.dw.isMaxWidth "Usar somente largura máxima">
@@ -63,11 +65,11 @@
 <!ENTITY options.itemsPerFeed "Itens por fonte">
 <!ENTITY about "Sobre">
 <!ENTITY noFeedsFoundTitle "Não foram encontrados Marcadores Dinâmicos">
-<!ENTITY noFeedsFound "O RSS Ticker não encontrou nenhum Marcador Dinâmico (notícias, fontes RSS)">
-<!ENTITY howToLiveBookmark1 "O RSS Ticker carrega e exibe as fontes guardadas como Marcadores Dinâmicos. Se ainda não conhece o sistema de marcação dinâmica do Firefox, existem duas formas de adicionar Marcadores Dinâmicos:">
-<!ENTITY howToLiveBookmark2 "Se a página que estiver a visitar fornecer uma fonte RSS (por exemplo, http://www.mozilla.org/) surge um pequeno ícone laranja no lado direito da barra de endereço. Ao clicar nesse ícone,  irá aparecer a opção de &apos;Subscrever RSS&apos;.">
-<!ENTITY howToLiveBookmark3 "Na biblioteca de Marcadores ( em Marcadores &gt; Organizar Marcadores...), procurar a opção &apos;Novo favorito RSS...&apos; no menu Arquivo. Basta de seguida colocar o endereço no campo respectivo.">
-<!ENTITY howToLiveBookmark4 "Depois de seguido qualquer desses passos, reinicie o Firefox, ou escolha &apos;Actualizar Fontes&apos; no menu contextual do RSS Ticker para exibir a nova fonte no letreiro.">
+<!ENTITY noFeedsFound "O RSS Ticker não encontrou nenhum Marcador Dinâmico">
+<!ENTITY howToSubscribe1 "O RSS Ticker carrega e exibe numa barra rolante os itens dos seus Marcadores Dinâmicos (também conhecidos como feeds RSS ou fontes de notícias), mas ainda não subscreveu nenhum. Precisa de ajuda? Subscrever uma fonte é simples:">
+<!ENTITY howToSubscribe2 "Se a página que está a ver no browser disponibiliza uma fonte RSS (www.mozilla.org, por exemplo), surge um pequeno ícone laranja ou azul no lado direito da barra de endereço, junto à estrela usada para adicionar marcadores. Se clicar nesse ícone, surgirá o menu para adicionar a fonte como marcador dinâmico.">
+<!ENTITY howToSubscribe3 "Clique «Subscrever», e o RSS Ticker começará a exibir na barra os itens dessa fonte.">
+<!ENTITY closeNoFeedsPage "Fechar esta página">
 <!ENTITY dontShowAgain "Não voltar a exibir esta mensagem.">
 <!ENTITY feed "Fonte">
 <!ENTITY feeds "Fontes">
@@ -84,5 +86,5 @@
 <!ENTITY oncePerDay "Uma vez por dia">
 <!ENTITY faster "Mais rápido">
 <!ENTITY slower "Mais lento">
-<!ENTITY smoother "Mais suave (Consome mais recursos da CPU)">
-<!ENTITY choppier "Mais brusco (Consome menos recursos da CPU)">
+<!ENTITY smoother "Mais suave (Consome mais recursos)">
+<!ENTITY choppier "Mais brusco (Consome menos recursos)">
