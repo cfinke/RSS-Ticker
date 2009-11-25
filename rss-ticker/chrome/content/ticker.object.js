@@ -401,7 +401,7 @@ var RSSTICKER = {
 			var option = menu.childNodes[i];
 			
 			if (option.nodeName == 'menuitem'){
-				if (eval("RSSTICKER.cmOptions." + option.getAttribute("option") + " == false")){
+				if (RSSTICKER.cmOptions[option.getAttribute("option")] == false){
 					option.style.display = 'none';
 				}
 				else {
