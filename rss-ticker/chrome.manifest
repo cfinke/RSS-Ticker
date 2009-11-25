@@ -3,7 +3,6 @@ content    rss-ticker     chrome/content/
 locale     rss-ticker     da-DK            chrome/locale/da-DK/
 locale     rss-ticker     de-DE            chrome/locale/de-DE/
 locale     rss-ticker     en-US            chrome/locale/en-US/
-locale     rss-ticker     es-AR            chrome/locale/es-AR/
 locale     rss-ticker     es-ES            chrome/locale/es-ES/
 locale     rss-ticker     fi-FI            chrome/locale/fi-FI/
 locale     rss-ticker     fr-FR            chrome/locale/fr-FR/
@@ -19,8 +18,6 @@ locale     rss-ticker     ru-RU            chrome/locale/ru-RU/
 locale     rss-ticker     sl-SI            chrome/locale/sl-SI/
 locale     rss-ticker     sv-SE            chrome/locale/sv-SE/
 locale     rss-ticker     tr-TR            chrome/locale/tr-TR/
-locale     rss-ticker     uk-UA            chrome/locale/tr-TR/
-locale     rss-ticker     zh-CN            chrome/locale/uk-UA/
 locale     rss-ticker     zh-TW            chrome/locale/zh-TW/
 
 skin       rss-ticker     classic             chrome/skin/lin/
