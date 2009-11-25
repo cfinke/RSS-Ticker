@@ -1,21 +1,24 @@
 <?xml version="1.0"?>
-<RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
-         xmlns:NC="http://home.netscape.com/NC-rdf#"
-         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="urn:mozilla:install-manifest"
-                   em:id="{1f91cde0-c040-11da-a94d-0800200c9a66}"
-                   em:name="RSS Ticker"
-                   em:version="3.0.2"
-                   em:description="Scrolls your RSS feeds (Live Bookmarks) in a toolbar."
-                   em:creator="Christopher Finke"
-                   em:homepageURL="http://www.chrisfinke.com/addons/rss-ticker/"
-                   em:iconURL="chrome://rss-ticker/content/skin-common/feed-icon.gif"
-                   em:optionsURL="chrome://rss-ticker/content/options.xul"
-                   em:aboutURL="chrome://rss-ticker/content/about.xul">
-    <em:targetApplication RDF:resource="rdf:#$Zgf3i2"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$Zgf3i2"
-                   em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-                   em:minVersion="3.0"
-                   em:maxVersion="3.5.*" />
-</RDF:RDF>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+	<Description about="urn:mozilla:install-manifest">
+		<em:id>{1f91cde0-c040-11da-a94d-0800200c9a66}</em:id>
+		<em:name>RSS Ticker</em:name>
+		<em:version>3.0.4pre</em:version>
+		<em:description>Scrolls your RSS feeds (Live Bookmarks) in a toolbar.</em:description>
+		<em:creator>Christopher Finke</em:creator>
+		<em:iconURL>chrome://rss-ticker/content/skin-common/feed-icon.gif</em:iconURL>
+		<em:homepageURL>http://www.chrisfinke.com/addons/rss-ticker/</em:homepageURL>
+		<em:optionsURL>chrome://rss-ticker/content/options.xul</em:optionsURL>    
+		<em:aboutURL>chrome://rss-ticker/content/about.xul</em:aboutURL>
+		<!-- Firefox -->
+		
+		<em:targetApplication>
+			<Description>
+				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+				<em:minVersion>3.0</em:minVersion>
+				<em:maxVersion>3.6.*</em:maxVersion>
+			</Description>
+		</em:targetApplication>
+		
+	</Description>   
+</RDF>
