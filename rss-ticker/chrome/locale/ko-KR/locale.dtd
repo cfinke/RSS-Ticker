@@ -28,6 +28,8 @@
 <!ENTITY options.smoothness.tt "티커 전면에서 1개의 항목을 사라지는데 걸리는 순간. 더 부드러운 스크롤을 위한 높이 설정.">
 <!ENTITY options.updateInterval.tt "피드 갱신 사이의 분수">
 <!ENTITY options.updateInterval "갱신 주기">
+<!ENTITY options.update.1 "피드 갱신 주기:">
+<!ENTITY options.update.2 "분">
 <!ENTITY options.speed "틱 속도">
 <!ENTITY options.dw.itemWidth "항목 폭">
 <!ENTITY pixelAbbrev "px">
@@ -64,6 +66,10 @@
 <!ENTITY about "이 확장기능에 대하여">
 <!ENTITY noFeedsFoundTitle "발견된 라이브 북마크 없음">
 <!ENTITY noFeedsFound "RSS 티커는 (뉴스 피드, RSS 피드 같은) 어떤 라이브 북마크도 찾아낼 수 없었습니다.">
+<!ENTITY howToSubscribe1 "RSS Ticker는 당신의 라이브 북마크(예를들어, 뉴스피드, RSS피드)로 부터 항목을 불러와 스크롤합니다.하지만,어떠한 라이브 북마크도 구독하지 않고 있습니다. 도움이 필요하십니까?피드 구독은 쉽습니다:">
+<!ENTITY howToSubscribe2 "만약 브라우저 안에 보고있는 페이지가 RSS피드를 제공(예를 들면, www.mozilla.org)하고 있다면, 주소창 오른쪽 구석위에 작은 오렌지색 또는 파란색 아이콘과, 그 옆에 북마크를 위한 사용되는 별이 있을 겁니다. 만약 아이콘을 클릭한다면, '라이브 북마크 추가' 화면이 열릴겁니다.">
+<!ENTITY howToSubscribe3 "바로 구독하기를 클릭 후, RSS Ticker는 곧바로 Feed로 부터 뉴스를 스크롤하기 시작합니다.">
+<!ENTITY closeNoFeedsPage "이 페이지 닫기">
 <!ENTITY dontShowAgain "이 메시지를 다시 표시 하지 않음.">
 <!ENTITY feed "피드">
 <!ENTITY feeds "피드">
@@ -72,3 +78,14 @@
 <!ENTITY remove "삭제">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "아무것도 없을 경우 티커 숨김.">
+<!ENTITY trendsTitle "실시간 웹 경향">
+<!ENTITY trendsP1 "RSS Ticker는 혹시 당신이 Twitter, Digg, 및 다른 소셜 웹상의 최근 동향 검색어를 구독하기를 좋아하는지 알기를 원합니다.">
+<!ENTITY trendsP2 "피드를 구독하려면 확인을 클릭하세요; 티커안에 자동으로 표시될 것이고, 최근 뉴스와 주변의 웹으로부터 유행을 최신 상태로 유지시킬 겁니다.(언제든지 구독을 해지 할 수 있습니다.)">
+<!ENTITY trendsP3 "걱정마세요, 구독안함을 선택하면 다시 묻지 않습니다.">
+<!ENTITY every10Minutes "매 10분마다">
+<!ENTITY oncePerDay "하루에 1번">
+<!ENTITY faster "빠르게">
+<!ENTITY slower "느리게">
+<!ENTITY smoother "부드럽게(더좋은 CPU)">
+<!ENTITY choppier "급하게(낮은 CPU)">
+<!ENTITY checkbox_understand "예, 전 사회적 화제 동향의 Feed를 구독하길 원합니다.">

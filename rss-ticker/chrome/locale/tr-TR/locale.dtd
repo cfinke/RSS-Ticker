@@ -66,6 +66,8 @@
 <!ENTITY about "Hakkında">
 <!ENTITY noFeedsFoundTitle "Hiçbir Canlı Yerimi Bulunamadı">
 <!ENTITY noFeedsFound "RSS Ticker herhangi bir canlı yerimi bulamadı (aka newsfeeds, RSS feed vb.)">
+<!ENTITY howToSubscribe1 "RSS Ticker, Canlı Yerimlerinizdeki öğeleri alır ve kaydırarak gösterir (haber akışı veya RSS beslemeleri), fakat Canlı Yerimlerinizde herhangi bir aboneliğiniz yok. Yardıma ihtiyacınız varmı? Bir beslemeye abone olmak çok kolaydır.">
+<!ENTITY howToSubscribe2 "Eğer baktığınız web sayfası bir RSS beslemesi içeriyorsa (örneğin www.mozilla.org gibi), adres çubuğunuzun sağ tarafında, yıldızından sonra küçük turuncu veya mavi bir simge görülecektir. Eğer bu simgeye tıklarsanız, &apos;Canlı Yerimi Ekle&apos; seçeneği görülecektir.">
 <!ENTITY howToSubscribe3 "Abone olmak için tıklayın ve RSS Ticker bu yayındaki elemanları almaya başlayacaktır.">
 <!ENTITY closeNoFeedsPage "Bu sayfayı kapat">
 <!ENTITY dontShowAgain "Bu iletiyi tekrar gösterme.">
@@ -76,9 +78,14 @@
 <!ENTITY remove "Kaldır">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Boş olduğunda Şeridi gizle">
+<!ENTITY trendsTitle "Gerçek-zamanlı Web Akımları">
+<!ENTITY trendsP1 "RSS Ticker sizin Twitter, Digg ve diğer sosyal Web sitelerindeki son aranan terimlerin beslemelerine abone olmak isteyebileceğini bilmek istiyor.">
 <!ENTITY trendsP2 "Yayına üye olmak için OK'e tıklayın; ticker içinde kendiliğinden görülecektir, bu yolla web aracılığı ile en güncel haber ve trendlerden haberdar olunuz. (İstediğiniz zaman aboneliğinizi iptal edebilirsiniz)">
 <!ENTITY trendsP3 "Endişelenme, eğer abone olmamayı seçdiyseniz size tekrar sorulmayacak.">
 <!ENTITY every10Minutes "Her 10 dakikada">
 <!ENTITY oncePerDay "Günde bir defa">
 <!ENTITY faster "Hızlı">
 <!ENTITY slower "Yavaş">
+<!ENTITY smoother "Akıllıca (Daha Fazla CPU)">
+<!ENTITY choppier "Basit (Daha Az CPU)">
+<!ENTITY checkbox_understand "Evet, güncel sosyal konulardaki beslemelere abone olmak istiyorum.">

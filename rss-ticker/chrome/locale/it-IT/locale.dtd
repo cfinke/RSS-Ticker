@@ -73,14 +73,14 @@
 <!ENTITY dontShowAgain "Non mostrare questo messaggio ancora">
 <!ENTITY feed "Feed">
 <!ENTITY feeds "Feed">
-<!ENTITY feedManagement "È possibile aggiungere o eliminare i feed dalla barra di RSS Ticker selezionandoli nella lista qui sotto e facendo clic sui pulsanti 'Aggiungi' o 'Elimina'. Nota: attualmente tramite la lista è possibile la sola selezione dei feed da visualizzare nella barra. Per aggiungere i feed è necessario utilizzare la relativa funzione dei segnalibri Live di Firefox">
+<!ENTITY feedManagement "È possibile aggiungere o eliminare i feed dalla barra di RSS Ticker selezionandoli nella lista qui sotto e facendo clic sui pulsanti 'Aggiungi' o 'Elimina'. Nota: attualmente tramite la lista è possibile la sola selezione dei feed da visualizzare nella barra. Per aggiungere nuovi feed è necessario utilizzare la relativa funzione dei segnalibri Live di Firefox">
 <!ENTITY add "Aggiungi">
 <!ENTITY remove "Elimina">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Nascondi la barra di RSS Ticker quando è vuota">
 <!ENTITY trendsTitle "Tendenze del web in tempo reale">
-<!ENTITY trendsP1 "È possibile aggiungere un feed relativo alle ultime tendenze di ricerca su Twitter, Digg ed il resto del social web">
-<!ENTITY trendsP2 "Fare clic su OK per aggiungere tale feed (eliminabile in qualsiasi momento), che verrà visualizzato automaticamente nella barra di RSS Ticker mantenendo aggiornati sulle ultime notizie e tendenze del web">
+<!ENTITY trendsP1 "È possibile aggiungere un feed relativo alle ultime tendenze di ricerca su Twitter, Digg ed il resto delle reti sociali">
+<!ENTITY trendsP2 "Selezionare la casella qui sotto e fare clic su OK per aggiungere tale feed (eliminabile in qualsiasi momento), che verrà visualizzato automaticamente nella barra di RSS Ticker permettendo di rimanere aggiornati sulle ultime notizie e tendenze del web">
 <!ENTITY trendsP3 "Questo avviso non verrà più mostrato">
 <!ENTITY every10Minutes "Ogni 10 minuti">
 <!ENTITY oncePerDay "Una volta al giorno">
@@ -88,3 +88,4 @@
 <!ENTITY slower "Minore">
 <!ENTITY smoother "Maggiore (maggior uso della CPU)">
 <!ENTITY choppier "Minore (minor uso della CPU)">
+<!ENTITY checkbox_understand "Aggiungi il feed delle ultime tendenze di ricerca">
