@@ -3,7 +3,6 @@ var RSSTICKER = {
 	bookmarkService : Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService),
 	ioService : Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService),
 	
-	
 	ignoreFilename : "rss-ticker.ignore.txt",
 	
 	strings : null,
@@ -108,6 +107,8 @@ var RSSTICKER = {
 	currentFirstItemMargin : 0,
 	
 	tickLength : 0,
+	
+	lastOneRiotTimestamp : 0,
 	
 	onload : function () {
 		this.loadPrefs();
@@ -840,18 +841,32 @@ var RSSTICKER = {
 						tbb.style.fontWeight = 'bold';
 					}
 				}
-
+				
 				tbb.onContextOpen = function (target) {
+					var url = this.href;
+					
+					if (url.indexOf("oneriot.com") != -1 && url.indexOf("86f2f5da-3b24-4a87-bbb3-1ad47525359d") != -1) {
+						var timestamp = new Date();
+						timestamp = timestamp.getTime();
+						
+						if (RSSTICKER.lastOneRiotTimestamp > (timestamp - 1100)) {
+							url = url.split("&")[0];
+						}
+						else {
+							RSSTICKER.lastOneRiotTimestamp = timestamp;
+						}
+					}
+					
 					if (!target) {
-						window._content.document.location.href = this.href;
+						window._content.document.location.href = url;
 					}
 					else if (target == 'window'){
-						window.open(this.href);
+						window.open(url);
 					}
 					else if (target == 'tab') {
-						this.parent.browser.openInNewTab(this.href);
+						this.parent.browser.openInNewTab(url);
 					}
-
+					
 					this.markAsRead(true);
 				};
 
@@ -947,7 +962,7 @@ var RSSTICKER = {
 		this.tick();
 	},
 	
-	onTickerItemClick : function (event, url, node) {
+	onTickerItemClick : function (event, url, node) {		
 		if (event.ctrlKey) {
 			node.markAsRead(true); 
 			return false;
@@ -956,14 +971,28 @@ var RSSTICKER = {
 			// Discard right-clicks
 			return;
 		}
-		else if (event.which == 4 || event.shiftKey){
-			// Shift
-			window.open(url);
-		}
 		else {
-			// Left-click
-			this.launchUrl(url, event);
-			node.markAsRead(true);
+			if (url.indexOf("oneriot.com") != -1 && url.indexOf("86f2f5da-3b24-4a87-bbb3-1ad47525359d") != -1) {
+				var timestamp = new Date();
+				timestamp = timestamp.getTime();
+				
+				if (RSSTICKER.lastOneRiotTimestamp > (timestamp - 1100)) {
+					url = url.split("&")[0];
+				}
+				else {
+					RSSTICKER.lastOneRiotTimestamp = timestamp;
+				}
+			}
+			
+			if (event.which == 4 || event.shiftKey){
+				// Shift
+				window.open(url);
+			}
+			else {
+				// Left-click
+				this.launchUrl(url, event);
+				node.markAsRead(true);
+			}
 		}
 	},
 	
