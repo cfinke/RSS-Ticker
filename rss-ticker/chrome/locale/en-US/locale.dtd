@@ -34,7 +34,7 @@
 <!ENTITY options.dw.itemWidth "Item width">
 <!ENTITY pixelAbbrev "px">
 <!ENTITY options.smooothness "Ticker Scroll Smoothness">
-<!ENTITY cmOptionsDescription "Customize the ticker&apos;s context menu by selecting or deselecting options below.">
+<!ENTITY cmOptionsDescription "Customize the ticker's context menu by selecting or deselecting options below.">
 <!ENTITY tt.summary "Summary">
 <!ENTITY options "Options">
 <!ENTITY options.restartNotice "Options denoted by * will not be changed until you reopen your browser window.">
@@ -45,8 +45,8 @@
 <!ENTITY options.random.tt "Have the ticker show the feed items in a random order for variety.">
 <!ENTITY options.pause.tt "Pause the ticker when the mouse is over it.">
 <!ENTITY options.disable.tt "Disable the RSS ticker. This has the same effect as uninstalling it, but without uninstalling it.">
-<!ENTITY options.hide.tt "Hide feed items that you&apos;ve already read (according to your browser&apos;s history).">
-<!ENTITY options.bold.tt "Show items that you haven&apos;t read (according to your browser&apos;s history) in bold.">
+<!ENTITY options.hide.tt "Hide feed items that you've already read (according to your browser's history).">
+<!ENTITY options.bold.tt "Show items that you haven't read (according to your browser's history) in bold.">
 <!ENTITY options.openInNewTab.tt "Always open links in new tabs, no matter which mouse button you click with.">
 <!ENTITY disableTicker "Disable ticker">
 <!ENTITY options.tickerPlacement "Ticker Placement">
@@ -54,8 +54,8 @@
 <!ENTITY tickerPlacement.belowBMTB "Below bookmarks toolbar">
 <!ENTITY options.random "Randomize ticker items ">
 <!ENTITY options.pause "Pause the ticker when the mouse is over it.">
-<!ENTITY options.hide "Hide items you&apos;ve already read.">
-<!ENTITY options.bold "Bold items you haven&apos;t read.">
+<!ENTITY options.hide "Hide items you've already read.">
+<!ENTITY options.bold "Bold items you haven't read.">
 <!ENTITY options.openInNewTab "Always open links in new tabs.">
 <!ENTITY toggleTicker "Toggle ticker on/off">
 <!ENTITY options.dw.limitWidth "Limit the width of the items in the ticker">
@@ -67,10 +67,10 @@
 <!ENTITY noFeedsFoundTitle "No Live Bookmarks Found">
 <!ENTITY noFeedsFound "RSS Ticker could not locate any Live Bookmarks">
 <!ENTITY howToSubscribe1 "RSS Ticker loads and scrolls the items from your Live Bookmarks (a.k.a. newsfeeds or RSS feeds), but you haven't subscribed to any Live Bookmarks.  Need some help?  Subscribing to a feed is easy:">
-<!ENTITY howToSubscribe2 "If the page you are looking at in your browser offers an RSS feed (www.mozilla.org, for example), there will be a small orange or blue icon on the right side of the address bar, next to the star used for bookmarking. If you click on that icon, it will open the &apos;Add Live Bookmark&apos; dialog.">
+<!ENTITY howToSubscribe2 "If the page you are looking at in your browser offers an RSS feed (www.mozilla.org, for example), there will be a small orange or blue icon on the right side of the address bar, next to the star used for bookmarking. If you click on that icon, it will open the 'Add Live Bookmark' dialog.">
 <!ENTITY howToSubscribe3 "Click Subscribe Now, and RSS Ticker will instantly begin scrolling the items from that feed.">
 <!ENTITY closeNoFeedsPage "Close this page">
-<!ENTITY dontShowAgain "Don&apos;t show this message again.">
+<!ENTITY dontShowAgain "Don't show this message again.">
 <!ENTITY feed "Feed">
 <!ENTITY feeds "Feeds">
 <!ENTITY feedManagement "You can add or remove feeds from the ticker by selecting them in the list below and pressing either the Add or Remove button. Note: To actually subscribe to a feed, use Firefox's Live Bookmarks.  This list only allows you to set which of your Live Bookmarks appear in the ticker; it doesn't allow you to subscribe to a new feed.">
@@ -80,8 +80,8 @@
 <!ENTITY hideWhenEmpty "Hide Ticker When Empty">
 
 <!ENTITY trendsTitle "Real-time Trending News">
-<!ENTITY trendsP1 "RSS Ticker wants to know if you'd like to subscribe to a feed of the latest trending news on Twitter, Digg, and the rest of the social Web.">
-<!ENTITY trendsP2 "Click OK to subscribe; it will automatically appear in the ticker, keeping you up-to-date on the latest news and trends from around the Web.">
+<!ENTITY trendsP1 "RSS Ticker wants to know if you'd like to subscribe to a feed of the latest trending news stories.">
+<!ENTITY trendsP2 "Click OK to subscribe; the feed will automatically appear in the ticker, keeping you up-to-date on the latest news and trends from around the Web.">
 <!ENTITY trendsP3 "Don't worry, you won't be asked again if you choose not to subscribe.">
 
 <!ENTITY every10Minutes "Every 10 minutes">

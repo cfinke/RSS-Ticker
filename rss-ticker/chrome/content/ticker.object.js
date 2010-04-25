@@ -195,12 +195,9 @@ var RSSTICKER = {
 			
 			setTimeout(
 				function () {
-					window.openDialog("chrome://rss-ticker/content/one-riot-suggestion.xul", "trends", "chrome,dialog,centerscreen,titlebar,alwaysraised,modal");
+					window.openDialog("chrome://rss-ticker/content/one-riot-suggestion.xul", "trends", "chrome,dialog,centerscreen,titlebar,alwaysraised");
 				}, 5000
 			);
-		}
-		else {
-			// Check if they're subscribed to the old feed.
 		}
 	},
 		
@@ -483,10 +480,20 @@ var RSSTICKER = {
 
 		for (var i = 0; i < livemarkIds.length; i++){
 			var feedURL = RSSTICKER.livemarkService.getFeedURI(livemarkIds[i]).spec;
-			var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkIds[i]);
 			
-			if (!RSSTICKER.inArray(ignore, feedURL)){
-				RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkIds[i] });
+			if (feedURL == "http://www.oneriot.com/rss/trendingtopics?&spid=86f2f5da-3b24-4a87-bbb3-1ad47525359d&p=rss-ticker&ssrc=ticker") {
+				// This is the old trending news feed. Use the new subscription method.
+				RSSTICKER.prefs.setBoolPref("trendingNews", true);
+				
+				var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
+				bookmarkService.removeFolder(livemarkIds[i]);
+			}
+			else {
+				var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkIds[i]);
+			
+				if (!RSSTICKER.inArray(ignore, feedURL)){
+					RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkIds[i] });
+				}
 			}
 		}
 		

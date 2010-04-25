@@ -5,44 +5,34 @@
 	id="rssticker-oneriot-dialog"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     buttons="accept,cancel"
-	buttondisabledaccept="true"
     ondialogaccept="return subscribeToFeed();"
 	ondialogcancel="return cancelSearchProvider();"> 
 	
     <script type="application/x-javascript">
         <![CDATA[
-			var feedUrl = "http://www.oneriot.com/rss/trendingtopics?&spid=86f2f5da-3b24-4a87-bbb3-1ad47525359d&p=rss-ticker&ssrc=ticker";
+			var feedUrl = opener.RSSTICKER.trendingNewsUrl;
 			
             var subscribeToFeed = function() {
-				if (document.getElementById("understand").checked) {
-					
-					opener.RSSTICKER.prefs.setBoolPref("trendingNews", true);
-					/*
-					var strings = document.getElementById("RSSTICKER-bundle");
-				
-					var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"];
-					var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
-					var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
-					var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
-					var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService);
-					var menu = Application.bookmarks.menu;
-					var uri = ioService.newURI(feedUrl, null, null);
-					var feedUri = ioService.newURI(feedUrl, null, null);
-					var lm = livemarkService.createLivemarkFolderOnly(Application.bookmarks.menu.id, strings.getString("trendBookmarkTitle"), uri, feedUri, -1);
-					annotationService.setItemAnnotation(lm, "bookmarkProperties/description", strings.getString("trendBookmarkDescription"), 0, Components.interfaces.nsIAnnotationService.EXPIRE_NEVER);
-					*/
-				}
+				opener.RSSTICKER.prefs.setBoolPref("trendingNews", true);
+				/*
+				var strings = document.getElementById("RSSTICKER-bundle");
+			
+				var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"];
+				var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
+				var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
+				var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
+				var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService);
+				var menu = Application.bookmarks.menu;
+				var uri = ioService.newURI(feedUrl, null, null);
+				var feedUri = ioService.newURI(feedUrl, null, null);
+				var lm = livemarkService.createLivemarkFolderOnly(Application.bookmarks.menu.id, strings.getString("trendBookmarkTitle"), uri, feedUri, -1);
+				annotationService.setItemAnnotation(lm, "bookmarkProperties/description", strings.getString("trendBookmarkDescription"), 0, Components.interfaces.nsIAnnotationService.EXPIRE_NEVER);
+				*/
 				
                 return true;
             }
-
+			
 			var cancelSearchProvider = function () {
-				if (document.getElementById("understand").checked) {
-					document.getElementById("understand").checked = false;
-					document.getElementById('rssticker-oneriot-dialog').setAttribute('buttondisabledaccept', true);
-					return false;
-				}
-
 				return true;
 			}
         ]]>
@@ -58,9 +48,6 @@
             <description>&trendsP1;</description>
             <description>&trendsP2;</description>
 			<description>&trendsP3;</description>
-			<hbox align="center">
-				<checkbox id="understand" label="&checkbox_understand;" oncommand="document.getElementById('rssticker-oneriot-dialog').setAttribute('buttondisabledaccept', !this.checked);" />
-			</hbox>
         </vbox>
     </hbox>
 </dialog>
