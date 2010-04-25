@@ -1,4 +1,6 @@
 var tickerBookmarkObserver = {
+	onBeforeItemRemoved : function () { },
+	
 	onBeginUpdateBatch: function() {
 		// This method is notified when a batch of changes are about to occur.
 		// Observers can use this to suspend updates to the user-interface, for example

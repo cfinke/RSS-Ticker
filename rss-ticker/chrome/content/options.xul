@@ -179,11 +179,18 @@
 		<spacer style="height: 30px;" />
 	</prefpane>		
 	<prefpane id="manage-pane" label="&feeds;" image="chrome://rss-ticker/content/skin-common/feed-icon.gif">
+		<preferences>
+			<preference id="p_trends" name="extensions.rssticker.trendingNews" type="bool" />
+		</preferences>
+		
 		<script type="application/x-javascript" src="chrome://browser/content/bookmarks/bookmarks.js"></script>
 		<script type="application/x-javascript" src="chrome://rss-ticker/content/ticker.object.js"></script>
 		<script type="application/x-javascript" src="chrome://rss-ticker/content/options.js"></script>
+		
+		<checkbox label="Subscribe to Trending News" preference="p_trends" />
+		
 		<vbox>
-			<description style="max-width: 35em;">&feedManagement;</description>
+			<description style="max-width: 40em;">&feedManagement;</description>
 			<listbox id="feeds" flex="1" seltype="multiple">
 				<listhead>
 					<listheader label="&feed;"/>

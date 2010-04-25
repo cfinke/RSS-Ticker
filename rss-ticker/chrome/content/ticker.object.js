@@ -3,6 +3,8 @@ var RSSTICKER = {
 	bookmarkService : Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService),
 	ioService : Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService),
 	
+	trendingNewsUrl : "http://api.ads.oneriot.com/search?appId=86f2f5da-3b24-4a87-bbb3-1ad47525359d&version=1.1&format=XML",
+	
 	ignoreFilename : "rss-ticker.ignore.txt",
 	
 	strings : null,
@@ -108,80 +110,78 @@ var RSSTICKER = {
 	
 	tickLength : 0,
 	
-	lastOneRiotTimestamp : 0,
-	
 	onload : function () {
-		this.loadPrefs();
+		RSSTICKER.loadPrefs();
 		
-		var db = this.getDB();
+		var db = RSSTICKER.getDB();
 		
 		if (!db.tableExists("history")) {
 			db.executeSimpleSQL("CREATE TABLE IF NOT EXISTS history (id TEXT PRIMARY KEY, date INTEGER)");
 		}
 		
-		this.strings = document.getElementById("RSSTICKER-bundle");
-		this.customizeContextMenus();
+		RSSTICKER.strings = document.getElementById("RSSTICKER-bundle");
+		RSSTICKER.customizeContextMenus();
 		
-		this.ticker = this.ce('toolbar');
-		this.ticker.setAttribute("id","RSSTICKER" + this.strings.getString("toolbar"));
-		this.ticker.setAttribute("class","chromeclass-toolbar");
-		this.ticker.setAttribute("hidden",false);
-		this.ticker.setAttribute("iconsize","small");
-		this.ticker.setAttribute("inherits","collapsed,hidden");
-		this.ticker.setAttribute("mode","full");
-		this.ticker.setAttribute("persist","collapsed,hidden");
-		this.ticker.setAttribute("toolbarname",this.strings.getString("extension.name"));
-		this.ticker.style.maxHeight = '24px';
+		RSSTICKER.ticker = RSSTICKER.ce('toolbar');
+		RSSTICKER.ticker.setAttribute("id","RSSTICKER" + RSSTICKER.strings.getString("toolbar"));
+		RSSTICKER.ticker.setAttribute("class","chromeclass-toolbar");
+		RSSTICKER.ticker.setAttribute("hidden",false);
+		RSSTICKER.ticker.setAttribute("iconsize","small");
+		RSSTICKER.ticker.setAttribute("inherits","collapsed,hidden");
+		RSSTICKER.ticker.setAttribute("mode","full");
+		RSSTICKER.ticker.setAttribute("persist","collapsed,hidden");
+		RSSTICKER.ticker.setAttribute("toolbarname",RSSTICKER.strings.getString("extension.name"));
+		RSSTICKER.ticker.style.maxHeight = '24px';
 	
-		this.toolbar = this.ce('hbox');
-		this.toolbar.spacer = this.ce('spacer');
-		this.toolbar.appendChild(this.toolbar.spacer);
-		this.toolbar.style.maxHeight = '24px';
+		RSSTICKER.toolbar = RSSTICKER.ce('hbox');
+		RSSTICKER.toolbar.spacer = RSSTICKER.ce('spacer');
+		RSSTICKER.toolbar.appendChild(RSSTICKER.toolbar.spacer);
+		RSSTICKER.toolbar.style.maxHeight = '24px';
 	
-		this.ticker.setAttribute("contextmenu","RSSTICKERCM");
+		RSSTICKER.ticker.setAttribute("contextmenu","RSSTICKERCM");
 	
-		this.ticker.setAttribute("onmouseover","RSSTICKER.mouseOverFlag = true;");
-		this.ticker.setAttribute("onmouseout","RSSTICKER.mouseOverFlag = false;");
+		RSSTICKER.ticker.setAttribute("onmouseover","RSSTICKER.mouseOverFlag = true;");
+		RSSTICKER.ticker.setAttribute("onmouseout","RSSTICKER.mouseOverFlag = false;");
 
 		document.getElementById("RSSTICKERItemCM").setAttribute("onmouseover","RSSTICKER.mouseOverFlag = true;");
 		document.getElementById("RSSTICKERItemCM").setAttribute("onmouseout","RSSTICKER.mouseOverFlag = false;");
 	
-		this.ticker.appendChild(this.toolbar);
+		RSSTICKER.ticker.appendChild(RSSTICKER.toolbar);
 		
-		this.loadingNoticeParent = this.ce('toolbaritem');
-		this.loadingNoticeParent.setAttribute("tooltip","RSSTICKERLoadingNoticeTooltip");
-		this.loadingNoticeParent.id = "RSSTICKER-throbber-box";
-		this.loadingNoticeParent.setAttribute("title","RSS Ticker Activity Indicator");
-		this.loadingNoticeParent.setAttribute("align","center");
-		this.loadingNoticeParent.setAttribute("pack","center");
+		RSSTICKER.loadingNoticeParent = RSSTICKER.ce('toolbaritem');
+		RSSTICKER.loadingNoticeParent.setAttribute("tooltip","RSSTICKERLoadingNoticeTooltip");
+		RSSTICKER.loadingNoticeParent.id = "RSSTICKER-throbber-box";
+		RSSTICKER.loadingNoticeParent.setAttribute("title","RSS Ticker Activity Indicator");
+		RSSTICKER.loadingNoticeParent.setAttribute("align","center");
+		RSSTICKER.loadingNoticeParent.setAttribute("pack","center");
 	
-		this.loadingNotice = this.ce('image');
-		this.loadingNotice.setAttribute("src","chrome://rss-ticker/content/skin-common/throbber.gif");
-		this.loadingNotice.id = "RSSTICKER-throbber";
-		this.loadingNotice.setAttribute("busy","false");
-		this.loadingNotice.style.marginRight = '4px';
-		this.loadingNoticeParent.appendChild(this.loadingNotice);
+		RSSTICKER.loadingNotice = RSSTICKER.ce('image');
+		RSSTICKER.loadingNotice.setAttribute("src","chrome://rss-ticker/content/skin-common/throbber.gif");
+		RSSTICKER.loadingNotice.id = "RSSTICKER-throbber";
+		RSSTICKER.loadingNotice.setAttribute("busy","false");
+		RSSTICKER.loadingNotice.style.marginRight = '4px';
+		RSSTICKER.loadingNoticeParent.appendChild(RSSTICKER.loadingNotice);
 	
 		try {
-			document.getElementById("nav-bar").appendChild(this.loadingNoticeParent);
+			document.getElementById("nav-bar").appendChild(RSSTICKER.loadingNoticeParent);
 		} catch (e) {
-			if (this.DEBUG) this.logMessage(e);
+			if (RSSTICKER.DEBUG) RSSTICKER.logMessage(e);
 		}
 		
-		if (this.prefs.getBoolPref("disabled")){
-			this.disable();
+		if (RSSTICKER.prefs.getBoolPref("disabled")){
+			RSSTICKER.disable();
 			return;
 		}
 		else {
-			this.enable();
+			RSSTICKER.enable();
 		}
 		
 		setTimeout(function () { RSSTICKER.showFirstRun(); }, 1500);
 	},
 	
 	showFirstRun : function () {
-	    var version = Components.classes["@mozilla.org/extensions/manager;1"].getService(Components.interfaces.nsIExtensionManager).getItemForID("{1f91cde0-c040-11da-a94d-0800200c9a66}").version;
-
+		var version = Components.classes["@mozilla.org/extensions/manager;1"].getService(Components.interfaces.nsIExtensionManager).getItemForID("{1f91cde0-c040-11da-a94d-0800200c9a66}").version;
+		
 		if (RSSTICKER.prefs.getCharPref("lastVersion") != version) {
 			RSSTICKER.prefs.setCharPref("lastVersion",version);
 			var theTab = gBrowser.addTab("http://www.chrisfinke.com/firstrun/rss-ticker.php");
@@ -190,15 +190,18 @@ var RSSTICKER = {
 		
 		// Ask if they want the trending terms feed.
 		
-		if (!this.prefs.getBoolPref("trendRequest")) {
-            this.prefs.setBoolPref("trendRequest", true);
-            
-		    setTimeout(
-		        function () {
+		if (!RSSTICKER.prefs.getBoolPref("trendRequest")) {
+			RSSTICKER.prefs.setBoolPref("trendRequest", true);
+			
+			setTimeout(
+				function () {
 					window.openDialog("chrome://rss-ticker/content/one-riot-suggestion.xul", "trends", "chrome,dialog,centerscreen,titlebar,alwaysraised,modal");
-                }, 5000
+				}, 5000
 			);
-        }
+		}
+		else {
+			// Check if they're subscribed to the old feed.
+		}
 	},
 		
 	observe: function(subject, topic, data) {
@@ -208,117 +211,125 @@ var RSSTICKER = {
 		
 		switch(data) {
 			case "disabled":
-				if (this.prefs.getBoolPref("disabled")) {
-					this.disable();
+				if (RSSTICKER.prefs.getBoolPref("disabled")) {
+					RSSTICKER.disable();
 				}
 				else {
-					this.enable();
+					RSSTICKER.enable();
 				}
 			break;
 			case "hideWhenEmpty":
-				this.hideWhenEmpty = this.prefs.getBoolPref("hideWhenEmpty");
+				RSSTICKER.hideWhenEmpty = RSSTICKER.prefs.getBoolPref("hideWhenEmpty");
 			break;
 			case "tickerPlacement":
-				this.attachTicker();
+				RSSTICKER.attachTicker();
 			break;
 			case "randomizeItems":
-				this.randomizeItems = this.prefs.getBoolPref("randomizeItems");
+				RSSTICKER.randomizeItems = RSSTICKER.prefs.getBoolPref("randomizeItems");
 			break;
 			case "limitItemsPerFeed":
-				this.limitItemsPerFeed = this.prefs.getBoolPref("limitItemsPerFeed");
+				RSSTICKER.limitItemsPerFeed = RSSTICKER.prefs.getBoolPref("limitItemsPerFeed");
 			break;
 			case "itemsPerFeed":
-				if (this.prefs.getIntPref("itemsPerFeed") < 0) {
-					this.prefs.setIntPref("itemsPerFeed", 0);
+				if (RSSTICKER.prefs.getIntPref("itemsPerFeed") < 0) {
+					RSSTICKER.prefs.setIntPref("itemsPerFeed", 0);
 				}
 				else {
-					this.limitItemsPerFeed = this.prefs.getIntPref("itemsPerFeed");
+					RSSTICKER.limitItemsPerFeed = RSSTICKER.prefs.getIntPref("itemsPerFeed");
 				}
 			break;
 			case "alwaysOpenInNewTab":
-				this.alwaysOpenInNewTab = this.prefs.getBooPref("alwaysOpenInNewTab");
+				RSSTICKER.alwaysOpenInNewTab = RSSTICKER.prefs.getBooPref("alwaysOpenInNewTab");
 			break;
 			case "tickSpeed":
-				this.tickLength = this.prefs.getIntPref("tickSpeed") * (500 / this.ticksPerItem);
+				RSSTICKER.tickLength = RSSTICKER.prefs.getIntPref("tickSpeed") * (500 / RSSTICKER.ticksPerItem);
 			break;
 			case "updateFrequency":
-				RSSTICKER.setReloadInterval(this.prefs.getIntPref("updateFrequency"));
+				RSSTICKER.setReloadInterval(RSSTICKER.prefs.getIntPref("updateFrequency"));
 			break;
 			case "ticksPerItem":
-				this.ticksPerItem = this.prefs.getIntPref("ticksPerItem");
-				this.tickLength = this.prefs.getIntPref("tickSpeed") * (500 / this.ticksPerItem);
+				RSSTICKER.ticksPerItem = RSSTICKER.prefs.getIntPref("ticksPerItem");
+				RSSTICKER.tickLength = RSSTICKER.prefs.getIntPref("tickSpeed") * (500 / RSSTICKER.ticksPerItem);
 			break;
 			case "dw.limitWidth":
-				this.displayWidth.limitWidth = this.prefs.getBoolPref("dw.limitWidth");
+				RSSTICKER.displayWidth.limitWidth = RSSTICKER.prefs.getBoolPref("dw.limitWidth");
 			break;
 			case "dw.isMaxWidth":
-				this.displayWidth.isMaxWidth = this.prefs.getBoolPref("dw.isMaxWidth");
+				RSSTICKER.displayWidth.isMaxWidth = RSSTICKER.prefs.getBoolPref("dw.isMaxWidth");
 			break;
 			case "smoothness":
-				if (this.prefs.getIntPref("smoothness") <= 0) {
-					this.prefs.setIntPref("smoothness", 1);
+				if (RSSTICKER.prefs.getIntPref("smoothness") <= 0) {
+					RSSTICKER.prefs.setIntPref("smoothness", 1);
 				}
 			break;
 			case "updateToggle":
-				this.updateAllFeeds();
+				RSSTICKER.updateAllFeeds();
+			break;
+			case "trendingNews":
+				if (!RSSTICKER.prefs.getBoolPref("trendingNews")) {
+					RSSTICKER.removeTrendingFeed();
+				}
+				else {
+					RSSTICKER.addTrendingFeed();
+				}
 			break;
 		}
 		
-		this.customizeContextMenus();
-		this.checkForEmptiness();
+		RSSTICKER.customizeContextMenus();
+		RSSTICKER.checkForEmptiness();
 	},
 	
 	attachTicker : function () {
-		if (this.ticker.parentNode) {
-			this.ticker.parentNode.removeChild(this.ticker);
+		if (RSSTICKER.ticker.parentNode) {
+			RSSTICKER.ticker.parentNode.removeChild(RSSTICKER.ticker);
 		}
 		
-		var tickerPlacement = this.prefs.getIntPref("tickerPlacement");
+		var tickerPlacement = RSSTICKER.prefs.getIntPref("tickerPlacement");
 		
 		if (tickerPlacement == 1){
 			// Beneath the status bar
-			document.getElementById('browser-bottombox').insertBefore(this.ticker, document.getElementById('status-bar').nextSibling);
-			if (this.DEBUG) this.logMessage("Placed after status bar.");
+			document.getElementById('browser-bottombox').insertBefore(RSSTICKER.ticker, document.getElementById('status-bar').nextSibling);
+			if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Placed after status bar.");
 		}
 		else if (tickerPlacement == 2){
 			// Up by the Bookmarks Toolbar
-			document.getElementById('navigator-toolbox').appendChild(this.ticker);
-			if (this.DEBUG) this.logMessage("Placed in navigator toolbox.");
+			document.getElementById('navigator-toolbox').appendChild(RSSTICKER.ticker);
+			if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Placed in navigator toolbox.");
 		}
 	},
 	
 	enable : function () {
-		this.disabled = false;
+		RSSTICKER.disabled = false;
 		
 		if (document.getElementById("RSSTICKER-button")){
 			document.getElementById("RSSTICKER-button").setAttribute("greyed","false");
 		}
 		
-		this.attachTicker();
-		this.startFetchingFeeds();
+		RSSTICKER.attachTicker();
+		RSSTICKER.startFetchingFeeds();
 	},
 	
 	disable : function () {
-		if (this.DEBUG) this.logMessage("Ticker disabled.");
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Ticker disabled.");
 		
-		this.disabled = true;
+		RSSTICKER.disabled = true;
 		
-		if (this.ticker.parentNode){
-			this.ticker.parentNode.removeChild(this.ticker);
+		if (RSSTICKER.ticker.parentNode){
+			RSSTICKER.ticker.parentNode.removeChild(RSSTICKER.ticker);
 		}
 		
-		while (this.toolbar.childNodes.length > 0){
-			this.toolbar.removeChild(this.toolbar.lastChild);
+		while (RSSTICKER.toolbar.childNodes.length > 0){
+			RSSTICKER.toolbar.removeChild(RSSTICKER.toolbar.lastChild);
 		}
 		
-		this.toolbar.appendChild(this.toolbar.spacer);
+		RSSTICKER.toolbar.appendChild(RSSTICKER.toolbar.spacer);
 		
 		if (document.getElementById("RSSTICKER-button")) {
 			document.getElementById("RSSTICKER-button").setAttribute("greyed","true");
 		}
 		
-		this.prefs.setIntPref("lastUpdate", 0);
-		this.stopFetchingFeeds();
+		RSSTICKER.prefs.setIntPref("lastUpdate", 0);
+		RSSTICKER.stopFetchingFeeds();
 	},
 	
 	loadingNoticeTimeout : null,
@@ -326,11 +337,11 @@ var RSSTICKER = {
 	addLoadingNotice : function (message) {
 		clearTimeout(RSSTICKER.loadingNoticeTimeout);
 		
-		if (!message || this.disabled) {
-			this.loadingNotice.setAttribute("busy", "false");
+		if (!message || RSSTICKER.disabled) {
+			RSSTICKER.loadingNotice.setAttribute("busy", "false");
 		}
 		else {
-			if (this.DEBUG) this.logMessage("Setting loading notice.");
+			if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Setting loading notice.");
 			
 			var text = document.createTextNode(message);
 			
@@ -340,56 +351,56 @@ var RSSTICKER = {
 			
 			document.getElementById("RSSTICKERLoadingNoticeText").appendChild(text);
 			
-			this.loadingNotice.setAttribute("busy", "true");
+			RSSTICKER.loadingNotice.setAttribute("busy", "true");
 		}
 		
 		RSSTICKER.loadingNoticeTimeout = setTimeout(function () { RSSTICKER.addLoadingNotice(); }, 5000);
 	},
 	
 	loadPrefs : function () {
-		if (this.DEBUG) this.logMessage("Loading prefs.");
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Loading prefs.");
 	
-		this.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker.");
-		this.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
-		this.prefs.addObserver("", this, false);
+		RSSTICKER.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker.");
+		RSSTICKER.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
+		RSSTICKER.prefs.addObserver("", this, false);
 	
-		this.disabled = this.prefs.getBoolPref("disabled");
-		this.hideWhenEmpty = this.prefs.getBoolPref("hideWhenEmpty");
-		this.randomizeItems = this.prefs.getBoolPref("randomizeItems");
-		this.ticksPerItem = this.prefs.getIntPref("ticksPerItem");
-		this.displayWidth.itemWidth = this.prefs.getIntPref("dw.itemWidth");
-		this.limitItemsPerFeed = this.prefs.getBoolPref("limitItemsPerFeed");
-		this.itemsPerFeed = this.prefs.getIntPref("itemsPerFeed");
-		this.boldUnvisited = this.prefs.getBoolPref("boldUnvisited");
-		this.hideVisited = this.prefs.getBoolPref("hideVisited");
-		this.alwaysOpenInNewTab = this.prefs.getBoolPref("alwaysOpenInNewTab");
-		this.displayWidth.limitWidth = this.prefs.getBoolPref("dw.limitWidth");
-		this.displayWidth.isMaxWidth = this.prefs.getBoolPref("dw.isMaxWidth");
+		RSSTICKER.disabled = RSSTICKER.prefs.getBoolPref("disabled");
+		RSSTICKER.hideWhenEmpty = RSSTICKER.prefs.getBoolPref("hideWhenEmpty");
+		RSSTICKER.randomizeItems = RSSTICKER.prefs.getBoolPref("randomizeItems");
+		RSSTICKER.ticksPerItem = RSSTICKER.prefs.getIntPref("ticksPerItem");
+		RSSTICKER.displayWidth.itemWidth = RSSTICKER.prefs.getIntPref("dw.itemWidth");
+		RSSTICKER.limitItemsPerFeed = RSSTICKER.prefs.getBoolPref("limitItemsPerFeed");
+		RSSTICKER.itemsPerFeed = RSSTICKER.prefs.getIntPref("itemsPerFeed");
+		RSSTICKER.boldUnvisited = RSSTICKER.prefs.getBoolPref("boldUnvisited");
+		RSSTICKER.hideVisited = RSSTICKER.prefs.getBoolPref("hideVisited");
+		RSSTICKER.alwaysOpenInNewTab = RSSTICKER.prefs.getBoolPref("alwaysOpenInNewTab");
+		RSSTICKER.displayWidth.limitWidth = RSSTICKER.prefs.getBoolPref("dw.limitWidth");
+		RSSTICKER.displayWidth.isMaxWidth = RSSTICKER.prefs.getBoolPref("dw.isMaxWidth");
 		
-		this.tickLength = this.prefs.getIntPref("tickSpeed") * (500 / this.prefs.getIntPref("ticksPerItem"));
+		RSSTICKER.tickLength = RSSTICKER.prefs.getIntPref("tickSpeed") * (500 / RSSTICKER.prefs.getIntPref("ticksPerItem"));
 	},
 	
 	customizeContextMenus : function () {
-		this.cmOptions.open = this.prefs.getBoolPref("cm.open");
-		this.cmOptions.openInTab = this.prefs.getBoolPref("cm.openInTab");
-		this.cmOptions.openInWindow = this.prefs.getBoolPref("cm.openInWindow");
-		this.cmOptions.openAllInTabs = this.prefs.getBoolPref("cm.openAllInTabs");
-		this.cmOptions.openUnreadInTabs = this.prefs.getBoolPref("cm.openUnreadInTabs");
-		this.cmOptions.openFeedInTabs = this.prefs.getBoolPref("cm.openFeedInTabs");
-		this.cmOptions.openFeedUnreadInTabs = this.prefs.getBoolPref("cm.openFeedUnreadInTabs");
-		this.cmOptions.copyLinkTitle = this.prefs.getBoolPref("cm.copyLinkTitle");
-		this.cmOptions.copyLinkURL = this.prefs.getBoolPref("cm.copyLinkURL");
-		this.cmOptions.refreshFeeds = this.prefs.getBoolPref("cm.refreshFeeds");
-		this.cmOptions.manageFeeds = this.prefs.getBoolPref("cm.manageFeeds");
-		this.cmOptions.markAsRead = this.prefs.getBoolPref("cm.markAsRead");
-		this.cmOptions.markFeedAsRead = this.prefs.getBoolPref("cm.markFeedAsRead");
-		this.cmOptions.markAllAsRead = this.prefs.getBoolPref("cm.markAllAsRead");
-		this.cmOptions.options = this.prefs.getBoolPref("cm.options");
-		this.cmOptions.disableTicker = this.prefs.getBoolPref("cm.disableTicker");
+		RSSTICKER.cmOptions.open = RSSTICKER.prefs.getBoolPref("cm.open");
+		RSSTICKER.cmOptions.openInTab = RSSTICKER.prefs.getBoolPref("cm.openInTab");
+		RSSTICKER.cmOptions.openInWindow = RSSTICKER.prefs.getBoolPref("cm.openInWindow");
+		RSSTICKER.cmOptions.openAllInTabs = RSSTICKER.prefs.getBoolPref("cm.openAllInTabs");
+		RSSTICKER.cmOptions.openUnreadInTabs = RSSTICKER.prefs.getBoolPref("cm.openUnreadInTabs");
+		RSSTICKER.cmOptions.openFeedInTabs = RSSTICKER.prefs.getBoolPref("cm.openFeedInTabs");
+		RSSTICKER.cmOptions.openFeedUnreadInTabs = RSSTICKER.prefs.getBoolPref("cm.openFeedUnreadInTabs");
+		RSSTICKER.cmOptions.copyLinkTitle = RSSTICKER.prefs.getBoolPref("cm.copyLinkTitle");
+		RSSTICKER.cmOptions.copyLinkURL = RSSTICKER.prefs.getBoolPref("cm.copyLinkURL");
+		RSSTICKER.cmOptions.refreshFeeds = RSSTICKER.prefs.getBoolPref("cm.refreshFeeds");
+		RSSTICKER.cmOptions.manageFeeds = RSSTICKER.prefs.getBoolPref("cm.manageFeeds");
+		RSSTICKER.cmOptions.markAsRead = RSSTICKER.prefs.getBoolPref("cm.markAsRead");
+		RSSTICKER.cmOptions.markFeedAsRead = RSSTICKER.prefs.getBoolPref("cm.markFeedAsRead");
+		RSSTICKER.cmOptions.markAllAsRead = RSSTICKER.prefs.getBoolPref("cm.markAllAsRead");
+		RSSTICKER.cmOptions.options = RSSTICKER.prefs.getBoolPref("cm.options");
+		RSSTICKER.cmOptions.disableTicker = RSSTICKER.prefs.getBoolPref("cm.disableTicker");
 			
-		this.customizeContextMenu("RSSTICKERItemCM");
-		this.customizeContextMenu("RSSTICKERCM");
-		this.customizeContextMenu("RSSTICKERButtonCM");
+		RSSTICKER.customizeContextMenu("RSSTICKERItemCM");
+		RSSTICKER.customizeContextMenu("RSSTICKERCM");
+		RSSTICKER.customizeContextMenu("RSSTICKERButtonCM");
 	},
 	
 	customizeContextMenu : function(menuID){
@@ -426,7 +437,7 @@ var RSSTICKER = {
 	},
 	
 	unload : function () {
-		this.prefs.setIntPref("lastUpdate", 0);
+		RSSTICKER.prefs.setIntPref("lastUpdate", 0);
 	},
 	
 	feedsToFetch : [],
@@ -437,32 +448,32 @@ var RSSTICKER = {
 	stopFetchingFeeds : function () {
 		clearTimeout(RSSTICKER.feedUpdateTimeout);
 		
-		this.feedsToFetch = [];
-		this.feedIndex = 0;
+		RSSTICKER.feedsToFetch = [];
+		RSSTICKER.feedIndex = 0;
 	},
 	
 	startFetchingFeeds : function () {
-		if (this.DEBUG) this.logMessage("Updating feeds " + new Date().toString());
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Updating feeds " + new Date().toString());
 		
-		if (this.disabled) {
+		if (RSSTICKER.disabled) {
 			return;
 		}
 		
-		var ignore = this.readIgnoreFile();
+		var ignore = RSSTICKER.readIgnoreFile();
 
-		this.internalPause = true;
+		RSSTICKER.internalPause = true;
 
-		for (var i = this.toolbar.childNodes.length - 1; i >= 0; i--){
-			if (this.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
-				if (this.inArray(ignore, this.toolbar.childNodes[i].feedURL)){
-					this.toolbar.removeChild(this.toolbar.childNodes[i]);
+		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+			if (RSSTICKER.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
+				if (RSSTICKER.inArray(ignore, RSSTICKER.toolbar.childNodes[i].feedURL)){
+					RSSTICKER.toolbar.removeChild(RSSTICKER.toolbar.childNodes[i]);
 				}
 			}
 		}
 
-		this.checkForEmptiness();
+		RSSTICKER.checkForEmptiness();
 
-		this.internalPause = false;
+		RSSTICKER.internalPause = false;
 
 	    RSSTICKER.feedsToFetch = [];
 	    RSSTICKER.feedIndex = 0;
@@ -474,9 +485,19 @@ var RSSTICKER = {
 			var feedURL = RSSTICKER.livemarkService.getFeedURI(livemarkIds[i]).spec;
 			var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkIds[i]);
 			
-			if (!this.inArray(ignore, feedURL)){
+			if (!RSSTICKER.inArray(ignore, feedURL)){
 				RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkIds[i] });
 			}
+		}
+		
+		if (RSSTICKER.prefs.getBoolPref("trendingNews")) {
+			RSSTICKER.feedsToFetch.unshift(
+				{
+					"name" : "Trending News",
+					"feed" : RSSTICKER.trendingNewsUrl,
+					"livemarkId" : -1
+				}
+			);
 		}
 		
 		if (RSSTICKER.feedsToFetch.length == 0) {
@@ -492,7 +513,7 @@ var RSSTICKER = {
 		var showWindow = true;
 		
 		try {
-			showWindow = !this.prefs.getBoolPref("noFeedsFoundFlag.1.7");
+			showWindow = !RSSTICKER.prefs.getBoolPref("noFeedsFoundFlag.1.7");
 		} catch (e) {
 		}
 		
@@ -517,7 +538,7 @@ var RSSTICKER = {
 		RSSTICKER.secondsBetweenFeeds = Math.ceil((interval * 60) / numFeeds);
         
         // Check if it's been more than $minutes minutes since the last full update.
-	    var lastUpdate = this.prefs.getIntPref("lastUpdate") * 1000; 
+	    var lastUpdate = RSSTICKER.prefs.getIntPref("lastUpdate") * 1000; 
 	    var now = new Date().getTime();
 	    
 	    var minutesSince = (now - lastUpdate) / 1000 / 60;
@@ -548,8 +569,8 @@ var RSSTICKER = {
 	    }
 		
         clearTimeout(RSSTICKER.feedUpdateTimeout);
-
-        if (this.disabled || RSSTICKER.feedsToFetch.length == 0 || (!RSSTICKER.rapidUpdate && RSSTICKER.secondsBetweenFeeds == 0)){
+		
+        if (RSSTICKER.disabled || RSSTICKER.feedsToFetch.length == 0 || (!RSSTICKER.rapidUpdate && RSSTICKER.secondsBetweenFeeds == 0)){
 		    setTimeoutForNext();
 		    return;
 		}
@@ -563,12 +584,14 @@ var RSSTICKER = {
 		}
 		
         if (RSSTICKER.feedIndex >= RSSTICKER.feedsToFetch.length) {
-            RSSTICKER.feedIndex = 0;
+			RSSTICKER.feedIndex = 0;
         }
                 
         var feedIndex = RSSTICKER.feedIndex;
         
-        if (indexOverride) {
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("indexOverride: " + indexOverride);
+
+        if (typeof(indexOverride) != "undefined") {
             feedIndex = indexOverride;
         }
         else {
@@ -576,39 +599,54 @@ var RSSTICKER = {
         }
         
         if (feedIndex == 0) {
-            this.prefs.setIntPref("lastUpdate", Math.round(new Date().getTime() / 1000));
+            RSSTICKER.prefs.setIntPref("lastUpdate", Math.round(new Date().getTime() / 1000));
         }
         
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("feedIndex: " + feedIndex);
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("feedsToFetch: " + RSSTICKER.feedsToFetch);
+		
+
         var feed = RSSTICKER.feedsToFetch[feedIndex];
-        
+
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Feed: " + feed.toSource());
+		
 	    var url = feed.feed;
+			
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Url: " + url);
 		
-		/* START FEED FETCH HERE */
-		
-		if (this.DEBUG) this.logMessage("Loading " + url);
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Loading " + url);
 		
 		var req = new XMLHttpRequest();
 		req.parent = this;
 		req.parent.addLoadingNotice("Updating " + feed.name + " (" + parseInt(RSSTICKER.feedIndex + 1, 10) + ")...");
-		
+	
 		RSSTICKER.currentRequest = req;
 		
+		if (url == RSSTICKER.trendingNewsUrl) {
+			req.overrideMimeType("text/xml");
+		}
+		
+		/* START FEED FETCH HERE */
+	
 		try {
 			req.open("GET", url, true);
-			
+		
 			req.onreadystatechange = function (event) {
 				if (req.readyState == 4) {
 					clearTimeout(req.parent.loadTimer);
-					
+				
 					req.parent.currentRequest = null;
 					setTimeoutForNext();
 					
 					try {
 						if (req.status == 200){
-							var feedOb = null;
-							
 							try {
-								req.parent.queueForParsing(req.responseText.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
+								if (url == RSSTICKER.trendingNewsUrl) {
+									req.parent.parseTrendingNews(req.responseXML, url);
+								}
+								else {
+									req.parent.queueForParsing(req.responseText.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
+								}
 							} catch (e) {
 								// Parse error
 							}
@@ -620,7 +658,7 @@ var RSSTICKER = {
 					}
 				}
 			};
-			
+		
 			req.send(null);
 			RSSTICKER.loadTimer = setTimeout(function () { RSSTICKER.killCurrentRequest(); }, 1000 * 15);
 		}
@@ -628,9 +666,103 @@ var RSSTICKER = {
 			setTimeoutForNext();
 		}
 		
-		this.checkForEmptiness();
-		this.tick();
+		RSSTICKER.checkForEmptiness();
+		RSSTICKER.tick();
     },
+
+	parseTrendingNews : function (xml, url) {
+		var listener = new TickerParseListener();
+		
+		var result = {
+			bozo : false,
+			
+			doc : {
+				QueryInterface : function () { },
+				
+				link : {
+					resolve : function () {
+						return "http://www.oneriot.com/";
+					}
+				},
+				
+				title : {
+					plainText : function () {
+						return "Trending News";
+					}
+				},
+				
+				summary : {
+					text : "Trending news courtesy of RSS Ticker"
+				},
+				
+				items : {
+					get length() { return this._items.length; },
+					
+					queryElementAt : function (index) {
+						return this._items[index];
+					},
+					
+					_items : []
+				}
+			},
+			
+			uri : {
+				_uri : url,
+				
+				resolve : function () {
+					return this._uri;
+				}
+			}
+		};
+		
+		var items = xml.getElementsByTagName("featured-result");
+		var updated = new Date();
+		updated.setTime( xml.getElementsByTagName("time")[0].textContent * 1000);
+		
+		for (var i = 0; i < items.length; i++) {
+			var itemUrl = items[i].getElementsByTagName("redirect-url")[0].textContent;
+			
+			var item = {
+				id : itemUrl,
+				
+				uri : itemUrl,
+				
+				displayUri : items[i].getElementsByTagName("display-url")[0].textContent,
+				
+				link : {
+					_link : items[i].getElementsByTagName("redirect-url")[0].textContent,
+				
+					resolve : function () {
+						return this._link;
+					}
+				},
+				
+				updated : updated,
+				
+				title : {
+					_title : items[i].getElementsByTagName("title")[0].textContent,
+				
+					plainText : function () {
+						return this._title.replace(/<[^>]+>/g, "");
+					}
+				},
+			
+				summary : {
+					_summary : items[i].getElementsByTagName("snippet")[0].textContent,
+				
+					get text() {
+						return this._summary.replace(/<[^>]+>/g, "");
+					} 
+				},
+			
+				image : "chrome://rss-ticker/content/skin-common/feed-icon-16.png"//items[i].getElementsByTagName("source-logo")[0].getElementsByTagName("url")[0].textContent
+			};
+			
+			result.doc.items._items.push(item);
+		}
+		
+		listener.handleResult(result);
+	},
 	
 	removeFeed : function (livemarkId) {
 		var len = RSSTICKER.feedsToFetch.length;
@@ -640,12 +772,12 @@ var RSSTICKER = {
 				var label = RSSTICKER.feedsToFetch[i].name;
 				RSSTICKER.feedsToFetch.splice(i, 1);
 
-				for (var i = this.toolbar.childNodes.length - 1; i >= 0; i--){
-					var item = this.toolbar.childNodes[i];
+				for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+					var item = RSSTICKER.toolbar.childNodes[i];
 					
 					if (item.nodeName == 'toolbarbutton') {
 						if (item.feed == label) {
-							this.toolbar.removeChild(item);
+							RSSTICKER.toolbar.removeChild(item);
 						}
 					}
 				}
@@ -655,6 +787,36 @@ var RSSTICKER = {
 		}
 		
 		return false;
+	},
+	
+	addTrendingFeed : function () {
+		RSSTICKER.feedsToFetch.unshift(
+			{
+				"name": "Trending News",
+				"feed" : RSSTICKER.trendingNewsUrl,
+				"livemarkId": -1
+			}
+		);
+		
+		RSSTICKER.updateAFeed(0);
+	},
+	
+	removeTrendingFeed : function () {
+		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+			var item = RSSTICKER.toolbar.childNodes[i];
+			
+			if (item.nodeName == 'toolbarbutton') {
+				if (item.feedURL == RSSTICKER.trendingNewsUrl) {
+					RSSTICKER.logMessage("Found: " + item.feedURL);
+					RSSTICKER.toolbar.removeChild(item);
+				}
+				else {
+					RSSTICKER.logMessage("Missed: " + item.feedURL);
+				}
+			}
+		}
+		
+		RSSTICKER.feedsToFetch.shift();
 	},
 
 	updateSingleFeed : function (livemarkId) {
@@ -704,42 +866,42 @@ var RSSTICKER = {
 	writeFeed : function (feed) {
 		var doTick, i, j;
 		
-		if (this.disabled) {
+		if (RSSTICKER.disabled) {
 			return;
 		}
 		
 		var feedItems = feed.items;
 		
-		this.internalPause = true;
+		RSSTICKER.internalPause = true;
 		
 		// Remove items that are no longer in the feed.
-		for (var i = this.toolbar.childNodes.length - 1; i >= 0; i--){
-			var item = this.toolbar.childNodes[i];
+		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+			var item = RSSTICKER.toolbar.childNodes[i];
 			
 			if ((item.nodeName == 'toolbarbutton') && (item.feed == feed.label)){
 				var itemFound = false;
 				
 				for (var j = 0; j < feedItems.length; j++){
-					if (feedItems[j].uri == item.uri){
+					if ((feedItems[j].uri == item.uri) && (feedItems[j].id == item.guid)){
 						itemFound = true;
 						break;
 					}
 				}
 				
 				if (!itemFound){
-					this.toolbar.removeChild(item);
+					RSSTICKER.toolbar.removeChild(item);
 				}
 			}
 		}
 		
-		var itemsShowing = this.itemsInTicker(feed.label);
+		var itemsShowing = RSSTICKER.itemsInTicker(feed.label);
 		
 		for (j = 0; j < feedItems.length; j++){
-			if (!document.getElementById("RSSTICKER" + feedItems[j].uri)){
-				if (this.limitItemsPerFeed && (this.itemsPerFeed <= itemsShowing.length)){
+			if (!document.getElementById("RSSTICKER" + feedItems[j].uri + feedItems[j].id)){
+				if (RSSTICKER.limitItemsPerFeed && (RSSTICKER.itemsPerFeed <= itemsShowing.length)){
 					// Determine if this item is newer than the oldest item showing.
-					if ((this.itemsPerFeed > 0) && feedItems[j].published && itemsShowing[0].published && (feedItems[j].published > itemsShowing[0].published)){
-						this.toolbar.removeChild(document.getElementById("RSSTICKER" + itemsShowing[0].href));
+					if ((RSSTICKER.itemsPerFeed > 0) && feedItems[j].published && itemsShowing[0].published && (feedItems[j].published > itemsShowing[0].published)){
+						RSSTICKER.toolbar.removeChild(document.getElementById("RSSTICKER" + itemsShowing[0].href + itemsShowing[0].guid));
 						itemsShowing.shift();
 					}
 					else {					
@@ -747,9 +909,9 @@ var RSSTICKER = {
 					}
 				}
 
-				var itemIsVisited = this.history.isVisitedURL(feedItems[j].uri, feedItems[j].id, 1);
+				var itemIsVisited = RSSTICKER.history.isVisitedURL(feedItems[j].uri, feedItems[j].id, 1);
 
-				if (itemIsVisited && this.hideVisited){
+				if (itemIsVisited && RSSTICKER.hideVisited){
 					continue;
 				}
 
@@ -766,9 +928,9 @@ var RSSTICKER = {
 					}
 				}
 
-				var tbb = this.ce('toolbarbutton');
+				var tbb = RSSTICKER.ce('toolbarbutton');
 				tbb.uri = feedItems[j].uri;
-				tbb.id = "RSSTICKER" + feedItems[j].uri;
+				tbb.id = "RSSTICKER" + feedItems[j].uri + feedItems[j].id;
 
 				tbb.setAttribute("label",feedItems[j].label);
 				tbb.setAttribute("tooltip","RSSTICKERTooltip");
@@ -777,12 +939,12 @@ var RSSTICKER = {
 
 				tbb.setAttribute("onclick","return RSSTICKER.onTickerItemClick(event, this.uri, this);");
 
-				if (this.displayWidth.limitWidth){
-					if (this.displayWidth.isMaxWidth){
-						tbb.style.maxWidth = this.displayWidth.itemWidth + "px";
+				if (RSSTICKER.displayWidth.limitWidth){
+					if (RSSTICKER.displayWidth.isMaxWidth){
+						tbb.style.maxWidth = RSSTICKER.displayWidth.itemWidth + "px";
 					}
 					else {
-						tbb.style.width = this.displayWidth.itemWidth + "px";
+						tbb.style.width = RSSTICKER.displayWidth.itemWidth + "px";
 					}
 				}
 
@@ -792,11 +954,13 @@ var RSSTICKER = {
 				tbb.feed = feed.label;
 				tbb.feedURL = feed.uri;
 				tbb.href = feedItems[j].uri;
-				tbb.parent = this;
+				tbb.displayHref = feedItems[j].displayUri;
+				
+				tbb.parent = RSSTICKER;
 				tbb.published = feedItems[j].published;
 				tbb.guid = feedItems[j].id;
 
-				if (this.hideVisited){
+				if (RSSTICKER.hideVisited){
 					tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
 						this.parentNode.removeChild(this);
 						this.visited = true;
@@ -810,7 +974,7 @@ var RSSTICKER = {
 						this.parent.checkForEmptiness();
 					};
 				}
-				else if (this.boldUnvisited){
+				else if (RSSTICKER.boldUnvisited){
 					if (!itemIsVisited){
 						tbb.style.fontWeight = 'bold';
 					}
@@ -835,7 +999,7 @@ var RSSTICKER = {
 					};
 				}
 
-				if (this.boldUnvisited){
+				if (RSSTICKER.boldUnvisited){
 					// Don't move this.
 					if (!itemIsVisited){
 						tbb.style.fontWeight = 'bold';
@@ -844,18 +1008,6 @@ var RSSTICKER = {
 				
 				tbb.onContextOpen = function (target) {
 					var url = this.href;
-					
-					if (url.indexOf("oneriot.com") != -1 && url.indexOf("86f2f5da-3b24-4a87-bbb3-1ad47525359d") != -1) {
-						var timestamp = new Date();
-						timestamp = timestamp.getTime();
-						
-						if (RSSTICKER.lastOneRiotTimestamp > (timestamp - 1100)) {
-							url = url.split("&")[0];
-						}
-						else {
-							RSSTICKER.lastOneRiotTimestamp = timestamp;
-						}
-					}
 					
 					if (!target) {
 						window._content.document.location.href = url;
@@ -872,25 +1024,25 @@ var RSSTICKER = {
 
 				// Determine where to add the item
 
-				if (this.randomizeItems){
-					if (this.toolbar.childNodes.length == 1){
+				if (RSSTICKER.randomizeItems){
+					if (RSSTICKER.toolbar.childNodes.length == 1){
 						// Only the spacer is showing
-						this.toolbar.appendChild(tbb);
+						RSSTICKER.toolbar.appendChild(tbb);
 					}
 					else {
-						if ((this.toolbar.firstChild.nodeName == 'spacer') && ((this.currentFirstItemMargin * -1) < (this.toolbar.firstChild.nextSibling.boxObject.width))){
-							var randomPlace = Math.floor(Math.random() * (this.toolbar.childNodes.length - 1)) + 1;
+						if ((RSSTICKER.toolbar.firstChild.nodeName == 'spacer') && ((RSSTICKER.currentFirstItemMargin * -1) < (RSSTICKER.toolbar.firstChild.nextSibling.boxObject.width))){
+							var randomPlace = Math.floor(Math.random() * (RSSTICKER.toolbar.childNodes.length - 1)) + 1;
 						}
 						else {
 							// Add after the 5th one just to avoid some jumpiness
-							var randomPlace = Math.floor(Math.random() * (this.toolbar.childNodes.length - 1)) + 6;
+							var randomPlace = Math.floor(Math.random() * (RSSTICKER.toolbar.childNodes.length - 1)) + 6;
 						}
 
-						if (randomPlace >= this.toolbar.childNodes.length){
-							this.toolbar.appendChild(tbb);
+						if (randomPlace >= RSSTICKER.toolbar.childNodes.length){
+							RSSTICKER.toolbar.appendChild(tbb);
 						}
 						else {
-							this.toolbar.insertBefore(tbb, this.toolbar.childNodes[randomPlace]);
+							RSSTICKER.toolbar.insertBefore(tbb, RSSTICKER.toolbar.childNodes[randomPlace]);
 						}
 					}
 				}
@@ -898,15 +1050,15 @@ var RSSTICKER = {
 					// Check for another item from this feed, if so place at end of that feed.
 
 					if (itemsShowing.length > 0){
-						for (i = this.toolbar.childNodes.length - 1; i >= 0; i--){
-							if (this.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
-								if (this.toolbar.childNodes[i].feed == tbb.feed){
-									if (i == (this.toolbar.childNodes.length - 1)){
-										this.toolbar.appendChild(tbb);
+						for (i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+							if (RSSTICKER.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
+								if (RSSTICKER.toolbar.childNodes[i].feed == tbb.feed){
+									if (i == (RSSTICKER.toolbar.childNodes.length - 1)){
+										RSSTICKER.toolbar.appendChild(tbb);
 										addedButton = true;
 									}
 									else {
-										this.toolbar.insertBefore(tbb, this.toolbar.childNodes[i+1]);
+										RSSTICKER.toolbar.insertBefore(tbb, RSSTICKER.toolbar.childNodes[i+1]);
 										addedButton = true;
 									}
 
@@ -917,32 +1069,32 @@ var RSSTICKER = {
 					}
 					else {
 						// None of this feed is showing; add after another feed.
-						if ((this.toolbar.firstChild.nodeName == 'spacer') || (this.toolbar.lastChild.nodeName == 'spacer')){
-							this.toolbar.appendChild(tbb);
+						if ((RSSTICKER.toolbar.firstChild.nodeName == 'spacer') || (RSSTICKER.toolbar.lastChild.nodeName == 'spacer')){
+							RSSTICKER.toolbar.appendChild(tbb);
 						}
 						else {
-							if (this.toolbar.firstChild.feed != this.toolbar.lastChild.feed){
+							if (RSSTICKER.toolbar.firstChild.feed != RSSTICKER.toolbar.lastChild.feed){
 								// We're in luck - a feed just finished scrolling
-								this.toolbar.appendChild(tbb);
+								RSSTICKER.toolbar.appendChild(tbb);
 							}
 							else {
 								var addedButton = false;
 
-								for (i = this.toolbar.childNodes.length - 2; i >= 0; i--){
-									if (this.toolbar.childNodes[i].nodeName == 'spacer'){
-										this.toolbar.insertBefore(tbb, this.toolbar.childNodes[i+1]);
+								for (i = RSSTICKER.toolbar.childNodes.length - 2; i >= 0; i--){
+									if (RSSTICKER.toolbar.childNodes[i].nodeName == 'spacer'){
+										RSSTICKER.toolbar.insertBefore(tbb, RSSTICKER.toolbar.childNodes[i+1]);
 										addedButton = true;
 										break;
 									}
-									else if (this.toolbar.childNodes[i].feed != this.toolbar.childNodes[i+1].feed){
-										this.toolbar.insertBefore(tbb, this.toolbar.childNodes[i+1]);
+									else if (RSSTICKER.toolbar.childNodes[i].feed != RSSTICKER.toolbar.childNodes[i+1].feed){
+										RSSTICKER.toolbar.insertBefore(tbb, RSSTICKER.toolbar.childNodes[i+1]);
 										addedButton = true;
 										break;
 									}
 								}
 
 								if (!addedButton){
-									this.toolbar.appendChild(tbb);
+									RSSTICKER.toolbar.appendChild(tbb);
 								}
 							}
 						}
@@ -955,11 +1107,11 @@ var RSSTICKER = {
 			}
 		}
 		
-		this.internalPause = false;
+		RSSTICKER.internalPause = false;
 		
-		this.adjustSpacerWidth();
-		this.checkForEmptiness();
-		this.tick();
+		RSSTICKER.adjustSpacerWidth();
+		RSSTICKER.checkForEmptiness();
+		RSSTICKER.tick();
 	},
 	
 	onTickerItemClick : function (event, url, node) {		
@@ -972,36 +1124,24 @@ var RSSTICKER = {
 			return;
 		}
 		else {
-			if (url.indexOf("oneriot.com") != -1 && url.indexOf("86f2f5da-3b24-4a87-bbb3-1ad47525359d") != -1) {
-				var timestamp = new Date();
-				timestamp = timestamp.getTime();
-				
-				if (RSSTICKER.lastOneRiotTimestamp > (timestamp - 1100)) {
-					url = url.split("&")[0];
-				}
-				else {
-					RSSTICKER.lastOneRiotTimestamp = timestamp;
-				}
-			}
-			
 			if (event.which == 4 || event.shiftKey){
 				// Shift
 				window.open(url);
 			}
 			else {
 				// Left-click
-				this.launchUrl(url, event);
+				RSSTICKER.launchUrl(url, event);
 				node.markAsRead(true);
 			}
 		}
 	},
 	
 	launchUrl : function (url, event) {
-		if (this.prefs.getBoolPref("alwaysOpenInNewTab") || (event.which == 2) || (event.which == 1 && (event.ctrlKey || event.metaKey) && (event.ctrlKey || event.metaKey))){
-			this._addTab(url);
+		if (RSSTICKER.prefs.getBoolPref("alwaysOpenInNewTab") || (event.which == 2) || (event.which == 1 && (event.ctrlKey || event.metaKey) && (event.ctrlKey || event.metaKey))){
+			RSSTICKER._addTab(url);
 		}
 		else if (event.which == 1 || (event.which == 13 && !event.shiftKey)){
-			this._inTab(url);
+			RSSTICKER._inTab(url);
 		}
 		else if (event.which == 4 || (event.which == 13 && event.shiftKey)){
 			window.open(url);
@@ -1031,24 +1171,24 @@ var RSSTICKER = {
 	},
 	
 	adjustSpacerWidth : function () {
-		if (this.toolbar && !this.disabled){
+		if (RSSTICKER.toolbar && !RSSTICKER.disabled){
 			var extraPadding;
 			
 			try {
-				if (this.displayWidth.limitWidth){
-					extraPadding = this.displayWidth.itemWidth;
+				if (RSSTICKER.displayWidth.limitWidth){
+					extraPadding = RSSTICKER.displayWidth.itemWidth;
 				}
 				else {
 					extraPadding = 250;
 				}
 				
-				var windowWidth = parseInt(this.ticker.boxObject.width);
+				var windowWidth = parseInt(RSSTICKER.ticker.boxObject.width);
 				
 				var tickerWidth = 0;
 				
-				for (var i = 0; i < this.toolbar.childNodes.length; i++){
-					if (this.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
-						tickerWidth += this.toolbar.childNodes[i].boxObject.width;
+				for (var i = 0; i < RSSTICKER.toolbar.childNodes.length; i++){
+					if (RSSTICKER.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
+						tickerWidth += RSSTICKER.toolbar.childNodes[i].boxObject.width;
 					}
 				}
 				
@@ -1061,123 +1201,123 @@ var RSSTICKER = {
 					spacerWidth = 0;
 				}
 				
-				this.toolbar.spacer.style.width = spacerWidth + "px";
+				RSSTICKER.toolbar.spacer.style.width = spacerWidth + "px";
 			} catch (e) {
 				// Tried to adjust spacer when there wasn't one.
 				// Could happen depending on when the disable button was pressed
-				if (this.DEBUG) this.logMessage(e);
+				if (RSSTICKER.DEBUG) RSSTICKER.logMessage(e);
 			}
 		}
 	},
 	
 	tick : function () {
-		if (this.disabled) {
+		if (RSSTICKER.disabled) {
 			return;
 		}
 		
-		clearTimeout(this.tickTimer);
+		clearTimeout(RSSTICKER.tickTimer);
 		
-		if (this.internalPause){
-			this.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, this.tickLength);
+		if (RSSTICKER.internalPause){
+			RSSTICKER.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, RSSTICKER.tickLength);
 		}
 		else {
 			var node, nodeWidth, marginLeft;
 			
-			if (this.mouseOverFlag){
-				if (this.toolbar.childNodes.length > 1){
-					if (this.currentFirstItemMargin <= (this.toolbar.firstChild.boxObject.width * -1)){
-						node = this.toolbar.firstChild;
-						this.toolbar.removeChild(node);
-						this.currentFirstItemMargin = 0;
+			if (RSSTICKER.mouseOverFlag){
+				if (RSSTICKER.toolbar.childNodes.length > 1){
+					if (RSSTICKER.currentFirstItemMargin <= (RSSTICKER.toolbar.firstChild.boxObject.width * -1)){
+						node = RSSTICKER.toolbar.firstChild;
+						RSSTICKER.toolbar.removeChild(node);
+						RSSTICKER.currentFirstItemMargin = 0;
 						node.style.marginLeft = '0px';
-						this.toolbar.appendChild(node);
+						RSSTICKER.toolbar.appendChild(node);
 						
 						if (node.nodeName == 'toolbarbutton' && !node.visited){
-							if (this.history.isVisitedURL(node.href, node.guid, 2)){
+							if (RSSTICKER.history.isVisitedURL(node.href, node.guid, 2)){
 								node.markAsRead(true);
 							}
 						}
 					}
-					else if (this.currentFirstItemMargin > 0){
+					else if (RSSTICKER.currentFirstItemMargin > 0){
 						// Move the last child back to the front.
-						node = this.toolbar.lastChild;
+						node = RSSTICKER.toolbar.lastChild;
 						nodeWidth = node.boxObject.width;
-						this.toolbar.removeChild(node);
+						RSSTICKER.toolbar.removeChild(node);
 						
 						// Set the correct margins
-						marginLeft = parseInt((0 - nodeWidth) + this.currentFirstItemMargin);
+						marginLeft = parseInt((0 - nodeWidth) + RSSTICKER.currentFirstItemMargin);
 						
 						node.style.marginLeft = marginLeft + "px";
-						this.currentFirstItemMargin = marginLeft;
-						this.toolbar.firstChild.style.marginLeft = 0;
-						this.toolbar.insertBefore(node, this.toolbar.firstChild);
+						RSSTICKER.currentFirstItemMargin = marginLeft;
+						RSSTICKER.toolbar.firstChild.style.marginLeft = 0;
+						RSSTICKER.toolbar.insertBefore(node, RSSTICKER.toolbar.firstChild);
 					}
 				}
 				
-				this.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, this.tickLength);
+				RSSTICKER.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, RSSTICKER.tickLength);
 			}
 			else {
-				if (this.toolbar.childNodes.length > 1){
-					if (this.currentFirstItemMargin <= (this.toolbar.firstChild.boxObject.width * -1)){
-						node = this.toolbar.firstChild;
-						this.toolbar.removeChild(node);
-						this.currentFirstItemMargin = 0;
+				if (RSSTICKER.toolbar.childNodes.length > 1){
+					if (RSSTICKER.currentFirstItemMargin <= (RSSTICKER.toolbar.firstChild.boxObject.width * -1)){
+						node = RSSTICKER.toolbar.firstChild;
+						RSSTICKER.toolbar.removeChild(node);
+						RSSTICKER.currentFirstItemMargin = 0;
 						node.style.marginLeft = '0px';
-						this.toolbar.appendChild(node);
+						RSSTICKER.toolbar.appendChild(node);
 						
 						if (node.nodeName == 'toolbarbutton' && !node.visited){
-							if (this.history.isVisitedURL(node.href, node.guid, 3)){
+							if (RSSTICKER.history.isVisitedURL(node.href, node.guid, 3)){
 								node.markAsRead(true);
 							}
 						}
 					}
-					else if (this.currentFirstItemMargin > 0){
+					else if (RSSTICKER.currentFirstItemMargin > 0){
 						// Move the last child back to the front.
-						node = this.toolbar.lastChild;
-						this.toolbar.removeChild(node);
+						node = RSSTICKER.toolbar.lastChild;
+						RSSTICKER.toolbar.removeChild(node);
 						
 						// Set the correct margins
 						nodeWidth = node.boxObject.width;
-						marginLeft = parseInt((0 - nodeWidth) + this.currentFirstItemMargin);
+						marginLeft = parseInt((0 - nodeWidth) + RSSTICKER.currentFirstItemMargin);
 
 						node.style.marginLeft = marginLeft + "px";
-						this.currentFirstItemMargin = marginLeft;
-						this.toolbar.firstChild.style.marginLeft = 0;
-						this.toolbar.insertBefore(node, this.toolbar.firstChild);
+						RSSTICKER.currentFirstItemMargin = marginLeft;
+						RSSTICKER.toolbar.firstChild.style.marginLeft = 0;
+						RSSTICKER.toolbar.insertBefore(node, RSSTICKER.toolbar.firstChild);
 					}
 					else {
-						this.currentFirstItemMargin -= (200 / this.ticksPerItem);
-						this.toolbar.firstChild.style.marginLeft = this.currentFirstItemMargin + "px";
+						RSSTICKER.currentFirstItemMargin -= (200 / RSSTICKER.ticksPerItem);
+						RSSTICKER.toolbar.firstChild.style.marginLeft = RSSTICKER.currentFirstItemMargin + "px";
 					}
 				}
 				
-				this.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, this.tickLength);
+				RSSTICKER.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, RSSTICKER.tickLength);
 			}
 		}
 	},
 	
 	markAllAsRead : function (feed) {
-		this.internalPause = true;
+		RSSTICKER.internalPause = true;
 		
-		for (var i = this.toolbar.childNodes.length - 1; i >= 0; i--){
-			if (this.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
-				if (!feed || (this.toolbar.childNodes[i].feed == feed)){
-					this.history.addToHistory(this.toolbar.childNodes[i].guid);
-					this.toolbar.childNodes[i].markAsRead(true, true);
+		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+			if (RSSTICKER.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
+				if (!feed || (RSSTICKER.toolbar.childNodes[i].feed == feed)){
+					RSSTICKER.history.addToHistory(RSSTICKER.toolbar.childNodes[i].guid);
+					RSSTICKER.toolbar.childNodes[i].markAsRead(true, true);
 				}
 			}
 		}
 		
-		this.internalPause = false;
+		RSSTICKER.internalPause = false;
 		
-		this.adjustSpacerWidth();
+		RSSTICKER.adjustSpacerWidth();
 	},
 	
 	openAllInTabs : function (unreadOnly, feed) {
-		for (var i = this.toolbar.childNodes.length - 1; i >= 0; i--){
-			if (this.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
-				if ((!feed || (this.toolbar.childNodes[i].feed == feed)) &&	(!unreadOnly || (!this.toolbar.childNodes[i].visited))){
-					this.toolbar.childNodes[i].onContextOpen('tab');
+		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+			if (RSSTICKER.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
+				if ((!feed || (RSSTICKER.toolbar.childNodes[i].feed == feed)) &&	(!unreadOnly || (!RSSTICKER.toolbar.childNodes[i].visited))){
+					RSSTICKER.toolbar.childNodes[i].onContextOpen('tab');
 				}
 			}
 		}
@@ -1186,34 +1326,34 @@ var RSSTICKER = {
 	// Each scroll of the mouse should move the ticker items 
 	
 	scrollTicker : function (event) {
-		if (this.mouseOverFlag && !this.internalPause){
-			if (this.toolbar.childNodes.length > 1){
+		if (RSSTICKER.mouseOverFlag && !RSSTICKER.internalPause){
+			if (RSSTICKER.toolbar.childNodes.length > 1){
 				if (event.detail > 0){
 					// Scroll Down
-					if (this.toolbar.firstChild){
-						this.currentFirstItemMargin -= 40;
-						this.toolbar.firstChild.style.marginLeft = this.currentFirstItemMargin + "px";
+					if (RSSTICKER.toolbar.firstChild){
+						RSSTICKER.currentFirstItemMargin -= 40;
+						RSSTICKER.toolbar.firstChild.style.marginLeft = RSSTICKER.currentFirstItemMargin + "px";
 					}
 				}
 				else if (event.detail < 0){
 					// Scroll Up
-					if (this.toolbar.firstChild){
-						this.currentFirstItemMargin += 40;
-						this.toolbar.firstChild.style.marginLeft = this.currentFirstItemMargin + "px";
+					if (RSSTICKER.toolbar.firstChild){
+						RSSTICKER.currentFirstItemMargin += 40;
+						RSSTICKER.toolbar.firstChild.style.marginLeft = RSSTICKER.currentFirstItemMargin + "px";
 						
-						if (this.currentFirstItemMargin > 0){
+						if (RSSTICKER.currentFirstItemMargin > 0){
 							// Move the last child back to the front.
-							var node = this.toolbar.lastChild;
+							var node = RSSTICKER.toolbar.lastChild;
 							var nodeWidth = node.boxObject.width;
-							this.toolbar.removeChild(node);
+							RSSTICKER.toolbar.removeChild(node);
 							
 							// Set the correct margins
-							var marginLeft = (0 - nodeWidth) + this.currentFirstItemMargin;
+							var marginLeft = (0 - nodeWidth) + RSSTICKER.currentFirstItemMargin;
 							
 							node.style.marginLeft = marginLeft + "px";
-							this.currentFirstItemMargin = marginLeft;
-							this.toolbar.firstChild.style.marginLeft = 0;
-							this.toolbar.insertBefore(node, this.toolbar.firstChild);
+							RSSTICKER.currentFirstItemMargin = marginLeft;
+							RSSTICKER.toolbar.firstChild.style.marginLeft = 0;
+							RSSTICKER.toolbar.insertBefore(node, RSSTICKER.toolbar.firstChild);
 						}
 					}
 				}
@@ -1222,7 +1362,7 @@ var RSSTICKER = {
 	},
 	
 	toggleDisabled : function () {
-		this.prefs.setBoolPref("disabled", !this.prefs.getBoolPref("disabled"));
+		RSSTICKER.prefs.setBoolPref("disabled", !RSSTICKER.prefs.getBoolPref("disabled"));
 	},
 	
 	fillInTooltip : function (item, tt){
@@ -1230,7 +1370,8 @@ var RSSTICKER = {
 		
 		var descr = item.description;
 		var title = item.getAttribute("label");
-		var url = item.href;
+		var url = item.displayHref;
+		
 		var feedName = item.feed;
 		
 		if (title.length > maxLength){
@@ -1248,7 +1389,7 @@ var RSSTICKER = {
 		
 		document.getElementById("RSSTICKERTooltipImage").src = image;
 		
-		document.getElementById("RSSTICKERTooltipURL").value = this.strings.getString("URL") + ": " + url;
+		document.getElementById("RSSTICKERTooltipURL").value = RSSTICKER.strings.getString("URL") + ": " + url;
 		
 		var maxw = document.getElementById("RSSTICKERTooltipURL").boxObject.width;
 		
@@ -1296,25 +1437,25 @@ var RSSTICKER = {
 	theDB : null,
 	
 	getDB : function () {
-		if (!this.theFile) {
-			this.theFile = Components.classes["@mozilla.org/file/directory_service;1"]
+		if (!RSSTICKER.theFile) {
+			RSSTICKER.theFile = Components.classes["@mozilla.org/file/directory_service;1"]
 		                     .getService(Components.interfaces.nsIProperties)
 		                     .get("ProfD", Components.interfaces.nsIFile);
-			this.theFile.append("rssticker.sqlite");
+			RSSTICKER.theFile.append("rssticker.sqlite");
 		}
 		
-		if (!this.theDB) {
-			this.theDB = Components.classes["@mozilla.org/storage/service;1"]
-		                 .getService(Components.interfaces.mozIStorageService).openDatabase(this.theFile);
+		if (!RSSTICKER.theDB) {
+			RSSTICKER.theDB = Components.classes["@mozilla.org/storage/service;1"]
+		                 .getService(Components.interfaces.mozIStorageService).openDatabase(RSSTICKER.theFile);
 		}
 		
-		return this.theDB;
+		return RSSTICKER.theDB;
 	},
 	
 	closeDB : function () {
-		this.theDB.close();
-		delete this.theDB;
-		this.theDB = null;
+		RSSTICKER.theDB.close();
+		delete RSSTICKER.theDB;
+		RSSTICKER.theDB = null;
 	},
 	
 	history : {
@@ -1324,44 +1465,28 @@ var RSSTICKER = {
 		URI : null,
 		
 		isVisitedURL : function(url, guid){
-			try {
-				RSSTICKER.history.URI = this.ioService.newURI(url, null, null);
-				var visited = RSSTICKER.history.hService.isVisited(RSSTICKER.history.URI);
-				
-				var db = RSSTICKER.getDB();
-				
-				if (!visited) {
-					var select = db.createStatement("SELECT id FROM history WHERE id=?1");
-					select.bindStringParameter(0, guid);
+			var visited = false;
+			
+			var db = RSSTICKER.getDB();
+			
+			var select = db.createStatement("SELECT id FROM history WHERE id=?1");
+			select.bindStringParameter(0, guid);
 
-					try {
-						while (select.executeStep()) {
-							visited = true;
-							break;
-						}
-					} catch (e) {
-						RSSTICKER.logMessage(e);
-					} finally {	
-						select.reset();
-					}
+			try {
+				while (select.executeStep()) {
+					visited = true;
+					break;
 				}
-				else {
-					// Add to DB
-					var insert = db.createStatement("INSERT INTO history (id, date) VALUES (?1, ?2)");
-					insert.bindUTF8StringParameter(0, guid);
-					insert.bindInt64Parameter(1, (new Date().getTime()));
-					
-					try { insert.execute(); } catch (alreadyExists) { }
-				}
-				
-				return visited;
 			} catch (e) {
-				// Malformed URI, probably
-				RSSTICKER.logMessage(e + " " + url);
-				return false;
+				RSSTICKER.logMessage(e);
+			} finally {	
+				select.reset();
 			}
+			
+			select.finalize();
+			
+			return visited;
 		},
-		
 		
 		addToHistory : function (guid) {
 			var db = RSSTICKER.getDB();
@@ -1411,7 +1536,7 @@ var RSSTICKER = {
 	},
 	
 	observeFeed : function (url) {
-		var feeds = this.readIgnoreFile();
+		var feeds = RSSTICKER.readIgnoreFile();
 		var newFeeds = [];
 		
 		var foundFeed = false;
@@ -1434,7 +1559,7 @@ var RSSTICKER = {
 			else profilePath += "/";
 						
 			var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-			file.initWithPath(profilePath + this.ignoreFilename);
+			file.initWithPath(profilePath + RSSTICKER.ignoreFilename);
 
 			var outputStream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance( Components.interfaces.nsIFileOutputStream );
 
@@ -1446,7 +1571,7 @@ var RSSTICKER = {
 				data += newFeeds[i] + "\r\n";
 			}
 			
-			this.writeBytes(outputStream, data);
+			RSSTICKER.writeBytes(outputStream, data);
 			
 			outputStream.close();
 		}
@@ -1464,7 +1589,7 @@ var RSSTICKER = {
 	},
 	
 	ignoreFeed : function (url) {
-		var feeds = this.readIgnoreFile();
+		var feeds = RSSTICKER.readIgnoreFile();
 		var foundFeed = false;
 		
 		for (var i = 0; i < feeds.length; i++){
@@ -1476,14 +1601,14 @@ var RSSTICKER = {
 		
 		if (!foundFeed){
 			var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-			file.initWithPath(this.getProfilePath() + this.ignoreFilename);
+			file.initWithPath(RSSTICKER.getProfilePath() + RSSTICKER.ignoreFilename);
 
 			var outputStream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance( Components.interfaces.nsIFileOutputStream );
 			outputStream.init(file, 0x02 | 0x08 | 0x10, 0600, null);
 		
 			var data = url + "\r\n";
 			
-			this.writeBytes(outputStream, data);
+			RSSTICKER.writeBytes(outputStream, data);
 			
 			outputStream.close();
 		}
@@ -1496,7 +1621,7 @@ var RSSTICKER = {
 		
 		file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
 		
-		file.initWithPath(this.getProfilePath() + this.ignoreFilename);
+		file.initWithPath(RSSTICKER.getProfilePath() + RSSTICKER.ignoreFilename);
 		
 		if (!file.exists()) {
 			// File doesn't exist yet
@@ -1526,15 +1651,15 @@ var RSSTICKER = {
 	},
 	
 	getProfilePath : function () {
-		if (!this.profilePath){
+		if (!RSSTICKER.profilePath){
 			var DIR_SERVICE = new Components.Constructor("@mozilla.org/file/directory_service;1", "nsIProperties");
-			this.profilePath = (new DIR_SERVICE()).get("ProfD", Components.interfaces.nsIFile).path; 
+			RSSTICKER.profilePath = (new DIR_SERVICE()).get("ProfD", Components.interfaces.nsIFile).path; 
 		
-			if (this.profilePath.search(/\\/) != -1) this.profilePath += "\\";
-			else this.profilePath += "/";
+			if (RSSTICKER.profilePath.search(/\\/) != -1) RSSTICKER.profilePath += "\\";
+			else RSSTICKER.profilePath += "/";
 		}
 		
-		return this.profilePath;
+		return RSSTICKER.profilePath;
 	},
 	
 	inArray : function (arr, needle){
@@ -1551,16 +1676,16 @@ var RSSTICKER = {
 	
 	itemsInTicker : function (feed) {
 		var items = [];
-		var ip = this.internalPause;
+		var ip = RSSTICKER.internalPause;
 		
-		this.internalPause = true;
+		RSSTICKER.internalPause = true;
 		
-		for (var i = this.toolbar.childNodes.length - 1; i >= 0; i--){
-			var tbb = this.toolbar.childNodes[i];
+		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+			var tbb = RSSTICKER.toolbar.childNodes[i];
 			
 			if (tbb.nodeName != "spacer" && tbb.feed == feed){
-				if (this.limitItemsPerFeed && (items.length == this.itemsPerFeed)){
-					this.toolbar.removeChild(tbb);
+				if (RSSTICKER.limitItemsPerFeed && (items.length == RSSTICKER.itemsPerFeed)){
+					RSSTICKER.toolbar.removeChild(tbb);
 				}
 				else {
 					items.push(tbb);
@@ -1572,25 +1697,25 @@ var RSSTICKER = {
 		
 		items.sort(RSSTICKER.sortByPubDate);
 		
-		this.internalPause = ip;
+		RSSTICKER.internalPause = ip;
 		
-		this.checkForEmptiness();
+		RSSTICKER.checkForEmptiness();
 		
 		return items;
 	},
 	
 	checkForEmptiness : function(){
-		if (this.toolbar) {
-			if ((this.toolbar.childNodes.length <= 1) && (this.hideWhenEmpty)){
-				this.ticker.style.display = 'none';
-				this.toolbar.firstChild.style.marginLeft = '0px';
-				this.currentFirstItemMargin = 0;
-				this.mouseOverFlag = false;
+		if (RSSTICKER.toolbar) {
+			if ((RSSTICKER.toolbar.childNodes.length <= 1) && (RSSTICKER.hideWhenEmpty)){
+				RSSTICKER.ticker.style.display = 'none';
+				RSSTICKER.toolbar.firstChild.style.marginLeft = '0px';
+				RSSTICKER.currentFirstItemMargin = 0;
+				RSSTICKER.mouseOverFlag = false;
 			}
 			else {
-				this.ticker.style.display = '';
+				RSSTICKER.ticker.style.display = '';
 				
-				if (this.toolbar.childNodes.length <= 1){
+				if (RSSTICKER.toolbar.childNodes.length <= 1){
 					document.getElementById("rss-ticker_cmd_openAllInTabs").setAttribute("disabled","true");
 					document.getElementById("rss-ticker_cmd_openUnreadInTabs").setAttribute("disabled","true");
 					document.getElementById("rss-ticker_cmd_markAllAsRead").setAttribute("disabled","true");

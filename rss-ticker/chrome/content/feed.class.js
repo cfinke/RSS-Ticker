@@ -84,6 +84,7 @@ TickerParseListener.prototype = {
 							itemObject.id = item.id;
 				
 							itemObject.uri = item.link.resolve("");
+							itemObject.displayUri = item.displayUri ? item.displayUri : itemObject.uri;
 							
 							/*
 							if (itemObject.uri.match(/\/\/news\.google\.com\/.*\?/)){
@@ -106,7 +107,12 @@ TickerParseListener.prototype = {
 								}
 								else {
 									*/
-									itemObject.image = itemObject.uri.substr(0, (itemObject.uri.indexOf("/", 9) + 1)) + "favicon.ico";
+									if (item.image) {
+										itemObject.image = item.image;
+									}
+									else {
+										itemObject.image = itemObject.uri.substr(0, (itemObject.uri.indexOf("/", 9) + 1)) + "favicon.ico";
+									}
 									/*
 								}
 								*/
