@@ -86,6 +86,8 @@ TickerParseListener.prototype = {
 							itemObject.uri = item.link.resolve("");
 							itemObject.displayUri = item.displayUri ? item.displayUri : itemObject.uri;
 							
+							itemObject.trackingUri = item.trackingUri ? item.trackingUri : "";
+							
 							/*
 							if (itemObject.uri.match(/\/\/news\.google\.com\/.*\?/)){
 								var q = itemObject.uri.indexOf("?");
@@ -173,7 +175,7 @@ TickerParseListener.prototype = {
 				
 							itemObject.description = itemObject.description.replace(/<script[^>]*>[\s\S]+<\/script>/gim, "");
 				
-							itemObject.visited = RSSTICKER.history.isVisitedURL(itemObject.uri, itemObject.id, "q");
+							itemObject.visited = RSSTICKER.history.isVisitedURL(itemObject.id, "q");
 				
 							feedObject.items.push(itemObject);
 						} catch (e) {

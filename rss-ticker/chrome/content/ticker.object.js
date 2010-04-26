@@ -4,6 +4,7 @@ var RSSTICKER = {
 	ioService : Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService),
 	
 	trendingNewsUrl : "http://api.ads.oneriot.com/search?appId=86f2f5da-3b24-4a87-bbb3-1ad47525359d&version=1.1&format=XML",
+	trendingNewsExpiration : 0,
 	
 	ignoreFilename : "rss-ticker.ignore.txt",
 	
@@ -625,11 +626,19 @@ var RSSTICKER = {
 		
 		var req = new XMLHttpRequest();
 		req.parent = this;
-		req.parent.addLoadingNotice("Updating " + feed.name + " (" + parseInt(RSSTICKER.feedIndex + 1, 10) + ")...");
+		req.parent.addLoadingNotice("Updating " + feed.name + " (" + parseInt(feedIndex + 1, 10) + ")...");
 	
 		RSSTICKER.currentRequest = req;
 		
 		if (url == RSSTICKER.trendingNewsUrl) {
+			if (RSSTICKER.trendingNewsExpiration > (new Date()).getTime()) {
+				RSSTICKER.checkForEmptiness();
+				RSSTICKER.tick();
+				setTimeoutForNext();
+			
+				return;
+			}
+			
 			req.overrideMimeType("text/xml");
 		}
 		
@@ -678,6 +687,9 @@ var RSSTICKER = {
     },
 
 	parseTrendingNews : function (xml, url) {
+		var cache = 120; // xml.getElementsByTagName("max-age")[0].textContent;
+		RSSTICKER.trendingNewsExpiration = (new Date()).getTime() + (cache * 60 * 1000);
+		
 		var listener = new TickerParseListener();
 		
 		var result = {
@@ -730,11 +742,12 @@ var RSSTICKER = {
 			var itemUrl = items[i].getElementsByTagName("redirect-url")[0].textContent;
 			
 			var item = {
-				id : itemUrl,
+				id : "http://" + items[i].getElementsByTagName("display-url")[0].textContent,
 				
 				uri : itemUrl,
 				
 				displayUri : items[i].getElementsByTagName("display-url")[0].textContent,
+				trackingUri : items[i].getElementsByTagName("tracking-url")[0].textContent,
 				
 				link : {
 					_link : items[i].getElementsByTagName("redirect-url")[0].textContent,
@@ -916,7 +929,7 @@ var RSSTICKER = {
 					}
 				}
 
-				var itemIsVisited = RSSTICKER.history.isVisitedURL(feedItems[j].uri, feedItems[j].id, 1);
+				var itemIsVisited = RSSTICKER.history.isVisitedURL(feedItems[j].id, 1);
 
 				if (itemIsVisited && RSSTICKER.hideVisited){
 					continue;
@@ -954,30 +967,35 @@ var RSSTICKER = {
 						tbb.style.width = RSSTICKER.displayWidth.itemWidth + "px";
 					}
 				}
-
+				
 				tbb.description = feedItems[j].description;
 				tbb.visited = itemIsVisited;
-
+				
 				tbb.feed = feed.label;
 				tbb.feedURL = feed.uri;
 				tbb.href = feedItems[j].uri;
+				
 				tbb.displayHref = feedItems[j].displayUri;
+				
+				if (feedItems[j].trackingUri) {
+					tbb.style.background = 'url('+feedItems[j].trackingUri+') no-repeat';
+				}
 				
 				tbb.parent = RSSTICKER;
 				tbb.published = feedItems[j].published;
 				tbb.guid = feedItems[j].id;
-
+				
 				if (RSSTICKER.hideVisited){
 					tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
 						this.parentNode.removeChild(this);
 						this.visited = true;
-
+						
 						if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
-
+						
 						if (addToHist){
 							this.parent.history.addToHistory(this.guid);
 						}
-
+						
 						this.parent.checkForEmptiness();
 					};
 				}
@@ -1240,7 +1258,7 @@ var RSSTICKER = {
 						RSSTICKER.toolbar.appendChild(node);
 						
 						if (node.nodeName == 'toolbarbutton' && !node.visited){
-							if (RSSTICKER.history.isVisitedURL(node.href, node.guid, 2)){
+							if (RSSTICKER.history.isVisitedURL(node.guid, 2)){
 								node.markAsRead(true);
 							}
 						}
@@ -1273,7 +1291,7 @@ var RSSTICKER = {
 						RSSTICKER.toolbar.appendChild(node);
 						
 						if (node.nodeName == 'toolbarbutton' && !node.visited){
-							if (RSSTICKER.history.isVisitedURL(node.href, node.guid, 3)){
+							if (RSSTICKER.history.isVisitedURL(node.guid, 3)){
 								node.markAsRead(true);
 							}
 						}
@@ -1471,7 +1489,7 @@ var RSSTICKER = {
 		
 		URI : null,
 		
-		isVisitedURL : function(url, guid){
+		isVisitedURL : function(guid){
 			var visited = false;
 			
 			var db = RSSTICKER.getDB();
