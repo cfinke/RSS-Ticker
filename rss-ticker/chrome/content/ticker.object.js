@@ -687,7 +687,8 @@ var RSSTICKER = {
     },
 
 	parseTrendingNews : function (xml, url) {
-		var cache = 120; // xml.getElementsByTagName("max-age")[0].textContent;
+		// Cache for an hour.
+		var cache = 60;// xml.getElementsByTagName("max-age")[0].textContent;
 		RSSTICKER.trendingNewsExpiration = (new Date()).getTime() + (cache * 60 * 1000);
 		
 		var listener = new TickerParseListener();
