@@ -14,20 +14,6 @@
 			
             var subscribeToFeed = function() {
 				opener.RSSTICKER.prefs.setBoolPref("trendingNews", true);
-				/*
-				var strings = document.getElementById("RSSTICKER-bundle");
-			
-				var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"];
-				var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
-				var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
-				var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
-				var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService);
-				var menu = Application.bookmarks.menu;
-				var uri = ioService.newURI(feedUrl, null, null);
-				var feedUri = ioService.newURI(feedUrl, null, null);
-				var lm = livemarkService.createLivemarkFolderOnly(Application.bookmarks.menu.id, strings.getString("trendBookmarkTitle"), uri, feedUri, -1);
-				annotationService.setItemAnnotation(lm, "bookmarkProperties/description", strings.getString("trendBookmarkDescription"), 0, Components.interfaces.nsIAnnotationService.EXPIRE_NEVER);
-				*/
 				
                 return true;
             }
