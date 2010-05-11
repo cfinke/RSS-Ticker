@@ -1,0 +1,91 @@
+<!ENTITY extension.title "Bộ Cuộn Tin RSS">
+<!ENTITY cm.open "Mở">
+<!ENTITY cm.open.key "O">
+<!ENTITY cm.openInNewWindow "Mở trong Cửa Sổ Mới">
+<!ENTITY cm.openInNewWindow.key "N">
+<!ENTITY cm.openInNewTab "Mở trong Thẻ Mới">
+<!ENTITY cm.openInNewTab.key "T">
+<!ENTITY cm.openAllInTabs "Mở Tất Cả trong Thẻ">
+<!ENTITY cm.openUnreadInTabs "Mở Chưa Đọc trong Thẻ">
+<!ENTITY cm.openFeedInTabs "Mở Nguồn Tin trong Thẻ">
+<!ENTITY cm.openFeedUnreadInTabs "Mở Nguồn Tin Chưa Đọc trong Thẻ">
+<!ENTITY cm.copyLinkTitle "Chép Tiêu Đề Liên Kết">
+<!ENTITY cm.copyLinkTitle.key "L">
+<!ENTITY cm.copyLinkURL "Chép URL Liên Kết">
+<!ENTITY cm.copyLinkURL.key "C">
+<!ENTITY cm.refreshFeeds "Làm Mới Nguồn Tin">
+<!ENTITY cm.refreshFeeds.key "R">
+<!ENTITY cm.manageFeeds "Quản Lý Nguồn Tin">
+<!ENTITY cm.manageFeeds.key "G">
+<!ENTITY cm.markAsRead "Đánh Dấu Đã Đọc">
+<!ENTITY cm.markAsRead.key "M">
+<!ENTITY cm.markFeedAsRead "Đánh Dấu Đã Đọc Nguồn Tin">
+<!ENTITY cm.markFeedAsRead.key "F">
+<!ENTITY cm.markAllAsRead "Đánh Dấu Đã Đọc Tất Cả">
+<!ENTITY cm.markAllAsRead.key "A">
+<!ENTITY options.speed.tt "Tốc độ của bộ cuộn tin. 1 là nhanh nhất.">
+<!ENTITY options.dw.itemWidth.tt "Chiều rộng của mỗi mục trong bộ cuộn tin. Mặc định là 200 (px).">
+<!ENTITY options.smoothness.tt "Số lần cuộn mà nó cần để loại một mục tin khỏi phần trước của bộ cuộn. Càng cao thì cuộn càng mượt.">
+<!ENTITY options.updateInterval.tt "Số phút giữa các lần cập nhật các nguồn tin.">
+<!ENTITY options.updateInterval "Mức Thường Xuyên Cập Nhật Nguồn Tin">
+<!ENTITY options.update.1 "Cập nhật nguồn tin của tôi mỗi">
+<!ENTITY options.update.2 "phút.">
+<!ENTITY options.speed "Tốc Độ Lướt Tin">
+<!ENTITY options.dw.itemWidth "Chiều rộng mục tin">
+<!ENTITY pixelAbbrev "px">
+<!ENTITY options.smooothness "Độ Mượt Bộ Cuộn Tin">
+<!ENTITY cmOptionsDescription "Tùy chỉnh trình đơn ngữ cảnh của bộ cuộn tin bằng việc chọn hoặc bỏ chọn các tùy chọn bên dưới.">
+<!ENTITY tt.summary "Tóm Tắt">
+<!ENTITY options "Tùy Chọn">
+<!ENTITY options.restartNotice "Tùy chọn biểu thị bằng dấu * sẽ không thay đổi tới khi bạn mở lại cửa sổ trình duyệt.">
+<!ENTITY options.general "Chung">
+<!ENTITY options.advanced "Nâng Cao">
+<!ENTITY options.contextMenu "Trình Đơn Ngữ Cảnh">
+<!ENTITY options.placement.tt "Vị trí của bộ cuộn tin trên trình duyệt.">
+<!ENTITY options.random.tt "Để bộ cuộn tin hiển thị các mục với thứ tự ngẫu nhiên cho đa dạng.">
+<!ENTITY options.pause.tt "Tạm dựng cuộn khi di chuyển chuột lên nó.">
+<!ENTITY options.disable.tt "Tắt bộ cuộn tin RSS. Cái này có tác dụng như gỡ bỏ nó, nhưng chưa thật sự gỡ bỏ.">
+<!ENTITY options.hide.tt "Ẩn mục tin mà bạn đã đọc (tùy theo lược sử của trình duyệt).">
+<!ENTITY options.bold.tt "Hiển thị chữ đậm các tin mà bạn không đọc (tùy theo lược sử của trình duyệt).">
+<!ENTITY options.openInNewTab.tt "Luôn mở liên kết trong thẻ mới, bất kể bạn bấm nút chuột nào.">
+<!ENTITY disableTicker "Tắt bộ cuộn tin">
+<!ENTITY options.tickerPlacement "Vị Trí Bộ Cuộn Tin">
+<!ENTITY tickerPlacement.belowStatusBar "Dưới thanh trạng thái">
+<!ENTITY tickerPlacement.belowBMTB "Dưới thanh đánh dấu">
+<!ENTITY options.random "Ngẫu nhiên hóa các mục cuộn tin">
+<!ENTITY options.pause "Tạm dừng bộ cuộn khi rê chuột lên nó.">
+<!ENTITY options.hide "Ẩn mục tin bạn đã đọc.">
+<!ENTITY options.bold "Tô đậm mục tin bạn chưa đọc.">
+<!ENTITY options.openInNewTab "Luôn mở liên kết trong thẻ mới.">
+<!ENTITY toggleTicker "Bật bộ cuộn tắt/mở">
+<!ENTITY options.dw.limitWidth "Giới hạn chiều rộng cho mục tin trong bộ cuộn">
+<!ENTITY options.dw.isMaxWidth "Chỉ dùng độ rộng tối đa">
+<!ENTITY options.disableRefresh "Tắt tự động làm mới">
+<!ENTITY options.limitItemsPerFeed "Giới hạn số mục tin trên một nguồn">
+<!ENTITY options.itemsPerFeed "Mục trên một nguồn">
+<!ENTITY about "Giới Thiệu">
+<!ENTITY noFeedsFoundTitle "Không Tìm Thấy Đánh Dấu Trực Tiếp">
+<!ENTITY noFeedsFound "Bộ Cuộn Tin RSS không định vị bất cứ Đánh Dấu Trực Tiếp nào">
+<!ENTITY howToSubscribe1 "Bộ cuộn RSS tải và cuộn các mục tin từ Đánh Dấu Trực Tiếp của bạn (vd newsfeed hoặc nguồn RSS), nhưng bạn chưa đăng ký bất kỳ Đánh Dấu Trực Tiếp nào. Cần trợ giúp? Việc đăng ký một nguồn tin thật dễ dàng:">
+<!ENTITY howToSubscribe2 "Nếu trang bạn đang xem trên trình duyệt cung cấp nguồn tin RSS (ví dụ, www.mozilla.org), sẽ có một biểu tượng nhỏ màu cam hoặc xanh ở bên phải thanh địa chỉ, bên cạnh ngôi sao được dùng để đánh dấu trang. Nếu bạn nhấp vào biểu tượng này, nó sẽ mở khung &apos;Thêm Đánh Dấu Trực Tiếp&apos;.">
+<!ENTITY howToSubscribe3 "Hãy nhấp Đăng Ký Ngay, và Bộ Cuộn RSS sẽ bắt đầu cuộn các tin trên nguồn tin ngay.">
+<!ENTITY closeNoFeedsPage "Đóng trang này">
+<!ENTITY dontShowAgain "Không hiển thị thông báo này nữa.">
+<!ENTITY feed "Nguồn Tin">
+<!ENTITY feeds "Nguồn Tin">
+<!ENTITY feedManagement "Bạn có thể thêm hoặc loại bỏ nguồn tin khỏi bộ cuộn bằng việc chọn chúng trong danh sách bên dưới và nhấp vào nút Thêm hoặc Loại Bỏ. Lưu ý: Để thật sự ngừng nhận tin khỏi một nguồn, hãy sử dụng Đánh Dấu của Firefox. Danh sách này chỉ cho phép bạn thiết lập một Đánh Dấu của bạn xuất hiện trên bộ cuộn; nó không làm bạn ngừng nhận một nguồn tin nào.">
+<!ENTITY add "Thêm">
+<!ENTITY remove "Loại Bỏ">
+<!ENTITY URL "URL">
+<!ENTITY hideWhenEmpty "Ẩn Bộ Cuộn Khi Nó Rỗng">
+<!ENTITY trendsTitle "Xu Hướng Web Thời Gian Thực">
+<!ENTITY trendsP1 "Bộ Cuộn Tin RSS muốn biết liệu bạn có muốn nhận tin về xu hướng tìm kiếm mới nhất trên Twitter, Digg, và các trang mạng xã hội khác.">
+<!ENTITY trendsP2 "Nhấp OK để đăng ký nhận nguồn tin; nó sẽ tự động xuất hiện trên bộ cuộn tin, luôn cập nhật tin mới nhất và xu hướng trên Web. (Bạn có thể bỏ đăng ký bất cứ lúc nào.)">
+<!ENTITY trendsP3 "Đừng lo lăng, bạn sẽ không bị hỏi lần nữa nếu bạn chọn không đăng ký tin.">
+<!ENTITY every10Minutes "Mỗi 10 phút">
+<!ENTITY oncePerDay "Một lần trong ngày">
+<!ENTITY faster "Nhanh hơn">
+<!ENTITY slower "Chậm hơn">
+<!ENTITY smoother "Mượt hơn (Tốn CPU)">
+<!ENTITY choppier "Giật hơn (Ít CPU)">
+<!ENTITY checkbox_understand "Đồng ý, tôi muốn đăng ký một nguồn tin về chủ đề xã hội.">

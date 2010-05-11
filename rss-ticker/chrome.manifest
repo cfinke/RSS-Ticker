@@ -18,6 +18,7 @@ locale     rss-ticker     ru-RU            chrome/locale/ru-RU/
 locale     rss-ticker     sl-SI            chrome/locale/sl-SI/
 locale     rss-ticker     sv-SE            chrome/locale/sv-SE/
 locale     rss-ticker     tr-TR            chrome/locale/tr-TR/
+locale     rss-ticker     vi               chrome/locale/vi/
 locale     rss-ticker     zh-TW            chrome/locale/zh-TW/
 
 skin       rss-ticker     classic             chrome/skin/lin/
