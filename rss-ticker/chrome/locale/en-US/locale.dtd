@@ -23,10 +23,6 @@
 <!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "Mark All as Read">
 <!ENTITY cm.markAllAsRead.key "A">
-<!ENTITY options.speed.tt "The speed of the ticker.  1 is the fastest.">
-<!ENTITY options.dw.itemWidth.tt "The width of the individual items in the ticker.  The default is 200 (px).">
-<!ENTITY options.smoothness.tt "The number of ticks that it takes to remove one item from the front of the ticker.  Set higher for a smoother scroll.">
-<!ENTITY options.updateInterval.tt "The number of minutes between updates of the feeds.">
 <!ENTITY options.updateInterval "Feed Update Frequency">
 <!ENTITY options.update.1 "Update my feeds every">
 <!ENTITY options.update.2 "minutes.">
@@ -41,26 +37,17 @@
 <!ENTITY options.general "General">
 <!ENTITY options.advanced "Advanced">
 <!ENTITY options.contextMenu "Context Menu">
-<!ENTITY options.placement.tt "Placement of the ticker in the browser.">
-<!ENTITY options.random.tt "Have the ticker show the feed items in a random order for variety.">
-<!ENTITY options.pause.tt "Pause the ticker when the mouse is over it.">
-<!ENTITY options.disable.tt "Disable the RSS ticker. This has the same effect as uninstalling it, but without uninstalling it.">
-<!ENTITY options.hide.tt "Hide feed items that you've already read (according to your browser's history).">
-<!ENTITY options.bold.tt "Show items that you haven't read (according to your browser's history) in bold.">
-<!ENTITY options.openInNewTab.tt "Always open links in new tabs, no matter which mouse button you click with.">
 <!ENTITY disableTicker "Disable ticker">
 <!ENTITY options.tickerPlacement "Ticker Placement">
 <!ENTITY tickerPlacement.belowStatusBar "Below status bar">
 <!ENTITY tickerPlacement.belowBMTB "Below bookmarks toolbar">
 <!ENTITY options.random "Randomize ticker items ">
-<!ENTITY options.pause "Pause the ticker when the mouse is over it.">
 <!ENTITY options.hide "Hide items you've already read.">
 <!ENTITY options.bold "Bold items you haven't read.">
 <!ENTITY options.openInNewTab "Always open links in new tabs.">
 <!ENTITY toggleTicker "Toggle ticker on/off">
 <!ENTITY options.dw.limitWidth "Limit the width of the items in the ticker">
 <!ENTITY options.dw.isMaxWidth "Use only as a maximum width">
-<!ENTITY options.disableRefresh "Disable auto-refresh">
 <!ENTITY options.limitItemsPerFeed "Limit the number of items per feed">
 <!ENTITY options.itemsPerFeed "Items per feed">
 <!ENTITY about "About">
@@ -84,13 +71,8 @@
 <!ENTITY trendsP2 "Click OK to subscribe; the feed will automatically appear in the ticker, keeping you up-to-date on the latest news and trends from around the Web.">
 <!ENTITY trendsP3 "Don't worry, you won't be asked again if you choose not to subscribe.">
 
-<!ENTITY every10Minutes "Every 10 minutes">
-<!ENTITY oncePerDay "Once per day">
-
 <!ENTITY faster "Faster">
 <!ENTITY slower "Slower">
 
 <!ENTITY smoother "Smoother (More CPU)">
 <!ENTITY choppier "Choppier (Less CPU)">
-
-<!ENTITY checkbox_understand "Yes, I want to subscribe to a feed of trending social topics.">
