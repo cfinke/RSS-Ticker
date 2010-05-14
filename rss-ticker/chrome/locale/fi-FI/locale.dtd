@@ -23,10 +23,6 @@
 <!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "Merkitse kaikki luetuksi">
 <!ENTITY cm.markAllAsRead.key "A">
-<!ENTITY options.speed.tt "Syötenauhan vieritysnopeus (&apos;1&apos; on nopein).">
-<!ENTITY options.dw.itemWidth.tt "Yksittäisen kohteen leveys syötenauhassa (oletus 200 pistettä).">
-<!ENTITY options.smoothness.tt "Nauhan vierityksen tasaisuus (arvon kasvattaminen saa nauhan vierimään tasaisemmin, mutta vieritys hidastuu samalla).">
-<!ENTITY options.updateInterval.tt "Syötteiden päivitysväli minuuteissa.">
 <!ENTITY options.updateInterval "Päivitystiheys">
 <!ENTITY options.speed "Vieritysnopeus">
 <!ENTITY options.dw.itemWidth "Leveys">
@@ -39,26 +35,17 @@
 <!ENTITY options.general "Yleiset">
 <!ENTITY options.advanced "Lisäasetukset">
 <!ENTITY options.contextMenu "Aihevalikko">
-<!ENTITY options.placement.tt "Syötenauhan sijainti selaimessa.">
-<!ENTITY options.random.tt "Näytä syötteen kohteet satunnaisessa järjestyksessä.">
-<!ENTITY options.pause.tt "Pysäytä syötenauha vietäessä hiiri sen päälle.">
-<!ENTITY options.disable.tt "Kytke RSS Ticker pois päältä.">
-<!ENTITY options.hide.tt "Piilota syötteen kohteet, jotka olet jo lukenut.">
-<!ENTITY options.bold.tt "Lihavoi kohteet, joita et ole lukenut.">
-<!ENTITY options.openInNewTab.tt "Avaa linkit aina uuteen välilehteen riippumatta siitä, mitä hiiren nappia painettiin.">
 <!ENTITY disableTicker "Kytke syötenauha pois päältä">
 <!ENTITY options.tickerPlacement "Syötenauhan sijainti">
 <!ENTITY tickerPlacement.belowStatusBar "Tilapalkin alapuolella">
 <!ENTITY tickerPlacement.belowBMTB "Kirjanmerkkipalkin alapuolella">
 <!ENTITY options.random "Sekoita syötteen kohteet">
-<!ENTITY options.pause "Pysäytä syötenauha kun hiiri on sen päällä.">
 <!ENTITY options.hide "Piilota luetut kohteet.">
 <!ENTITY options.bold "Lihavoi kohteet, joita ei ole luettu.">
 <!ENTITY options.openInNewTab "Avaa linkit aina uuteen välilehteen.">
 <!ENTITY toggleTicker "Syötenauha päälle/pois">
 <!ENTITY options.dw.limitWidth "Rajoita kohteiden leveys">
 <!ENTITY options.dw.isMaxWidth "Käytä enimmäisleveyttä">
-<!ENTITY options.disableRefresh "Poista automaattinen päivitys käytöstä">
 <!ENTITY options.limitItemsPerFeed "Rajoita kohteiden lukumäärä syötteissä">
 <!ENTITY options.itemsPerFeed "Kohteita syötteessä">
 <!ENTITY about "Tietoja">

@@ -23,10 +23,6 @@
 <!ENTITY cm.markFeedAsRead.key "л">
 <!ENTITY cm.markAllAsRead "Пометить всё как Прочитанное">
 <!ENTITY cm.markAllAsRead.key "ё">
-<!ENTITY options.speed.tt "Скорость бегущей строки. 1 - наибольшая.">
-<!ENTITY options.dw.itemWidth.tt "Ширина отдельного элемента ленты в бегущей строке. По умолчанию 200 (px).">
-<!ENTITY options.smoothness.tt "Количество движений, после которых элемент исчезнет с экрана. Более крупное значение соответствует более плавной прокрутке">
-<!ENTITY options.updateInterval.tt "Интервал обновления лент, в минутах">
 <!ENTITY options.updateInterval "Частота обновлений">
 <!ENTITY options.update.1 "Обновлять новости каждые">
 <!ENTITY options.update.2 "минут.">
@@ -41,26 +37,17 @@
 <!ENTITY options.general "Основные">
 <!ENTITY options.advanced "Дополнительно">
 <!ENTITY options.contextMenu "Контекстное меню">
-<!ENTITY options.placement.tt "Положение строки в браузере">
-<!ENTITY options.random.tt "Отображать новости в бегущей строке в произвольном порядке">
-<!ENTITY options.pause.tt "Останавливать бегущую строку, когда курсор мыши находится на ней">
-<!ENTITY options.disable.tt "Отключить Rss Ticker">
-<!ENTITY options.hide.tt "Скрывать прочитанные элементы ленты (согласно истории вашего браузера).">
-<!ENTITY options.bold.tt "Выделять жирным шрифтом непрочитанные элементы ленты">
-<!ENTITY options.openInNewTab.tt "Всегда открывать ссылки в новой вкладке">
 <!ENTITY disableTicker "Отключить Rss Ticker">
 <!ENTITY options.tickerPlacement "Расположение бегущей строки">
 <!ENTITY tickerPlacement.belowStatusBar "Под строкой состояния">
 <!ENTITY tickerPlacement.belowBMTB "Над панелью вкладок">
 <!ENTITY options.random "Новости в произвольном порядке">
-<!ENTITY options.pause "Останавливать бегущую строку, если курсор находится на ней">
 <!ENTITY options.hide "Скрывать прочитанные новости">
 <!ENTITY options.bold "Выделять жирным шрифтом непрочитанные новости">
 <!ENTITY options.openInNewTab "Всегда открывать ссылки в новых вкладках">
 <!ENTITY toggleTicker "Включение/Выключение бегущей строки">
 <!ENTITY options.dw.limitWidth "Ограничить ширину элементов бегущей строки">
 <!ENTITY options.dw.isMaxWidth "Фиксированная ширина элементов">
-<!ENTITY options.disableRefresh "Отключить авто-обновление">
 <!ENTITY options.limitItemsPerFeed "Отображать только N последних новостей">
 <!ENTITY options.itemsPerFeed "Показывать только">
 <!ENTITY about "О расширении">
@@ -82,8 +69,6 @@
 <!ENTITY trendsP1 "RSS Ticker интересуется, не хотите ли вы подписаться на ленту последних поисковых слов на Twitter, Digg и прочих социальных сайтах.">
 <!ENTITY trendsP2 "Нажмите OK чтобы подписаться на ленту. Она появится в RSS Ticker и будет оповещать вас о последних новостях и события веба. (Вы можете отписаться в любой момент.)">
 <!ENTITY trendsP3 "Не волнуйтесь: вас никогда не будут спрашивать, если вы не захотите подписываться.">
-<!ENTITY every10Minutes "Каждые 10 минут">
-<!ENTITY oncePerDay "Один раз в день">
 <!ENTITY faster "Быстрее">
 <!ENTITY slower "Медленее">
 <!ENTITY smoother "Более гладко">

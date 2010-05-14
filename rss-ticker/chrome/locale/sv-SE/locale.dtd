@@ -23,10 +23,6 @@
 <!ENTITY cm.markFeedAsRead.key "L">
 <!ENTITY cm.markAllAsRead "Markera Alla som Lästa">
 <!ENTITY cm.markAllAsRead.key "A">
-<!ENTITY options.speed.tt "Hastigheten på textremsan. 1 är snabbast.">
-<!ENTITY options.dw.itemWidth.tt "Bredden på de enskilda objekten i textremsan. Standard är 200 (px).">
-<!ENTITY options.smoothness.tt "Antal tick som det tar att ta bort ett objekt från starten på textremsan. Sätt ett högre värde för en mjukare rullning.">
-<!ENTITY options.updateInterval.tt "Antalet minuter mellan uppdatering av flödena.">
 <!ENTITY options.updateInterval "Uppdateringsfrekvens">
 <!ENTITY options.speed "Rullningshastighet">
 <!ENTITY options.dw.itemWidth "Objektbredd">
@@ -39,26 +35,17 @@
 <!ENTITY options.general "Allmänt">
 <!ENTITY options.advanced "Avancerat">
 <!ENTITY options.contextMenu "Snabbvalsmeny">
-<!ENTITY options.placement.tt "Placering av textremsan i webbläsaren.">
-<!ENTITY options.random.tt "Låt textremsan visa flödenas innehåll i slumpvis ordning för att skapa variation.">
-<!ENTITY options.pause.tt "Pausa textremsan när musen är över den.">
-<!ENTITY options.disable.tt "Avaktivera RSS Ticker. Detta har samma effekt som att avinstallera den, men utan att avinstallera den.">
-<!ENTITY options.hide.tt "Göm flödesinnehåll du redan har läst (enligt historiken i din webbläsare)">
-<!ENTITY options.bold.tt "Visa innehåll som du inte har läst (enligt webbläsarens historik) i fet stil.">
-<!ENTITY options.openInNewTab.tt "Öppna alltid länkar i nya flikar, oavsett vilken musknapp du klickar med.">
 <!ENTITY disableTicker "Avaktivera textremsan">
 <!ENTITY options.tickerPlacement "Textremsans placering">
 <!ENTITY tickerPlacement.belowStatusBar "Nedanför statusraden">
 <!ENTITY tickerPlacement.belowBMTB "Nedanför bokmärkesverktygsfältet.">
 <!ENTITY options.random "Slumpa textremsans innehåll">
-<!ENTITY options.pause "Pausa textremsan när musen är över den.">
 <!ENTITY options.hide "Göm innehåll du redan har läst.">
 <!ENTITY options.bold "Visa innehåll du inte läst med fet stil.">
 <!ENTITY options.openInNewTab "Öppna alltid länkar i nya flikar.">
 <!ENTITY toggleTicker "Växla textremsan av/på">
 <!ENTITY options.dw.limitWidth "Begränsa bredden på objekt i textremsan">
 <!ENTITY options.dw.isMaxWidth "Använd endast som maxbredd">
-<!ENTITY options.disableRefresh "Avaktivera autouppdatering">
 <!ENTITY options.limitItemsPerFeed "Begränsa antalet objekt per flöde">
 <!ENTITY options.itemsPerFeed "Objekt per flöde">
 <!ENTITY about "Om">

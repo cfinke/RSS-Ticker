@@ -23,10 +23,6 @@
 <!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "Tümünü Okunmuş Olarak İşaretle">
 <!ENTITY cm.markAllAsRead.key "A">
-<!ENTITY options.speed.tt "Şerit'in hızı. 1 en hızlısı">
-<!ENTITY options.dw.itemWidth.tt "Şeritteki özel öğelerin genişliği. Varsayılan 200 (px)">
-<!ENTITY options.smoothness.tt "Şeridin başında bir öğenin kaybolması için gerekli im sayısı. Yumuşak kayış için yüksek sayıya ayarlayın.">
-<!ENTITY options.updateInterval.tt "Yayınların güncelleme aralığı, dakika olarak.">
 <!ENTITY options.updateInterval "Güncelleme Sıklığı">
 <!ENTITY options.update.1 "Yayının güncellenme sıklığı">
 <!ENTITY options.update.2 "dakika">
@@ -41,26 +37,17 @@
 <!ENTITY options.general "Genel">
 <!ENTITY options.advanced "Gelişmiş">
 <!ENTITY options.contextMenu "İçerik Menüsü">
-<!ENTITY options.placement.tt "Şeritin tarayıcı içindeki yeri">
-<!ENTITY options.random.tt "Şeritteki yayın öğelerinin rastgele sırada göstermesini istermisiniz.">
-<!ENTITY options.pause.tt "Fare şeridin üzerine geldiğinde duraklat.">
-<!ENTITY options.disable.tt "RSS ticker'ı iptal et. Bu uzantının kaldırılması gibidir fakat kaldırma işlemi yapmaz.">
-<!ENTITY options.hide.tt "Zaten okuduğunuz yayın öğelerini gizle (tarayıcınızın geçmişine göre karar verir).">
-<!ENTITY options.bold.tt "Okunmamış öğeler (tarayıcınızın geçmişine göre) kalın harflerle gösterilsin.">
-<!ENTITY options.openInNewTab.tt "Bağlantılar, üzerine hangi fare tuşuyla basıldığına bakılmaksızın yeni sekmede açılsın.">
 <!ENTITY disableTicker "Şeridi iptal et">
 <!ENTITY options.tickerPlacement "Şerit Yerleşimi">
 <!ENTITY tickerPlacement.belowStatusBar "Durum çubuğunun altında">
 <!ENTITY tickerPlacement.belowBMTB "Yerimleri çubuğunun altında">
 <!ENTITY options.random "Rastgele şerit öğeleri">
-<!ENTITY options.pause "Fare şeridin üzerine geldiğinde duraklat.">
 <!ENTITY options.hide "Zaten okuduğunuz öğeleri gizle.">
 <!ENTITY options.bold "Okunmamış öğeleri kalın harflerle göster.">
 <!ENTITY options.openInNewTab "Bağlantıları herzaman yeni sekmede aç.">
 <!ENTITY toggleTicker "Şerit aç/kapa geçiş tuşu">
 <!ENTITY options.dw.limitWidth "Şerit içinde öğe genişliğini sınırla">
 <!ENTITY options.dw.isMaxWidth "Yalnızca en fazla değerleri kullan">
-<!ENTITY options.disableRefresh "Otomatik yenilemeyi iptal et">
 <!ENTITY options.limitItemsPerFeed "Her yayın için görülen öğeyi sınırla">
 <!ENTITY options.itemsPerFeed "Her yayın için öğeler">
 <!ENTITY about "Hakkında">
@@ -82,10 +69,7 @@
 <!ENTITY trendsP1 "RSS Ticker sizin Twitter, Digg ve diğer sosyal Web sitelerindeki son aranan terimlerin beslemelerine abone olmak isteyebileceğini bilmek istiyor.">
 <!ENTITY trendsP2 "Yayına üye olmak için OK'e tıklayın; ticker içinde kendiliğinden görülecektir, bu yolla web aracılığı ile en güncel haber ve trendlerden haberdar olunuz. (İstediğiniz zaman aboneliğinizi iptal edebilirsiniz)">
 <!ENTITY trendsP3 "Endişelenme, eğer abone olmamayı seçdiyseniz size tekrar sorulmayacak.">
-<!ENTITY every10Minutes "Her 10 dakikada">
-<!ENTITY oncePerDay "Günde bir defa">
 <!ENTITY faster "Hızlı">
 <!ENTITY slower "Yavaş">
 <!ENTITY smoother "Akıllıca (Daha Fazla CPU)">
 <!ENTITY choppier "Basit (Daha Az CPU)">
-<!ENTITY checkbox_understand "Evet, güncel sosyal konulardaki beslemelere abone olmak istiyorum.">

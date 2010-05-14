@@ -23,10 +23,6 @@
 <!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "모두 읽은 것으로 표시">
 <!ENTITY cm.markAllAsRead.key "A">
-<!ENTITY options.speed.tt "티커 속도. 1이 가장 빠름.">
-<!ENTITY options.dw.itemWidth.tt "티커 내 개별 항목의 폭. 기본값은 200(px).">
-<!ENTITY options.smoothness.tt "티커 전면에서 1개의 항목을 사라지는데 걸리는 순간. 더 부드러운 스크롤을 위한 높이 설정.">
-<!ENTITY options.updateInterval.tt "피드 갱신 사이의 분수">
 <!ENTITY options.updateInterval "갱신 주기">
 <!ENTITY options.update.1 "피드 갱신 주기:">
 <!ENTITY options.update.2 "분">
@@ -41,26 +37,17 @@
 <!ENTITY options.general "일반">
 <!ENTITY options.advanced "고급">
 <!ENTITY options.contextMenu "문맥 메뉴">
-<!ENTITY options.placement.tt "브라우저 내 티커 배치">
-<!ENTITY options.random.tt "다양하게 즐기기 위해 임의 순서로 피드 항목을 보이게 합니다.">
-<!ENTITY options.pause.tt "마우스를 위에 올려 놓으면 티커가 잠시 멈춥니다.">
-<!ENTITY options.disable.tt "RSS 티커를 끕니다. 설치 제거와 동일한 효과를 가지지만, 설치 제거를 하지는 않습니다.">
-<!ENTITY options.hide.tt "브라우저의 기록에 따라 이미 읽은 피드 항목을 숨깁니다.">
-<!ENTITY options.bold.tt "브라우저의 기록에 따라 읽지 않은 피드 항목을 진하게 표시합니다.">
-<!ENTITY options.openInNewTab.tt "누르는 마우스 버튼에 상관없이 언제나 새탭으로 링크를 열기">
 <!ENTITY disableTicker "티커 끔">
 <!ENTITY options.tickerPlacement "티커 배치">
 <!ENTITY tickerPlacement.belowStatusBar "상태바 밑에">
 <!ENTITY tickerPlacement.belowBMTB "북마크 도구상자 밑에">
 <!ENTITY options.random "티커 항목 무작위">
-<!ENTITY options.pause "마우스를 위에 올려 놓으면 티커가 잠시 멈춥니다.">
 <!ENTITY options.hide "이미 읽은 항목 숨기기">
 <!ENTITY options.bold "읽지 않은 항목 강조">
 <!ENTITY options.openInNewTab "언제나 새 탭으로 링크 열기">
 <!ENTITY toggleTicker "티커 끄기/켜기 전환">
 <!ENTITY options.dw.limitWidth "티커내 항목의 폭을 제한">
 <!ENTITY options.dw.isMaxWidth "최대 폭으로만 사용">
-<!ENTITY options.disableRefresh "자동 새로고침 끔">
 <!ENTITY options.limitItemsPerFeed "피드 당 항목의 수를 제한">
 <!ENTITY options.itemsPerFeed "피드 당 항목">
 <!ENTITY about "이 확장기능에 대하여">
@@ -82,10 +69,7 @@
 <!ENTITY trendsP1 "RSS Ticker는 혹시 당신이 Twitter, Digg, 및 다른 소셜 웹상의 최근 동향 검색어를 구독하기를 좋아하는지 알기를 원합니다.">
 <!ENTITY trendsP2 "피드를 구독하려면 확인을 클릭하세요; 티커안에 자동으로 표시될 것이고, 최근 뉴스와 주변의 웹으로부터 유행을 최신 상태로 유지시킬 겁니다.(언제든지 구독을 해지 할 수 있습니다.)">
 <!ENTITY trendsP3 "걱정마세요, 구독안함을 선택하면 다시 묻지 않습니다.">
-<!ENTITY every10Minutes "매 10분마다">
-<!ENTITY oncePerDay "하루에 1번">
 <!ENTITY faster "빠르게">
 <!ENTITY slower "느리게">
 <!ENTITY smoother "부드럽게(더좋은 CPU)">
 <!ENTITY choppier "급하게(낮은 CPU)">
-<!ENTITY checkbox_understand "예, 전 사회적 화제 동향의 Feed를 구독하길 원합니다.">

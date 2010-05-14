@@ -23,10 +23,6 @@
 <!ENTITY cm.markFeedAsRead.key "o">
 <!ENTITY cm.markAllAsRead "Segna tutti come letti">
 <!ENTITY cm.markAllAsRead.key "e">
-<!ENTITY options.speed.tt "Velocità di visualizzazione della barra di RSS Ticker. Il valore 1 corrisponde alla massima velocità">
-<!ENTITY options.dw.itemWidth.tt "Larghezza di ogni elemento nella barra di RSS Ticker. Il valore predefinito è 200 pixel">
-<!ENTITY options.smoothness.tt "Numero di movimenti necessari per eliminare un elemento dall'inizio della barra di RSS Ticker. Più alto sarà il valore, più scorrevole sarà il movimento degli elementi">
-<!ENTITY options.updateInterval.tt "Intervallo di tempo in minuti per la ricerca di aggiornamenti dei feed">
 <!ENTITY options.updateInterval "Frequenza di aggiornamento">
 <!ENTITY options.update.1 "Minuti prima dell'aggiornamento successivo:">
 <!ENTITY options.update.2 " ">
@@ -41,26 +37,17 @@
 <!ENTITY options.general "Generali">
 <!ENTITY options.advanced "Avanzate">
 <!ENTITY options.contextMenu "Menu contestuale">
-<!ENTITY options.placement.tt "Collocazione della barra di RSS Ticker nel browser">
-<!ENTITY options.random.tt "Selezionando questa opzione la barra di RSS Ticker mostrerà i feed in ordine casuale">
-<!ENTITY options.pause.tt "Selezionando questa opzione verrà interrotto lo scorrimento della barra di RSS Ticker al passaggio del mouse">
-<!ENTITY options.disable.tt "Selezionando questa opzione verrà disattivata la barra di RSS Ticker. Ciò avrà lo stesso effetto di disinstallare l'estensione pur mantenendola installata">
-<!ENTITY options.hide.tt "Selezionando questa opzione verranno nascosti gli elementi di feed già letti (conformemente alla cronologia del browser)">
-<!ENTITY options.bold.tt "Selezionando questa opzione gli elementi di feed non letti verranno visualizzati in grassetto (conformemente alla cronologia del browser)">
-<!ENTITY options.openInNewTab.tt "Selezionando questa opzione i link verranno sempre aperti in nuove schede, indipendentemente dal pulsante del mouse premuto">
 <!ENTITY disableTicker "Disattiva la barra di RSS Ticker">
 <!ENTITY options.tickerPlacement "Posizionamento della barra di RSS Ticker">
 <!ENTITY tickerPlacement.belowStatusBar "Sotto la barra di stato">
 <!ENTITY tickerPlacement.belowBMTB "Sotto la barra dei segnalibri">
 <!ENTITY options.random "Visualizza gli elementi in modo casuale ">
-<!ENTITY options.pause "Interrompi lo scorrimento della barra di RSS Ticker al passaggio del mouse">
 <!ENTITY options.hide "Nascondi gli elementi già letti">
 <!ENTITY options.bold "Visualizza gli elementi non letti in grassetto">
 <!ENTITY options.openInNewTab "Apri sempre i link in nuove schede">
 <!ENTITY toggleTicker "Attiva/disattiva la barra di RSS Ticker">
 <!ENTITY options.dw.limitWidth "Imposta la larghezza degli elementi nella barra di RSS Ticker">
 <!ENTITY options.dw.isMaxWidth "Utilizza solo come larghezza massima">
-<!ENTITY options.disableRefresh "Disattiva aggiornamento automatico">
 <!ENTITY options.limitItemsPerFeed "Imposta il numero di elementi visualizzabili per ogni feed">
 <!ENTITY options.itemsPerFeed "Elementi per feed">
 <!ENTITY about "Informazioni">
@@ -78,14 +65,11 @@
 <!ENTITY remove "Elimina">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Nascondi la barra di RSS Ticker quando è vuota">
-<!ENTITY trendsTitle "Tendenze del web in tempo reale">
-<!ENTITY trendsP1 "È possibile aggiungere un feed relativo alle ultime tendenze di ricerca su Twitter, Digg ed il resto delle reti sociali">
-<!ENTITY trendsP2 "Selezionare la casella qui sotto e fare clic su OK per aggiungere tale feed (eliminabile in qualsiasi momento), che verrà visualizzato automaticamente nella barra di RSS Ticker permettendo di rimanere aggiornati sulle ultime notizie e tendenze del web">
+<!ENTITY trendsTitle "Ultime notizie e tendenze dal web">
+<!ENTITY trendsP1 "È possibile aggiungere un feed relativo alle ultime notizie e tendenze dal web">
+<!ENTITY trendsP2 "Fare clic su OK per aggiungere tale feed, che verrà visualizzato automaticamente nella barra di RSS Ticker permettendo di rimanere aggiornati sulle ultime notizie e tendenze dal web">
 <!ENTITY trendsP3 "Questo avviso non verrà più mostrato">
-<!ENTITY every10Minutes "Ogni 10 minuti">
-<!ENTITY oncePerDay "Una volta al giorno">
 <!ENTITY faster "Maggiore">
 <!ENTITY slower "Minore">
 <!ENTITY smoother "Maggiore (maggior uso della CPU)">
 <!ENTITY choppier "Minore (minor uso della CPU)">
-<!ENTITY checkbox_understand "Aggiungi il feed delle ultime tendenze di ricerca">

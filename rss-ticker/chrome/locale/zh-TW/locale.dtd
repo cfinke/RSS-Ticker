@@ -23,10 +23,6 @@
 <!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "全部設為已讀">
 <!ENTITY cm.markAllAsRead.key "A">
-<!ENTITY options.speed.tt "設定跑馬燈的捲動速度，數字越小就越快。">
-<!ENTITY options.dw.itemWidth.tt "跑馬燈中每個項目的寬度，預設值是 200 像素。">
-<!ENTITY options.smoothness.tt "數值設得越高則捲動越平順。">
-<!ENTITY options.updateInterval.tt "每隔幾分鐘更新一次 feed。">
 <!ENTITY options.updateInterval "更新頻率">
 <!ENTITY options.speed "捲動速度">
 <!ENTITY options.dw.itemWidth "項目寬度">
@@ -39,26 +35,17 @@
 <!ENTITY options.general "一般">
 <!ENTITY options.advanced "進階">
 <!ENTITY options.contextMenu "右鍵選單">
-<!ENTITY options.placement.tt "跑馬燈於瀏覽器中的顯示位置。">
-<!ENTITY options.random.tt "讓跑馬燈上的 feed 項目以隨機改變的排序出現。">
-<!ENTITY options.pause.tt "當游標移到跑馬燈上時，跑馬燈暫時停止捲動。">
-<!ENTITY options.disable.tt "隱藏 RSS 跑馬燈。效果與移除套件後相同，只是你並沒有移除它。">
-<!ENTITY options.hide.tt "隱藏你閱讀過的 feed 項目 (以瀏覽器的歷史紀錄為準)。">
-<!ENTITY options.bold.tt "將你尚未閱讀的項目設為粗體字 (以瀏覽器的歷史紀錄為準)。">
-<!ENTITY options.openInNewTab.tt "無論你按下滑鼠上的哪顆按鈕，都把鏈結開啟在新分頁中。">
 <!ENTITY disableTicker "隱藏跑馬燈">
 <!ENTITY options.tickerPlacement "跑馬燈顯示位置">
 <!ENTITY tickerPlacement.belowStatusBar "狀態列底下">
 <!ENTITY tickerPlacement.belowBMTB "書籤列底下">
 <!ENTITY options.random "隨機顯示跑馬燈上的項目">
-<!ENTITY options.pause "跑馬燈在游標經過時暫停捲動">
 <!ENTITY options.hide "隱藏已讀項目">
 <!ENTITY options.bold "未讀項目設為粗體">
 <!ENTITY options.openInNewTab "永遠把鏈結開啟在新分頁">
 <!ENTITY toggleTicker "顯示 / 隱藏跑馬燈">
 <!ENTITY options.dw.limitWidth "限制跑馬燈上各個項目的寬度">
 <!ENTITY options.dw.isMaxWidth "設為最大寬度">
-<!ENTITY options.disableRefresh "取消自動更新">
 <!ENTITY options.limitItemsPerFeed "限制每個 feed 所顯示的項目個數">
 <!ENTITY options.itemsPerFeed "每個 feed 的項目數">
 <!ENTITY about "關於">

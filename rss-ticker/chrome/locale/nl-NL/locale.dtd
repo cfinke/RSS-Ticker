@@ -23,10 +23,6 @@
 <!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "Alles als gelezen markeren">
 <!ENTITY cm.markAllAsRead.key "A">
-<!ENTITY options.speed.tt "De snelheid van de ticker. 1 is het snelst.">
-<!ENTITY options.dw.itemWidth.tt "De breedte van de individuele tickerberichtjes. De normale waarde is 200 (px).">
-<!ENTITY options.smoothness.tt "Het aantal ticks nodig om 1 berichtje te verwijderen van de voorkant van de ticker. Zet hoger om vlotter te scrollen.">
-<!ENTITY options.updateInterval.tt "Het aantal minuten tussen updates van de feeds.">
 <!ENTITY options.updateInterval "Updatefrequentie">
 <!ENTITY options.update.1 "Mij feeds elke">
 <!ENTITY options.update.2 "minuten bijwerken.">
@@ -41,26 +37,17 @@
 <!ENTITY options.general "Algemeen">
 <!ENTITY options.advanced "Geavanceerd">
 <!ENTITY options.contextMenu "Contextmenu">
-<!ENTITY options.placement.tt "Positie van de ticker in de browser.">
-<!ENTITY options.random.tt "De ticker de feedberichten in een willekeurige volgorde laten weergeven voor variatie.">
-<!ENTITY options.pause.tt "De ticker pauzeren als de muis erover gaat.">
-<!ENTITY options.disable.tt "De RSS ticker uitschakelen. Dit heeft hetzelfde effect als verwijderen, maar zonder te verwijderen.">
-<!ENTITY options.hide.tt "Feedberichten die u reeds gelezen hebt verbergen (volgens browsergeschiedenis).">
-<!ENTITY options.bold.tt "Ongelezen berichten vet weergeven (volgens browsergeschiedenis).">
-<!ENTITY options.openInNewTab.tt "Koppelingen altijd in nieuwe tabbladen openen, onafhankelijk van met welke muisknop erop geklikt werd.">
 <!ENTITY disableTicker "Ticker uitschakelen">
 <!ENTITY options.tickerPlacement "Positie ticker">
 <!ENTITY tickerPlacement.belowStatusBar "Onder de statusbalk">
 <!ENTITY tickerPlacement.belowBMTB "Onder de bladwijzerwerkbalk">
 <!ENTITY options.random "Ticker items in willekeurige volgorde">
-<!ENTITY options.pause "De ticker pauzeren wanner de muis erover gaat.">
 <!ENTITY options.hide "Ongelezen berichten verbergen.">
 <!ENTITY options.bold "Vette ongelezen berichten.">
 <!ENTITY options.openInNewTab "Koppelingen altijd in nieuwe tabbladen openen.">
 <!ENTITY toggleTicker "Ticker in-/uitschakelen">
 <!ENTITY options.dw.limitWidth "De breedte van de berichten in de ticker beperken">
 <!ENTITY options.dw.isMaxWidth "Enkel als maximumbreedte gebruiken">
-<!ENTITY options.disableRefresh "Automatisch verversen uitschakelen">
 <!ENTITY options.limitItemsPerFeed "Aantal berichten per feed beperken">
 <!ENTITY options.itemsPerFeed "Berichten per feed">
 <!ENTITY about "Over">
@@ -82,10 +69,7 @@
 <!ENTITY trendsP1 "RSS Ticker wil weten of u zich wilt abonneren op een feed met de laatste trendzoektermen op Twitter, Digg en de rest van het sociale web.">
 <!ENTITY trendsP2 "Klik OK om u te abonneren op de feed; deze zal automatisch in de ticker verschijnen en u up-to-date houden met het laatste nieuws en trends op het web. (U kunt uw abonnement op elk gewenst moment opzeggen.)">
 <!ENTITY trendsP3 "Wees gerust, u wordt niet meer lastiggevallen als u zich niet abonneert.">
-<!ENTITY every10Minutes "Elke 10 minuten">
-<!ENTITY oncePerDay "Eenmaal daags">
 <!ENTITY faster "Sneller">
 <!ENTITY slower "Langzamer">
 <!ENTITY smoother "Soepeler (meer CPU)">
 <!ENTITY choppier "Hakkeriger (minder CPU)">
-<!ENTITY checkbox_understand "Ja, ik wil me abonneren op een feed met onderwerpen over sociale trends.">

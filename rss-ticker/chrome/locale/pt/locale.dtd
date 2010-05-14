@@ -23,10 +23,6 @@
 <!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "Marcar Todas como Lidas">
 <!ENTITY cm.markAllAsRead.key "A">
-<!ENTITY options.speed.tt "Velocidade do letreiro. 1 é a mais rápida.">
-<!ENTITY options.dw.itemWidth.tt "Largura de cada item no letreiro. O padrão é de 200px.">
-<!ENTITY options.smoothness.tt "Tempo para remover cada item do letreiro. Defina um valor alto para uma transição suave.">
-<!ENTITY options.updateInterval.tt "Minutos de intervalo entre actualizações das fontes.">
 <!ENTITY options.updateInterval "Frequência de Actualização">
 <!ENTITY options.update.1 "Actualizar as minhas fontes a cada">
 <!ENTITY options.update.2 "minutos.">
@@ -41,26 +37,17 @@
 <!ENTITY options.general "Geral">
 <!ENTITY options.advanced "Avançado">
 <!ENTITY options.contextMenu "Menu Contextual">
-<!ENTITY options.placement.tt "Localização do letreiro no browser.">
-<!ENTITY options.random.tt "Exibir itens de forma aleatória.">
-<!ENTITY options.pause.tt "Parar o letreiro quando o rato estiver sobre ele.">
-<!ENTITY options.disable.tt "Desactivar o RSS Ticker. O efeito é equivalente à desinstalação.">
-<!ENTITY options.hide.tt "Ocultar itens já lidos (de acordo com o histórico do browser).">
-<!ENTITY options.bold.tt "Mostrar a negrito itens ainda não lidos (de acordo com o histórico do browser).">
-<!ENTITY options.openInNewTab.tt "Abrir sempre as ligações em novos separadores, independentemente do botão do rato que foi pressionado.">
 <!ENTITY disableTicker "Desactivar o RSS Ticker">
 <!ENTITY options.tickerPlacement "Localização do Letreiro">
 <!ENTITY tickerPlacement.belowStatusBar "Abaixo da barra de estado">
 <!ENTITY tickerPlacement.belowBMTB "Abaixo da barra de marcadores">
 <!ENTITY options.random "Itens aleatórios">
-<!ENTITY options.pause "Parar o letreiro com o rato.">
 <!ENTITY options.hide "Ocultar itens lidos.">
 <!ENTITY options.bold "Itens não lidos a negrito.">
 <!ENTITY options.openInNewTab "Abrir ligações em novos separadores.">
 <!ENTITY toggleTicker "Alternar entre letreiro ligado ou desligado">
 <!ENTITY options.dw.limitWidth "Limitar a largura dos itens no letreiro">
 <!ENTITY options.dw.isMaxWidth "Usar somente largura máxima">
-<!ENTITY options.disableRefresh "Desactivar actualização automática">
 <!ENTITY options.limitItemsPerFeed "Limitar o número de itens por fonte">
 <!ENTITY options.itemsPerFeed "Itens por fonte">
 <!ENTITY about "Sobre">
@@ -82,8 +69,6 @@
 <!ENTITY trendsP1 "O RSS Ticker deseja saber se pretende subscrever uma fonte com as tendências de busca mais recentes no Twitter, no Digg e outros locais da Web social.">
 <!ENTITY trendsP2 "Pressione OK para subscrever a fonte; aparecerá automaticamente no letreiro, mantendo-o a par das notícias e tendências mais recentes na Web. (Pode cancelar a subscrição a qualquer momento.)">
 <!ENTITY trendsP3 "Não se preocupe; não voltará a ser incomodado caso opte por não subscrever.">
-<!ENTITY every10Minutes "A cada 10 minutos">
-<!ENTITY oncePerDay "Uma vez por dia">
 <!ENTITY faster "Mais rápido">
 <!ENTITY slower "Mais lento">
 <!ENTITY smoother "Mais suave (Consome mais recursos)">

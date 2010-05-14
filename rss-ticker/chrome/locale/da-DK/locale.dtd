@@ -23,10 +23,6 @@
 <!ENTITY cm.markFeedAsRead.key "f">
 <!ENTITY cm.markAllAsRead "Markér alle som læste">
 <!ENTITY cm.markAllAsRead.key "a">
-<!ENTITY options.speed.tt "Hastighed på tickeren. 1 er det hurtigste.">
-<!ENTITY options.dw.itemWidth.tt "Bredden på individuelle emner i tickeren. Standard er 200 (px).">
-<!ENTITY options.smoothness.tt "Antal trin det tager at fjerne et emne fra forrest på tickeren. Sæt højere for en mere jævn rulning.">
-<!ENTITY options.updateInterval.tt "Antal minutter mellem opdatering af feedene.">
 <!ENTITY options.updateInterval "Opdateringsfrekvens">
 <!ENTITY options.update.1 "Opdater mine feeds hver">
 <!ENTITY options.update.2 "minutter.">
@@ -41,26 +37,17 @@
 <!ENTITY options.general "Generelt">
 <!ENTITY options.advanced "Avanceret">
 <!ENTITY options.contextMenu "Kontekstmenu">
-<!ENTITY options.placement.tt "Placering af tickeren i browseren.">
-<!ENTITY options.random.tt "Lad tickeren vise feedemner i tilfældig rækkefølge for afvekslingens skyld.">
-<!ENTITY options.pause.tt "Stands tickeren når musen er over den.">
-<!ENTITY options.disable.tt "Slå RSS Ticker fra. Dette svarer til at afinstallere den, men uden at afinstallere den.">
-<!ENTITY options.hide.tt "Skjul feedemner du allerede har læst (ifølge din browsers historik).">
-<!ENTITY options.bold.tt "Viser emner du ikke har læst (i henhold til din browsers historik) med fed.">
-<!ENTITY options.openInNewTab.tt "Åbn altid links i nye faneblade, uanset hvilken museknap du klikker med.">
 <!ENTITY disableTicker "Slå ticker fra">
 <!ENTITY options.tickerPlacement "Ticker placering">
 <!ENTITY tickerPlacement.belowStatusBar "Under statuslinien">
 <!ENTITY tickerPlacement.belowBMTB "Under bogmærker-værktøjslinien">
 <!ENTITY options.random "Tilfældige ticker emner">
-<!ENTITY options.pause "Stands tickeren når musen er over den.">
 <!ENTITY options.hide "Skjul emner du allerede har læst.">
 <!ENTITY options.bold "Fremhæv ulæste emner.">
 <!ENTITY options.openInNewTab "Åbn altid links i nye faneblade.">
 <!ENTITY toggleTicker "Slå ticker til/fra">
 <!ENTITY options.dw.limitWidth "Begræns længden på emner i tickeren">
 <!ENTITY options.dw.isMaxWidth "Brug kun som maksimumbredde">
-<!ENTITY options.disableRefresh "Slå automatisk opdatering fra">
 <!ENTITY options.limitItemsPerFeed "Begræns antallet af emner pr. feed">
 <!ENTITY options.itemsPerFeed "Emner pr. feed">
 <!ENTITY about "Om">

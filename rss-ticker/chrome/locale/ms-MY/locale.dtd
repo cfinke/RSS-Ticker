@@ -23,10 +23,6 @@
 <!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "Tanda semua sebagai sudah dibaca">
 <!ENTITY cm.markAllAsRead.key "A">
-<!ENTITY options.speed.tt "Kelajuan ticker. 1 adalah yang paling laju">
-<!ENTITY options.dw.itemWidth.tt "Lebar item individu dalam ticker. Nilai default adalah 200 (px).">
-<!ENTITY options.smoothness.tt "Bilangan tik yang diperlukan untuk membuang satu item didepan ticker. Pilih yang tinggi untuk skrol yang lebih licin.">
-<!ENTITY options.updateInterval.tt "Bilangan minit antara kemaskini feed.">
 <!ENTITY options.updateInterval "Frekuensi Kemaskini">
 <!ENTITY options.speed "Kelajuan Tik">
 <!ENTITY options.dw.itemWidth "Lebar item">
@@ -39,26 +35,17 @@
 <!ENTITY options.general "Am">
 <!ENTITY options.advanced "Lanjutan">
 <!ENTITY options.contextMenu "Menu konteks">
-<!ENTITY options.placement.tt "Kedudukan ticker dalam browser">
-<!ENTITY options.random.tt "Keperluan ticker memaparkan item secara rawak untuk kepelbagaian feed.">
-<!ENTITY options.pause.tt "Jeda ticker apabila tetikus menghala di atasnya.">
-<!ENTITY options.disable.tt "Jeda RSS Ticker. Efek yang sama jika ekstensi ini dibuang tetapi ia boleh dilakukan tanpa membuang ekstensi RSS Ticker.">
-<!ENTITY options.hide.tt "Sembunyikan item feed yang telah anda baca (mengikut sejarah browser anda).">
-<!ENTITY options.bold.tt "Paparkan item yang belum anda baca (mengikut sejarah browser anda) tebal.">
-<!ENTITY options.openInNewTab.tt "Selalu buka pautan dalam tab baru tanpa mengira dengan butang tetikus mana anda klik.">
 <!ENTITY disableTicker "Nyah aktifkan ticker.">
 <!ENTITY options.tickerPlacement "Kedudukan Ticker">
 <!ENTITY tickerPlacement.belowStatusBar "Dibawah bar status">
 <!ENTITY tickerPlacement.belowBMTB "Diabwah bar alatan tanda baca">
 <!ENTITY options.random "Pelbagaikan item ticker.">
-<!ENTITY options.pause "Jeda ticker apabila tetikus menghala di atasnya.">
 <!ENTITY options.hide "Sembunyika item yang telah anda baca.">
 <!ENTITY options.bold "Tebalkan item yang belum anda baca.">
 <!ENTITY options.openInNewTab "Selalu buka pautan dalam tab baru.">
 <!ENTITY toggleTicker "Tukar ticker buka/tutup.">
 <!ENTITY options.dw.limitWidth "Hadkan lebar item dalam ticker.">
 <!ENTITY options.dw.isMaxWidth "Hanya guna lebar maksimum.">
-<!ENTITY options.disableRefresh "Nyah aktif kemaskini automatik.">
 <!ENTITY options.limitItemsPerFeed "Hadkan bilangan item dalam satu feed">
 <!ENTITY options.itemsPerFeed "Item dalam satu feed">
 <!ENTITY about "Perihal">

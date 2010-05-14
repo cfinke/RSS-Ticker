@@ -23,10 +23,6 @@
 <!ENTITY cm.markFeedAsRead.key "ž">
 <!ENTITY cm.markAllAsRead "Označi vse kot prebrano">
 <!ENTITY cm.markAllAsRead.key "v">
-<!ENTITY options.speed.tt "Hitrost prikazovalnika. 1 je najvišja.">
-<!ENTITY options.dw.itemWidth.tt "Širina posameznih elementov v prikazovalniku. Privzeta vrednost je 200 (točk).">
-<!ENTITY options.smoothness.tt "Število postavitev, da ta preide prek prikazovalnika. Nastavite višje za bolj gladko drsenje.">
-<!ENTITY options.updateInterval.tt "Trajanje v minutah med posodobitvami živega zaznamka.">
 <!ENTITY options.updateInterval "Frekvenca posodabljanja">
 <!ENTITY options.speed "Hitrost prikazovalnika">
 <!ENTITY options.dw.itemWidth "Širina elementa">
@@ -39,26 +35,17 @@
 <!ENTITY options.general "Splošno">
 <!ENTITY options.advanced "Napredno">
 <!ENTITY options.contextMenu "Pojavni meni">
-<!ENTITY options.placement.tt "Postavitve prikazovalnika v brskalniku.">
-<!ENTITY options.random.tt "Prikazovalnik naj pokaže elemente zaznamka v naključnem vrstnem redu zaradi raznolikosti.">
-<!ENTITY options.pause.tt "Prekini prikazovanje, ko je miška nad njim.">
-<!ENTITY options.disable.tt "Onemogoči prikazovalnik. To ima enak učinek od odstranitev, ne da bi ga odstranili.">
-<!ENTITY options.hide.tt "Skrij že prebrano (glede na zgodovino brskalnika).">
-<!ENTITY options.bold.tt "Pokaži neprebrano (glede na zgodovino brskalnika) v krepki pisavi.">
-<!ENTITY options.openInNewTab.tt "Vedno odpre povezave v novih zavihkih, ne glede na to, s katerim gumbom miške kliknete nanje.">
 <!ENTITY disableTicker "Onemogoči prikazovalnik">
 <!ENTITY options.tickerPlacement "Postavitev prikazovalnika">
 <!ENTITY tickerPlacement.belowStatusBar "Pod vrstico stanja">
 <!ENTITY tickerPlacement.belowBMTB "Pod orodno vrstico zaznamkov">
 <!ENTITY options.random "Naključno prikaži elemente prikazovalnika">
-<!ENTITY options.pause "Prekini izpisovanje, ko je miška nad prikazovalnikom.">
 <!ENTITY options.hide "Skrij že prebrano.">
 <!ENTITY options.bold "Neprebrano prikaži v krepki pisavi.">
 <!ENTITY options.openInNewTab "Vedno odpri povezave v novih zavihkih.">
 <!ENTITY toggleTicker "Prikazovalnik vključen/izključen">
 <!ENTITY options.dw.limitWidth "Omeji širino elementov v prikazovalniku">
 <!ENTITY options.dw.isMaxWidth "Uporabi samo kot največjo širino">
-<!ENTITY options.disableRefresh "Onemogoči samodejno osveževanje">
 <!ENTITY options.limitItemsPerFeed "Omeji število novic na živ zaznamek">
 <!ENTITY options.itemsPerFeed "Elementov na živ zaznamek">
 <!ENTITY about "O razširitvi">
@@ -76,8 +63,6 @@
 <!ENTITY trendsP1 "RSS Ticker vas lahko naroči na vir RSS najbolj trendovskih iskalnih gesel na Twitterju, Diggu in preostalih družabnih spletiščih.">
 <!ENTITY trendsP2 "Kliknite V redu, če se želite naročiti na vir; samodejno se bo pojavil in vas sproti obveščal o novicah in trendih na spletu. (Odjavite se lahko kadar koli.)">
 <!ENTITY trendsP3 "Ne skrbite, če se ne naročite, vas ne bomo znova spraševali.">
-<!ENTITY every10Minutes "vsakih 10 minut">
-<!ENTITY oncePerDay "enkrat na dan">
 <!ENTITY faster "hitreje">
 <!ENTITY slower "počasneje">
 <!ENTITY smoother "gladko (več CPE)">
