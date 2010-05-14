@@ -3,7 +3,7 @@ var RSSTICKER = {
 	bookmarkService : Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService),
 	ioService : Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService),
 	
-	trendingNewsUrl : "http://api.ads.oneriot.com/search?appId=86f2f5da-3b24-4a87-bbb3-1ad47525359d&version=1.1&format=XML",
+	trendingNewsUrl : "http://api.ads.oneriot.com/search?appId=rssticker01&version=1.1&format=XML",
 	trendingNewsExpiration : 0,
 	
 	ignoreFilename : "rss-ticker.ignore.txt",
