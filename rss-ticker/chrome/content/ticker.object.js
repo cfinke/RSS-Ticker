@@ -140,9 +140,10 @@ var RSSTICKER = {
 		RSSTICKER.toolbar.style.maxHeight = '24px';
 		
 		RSSTICKER.observe(null, "nsPref:changed", "boldUnvisited");
-	
+		RSSTICKER.observe(null, "nsPref:changed", "dw.limitWidth");
+		
 		RSSTICKER.ticker.setAttribute("contextmenu","RSSTICKERCM");
-	
+		
 		RSSTICKER.ticker.setAttribute("onmouseover","RSSTICKER.mouseOverFlag = true;");
 		RSSTICKER.ticker.setAttribute("onmouseout","RSSTICKER.mouseOverFlag = false;");
 
@@ -211,7 +212,42 @@ var RSSTICKER = {
 		
 		switch(data) {
 			case "boldUnvisited":
-				RSSTICKER.ticker.setAttribute("boldUnvisited", RSSTICKER.prefs.getBoolPref("boldUnvisited"));
+				RSSTICKER.boldUnvisited = RSSTICKER.prefs.getBoolPref("boldUnvisited");
+				RSSTICKER.ticker.setAttribute("boldUnvisited", RSSTICKER.boldUnvisited);
+			break;
+			case "dw.limitWidth":
+			case "dw.itemWidth":
+			case "dw.isMaxWidth":
+				RSSTICKER.displayWidth.limitWidth = RSSTICKER.prefs.getBoolPref("dw.limitWidth");
+				RSSTICKER.displayWidth.itemWidth = RSSTICKER.prefs.getIntPref("dw.itemWidth");
+				RSSTICKER.displayWidth.isMaxWidth = RSSTICKER.prefs.getBoolPref("dw.isMaxWidth");
+				
+				RSSTICKER.ticker.setAttribute("limitWidth", RSSTICKER.displayWidth.limitWidth);
+				RSSTICKER.ticker.setAttribute("isMaxWidth", RSSTICKER.displayWidth.isMaxWidth);
+				
+				if (!RSSTICKER.displayWidth.limitWidth) {
+					var css = '#RSSTICKERToolbar toolbarbutton { width: auto !important; max-width: none !important; }';
+				}
+				else {
+					if (RSSTICKER.displayWidth.isMaxWidth) {
+						var css = '#RSSTICKERToolbar toolbarbutton { width: auto !important; max-width: '+RSSTICKER.displayWidth.itemWidth+'px !important; }';
+					}
+					else {
+						var css = '#RSSTICKERToolbar toolbarbutton { width: '+RSSTICKER.displayWidth.itemWidth+'px !important; max-width: none !important; } ';
+					}
+				}
+				
+				var data = 'data:text/css;charset=utf-8,' + encodeURI(css);
+				var sss = Components.classes["@mozilla.org/content/style-sheet-service;1"].getService(Components.interfaces.nsIStyleSheetService);
+				var ios = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
+				
+				var u = ios.newURI(data, null, null);
+				
+				if (sss.sheetRegistered(u, sss.USER_SHEET)) {
+					sss.unregisterSheet(u, sss.USER_SHEET);
+				}
+				
+				sss.loadAndRegisterSheet(u, sss.USER_SHEET);
 			break;
 			case "disabled":
 				if (RSSTICKER.prefs.getBoolPref("disabled")) {
@@ -253,12 +289,6 @@ var RSSTICKER = {
 			case "ticksPerItem":
 				RSSTICKER.ticksPerItem = RSSTICKER.prefs.getIntPref("ticksPerItem");
 				RSSTICKER.tickLength = RSSTICKER.prefs.getIntPref("tickSpeed") * (500 / RSSTICKER.ticksPerItem);
-			break;
-			case "dw.limitWidth":
-				RSSTICKER.displayWidth.limitWidth = RSSTICKER.prefs.getBoolPref("dw.limitWidth");
-			break;
-			case "dw.isMaxWidth":
-				RSSTICKER.displayWidth.isMaxWidth = RSSTICKER.prefs.getBoolPref("dw.isMaxWidth");
 			break;
 			case "smoothness":
 				if (RSSTICKER.prefs.getIntPref("smoothness") <= 0) {
@@ -900,8 +930,6 @@ var RSSTICKER = {
 			RSSTICKER.checkForEmptiness();
 		}
 		else if (RSSTICKER.boldUnvisited){
-			// node.style.fontWeight = '';
-			
 			if (!dontAdjustSpacer) RSSTICKER.adjustSpacerWidth();
 		}
 		
@@ -981,17 +1009,8 @@ var RSSTICKER = {
 				tbb.setAttribute("tooltip","RSSTICKERTooltip");
 				tbb.setAttribute("image",feedItems[j].image);
 				tbb.setAttribute("contextmenu","RSSTICKERItemCM");
-
+				
 				tbb.setAttribute("onclick","return RSSTICKER.onTickerItemClick(event, this.uri, this);");
-
-				if (RSSTICKER.displayWidth.limitWidth){
-					if (RSSTICKER.displayWidth.isMaxWidth){
-						tbb.style.maxWidth = RSSTICKER.displayWidth.itemWidth + "px";
-					}
-					else {
-						tbb.style.width = RSSTICKER.displayWidth.itemWidth + "px";
-					}
-				}
 				
 				tbb.description = feedItems[j].description;
 				tbb.setAttribute("visited", itemIsVisited);

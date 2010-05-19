@@ -64,7 +64,6 @@
 			<preference id="p_ticksPerItem" name="extensions.rssticker.ticksPerItem" type="int" />
 		</preferences>
 		<vbox>
-			<description>&options.restartNotice;</description>
 			<groupbox>
 				<caption label="&options.updateInterval;" />
 				<hbox align="center">
@@ -94,10 +93,10 @@
 
 			<groupbox>
 				<caption label="&options.dw.itemWidth;" />
-				<checkbox preference="p_dw_limitWidth" label="&options.dw.limitWidth; *" />
-				<checkbox preference="p_dw_isMaxWidth" label="&options.dw.isMaxWidth; *" />
+				<checkbox preference="p_dw_limitWidth" label="&options.dw.limitWidth;" />
+				<checkbox preference="p_dw_isMaxWidth" label="&options.dw.isMaxWidth;" />
 				<hbox flex="1" align="center">
-					<label value="&options.dw.itemWidth; : *" />
+					<label value="&options.dw.itemWidth;:" />
 					<textbox flex="1" preference="p_dw_itemWidth" />
 					<label value="&pixelAbbrev;" />
 				</hbox>
