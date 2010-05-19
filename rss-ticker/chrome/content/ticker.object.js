@@ -863,11 +863,7 @@ var RSSTICKER = {
 			
 			if (item.nodeName == 'toolbarbutton') {
 				if (item.feedURL == RSSTICKER.trendingNewsUrl) {
-					RSSTICKER.logMessage("Found: " + item.feedURL);
 					RSSTICKER.toolbar.removeChild(item);
-				}
-				else {
-					RSSTICKER.logMessage("Missed: " + item.feedURL);
 				}
 			}
 		}
@@ -970,64 +966,66 @@ var RSSTICKER = {
 		var itemsShowing = RSSTICKER.itemsInTicker(feed.label);
 		
 		for (j = 0; j < feedItems.length; j++){
-			if (!document.getElementById("RSSTICKER" + feedItems[j].uri + feedItems[j].id)){
+			var feedItem = feedItems[j];
+			
+			if (!document.getElementById("RSSTICKER" + feedItem.uri + feedItem.id)){
 				if (RSSTICKER.limitItemsPerFeed && (RSSTICKER.itemsPerFeed <= itemsShowing.length)){
 					// Determine if this item is newer than the oldest item showing.
-					if ((RSSTICKER.itemsPerFeed > 0) && feedItems[j].published && itemsShowing[0].published && (feedItems[j].published > itemsShowing[0].published)){
+					if ((RSSTICKER.itemsPerFeed > 0) && feedItem.published && itemsShowing[0].published && (feedItem.published > itemsShowing[0].published)){
 						RSSTICKER.toolbar.removeChild(document.getElementById("RSSTICKER" + itemsShowing[0].href + itemsShowing[0].guid));
 						itemsShowing.shift();
 					}
-					else {					
+					else {
 						continue;
 					}
 				}
 
-				var itemIsVisited = RSSTICKER.history.isVisitedURL(feedItems[j].id, 1);
+				var itemIsVisited = RSSTICKER.history.isVisitedURL(feedItem.id, 1);
 
-				if (itemIsVisited && RSSTICKER.hideVisited){
+				if (itemIsVisited && RSSTICKER.hideVisited) {
 					continue;
 				}
 
 				doTick = true;
 
-				feedItems[j].description = feedItems[j].description.replace(/<[^>]+>/g, "");
+				feedItem.description = feedItem.description.replace(/<[^>]+>/g, "");
 
-				if ((feedItems[j].label == '') && (feedItems[j].description != '')){
-					if (feedItems[j].description.length > 40){
-						feedItems[j].label = feedItems[j].description.substr(0,40) + "...";
+				if ((feedItem.label == '') && (feedItem.description != '')){
+					if (feedItem.description.length > 40){
+						feedItem.label = feedItem.description.substr(0,40) + "...";
 					}
 					else {
-						feedItems[j].label = feedItems[j].description;
+						feedItem.label = feedItem.description;
 					}
 				}
 
 				var tbb = RSSTICKER.ce('toolbarbutton');
-				tbb.uri = feedItems[j].uri;
-				tbb.id = "RSSTICKER" + feedItems[j].uri + feedItems[j].id;
+				tbb.uri = feedItem.uri;
+				tbb.id = "RSSTICKER" + feedItem.uri + feedItem.id;
 
-				tbb.setAttribute("label",feedItems[j].label);
+				tbb.setAttribute("label",feedItem.label);
 				tbb.setAttribute("tooltip","RSSTICKERTooltip");
-				tbb.setAttribute("image",feedItems[j].image);
+				tbb.setAttribute("image",feedItem.image);
 				tbb.setAttribute("contextmenu","RSSTICKERItemCM");
 				
 				tbb.setAttribute("onclick","return RSSTICKER.onTickerItemClick(event, this.uri, this);");
 				
-				tbb.description = feedItems[j].description;
+				tbb.description = feedItem.description;
 				tbb.setAttribute("visited", itemIsVisited);
 				
 				tbb.feed = feed.label;
 				tbb.feedURL = feed.uri;
-				tbb.href = feedItems[j].uri;
+				tbb.href = feedItem.uri;
 				
-				tbb.displayHref = feedItems[j].displayUri;
+				tbb.displayHref = feedItem.displayUri;
 				
-				if (feedItems[j].trackingUri) {
-					tbb.style.background = 'url('+feedItems[j].trackingUri+') no-repeat';
+				if (feedItem.trackingUri) {
+					tbb.style.background = 'url('+feedItem.trackingUri+') no-repeat';
 				}
 				
 				tbb.parent = RSSTICKER;
-				tbb.published = feedItems[j].published;
-				tbb.guid = feedItems[j].id;
+				tbb.published = feedItem.published;
+				tbb.guid = feedItem.id;
 				
 				tbb.onContextOpen = function (target) {
 					var url = this.href;
