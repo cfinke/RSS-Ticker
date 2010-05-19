@@ -1015,17 +1015,17 @@ var RSSTICKER = {
 						continue;
 					}
 				}
-
+				
 				var itemIsVisited = RSSTICKER.history.isVisitedURL(feedItem.id, 1);
-
+				
 				if (itemIsVisited && RSSTICKER.hideVisited) {
 					continue;
 				}
-
+				
 				doTick = true;
-
+				
 				feedItem.description = feedItem.description.replace(/<[^>]+>/g, "");
-
+				
 				if ((feedItem.label == '') && (feedItem.description != '')){
 					if (feedItem.description.length > 40){
 						feedItem.label = feedItem.description.substr(0,40) + "...";
@@ -1038,32 +1038,26 @@ var RSSTICKER = {
 				var tbb = RSSTICKER.ce('toolbarbutton');
 				tbb.uri = feedItem.uri;
 				tbb.id = "RSSTICKER" + feedItem.uri + feedItem.id;
-
-				tbb.setAttribute("label",feedItem.label);
-				tbb.setAttribute("tooltip","RSSTICKERTooltip");
-				tbb.setAttribute("image",feedItem.image);
-				tbb.setAttribute("contextmenu","RSSTICKERItemCM");
-				
-				tbb.setAttribute("onclick","return RSSTICKER.onTickerItemClick(event, this.uri, this);");
-				
 				tbb.description = feedItem.description;
-				tbb.setAttribute("visited", itemIsVisited);
-				
 				tbb.feed = feed.label;
 				tbb.feedURL = feed.uri;
 				tbb.href = feedItem.uri;
-				
 				tbb.displayHref = feedItem.displayUri;
+				tbb.published = feedItem.published;
+				tbb.guid = feedItem.id;
+				
+				tbb.setAttribute("label", feedItem.label);
+				tbb.setAttribute("tooltip", "RSSTICKERTooltip");
+				tbb.setAttribute("image", feedItem.image);
+				tbb.setAttribute("contextmenu", "RSSTICKERItemCM");
+				tbb.setAttribute("onclick", "return RSSTICKER.onTickerItemClick(event, this.uri, this);");
+				tbb.setAttribute("visited", itemIsVisited);
 				
 				if (feedItem.trackingUri) {
 					tbb.style.background = 'url('+feedItem.trackingUri+') no-repeat';
 				}
 				
-				tbb.published = feedItem.published;
-				tbb.guid = feedItem.id;
-				
 				// Determine where to add the item
-
 				if (RSSTICKER.randomizeItems){
 					if (RSSTICKER.toolbar.childNodes.length == 1){
 						// Only the spacer is showing
@@ -1077,7 +1071,7 @@ var RSSTICKER = {
 							// Add after the 5th one just to avoid some jumpiness
 							var randomPlace = Math.floor(Math.random() * (RSSTICKER.toolbar.childNodes.length - 1)) + 6;
 						}
-
+						
 						if (randomPlace >= RSSTICKER.toolbar.childNodes.length){
 							RSSTICKER.toolbar.appendChild(tbb);
 						}
@@ -1088,7 +1082,6 @@ var RSSTICKER = {
 				}
 				else {
 					// Check for another item from this feed, if so place at end of that feed.
-
 					if (itemsShowing.length > 0){
 						for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
 							var node = RSSTICKER.toolbar.childNodes[i];
@@ -1103,7 +1096,7 @@ var RSSTICKER = {
 										RSSTICKER.toolbar.insertBefore(tbb, node.nextSibling);
 										addedButton = true;
 									}
-
+									
 									break;
 								}
 							}
@@ -1121,7 +1114,7 @@ var RSSTICKER = {
 							}
 							else {
 								var addedButton = false;
-
+								
 								for (var i = RSSTICKER.toolbar.childNodes.length - 2; i >= 0; i--){
 									var node = RSSTICKER.toolbar.childNodes[i];
 									
@@ -1136,7 +1129,7 @@ var RSSTICKER = {
 										break;
 									}
 								}
-
+								
 								if (!addedButton){
 									RSSTICKER.toolbar.appendChild(tbb);
 								}
