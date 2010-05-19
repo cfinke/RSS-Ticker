@@ -249,7 +249,7 @@ var RSSTICKER = {
 				
 				sss.loadAndRegisterSheet(u, sss.USER_SHEET);
 				
-				// RSSTICKER.adjustSpacerWidth();
+				RSSTICKER.adjustSpacerWidth();
 			break;
 			case "disabled":
 				if (RSSTICKER.prefs.getBoolPref("disabled")) {
