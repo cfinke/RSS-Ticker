@@ -23,10 +23,6 @@
 <!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "Alle als gelesenen markieren">
 <!ENTITY cm.markAllAsRead.key "l">
-<!ENTITY options.speed.tt "Bestimmt die Geschwindigkeit des Tickers. 1 ist am schnellsten.">
-<!ENTITY options.dw.itemWidth.tt "Legt die Breite der einzelnen Einträge im Ticker fest. Standard ist 200 (px).">
-<!ENTITY options.smoothness.tt "Regelt das Laufverhalten des Tickers. Je größer die Zahl, um so weicher ist der Tickerlauf.">
-<!ENTITY options.updateInterval.tt "Die Anzahl an Minuten zwischen den automatischen Aktualisierungen der Feeds.">
 <!ENTITY options.updateInterval "Aktualisierungsintervall (in Minuten)">
 <!ENTITY options.speed "Laufgeschwindigkeit">
 <!ENTITY options.dw.itemWidth "Breite der Einträge">
@@ -39,26 +35,17 @@
 <!ENTITY options.general "Allgemein">
 <!ENTITY options.advanced "Erweitert">
 <!ENTITY options.contextMenu "Kontextmenü">
-<!ENTITY options.placement.tt "Bestimmt die Platzierung des Tickers im Browser.">
-<!ENTITY options.random.tt "Zeigt die Feed-Einträge im Ticker für mehr Abwechslung in zufälliger Reihenfolge an.">
-<!ENTITY options.pause.tt "Hält den Ticker an, wenn sich der Mauszeiger darüber befindet.">
-<!ENTITY options.disable.tt "Deaktiviert den RSS-Ticker. Dies hat den gleichen Effekt, wie ihn zu deinstallieren, ohne dies tun zu müssen.">
-<!ENTITY options.hide.tt "Blendet gelesene Einträge aus (gemäß der Browser-Chronik).">
-<!ENTITY options.bold.tt "Zeigt ungelesene Einträge fett hervorgehoben an (gemäß der Browser-Chronik).">
-<!ENTITY options.openInNewTab.tt "Öffnet Links immer in neuen Tabs, egal, welche Maustaste gedrückt wird.">
 <!ENTITY disableTicker "Ticker deaktivieren">
 <!ENTITY options.tickerPlacement "Ticker-Platzierung">
 <!ENTITY tickerPlacement.belowStatusBar "Unterhalb der Statusleiste">
 <!ENTITY tickerPlacement.belowBMTB "Unterhalb der Lesezeichen-Symbolleiste">
 <!ENTITY options.random "Ticker-Einträge in zufälliger Reihenfolge anzeigen">
-<!ENTITY options.pause "Ticker beim Überfahren mit der Maus anhalten">
 <!ENTITY options.hide "Gelesene Einträge ausblenden">
 <!ENTITY options.bold "Ungelesene Einträge fett markieren">
 <!ENTITY options.openInNewTab "Links immer in neuen Tabs öffnen">
 <!ENTITY toggleTicker "Ticker ein-/ausschalten">
 <!ENTITY options.dw.limitWidth "Breite der Einträge im Ticker begrenzen">
 <!ENTITY options.dw.isMaxWidth "Flexible Breite mit Wert als Maximum benutzen">
-<!ENTITY options.disableRefresh "Automatische Aktualisierung deaktivieren">
 <!ENTITY options.limitItemsPerFeed "Anzahl der Einträge pro Feed begrenzen">
 <!ENTITY options.itemsPerFeed "Einträge pro Feed">
 <!ENTITY about "Über">
