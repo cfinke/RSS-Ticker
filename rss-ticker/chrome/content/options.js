@@ -17,10 +17,14 @@ function findTicker() {
 function observeFeeds(){
 	var items = document.getElementById('feeds').selectedItems;
 	
-	for (var i = 0; i < items.length; i++){
-		if (items[i].nodeName == 'listitem'){
-			ticker.observeFeed(items[i].getAttribute("value"));
-			items[i].setAttribute("ignored","false");
+	var len = items.length;
+	
+	for (var i = 0; i < len; i++){
+		var item = items[i];
+		
+		if (item.nodeName == 'listitem'){
+			ticker.observeFeed(item.getAttribute("value"));
+			item.setAttribute("ignored","false");
 		}
 	}
 	
@@ -30,10 +34,14 @@ function observeFeeds(){
 function ignoreFeeds(){
 	var items = document.getElementById('feeds').selectedItems;
 	
-	for (var i = 0; i < items.length; i++){
-		if (items[i].nodeName == 'listitem'){
-			ticker.ignoreFeed(items[i].getAttribute("value"));
-			items[i].setAttribute("ignored","true");
+	var len = items.length;
+	
+	for (var i = 0; i < len; i++){
+		var item = items[i];
+		
+		if (item.nodeName == 'listitem'){
+			ticker.ignoreFeed(item.getAttribute("value"));
+			item.setAttribute("ignored","true");
 		}
 	}
 	
@@ -50,10 +58,14 @@ function getFeeds(){
 	var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
 	var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
 	var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
-
-	for (var i = 0; i < livemarkIds.length; i++){
-		var feedURL = livemarkService.getFeedURI(livemarkIds[i]).spec;
-		var feedTitle = bookmarkService.getItemTitle(livemarkIds[i]);
+	
+	var len = livemarkIds.length;
+	
+	for (var i = 0; i < len; i++){
+		var livemarkId = livemarkIds[i];
+		
+		var feedURL = livemarkService.getFeedURI(livemarkId).spec;
+		var feedTitle = bookmarkService.getItemTitle(livemarkId);
 		
 		livemarks.push(
 			{
@@ -63,14 +75,18 @@ function getFeeds(){
 		);
 	}
 	
-	for (var i = 0; i < livemarks.length; i++){
+	var len = livemarks.length;
+	
+	for (var i = 0; i < len; i++){
+		var livemark = livemarks[i];
+		
 		var opt = document.createElement('listitem');
 		var o1 = document.createElement('listcell');
 		var o2 = document.createElement('listcell');
-		o1.setAttribute("label",livemarks[i].feedTitle);
-		o2.setAttribute("label",livemarks[i].feedURL);
+		o1.setAttribute("label", livemark.feedTitle);
+		o2.setAttribute("label", livemark.feedURL);
 		
-		opt.setAttribute("value",livemarks[i].feedURL);
+		opt.setAttribute("value", livemark.feedURL);
 		
 		opt.appendChild(o1);
 		opt.appendChild(o2);
@@ -80,9 +96,13 @@ function getFeeds(){
 	
 	var ignore = ticker.readIgnoreFile();
 	
-	for (var i = 0; i < feedList.childNodes.length; i++){
-		if (ticker.inArray(ignore, feedList.childNodes[i].getAttribute("value"))){
-			feedList.childNodes[i].setAttribute("ignored","true");
+	var len = feedList.childNodes.length;
+	
+	for (var i = 0; i < len; i++){
+		var node = feedList.childNodes[i];
+		
+		if (ticker.inArray(ignore, node.getAttribute("value"))){
+			node.setAttribute("ignored","true");
 		}
 	}
 }

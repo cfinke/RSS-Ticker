@@ -248,6 +248,8 @@ var RSSTICKER = {
 				}
 				
 				sss.loadAndRegisterSheet(u, sss.USER_SHEET);
+				
+				// RSSTICKER.adjustSpacerWidth();
 			break;
 			case "disabled":
 				if (RSSTICKER.prefs.getBoolPref("disabled")) {
@@ -441,7 +443,9 @@ var RSSTICKER = {
 		var separator = null;
 		var firstOption = false;
 		
-		for (var i = 0; i < menu.childNodes.length; i++){
+		var len = menu.childNodes.length;
+		
+		for (var i = 0; i < len; i++){
 			var option = menu.childNodes[i];
 			
 			if (option.nodeName == 'menuitem'){
@@ -495,11 +499,13 @@ var RSSTICKER = {
 		var ignore = RSSTICKER.readIgnoreFile();
 
 		RSSTICKER.internalPause = true;
-
+		
 		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
-			if (RSSTICKER.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
-				if (RSSTICKER.inArray(ignore, RSSTICKER.toolbar.childNodes[i].feedURL)){
-					RSSTICKER.toolbar.removeChild(RSSTICKER.toolbar.childNodes[i]);
+			var node = RSSTICKER.toolbar.childNodes[i];
+			
+			if (node.nodeName == 'toolbarbutton'){
+				if (RSSTICKER.inArray(ignore, node.feedURL)){
+					RSSTICKER.toolbar.removeChild(node);
 				}
 			}
 		}
@@ -513,22 +519,26 @@ var RSSTICKER = {
 	    
 		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
 		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
-
-		for (var i = 0; i < livemarkIds.length; i++){
-			var feedURL = RSSTICKER.livemarkService.getFeedURI(livemarkIds[i]).spec;
+		
+		var len = livemarkIds.length;
+		
+		for (var i = 0; i < len; i++){
+			var livemarkId = livemarkIds[i];
+			
+			var feedURL = RSSTICKER.livemarkService.getFeedURI(livemarkId).spec;
 			
 			if (feedURL == "http://www.oneriot.com/rss/trendingtopics?&spid=86f2f5da-3b24-4a87-bbb3-1ad47525359d&p=rss-ticker&ssrc=ticker") {
 				// This is the old trending news feed. Use the new subscription method.
 				RSSTICKER.prefs.setBoolPref("trendingNews", true);
 				
 				var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
-				bookmarkService.removeFolder(livemarkIds[i]);
+				bookmarkService.removeFolder(livemarkId);
 			}
 			else {
-				var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkIds[i]);
+				var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkId);
 			
 				if (!RSSTICKER.inArray(ignore, feedURL)){
-					RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkIds[i] });
+					RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
 				}
 			}
 		}
@@ -774,19 +784,23 @@ var RSSTICKER = {
 		var updated = new Date();
 		updated.setTime( xml.getElementsByTagName("time")[0].textContent * 1000);
 		
-		for (var i = 0; i < items.length; i++) {
-			var itemUrl = items[i].getElementsByTagName("redirect-url")[0].textContent;
+		var len = items.length;
+		
+		for (var i = 0; i < len; i++) {
+			var item_i = items[i];
+			
+			var itemUrl = item_i.getElementsByTagName("redirect-url")[0].textContent;
 			
 			var item = {
-				id : "http://" + items[i].getElementsByTagName("display-url")[0].textContent,
+				id : "http://" + item_i.getElementsByTagName("display-url")[0].textContent,
 				
 				uri : itemUrl,
 				
-				displayUri : items[i].getElementsByTagName("display-url")[0].textContent,
-				trackingUri : items[i].getElementsByTagName("tracking-url")[0].textContent,
+				displayUri : item_i.getElementsByTagName("display-url")[0].textContent,
+				trackingUri : item_i.getElementsByTagName("tracking-url")[0].textContent,
 				
 				link : {
-					_link : items[i].getElementsByTagName("redirect-url")[0].textContent,
+					_link : item_i.getElementsByTagName("redirect-url")[0].textContent,
 				
 					resolve : function () {
 						return this._link;
@@ -796,7 +810,7 @@ var RSSTICKER = {
 				updated : updated,
 				
 				title : {
-					_title : items[i].getElementsByTagName("title")[0].textContent,
+					_title : item_i.getElementsByTagName("title")[0].textContent,
 				
 					plainText : function () {
 						return this._title.replace(/<[^>]+>/g, "");
@@ -804,14 +818,14 @@ var RSSTICKER = {
 				},
 			
 				summary : {
-					_summary : items[i].getElementsByTagName("snippet")[0].textContent,
+					_summary : item_i.getElementsByTagName("snippet")[0].textContent,
 				
 					get text() {
 						return this._summary.replace(/<[^>]+>/g, "");
 					} 
 				},
 			
-				image : "chrome://rss-ticker/content/skin-common/feed-icon-16.png"//items[i].getElementsByTagName("source-logo")[0].getElementsByTagName("url")[0].textContent
+				image : "chrome://rss-ticker/content/skin-common/feed-icon-16.png"//item_i.getElementsByTagName("source-logo")[0].getElementsByTagName("url")[0].textContent
 			};
 			
 			result.doc.items._items.push(item);
@@ -824,8 +838,10 @@ var RSSTICKER = {
 		var len = RSSTICKER.feedsToFetch.length;
 		
 		for (var i = 0; i < len; i++) {
-			if (RSSTICKER.feedsToFetch[i].livemarkId == livemarkId) {
-				var label = RSSTICKER.feedsToFetch[i].name;
+			var feedToFetch = RSSTICKER.feedsToFetch[i];
+			
+			if (feedToFetch.livemarkId == livemarkId) {
+				var label = feedToFetch.name;
 				RSSTICKER.feedsToFetch.splice(i, 1);
 
 				for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
@@ -950,7 +966,9 @@ var RSSTICKER = {
 			if ((item.nodeName == 'toolbarbutton') && (item.feed == feed.label)){
 				var itemFound = false;
 				
-				for (var j = 0; j < feedItems.length; j++){
+				var len = feedItems.length;
+				
+				for (var j = 0; j < len; j++){
 					if ((feedItems[j].uri == item.uri) && (feedItems[j].id == item.guid)){
 						itemFound = true;
 						break;
@@ -965,7 +983,9 @@ var RSSTICKER = {
 		
 		var itemsShowing = RSSTICKER.itemsInTicker(feed.label);
 		
-		for (j = 0; j < feedItems.length; j++){
+		var len = feedItems.length;
+		
+		for (j = 0; j < len; j++){
 			var feedItem = feedItems[j];
 			
 			if (!document.getElementById("RSSTICKER" + feedItem.uri + feedItem.id)){
@@ -1071,15 +1091,17 @@ var RSSTICKER = {
 					// Check for another item from this feed, if so place at end of that feed.
 
 					if (itemsShowing.length > 0){
-						for (i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
-							if (RSSTICKER.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
-								if (RSSTICKER.toolbar.childNodes[i].feed == tbb.feed){
+						for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+							var node = RSSTICKER.toolbar.childNodes[i];
+							
+							if (node.nodeName == 'toolbarbutton'){
+								if (node.feed == tbb.feed){
 									if (i == (RSSTICKER.toolbar.childNodes.length - 1)){
 										RSSTICKER.toolbar.appendChild(tbb);
 										addedButton = true;
 									}
 									else {
-										RSSTICKER.toolbar.insertBefore(tbb, RSSTICKER.toolbar.childNodes[i+1]);
+										RSSTICKER.toolbar.insertBefore(tbb, node.nextSibling);
 										addedButton = true;
 									}
 
@@ -1101,14 +1123,16 @@ var RSSTICKER = {
 							else {
 								var addedButton = false;
 
-								for (i = RSSTICKER.toolbar.childNodes.length - 2; i >= 0; i--){
-									if (RSSTICKER.toolbar.childNodes[i].nodeName == 'spacer'){
-										RSSTICKER.toolbar.insertBefore(tbb, RSSTICKER.toolbar.childNodes[i+1]);
+								for (var i = RSSTICKER.toolbar.childNodes.length - 2; i >= 0; i--){
+									var node = RSSTICKER.toolbar.childNodes[i];
+									
+									if (node.nodeName == 'spacer'){
+										RSSTICKER.toolbar.insertBefore(tbb, node.nextSibling);
 										addedButton = true;
 										break;
 									}
-									else if (RSSTICKER.toolbar.childNodes[i].feed != RSSTICKER.toolbar.childNodes[i+1].feed){
-										RSSTICKER.toolbar.insertBefore(tbb, RSSTICKER.toolbar.childNodes[i+1]);
+									else if (node.feed != node.nextSibling.feed){
+										RSSTICKER.toolbar.insertBefore(tbb, node.nextSibling);
 										addedButton = true;
 										break;
 									}
@@ -1207,9 +1231,13 @@ var RSSTICKER = {
 				
 				var tickerWidth = 0;
 				
-				for (var i = 0; i < RSSTICKER.toolbar.childNodes.length; i++){
-					if (RSSTICKER.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
-						tickerWidth += RSSTICKER.toolbar.childNodes[i].boxObject.width;
+				var len = RSSTICKER.toolbar.childNodes.length;
+				
+				for (var i = 0; i < len; i++){
+					var node = RSSTICKER.toolbar.childNodes[i];
+					
+					if (node.nodeName == 'toolbarbutton'){
+						tickerWidth += node.boxObject.width;
 					}
 				}
 				
@@ -1433,8 +1461,10 @@ var RSSTICKER = {
 		}
 				
 		if (descr != ''){
-			for (var i = 0; i < document.getElementById("RSSTICKERTooltipSummary").childNodes.length; i++){
-				document.getElementById("RSSTICKERTooltipSummary").removeChild(document.getElementById("RSSTICKERTooltipSummary").lastChild);
+			var summary = document.getElementById("RSSTICKERTooltipSummary");
+			
+			while (summary.lastChild) {
+				summary.removeChild(summary.lastChild);
 			}
 			
 			if (descr.length > 200){
@@ -1443,7 +1473,7 @@ var RSSTICKER = {
 			
 			var text = document.createTextNode(descr);
 			
-			document.getElementById("RSSTICKERTooltipSummary").appendChild(text);
+			summary.appendChild(text);
 			document.getElementById("RSSTICKERTooltipSummaryGroupbox").setAttribute("hidden",false);
 		}
 		else {
@@ -1566,12 +1596,16 @@ var RSSTICKER = {
 		
 		var foundFeed = false;
 		
-		for (var i = 0; i < feeds.length; i++){
-			if (feeds[i] == url){
+		var len = feeds.length;
+		
+		for (var i = 0; i < len; i++){
+			var feed = feeds[i];
+			
+			if (feed == url){
 				foundFeed = true;
 			}
 			else {
-				newFeeds.push(feeds[i]);
+				newFeeds.push(feed);
 			}
 		}
 	
@@ -1592,7 +1626,9 @@ var RSSTICKER = {
 		
 			var data = "";
 			
-			for (var i = 0; i < newFeeds.length; i++){
+			var len = newFeeds.length;
+			
+			for (var i = 0; i < len; i++){
 				data += newFeeds[i] + "\r\n";
 			}
 			
@@ -1617,7 +1653,9 @@ var RSSTICKER = {
 		var feeds = RSSTICKER.readIgnoreFile();
 		var foundFeed = false;
 		
-		for (var i = 0; i < feeds.length; i++){
+		var len = feeds.length;
+		
+		for (var i = 0; i < len; i++){
 			if (feeds[i] == url){
 				foundFeed = true;
 				break;
@@ -1689,8 +1727,9 @@ var RSSTICKER = {
 	
 	inArray : function (arr, needle){
 		var i;
+		var len = arr.length;
 		
-		for (i = 0; i < arr.length; i++){
+		for (i = 0; i < len; i++){
 			if (arr[i] == needle){
 				return true;
 			}
