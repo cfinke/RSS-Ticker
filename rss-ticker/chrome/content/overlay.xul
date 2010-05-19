@@ -18,9 +18,9 @@
 		<stringbundle id="RSSTICKER-bundle" src="chrome://rss-ticker/locale/locale.properties" />
 	</stringbundleset>
 	<commandset id="mainCommandSet">
-		<command id="rss-ticker_cmd_open" oncommand="document.popupNode.onContextOpen();" label="&cm.open;"/>
-		<command id="rss-ticker_cmd_openInNewWindow" oncommand="document.popupNode.onContextOpen('window');" label="&cm.openInNewWindow;"/>
-		<command id="rss-ticker_cmd_openInTab" oncommand="document.popupNode.onContextOpen('tab');" label="&cm.openInNewTab;"/>
+		<command id="rss-ticker_cmd_open" oncommand="RSSTICKER.onContextOpen(document.popupNode);" label="&cm.open;"/>
+		<command id="rss-ticker_cmd_openInNewWindow" oncommand="RSSTICKER.onContextOpen(document.popupNode, 'window');" label="&cm.openInNewWindow;"/>
+		<command id="rss-ticker_cmd_openInTab" oncommand="RSSTICKER.onContextOpen(document.popupNode, 'tab');" label="&cm.openInNewTab;"/>
 		<command id="rss-ticker_cmd_openAllInTabs" oncommand="RSSTICKER.openAllInTabs();" label="&cm.openAllInTabs;"/>
 		<command id="rss-ticker_cmd_openUnreadInTabs" oncommand="RSSTICKER.openAllInTabs(true);" label="&cm.openUnreadInTabs;"/>
 		<command id="rss-ticker_cmd_openFeedInTabs" oncommand="RSSTICKER.openAllInTabs(false, document.popupNode.feed);" label="&cm.openFeedInTabs;"/>

@@ -948,6 +948,22 @@ var RSSTICKER = {
 		RSSTICKER.history.addToHistory(node.guid);
 	},
 	
+	onContextOpen : function (node, target) {
+		var url = node.href;
+		
+		if (!target) {
+			window._content.document.location.href = url;
+		}
+		else if (target == 'window'){
+			window.open(url);
+		}
+		else if (target == 'tab') {
+			RSSTICKER.browser.openInNewTab(url);
+		}
+		
+		RSSTICKER.markAsRead(node);
+	},
+	
 	writeFeed : function (feed) {
 		var doTick, i, j;
 		
@@ -1043,26 +1059,9 @@ var RSSTICKER = {
 					tbb.style.background = 'url('+feedItem.trackingUri+') no-repeat';
 				}
 				
-				tbb.parent = RSSTICKER;
 				tbb.published = feedItem.published;
 				tbb.guid = feedItem.id;
 				
-				tbb.onContextOpen = function (target) {
-					var url = this.href;
-					
-					if (!target) {
-						window._content.document.location.href = url;
-					}
-					else if (target == 'window'){
-						window.open(url);
-					}
-					else if (target == 'tab') {
-						this.parent.browser.openInNewTab(url);
-					}
-					
-					RSSTICKER.markAsRead(this);
-				};
-
 				// Determine where to add the item
 
 				if (RSSTICKER.randomizeItems){
@@ -1370,7 +1369,7 @@ var RSSTICKER = {
 			
 			if (node.nodeName == 'toolbarbutton'){
 				if ((!feed || (node.feed == feed)) && (!unreadOnly || (node.getAttribute("visited") == "false"))){
-					node.onContextOpen('tab');
+					RSSTICKER.onContextOpen(node, 'tab');
 				}
 			}
 		}
