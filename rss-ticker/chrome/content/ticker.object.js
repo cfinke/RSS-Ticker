@@ -1,4 +1,6 @@
 var RSSTICKER = {
+	items : [],
+	
 	livemarkService : Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService),
 	bookmarkService : Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService),
 	ioService : Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService),
@@ -965,8 +967,6 @@ var RSSTICKER = {
 	},
 	
 	writeFeed : function (feed) {
-		var doTick, i, j;
-		
 		if (RSSTICKER.disabled) {
 			return;
 		}
@@ -1022,8 +1022,6 @@ var RSSTICKER = {
 					continue;
 				}
 				
-				doTick = true;
-				
 				feedItem.description = feedItem.description.replace(/<[^>]+>/g, "");
 				
 				if ((feedItem.label == '') && (feedItem.description != '')){
@@ -1034,7 +1032,15 @@ var RSSTICKER = {
 						feedItem.label = feedItem.description;
 					}
 				}
-
+				
+				/*
+				var tbb_object = {
+					"feed": feed,
+					"feedItem": feedItem,
+					"visited": itemIsVisited
+				};
+				*/
+				
 				var tbb = document.createElement('toolbarbutton');
 				tbb.uri = feedItem.uri;
 				tbb.id = "RSSTICKER" + feedItem.uri + feedItem.id;
@@ -1056,6 +1062,17 @@ var RSSTICKER = {
 				if (feedItem.trackingUri) {
 					tbb.style.background = 'url('+feedItem.trackingUri+') no-repeat';
 				}
+				
+				// RSSTICKER.items.push(tbb_object);
+				
+				// Maintain an array of the items for the ticker.
+				
+				// Add this item into the array at the appropriate spot.
+				
+				// Then let the function that adds a new toolbar item to the end of the ticker handle the rest.
+				
+				// @todo
+				
 				
 				// Determine where to add the item
 				if (RSSTICKER.randomizeItems){
@@ -1151,7 +1168,7 @@ var RSSTICKER = {
 		RSSTICKER.tick();
 	},
 	
-	onTickerItemClick : function (event, url, node) {		
+	onTickerItemClick : function (event, url, node) {
 		if (event.ctrlKey) {
 			RSSTICKER.markAsRead(node);
 			return false;
