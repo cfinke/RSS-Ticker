@@ -1002,23 +1002,19 @@ var RSSTICKER = {
 						tbb.style.fontWeight = 'bold';
 					}
 
-					tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
+					tbb.markAsRead = function (dontAdjustSpacer) {
 						this.style.fontWeight = '';
 						this.visited = true;
-
+						
 						if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
-
-						if (addToHist){
-							this.parent.history.addToHistory(this.guid);
-						}
+						
+						this.parent.history.addToHistory(this.guid);
 					};
 				}
 				else {
-					tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
+					tbb.markAsRead = function () {
 						this.visited = true;
-						if (addToHist){
-							this.parent.history.addToHistory(this.guid);
-						}
+						this.parent.history.addToHistory(this.guid);
 					};
 				}
 
