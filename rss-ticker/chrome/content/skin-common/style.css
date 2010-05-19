@@ -14,7 +14,7 @@
 	padding: 1px 2px;
 }
 
-RSSTICKERToolbar toolbarbutton image {
+#RSSTICKERToolbar toolbarbutton image {
 	width: 16px;
 	height: 16px;
 }
@@ -22,6 +22,14 @@ RSSTICKERToolbar toolbarbutton image {
 #feeds listitem[ignored="true"] {
 	text-decoration: line-through;
 	background-color: #e00;
+}
+
+#RSSTICKERToolbar[boldUnvisited="true"] toolbarbutton {
+	font-weight: bold;
+}
+
+#RSSTICKERToolbar[boldUnvisited="true"] toolbarbutton[visited="true"] {
+	font-weight: normal;
 }
 
 /*

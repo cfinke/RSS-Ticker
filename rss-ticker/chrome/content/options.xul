@@ -46,7 +46,7 @@
 			</groupbox>
 			<groupbox>
 				<checkbox preference="p_hideVisited" label="&options.hide; *"/>
-				<checkbox preference="p_boldUnvisited" label="&options.bold; *"/>
+				<checkbox preference="p_boldUnvisited" label="&options.bold;"/>
 			</groupbox>
 			<groupbox>
 				<checkbox preference="p_alwaysOpenInNewTab" label="&options.openInNewTab;"/>

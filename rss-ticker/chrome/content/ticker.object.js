@@ -124,20 +124,22 @@ var RSSTICKER = {
 		RSSTICKER.customizeContextMenus();
 		
 		RSSTICKER.ticker = RSSTICKER.ce('toolbar');
-		RSSTICKER.ticker.setAttribute("id","RSSTICKER" + RSSTICKER.strings.getString("toolbar"));
-		RSSTICKER.ticker.setAttribute("class","chromeclass-toolbar");
-		RSSTICKER.ticker.setAttribute("hidden",false);
-		RSSTICKER.ticker.setAttribute("iconsize","small");
-		RSSTICKER.ticker.setAttribute("inherits","collapsed,hidden");
-		RSSTICKER.ticker.setAttribute("mode","full");
-		RSSTICKER.ticker.setAttribute("persist","collapsed,hidden");
-		RSSTICKER.ticker.setAttribute("toolbarname",RSSTICKER.strings.getString("extension.name"));
+		RSSTICKER.ticker.setAttribute("id", "RSSTICKERToolbar");
+		RSSTICKER.ticker.setAttribute("class", "chromeclass-toolbar");
+		RSSTICKER.ticker.setAttribute("hidden", false);
+		RSSTICKER.ticker.setAttribute("iconsize", "small");
+		RSSTICKER.ticker.setAttribute("inherits", "collapsed,hidden");
+		RSSTICKER.ticker.setAttribute("mode", "full");
+		RSSTICKER.ticker.setAttribute("persist", "collapsed,hidden");
+		RSSTICKER.ticker.setAttribute("toolbarname", RSSTICKER.strings.getString("extension.name"));
 		RSSTICKER.ticker.style.maxHeight = '24px';
 	
 		RSSTICKER.toolbar = RSSTICKER.ce('hbox');
 		RSSTICKER.toolbar.spacer = RSSTICKER.ce('spacer');
 		RSSTICKER.toolbar.appendChild(RSSTICKER.toolbar.spacer);
 		RSSTICKER.toolbar.style.maxHeight = '24px';
+		
+		RSSTICKER.observe(null, "nsPref:changed", "boldUnvisited");
 	
 		RSSTICKER.ticker.setAttribute("contextmenu","RSSTICKERCM");
 	
@@ -202,12 +204,15 @@ var RSSTICKER = {
 		}
 	},
 		
-	observe: function(subject, topic, data) {
+	observe : function(subject, topic, data) {
 		if (topic != "nsPref:changed") {
 			return;
 		}
 		
 		switch(data) {
+			case "boldUnvisited":
+				RSSTICKER.ticker.setAttribute("boldUnvisited", RSSTICKER.prefs.getBoolPref("boldUnvisited"));
+			break;
 			case "disabled":
 				if (RSSTICKER.prefs.getBoolPref("disabled")) {
 					RSSTICKER.disable();
@@ -884,6 +889,25 @@ var RSSTICKER = {
 		return this;
 	},
 	
+	markAsRead : function (node, dontAdjustSpacer) {
+		node.setAttribute("visited", "true");
+		
+		if (RSSTICKER.hideVisited){
+			node.parentNode.removeChild(node);
+			
+			if (!dontAdjustSpacer) RSSTICKER.adjustSpacerWidth();
+			
+			RSSTICKER.checkForEmptiness();
+		}
+		else if (RSSTICKER.boldUnvisited){
+			// node.style.fontWeight = '';
+			
+			if (!dontAdjustSpacer) RSSTICKER.adjustSpacerWidth();
+		}
+		
+		RSSTICKER.history.addToHistory(node.guid);
+	},
+	
 	writeFeed : function (feed) {
 		var doTick, i, j;
 		
@@ -970,7 +994,7 @@ var RSSTICKER = {
 				}
 				
 				tbb.description = feedItems[j].description;
-				tbb.visited = itemIsVisited;
+				tbb.setAttribute("visited", itemIsVisited);
 				
 				tbb.feed = feed.label;
 				tbb.feedURL = feed.uri;
@@ -986,45 +1010,6 @@ var RSSTICKER = {
 				tbb.published = feedItems[j].published;
 				tbb.guid = feedItems[j].id;
 				
-				if (RSSTICKER.hideVisited){
-					tbb.markAsRead = function (dontAdjustSpacer) {
-						this.parentNode.removeChild(this);
-						this.visited = true;
-						
-						if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
-						
-						this.parent.history.addToHistory(this.guid);
-						this.parent.checkForEmptiness();
-					};
-				}
-				else if (RSSTICKER.boldUnvisited){
-					if (!itemIsVisited){
-						tbb.style.fontWeight = 'bold';
-					}
-
-					tbb.markAsRead = function (dontAdjustSpacer) {
-						this.style.fontWeight = '';
-						this.visited = true;
-						
-						if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
-						
-						this.parent.history.addToHistory(this.guid);
-					};
-				}
-				else {
-					tbb.markAsRead = function () {
-						this.visited = true;
-						this.parent.history.addToHistory(this.guid);
-					};
-				}
-
-				if (RSSTICKER.boldUnvisited){
-					// Don't move this.
-					if (!itemIsVisited){
-						tbb.style.fontWeight = 'bold';
-					}
-				}
-				
 				tbb.onContextOpen = function (target) {
 					var url = this.href;
 					
@@ -1038,7 +1023,7 @@ var RSSTICKER = {
 						this.parent.browser.openInNewTab(url);
 					}
 					
-					this.markAsRead();
+					RSSTICKER.markAsRead(this);
 				};
 
 				// Determine where to add the item
@@ -1135,7 +1120,7 @@ var RSSTICKER = {
 	
 	onTickerItemClick : function (event, url, node) {		
 		if (event.ctrlKey) {
-			node.markAsRead(); 
+			RSSTICKER.markAsRead(node);
 			return false;
 		}
 		else if (event.which == 3){
@@ -1150,7 +1135,7 @@ var RSSTICKER = {
 			else {
 				// Left-click
 				RSSTICKER.launchUrl(url, event);
-				node.markAsRead();
+				RSSTICKER.markAsRead(node);
 			}
 		}
 	},
@@ -1242,7 +1227,7 @@ var RSSTICKER = {
 		else {
 			var node, nodeWidth, marginLeft;
 			
-			if (RSSTICKER.mouseOverFlag){
+			if (RSSTICKER.mouseOverFlag || 1){
 				if (RSSTICKER.toolbar.childNodes.length > 1){
 					if (RSSTICKER.currentFirstItemMargin <= (RSSTICKER.toolbar.firstChild.boxObject.width * -1)){
 						node = RSSTICKER.toolbar.firstChild;
@@ -1251,9 +1236,9 @@ var RSSTICKER = {
 						node.style.marginLeft = '0px';
 						RSSTICKER.toolbar.appendChild(node);
 						
-						if (node.nodeName == 'toolbarbutton' && !node.visited){
+						if (node.nodeName == 'toolbarbutton' && (node.getAttribute("visited") == "false")) {
 							if (RSSTICKER.history.isVisitedURL(node.guid, 2)){
-								node.markAsRead();
+								RSSTICKER.markAsRead(node);
 							}
 						}
 					}
@@ -1284,9 +1269,9 @@ var RSSTICKER = {
 						node.style.marginLeft = '0px';
 						RSSTICKER.toolbar.appendChild(node);
 						
-						if (node.nodeName == 'toolbarbutton' && !node.visited){
+						if (node.nodeName == 'toolbarbutton' && (node.getAttribute("visited") == "false")) {
 							if (RSSTICKER.history.isVisitedURL(node.guid, 3)){
-								node.markAsRead();
+								RSSTICKER.markAsRead(node);
 							}
 						}
 					}
@@ -1319,10 +1304,12 @@ var RSSTICKER = {
 		RSSTICKER.internalPause = true;
 		
 		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
-			if (RSSTICKER.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
-				if (!feed || (RSSTICKER.toolbar.childNodes[i].feed == feed)){
-					RSSTICKER.history.addToHistory(RSSTICKER.toolbar.childNodes[i].guid);
-					RSSTICKER.toolbar.childNodes[i].markAsRead(true);
+			var node = RSSTICKER.toolbar.childNodes[i];
+			
+			if (node.nodeName == 'toolbarbutton'){
+				if (!feed || (node.feed == feed)){
+					RSSTICKER.history.addToHistory(node.guid);
+					RSSTICKER.markAsRead(node, true);
 				}
 			}
 		}
@@ -1334,9 +1321,11 @@ var RSSTICKER = {
 	
 	openAllInTabs : function (unreadOnly, feed) {
 		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
-			if (RSSTICKER.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
-				if ((!feed || (RSSTICKER.toolbar.childNodes[i].feed == feed)) &&	(!unreadOnly || (!RSSTICKER.toolbar.childNodes[i].visited))){
-					RSSTICKER.toolbar.childNodes[i].onContextOpen('tab');
+			var node = RSSTICKER.toolbar.childNodes[i];
+			
+			if (node.nodeName == 'toolbarbutton'){
+				if ((!feed || (node.feed == feed)) && (!unreadOnly || (node.getAttribute("visited") == "false"))){
+					node.onContextOpen('tab');
 				}
 			}
 		}
