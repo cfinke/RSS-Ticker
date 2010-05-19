@@ -1227,7 +1227,7 @@ var RSSTICKER = {
 		else {
 			var node, nodeWidth, marginLeft;
 			
-			if (RSSTICKER.mouseOverFlag || 1){
+			if (RSSTICKER.mouseOverFlag){
 				if (RSSTICKER.toolbar.childNodes.length > 1){
 					if (RSSTICKER.currentFirstItemMargin <= (RSSTICKER.toolbar.firstChild.boxObject.width * -1)){
 						node = RSSTICKER.toolbar.firstChild;
