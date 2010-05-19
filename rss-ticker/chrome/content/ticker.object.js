@@ -123,7 +123,7 @@ var RSSTICKER = {
 		RSSTICKER.strings = document.getElementById("RSSTICKER-bundle");
 		RSSTICKER.customizeContextMenus();
 		
-		RSSTICKER.ticker = RSSTICKER.ce('toolbar');
+		RSSTICKER.ticker = document.createElement('toolbar');
 		RSSTICKER.ticker.setAttribute("id", "RSSTICKERToolbar");
 		RSSTICKER.ticker.setAttribute("class", "chromeclass-toolbar");
 		RSSTICKER.ticker.setAttribute("hidden", false);
@@ -134,8 +134,8 @@ var RSSTICKER = {
 		RSSTICKER.ticker.setAttribute("toolbarname", RSSTICKER.strings.getString("extension.name"));
 		RSSTICKER.ticker.style.maxHeight = '24px';
 	
-		RSSTICKER.toolbar = RSSTICKER.ce('hbox');
-		RSSTICKER.toolbar.spacer = RSSTICKER.ce('spacer');
+		RSSTICKER.toolbar = document.createElement('hbox');
+		RSSTICKER.toolbar.spacer = document.createElement('spacer');
 		RSSTICKER.toolbar.appendChild(RSSTICKER.toolbar.spacer);
 		RSSTICKER.toolbar.style.maxHeight = '24px';
 		
@@ -152,14 +152,14 @@ var RSSTICKER = {
 	
 		RSSTICKER.ticker.appendChild(RSSTICKER.toolbar);
 		
-		RSSTICKER.loadingNoticeParent = RSSTICKER.ce('toolbaritem');
+		RSSTICKER.loadingNoticeParent = document.createElement('toolbaritem');
 		RSSTICKER.loadingNoticeParent.setAttribute("tooltip","RSSTICKERLoadingNoticeTooltip");
 		RSSTICKER.loadingNoticeParent.id = "RSSTICKER-throbber-box";
 		RSSTICKER.loadingNoticeParent.setAttribute("title","RSS Ticker Activity Indicator");
 		RSSTICKER.loadingNoticeParent.setAttribute("align","center");
 		RSSTICKER.loadingNoticeParent.setAttribute("pack","center");
 	
-		RSSTICKER.loadingNotice = RSSTICKER.ce('image');
+		RSSTICKER.loadingNotice = document.createElement('image');
 		RSSTICKER.loadingNotice.setAttribute("src","chrome://rss-ticker/content/skin-common/throbber.gif");
 		RSSTICKER.loadingNotice.id = "RSSTICKER-throbber";
 		RSSTICKER.loadingNotice.setAttribute("busy","false");
@@ -1035,7 +1035,7 @@ var RSSTICKER = {
 					}
 				}
 
-				var tbb = RSSTICKER.ce('toolbarbutton');
+				var tbb = document.createElement('toolbarbutton');
 				tbb.uri = feedItem.uri;
 				tbb.id = "RSSTICKER" + feedItem.uri + feedItem.id;
 				tbb.description = feedItem.description;
@@ -1576,10 +1576,6 @@ var RSSTICKER = {
 				browser.selectedTab = theTab;
 			}
 		}
-	},
-	
-	ce : function (name){
-		return document.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", name);
 	},
 	
 	observeFeed : function (url) {
