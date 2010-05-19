@@ -1,25 +1,25 @@
 content    rss-ticker     chrome/content/
 
-locale     rss-ticker     da-DK            chrome/locale/da-DK/
-locale     rss-ticker     de-DE            chrome/locale/de-DE/
 locale     rss-ticker     en-US            chrome/locale/en-US/
-locale     rss-ticker     es-ES            chrome/locale/es-ES/
-locale     rss-ticker     fi-FI            chrome/locale/fi-FI/
-locale     rss-ticker     fr-FR            chrome/locale/fr-FR/
-locale     rss-ticker     it-IT            chrome/locale/it-IT/
-locale     rss-ticker     ko-KR            chrome/locale/ko-KR/
-locale     rss-ticker     ms-MY            chrome/locale/ms-MY/
-locale     rss-ticker     nl-NL            chrome/locale/nl-NL/
-locale     rss-ticker     pl-PL            chrome/locale/pl-PL/
-locale     rss-ticker     pt               chrome/locale/pt/
-locale     rss-ticker     pt-BR            chrome/locale/pt-BR/
-locale     rss-ticker     pt-PT            chrome/locale/pt-PT/
-locale     rss-ticker     ru-RU            chrome/locale/ru-RU/
-locale     rss-ticker     sl-SI            chrome/locale/sl-SI/
-locale     rss-ticker     sv-SE            chrome/locale/sv-SE/
-locale     rss-ticker     tr-TR            chrome/locale/tr-TR/
-locale     rss-ticker     vi               chrome/locale/vi/
-locale     rss-ticker     zh-TW            chrome/locale/zh-TW/
+# locale     rss-ticker     da-DK            chrome/locale/da-DK/
+# locale     rss-ticker     de-DE            chrome/locale/de-DE/
+# locale     rss-ticker     es-ES            chrome/locale/es-ES/
+# locale     rss-ticker     fi-FI            chrome/locale/fi-FI/
+# locale     rss-ticker     fr-FR            chrome/locale/fr-FR/
+# locale     rss-ticker     it-IT            chrome/locale/it-IT/
+# locale     rss-ticker     ko-KR            chrome/locale/ko-KR/
+# locale     rss-ticker     ms-MY            chrome/locale/ms-MY/
+# locale     rss-ticker     nl-NL            chrome/locale/nl-NL/
+# locale     rss-ticker     pl-PL            chrome/locale/pl-PL/
+# locale     rss-ticker     pt               chrome/locale/pt/
+# locale     rss-ticker     pt-BR            chrome/locale/pt-BR/
+# locale     rss-ticker     pt-PT            chrome/locale/pt-PT/
+# locale     rss-ticker     ru-RU            chrome/locale/ru-RU/
+# locale     rss-ticker     sl-SI            chrome/locale/sl-SI/
+# locale     rss-ticker     sv-SE            chrome/locale/sv-SE/
+# locale     rss-ticker     tr-TR            chrome/locale/tr-TR/
+# locale     rss-ticker     vi               chrome/locale/vi/
+# locale     rss-ticker     zh-TW            chrome/locale/zh-TW/
 
 skin       rss-ticker     classic             chrome/skin/lin/
 skin       rss-ticker     classic             chrome/skin/win/ os=WINNT
