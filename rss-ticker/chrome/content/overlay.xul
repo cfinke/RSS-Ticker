@@ -29,7 +29,7 @@
 		<command id="rss-ticker_cmd_copyLinkURL" oncommand="RSSTICKER.clipboard.copyString(document.popupNode.href);" label="&cm.copyLinkURL;"/>
 		<command id="rss-ticker_cmd_refreshFeeds" oncommand="RSSTICKER.updateAllFeeds(); RSSTICKER.mouseOverFlag = false;" label="&cm.refreshFeeds;"/>
 		<command id="rss-ticker_cmd_manageFeeds" oncommand="window.openDialog('chrome://rss-ticker/content/options.xul','','chrome,titlebar,toolbar,centerscreen','manage-pane');" label="&cm.manageFeeds;"/>
-		<command id="rss-ticker_cmd_markAsRead" oncommand="document.popupNode.markAsRead(true);" label="&cm.markAsRead;"/>
+		<command id="rss-ticker_cmd_markAsRead" oncommand="document.popupNode.markAsRead();" label="&cm.markAsRead;"/>
 		<command id="rss-ticker_cmd_markFeedAsRead" oncommand="RSSTICKER.markAllAsRead(document.popupNode.feed);" label="&cm.markFeedAsRead;"/>
 		<command id="rss-ticker_cmd_markAllAsRead" oncommand="RSSTICKER.markAllAsRead();" label="&cm.markAllAsRead;"/>
 		<command id="rss-ticker_cmd_options" oncommand="window.openDialog('chrome://rss-ticker/content/options.xul','','chrome,titlebar,toolbar,centerscreen');" label="&options;" />

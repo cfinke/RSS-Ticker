@@ -987,16 +987,13 @@ var RSSTICKER = {
 				tbb.guid = feedItems[j].id;
 				
 				if (RSSTICKER.hideVisited){
-					tbb.markAsRead = function (addToHist, dontAdjustSpacer) {
+					tbb.markAsRead = function (dontAdjustSpacer) {
 						this.parentNode.removeChild(this);
 						this.visited = true;
 						
 						if (!dontAdjustSpacer) this.parent.adjustSpacerWidth();
 						
-						if (addToHist){
-							this.parent.history.addToHistory(this.guid);
-						}
-						
+						this.parent.history.addToHistory(this.guid);
 						this.parent.checkForEmptiness();
 					};
 				}
@@ -1045,7 +1042,7 @@ var RSSTICKER = {
 						this.parent.browser.openInNewTab(url);
 					}
 					
-					this.markAsRead(true);
+					this.markAsRead();
 				};
 
 				// Determine where to add the item
@@ -1142,7 +1139,7 @@ var RSSTICKER = {
 	
 	onTickerItemClick : function (event, url, node) {		
 		if (event.ctrlKey) {
-			node.markAsRead(true); 
+			node.markAsRead(); 
 			return false;
 		}
 		else if (event.which == 3){
@@ -1157,7 +1154,7 @@ var RSSTICKER = {
 			else {
 				// Left-click
 				RSSTICKER.launchUrl(url, event);
-				node.markAsRead(true);
+				node.markAsRead();
 			}
 		}
 	},
@@ -1260,7 +1257,7 @@ var RSSTICKER = {
 						
 						if (node.nodeName == 'toolbarbutton' && !node.visited){
 							if (RSSTICKER.history.isVisitedURL(node.guid, 2)){
-								node.markAsRead(true);
+								node.markAsRead();
 							}
 						}
 					}
@@ -1293,7 +1290,7 @@ var RSSTICKER = {
 						
 						if (node.nodeName == 'toolbarbutton' && !node.visited){
 							if (RSSTICKER.history.isVisitedURL(node.guid, 3)){
-								node.markAsRead(true);
+								node.markAsRead();
 							}
 						}
 					}
@@ -1329,7 +1326,7 @@ var RSSTICKER = {
 			if (RSSTICKER.toolbar.childNodes[i].nodeName == 'toolbarbutton'){
 				if (!feed || (RSSTICKER.toolbar.childNodes[i].feed == feed)){
 					RSSTICKER.history.addToHistory(RSSTICKER.toolbar.childNodes[i].guid);
-					RSSTICKER.toolbar.childNodes[i].markAsRead(true, true);
+					RSSTICKER.toolbar.childNodes[i].markAsRead(true);
 				}
 			}
 		}
