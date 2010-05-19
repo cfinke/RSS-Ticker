@@ -1,6 +1,4 @@
 var RSSTICKER = {
-	items : [],
-	
 	livemarkService : Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService),
 	bookmarkService : Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService),
 	ioService : Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService),
@@ -1001,14 +999,14 @@ var RSSTICKER = {
 		
 		var len = feedItems.length;
 		
-		for (j = 0; j < len; j++){
+		for (var j = 0; j < len; j++){
 			var feedItem = feedItems[j];
 			
-			if (!document.getElementById("RSSTICKER" + feedItem.uri + feedItem.id)){
+			if (!document.getElementById("RSSTICKER" + feedItem.uri)){
 				if (RSSTICKER.limitItemsPerFeed && (RSSTICKER.itemsPerFeed <= itemsShowing.length)){
 					// Determine if this item is newer than the oldest item showing.
 					if ((RSSTICKER.itemsPerFeed > 0) && feedItem.published && itemsShowing[0].published && (feedItem.published > itemsShowing[0].published)){
-						RSSTICKER.toolbar.removeChild(document.getElementById("RSSTICKER" + itemsShowing[0].href + itemsShowing[0].guid));
+						RSSTICKER.toolbar.removeChild(document.getElementById("RSSTICKER" + itemsShowing[0].href));
 						itemsShowing.shift();
 					}
 					else {
@@ -1016,7 +1014,7 @@ var RSSTICKER = {
 					}
 				}
 				
-				var itemIsVisited = RSSTICKER.history.isVisitedURL(feedItem.id, 1);
+				var itemIsVisited = RSSTICKER.history.isVisitedURL(feedItem.uri, feedItem.id, 1);
 				
 				if (itemIsVisited && RSSTICKER.hideVisited) {
 					continue;
@@ -1033,17 +1031,9 @@ var RSSTICKER = {
 					}
 				}
 				
-				/*
-				var tbb_object = {
-					"feed": feed,
-					"feedItem": feedItem,
-					"visited": itemIsVisited
-				};
-				*/
-				
 				var tbb = document.createElement('toolbarbutton');
 				tbb.uri = feedItem.uri;
-				tbb.id = "RSSTICKER" + feedItem.uri + feedItem.id;
+				tbb.id = "RSSTICKER" + feedItem.uri;
 				tbb.description = feedItem.description;
 				tbb.feed = feed.label;
 				tbb.feedURL = feed.uri;
@@ -1057,22 +1047,16 @@ var RSSTICKER = {
 				tbb.setAttribute("image", feedItem.image);
 				tbb.setAttribute("contextmenu", "RSSTICKERItemCM");
 				tbb.setAttribute("onclick", "return RSSTICKER.onTickerItemClick(event, this.uri, this);");
+				
+				tbb.onclick = function (event) {
+					return RSSTICKER.onTickerItemClick(event, this.uri, this);
+				};
+				
 				tbb.setAttribute("visited", itemIsVisited);
 				
 				if (feedItem.trackingUri) {
 					tbb.style.background = 'url('+feedItem.trackingUri+') no-repeat';
 				}
-				
-				// RSSTICKER.items.push(tbb_object);
-				
-				// Maintain an array of the items for the ticker.
-				
-				// Add this item into the array at the appropriate spot.
-				
-				// Then let the function that adds a new toolbar item to the end of the ticker handle the rest.
-				
-				// @todo
-				
 				
 				// Determine where to add the item
 				if (RSSTICKER.randomizeItems){
@@ -1214,7 +1198,7 @@ var RSSTICKER = {
 			loadInBackground = prefs.getBoolPref("browser.tabs.loadInBackground");
 		} catch (e) {
 		}
-			
+		
 		if (!loadInBackground){
 			browser.selectedTab = theTab;
 		}
@@ -1286,12 +1270,15 @@ var RSSTICKER = {
 					if (RSSTICKER.currentFirstItemMargin <= (RSSTICKER.toolbar.firstChild.boxObject.width * -1)){
 						node = RSSTICKER.toolbar.firstChild;
 						RSSTICKER.toolbar.removeChild(node);
+						
+						// @todo Add an item to the end of the ticker.
+						
 						RSSTICKER.currentFirstItemMargin = 0;
 						node.style.marginLeft = '0px';
 						RSSTICKER.toolbar.appendChild(node);
 						
 						if (node.nodeName == 'toolbarbutton' && (node.getAttribute("visited") == "false")) {
-							if (RSSTICKER.history.isVisitedURL(node.guid, 2)){
+							if (RSSTICKER.history.isVisitedURL(node.uri, node.guid, 2)){
 								RSSTICKER.markAsRead(node);
 							}
 						}
@@ -1324,7 +1311,7 @@ var RSSTICKER = {
 						RSSTICKER.toolbar.appendChild(node);
 						
 						if (node.nodeName == 'toolbarbutton' && (node.getAttribute("visited") == "false")) {
-							if (RSSTICKER.history.isVisitedURL(node.guid, 3)){
+							if (RSSTICKER.history.isVisitedURL(node.uri, node.guid, 3)){
 								RSSTICKER.markAsRead(node);
 							}
 						}
@@ -1528,28 +1515,43 @@ var RSSTICKER = {
 		
 		URI : null,
 		
-		isVisitedURL : function(guid){
-			var visited = false;
-			
-			var db = RSSTICKER.getDB();
-			
-			var select = db.createStatement("SELECT id FROM history WHERE id=?1");
-			select.bindStringParameter(0, guid);
-
+		isVisitedURL : function(url, guid){
 			try {
-				while (select.executeStep()) {
-					visited = true;
-					break;
+				RSSTICKER.history.URI = this.ioService.newURI(url, null, null);
+				var visited = RSSTICKER.history.hService.isVisited(RSSTICKER.history.URI);
+				var db = RSSTICKER.getDB();
+				
+				if (!visited) {
+					var select = db.createStatement("SELECT id FROM history WHERE id=?1");
+					select.bindStringParameter(0, guid);
+					
+					try {
+						while (select.executeStep()) {
+							visited = true;
+							break;
+						}
+					} catch (e) {
+						RSSTICKER.logMessage(e);
+					} finally {
+						select.reset();
+					}
+					
+					select.finalize();
 				}
+				else {
+					// Add to DB
+					var insert = db.createStatement("INSERT INTO history (id, date) VALUES (?1, ?2)");
+					insert.bindUTF8StringParameter(0, guid);
+					insert.bindInt64Parameter(1, (new Date().getTime()));
+					try { insert.execute(); } catch (alreadyExists) { }
+				}
+				
+				return visited;
 			} catch (e) {
-				RSSTICKER.logMessage(e);
-			} finally {	
-				select.reset();
+				// Malformed URI, probably
+				RSSTICKER.logMessage(e + " " + url);
+				return false;
 			}
-			
-			select.finalize();
-			
-			return visited;
 		},
 		
 		addToHistory : function (guid) {
