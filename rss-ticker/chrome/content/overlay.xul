@@ -6,11 +6,16 @@
 	<script type="application/x-javascript" src="chrome://rss-ticker/content/bookmark-observer.js"></script>
 	<script type="application/x-javascript">
 		<![CDATA[
-
+			
+			Components.utils.import("resource://rss-ticker-modules/featured-feeds.js");
+			
 			window.addEventListener("load", function () { RSSTICKER.onload(); }, false);
 			window.addEventListener("unload", function () { RSSTICKER.unload(); }, false);
 			window.addEventListener("resize", function () { RSSTICKER.adjustSpacerWidth(); }, false);
 			window.addEventListener("DOMMouseScroll", function (event) { RSSTICKER.scrollTicker(event); }, false)
+			
+			addEventListener("load", FEATURED_TICKER_FEEDS.load, false);
+			addEventListener("unload", FEATURED_TICKER_FEEDS.unload, false);
 			
 		]]>
 	</script>
@@ -28,11 +33,11 @@
 		<command id="rss-ticker_cmd_copyLinkTitle" oncommand="RSSTICKER.clipboard.copyString(document.popupNode.attributes['label'].value);" label="&cm.copyLinkTitle;"/>
 		<command id="rss-ticker_cmd_copyLinkURL" oncommand="RSSTICKER.clipboard.copyString(document.popupNode.href);" label="&cm.copyLinkURL;"/>
 		<command id="rss-ticker_cmd_refreshFeeds" oncommand="RSSTICKER.updateAllFeeds(); RSSTICKER.mouseOverFlag = false;" label="&cm.refreshFeeds;"/>
-		<command id="rss-ticker_cmd_manageFeeds" oncommand="window.openDialog('chrome://rss-ticker/content/options.xul','','chrome,titlebar,toolbar,centerscreen','manage-pane');" label="&cm.manageFeeds;"/>
+		<command id="rss-ticker_cmd_manageFeeds" oncommand="RSSTICKER.options('manage-pane');" label="&cm.manageFeeds;"/>
 		<command id="rss-ticker_cmd_markAsRead" oncommand="RSSTICKER.markAsRead(document.popupNode);" label="&cm.markAsRead;"/>
 		<command id="rss-ticker_cmd_markFeedAsRead" oncommand="RSSTICKER.markAllAsRead(document.popupNode.feed);" label="&cm.markFeedAsRead;"/>
 		<command id="rss-ticker_cmd_markAllAsRead" oncommand="RSSTICKER.markAllAsRead();" label="&cm.markAllAsRead;"/>
-		<command id="rss-ticker_cmd_options" oncommand="window.openDialog('chrome://rss-ticker/content/options.xul','','chrome,titlebar,toolbar,centerscreen');" label="&options;" />
+		<command id="rss-ticker_cmd_options" oncommand="RSSTICKER.options();" label="&options;" />
 		<command id="rss-ticker_cmd_disableTicker" oncommand="RSSTICKER.toggleDisabled();" label="&disableTicker;"/>
 	</commandset>
 	<popupset id="mainPopupSet">

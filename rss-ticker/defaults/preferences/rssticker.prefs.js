@@ -36,3 +36,8 @@ pref("extensions.rssticker.lastUpdate", 0);
 pref("extensions.rssticker.trendRequest", false);
 
 pref("extensions.rssticker.trendingNews", false);
+
+pref("extensions.rssticker.featuredFeeds", "");
+pref("extensions.rssticker.featuredFeeds.lastUpdate", "0");
+pref("extensions.rssticker.featuredFeeds.new", false);
+pref("extensions.rssticker.featuredFeeds.notify", true);

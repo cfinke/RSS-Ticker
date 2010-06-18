@@ -192,8 +192,9 @@ var RSSTICKER = {
 			gBrowser.selectedTab = theTab;
 		}
 		
-		// Ask if they want the trending terms feed.
+		RSSTICKER.showFeaturedFeeds();
 		
+		// Ask if they want the trending terms feed.
 		if (!RSSTICKER.prefs.getBoolPref("trendRequest")) {
 			RSSTICKER.prefs.setBoolPref("trendRequest", true);
 			
@@ -475,6 +476,93 @@ var RSSTICKER = {
 	
 	unload : function () {
 		RSSTICKER.prefs.setIntPref("lastUpdate", 0);
+	},
+	
+	options : function (panel) {
+		var features = "";
+		
+		try {
+			var instantApply = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("").getBoolPref("browser.preferences.instantApply");
+			features = "chrome,titlebar,toolbar,centerscreen" + (instantApply ? ",dialog=no" : "");
+		}
+		catch (e) {
+			features = "chrome,titlebar,toolbar,centerscreen";
+		}
+		
+		var optWin = openDialog("chrome://rss-ticker/content/options.xul", "", features);
+		
+		if (panel) {
+			optWin.addEventListener("load", function (evt) {
+				var win = evt.currentTarget;
+				win.document.documentElement.showPane(win.document.getElementById(panel));
+			}, false);
+		}
+		
+		return optWin;
+	},
+	
+	showFeaturedFeeds : function () {
+		var allowedToShow = RSSTICKER.prefs.getBoolPref("featuredFeeds.notify");
+		
+		if (allowedToShow) {
+			var needToShow = RSSTICKER.prefs.getBoolPref("featuredFeeds.new");
+			
+			if (needToShow) {
+				var feedsToShow = RSSTICKER.prefs.getCharPref("featuredFeeds");
+				
+				if (feedsToShow) {
+					// Add an item.
+					
+					if (!document.getElementById("RSSTICKER-feature-feeds-subscribe")){
+						RSSTICKER.internalPause = true;
+						
+						var tbb = document.createElement('toolbarbutton');
+						tbb.uri = "chrome://rss-ticker/content/options.xul";
+						tbb.id = "RSSTICKER-feature-feeds-subscribe";
+						tbb.description = RSSTICKER.strings.getString("rssticker.featured.description");
+						tbb.feed = "A Message From RSS Ticker";
+						tbb.feedURL = "rssticker";
+						tbb.href = "chrome://rss-ticker/content/options.xul";
+						tbb.displayHref = "Just around the corner here.";
+						tbb.published = "";
+						tbb.guid = "RSSTICKER-feature-feeds-subscribe";
+						
+						tbb.setAttribute("label", RSSTICKER.strings.getString("rssticker.featured.label"));
+						tbb.setAttribute("tooltip", "RSSTICKERTooltip");
+						tbb.setAttribute("image", "chrome://rss-ticker/content/skin-common/thumbs-up.png");
+						tbb.setAttribute("onclick", "RSSTICKER.openFeaturedFeeds();");
+						tbb.setAttribute("visited", "false");
+						RSSTICKER.toolbar.appendChild(tbb);
+						
+						RSSTICKER.internalPause = false;
+						
+						RSSTICKER.adjustSpacerWidth();
+						RSSTICKER.checkForEmptiness();
+						RSSTICKER.tick();
+					}
+				}
+			}
+		}
+	},
+	
+	openFeaturedFeeds : function () {
+		RSSTICKER.prefs.setBoolPref("featuredFeeds.new", false);
+		
+		var tickerItem = document.getElementById("RSSTICKER-feature-feeds-subscribe");
+		
+		if (tickerItem) {
+			RSSTICKER.internalPause = true;
+			
+			tickerItem.parentNode.removeChild(tickerItem);
+			
+			RSSTICKER.internalPause = false;
+			
+			RSSTICKER.adjustSpacerWidth();
+			RSSTICKER.checkForEmptiness();
+			RSSTICKER.tick();
+		}
+		
+		RSSTICKER.options('featured-pane');
 	},
 	
 	feedsToFetch : [],
@@ -885,6 +973,8 @@ var RSSTICKER = {
 		}
 		
 		RSSTICKER.feedsToFetch.shift();
+		
+		RSSTICKER.trendingNewsExpiration = 0;
 	},
 
 	updateSingleFeed : function (livemarkId) {

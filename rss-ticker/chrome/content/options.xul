@@ -1,12 +1,15 @@
 <?xml version="1.0"?>
-<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
-<?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css" type="text/css"?>
-<?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css" type="text/css"?>
-<!DOCTYPE dialog SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://rss-ticker/locale/locale.dtd">
 <prefwindow
-	onload="findTicker(); getFeeds(); scales();"
 	title="&extension.title; - &options;"
+	buttons="accept,cancel"
+	onload="TICKER_PREFS.onload();"
+	ondialogaccept="TICKER_PREFS.unload();"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<stringbundleset id="stringbundleset">
+		<stringbundle id="ticker-string-bundle" src="chrome://rss-ticker/locale/locale.properties" />
+	</stringbundleset>
 	<prefpane id="general-pane" label="&options.general;" image="chrome://rss-ticker/content/skin-common/emblem-system.png">
 		<preferences>
 			<preference id="p_disabled" name="extensions.rssticker.disabled" type="bool" />
@@ -18,6 +21,7 @@
 			<preference id="p_hideVisited" name="extensions.rssticker.hideVisited" type="bool" />
 			<preference id="p_boldUnvisited" name="extensions.rssticker.boldUnvisited" type="bool" />
 			<preference id="p_alwaysOpenInNewTab" name="extensions.rssticker.alwaysOpenInNewTab" type="bool" />
+			<preference id="p_featured" name="extensions.rssticker.featuredFeeds.notify" type="bool" />
 		</preferences>
 		<vbox>
 			<description>&options.restartNotice;</description>
@@ -178,15 +182,9 @@
 		<spacer style="height: 30px;" />
 	</prefpane>		
 	<prefpane id="manage-pane" label="&feeds;" image="chrome://rss-ticker/content/skin-common/feed-icon.gif">
-		<preferences>
-			<preference id="p_trends" name="extensions.rssticker.trendingNews" type="bool" />
-		</preferences>
-		
 		<script type="application/x-javascript" src="chrome://browser/content/bookmarks/bookmarks.js"></script>
 		<script type="application/x-javascript" src="chrome://rss-ticker/content/ticker.object.js"></script>
 		<script type="application/x-javascript" src="chrome://rss-ticker/content/options.js"></script>
-		
-		<checkbox label="Subscribe to Trending News" preference="p_trends" />
 		
 		<vbox>
 			<description style="max-width: 40em;">&feedManagement;</description>
@@ -206,5 +204,28 @@
 			</hbox>
 		</vbox>
 		<spacer style="height: 30px;" />
+	</prefpane>
+	<prefpane id="featured-pane" label="&rssticker.featured.panelTitle;" image="chrome://rss-ticker/content/skin-common/feed-icon-32.png">
+		<vbox style="max-width: 40em;">
+			<description>&rssticker.featured.description;</description>
+			<description style="font-size: 8pt;">&rssticker.featured.contact;</description>
+			<checkbox preference="p_featured" label="&rssticker.featured.notifyMe;" />
+			<vbox id="featured-feeds" style="min-height: 400px;">
+				<groupbox>
+					<hbox>
+						<vbox>
+							<spring flex="1" />
+							<image src="chrome://rss-ticker/content/skin-common/feed-icon-64.png" style="width: 64px; height: 64px; margin-right: 10px;" />
+							<spring flex="1" />
+						</vbox>
+						<vbox flex="1">
+							<label class="text-link" style="padding-left: 0; margin-left: 0;" value="&rssticker.featured.trends.title;" />
+							<description>&rssticker.featured.trends.description;</description>
+							<button id="trending-news-button" oncommand="TICKER_PREFS.prefs.setBoolPref('trendingNews', !TICKER_PREFS.prefs.getBoolPref('trendingNews')); if (TICKER_PREFS.prefs.getBoolPref('trendingNews')) { this.setAttribute('label', TICKER_PREFS.strings.getString('rssticker.featured.unsubscribe')); } else { this.setAttribute('label', TICKER_PREFS.strings.getString('rssticker.featured.subscribe')); }" label="&rssticker.featured.subscribe;" />
+						</vbox>
+					</hbox>
+				</groupbox>
+			</vbox>
+		</vbox>
 	</prefpane>
 </prefwindow>
