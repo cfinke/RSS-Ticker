@@ -76,3 +76,11 @@
 
 <!ENTITY smoother "Smoother (More CPU)">
 <!ENTITY choppier "Choppier (Less CPU)">
+
+<!ENTITY rssticker.featured.subscribe "Subscribe">
+<!ENTITY rssticker.featured.panelTitle "Featured Feeds">
+<!ENTITY rssticker.featured.description "Support RSS Ticker's development without spending a cent by trying out some of these feeds from the Friends of RSS Ticker.">
+<!ENTITY rssticker.featured.contact "(If you'd like to see your feed in this list, e-mail cfinke@gmail.com.)">
+<!ENTITY rssticker.featured.trends.title "Trending News">
+<!ENTITY rssticker.featured.trends.description "A feed of the latest popular and trending news stories.">
+<!ENTITY rssticker.featured.notifyMe "Periodically notify me about new featured feeds.">
