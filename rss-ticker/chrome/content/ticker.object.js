@@ -192,8 +192,6 @@ var RSSTICKER = {
 			gBrowser.selectedTab = theTab;
 		}
 		
-		RSSTICKER.showFeaturedFeeds();
-		
 		// Ask if they want the trending terms feed.
 		if (!RSSTICKER.prefs.getBoolPref("trendRequest")) {
 			RSSTICKER.prefs.setBoolPref("trendRequest", true);
@@ -342,6 +340,7 @@ var RSSTICKER = {
 		}
 		
 		RSSTICKER.attachTicker();
+		RSSTICKER.adjustSpacerWidth();
 		RSSTICKER.startFetchingFeeds();
 	},
 	
@@ -532,6 +531,7 @@ var RSSTICKER = {
 						tbb.setAttribute("image", "chrome://rss-ticker/content/skin-common/thumbs-up.png");
 						tbb.setAttribute("onclick", "RSSTICKER.openFeaturedFeeds();");
 						tbb.setAttribute("visited", "false");
+						
 						RSSTICKER.toolbar.appendChild(tbb);
 						
 						RSSTICKER.internalPause = false;
@@ -578,6 +578,8 @@ var RSSTICKER = {
 	},
 	
 	startFetchingFeeds : function () {
+		RSSTICKER.showFeaturedFeeds();
+		
 		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Updating feeds " + new Date().toString());
 		
 		if (RSSTICKER.disabled) {
@@ -1333,6 +1335,11 @@ var RSSTICKER = {
 					spacerWidth = 0;
 				}
 				
+				if (spacerWidth < parseInt(RSSTICKER.toolbar.spacer.style.width.replace("px", ""), 10) && RSSTICKER.toolbar.firstChild.nodeName == 'spacer') {
+					// Don't shrink the spacer if it's the first item; it makes for a poor UX
+					return;
+				}
+				
 				RSSTICKER.toolbar.spacer.style.width = spacerWidth + "px";
 			} catch (e) {
 				// Tried to adjust spacer when there wasn't one.
@@ -1361,7 +1368,7 @@ var RSSTICKER = {
 						node = RSSTICKER.toolbar.firstChild;
 						RSSTICKER.toolbar.removeChild(node);
 						
-						// @todo Add an item to the end of the ticker.
+						// Add an item to the end of the ticker.
 						
 						RSSTICKER.currentFirstItemMargin = 0;
 						node.style.marginLeft = '0px';
@@ -1371,6 +1378,9 @@ var RSSTICKER = {
 							if (RSSTICKER.history.isVisitedURL(node.uri, node.guid, 2)){
 								RSSTICKER.markAsRead(node);
 							}
+						}
+						else if (node.nodeName == 'spacer') {
+							RSSTICKER.adjustSpacerWidth();
 						}
 					}
 					else if (RSSTICKER.currentFirstItemMargin > 0){
