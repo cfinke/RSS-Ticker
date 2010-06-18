@@ -71,5 +71,5 @@
 <!ENTITY trendsP3 "Questo avviso non verrà più mostrato">
 <!ENTITY faster "Maggiore">
 <!ENTITY slower "Minore">
-<!ENTITY smoother "Maggiore (maggior uso della CPU)">
-<!ENTITY choppier "Minore (minor uso della CPU)">
+<!ENTITY smoother "Maggiore (maggior uso CPU)">
+<!ENTITY choppier "Minore (minor uso CPU)">
