@@ -74,3 +74,10 @@
 <!ENTITY slower "Спорије">
 <!ENTITY smoother "Глађе (за брже процесоре)">
 <!ENTITY choppier "Узбурканије (за спорије процесоре)">
+<!ENTITY rssticker.featured.subscribe "Претплати се">
+<!ENTITY rssticker.featured.panelTitle "Одвојени доводи">
+<!ENTITY rssticker.featured.description "Подржите развој програма без иједног цента преузимајући неке од довода са списка „Пријатељи од RSS Ticker-а“.">
+<!ENTITY rssticker.featured.contact "(Ако желите да видите свој довод на овом списку, пошаљите поруку на cfinke@gmail.com.)">
+<!ENTITY rssticker.featured.trends.title "Актуелне вести">
+<!ENTITY rssticker.featured.trends.description "Довод најновијих популарних и актуелних вести.">
+<!ENTITY rssticker.featured.notifyMe "С времена на време ме подсећај о новим издвојеним доводима.">

@@ -24,6 +24,8 @@
 <!ENTITY cm.markAllAsRead "Markera Alla som Lästa">
 <!ENTITY cm.markAllAsRead.key "A">
 <!ENTITY options.updateInterval "Uppdateringsfrekvens">
+<!ENTITY options.update.1 "Uppdatera mina flöden var">
+<!ENTITY options.update.2 "minut.">
 <!ENTITY options.speed "Rullningshastighet">
 <!ENTITY options.dw.itemWidth "Objektbredd">
 <!ENTITY pixelAbbrev "px">
@@ -51,6 +53,10 @@
 <!ENTITY about "Om">
 <!ENTITY noFeedsFoundTitle "Inga aktiva bokmärken funna">
 <!ENTITY noFeedsFound "RSS Ticker kunde inte hitta några aktiva bokmärken (också kända som newsfeeds, RSS feeds).">
+<!ENTITY howToSubscribe1 "RSS Ticker laddar och skrollar din Aktiva Bokmärkan (också kända som nyhetsflöden eller RSS feeds), men du har inte lagt in några Aktiva Bokmärken. Behöver du hjälp? Att lägga till ett nyhetslöde är enkelt:">
+<!ENTITY howToSubscribe2 "Om sidan du tittar på i din webbläsare erbjuder ett RSS-flöde (www.mozilla.org till exempel), så kommer det att finnas en lite orange eller blå ikon till höger i adressfältet, intill stjärnan för att lägga till bokmärken. Om du klickar på den ikonen kommer det att öppnas en dialogruta, &quot;Lägg till Aktivt Bokmärke&quot;.">
+<!ENTITY howToSubscribe3 "Klicka på prenumerera nu så kommer RSS Ticker omedelbart att börja skrolla inläggen från flödet.">
+<!ENTITY closeNoFeedsPage "Stäng denna sida">
 <!ENTITY dontShowAgain "Visa inte detta meddelande igen.">
 <!ENTITY feed "Flöde">
 <!ENTITY feeds "Flöden">
@@ -59,3 +65,18 @@
 <!ENTITY remove "Ta bort">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Göm textremsan när den är tom">
+<!ENTITY trendsTitle "Realtids trendnyheter">
+<!ENTITY trendsP1 "RSS Ticker vill veta om du vill prenumerera på ett flöde med de senaste trendnyheterna.">
+<!ENTITY trendsP2 "Klicka OK för att prenumerera; flödet kommer genast att dyka upp i tickern, och håller dig uppdaterad på de senaste trenderna och nyheterna från webben.">
+<!ENTITY trendsP3 "Var inte orolig, du kommer inte att få frågan igen om du inte vill prenumerera.">
+<!ENTITY faster "Snabbare">
+<!ENTITY slower "Saktare">
+<!ENTITY smoother "Mjukare (Mer processor)">
+<!ENTITY choppier "Hackigare (Mindre processor)">
+<!ENTITY rssticker.featured.subscribe "Prenumerera">
+<!ENTITY rssticker.featured.panelTitle "Rekommenderade flöden">
+<!ENTITY rssticker.featured.description "Stöd RSS Tickers utveckling utan att spendera ett öre genom att testa några av dess flöden från RSS Tickers vänner.">
+<!ENTITY rssticker.featured.contact "(Om du vill ha ditt flöde i den här listan, skicka ett mail till cfinke@gmail.com).">
+<!ENTITY rssticker.featured.trends.title "Trendnyheter">
+<!ENTITY rssticker.featured.trends.description "Ett flöde med de senaste populära och trendiga nyheterna.">
+<!ENTITY rssticker.featured.notifyMe "Visa mig nya rekommenderade flöden då och då.">

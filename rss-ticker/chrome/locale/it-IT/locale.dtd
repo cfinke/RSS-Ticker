@@ -73,3 +73,10 @@
 <!ENTITY slower "Minore">
 <!ENTITY smoother "Maggiore (maggior uso CPU)">
 <!ENTITY choppier "Minore (minor uso CPU)">
+<!ENTITY rssticker.featured.subscribe "Sottoscrivi">
+<!ENTITY rssticker.featured.panelTitle "Feed proposti">
+<!ENTITY rssticker.featured.description "È possibile supportare gratuitamente lo sviluppo di RSS Ticker sottoscrivendo uno o più feed tra quelli proposti qui sotto">
+<!ENTITY rssticker.featured.contact "Per aggiungere un proprio feed alla lista inviare un'e-mail all'indirizzo cfinke@gmail.com">
+<!ENTITY rssticker.featured.trends.title "Ultime notizie e tendenze dal web">
+<!ENTITY rssticker.featured.trends.description "Feed relativo alle ultime notizie e tendenze dal web">
+<!ENTITY rssticker.featured.notifyMe "Avvisa periodicamente della disponibilità di nuovi feed proposti">

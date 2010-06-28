@@ -73,3 +73,10 @@
 <!ENTITY slower "Chậm hơn">
 <!ENTITY smoother "Mượt hơn (Tốn CPU)">
 <!ENTITY choppier "Giật hơn (Ít CPU)">
+<!ENTITY rssticker.featured.subscribe "Nhận Tin">
+<!ENTITY rssticker.featured.panelTitle "Nguồn Tin Đặc Sắc">
+<!ENTITY rssticker.featured.description "Hỗ trợ việc phát triển RSS Ticker mà không mất xu nào bằng việc thử vài nguồn tin từ Bạn của RSS Ticker.">
+<!ENTITY rssticker.featured.contact "(Nếu bạn muốn xem nguồn tin của bạn trong danh sách này, hãy e-mail đến cfinke@gmail.com.)">
+<!ENTITY rssticker.featured.trends.title "Tin Theo Xu Hướng">
+<!ENTITY rssticker.featured.trends.description "Một tin của các mẩu tin theo xu hướng và phổ biến mới nhất.">
+<!ENTITY rssticker.featured.notifyMe "Định kỳ thông báo cho tôi về các nguồn tin đặc sắc mới.">

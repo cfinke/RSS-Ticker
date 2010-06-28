@@ -73,3 +73,10 @@
 <!ENTITY slower "Медленее">
 <!ENTITY smoother "Более гладко">
 <!ENTITY choppier "Менее гладко">
+<!ENTITY rssticker.featured.subscribe "Подписаться">
+<!ENTITY rssticker.featured.panelTitle "Подборка новостей">
+<!ENTITY rssticker.featured.description "Поддержите развитие RSS Ticker, попробовав ленты из подборки друзей RSS Ticker.">
+<!ENTITY rssticker.featured.contact "(Если Вы хотите увидеть Вашу ленту в этом списке, напишите на адрес cfinke@gmail.com.)">
+<!ENTITY rssticker.featured.trends.title "Популярные новости">
+<!ENTITY rssticker.featured.trends.description "Лента самых популярных новостей.">
+<!ENTITY rssticker.featured.notifyMe "Периодически оповещать меня о новых новостей в подборке.">
