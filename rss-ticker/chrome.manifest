@@ -29,9 +29,7 @@ skin       rss-ticker     classic             chrome/skin/mac/ os=Darwin
 
 overlay   chrome://browser/content/browser.xul                       chrome://rss-ticker/content/overlay.xul
 
-style     chrome://rss-ticker/content/about.xul                      chrome://global/skin/global.css
 style     chrome://rss-ticker/content/noFeedsFound.xul               chrome://global/skin/global.css
-style     chrome://rss-ticker/content/about.xul                      chrome://browser/skin/browser.css
 style     chrome://rss-ticker/content/noFeedsFound.xul               chrome://browser/skin/browser.css
 style     chrome://rss-ticker/content/options.xul                    chrome://global/skin/global.css
 style     chrome://rss-ticker/content/options.xul                    chrome://browser/skin/browser.css
