@@ -73,3 +73,10 @@
 <!ENTITY slower "Plus lent">
 <!ENTITY smoother "Plus doux (plus de processeur)">
 <!ENTITY choppier "Plus saccadé (moins de processeur)">
+<!ENTITY rssticker.featured.subscribe "S'abonner">
+<!ENTITY rssticker.featured.panelTitle "Flux à la une">
+<!ENTITY rssticker.featured.description "Aider le développement de RSS Ticker sans dépenser un centime en essayant certains de ces flux partenaires.">
+<!ENTITY rssticker.featured.contact "(si vous aimeriez voir votre flux dans cette liste, écrivez à cfinke@gmail.com)">
+<!ENTITY rssticker.featured.trends.title "Nouvelles tendances">
+<!ENTITY rssticker.featured.trends.description "Un flux avec les dernières nouvelles tendances populaires.">
+<!ENTITY rssticker.featured.notifyMe "Me notifier périodiquement les nouveaux flux.">

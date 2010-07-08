@@ -24,10 +24,10 @@
 <!ENTITY cm.markAllAsRead "Alles als gelezen markeren">
 <!ENTITY cm.markAllAsRead.key "A">
 <!ENTITY options.updateInterval "Updatefrequentie">
-<!ENTITY options.update.1 "Mij feeds elke">
+<!ENTITY options.update.1 "Mijn feeds elke">
 <!ENTITY options.update.2 "minuten bijwerken.">
-<!ENTITY options.speed "Ticksnelheid">
-<!ENTITY options.dw.itemWidth "Breedte berichtje">
+<!ENTITY options.speed "Tickersnelheid">
+<!ENTITY options.dw.itemWidth "Berichtbreedte">
 <!ENTITY pixelAbbrev "px">
 <!ENTITY options.smooothness "Vlotheid scrollen ticker">
 <!ENTITY cmOptionsDescription "Het contextmenu van de ticker aanpassen door onderstaande opties te selecteren of te deselecteren.">
@@ -38,16 +38,16 @@
 <!ENTITY options.advanced "Geavanceerd">
 <!ENTITY options.contextMenu "Contextmenu">
 <!ENTITY disableTicker "Ticker uitschakelen">
-<!ENTITY options.tickerPlacement "Positie ticker">
+<!ENTITY options.tickerPlacement "Tickerpositie">
 <!ENTITY tickerPlacement.belowStatusBar "Onder de statusbalk">
 <!ENTITY tickerPlacement.belowBMTB "Onder de bladwijzerwerkbalk">
-<!ENTITY options.random "Ticker items in willekeurige volgorde">
+<!ENTITY options.random "Tickerberichten in willekeurige volgorde">
 <!ENTITY options.hide "Ongelezen berichten verbergen.">
 <!ENTITY options.bold "Vette ongelezen berichten.">
 <!ENTITY options.openInNewTab "Koppelingen altijd in nieuwe tabbladen openen.">
 <!ENTITY toggleTicker "Ticker in-/uitschakelen">
 <!ENTITY options.dw.limitWidth "De breedte van de berichten in de ticker beperken">
-<!ENTITY options.dw.isMaxWidth "Enkel als maximumbreedte gebruiken">
+<!ENTITY options.dw.isMaxWidth "Alleen als maximumbreedte gebruiken">
 <!ENTITY options.limitItemsPerFeed "Aantal berichten per feed beperken">
 <!ENTITY options.itemsPerFeed "Berichten per feed">
 <!ENTITY about "Over">
@@ -73,3 +73,10 @@
 <!ENTITY slower "Langzamer">
 <!ENTITY smoother "Soepeler (meer CPU)">
 <!ENTITY choppier "Hakkeriger (minder CPU)">
+<!ENTITY rssticker.featured.subscribe "Abonneren">
+<!ENTITY rssticker.featured.panelTitle "Gepresenteerde feeds">
+<!ENTITY rssticker.featured.description "Ondersteun de ontwikkeling van RSS Ticker zonder een cent uit te geven door een paar van deze feeds van de vrienden van RSS Ticker uit te proberen.">
+<!ENTITY rssticker.featured.contact "(Als u uw feed in deze lijst wilt zien, stuur dan een e-mailbericht naar cfinke@gmail.com).">
+<!ENTITY rssticker.featured.trends.title "Trendnieuws">
+<!ENTITY rssticker.featured.trends.description "Een feed met de laatste populaire en trendy nieuwsberichten.">
+<!ENTITY rssticker.featured.notifyMe "Informeer mij periodiek over nieuwe gepresenteerde feeds.">

@@ -1,4 +1,4 @@
-<!ENTITY extension.title "RSS Ticker">
+<!ENTITY extension.title "RSS-Ticker">
 <!ENTITY cm.open "Öffnen">
 <!ENTITY cm.open.key "Ö">
 <!ENTITY cm.openInNewWindow "In neuem Fenster öffnen">
@@ -24,6 +24,8 @@
 <!ENTITY cm.markAllAsRead "Alle als gelesenen markieren">
 <!ENTITY cm.markAllAsRead.key "l">
 <!ENTITY options.updateInterval "Aktualisierungsintervall (in Minuten)">
+<!ENTITY options.update.1 "Meine Feeds alle">
+<!ENTITY options.update.2 "Minuten aktualisieren.">
 <!ENTITY options.speed "Laufgeschwindigkeit">
 <!ENTITY options.dw.itemWidth "Breite der Einträge">
 <!ENTITY pixelAbbrev "px">
@@ -51,6 +53,7 @@
 <!ENTITY about "Über">
 <!ENTITY noFeedsFoundTitle "Keine dynamischen Lesezeichen gefunden">
 <!ENTITY noFeedsFound "RSS Ticker konnte keine dynamischen Lesezeichen (d.h. Newsfeeds, RSS-Feeds) finden.">
+<!ENTITY closeNoFeedsPage "Diese Seite schließen">
 <!ENTITY dontShowAgain "Diese Meldung nicht mehr anzeigen">
 <!ENTITY feed "Feed">
 <!ENTITY feeds "Feeds">
@@ -59,3 +62,7 @@
 <!ENTITY remove "Entfernen">
 <!ENTITY URL "Adresse">
 <!ENTITY hideWhenEmpty "Ticker ausblenden, wenn keine Einträge vorhanden sind">
+<!ENTITY faster "Schneller">
+<!ENTITY slower "Langsamer">
+<!ENTITY smoother "Feiner (Mehr CPU)">
+<!ENTITY choppier "Grober (Weniger CPU)">
