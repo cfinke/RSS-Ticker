@@ -180,17 +180,7 @@ var RSSTICKER = {
 			RSSTICKER.enable();
 		}
 		
-		setTimeout(function () { RSSTICKER.showFirstRun(); }, 1500);
-	},
-	
-	showFirstRun : function () {
-		var version = Components.classes["@mozilla.org/extensions/manager;1"].getService(Components.interfaces.nsIExtensionManager).getItemForID("{1f91cde0-c040-11da-a94d-0800200c9a66}").version;
-		
-		if (RSSTICKER.prefs.getCharPref("lastVersion") != version) {
-			RSSTICKER.prefs.setCharPref("lastVersion",version);
-			var theTab = gBrowser.addTab("http://www.chrisfinke.com/firstrun/rss-ticker.php");
-			gBrowser.selectedTab = theTab;
-		}
+		RSSTICKER.showFirstRun();
 		
 		// Ask if they want the trending terms feed.
 		if (!RSSTICKER.prefs.getBoolPref("trendRequest")) {
@@ -203,7 +193,56 @@ var RSSTICKER = {
 			);
 		}
 	},
+	
+	getVersion : function (callback) {
+		var addonId = "{1f91cde0-c040-11da-a94d-0800200c9a66}";
 		
+		if ("@mozilla.org/extensions/manager;1" in Components.classes) {
+			// < Firefox 4
+			var version = Components.classes["@mozilla.org/extensions/manager;1"]
+				.getService(Components.interfaces.nsIExtensionManager).getItemForID(addonId).version;
+			
+			callback(version);
+		}
+		else {
+			// Firefox 4.
+			Components.utils.import("resource://gre/modules/AddonManager.jsm");  
+			
+			AddonManager.getAddonByID(addonId, function (addon) {
+				callback(addon.version);
+			});
+		}
+	},
+	
+	showFirstRun : function () {
+		function isMajorUpdate(version1, version2) {
+			if (!version1) {
+				return true;
+			}
+			else {
+				var oldParts = version1.split(".");
+				var newParts = version2.split(".");
+		
+				if (newParts[0] != oldParts[0] || newParts[1] != oldParts[1]) {
+					return true;
+				}
+			}
+			
+			return false;
+		}
+		
+		function doShowFirstRun(version) {
+			if (isMajorUpdate(FEEDBAR_BROWSER.prefs.getCharPref("lastVersion"), version)) {
+				var theTab = gBrowser.addTab("http://www.chrisfinke.com/firstrun/rss-ticker.php?v="+version);
+				gBrowser.selectedTab = theTab;
+			}
+			
+			RSSTICKER.prefs.setCharPref("lastVersion", version);
+		}
+		
+		RSSTICKER.getVersion(doShowFirstRun);
+	},
+	
 	observe : function(subject, topic, data) {
 		if (topic != "nsPref:changed") {
 			return;
