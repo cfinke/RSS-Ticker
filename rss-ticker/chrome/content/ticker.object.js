@@ -232,7 +232,7 @@ var RSSTICKER = {
 		}
 		
 		function doShowFirstRun(version) {
-			if (isMajorUpdate(FEEDBAR_BROWSER.prefs.getCharPref("lastVersion"), version)) {
+			if (isMajorUpdate(RSSTICKER.prefs.getCharPref("lastVersion"), version)) {
 				var theTab = gBrowser.addTab("http://www.chrisfinke.com/firstrun/rss-ticker.php?v="+version);
 				gBrowser.selectedTab = theTab;
 			}
