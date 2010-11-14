@@ -1,0 +1,1 @@
+RSS Ticker loads your Firefox Live Bookmarks and scrolls their entries across your screen while you surf. It's perfect for staying informed without having to actively browse entries in an RSS reader.
