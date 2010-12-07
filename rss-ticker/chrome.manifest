@@ -4,6 +4,7 @@ resource   rss-ticker-modules             modules/
 content rss-ticker-default-locale chrome/locale/en-US/
 
 locale     rss-ticker     en-US            chrome/locale/en-US/
+locale     rss-ticker     da               chrome/locale/da/
 locale     rss-ticker     da-DK            chrome/locale/da-DK/
 locale     rss-ticker     de               chrome/locale/de/
 locale     rss-ticker     es-ES            chrome/locale/es-ES/
@@ -22,6 +23,7 @@ locale     rss-ticker     sr               chrome/locale/sr/
 locale     rss-ticker     sv-SE            chrome/locale/sv-SE/
 locale     rss-ticker     tr-TR            chrome/locale/tr-TR/
 locale     rss-ticker     vi               chrome/locale/vi/
+locale     rss-ticker     zh               chrome/locale/zh/
 locale     rss-ticker     zh-TW            chrome/locale/zh-TW/
 
 skin       rss-ticker     classic             chrome/skin/lin/
