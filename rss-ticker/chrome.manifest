@@ -40,3 +40,6 @@ style     chrome://global/content/customizeToolbar.xul               chrome://rs
 style     chrome://rss-ticker/content/options.xul                    chrome://rss-ticker/skin/style.css
 style     chrome://browser/content/browser.xul                       chrome://rss-ticker/skin/style.css
 style     chrome://global/content/customizeToolbar.xul               chrome://rss-ticker/skin/style.css
+
+override    chrome://rss-ticker/skin/toolbar-icon.png chrome://rss-ticker/skin/toolbar-icon-4.png os=Darwin appversion>=4.0b1
+override    chrome://rss-ticker/skin/style.css chrome://rss-ticker/skin/style-4.css os=Darwin appversion>=4.0b1
