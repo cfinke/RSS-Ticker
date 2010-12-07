@@ -57,7 +57,7 @@
 <!ENTITY dontShowAgain "Diese Meldung nicht mehr anzeigen">
 <!ENTITY feed "Feed">
 <!ENTITY feeds "Feeds">
-<!ENTITY feedManagement "Um Feeds zum Ticker hinzuzufügen oder daraus zu entfernen, wählen Sie die Einträge aus untenstehender Liste aus und klicken Sie entweder auf die Schaltfläche &apos;Hinzufügen&apos; oder &apos;Entfernen&apos;.">
+<!ENTITY feedManagement "Um Feeds zum Ticker hinzuzufügen oder daraus zu entfernen, wählen Sie die Einträge aus untenstehender Liste aus und klicken Sie entweder auf die Schaltfläche 'Hinzufügen' oder 'Entfernen'.">
 <!ENTITY add "Hinzufügen">
 <!ENTITY remove "Entfernen">
 <!ENTITY URL "Adresse">
@@ -66,3 +66,7 @@
 <!ENTITY slower "Langsamer">
 <!ENTITY smoother "Feiner (Mehr CPU)">
 <!ENTITY choppier "Grober (Weniger CPU)">
+<!ENTITY rssticker.featured.subscribe "Abonnieren">
+<!ENTITY rssticker.featured.panelTitle "Empfohlene Feeds">
+<!ENTITY rssticker.featured.contact "(Wenn Sie Ihren Feed in dieser Liste sehen möchten, schreiben Sie eine E-Mail an cfinke@gmail.com.)">
+<!ENTITY rssticker.featured.notifyMe "Benachrichtigen Sie mich regelmäßig über neue empfohlene Feeds.">

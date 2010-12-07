@@ -60,7 +60,7 @@
 <!ENTITY dontShowAgain "Não voltar a exibir esta mensagem.">
 <!ENTITY feed "Fonte">
 <!ENTITY feeds "Fontes">
-<!ENTITY feedManagement "Pode adicionar ou remover fontes do letreiro seleccionando-as na lista abaixo e pressionando os botões de Adicionar e Remover">
+<!ENTITY feedManagement "Pode adicionar ou remover fontes do letreiro seleccionando-as na lista abaixo e pressionando os botões de Adicionar e Remover. Nota: Para subscrever uma fonte, use os Marcadores Dinâmicos do Firefox. Esta lista apenas permite que seleccione quais aparecem no Ticker; não permite subscrever novas fontes.">
 <!ENTITY add "Adicionar">
 <!ENTITY remove "Remover">
 <!ENTITY URL "URL">

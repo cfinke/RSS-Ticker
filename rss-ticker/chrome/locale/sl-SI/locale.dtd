@@ -24,6 +24,8 @@
 <!ENTITY cm.markAllAsRead "Označi vse kot prebrano">
 <!ENTITY cm.markAllAsRead.key "v">
 <!ENTITY options.updateInterval "Frekvenca posodabljanja">
+<!ENTITY options.update.1 "Posodobi vire vsakih">
+<!ENTITY options.update.2 "minut.">
 <!ENTITY options.speed "Hitrost prikazovalnika">
 <!ENTITY options.dw.itemWidth "Širina elementa">
 <!ENTITY pixelAbbrev "točk">
@@ -51,6 +53,10 @@
 <!ENTITY about "O razširitvi">
 <!ENTITY noFeedsFoundTitle "Ni najdenih živih zaznamkov">
 <!ENTITY noFeedsFound "Prikazovalnik živih zaznamkov ne more najti živih zaznamkov.">
+<!ENTITY howToSubscribe1 "Razširitev naloži in prikaže vnose iz vaših Živih zaznamkov (torej novičarskih virov oz. virov RSS), vendar trenutno niste naročeni na še nobenega. Potrebujete pomoč? Naročanje na vir je enostavno:">
+<!ENTITY howToSubscribe2 "Če stran, ki si jo ogledujete, ponuja vir RSS (npr. www.firefox.org), se na desni strani okenca naslovne vrstice nahaja majhna oranžna ali modra ikona, poleg zvezdice za shranjevanje zaznamkov. Če to ikono kliknete, se odpre pogovorno okno 'Dodaj živi zaznamek'.">
+<!ENTITY howToSubscribe3 "Kliknite Prijavi zdaj in prikazovalnik bo takoj začel prikazovati novice iz tega vira.">
+<!ENTITY closeNoFeedsPage "Zapri to stran">
 <!ENTITY dontShowAgain "Tega sporočila ne prikaži več.">
 <!ENTITY feed "Živ zaznamek">
 <!ENTITY feeds "Živi zaznamki">
@@ -67,3 +73,10 @@
 <!ENTITY slower "počasneje">
 <!ENTITY smoother "gladko (več CPE)">
 <!ENTITY choppier "odsekano (manj CPE)">
+<!ENTITY rssticker.featured.subscribe "Naroči">
+<!ENTITY rssticker.featured.panelTitle "Izpostavljeni viri">
+<!ENTITY rssticker.featured.description "Podprite razvoj te razširitve brez stroškov tako, da poskusite nekaj teh virov prijateljev razširitve.">
+<!ENTITY rssticker.featured.contact "(Če želite na tem seznamu videti svoj vir, pišite na naslov cfinke@gmail.com.)">
+<!ENTITY rssticker.featured.trends.title "Trendovske novice">
+<!ENTITY rssticker.featured.trends.description "Vir najnovejših priljubljenih, trendovskih novic.">
+<!ENTITY rssticker.featured.notifyMe "Periodično me obveščaj o novih izpostavljenih virih.">
