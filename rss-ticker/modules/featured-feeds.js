@@ -76,8 +76,7 @@ var FEATURED_TICKER_FEEDS = {
 			if (req.readyState == 4) {
 				var text = req.responseText;
 				
-				var nativeJSON = Components.classes["@mozilla.org/dom/json;1"].createInstance(Components.interfaces.nsIJSON);
-				var json = nativeJSON.decode(text);
+				var json = JSON.parse(text);
 				
 				for (var i = 0; i < json.length; i++) {
 					var url = json[i].url;
@@ -101,7 +100,7 @@ var FEATURED_TICKER_FEEDS = {
 					json[i].siteUrl = siteUrl;
 				}
 				
-				FEATURED_TICKER_FEEDS.prefs.setCharPref("featuredFeeds", nativeJSON.encode(json));
+				FEATURED_TICKER_FEEDS.prefs.setCharPref("featuredFeeds", JSON.stringify(json));
 			}
 		};
 		
