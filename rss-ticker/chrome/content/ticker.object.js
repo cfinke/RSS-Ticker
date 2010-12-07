@@ -361,7 +361,7 @@ var RSSTICKER = {
 		
 		if (tickerPlacement == 1){
 			// Beneath the status bar
-			document.getElementById('browser-bottombox').insertBefore(RSSTICKER.ticker, document.getElementById('status-bar').nextSibling);
+			document.getElementById('browser-bottombox').appendChild(RSSTICKER.ticker);
 			if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Placed after status bar.");
 		}
 		else if (tickerPlacement == 2){
