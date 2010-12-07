@@ -1,6 +1,8 @@
 content    rss-ticker     chrome/content/
 resource   rss-ticker-modules             modules/
 
+content rss-ticker-default-locale chrome/locale/en-US/
+
 locale     rss-ticker     en-US            chrome/locale/en-US/
 locale     rss-ticker     da-DK            chrome/locale/da-DK/
 locale     rss-ticker     de               chrome/locale/de/

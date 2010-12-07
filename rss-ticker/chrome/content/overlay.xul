@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+<!DOCTYPE overlay [
+	<!ENTITY % localLocale SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+	%localLocale;
+	<!ENTITY % backupLocale SYSTEM "chrome://rss-ticker-default-locale/content/locale.dtd">
+	%backupLocale;
+]>
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script type="application/x-javascript" src="chrome://rss-ticker/content/feed.class.js"></script>
 	<script type="application/x-javascript" src="chrome://rss-ticker/content/ticker.object.js"></script>
@@ -20,6 +25,7 @@
 		]]>
 	</script>
 	<stringbundleset id="stringbundleset">
+		<stringbundle id="RSSTICKER-backup-bundle" src="chrome://rss-ticker-default-locale/content/locale.properties" />
 		<stringbundle id="RSSTICKER-bundle" src="chrome://rss-ticker/locale/locale.properties" />
 	</stringbundleset>
 	<commandset id="mainCommandSet">
@@ -41,7 +47,7 @@
 		<command id="rss-ticker_cmd_disableTicker" oncommand="RSSTICKER.toggleDisabled();" label="&disableTicker;"/>
 	</commandset>
 	<popupset id="mainPopupSet">
-		<popup id="RSSTICKERItemCM">
+		<menupopup id="RSSTICKERItemCM">
 			<menuitem option="open" accesskey="&cm.open.key;" command="rss-ticker_cmd_open" />
 			<menuitem option="openInWindow" accesskey="&cm.openInNewWindow.key;" command="rss-ticker_cmd_openInNewWindow"/>
 			<menuitem option="openInTab" accesskey="&cm.openInNewTab.key;" command="rss-ticker_cmd_openInTab"/>
@@ -63,8 +69,8 @@
 			<menuseparator />
 			<menuitem option="options" command="rss-ticker_cmd_options"/>
 			<menuitem option="disableTicker" command="rss-ticker_cmd_disableTicker"/>
-		</popup>
-		<popup id="RSSTICKERCM">
+		</menupopup>
+		<menupopup id="RSSTICKERCM">
 			<menuitem option="openAllInTabs" command="rss-ticker_cmd_openAllInTabs"/>
 			<menuitem option="openUnreadInTabs" command="rss-ticker_cmd_openUnreadInTabs"/>
 			<menuseparator />
@@ -75,13 +81,13 @@
 			<menuseparator />
 			<menuitem option="options" command="rss-ticker_cmd_options"/>
 			<menuitem option="disableTicker" command="rss-ticker_cmd_disableTicker"/>
-		</popup>
-		<popup id="RSSTICKERButtonCM">
+		</menupopup>
+		<menupopup id="RSSTICKERButtonCM">
 			<menuitem option="refreshFeeds" accesskey="&cm.refreshFeeds.key;" command="rss-ticker_cmd_refreshFeeds"/>
 			<menuitem option="manageFeeds" accesskey="&cm.manageFeeds.key;" command="rss-ticker_cmd_manageFeeds"/>
 			<menuseparator />
 			<menuitem option="options" command="rss-ticker_cmd_options"/>
-		</popup>
+		</menupopup>
 		<tooltip id="RSSTICKERTooltip" noautohide="true" orient="vertical" onpopupshowing="return RSSTICKER.fillInTooltip(document.tooltipNode, this);">
 			<hbox align="center">
 				<image id="RSSTICKERTooltipImage" style="vertical-align: middle; margin-left: 1ex; margin-right: 1ex;"/>

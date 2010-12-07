@@ -54,6 +54,7 @@
 <!ENTITY noFeedsFoundTitle "No Live Bookmarks Found">
 <!ENTITY noFeedsFound "RSS Ticker could not locate any Live Bookmarks">
 <!ENTITY howToSubscribe1 "RSS Ticker loads and scrolls the items from your Live Bookmarks (a.k.a. newsfeeds or RSS feeds), but you haven't subscribed to any Live Bookmarks.  Need some help?  Subscribing to a feed is easy:">
+<!ENTITY howToSubscribe1a "The easiest way to get started is to subscribe to RSS Ticker's Trending News feed.  Click the 'Subscribe' button below to instantly get trending news added to your ticker.">
 <!ENTITY howToSubscribe2 "If the page you are looking at in your browser offers an RSS feed (www.mozilla.org, for example), there will be a small orange or blue icon on the right side of the address bar, next to the star used for bookmarking. If you click on that icon, it will open the 'Add Live Bookmark' dialog.">
 <!ENTITY howToSubscribe3 "Click Subscribe Now, and RSS Ticker will instantly begin scrolling the items from that feed.">
 <!ENTITY closeNoFeedsPage "Close this page">
@@ -84,3 +85,5 @@
 <!ENTITY rssticker.featured.trends.title "Trending News">
 <!ENTITY rssticker.featured.trends.description "A feed of the latest popular and trending news stories.">
 <!ENTITY rssticker.featured.notifyMe "Periodically notify me about new featured feeds.">
+
+<!ENTITY rssticker.trendingNews.subscribe "Subscribe to Trending News">

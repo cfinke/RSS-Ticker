@@ -38,7 +38,55 @@ var TICKER_PREFS = {
 	prefs : null,
 	browserPrefs : null,
 	
-	get strings() { return document.getElementById("ticker-string-bundle"); },
+	strings : {
+		_backup : null,
+		_main : null,
+		
+		initStrings : function () {
+			if (!this._backup) { this._backup = document.getElementById("RSSTICKER-backup-bundle"); }
+			if (!this._main) { this._main = document.getElementById("RSSTICKER-bundle"); }
+		},
+		
+		getString : function (key) {
+			this.initStrings();
+			
+			var rv = "";
+			
+			try {
+				rv = this._main.getString(key);
+			} catch (e) {
+			}
+			
+			if (!rv) {
+				try {
+					rv = this._backup.getString(key);
+				} catch (e) {
+				}
+			}
+			
+			return rv;
+		},
+		
+		getFormattedString : function (key, args) {
+			this.initStrings();
+			
+			var rv = "";
+			
+			try {
+				rv = this._main.getFormattedString(key, args);
+			} catch (e) {
+			}
+			
+			if (!rv) {
+				try {
+					rv = this._backup.getFormattedString(key, args);
+				} catch (e) {
+				}
+			}
+			
+			return rv;
+		}
+	},
 	
 	onload : function () {
 		TICKER_PREFS.findTicker();

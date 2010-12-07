@@ -1,18 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="chrome://global/skin/config.css" type="text/css"?>
 <?xml-stylesheet href="chrome://rss-ticker/content/skin-common/config.css" type="text/css"?>
-<!DOCTYPE dialog SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+<!DOCTYPE window [
+	<!ENTITY % localLocale SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+	%localLocale;
+	<!ENTITY % backupLocale SYSTEM "chrome://rss-ticker-default-locale/content/locale.dtd">
+	%backupLocale;
+]>
 <window
 	title="&extension.title; - &noFeedsFoundTitle;"
 	orient="vertical"
-	onload="dontShowMsgAgain();"
+	onload="dontShowMsgAgain(); checkTrendingNewsSubscription();"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script type="application/x-javascript">
 		<![CDATA[
 		
+		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker.");
+		
 		function dontShowMsgAgain(){
-			var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker.");
 			prefs.setBoolPref("noFeedsFoundFlag.1.7", document.getElementById("showWarningNextTime").checked);
+		}
+		
+		function checkTrendingNewsSubscription() {
+			if (prefs.getBoolPref("trendingNews")) {
+				var items = document.getElementsByClassName("trending-news");
+				
+				for (var i = 0; i < items.length; i++) {
+					items[i].style.display = 'none';
+				}
+			}
+		}
+		
+		function subscribeToTrendingNews() {
+			var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker.");
+			prefs.setBoolPref("trendingNews", true);
+			
+			window.close();
 		}
 		
 		]]>
@@ -24,10 +47,12 @@
 			<vbox id="warningInnerBox" flex="1">
 				<label id="warningTitle">&noFeedsFound;</label>
 				<label id="warningText">&howToSubscribe1;</label>
+				<label id="warningText" class="trending-news">&howToSubscribe1a;</label>
 				<label id="warningText">&howToSubscribe2;</label>
 				<label id="warningText">&howToSubscribe3;</label>
 				<checkbox id="showWarningNextTime" label="&dontShowAgain;" checked="true" oncommand="dontShowMsgAgain();" />
 				<hbox pack="center">
+					<button id="warningButton" oncommand="subscribeToTrendingNews();" label="&rssticker.trendingNews.subscribe;" class="trending-news"/>
 					<button id="warningButton" oncommand="window.close();" label="&closeNoFeedsPage;"/>
 				</hbox>
 			</vbox>

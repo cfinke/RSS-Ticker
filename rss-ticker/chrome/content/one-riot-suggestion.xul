@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/css" href="chrome://global/skin/global.css"?>
-<!DOCTYPE dialog SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+<!DOCTYPE dialog [
+	<!ENTITY % localLocale SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+	%localLocale;
+	<!ENTITY % backupLocale SYSTEM "chrome://rss-ticker-default-locale/content/locale.dtd">
+	%backupLocale;
+]>
+
 <dialog title="&trendsTitle;"
 	id="rssticker-oneriot-dialog"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -24,6 +30,7 @@
         ]]>
     </script>
 	<stringbundleset>
+		<stringbundle id="RSSTICKER-backup-bundle" src="chrome://rss-ticker-default-locale/content/locale.properties" />
 		<stringbundle id="RSSTICKER-bundle" src="chrome://rss-ticker/locale/locale.properties" />
 	</stringbundleset>
     <hbox>
