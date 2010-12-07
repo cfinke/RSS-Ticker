@@ -1,5 +1,4 @@
 rm -rf .xpi_work_dir/
-chmod -R 0777 rss-ticker/
 rm -f rss-ticker.xpi
 mkdir .xpi_work_dir
 cp -r rss-ticker/* .xpi_work_dir/
