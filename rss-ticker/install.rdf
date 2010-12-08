@@ -3,7 +3,7 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>{1f91cde0-c040-11da-a94d-0800200c9a66}</em:id>
 		<em:name>RSS Ticker</em:name>
-		<em:version>3.2.3pre</em:version>
+		<em:version>3.2.3</em:version>
 		<em:description>Scrolls your RSS feeds (Live Bookmarks) in a toolbar.</em:description>
 		<em:creator>Christopher Finke</em:creator>
 		<em:iconURL>chrome://rss-ticker/content/skin-common/feed-icon.gif</em:iconURL>
