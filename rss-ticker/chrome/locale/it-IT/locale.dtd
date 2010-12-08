@@ -53,7 +53,8 @@
 <!ENTITY about "Informazioni">
 <!ENTITY noFeedsFoundTitle "Non sono stati trovati segnalibri Live">
 <!ENTITY noFeedsFound "RSS Ticker non ha trovato alcun tipo di segnalibro Live">
-<!ENTITY howToSubscribe1 "RSS Ticker permette di caricare e visualizzare tramite scorrimento nella propria barra di visualizzazione i feed salvati come segnalibri Live. Aggiungere un feed è semplice:">
+<!ENTITY howToSubscribe1 "RSS Ticker permette di caricare e visualizzare tramite scorrimento nella propria barra di visualizzazione i feed salvati come segnalibri Live">
+<!ENTITY howToSubscribe1a "Il modo più semplice per iniziare ad utilizzare l'estensione è aggiungere a tale barra il feed 'Ultime notizie e tendenze dal web' facendo clic sul relativo pulsante qui sotto">
 <!ENTITY howToSubscribe2 "Se nella pagina che si sta visualizzando nel browser è disponibile un feed RSS (ad esempio: www.mozilla.org), sarà presente una piccola icona arancione oppure blu vicino all'icona a forma di stella posizionata nel lato destro della barra degli indirizzi. Facendo clic su tale icona si aprirà la finestra di dialogo per l'aggiunta del feed">
 <!ENTITY howToSubscribe3 "Confermare facendo clic sul relativo pulsante per visualizzare istantaneamente gli elementi del feed aggiunto nella barra di RSS Ticker">
 <!ENTITY closeNoFeedsPage "Chiudi">
@@ -80,3 +81,4 @@
 <!ENTITY rssticker.featured.trends.title "Ultime notizie e tendenze dal web">
 <!ENTITY rssticker.featured.trends.description "Feed relativo alle ultime notizie e tendenze dal web">
 <!ENTITY rssticker.featured.notifyMe "Avvisa periodicamente della disponibilità di nuovi feed proposti">
+<!ENTITY rssticker.trendingNews.subscribe "Aggiungi 'Ultime notizie e tendenze dal web'">

@@ -34,6 +34,8 @@
 <!ENTITY tt.summary "Кратак преглед">
 <!ENTITY options "Поставке">
 <!ENTITY options.restartNotice "Опције означене са звездицом [*] неће бити промењене
+
+
 док год поново не отворите прозор прегледача.">
 <!ENTITY options.general "Опште">
 <!ENTITY options.advanced "Напредно">
