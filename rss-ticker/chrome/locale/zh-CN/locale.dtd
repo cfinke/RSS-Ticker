@@ -1,0 +1,66 @@
+<!ENTITY cm.open "打开">
+<!ENTITY cm.openInNewWindow "在新窗口中打开">
+<!ENTITY cm.openInNewTab "在新标签页中打开">
+<!ENTITY cm.openAllInTabs "在标签页中打开所有项目">
+<!ENTITY cm.openUnreadInTabs "在标签页中打开未读项目">
+<!ENTITY cm.openFeedInTabs "在标签页中打开 Feed">
+<!ENTITY cm.openFeedUnreadInTabs "在标签页中打开未读的 Feed">
+<!ENTITY cm.copyLinkTitle "复制链结标题">
+<!ENTITY cm.copyLinkURL "复制链结位址">
+<!ENTITY cm.refreshFeeds "更新 Feed">
+<!ENTITY cm.manageFeeds "管理 Feed">
+<!ENTITY cm.markAsRead "标记为已读">
+<!ENTITY cm.markFeedAsRead "将 Feed 标记为已读">
+<!ENTITY cm.markAllAsRead "全部标记为已读">
+<!ENTITY options.updateInterval "更新频率">
+<!ENTITY options.update.1 "更新我的 feed 每">
+<!ENTITY options.update.2 "分钟。">
+<!ENTITY options.speed "滚动速度">
+<!ENTITY options.dw.itemWidth "项目宽度">
+<!ENTITY pixelAbbrev "像素">
+<!ENTITY options.smooothness "滚动平滑度">
+<!ENTITY cmOptionsDescription "将下列勾选的项目显示于右键菜单上。">
+<!ENTITY tt.summary "内容摘要">
+<!ENTITY options "选项">
+<!ENTITY options.restartNotice "标有星号 (*) 的选项需要重启浏览器才会生效。">
+<!ENTITY options.general "常规">
+<!ENTITY options.advanced "高级">
+<!ENTITY options.contextMenu "右键菜单">
+<!ENTITY disableTicker "隐藏走马灯">
+<!ENTITY options.tickerPlacement "走马灯显示位置">
+<!ENTITY tickerPlacement.belowStatusBar "状态栏底下">
+<!ENTITY tickerPlacement.belowBMTB "书签栏底下">
+<!ENTITY options.random "随机显示走马灯上的项目">
+<!ENTITY options.hide "隐藏已读项目">
+<!ENTITY options.bold "未读项目设为粗体">
+<!ENTITY options.openInNewTab "永远在新标签页打开链接">
+<!ENTITY toggleTicker "显示 / 隐藏走马灯">
+<!ENTITY options.dw.limitWidth "限制走马灯上各个项目的宽度">
+<!ENTITY options.dw.isMaxWidth "设为最大宽度">
+<!ENTITY options.limitItemsPerFeed "限制每个 feed 所显示的项目个数">
+<!ENTITY options.itemsPerFeed "每个 feed 的项目数">
+<!ENTITY about "关于">
+<!ENTITY noFeedsFoundTitle "找不到即时书签">
+<!ENTITY noFeedsFound "RSS Ticker 找不到即时书签 (或称「newsfeed」、「RSS feed」)。">
+<!ENTITY howToSubscribe1 "RSS Ticker 加载并滚动来自你的活动书签的项目(a.k.a. newsfeeds 或 RSS feeds)，但你还没有订阅任何活动书签。需要帮助吗？订阅一个feed很容易：">
+<!ENTITY howToSubscribe2 "如果你正在访问的页面提供一个RSS feed（例如：www.mozilla.org），在地址栏的右边会出现一个桔色或蓝色的小图标，后面跟着书签的星级。如果你点击这个图标将出现’添加活动书签‘的对话框。">
+<!ENTITY howToSubscribe3 "点击现在订阅，RSS Ticker 将立刻开始滚动来自该feed的项目。">
+<!ENTITY closeNoFeedsPage "关闭该页">
+<!ENTITY dontShowAgain "不要再显示该信息。">
+<!ENTITY feedManagement "您可以隐藏或显示走马灯中的各个 feed。只需选择下列项目，再按下「显示」或「隐藏」钮即可。">
+<!ENTITY add "显示">
+<!ENTITY remove "隐藏">
+<!ENTITY URL "位址">
+<!ENTITY hideWhenEmpty "没有项目时隐藏走马灯">
+
+<!ENTITY trendsP2 "点击 确定 订阅；该feed将自动出现在ticker，保持该网站上你最后的新闻和喜好。Click OK to subscribe; the feed will automatically appear in the ticker, keeping you up-to-date on the latest news and trends from around the Web.">
+
+<!ENTITY faster "较快">
+<!ENTITY slower "较慢">
+
+<!ENTITY smoother "流畅 (消耗较多 CPU)">
+<!ENTITY choppier "微卡 (消耗较少 CPU)">
+
+<!ENTITY rssticker.featured.subscribe "订阅">
+<!ENTITY rssticker.featured.panelTitle "特色 Feeds">
+<!ENTITY rssticker.featured.trends.title "偏好的 News">
