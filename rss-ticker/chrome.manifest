@@ -3,10 +3,10 @@ resource   rss-ticker-modules             modules/
 
 content rss-ticker-default-locale chrome/locale/en-US/
 
-locale     rss-ticker     en-US            chrome/locale/en-US/
 locale     rss-ticker     da               chrome/locale/da/
 locale     rss-ticker     da-DK            chrome/locale/da-DK/
 locale     rss-ticker     de               chrome/locale/de/
+locale     rss-ticker     en-US            chrome/locale/en-US/
 locale     rss-ticker     es-ES            chrome/locale/es-ES/
 locale     rss-ticker     fi-FI            chrome/locale/fi-FI/
 locale     rss-ticker     fr               chrome/locale/fr/
