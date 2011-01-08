@@ -102,9 +102,11 @@
 				<description id="RSSTICKERTooltipSummary"></description>
 			</groupbox>
 		</tooltip>
+		<!--
 		<tooltip id="RSSTICKERLoadingNoticeTooltip" noautohide="true" orient="vertical">
 			<description id="RSSTICKERLoadingNoticeText"></description>
 		</tooltip>
+		-->
 	</popupset>
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="RSSTICKER-button" contextmenu="RSSTICKERButtonCM" tooltiptext="&toggleTicker;" class="toolbarbutton-1" label="&extension.title;" oncommand="RSSTICKER.toggleDisabled();" />

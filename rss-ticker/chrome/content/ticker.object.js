@@ -152,7 +152,7 @@ var RSSTICKER = {
 	DEBUG : false,
 	
 	// Button on the toolbar that shows status messages when the feeds are loading
-	loadingNotice : null,
+	// loadingNotice : null,
 	
 	// Current width of the first feed item (the one that is being shrunk)
 	currentFirstItemMargin : 0,
@@ -199,6 +199,7 @@ var RSSTICKER = {
 	
 		RSSTICKER.ticker.appendChild(RSSTICKER.toolbar);
 		
+		/*
 		RSSTICKER.loadingNoticeParent = document.createElement('toolbaritem');
 		RSSTICKER.loadingNoticeParent.setAttribute("tooltip","RSSTICKERLoadingNoticeTooltip");
 		RSSTICKER.loadingNoticeParent.id = "RSSTICKER-throbber-box";
@@ -212,12 +213,13 @@ var RSSTICKER = {
 		RSSTICKER.loadingNotice.setAttribute("busy","false");
 		RSSTICKER.loadingNotice.style.marginRight = '4px';
 		RSSTICKER.loadingNoticeParent.appendChild(RSSTICKER.loadingNotice);
-	
+		
 		try {
 			document.getElementById("nav-bar").appendChild(RSSTICKER.loadingNoticeParent);
 		} catch (e) {
 			if (RSSTICKER.DEBUG) RSSTICKER.logMessage(e);
 		}
+		*/
 		
 		if (RSSTICKER.prefs.getBoolPref("disabled")){
 			RSSTICKER.disable();
@@ -558,8 +560,9 @@ var RSSTICKER = {
 		RSSTICKER.stopFetchingFeeds();
 	},
 	
-	loadingNoticeTimeout : null,
+	// loadingNoticeTimeout : null,
 	
+	/*
 	addLoadingNotice : function (message) {
 		clearTimeout(RSSTICKER.loadingNoticeTimeout);
 		
@@ -582,6 +585,7 @@ var RSSTICKER = {
 		
 		RSSTICKER.loadingNoticeTimeout = setTimeout(function () { RSSTICKER.addLoadingNotice(); }, 5000);
 	},
+	*/
 	
 	loadPrefs : function () {
 		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Loading prefs.");
@@ -985,7 +989,7 @@ var RSSTICKER = {
 		
 		var req = new XMLHttpRequest();
 		req.parent = this;
-		req.parent.addLoadingNotice("Updating " + feed.name + " (" + parseInt(feedIndex + 1, 10) + ")...");
+		// req.parent.addLoadingNotice("Updating " + feed.name + " (" + parseInt(feedIndex + 1, 10) + ")...");
 	
 		RSSTICKER.currentRequest = req;
 		
