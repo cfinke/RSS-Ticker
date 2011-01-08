@@ -1036,7 +1036,7 @@ var RSSTICKER = {
 									
 									var encoding_matches = data.match(/<?xml[^>]+encoding="([^"]+)"/i);
 									
-									if (encoding_matches.length > 0) {
+									if (encoding_matches) {
 										var converter = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
 										converter.charset = encoding_matches[1];
 										data = converter.ConvertToUnicode(data);
@@ -1046,6 +1046,7 @@ var RSSTICKER = {
 								}
 							} catch (e) {
 								// Parse error
+								RSSTICKER.logMessage(e);
 							}
 						}
 						else {
