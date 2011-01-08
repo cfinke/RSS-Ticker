@@ -369,13 +369,14 @@ var RSSTICKER = {
 	},
 	
 	showFirstRun : function () {
-		return;
-		
 		function isMajorUpdate(version1, version2) {
 			if (!version1) {
 				return true;
 			}
 			else {
+				// Not showing firstrun on updates for now.
+				return false;
+				
 				var oldParts = version1.split(".");
 				var newParts = version2.split(".");
 		
