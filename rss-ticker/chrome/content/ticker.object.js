@@ -1609,7 +1609,6 @@ var RSSTICKER = {
 
 						marginLeft = parseInt((0 - nodeWidth) + RSSTICKER.currentFirstItemMargin);
 
-						RSSTICKER.logMessage("Setting to " + marginLeft);
 						node.style.marginLeft = marginLeft + "px";
 						RSSTICKER.currentFirstItemMargin = marginLeft;
 
