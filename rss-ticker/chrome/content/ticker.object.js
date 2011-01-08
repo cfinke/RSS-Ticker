@@ -205,7 +205,7 @@ var RSSTICKER = {
 		RSSTICKER.loadingNoticeParent.setAttribute("title","RSS Ticker Activity Indicator");
 		RSSTICKER.loadingNoticeParent.setAttribute("align","center");
 		RSSTICKER.loadingNoticeParent.setAttribute("pack","center");
-	
+		
 		RSSTICKER.loadingNotice = document.createElement('image');
 		RSSTICKER.loadingNotice.setAttribute("src","chrome://rss-ticker/content/skin-common/throbber.gif");
 		RSSTICKER.loadingNotice.id = "RSSTICKER-throbber";
@@ -241,6 +241,83 @@ var RSSTICKER = {
 			);
 		}
 		*/
+		
+		if (!RSSTICKER.prefs.getBoolPref("subscribeIconCheck")) {
+			RSSTICKER.prefs.setBoolPref("subscribeIconCheck", true);
+			
+			RSSTICKER.addToolbarButton("feed-button");
+		}
+	},
+	
+	addToolbarButton : function (buttonId) {
+		// Add the subscribe toolbar button, as Firefox 4 removes it.
+
+		if (!document.getElementById(buttonId)){
+			// Determine which toolbar to place the icon onto
+			if (document.getElementById("nav-bar").getAttribute("collapsed") != "true"){
+				var toolbar = document.getElementById("nav-bar");
+			}
+			else {
+				var toolbar = document.getElementById("toolbar-menubar");
+			}
+
+			var currentSet = toolbar.currentSet;
+			var newSet = currentSet;
+			var setItems = currentSet.split(',');
+
+			var toolbox = document.getElementById("navigator-toolbox");
+			var toolboxDocument = toolbox.ownerDocument;
+
+			function getIndex(array, val){
+				for (var i = 0; i < array.length; i++){
+					if (array[i] == val) {
+						return i;
+					}
+				}
+
+				return -1;
+			}
+
+			// Order of adding:
+				// before urlbar-container
+				// after home-button
+				// after reload-button
+				// after stop-button
+				// after forward-button
+				// before search-container
+				// at the end
+
+			if (getIndex(setItems, "urlbar-container") != -1){
+				newSet = currentSet.replace("urlbar-container","urlbar-container,"+buttonId);
+			}
+			else if (getIndex(setItems, "search-container") != -1){
+				newSet = currentSet.replace("search-container",buttonId+",search-container");
+			}
+			else if (getIndex(setItems, "home-button") != -1){
+				newSet = currentSet.replace("home-button","home-button,"+buttonId);
+			}
+			else if (getIndex(setItems, "reload-button") != -1){
+				newSet = currentSet.replace("reload-button","reload-button,"+buttonId);
+			}
+			else if (getIndex(setItems, "stop-button") != -1){
+				newSet = currentSet.replace("stop-button","stop-button,"+buttonId);
+			}
+			else if (getIndex(setItems, "forward-button") != -1){
+				newSet = currentSet.replace("forward-button","forward-button,"+buttonId);
+			}
+			else {
+				newSet = toolbar.currentSet + ","+buttonId;
+			}
+
+			toolbar.currentSet = newSet;
+			toolbar.setAttribute("currentset",newSet);
+
+			toolboxDocument.persist(toolbar.id, "currentset");
+
+			try {
+				BrowserToolboxCustomizeDone(true);
+			} catch (e) { }
+		}
 	},
 	
 	openTrendsSubscriptionDialog : function () {
@@ -662,7 +739,7 @@ var RSSTICKER = {
 	showTrendSuggestionInTicker : function () {
 		if (!RSSTICKER.prefs.getBoolPref("trendingNews")) {
 			if (!RSSTICKER.prefs.getBoolPref("trendRequest")) {
-				if ((new Date().getTime()) - RSSTICKER.prefs.getCharPref("lastTrendRequest") > (1000 * 60 * 60 * 24 * 7)) {
+				if ((new Date().getTime()) - RSSTICKER.prefs.getCharPref("lastTrendRequest") > (1000 * 60 * 60 * 24 * 7 * 10)) {
 					if (!document.getElementById("RSSTICKER-trends-subscribe")){
 						RSSTICKER.internalPause = true;
 			

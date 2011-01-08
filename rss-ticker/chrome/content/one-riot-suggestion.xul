@@ -12,6 +12,8 @@
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     buttons="accept,cancel"
     ondialogaccept="return subscribeToFeed();"
+	onload="opener.RSSTICKER.prefs.setBoolPref('trendRequest', true);"
+
 	ondialogcancel="return cancelSearchProvider();"> 
 	
     <script type="application/x-javascript">
