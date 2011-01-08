@@ -45,6 +45,7 @@
 <!ENTITY options.hide "Hide items you've already read.">
 <!ENTITY options.bold "Bold items you haven't read.">
 <!ENTITY options.openInNewTab "Always open links in new tabs.">
+<!ENTITY options.reverseDirection "Reverse ticker direction">
 <!ENTITY toggleTicker "Toggle ticker on/off">
 <!ENTITY options.dw.limitWidth "Limit the width of the items in the ticker">
 <!ENTITY options.dw.isMaxWidth "Use only as a maximum width">

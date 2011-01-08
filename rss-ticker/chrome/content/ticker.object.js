@@ -159,6 +159,8 @@ var RSSTICKER = {
 	
 	tickLength : 0,
 	
+	rtl : false,
+	
 	onload : function () {
 		RSSTICKER.loadPrefs();
 		
@@ -169,6 +171,8 @@ var RSSTICKER = {
 		}
 		
 		RSSTICKER.customizeContextMenus();
+		
+		RSSTICKER.rtl = RSSTICKER.prefs.getBoolPref("rtl");
 		
 		RSSTICKER.ticker = document.createElement('toolbar');
 		RSSTICKER.ticker.setAttribute("id", "RSSTICKERToolbar");
@@ -499,6 +503,9 @@ var RSSTICKER = {
 				}
 				
 				RSSTICKER.removeTrendsSubscriptionItem();
+			break;
+			case "rtl":
+				RSSTICKER.rtl = RSSTICKER.prefs.getBoolPref("rtl");
 			break;
 		}
 		
@@ -1592,24 +1599,63 @@ var RSSTICKER = {
 		else {
 			var node, nodeWidth, marginLeft;
 			
-			if (RSSTICKER.mouseOverFlag){
-				if (RSSTICKER.toolbar.childNodes.length > 1){
-					if (RSSTICKER.currentFirstItemMargin <= (RSSTICKER.toolbar.firstChild.boxObject.width * -1)){
-						node = RSSTICKER.toolbar.firstChild;
+			if (RSSTICKER.toolbar.childNodes.length > 1){
+				if (RSSTICKER.rtl) {
+					if (RSSTICKER.currentFirstItemMargin >= 0) {
+						node = RSSTICKER.toolbar.lastChild;
+						nodeWidth = node.boxObject.width;
+
 						RSSTICKER.toolbar.removeChild(node);
-						
-						// Add an item to the end of the ticker.
-						
-						RSSTICKER.currentFirstItemMargin = 0;
-						node.style.marginLeft = '0px';
-						RSSTICKER.toolbar.appendChild(node);
-						
+
+						marginLeft = parseInt((0 - nodeWidth) + RSSTICKER.currentFirstItemMargin);
+
+						RSSTICKER.logMessage("Setting to " + marginLeft);
+						node.style.marginLeft = marginLeft + "px";
+						RSSTICKER.currentFirstItemMargin = marginLeft;
+
+						RSSTICKER.toolbar.firstChild.marginLeft = "0px";
+						RSSTICKER.toolbar.insertBefore(node, RSSTICKER.toolbar.firstChild);
+
 						if (node.nodeName == 'toolbarbutton' && (node.getAttribute("visited") == "false")) {
-							if (RSSTICKER.history.isVisitedURL(node.uri, node.guid, 2)){
+							if (RSSTICKER.history.isVisitedURL(node.uri, node.guid, 3)){
 								RSSTICKER.markAsRead(node);
 							}
 						}
-						else if (node.nodeName == 'spacer') {
+						else if (RSSTICKER.mouseOverFlag && node.nodeName == 'spacer') {
+							RSSTICKER.adjustSpacerWidth();
+						}
+					}
+					else if (RSSTICKER.currentFirstItemMargin < (RSSTICKER.toolbar.firstChild.boxObject.width * -1)) {
+						var difference = RSSTICKER.currentFirstItemMargin - (RSSTICKER.toolbar.firstChild.boxObject.width * -1);
+
+						// Move the first child to the end
+						node = RSSTICKER.toolbar.firstChild;
+						RSSTICKER.toolbar.removeChild(node);
+
+						node.style.marginLeft = "0px";
+						RSSTICKER.toolbar.appendChild(node);
+						RSSTICKER.currentFirstItemMargin = difference;
+						RSSTICKER.toolbar.firstChild.style.marginLeft = difference + "px";
+					}
+					else if (!RSSTICKER.mouseOverFlag) {
+						RSSTICKER.currentFirstItemMargin += (200 / RSSTICKER.ticksPerItem);
+						RSSTICKER.toolbar.firstChild.style.marginLeft = RSSTICKER.currentFirstItemMargin + "px";
+					}
+				}
+				else {
+					if (RSSTICKER.currentFirstItemMargin <= (RSSTICKER.toolbar.firstChild.boxObject.width * -1)){
+						node = RSSTICKER.toolbar.firstChild;
+						RSSTICKER.toolbar.removeChild(node);
+						RSSTICKER.currentFirstItemMargin = 0;
+						node.style.marginLeft = '0px';
+						RSSTICKER.toolbar.appendChild(node);
+					
+						if (node.nodeName == 'toolbarbutton' && (node.getAttribute("visited") == "false")) {
+							if (RSSTICKER.history.isVisitedURL(node.uri, node.guid, 3)){
+								RSSTICKER.markAsRead(node);
+							}
+						}
+						else if (RSSTICKER.mouseOverFlag) {
 							RSSTICKER.adjustSpacerWidth();
 						}
 					}
@@ -1618,41 +1664,8 @@ var RSSTICKER = {
 						node = RSSTICKER.toolbar.lastChild;
 						nodeWidth = node.boxObject.width;
 						RSSTICKER.toolbar.removeChild(node);
-						
+					
 						// Set the correct margins
-						marginLeft = parseInt((0 - nodeWidth) + RSSTICKER.currentFirstItemMargin);
-						
-						node.style.marginLeft = marginLeft + "px";
-						RSSTICKER.currentFirstItemMargin = marginLeft;
-						RSSTICKER.toolbar.firstChild.style.marginLeft = 0;
-						RSSTICKER.toolbar.insertBefore(node, RSSTICKER.toolbar.firstChild);
-					}
-				}
-				
-				RSSTICKER.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, RSSTICKER.tickLength);
-			}
-			else {
-				if (RSSTICKER.toolbar.childNodes.length > 1){
-					if (RSSTICKER.currentFirstItemMargin <= (RSSTICKER.toolbar.firstChild.boxObject.width * -1)){
-						node = RSSTICKER.toolbar.firstChild;
-						RSSTICKER.toolbar.removeChild(node);
-						RSSTICKER.currentFirstItemMargin = 0;
-						node.style.marginLeft = '0px';
-						RSSTICKER.toolbar.appendChild(node);
-						
-						if (node.nodeName == 'toolbarbutton' && (node.getAttribute("visited") == "false")) {
-							if (RSSTICKER.history.isVisitedURL(node.uri, node.guid, 3)){
-								RSSTICKER.markAsRead(node);
-							}
-						}
-					}
-					else if (RSSTICKER.currentFirstItemMargin > 0){
-						// Move the last child back to the front.
-						node = RSSTICKER.toolbar.lastChild;
-						RSSTICKER.toolbar.removeChild(node);
-						
-						// Set the correct margins
-						nodeWidth = node.boxObject.width;
 						marginLeft = parseInt((0 - nodeWidth) + RSSTICKER.currentFirstItemMargin);
 
 						node.style.marginLeft = marginLeft + "px";
@@ -1660,14 +1673,14 @@ var RSSTICKER = {
 						RSSTICKER.toolbar.firstChild.style.marginLeft = 0;
 						RSSTICKER.toolbar.insertBefore(node, RSSTICKER.toolbar.firstChild);
 					}
-					else {
+					else if (!RSSTICKER.mouseOverFlag) {
 						RSSTICKER.currentFirstItemMargin -= (200 / RSSTICKER.ticksPerItem);
 						RSSTICKER.toolbar.firstChild.style.marginLeft = RSSTICKER.currentFirstItemMargin + "px";
 					}
 				}
-				
-				RSSTICKER.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, RSSTICKER.tickLength);
 			}
+			
+			RSSTICKER.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, RSSTICKER.tickLength);
 		}
 	},
 	
@@ -1710,14 +1723,41 @@ var RSSTICKER = {
 				if (event.detail > 0){
 					// Scroll Down
 					if (RSSTICKER.toolbar.firstChild){
-						RSSTICKER.currentFirstItemMargin -= 40;
+						if (RSSTICKER.rtl) {
+							RSSTICKER.currentFirstItemMargin += 40;
+						}
+						else {
+							RSSTICKER.currentFirstItemMargin -= 40;
+						}
+						
 						RSSTICKER.toolbar.firstChild.style.marginLeft = RSSTICKER.currentFirstItemMargin + "px";
+						
+						if (RSSTICKER.currentFirstItemMargin > 0){
+							// Move the last child back to the front.
+							var node = RSSTICKER.toolbar.lastChild;
+							var nodeWidth = node.boxObject.width;
+							RSSTICKER.toolbar.removeChild(node);
+							
+							// Set the correct margins
+							var marginLeft = (0 - nodeWidth) + RSSTICKER.currentFirstItemMargin;
+							
+							node.style.marginLeft = marginLeft + "px";
+							RSSTICKER.currentFirstItemMargin = marginLeft;
+							RSSTICKER.toolbar.firstChild.style.marginLeft = 0;
+							RSSTICKER.toolbar.insertBefore(node, RSSTICKER.toolbar.firstChild);
+						}
 					}
 				}
 				else if (event.detail < 0){
 					// Scroll Up
 					if (RSSTICKER.toolbar.firstChild){
-						RSSTICKER.currentFirstItemMargin += 40;
+						if (RSSTICKER.rtl) {
+							RSSTICKER.currentFirstItemMargin -= 40;
+						}
+						else {
+							RSSTICKER.currentFirstItemMargin += 40;
+						}
+
 						RSSTICKER.toolbar.firstChild.style.marginLeft = RSSTICKER.currentFirstItemMargin + "px";
 						
 						if (RSSTICKER.currentFirstItemMargin > 0){
@@ -2114,7 +2154,14 @@ var RSSTICKER = {
 		if (RSSTICKER.toolbar) {
 			if ((RSSTICKER.toolbar.childNodes.length <= 1) && (RSSTICKER.hideWhenEmpty)){
 				RSSTICKER.ticker.style.display = 'none';
-				RSSTICKER.toolbar.firstChild.style.marginLeft = '0px';
+				
+				if (RSSTICKER.rtl) {
+					RSSTICKER.toolbar.lastChild.style.marginRight = '0px';
+				}
+				else {
+					RSSTICKER.toolbar.firstChild.style.marginLeft = '0px';
+				}
+				
 				RSSTICKER.currentFirstItemMargin = 0;
 				RSSTICKER.mouseOverFlag = false;
 			}

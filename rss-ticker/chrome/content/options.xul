@@ -75,6 +75,7 @@
 			<preference id="p_dw_isMaxWidth" name="extensions.rssticker.dw.isMaxWidth" type="bool" />
 			<preference id="p_dw_itemWidth" name="extensions.rssticker.dw.itemWidth" type="int" />
 			<preference id="p_ticksPerItem" name="extensions.rssticker.ticksPerItem" type="int" />
+			<preference id="p_direction" name="extensions.rssticker.rtl" type="bool" />
 		</preferences>
 		<vbox>
 			<groupbox>
@@ -114,7 +115,9 @@
 					<label value="&pixelAbbrev;" />
 				</hbox>
 			</groupbox>
-			
+			<groupbox>
+				<checkbox preference="p_direction" label="&options.reverseDirection;" />
+			</groupbox>
 		</vbox>
 		<spacer style="height: 30px;" />
 	</prefpane>

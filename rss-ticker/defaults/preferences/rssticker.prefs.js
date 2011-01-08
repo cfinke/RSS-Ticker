@@ -46,3 +46,4 @@ pref("extensions.rssticker.featuredFeeds.notify", true);
 pref("extensions.rssticker.noFeedsFoundFlag.1.7", false);
 
 pref("extensions.rssticker.subscribeIconCheck", false);
+pref("extensions.rssticker.rtl", false);
