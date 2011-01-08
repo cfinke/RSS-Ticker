@@ -3,15 +3,15 @@
 <!ENTITY cm.open.key "A">
 <!ENTITY cm.openInNewWindow "Abrir en Nueva Ventana">
 <!ENTITY cm.openInNewWindow.key "N">
-<!ENTITY cm.openInNewTab "Abrir en Nueva Pesta&amp;#241;a">
+<!ENTITY cm.openInNewTab "Abrir en Nueva Pesta&#241;a">
 <!ENTITY cm.openInNewTab.key "P">
-<!ENTITY cm.openAllInTabs "Abrir Todas en Pesta&amp;#241;as">
-<!ENTITY cm.openUnreadInTabs "Abrir las no Le&amp;#237;das en Pesta&amp;#241;as">
-<!ENTITY cm.openFeedInTabs "Abrir Fuente en Pesta&amp;#241;as">
-<!ENTITY cm.openFeedUnreadInTabs "Abrir Fuente no Le&amp;#237;da en Pesta&amp;#241;as">
-<!ENTITY cm.copyLinkTitle "Copiar T&amp;#237;tulo del Enlace">
+<!ENTITY cm.openAllInTabs "Abrir Todas en Pesta&#241;as">
+<!ENTITY cm.openUnreadInTabs "Abrir las no Le&#237;das en Pesta&#241;as">
+<!ENTITY cm.openFeedInTabs "Abrir Fuente en Pesta&#241;as">
+<!ENTITY cm.openFeedUnreadInTabs "Abrir Fuente no Le&#237;da en Pesta&#241;as">
+<!ENTITY cm.copyLinkTitle "Copiar T&#237;tulo del Enlace">
 <!ENTITY cm.copyLinkTitle.key "T">
-<!ENTITY cm.copyLinkURL "Copiar Direcci&amp;#243;n del Enlace">
+<!ENTITY cm.copyLinkURL "Copiar Direcci&#243;n del Enlace">
 <!ENTITY cm.copyLinkURL.key "C">
 <!ENTITY cm.refreshFeeds "Actualizar Fuentes">
 <!ENTITY cm.refreshFeeds.key "R">
@@ -23,32 +23,32 @@
 <!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "Marcar Todo como Leido">
 <!ENTITY cm.markAllAsRead.key "L">
-<!ENTITY options.updateInterval "Frecuencia de Actualizaci&amp;#243;n">
+<!ENTITY options.updateInterval "Frecuencia de Actualizaci&#243;n">
 <!ENTITY options.speed "Velocidad del ticker">
 <!ENTITY options.dw.itemWidth "Ancho de noticias">
 <!ENTITY pixelAbbrev "px">
 <!ENTITY options.smooothness "Suavidad de movimiento del ticker">
-<!ENTITY cmOptionsDescription "Parametriza el men&amp;#250; contextual del lector marcando o no las opciones de abajo.">
+<!ENTITY cmOptionsDescription "Parametriza el men&#250; contextual del lector marcando o no las opciones de abajo.">
 <!ENTITY tt.summary "Sumario">
 <!ENTITY options "Opciones">
-<!ENTITY options.restartNotice "Las opciones marcadas con * no cambiar&amp;#225;n hasta que no vuelvas a abrir el navegador.">
+<!ENTITY options.restartNotice "Las opciones marcadas con * no cambiar&#225;n hasta que no vuelvas a abrir el navegador.">
 <!ENTITY options.general "General">
 <!ENTITY options.advanced "Avanzado">
-<!ENTITY options.contextMenu "Men&amp;#250; Contextual">
+<!ENTITY options.contextMenu "Men&#250; Contextual">
 <!ENTITY disableTicker "Deshabilitar ticker">
 <!ENTITY options.tickerPlacement "Lugar del Ticker">
 <!ENTITY tickerPlacement.belowStatusBar "Bajo la barra de estado">
 <!ENTITY tickerPlacement.belowBMTB "Bajo la barra de marcadores">
 <!ENTITY options.random "Noticias aleatorias">
-<!ENTITY options.hide "Ocultar noticias que ya han sido le&amp;#237;das">
-<!ENTITY options.bold "Noticias en negrita si no han sido le&amp;#237;das">
-<!ENTITY options.openInNewTab "Siempre abrir enlaces en nuevas pesta&amp;#241;as">
+<!ENTITY options.hide "Ocultar noticias que ya han sido le&#237;das">
+<!ENTITY options.bold "Noticias en negrita si no han sido le&#237;das">
+<!ENTITY options.openInNewTab "Siempre abrir enlaces en nuevas pesta&#241;as">
 <!ENTITY toggleTicker "Cambiar ticker a encendido/apagado">
-<!ENTITY options.dw.limitWidth "Fije un l&amp;#237;mite para la anchura de los art&amp;#237;culos en el ticker">
-<!ENTITY options.dw.isMaxWidth "Utilice solamente el l&amp;#237;mite cuando el art&amp;#237;culo es m&amp;#225;s largo que &amp;#233;l">
-<!ENTITY options.limitItemsPerFeed "Limita el n&amp;#250;mero de noticias por fuente">
+<!ENTITY options.dw.limitWidth "Fije un l&#237;mite para la anchura de los art&#237;culos en el ticker">
+<!ENTITY options.dw.isMaxWidth "Utilice solamente el l&#237;mite cuando el art&#237;culo es m&#225;s largo que &#233;l">
+<!ENTITY options.limitItemsPerFeed "Limita el n&#250;mero de noticias por fuente">
 <!ENTITY options.itemsPerFeed "Noticias por fuente">
 <!ENTITY about "Acerca de">
-<!ENTITY noFeedsFoundTitle "No se encuentran marcadores din&amp;#225;micos">
-<!ENTITY noFeedsFound "RSS Ticker no encuentra ning&amp;#250;n marcador din&amp;#225;mico (es decir fuente de noticias, o fuentes RSS).">
+<!ENTITY noFeedsFoundTitle "No se encuentran marcadores din&#225;micos">
+<!ENTITY noFeedsFound "RSS Ticker no encuentra ning&#250;n marcador din&#225;mico (es decir fuente de noticias, o fuentes RSS).">
 <!ENTITY dontShowAgain "No mostrar este mensaje de nuevo.">
