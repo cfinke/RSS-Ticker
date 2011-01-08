@@ -1016,7 +1016,8 @@ var RSSTICKER = {
 	
 		try {
 			req.open("GET", url, true);
-		
+			req.overrideMimeType('text/plain; charset=x-user-defined');
+			
 			req.onreadystatechange = function (event) {
 				if (req.readyState == 4) {
 					clearTimeout(req.parent.loadTimer);
@@ -1031,7 +1032,17 @@ var RSSTICKER = {
 									req.parent.parseTrendingNews(req.responseXML, url);
 								}
 								else {
-									req.parent.queueForParsing(req.responseText.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
+									var data = req.responseText;
+									
+									var encoding_matches = data.match(/<?xml[^>]+encoding="([^"]+)"/i);
+									
+									if (encoding_matches.length > 0) {
+										var converter = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
+										converter.charset = encoding_matches[1];
+										data = converter.ConvertToUnicode(data);
+									}
+									
+									req.parent.queueForParsing(data.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
 								}
 							} catch (e) {
 								// Parse error
@@ -1242,6 +1253,7 @@ var RSSTICKER = {
 	
 	queueForParsing : function (feedText, feedURL) {
 		var data = feedText;
+		
 		var uri = RSSTICKER.ioService.newURI(feedURL, null, null);
 
 		if (data.length) {
