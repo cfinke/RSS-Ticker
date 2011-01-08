@@ -1038,8 +1038,13 @@ var RSSTICKER = {
 									
 									if (encoding_matches) {
 										var converter = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
-										converter.charset = encoding_matches[1];
-										data = converter.ConvertToUnicode(data);
+										
+										try {
+											converter.charset = encoding_matches[1];
+											data = converter.ConvertToUnicode(data);
+										} catch (e) {
+											RSSTICKER.logMessage(e);
+										}
 									}
 									
 									req.parent.queueForParsing(data.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
