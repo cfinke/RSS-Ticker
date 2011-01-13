@@ -1035,17 +1035,19 @@ var RSSTICKER = {
 								else {
 									var data = req.responseText;
 									
-									var encoding_matches = data.match(/<?xml[^>]+encoding="([^"]+)"/i);
+									var encoding_matches = data.match(/<?xml[^>]+encoding=['"]([^"']+)["']/i);
 									
-									if (encoding_matches) {
-										var converter = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
-										
-										try {
-											converter.charset = encoding_matches[1];
-											data = converter.ConvertToUnicode(data);
-										} catch (e) {
-											RSSTICKER.logMessage(e);
-										}
+									if (!encoding_matches) {
+										encoding_matches = [null, "UTF-8"];
+									}
+									
+									var converter = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
+									
+									try {
+										converter.charset = encoding_matches[1];
+										data = converter.ConvertToUnicode(data);
+									} catch (e) {
+										RSSTICKER.logMessage(e);
 									}
 									
 									req.parent.queueForParsing(data.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
