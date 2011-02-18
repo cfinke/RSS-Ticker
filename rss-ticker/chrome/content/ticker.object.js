@@ -53,9 +53,6 @@ var RSSTICKER = {
 		}
 	},
 	
-	trendingNewsUrl : "http://api.ads.oneriot.com/search?appId=rssticker01&version=1.1&format=XML",
-	trendingNewsExpiration : 0,
-	
 	ignoreFilename : "rss-ticker.ignore.txt",
 	
 	profilePath : null,
@@ -235,19 +232,6 @@ var RSSTICKER = {
 		
 		RSSTICKER.showFirstRun();
 		
-		// Ask if they want the trending terms feed.
-		/*
-		if (!RSSTICKER.prefs.getBoolPref("trendRequest")) {
-			RSSTICKER.prefs.setBoolPref("trendRequest", true);
-			
-			setTimeout(
-				function () {
-					RSSTICKER.openTrendsSubscriptionDialog();
-				}, 5000
-			);
-		}
-		*/
-		
 		if (!RSSTICKER.prefs.getBoolPref("subscribeIconCheck")) {
 			RSSTICKER.prefs.setBoolPref("subscribeIconCheck", true);
 			
@@ -323,28 +307,6 @@ var RSSTICKER = {
 			try {
 				BrowserToolboxCustomizeDone(true);
 			} catch (e) { }
-		}
-	},
-	
-	openTrendsSubscriptionDialog : function () {
-		window.openDialog("chrome://rss-ticker/content/one-riot-suggestion.xul", "trends", "chrome,dialog,centerscreen,titlebar,alwaysraised");
-		
-		RSSTICKER.removeTrendsSubscriptionItem();
-	},
-	
-	removeTrendsSubscriptionItem : function () {
-		var tickerItem = document.getElementById("RSSTICKER-trends-subscribe");
-		
-		if (tickerItem) {
-			RSSTICKER.internalPause = true;
-			
-			tickerItem.parentNode.removeChild(tickerItem);
-			
-			RSSTICKER.internalPause = false;
-			
-			RSSTICKER.adjustSpacerWidth();
-			RSSTICKER.checkForEmptiness();
-			RSSTICKER.tick();
 		}
 	},
 	
@@ -494,16 +456,6 @@ var RSSTICKER = {
 			break;
 			case "updateToggle":
 				RSSTICKER.updateAllFeeds();
-			break;
-			case "trendingNews":
-				if (!RSSTICKER.prefs.getBoolPref("trendingNews")) {
-					RSSTICKER.removeTrendingFeed();
-				}
-				else {
-					RSSTICKER.addTrendingFeed();
-				}
-				
-				RSSTICKER.removeTrendsSubscriptionItem();
 			break;
 			case "rtl":
 				RSSTICKER.rtl = RSSTICKER.prefs.getBoolPref("rtl");
@@ -748,43 +700,6 @@ var RSSTICKER = {
 		}
 	},
 	
-	showTrendSuggestionInTicker : function () {
-		if (!RSSTICKER.prefs.getBoolPref("trendingNews")) {
-			if (!RSSTICKER.prefs.getBoolPref("trendRequest")) {
-				if ((new Date().getTime()) - RSSTICKER.prefs.getCharPref("lastTrendRequest") > (1000 * 60 * 60 * 24 * 7 * 10)) {
-					if (!document.getElementById("RSSTICKER-trends-subscribe")){
-						RSSTICKER.internalPause = true;
-			
-						var tbb = document.createElement('toolbarbutton');
-						tbb.uri = "chrome://rss-ticker/content/one-riot-suggestion.xul";
-						tbb.id = "RSSTICKER-trends-subscribe";
-						tbb.description = RSSTICKER.strings.getString("rssticker.trends.description");
-						tbb.feed = RSSTICKER.strings.getString("rssticker.specialItem.feedName");
-						tbb.feedURL = "rssticker";
-						tbb.href = "chrome://rss-ticker/content/one-riot-suggestion.xul";
-						tbb.displayHref = RSSTICKER.strings.getString("rssticker.specialItem.displayHref");
-						tbb.published = "";
-						tbb.guid = "RSSTICKER-trends-subscribe";
-			
-						tbb.setAttribute("label", RSSTICKER.strings.getString("rssticker.trends.label"));
-						tbb.setAttribute("tooltip", "RSSTICKERTooltip");
-						tbb.setAttribute("image", "chrome://rss-ticker/content/skin-common/thumbs-up.png");
-						tbb.setAttribute("onclick", "RSSTICKER.openTrendsSubscriptionDialog();");
-						tbb.setAttribute("visited", "false");
-			
-						RSSTICKER.toolbar.appendChild(tbb);
-			
-						RSSTICKER.internalPause = false;
-			
-						RSSTICKER.adjustSpacerWidth();
-						RSSTICKER.checkForEmptiness();
-						RSSTICKER.tick();
-					}
-				}
-			}
-		}
-	},
-	
 	openFeaturedFeeds : function () {
 		RSSTICKER.prefs.setBoolPref("featuredFeeds.new", false);
 		
@@ -819,7 +734,6 @@ var RSSTICKER = {
 	
 	startFetchingFeeds : function () {
 //		RSSTICKER.showFeaturedFeeds();
-		RSSTICKER.showTrendSuggestionInTicker();
 		
 		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Updating feeds " + new Date().toString());
 		
@@ -858,30 +772,11 @@ var RSSTICKER = {
 			
 			var feedURL = RSSTICKER.livemarkService.getFeedURI(livemarkId).spec;
 			
-			if (feedURL == "http://www.oneriot.com/rss/trendingtopics?&spid=86f2f5da-3b24-4a87-bbb3-1ad47525359d&p=rss-ticker&ssrc=ticker") {
-				// This is the old trending news feed. Use the new subscription method.
-				RSSTICKER.prefs.setBoolPref("trendingNews", true);
-				
-				var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
-				bookmarkService.removeFolder(livemarkId);
-			}
-			else {
-				var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkId);
-			
-				if (!RSSTICKER.inArray(ignore, feedURL)){
-					RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
-				}
-			}
-		}
+			var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkId);
 		
-		if (RSSTICKER.prefs.getBoolPref("trendingNews")) {
-			RSSTICKER.feedsToFetch.unshift(
-				{
-					"name" : "Trending News",
-					"feed" : RSSTICKER.trendingNewsUrl,
-					"livemarkId" : -1
-				}
-			);
+			if (!RSSTICKER.inArray(ignore, feedURL)){
+				RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
+			}
 		}
 		
 		if (RSSTICKER.feedsToFetch.length == 0) {
@@ -1001,18 +896,6 @@ var RSSTICKER = {
 	
 		RSSTICKER.currentRequest = req;
 		
-		if (url == RSSTICKER.trendingNewsUrl) {
-			if (RSSTICKER.trendingNewsExpiration > (new Date()).getTime()) {
-				RSSTICKER.checkForEmptiness();
-				RSSTICKER.tick();
-				setTimeoutForNext();
-			
-				return;
-			}
-			
-			req.overrideMimeType("text/xml");
-		}
-		
 		/* START FEED FETCH HERE */
 	
 		try {
@@ -1029,29 +912,24 @@ var RSSTICKER = {
 					try {
 						if (req.status == 200){
 							try {
-								if (url == RSSTICKER.trendingNewsUrl) {
-									req.parent.parseTrendingNews(req.responseXML, url);
+								var data = req.responseText;
+								
+								var encoding_matches = data.match(/<?xml[^>]+encoding=['"]([^"']+)["']/i); //"
+								
+								if (!encoding_matches) {
+									encoding_matches = [null, "UTF-8"];
 								}
-								else {
-									var data = req.responseText;
-									
-									var encoding_matches = data.match(/<?xml[^>]+encoding=['"]([^"']+)["']/i);
-									
-									if (!encoding_matches) {
-										encoding_matches = [null, "UTF-8"];
-									}
-									
-									var converter = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
-									
-									try {
-										converter.charset = encoding_matches[1];
-										data = converter.ConvertToUnicode(data);
-									} catch (e) {
-										RSSTICKER.logMessage(e);
-									}
-									
-									req.parent.queueForParsing(data.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
+								
+								var converter = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
+								
+								try {
+									converter.charset = encoding_matches[1];
+									data = converter.ConvertToUnicode(data);
+								} catch (e) {
+									RSSTICKER.logMessage(e);
 								}
+								
+								req.parent.queueForParsing(data.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
 							} catch (e) {
 								// Parse error
 								RSSTICKER.logMessage(e);
@@ -1075,109 +953,6 @@ var RSSTICKER = {
 		RSSTICKER.checkForEmptiness();
 		RSSTICKER.tick();
     },
-
-	parseTrendingNews : function (xml, url) {
-		// Cache for an hour.
-		var cache = 60;// xml.getElementsByTagName("max-age")[0].textContent;
-		RSSTICKER.trendingNewsExpiration = (new Date()).getTime() + (cache * 60 * 1000);
-		
-		var listener = new TickerParseListener();
-		
-		var result = {
-			bozo : false,
-			
-			doc : {
-				QueryInterface : function () { },
-				
-				link : {
-					resolve : function () {
-						return "http://www.oneriot.com/";
-					}
-				},
-				
-				title : {
-					plainText : function () {
-						return "Trending News";
-					}
-				},
-				
-				summary : {
-					text : "Trending news courtesy of RSS Ticker"
-				},
-				
-				items : {
-					get length() { return this._items.length; },
-					
-					queryElementAt : function (index) {
-						return this._items[index];
-					},
-					
-					_items : []
-				}
-			},
-			
-			uri : {
-				_uri : url,
-				
-				resolve : function () {
-					return this._uri;
-				}
-			}
-		};
-		
-		var items = xml.getElementsByTagName("featured-result");
-		var updated = new Date();
-		updated.setTime( xml.getElementsByTagName("time")[0].textContent * 1000);
-		
-		var len = items.length;
-		
-		for (var i = 0; i < len; i++) {
-			var item_i = items[i];
-			
-			var itemUrl = item_i.getElementsByTagName("redirect-url")[0].textContent;
-			
-			var item = {
-				id : "http://" + item_i.getElementsByTagName("display-url")[0].textContent,
-				
-				uri : itemUrl,
-				
-				displayUri : item_i.getElementsByTagName("display-url")[0].textContent,
-				trackingUri : item_i.getElementsByTagName("tracking-url")[0].textContent,
-				
-				link : {
-					_link : item_i.getElementsByTagName("redirect-url")[0].textContent,
-				
-					resolve : function () {
-						return this._link;
-					}
-				},
-				
-				updated : updated,
-				
-				title : {
-					_title : item_i.getElementsByTagName("title")[0].textContent,
-				
-					plainText : function () {
-						return this._title.replace(/<[^>]+>/g, "");
-					}
-				},
-			
-				summary : {
-					_summary : item_i.getElementsByTagName("snippet")[0].textContent,
-				
-					get text() {
-						return this._summary.replace(/<[^>]+>/g, "");
-					} 
-				},
-			
-				image : "chrome://rss-ticker/content/skin-common/feed-icon-16.png"//item_i.getElementsByTagName("source-logo")[0].getElementsByTagName("url")[0].textContent
-			};
-			
-			result.doc.items._items.push(item);
-		}
-		
-		listener.handleResult(result);
-	},
 	
 	removeFeed : function (livemarkId) {
 		var len = RSSTICKER.feedsToFetch.length;
@@ -1206,36 +981,6 @@ var RSSTICKER = {
 		return false;
 	},
 	
-	addTrendingFeed : function () {
-		RSSTICKER.feedsToFetch.unshift(
-			{
-				"name": "Trending News",
-				"feed" : RSSTICKER.trendingNewsUrl,
-				"livemarkId": -1
-			}
-		);
-		
-		RSSTICKER.updateAFeed(0);
-		
-		
-	},
-	
-	removeTrendingFeed : function () {
-		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
-			var item = RSSTICKER.toolbar.childNodes[i];
-			
-			if (item.nodeName == 'toolbarbutton') {
-				if (item.feedURL == RSSTICKER.trendingNewsUrl) {
-					RSSTICKER.toolbar.removeChild(item);
-				}
-			}
-		}
-		
-		RSSTICKER.feedsToFetch.shift();
-		
-		RSSTICKER.trendingNewsExpiration = 0;
-	},
-
 	updateSingleFeed : function (livemarkId) {
 		var feedURL = RSSTICKER.livemarkService.getFeedURI(livemarkId).spec;
 		var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkId);
@@ -1945,19 +1690,14 @@ var RSSTICKER = {
 		},
 		
 		addToHistory : function (guid) {
-			if (guid == "RSSTICKER-trends-subscribe") {
-				RSSTICKER.prefs.setCharPref("lastTrendRequest", (new Date().getTime()));
-			}
-			else {
-				var db = RSSTICKER.getDB();
-			
-				// Add to DB
-				var insert = db.createStatement("INSERT INTO history (id, date) VALUES (?1, ?2)");
-				insert.bindUTF8StringParameter(0, guid);
-				insert.bindInt64Parameter(1, (new Date().getTime()));
-			
-				try { insert.execute(); } catch (alreadyExists) { }
-			}
+			var db = RSSTICKER.getDB();
+		
+			// Add to DB
+			var insert = db.createStatement("INSERT INTO history (id, date) VALUES (?1, ?2)");
+			insert.bindUTF8StringParameter(0, guid);
+			insert.bindInt64Parameter(1, (new Date().getTime()));
+		
+			try { insert.execute(); } catch (alreadyExists) { }
 		},
 	},
 	

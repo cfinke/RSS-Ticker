@@ -95,10 +95,6 @@ var TICKER_PREFS = {
 		TICKER_PREFS.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker.");
 		TICKER_PREFS.browserPrefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("browser.preferences.");
 		
-		if (this.prefs.getBoolPref("trendingNews")) {
-			document.getElementById("trending-news-button").setAttribute('label', TICKER_PREFS.strings.getString("rssticker.featured.unsubscribe"));
-		}
-		
 		TICKER_PREFS.scales();
 		
 		var featuredFeeds = TICKER_PREFS.prefs.getCharPref("featuredFeeds");

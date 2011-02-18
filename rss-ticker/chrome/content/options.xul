@@ -219,20 +219,6 @@
 			<description style="font-size: 8pt;">&rssticker.featured.contact;</description>
 			<checkbox preference="p_featured" label="&rssticker.featured.notifyMe;" />
 			<vbox id="featured-feeds" style="min-height: 400px;">
-				<groupbox>
-					<hbox>
-						<vbox>
-							<spring flex="1" />
-							<image src="chrome://rss-ticker/content/skin-common/feed-icon-64.png" style="width: 64px; height: 64px; margin-right: 10px;" />
-							<spring flex="1" />
-						</vbox>
-						<vbox flex="1">
-							<label class="text-link" style="padding-left: 0; margin-left: 0;" value="&rssticker.featured.trends.title;" />
-							<description>&rssticker.featured.trends.description;</description>
-							<button id="trending-news-button" oncommand="TICKER_PREFS.prefs.setBoolPref('trendingNews', !TICKER_PREFS.prefs.getBoolPref('trendingNews')); if (TICKER_PREFS.prefs.getBoolPref('trendingNews')) { this.setAttribute('label', TICKER_PREFS.strings.getString('rssticker.featured.unsubscribe')); } else { this.setAttribute('label', TICKER_PREFS.strings.getString('rssticker.featured.subscribe')); }" label="&rssticker.featured.subscribe;" />
-						</vbox>
-					</hbox>
-				</groupbox>
 			</vbox>
 		</vbox>
 	</prefpane>

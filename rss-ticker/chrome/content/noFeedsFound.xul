@@ -10,7 +10,7 @@
 <window
 	title="&extension.title; - &noFeedsFoundTitle;"
 	orient="vertical"
-	onload="dontShowMsgAgain(); checkTrendingNewsSubscription();"
+	onload="dontShowMsgAgain();"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script type="application/x-javascript">
 		<![CDATA[
@@ -19,23 +19,6 @@
 		
 		function dontShowMsgAgain(){
 			prefs.setBoolPref("noFeedsFoundFlag.1.7", document.getElementById("showWarningNextTime").checked);
-		}
-		
-		function checkTrendingNewsSubscription() {
-			if (prefs.getBoolPref("trendingNews")) {
-				var items = document.getElementsByClassName("trending-news");
-				
-				for (var i = 0; i < items.length; i++) {
-					items[i].style.display = 'none';
-				}
-			}
-		}
-		
-		function subscribeToTrendingNews() {
-			var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker.");
-			prefs.setBoolPref("trendingNews", true);
-			
-			window.close();
 		}
 		
 		]]>
@@ -47,12 +30,10 @@
 			<vbox id="warningInnerBox" flex="1">
 				<label id="warningTitle">&noFeedsFound;</label>
 				<label id="warningText">&howToSubscribe1;</label>
-				<label id="warningText" class="trending-news">&howToSubscribe1a;</label>
 				<label id="warningText">&howToSubscribe2;</label>
 				<label id="warningText">&howToSubscribe3;</label>
 				<checkbox id="showWarningNextTime" label="&dontShowAgain;" checked="true" oncommand="dontShowMsgAgain();" />
 				<hbox pack="center">
-					<button id="warningButton" oncommand="subscribeToTrendingNews();" label="&rssticker.trendingNews.subscribe;" class="trending-news"/>
 					<button id="warningButton" oncommand="window.close();" label="&closeNoFeedsPage;"/>
 				</hbox>
 			</vbox>
