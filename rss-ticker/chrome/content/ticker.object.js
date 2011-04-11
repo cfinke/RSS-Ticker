@@ -787,45 +787,44 @@ var RSSTICKER = {
 			req.open("GET", url, true);
 			req.overrideMimeType('text/plain; charset=x-user-defined');
 			
-			req.onreadystatechange = function (event) {
-				if (req.readyState == 4) {
-					RSSTICKER.clearTimeout(RSSTICKER.loadTimer);
+			req.onload = function () {
+				RSSTICKER.clearTimeout(RSSTICKER.loadTimer);
+			
+				RSSTICKER.currentRequest = null;
+				setTimeoutForNext();
 				
-					RSSTICKER.currentRequest = null;
-					setTimeoutForNext();
-					
+				if (req.status == 200){
 					try {
-						if (req.status == 200){
-							try {
-								var data = req.responseText;
-								
-								var encoding_matches = data.match(/<?xml[^>]+encoding=['"]([^"']+)["']/i); //"
-								
-								if (!encoding_matches) {
-									encoding_matches = [null, "UTF-8"];
-								}
-								
-								var converter = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
-								
-								try {
-									converter.charset = encoding_matches[1];
-									data = converter.ConvertToUnicode(data);
-								} catch (e) {
-									RSSTICKER_UTIL.log(e);
-								}
-								
-								RSSTICKER.queueForParsing(data.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
-							} catch (e) {
-								// Parse error
-								RSSTICKER_UTIL.log(e);
-							}
+						var data = req.responseText;
+						
+						var encoding_matches = data.match(/<?xml[^>]+encoding=['"]([^"']+)["']/i); //"
+						
+						if (!encoding_matches) {
+							encoding_matches = [null, "UTF-8"];
 						}
-						else {
+						
+						var converter = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
+						
+						try {
+							converter.charset = encoding_matches[1];
+							data = converter.ConvertToUnicode(data);
+						} catch (e) {
+							RSSTICKER_UTIL.log(e);
 						}
-					}
-					catch (e) {
+						
+						RSSTICKER.queueForParsing(data.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
+					} catch (e) {
+						// Parse error
+						RSSTICKER_UTIL.log(e);
 					}
 				}
+			};
+			
+			req.onerror = function () {
+				RSSTICKER.clearTimeout(RSSTICKER.loadTimer);
+			
+				RSSTICKER.currentRequest = null;
+				setTimeoutForNext();
 			};
 		
 			req.send(null);
