@@ -175,7 +175,7 @@ TickerParseListener.prototype = {
 				
 							itemObject.description = itemObject.description.replace(/<script[^>]*>[\s\S]+<\/script>/gim, "");
 				
-							itemObject.visited = RSSTICKER.history.isVisitedURL(itemObject.id, "q");
+							itemObject.visited = RSSTICKER_UTIL.history.isVisitedURL(itemObject.id, "q");
 				
 							feedObject.items.push(itemObject);
 						} catch (e) {

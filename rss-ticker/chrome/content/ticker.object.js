@@ -930,7 +930,7 @@ var RSSTICKER = {
 			if (!dontAdjustSpacer) RSSTICKER.adjustSpacerWidth();
 		}
 		
-		RSSTICKER.history.addToHistory(node.guid);
+		RSSTICKER_UTIL.history.addToHistory(node.guid);
 	},
 	
 	onContextOpen : function (node, target) {
@@ -999,7 +999,7 @@ var RSSTICKER = {
 					}
 				}
 				
-				var itemIsVisited = RSSTICKER.history.isVisitedURL(feedItem.uri, feedItem.id, 1);
+				var itemIsVisited = RSSTICKER_UTIL.history.isVisitedURL(feedItem.uri, feedItem.id, 1);
 				
 				if (itemIsVisited && RSSTICKER.hideVisited) {
 					continue;
@@ -1272,7 +1272,7 @@ var RSSTICKER = {
 						RSSTICKER.toolbar.insertBefore(node, RSSTICKER.toolbar.firstChild);
 
 						if (node.nodeName == 'toolbarbutton' && (node.getAttribute("visited") == "false")) {
-							if (RSSTICKER.history.isVisitedURL(node.uri, node.guid, 3)){
+							if (RSSTICKER_UTIL.history.isVisitedURL(node.uri, node.guid, 3)){
 								RSSTICKER.markAsRead(node);
 							}
 						}
@@ -1306,7 +1306,7 @@ var RSSTICKER = {
 						RSSTICKER.toolbar.appendChild(node);
 					
 						if (node.nodeName == 'toolbarbutton' && (node.getAttribute("visited") == "false")) {
-							if (RSSTICKER.history.isVisitedURL(node.uri, node.guid, 3)){
+							if (RSSTICKER_UTIL.history.isVisitedURL(node.uri, node.guid, 3)){
 								RSSTICKER.markAsRead(node);
 							}
 						}
@@ -1347,7 +1347,7 @@ var RSSTICKER = {
 			
 			if (node.nodeName == 'toolbarbutton'){
 				if (!feed || (node.feed == feed)){
-					RSSTICKER.history.addToHistory(node.guid);
+					RSSTICKER_UTIL.history.addToHistory(node.guid);
 					RSSTICKER.markAsRead(node, true);
 				}
 			}
@@ -1527,73 +1527,6 @@ var RSSTICKER = {
 		RSSTICKER.theDB.close();
 		delete RSSTICKER.theDB;
 		RSSTICKER.theDB = null;
-	},
-	
-	history : {
-		_hService : null,
-		get hService() { if (!RSSTICKER.history._hService) { RSSTICKER.history._hService = Components.classes["@mozilla.org/browser/global-history;2"].getService(Components.interfaces.nsIGlobalHistory2); } return RSSTICKER.history._hService; },
-		
-		URI : null,
-		
-		isVisitedURL : function(url, guid){
-			try {
-				RSSTICKER.history.URI = RSSTICKER_UTIL.ioService.newURI(url, null, null);
-				var visited = RSSTICKER.history.hService.isVisited(RSSTICKER.history.URI);
-				var db = RSSTICKER.getDB();
-				
-				if (!visited) {
-					var select = db.createStatement("SELECT id FROM history WHERE id=?1");
-					select.bindStringParameter(0, guid);
-					
-					try {
-						while (select.executeStep()) {
-							visited = true;
-							break;
-						}
-					} catch (e) {
-						RSSTICKER_UTIL.log(e);
-					} finally {
-						select.reset();
-					}
-					
-					select.finalize();
-				}
-				else {
-					// Add to DB
-					var insert = db.createStatement("INSERT INTO history (id, date) VALUES (?1, ?2)");
-					insert.bindUTF8StringParameter(0, guid);
-					insert.bindInt64Parameter(1, (new Date().getTime()));
-					try { insert.execute(); } catch (alreadyExists) { }
-				}
-				
-				return visited;
-			} catch (e) {
-				// Malformed URI, probably
-				RSSTICKER_UTIL.log(e + " " + url);
-				return false;
-			}
-		},
-		
-		addToHistory : function (guid) {
-			var db = RSSTICKER.getDB();
-		
-			// Add to DB
-			var insert = db.createStatement("INSERT INTO history (id, date) VALUES (?1, ?2)");
-			insert.bindUTF8StringParameter(0, guid);
-			insert.bindInt64Parameter(1, (new Date().getTime()));
-		
-			try { insert.execute(); } catch (alreadyExists) { }
-		},
-	},
-	
-	clipboard : {
-		copyString : function (str){
-			try {
-				var oClipBoard = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
-				oClipBoard.copyString(str);
-			} catch (e) {
-			}
-		}
 	},
 	
 	browser : {

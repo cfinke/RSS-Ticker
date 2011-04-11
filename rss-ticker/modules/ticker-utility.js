@@ -14,6 +14,19 @@ var RSSTICKER_UTIL = {
 	_ioService : null,
 	get ioService() { if (!RSSTICKER_UTIL._ioService) { RSSTICKER_UTIL._ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService); } return RSSTICKER_UTIL._ioService; },
 	
+	_historyService : null,
+	get historyService() { if (!RSSTICKER_UTIL._historyService) { RSSTICKER_UTIL._historyService = Components.classes["@mozilla.org/browser/global-history;2"].getService(Components.interfaces.nsIGlobalHistory2); } return RSSTICKER_UTIL._historyService; },
+	
+	clipboard : {
+		copyString : function (str){
+			try {
+				var oClipBoard = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
+				oClipBoard.copyString(str);
+			} catch (e) {
+			}
+		}
+	},
+	
 	strings : {
 		_backup : null,
 		_main : null,
@@ -61,6 +74,55 @@ var RSSTICKER_UTIL = {
 			}
 			
 			return rv;
+		}
+	},
+	
+	history : {
+		URI : null,
+		
+		isVisitedURL : function(url, guid){
+			try {
+				RSSTICKER_UTIL.history.URI = RSSTICKER_UTIL.ioService.newURI(url, null, null);
+				var visited = RSSTICKER_UTIL.historyService.isVisited(RSSTICKER_UTIL.history.URI);
+				var db = RSSTICKER.getDB();
+				
+				if (!visited) {
+					var select = db.createStatement("SELECT id FROM history WHERE id=?1");
+					select.bindStringParameter(0, guid);
+					
+					try {
+						while (select.executeStep()) {
+							visited = true;
+							break;
+						}
+					} catch (e) {
+						RSSTICKER_UTIL.log(e);
+					} finally {
+						select.reset();
+					}
+					
+					select.finalize();
+				}
+				else {
+					RSSTICKER_UTIL.history.addToHistory(guid);
+				}
+				
+				return visited;
+			} catch (e) {
+				// Malformed URI, probably
+				RSSTICKER_UTIL.log(e + " " + url);
+				return false;
+			}
+		},
+		
+		addToHistory : function (guid) {
+			var db = RSSTICKER.getDB();
+		
+			// Add to DB
+			var insert = db.createStatement("INSERT INTO history (id, date) VALUES (?1, ?2)");
+			insert.bindUTF8StringParameter(0, guid);
+			insert.bindInt64Parameter(1, (new Date().getTime()));
+			insert.executeAsync();
 		}
 	},
 	
