@@ -1,4 +1,7 @@
 var RSSTICKER_UTIL = {
+	_prefs : null,
+	get prefs() { if (!RSSTICKER_UTIL._prefs) { RSSTICKER_UTIL._prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker."); } return RSSTICKER_UTIL._prefs; },
+	
 	_livemarkService : null,
 	get livemarkService() { if (!RSSTICKER_UTIL._livemarkService) { RSSTICKER_UTIL._livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService); } return RSSTICKER_UTIL._livemarkService; },
 

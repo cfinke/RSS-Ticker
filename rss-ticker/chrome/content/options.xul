@@ -210,8 +210,8 @@
 				</listcols>
 			</listbox>
 			<hbox>
-				<button flex="1" label="&add;" onclick="observeFeeds();" />
-				<button flex="1" label="&remove;" onclick="ignoreFeeds();" />
+				<button flex="1" label="&add;" onclick="TICKER_PREFS.observeFeeds();" />
+				<button flex="1" label="&remove;" onclick="TICKER_PREFS.ignoreFeeds();" />
 			</hbox>
 		</vbox>
 		<spacer style="height: 30px;" />

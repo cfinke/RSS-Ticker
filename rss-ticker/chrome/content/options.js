@@ -1,53 +1,14 @@
-var ticker;
-
-function observeFeeds(){
-	var items = document.getElementById('feeds').selectedItems;
-	
-	var len = items.length;
-	
-	for (var i = 0; i < len; i++){
-		var item = items[i];
-		
-		if (item.nodeName == 'listitem'){
-			RSSTICKER_UTIL.unignoreFeed(item.getAttribute("value"));
-			item.setAttribute("ignored","false");
-		}
-	}
-	
-	ticker.prefs.setBoolPref("updateToggle", !ticker.prefs.getBoolPref("updateToggle"));
-}
-
-function ignoreFeeds(){
-	var items = document.getElementById('feeds').selectedItems;
-	
-	var len = items.length;
-	
-	for (var i = 0; i < len; i++){
-		var item = items[i];
-		
-		if (item.nodeName == 'listitem'){
-			RSSTICKER_UTIL.ignoreFeed(item.getAttribute("value"));
-			item.setAttribute("ignored","true");
-		}
-	}
-	
-	ticker.prefs.setBoolPref("updateToggle", !ticker.prefs.getBoolPref("updateToggle"));
-}
-
 var TICKER_PREFS = {
-	prefs : null,
 	browserPrefs : null,
 	
 	onload : function () {
-		TICKER_PREFS.findTicker();
 		TICKER_PREFS.getFeeds();
 		
-		TICKER_PREFS.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker.");
 		TICKER_PREFS.browserPrefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("browser.preferences.");
 		
 		TICKER_PREFS.scales();
 		
-		var featuredFeeds = TICKER_PREFS.prefs.getCharPref("featuredFeeds");
+		var featuredFeeds = RSSTICKER_UTIL.prefs.getCharPref("featuredFeeds");
 		
 		if (!featuredFeeds) {
 			document.getElementById("featured-pane").style.display = "none";
@@ -160,18 +121,38 @@ var TICKER_PREFS = {
 		// @todo
 	},
 	
-	findTicker : function () {
-		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
-		var enumerator = wm.getEnumerator(null);
+	observeFeeds : function () {
+		var items = document.getElementById('feeds').selectedItems;
 
-		while(enumerator.hasMoreElements()) {
-			var win = enumerator.getNext();
+		var len = items.length;
 
-			if (win.RSSTICKER) {
-				ticker = win.RSSTICKER;
-				break;
+		for (var i = 0; i < len; i++){
+			var item = items[i];
+
+			if (item.nodeName == 'listitem'){
+				RSSTICKER_UTIL.unignoreFeed(item.getAttribute("value"));
+				item.setAttribute("ignored","false");
 			}
 		}
+
+		RSSTICKER_UTIL.prefs.setBoolPref("updateToggle", !RSSTICKER_UTIL.prefs.getBoolPref("updateToggle"));
+	},
+	
+	ignoreFeeds : function () {
+		var items = document.getElementById('feeds').selectedItems;
+
+		var len = items.length;
+
+		for (var i = 0; i < len; i++){
+			var item = items[i];
+
+			if (item.nodeName == 'listitem'){
+				RSSTICKER_UTIL.ignoreFeed(item.getAttribute("value"));
+				item.setAttribute("ignored","true");
+			}
+		}
+
+		RSSTICKER_UTIL.prefs.setBoolPref("updateToggle", !RSSTICKER_UTIL.prefs.getBoolPref("updateToggle"));
 	},
 	
 	getFeeds : function () {
