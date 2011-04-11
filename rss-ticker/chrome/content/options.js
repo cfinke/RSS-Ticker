@@ -43,8 +43,8 @@ var TICKER_PREFS = {
 		_main : null,
 		
 		initStrings : function () {
-			if (!this._backup) { this._backup = document.getElementById("RSSTICKER-backup-bundle"); }
-			if (!this._main) { this._main = document.getElementById("RSSTICKER-bundle"); }
+			if (!this._backup) { this._backup = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService).createBundle("chrome://rss-ticker-default-locale/content/locale.properties"); }
+			if (!this._main) { this._main = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService).createBundle("chrome://rss-ticker/locale/locale.properties"); }
 		},
 		
 		getString : function (key) {
@@ -231,7 +231,6 @@ var TICKER_PREFS = {
 		
 		var livemarks = [];
 		
-		var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
 		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
 		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
 
@@ -241,7 +240,7 @@ var TICKER_PREFS = {
 			var livemarkId = livemarkIds[i];
 
 			var feedURL = livemarkService.getFeedURI(livemarkId).spec;
-			var feedTitle = bookmarkService.getItemTitle(livemarkId);
+			var feedTitle = ticker.bookmarkService.getItemTitle(livemarkId);
 
 			livemarks.push(
 				{
@@ -277,7 +276,7 @@ var TICKER_PREFS = {
 		for (var i = 0; i < len; i++){
 			var node = feedList.childNodes[i];
 
-			if (ticker.inArray(ignore, node.getAttribute("value"))){
+			if (ignore.indexOf(node.getAttribute("value") != -1){
 				node.setAttribute("ignored","true");
 			}
 		}
@@ -315,13 +314,11 @@ var TICKER_PREFS = {
 	},
 	
 	subscribe : function (title, feedUrl, siteUrl, description) {
-		var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
-		var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
 		var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
 		var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService);
 		var menu = Application.bookmarks.menu;
-		var uri = ioService.newURI(siteUrl, null, null);
-		var feedUri = ioService.newURI(feedUrl, null, null);
+		var uri = ticker.ioService.newURI(siteUrl, null, null);
+		var feedUri = ticker.ioService.newURI(feedUrl, null, null);
 		var lm = livemarkService.createLivemarkFolderOnly(Application.bookmarks.menu.id, title, uri, feedUri, -1);
 		annotationService.setItemAnnotation(lm, "bookmarkProperties/description", description, 0, Components.interfaces.nsIAnnotationService.EXPIRE_NEVER);
 	},
