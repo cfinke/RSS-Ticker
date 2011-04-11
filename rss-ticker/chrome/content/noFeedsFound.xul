@@ -17,6 +17,8 @@
 		<![CDATA[
 		
 		Components.utils.import("resource://rss-ticker-modules/ticker-utility.js");
+		addEventListener("load", function () { removeEventListener("load", arguments.callee, false); RSSTICKER_UTIL.load(); }, false);
+		addEventListener("unload", function () { removeEventListener("unload", arguments.callee, false); RSSTICKER_UTIL.unload(); }, false);
 		
 		function dontShowMsgAgain(){
 			RSSTICKER_UTIL.prefs.setBoolPref("noFeedsFoundFlag.1.7", document.getElementById("showWarningNextTime").checked);

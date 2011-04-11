@@ -1,4 +1,21 @@
 var RSSTICKER_UTIL = {
+	loadStack : 0,
+	
+	load : function () {
+		RSSTICKER_UTIL.loadStack++;
+		
+		if (RSSTICKER_UTIL.loadStack == 1) {
+		}
+	},
+	
+	unload : function () {
+		RSSTICKER_UTIL.loadStack--;
+		
+		if (RSSTICKER_UTIL.loadStack == 0) {
+			RSSTICKER_UTIL.closeDB();
+		}
+	},
+	
 	_prefs : null,
 	get prefs() { if (!RSSTICKER_UTIL._prefs) { RSSTICKER_UTIL._prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker."); } return RSSTICKER_UTIL._prefs; },
 	
@@ -42,14 +59,16 @@ var RSSTICKER_UTIL = {
 			var rv = "";
 			
 			try {
-				rv = this._main.getString(key);
+				rv = this._main.GetStringFromName(key);
 			} catch (e) {
+				RSSTICKER_UTIL.log(e);
 			}
 			
 			if (!rv) {
 				try {
-					rv = this._backup.getString(key);
+					rv = this._backup.GetStringFromName(key);
 				} catch (e) {
+					RSSTICKER_UTIL.log(e);
 				}
 			}
 			
@@ -62,19 +81,40 @@ var RSSTICKER_UTIL = {
 			var rv = "";
 			
 			try {
-				rv = this._main.getFormattedString(key, args);
+				rv = this._main.formatStringFromName(key, args);
 			} catch (e) {
 			}
 			
 			if (!rv) {
 				try {
-					rv = this._backup.getFormattedString(key, args);
+					rv = this._backup.formatStringFromName(key, args);
 				} catch (e) {
 				}
 			}
 			
 			return rv;
 		}
+	},
+	
+	get windows() {
+		var windows = [];
+		
+		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+		                   .getService(Components.interfaces.nsIWindowMediator);
+		
+		var enumerator = wm.getEnumerator("navigator:browser");
+		
+		while (enumerator.hasMoreElements()) {
+			windows.push(enumerator.getNext());
+		}
+		
+		return windows;
+	},
+	
+	get window() {
+		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+		                   .getService(Components.interfaces.nsIWindowMediator);
+		return wm.getMostRecentWindow("navigator:browser");
 	},
 	
 	history : {
@@ -132,8 +172,8 @@ var RSSTICKER_UTIL = {
 		if (!RSSTICKER_UTIL.dbConnection) {
 			var dbFile = Components.classes["@mozilla.org/file/directory_service;1"]
 			                     .getService(Components.interfaces.nsIProperties)
-			                     .get("ProfD", Components.interfaces.nsIFile)
-			                     .append("rssticker.sqlite");
+			                     .get("ProfD", Components.interfaces.nsIFile);
+			dbFile.append("rssticker.sqlite");
 		
 			RSSTICKER_UTIL.dbConnection = Components.classes["@mozilla.org/storage/service;1"]
 			                                      .getService(Components.interfaces.mozIStorageService)
@@ -195,27 +235,28 @@ var RSSTICKER_UTIL = {
 	},
 	
 	writeIgnoreFile : function () {
-		var profilePath = RSSTICKER_UTIL.getProfilePath();
+		Components.utils.import("resource://gre/modules/NetUtil.jsm");
 		
-		var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-		file.initWithPath(profilePath + RSSTICKER_UTIL.ignoreListFilename);
-
-		var outputStream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance( Components.interfaces.nsIFileOutputStream );
-
-		outputStream.init(file, 0x02 | 0x08 | 0x20, 0600, null);
+		var file = Components.classes["@mozilla.org/file/directory_service;1"].getService(Components.interfaces.nsIProperties).get("ProfD", Components.interfaces.nsIFile);
+		file.append(RSSTICKER_UTIL.ignoreListFilename);
+		file.create(Components.interfaces.nsIFile.NORMAL_FILE_TYPE, 0600);
+		
+		var ostream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance(Components.interfaces.nsIFileOutputStream);
+		ostream.init(file, -1, -1, 0);
 		
 		var data = RSSTICKER_UTIL.ignoreList.join("\r\n") + "\r\n";
 		
-		var bytes, bytesWritten, bytesRemaining = data.length;
-		var offset = 0;
+		let istream = Components.classes["@mozilla.org/io/string-input-stream;1"].createInstance(Components.interfaces.nsIStringInputStream);
+		istream.setData(data, data.length);
 		
-		while (bytesRemaining) {
-			bytesWritten = outputStream.write(data.substring(offset), bytesRemaining);
-			bytesRemaining -= bytesWritten;
-			offset += bytesWritten;
-		}
-		
-		outputStream.close();
+		NetUtil.asyncCopy(istream, ostream, function (aResult) {
+			if (!Components.isSuccessCode(aResult)) {
+				RSSTICKER_UTIL.log("An error occurred.");
+			}
+			else {
+				RSSTICKER_UTIL.log("Success!");
+			}
+		});
 	},
 	
 	getProfilePath : function () {

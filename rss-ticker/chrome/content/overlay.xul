@@ -13,12 +13,14 @@
 		<![CDATA[
 		
 		Components.utils.import("resource://rss-ticker-modules/ticker-utility.js");
-		Components.utils.import("resource://rss-ticker-modules/featured-feeds.js");
+		addEventListener("load", function () { removeEventListener("load", arguments.callee, false); RSSTICKER_UTIL.load(); }, false);
+		addEventListener("unload", function () { removeEventListener("unload", arguments.callee, false); RSSTICKER_UTIL.unload(); }, false);
 		
 		addEventListener("load", RSSTICKER.onload, false);
 		
-		addEventListener("load", FEATURED_TICKER_FEEDS.load, false);
-		addEventListener("unload", FEATURED_TICKER_FEEDS.unload, false);
+		Components.utils.import("resource://rss-ticker-modules/featured-feeds.js");
+		addEventListener("load", function () { removeEventListener("load", arguments.callee, false); FEATURED_TICKER_FEEDS.load(); }, false);
+		addEventListener("unload", function () { removeEventListener("unload", arguments.callee, false); FEATURED_TICKER_FEEDS.unload(); }, false);
 		
 		]]>
 	</script>

@@ -138,7 +138,7 @@ var RSSTICKER = {
 			return;
 		}
 		else {
-			RSSTICKER.enable(5000);
+			RSSTICKER.enable(3000);
 		}
 		
 		RSSTICKER.showFirstRun();
@@ -148,6 +148,12 @@ var RSSTICKER = {
 			
 			RSSTICKER.addToolbarButton("feed-button");
 		}
+	},
+	
+	unload : function () {
+		removeEventListener("unload", RSSTICKER.unload, false);
+		
+		RSSTICKER.prefs.setIntPref("lastUpdate", 0);
 	},
 	
 	addToolbarButton : function (buttonId) {
@@ -170,7 +176,7 @@ var RSSTICKER = {
 			var toolboxDocument = toolbox.ownerDocument;
 
 			function getIndex(array, val){
-				for (var i = 0; i < array.length; i++){
+				for (var i = 0, _len = array.length; i < _len; i++){
 					if (array[i] == val) {
 						return i;
 					}
@@ -507,12 +513,6 @@ var RSSTICKER = {
 				}
 			}
 		}
-	},
-	
-	unload : function () {
-		removeEventListener("unload", RSSTICKER.unload, false);
-		
-		RSSTICKER.prefs.setIntPref("lastUpdate", 0);
 	},
 	
 	options : function (panel) {
@@ -1607,8 +1607,6 @@ var RSSTICKER = {
 	},
 	
 	setTimeout : function (callback, timeout, arg1, arg2, arg3, arg4) {
-		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Setting timeout (" + timeout + ").");
-		
 		return setTimeout(callback, timeout, arg1, arg2, arg3, arg4);
 		/*
 		var cb = {
@@ -1628,8 +1626,6 @@ var RSSTICKER = {
 	},
 	
 	clearTimeout : function (timer) {
-		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Clearing timeout.");
-		
 		if (timer) {
 			clearTimeout(timer);
 			// timer.cancel();
