@@ -63,7 +63,7 @@ var RSSTICKER = {
 	ticker : null,
 	
 	// Toggles on/off debugging messages in the console.
-	DEBUG : true,
+	DEBUG : false,
 	
 	// Current width of the first feed item (the one that is being shrunk)
 	currentFirstItemMargin : 0,
