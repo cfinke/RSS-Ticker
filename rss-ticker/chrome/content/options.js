@@ -117,8 +117,6 @@ var TICKER_PREFS = {
 				}
 			}
 		}
-		
-		// @todo
 	},
 	
 	observeFeeds : function () {
@@ -134,7 +132,7 @@ var TICKER_PREFS = {
 				item.setAttribute("ignored","false");
 			}
 		}
-
+		
 		RSSTICKER_UTIL.prefs.setBoolPref("updateToggle", !RSSTICKER_UTIL.prefs.getBoolPref("updateToggle"));
 	},
 	
@@ -151,7 +149,7 @@ var TICKER_PREFS = {
 				item.setAttribute("ignored","true");
 			}
 		}
-
+		
 		RSSTICKER_UTIL.prefs.setBoolPref("updateToggle", !RSSTICKER_UTIL.prefs.getBoolPref("updateToggle"));
 	},
 	
