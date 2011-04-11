@@ -15,6 +15,8 @@
 	-moz-image-region: rect(72px, 24px, 96px, 0px);
 }
 
+/* @todo Optimize these rules; better selector for toolbar[] */
+
 toolbar[iconsize="small"] #RSSTICKER-button {
 	list-style-image: url(chrome://rss-ticker/skin/toolbar-icon-small.png);
 	-moz-image-region: rect(0px, 16px, 16px, 0px);

@@ -1,3 +1,5 @@
+/* @todo Optimize these rules. */
+
 #RSSTICKER-button {
 	list-style-image: url(chrome://rss-ticker/skin/toolbar-icon.png);
 	-moz-image-region: rect(0px, 24px, 24px, 0px);
