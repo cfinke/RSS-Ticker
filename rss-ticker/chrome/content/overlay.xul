@@ -12,9 +12,10 @@
 	<script type="application/x-javascript">
 		<![CDATA[
 		
-		addEventListener("load", RSSTICKER.onload, false);
-		
+		Components.utils.import("resource://rss-ticker-modules/ticker-utility.js");
 		Components.utils.import("resource://rss-ticker-modules/featured-feeds.js");
+		
+		addEventListener("load", RSSTICKER.onload, false);
 		
 		addEventListener("load", FEATURED_TICKER_FEEDS.load, false);
 		addEventListener("unload", FEATURED_TICKER_FEEDS.unload, false);

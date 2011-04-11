@@ -1,62 +1,4 @@
 var RSSTICKER = {
-	_livemarkService : null,
-	get livemarkService() { if (!RSSTICKER._livemarkService) { RSSTICKER._livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService); } return RSSTICKER._livemarkService; },
-
-	_bookmarkService : null,
-	get bookmarkService() { if (!RSSTICKER._bookmarkService) { RSSTICKER._bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService); } return RSSTICKER._bookmarkService; },
-
-	_ioService : null,
-	get ioService() { if (!RSSTICKER._ioService) { RSSTICKER._ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService); } return RSSTICKER._ioService; },
-	
-	strings : {
-		_backup : null,
-		_main : null,
-		
-		initStrings : function () {
-			if (!this._backup) { this._backup = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService).createBundle("chrome://rss-ticker-default-locale/content/locale.properties"); }
-			if (!this._main) { this._main = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService).createBundle("chrome://rss-ticker/locale/locale.properties"); }
-		},
-		
-		getString : function (key) {
-			this.initStrings();
-			
-			var rv = "";
-			
-			try {
-				rv = this._main.getString(key);
-			} catch (e) {
-			}
-			
-			if (!rv) {
-				try {
-					rv = this._backup.getString(key);
-				} catch (e) {
-				}
-			}
-			
-			return rv;
-		},
-		
-		getFormattedString : function (key, args) {
-			this.initStrings();
-			
-			var rv = "";
-			
-			try {
-				rv = this._main.getFormattedString(key, args);
-			} catch (e) {
-			}
-			
-			if (!rv) {
-				try {
-					rv = this._backup.getFormattedString(key, args);
-				} catch (e) {
-				}
-			}
-			
-			return rv;
-		}
-	},
 	
 	ignoreFilename : "rss-ticker.ignore.txt",
 	
@@ -183,7 +125,7 @@ var RSSTICKER = {
 		RSSTICKER.ticker.setAttribute("inherits", "collapsed,hidden");
 		RSSTICKER.ticker.setAttribute("mode", "full");
 		RSSTICKER.ticker.setAttribute("persist", "collapsed,hidden");
-		RSSTICKER.ticker.setAttribute("toolbarname", RSSTICKER.strings.getString("extension.name"));
+		RSSTICKER.ticker.setAttribute("toolbarname", RSSTICKER_UTIL.strings.getString("extension.name"));
 		RSSTICKER.ticker.style.maxHeight = '24px';
 	
 		RSSTICKER.toolbar = document.createElement('hbox');
@@ -379,7 +321,7 @@ var RSSTICKER = {
 				var data = 'data:text/css;charset=utf-8,' + encodeURI(css);
 				var sss = Components.classes["@mozilla.org/content/style-sheet-service;1"].getService(Components.interfaces.nsIStyleSheetService);
 				
-				var u = RSSTICKER.ioService.newURI(data, null, null);
+				var u = RSSTICKER_UTIL.ioService.newURI(data, null, null);
 				
 				if (sss.sheetRegistered(u, sss.USER_SHEET)) {
 					sss.unregisterSheet(u, sss.USER_SHEET);
@@ -608,15 +550,15 @@ var RSSTICKER = {
 						var tbb = document.createElement('toolbarbutton');
 						tbb.uri = "chrome://rss-ticker/content/options.xul";
 						tbb.id = "RSSTICKER-feature-feeds-subscribe";
-						tbb.description = RSSTICKER.strings.getString("rssticker.featured.description");
-						tbb.feed = RSSTICKER.strings.getString("rssticker.specialItem.feedName");
+						tbb.description = RSSTICKER_UTIL.strings.getString("rssticker.featured.description");
+						tbb.feed = RSSTICKER_UTIL.strings.getString("rssticker.specialItem.feedName");
 						tbb.feedURL = "rssticker";
 						tbb.href = "chrome://rss-ticker/content/options.xul";
-						tbb.displayHref = RSSTICKER.strings.getString("rssticker.specialItem.displayHref");
+						tbb.displayHref = RSSTICKER_UTIL.strings.getString("rssticker.specialItem.displayHref");
 						tbb.published = "";
 						tbb.guid = "RSSTICKER-feature-feeds-subscribe";
 						
-						tbb.setAttribute("label", RSSTICKER.strings.getString("rssticker.featured.label"));
+						tbb.setAttribute("label", RSSTICKER_UTIL.strings.getString("rssticker.featured.label"));
 						tbb.setAttribute("tooltip", "RSSTICKERTooltip");
 						tbb.setAttribute("image", "chrome://rss-ticker/content/skin-common/thumbs-up.png");
 						tbb.setAttribute("onclick", "RSSTICKER.openFeaturedFeeds();");
@@ -705,9 +647,9 @@ var RSSTICKER = {
 		for (var i = 0; i < len; i++){
 			var livemarkId = livemarkIds[i];
 			
-			var feedURL = RSSTICKER.livemarkService.getFeedURI(livemarkId).spec;
+			var feedURL = RSSTICKER_UTIL.livemarkService.getFeedURI(livemarkId).spec;
 			
-			var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkId);
+			var feedName = RSSTICKER_UTIL.bookmarkService.getItemTitle(livemarkId);
 		
 			if (ignore.indexOf(feedURL) == -1){
 				RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
@@ -914,8 +856,8 @@ var RSSTICKER = {
 	},
 	
 	updateSingleFeed : function (livemarkId) {
-		var feedURL = RSSTICKER.livemarkService.getFeedURI(livemarkId).spec;
-		var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkId);
+		var feedURL = RSSTICKER_UTIL.livemarkService.getFeedURI(livemarkId).spec;
+		var feedName = RSSTICKER_UTIL.bookmarkService.getItemTitle(livemarkId);
 		
 		RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
 	    RSSTICKER.updateAFeed(RSSTICKER.feedsToFetch.length - 1);
@@ -940,7 +882,7 @@ var RSSTICKER = {
 	queueForParsing : function (feedText, feedURL) {
 		var data = feedText;
 		
-		var uri = RSSTICKER.ioService.newURI(feedURL, null, null);
+		var uri = RSSTICKER_UTIL.ioService.newURI(feedURL, null, null);
 
 		if (data.length) {
 			var parser = Components.classes["@mozilla.org/feed-processor;1"]
@@ -1503,7 +1445,7 @@ var RSSTICKER = {
 		
 		document.getElementById("RSSTICKERTooltipImage").src = image;
 		
-		document.getElementById("RSSTICKERTooltipURL").value = RSSTICKER.strings.getString("URL") + ": " + url;
+		document.getElementById("RSSTICKERTooltipURL").value = RSSTICKER_UTIL.strings.getString("URL") + ": " + url;
 		
 		var maxw = document.getElementById("RSSTICKERTooltipURL").boxObject.width;
 		
@@ -1582,7 +1524,7 @@ var RSSTICKER = {
 		
 		isVisitedURL : function(url, guid){
 			try {
-				RSSTICKER.history.URI = RSSTICKER.ioService.newURI(url, null, null);
+				RSSTICKER.history.URI = RSSTICKER_UTIL.ioService.newURI(url, null, null);
 				var visited = RSSTICKER.history.hService.isVisited(RSSTICKER.history.URI);
 				var db = RSSTICKER.getDB();
 				

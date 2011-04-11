@@ -38,56 +38,6 @@ var TICKER_PREFS = {
 	prefs : null,
 	browserPrefs : null,
 	
-	strings : {
-		_backup : null,
-		_main : null,
-		
-		initStrings : function () {
-			if (!this._backup) { this._backup = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService).createBundle("chrome://rss-ticker-default-locale/content/locale.properties"); }
-			if (!this._main) { this._main = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService).createBundle("chrome://rss-ticker/locale/locale.properties"); }
-		},
-		
-		getString : function (key) {
-			this.initStrings();
-			
-			var rv = "";
-			
-			try {
-				rv = this._main.getString(key);
-			} catch (e) {
-			}
-			
-			if (!rv) {
-				try {
-					rv = this._backup.getString(key);
-				} catch (e) {
-				}
-			}
-			
-			return rv;
-		},
-		
-		getFormattedString : function (key, args) {
-			this.initStrings();
-			
-			var rv = "";
-			
-			try {
-				rv = this._main.getFormattedString(key, args);
-			} catch (e) {
-			}
-			
-			if (!rv) {
-				try {
-					rv = this._backup.getFormattedString(key, args);
-				} catch (e) {
-				}
-			}
-			
-			return rv;
-		}
-	},
-	
 	onload : function () {
 		TICKER_PREFS.findTicker();
 		TICKER_PREFS.getFeeds();
@@ -159,13 +109,13 @@ var TICKER_PREFS = {
 					button.description = featuredFeeds[i].description;
 					
 					if (isSubscribed) {
-						button.setAttribute("label", TICKER_PREFS.strings.getString("rssticker.featured.unsubscribe"));
+						button.setAttribute("label", RSSTICKER_UTIL.strings.getString("rssticker.featured.unsubscribe"));
 					}
 					else {
-						button.setAttribute("label", TICKER_PREFS.strings.getString("rssticker.featured.subscribe"));
+						button.setAttribute("label", RSSTICKER_UTIL.strings.getString("rssticker.featured.subscribe"));
 					}
 					
-					button.setAttribute("oncommand", "if (TICKER_PREFS.isSubscribed(this.feedUrl)) { this.setAttribute('label', TICKER_PREFS.strings.getString('rssticker.featured.subscribe')); TICKER_PREFS.unsubscribe(this.feedUrl); } else { this.setAttribute('label', TICKER_PREFS.strings.getString('rssticker.featured.unsubscribe')); TICKER_PREFS.subscribe(this.name, this.feedUrl, this.siteUrl, this.description); }");
+					button.setAttribute("oncommand", "if (TICKER_PREFS.isSubscribed(this.feedUrl)) { this.setAttribute('label', RSSTICKER_UTIL.strings.getString('rssticker.featured.subscribe')); TICKER_PREFS.unsubscribe(this.feedUrl); } else { this.setAttribute('label', RSSTICKER_UTIL.strings.getString('rssticker.featured.unsubscribe')); TICKER_PREFS.subscribe(this.name, this.feedUrl, this.siteUrl, this.description); }");
 					
 					vbox.appendChild(label);
 					vbox.appendChild(description);
@@ -240,7 +190,7 @@ var TICKER_PREFS = {
 			var livemarkId = livemarkIds[i];
 
 			var feedURL = livemarkService.getFeedURI(livemarkId).spec;
-			var feedTitle = ticker.bookmarkService.getItemTitle(livemarkId);
+			var feedTitle = RSSTICKER_UTIL.bookmarkService.getItemTitle(livemarkId);
 
 			livemarks.push(
 				{
@@ -303,7 +253,7 @@ var TICKER_PREFS = {
 		for (var i = 0; i < len; i++){
 			var livemarkId = livemarkIds[i];
 			
-			var feedURL = ticker.livemarkService.getFeedURI(livemarkId).spec;
+			var feedURL = RSSTICKER_UTIL.livemarkService.getFeedURI(livemarkId).spec;
 			
 			if (url == feedURL) {
 				return true;
@@ -317,8 +267,8 @@ var TICKER_PREFS = {
 		var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
 		var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService);
 		var menu = Application.bookmarks.menu;
-		var uri = ticker.ioService.newURI(siteUrl, null, null);
-		var feedUri = ticker.ioService.newURI(feedUrl, null, null);
+		var uri = RSSTICKER_UTIL.ioService.newURI(siteUrl, null, null);
+		var feedUri = RSSTICKER_UTIL.ioService.newURI(feedUrl, null, null);
 		var lm = livemarkService.createLivemarkFolderOnly(Application.bookmarks.menu.id, title, uri, feedUri, -1);
 		annotationService.setItemAnnotation(lm, "bookmarkProperties/description", description, 0, Components.interfaces.nsIAnnotationService.EXPIRE_NEVER);
 	},

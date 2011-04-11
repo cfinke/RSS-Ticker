@@ -12,6 +12,13 @@
 	onload="TICKER_PREFS.onload();"
 	ondialogaccept="TICKER_PREFS.unload();"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript">
+		<![CDATA[
+		
+		Components.utils.import("resource://rss-ticker-modules/ticker-utility.js");
+		
+		]]>
+	</script>
 	<script type="application/x-javascript" src="chrome://browser/content/bookmarks/bookmarks.js"></script>
 	<script type="application/x-javascript" src="chrome://rss-ticker/content/ticker.object.js"></script>
 	<script type="application/x-javascript" src="chrome://rss-ticker/content/options.js"></script>
