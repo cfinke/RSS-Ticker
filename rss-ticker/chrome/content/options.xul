@@ -121,7 +121,7 @@
 		<preferences>
 			<preference id="p_cm_open" name="extensions.rssticker.cm.open" type="bool" />
 			<preference id="p_cm_openInWindow" name="extensions.rssticker.cm.openInNewWindow" type="bool" />
-			<preference id="p_cm_openInTab" name="extensions.rssticker.cm.openInNewTab" type="bool" />
+			<preference id="p_cm_openInTab" name="extensions.rssticker.cm.openInTab" type="bool" />
 			<preference id="p_cm_openAllInTabs" name="extensions.rssticker.cm.openAllInTabs" type="bool" />
 			<preference id="p_cm_openUnreadInTabs" name="extensions.rssticker.cm.openUnreadInTabs" type="bool" />
 			<preference id="p_cm_openFeedInTabs" name="extensions.rssticker.cm.openFeedInTabs" type="bool" />
