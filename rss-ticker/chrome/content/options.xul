@@ -12,10 +12,6 @@
 	onload="TICKER_PREFS.onload();"
 	ondialogaccept="TICKER_PREFS.unload();"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<stringbundleset id="stringbundleset">
-		<stringbundle id="RSSTICKER-backup-bundle" src="chrome://rss-ticker-default-locale/content/locale.properties" />
-		<stringbundle id="RSSTICKER-bundle" src="chrome://rss-ticker/locale/locale.properties" />
-	</stringbundleset>
 	<script type="application/x-javascript" src="chrome://browser/content/bookmarks/bookmarks.js"></script>
 	<script type="application/x-javascript" src="chrome://rss-ticker/content/ticker.object.js"></script>
 	<script type="application/x-javascript" src="chrome://rss-ticker/content/options.js"></script>

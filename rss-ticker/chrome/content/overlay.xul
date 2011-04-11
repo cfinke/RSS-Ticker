@@ -11,23 +11,16 @@
 	<script type="application/x-javascript" src="chrome://rss-ticker/content/bookmark-observer.js"></script>
 	<script type="application/x-javascript">
 		<![CDATA[
-			
-			Components.utils.import("resource://rss-ticker-modules/featured-feeds.js");
-			
-			window.addEventListener("load", function () { RSSTICKER.onload(); }, false);
-			window.addEventListener("unload", function () { RSSTICKER.unload(); }, false);
-			window.addEventListener("resize", function () { RSSTICKER.adjustSpacerWidth(); }, false);
-			window.addEventListener("DOMMouseScroll", function (event) { RSSTICKER.scrollTicker(event); }, false)
-			
-			addEventListener("load", FEATURED_TICKER_FEEDS.load, false);
-			addEventListener("unload", FEATURED_TICKER_FEEDS.unload, false);
-			
+		
+		addEventListener("load", RSSTICKER.onload, false);
+		
+		Components.utils.import("resource://rss-ticker-modules/featured-feeds.js");
+		
+		addEventListener("load", FEATURED_TICKER_FEEDS.load, false);
+		addEventListener("unload", FEATURED_TICKER_FEEDS.unload, false);
+		
 		]]>
 	</script>
-	<stringbundleset id="stringbundleset">
-		<stringbundle id="RSSTICKER-backup-bundle" src="chrome://rss-ticker-default-locale/content/locale.properties" />
-		<stringbundle id="RSSTICKER-bundle" src="chrome://rss-ticker/locale/locale.properties" />
-	</stringbundleset>
 	<commandset id="mainCommandSet">
 		<command id="rss-ticker_cmd_open" oncommand="RSSTICKER.onContextOpen(document.popupNode);" label="&cm.open;"/>
 		<command id="rss-ticker_cmd_openInNewWindow" oncommand="RSSTICKER.onContextOpen(document.popupNode, 'window');" label="&cm.openInNewWindow;"/>
@@ -102,11 +95,6 @@
 				<description id="RSSTICKERTooltipSummary"></description>
 			</groupbox>
 		</tooltip>
-		<!--
-		<tooltip id="RSSTICKERLoadingNoticeTooltip" noautohide="true" orient="vertical">
-			<description id="RSSTICKERLoadingNoticeText"></description>
-		</tooltip>
-		-->
 	</popupset>
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="RSSTICKER-button" contextmenu="RSSTICKERButtonCM" tooltiptext="&toggleTicker;" class="toolbarbutton-1" label="&extension.title;" oncommand="RSSTICKER.toggleDisabled();" />
