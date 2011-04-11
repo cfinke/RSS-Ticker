@@ -45,6 +45,7 @@
 <!ENTITY options.hide "Skrij že prebrano.">
 <!ENTITY options.bold "Neprebrano prikaži v krepki pisavi.">
 <!ENTITY options.openInNewTab "Vedno odpri povezave v novih zavihkih.">
+<!ENTITY options.reverseDirection "Obrni smer prikazovanja">
 <!ENTITY toggleTicker "Prikazovalnik vključen/izključen">
 <!ENTITY options.dw.limitWidth "Omeji širino elementov v prikazovalniku">
 <!ENTITY options.dw.isMaxWidth "Uporabi samo kot največjo širino">
@@ -54,6 +55,7 @@
 <!ENTITY noFeedsFoundTitle "Ni najdenih živih zaznamkov">
 <!ENTITY noFeedsFound "Prikazovalnik živih zaznamkov ne more najti živih zaznamkov.">
 <!ENTITY howToSubscribe1 "Razširitev naloži in prikaže vnose iz vaših Živih zaznamkov (torej novičarskih virov oz. virov RSS), vendar trenutno niste naročeni na še nobenega. Potrebujete pomoč? Naročanje na vir je enostavno:">
+<!ENTITY howToSubscribe1a "Najenostavneje boste začeli z delom, če se naročite na vir novic RSS Tickerja. Kliknite gumb 'Naroči', s čimer dodate novice v svoj prikazovalnik.">
 <!ENTITY howToSubscribe2 "Če stran, ki si jo ogledujete, ponuja vir RSS (npr. www.firefox.org), se na desni strani okenca naslovne vrstice nahaja majhna oranžna ali modra ikona, poleg zvezdice za shranjevanje zaznamkov. Če to ikono kliknete, se odpre pogovorno okno 'Dodaj živi zaznamek'.">
 <!ENTITY howToSubscribe3 "Kliknite Prijavi zdaj in prikazovalnik bo takoj začel prikazovati novice iz tega vira.">
 <!ENTITY closeNoFeedsPage "Zapri to stran">
@@ -80,3 +82,4 @@
 <!ENTITY rssticker.featured.trends.title "Trendovske novice">
 <!ENTITY rssticker.featured.trends.description "Vir najnovejših priljubljenih, trendovskih novic.">
 <!ENTITY rssticker.featured.notifyMe "Periodično me obveščaj o novih izpostavljenih virih.">
+<!ENTITY rssticker.trendingNews.subscribe "Naroči se na novice">

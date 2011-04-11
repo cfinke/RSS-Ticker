@@ -45,6 +45,7 @@
 <!ENTITY options.hide "Nascondi gli elementi già letti">
 <!ENTITY options.bold "Visualizza gli elementi non letti in grassetto">
 <!ENTITY options.openInNewTab "Apri sempre i link in nuove schede">
+<!ENTITY options.reverseDirection "Inverti la direzione di scorrimento degli elementi">
 <!ENTITY toggleTicker "Attiva/disattiva la barra di RSS Ticker">
 <!ENTITY options.dw.limitWidth "Imposta la larghezza degli elementi nella barra di RSS Ticker">
 <!ENTITY options.dw.isMaxWidth "Utilizza solo come larghezza massima">

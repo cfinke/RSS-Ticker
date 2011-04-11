@@ -11,7 +11,7 @@
 <!ENTITY cm.openFeedUnreadInTabs "Ouvrir le flux non lu dans des onglets">
 <!ENTITY cm.copyLinkTitle "Copier le titre du lien">
 <!ENTITY cm.copyLinkTitle.key "C">
-<!ENTITY cm.copyLinkURL "Copier l&apos;URL du lien">
+<!ENTITY cm.copyLinkURL "Copier l'URL du lien">
 <!ENTITY cm.copyLinkURL.key "U">
 <!ENTITY cm.refreshFeeds "Rafraîchir les flux">
 <!ENTITY cm.refreshFeeds.key "R">
@@ -33,18 +33,19 @@
 <!ENTITY cmOptionsDescription "Personaliser le menu contextuel de la bande en activant ou désactivant les options ci-dessous.">
 <!ENTITY tt.summary "Sommaire">
 <!ENTITY options "Options">
-<!ENTITY options.restartNotice "Les changements sur les options marquées d&apos;un astérisque (*) ne seront effectifs qu&apos;après le redémarrage de votre navigateur.">
+<!ENTITY options.restartNotice "Les changements sur les options marquées d'un astérisque (*) ne seront effectifs qu'après le redémarrage de votre navigateur.">
 <!ENTITY options.general "Général">
 <!ENTITY options.advanced "Avancé">
 <!ENTITY options.contextMenu "Menu contextuel">
 <!ENTITY disableTicker "Désactiver la bande défilante">
 <!ENTITY options.tickerPlacement "Emplacement de la bande défilante">
-<!ENTITY tickerPlacement.belowStatusBar "Sous la barre d&apos;état">
+<!ENTITY tickerPlacement.belowStatusBar "Sous la barre d'état">
 <!ENTITY tickerPlacement.belowBMTB "Sous la barre personnelle">
 <!ENTITY options.random "Afficher au hasard les éléments dans la bande défilante">
 <!ENTITY options.hide "Masquer les éléments que vous avez déjà lus.">
-<!ENTITY options.bold "Mettre en gras les éléments que vous n&apos;avez pas lus.">
+<!ENTITY options.bold "Mettre en gras les éléments que vous n'avez pas lus.">
 <!ENTITY options.openInNewTab "Toujours ouvrir les liens dans de nouveaux onglets.">
+<!ENTITY options.reverseDirection "Inverser le sens de défilement">
 <!ENTITY toggleTicker "Activer / désactiver la bande défilante">
 <!ENTITY options.dw.limitWidth "Limiter la largeur des éléments dans la bande défilante">
 <!ENTITY options.dw.isMaxWidth "Utiliser seulement comme largeur maximale">

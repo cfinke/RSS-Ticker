@@ -45,6 +45,7 @@
 <!ENTITY options.hide "Skjul emner du allerede har læst.">
 <!ENTITY options.bold "Fremhæv ulæste emner.">
 <!ENTITY options.openInNewTab "Åbn altid links i nye faneblade.">
+<!ENTITY options.reverseDirection "Vend ticker-retningen om">
 <!ENTITY toggleTicker "Slå ticker til/fra">
 <!ENTITY options.dw.limitWidth "Begræns bredden på emner i tickeren">
 <!ENTITY options.dw.isMaxWidth "Brug kun som maksimumbredde">

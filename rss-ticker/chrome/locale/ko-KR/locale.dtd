@@ -39,12 +39,13 @@
 <!ENTITY options.contextMenu "문맥 메뉴">
 <!ENTITY disableTicker "티커 끔">
 <!ENTITY options.tickerPlacement "티커 배치">
-<!ENTITY tickerPlacement.belowStatusBar "상태바 밑에">
+<!ENTITY tickerPlacement.belowStatusBar "상태막대 밑에">
 <!ENTITY tickerPlacement.belowBMTB "북마크 도구상자 밑에">
 <!ENTITY options.random "티커 항목 무작위">
 <!ENTITY options.hide "이미 읽은 항목 숨기기">
 <!ENTITY options.bold "읽지 않은 항목 강조">
 <!ENTITY options.openInNewTab "언제나 새 탭으로 링크 열기">
+<!ENTITY options.reverseDirection "티커 글 방향을 반대로">
 <!ENTITY toggleTicker "티커 끄기/켜기 전환">
 <!ENTITY options.dw.limitWidth "티커내 항목의 폭을 제한">
 <!ENTITY options.dw.isMaxWidth "최대 폭으로만 사용">
