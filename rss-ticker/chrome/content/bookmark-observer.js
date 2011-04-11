@@ -1,4 +1,18 @@
 var tickerBookmarkObserver = {
+	load : function () {
+		removeEventListener("load", tickerBookmarkObserver.load, false);
+		
+		Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService).addObserver(tickerBookmarkObserver, false);
+		
+		addEventListener("unload", tickerBookmarkObserver.unload, false);
+	},
+	
+	unload : function () {
+		removeEventListener("unload", tickerBookmarkObserver.unload, false);
+		
+		Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService).removeObserver(tickerBookmarkObserver);
+	},
+	
 	onBeforeItemRemoved : function () { },
 	
 	onBeginUpdateBatch: function() {
@@ -46,11 +60,7 @@ var tickerBookmarkObserver = {
 		}
 		
 		throw Cr.NS_ERROR_NO_INTERFACE;
-	},
+	}
 };
 
-var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].
-        		getService(Components.interfaces.nsINavBookmarksService);
-bmsvc.addObserver(tickerBookmarkObserver, false);
-
-window.addEventListener("unload", function () { bmsvc.removeObserver(tickerBookmarkObserver); }, false);
+addEventListener("load", tickerBookmarkObserver.load, false);
