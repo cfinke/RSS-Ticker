@@ -56,6 +56,114 @@ var RSSTICKER_UTIL = {
 			
 			return rv;
 		}
+	},
+	
+	ignoreList : null,
+	ignoreListFilename : "rss-ticker.ignore.txt",
+	
+	readIgnoreFile : function () {
+		RSSTICKER_UTIL.ignoreList = [];
+		
+		var file, inputStream, lineStream, stillInFile, parts;
+		var feeds = [];
+		var line = { value: "" };
+		
+		file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+		
+		file.initWithPath(RSSTICKER_UTIL.getProfilePath() + RSSTICKER_UTIL.ignoreListFilename);
+		
+		if (!file.exists()) {
+			// File doesn't exist yet
+			return;
+		}
+
+		inputStream = Components.classes["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
+		inputStream.init(file, 0x01, 0600, null);
+		
+		lineStream = inputStream.QueryInterface(Components.interfaces.nsILineInputStream);
+		
+		do {
+			stillInFile = lineStream.readLine(line);
+			
+			if (line.value == "") {
+				continue;
+			}
+			else {
+				feeds.push(line.value);
+			}
+		} while (stillInFile);
+		
+		lineStream.close();
+		inputStream.close();
+		
+		return feeds;
+	},
+	
+	writeIgnoreFile : function () {
+		var profilePath = RSSTICKER_UTIL.getProfilePath();
+		
+		var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+		file.initWithPath(profilePath + RSSTICKER_UTIL.ignoreListFilename);
+
+		var outputStream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance( Components.interfaces.nsIFileOutputStream );
+
+		outputStream.init(file, 0x02 | 0x08 | 0x20, 0600, null);
+		
+		var data = RSSTICKER_UTIL.ignoreList.join("\r\n") + "\r\n";
+		
+		var bytes, bytesWritten, bytesRemaining = data.length;
+		var offset = 0;
+		
+		while (bytesRemaining) {
+			bytesWritten = outputStream.write(data.substring(offset), bytesRemaining);
+			bytesRemaining -= bytesWritten;
+			offset += bytesWritten;
+		}
+		
+		outputStream.close();
+	},
+	
+	getProfilePath : function () {
+		var DIR_SERVICE = new Components.Constructor("@mozilla.org/file/directory_service;1", "nsIProperties");
+		var profilePath = (new DIR_SERVICE()).get("ProfD", Components.interfaces.nsIFile).path; 
+		if (profilePath.search(/\\/) != -1) profilePath += "\\";
+		else profilePath += "/";
+		
+		return profilePath;
+	},
+	
+	isFeedIgnored : function (url) {
+		if (RSSTICKER_UTIL.ignoreList === null) {
+			RSSTICKER_UTIL.readIgnoreFile();
+		}
+		
+		return (RSSTICKER_UTIL.ignoreList.indexOf(url) != -1);
+	},
+	
+	ignoreFeed : function (url) {
+		if (RSSTICKER_UTIL.ignoreList === null) {
+			RSSTICKER_UTIL.readIgnoreFile();
+		}
+		
+		if (RSSTICKER_UTIL.ignoreList.indexOf(url) == -1) {
+			RSSTICKER_UTIL.ignoreList.push(url);
+			
+			RSSTICKER_UTIL.writeIgnoreFile();
+		}
+	},
+	
+	unignoreFeed : function (url) {
+		if (RSSTICKER_UTIL.ignoreList === null) {
+			RSSTICKER_UTIL.readIgnoreFile();
+		}
+		
+		var urlIndex = -1;
+		
+		if ((urlIndex = RSSTICKER_UTIL.ignoreList.indexOf(url)) != -1) {
+			RSSTICKER_UTIL.ignoreList.splice(urlIndex, 1);
+			
+			RSSTICKER_UTIL.writeIgnoreFile();
+		}
 	}
 };
 

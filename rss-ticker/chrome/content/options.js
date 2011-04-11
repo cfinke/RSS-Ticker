@@ -9,7 +9,7 @@ function observeFeeds(){
 		var item = items[i];
 		
 		if (item.nodeName == 'listitem'){
-			ticker.observeFeed(item.getAttribute("value"));
+			RSSTICKER_UTIL.unignoreFeed(item.getAttribute("value"));
 			item.setAttribute("ignored","false");
 		}
 	}
@@ -26,7 +26,7 @@ function ignoreFeeds(){
 		var item = items[i];
 		
 		if (item.nodeName == 'listitem'){
-			ticker.ignoreFeed(item.getAttribute("value"));
+			RSSTICKER_UTIL.ignoreFeed(item.getAttribute("value"));
 			item.setAttribute("ignored","true");
 		}
 	}
@@ -218,15 +218,13 @@ var TICKER_PREFS = {
 
 			feedList.appendChild(opt);
 		}
-
-		var ignore = ticker.readIgnoreFile();
-
+		
 		var len = feedList.childNodes.length;
 
 		for (var i = 0; i < len; i++){
 			var node = feedList.childNodes[i];
 
-			if (ignore.indexOf(node.getAttribute("value")) != -1){
+			if (RSSTICKER_UTIL.isFeedIgnored(node.getAttribute("value"))) {
 				node.setAttribute("ignored","true");
 			}
 		}

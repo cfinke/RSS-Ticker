@@ -33,10 +33,6 @@ pref("extensions.rssticker.updateToggle", true);
 
 pref("extensions.rssticker.lastVersion", "");
 pref("extensions.rssticker.lastUpdate", 0);
-pref("extensions.rssticker.trendRequest", false);
-pref("extensions.rssticker.lastTrendRequest", "0");
-
-pref("extensions.rssticker.trendingNews", false);
 
 pref("extensions.rssticker.featuredFeeds", "");
 pref("extensions.rssticker.featuredFeeds.lastUpdate", "0");

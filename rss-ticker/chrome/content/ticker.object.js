@@ -1,9 +1,4 @@
 var RSSTICKER = {
-	
-	ignoreFilename : "rss-ticker.ignore.txt",
-	
-	profilePath : null,
-	
 	tickTimer : null,
 	internalPause : false,
 	
@@ -69,8 +64,6 @@ var RSSTICKER = {
 	
 	// Toggles on/off debugging messages in the console.
 	DEBUG : false,
-	
-	// Button on the toolbar that shows status messages when the feeds are loading
 	
 	// Current width of the first feed item (the one that is being shrunk)
 	currentFirstItemMargin : 0,
@@ -618,15 +611,13 @@ var RSSTICKER = {
 			return;
 		}
 		
-		var ignore = RSSTICKER.readIgnoreFile();
-
 		RSSTICKER.internalPause = true;
 		
 		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
 			var node = RSSTICKER.toolbar.childNodes[i];
 			
 			if (node.nodeName == 'toolbarbutton'){
-				if (ignore.indexOf(node.feedURL) != -1){
+				if (RSSTICKER_UTIL.isFeedIgnored(node.feedURL)) {
 					RSSTICKER.toolbar.removeChild(node);
 				}
 			}
@@ -651,7 +642,7 @@ var RSSTICKER = {
 			
 			var feedName = RSSTICKER_UTIL.bookmarkService.getItemTitle(livemarkId);
 		
-			if (ignore.indexOf(feedURL) == -1){
+			if (!RSSTICKER_UTIL.isFeedIgnored(feedURL)){
 				RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
 			}
 		}
@@ -1602,111 +1593,6 @@ var RSSTICKER = {
 				browser.selectedTab = theTab;
 			}
 		}
-	},
-	
-	observeFeed : function (url) {
-		var feeds = RSSTICKER.readIgnoreFile();
-		
-		var urlIndex = -1;
-		
-		if ((urlIndex = feeds.indexOf(url)) != -1) {
-			feeds.splice(urlIndex, 1);
-			
-			// Rewrite the ignore file.
-			var DIR_SERVICE = new Components.Constructor("@mozilla.org/file/directory_service;1", "nsIProperties");
-			var profilePath = (new DIR_SERVICE()).get("ProfD", Components.interfaces.nsIFile).path; 
-		
-			if (profilePath.search(/\\/) != -1) profilePath += "\\";
-			else profilePath += "/";
-			
-			var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-			file.initWithPath(profilePath + RSSTICKER.ignoreFilename);
-
-			var outputStream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance( Components.interfaces.nsIFileOutputStream );
-
-			outputStream.init(file, 0x02 | 0x08 | 0x20, 0600, null);
-		
-			RSSTICKER.writeBytes(outputStream, feeds.join("\r\n") + "\r\n");
-			
-			outputStream.close();
-		}
-	},
-
-	writeBytes : function (outputStream, data) {
-		var bytes, bytesWritten, bytesRemaining = data.length;
-		var offset = 0;
-		
-		while (bytesRemaining) {
-			bytesWritten = outputStream.write(data.substring(offset), bytesRemaining);
-			bytesRemaining -= bytesWritten;
-			offset += bytesWritten;
-		}
-	},
-	
-	ignoreFeed : function (url) {
-		var feeds = RSSTICKER.readIgnoreFile();
-		
-		if (feeds.indexOf(url) == -1) {
-			var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-			file.initWithPath(RSSTICKER.getProfilePath() + RSSTICKER.ignoreFilename);
-
-			var outputStream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance( Components.interfaces.nsIFileOutputStream );
-			outputStream.init(file, 0x02 | 0x08 | 0x10, 0600, null);
-		
-			var data = url + "\r\n";
-			
-			RSSTICKER.writeBytes(outputStream, data);
-			
-			outputStream.close();
-		}
-	},
-	
-	readIgnoreFile : function () {
-		var file, inputStream, lineStream, stillInFile, parts;
-		var feeds = [];
-		var line = { value: "" };
-		
-		file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-		
-		file.initWithPath(RSSTICKER.getProfilePath() + RSSTICKER.ignoreFilename);
-		
-		if (!file.exists()) {
-			// File doesn't exist yet
-			return [];
-		}
-
-		inputStream = Components.classes["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
-		inputStream.init(file, 0x01, 0600, null);
-		
-		lineStream = inputStream.QueryInterface(Components.interfaces.nsILineInputStream);
-		
-		do {
-			stillInFile = lineStream.readLine(line);
-			
-			if (line.value == "") {
-				continue;
-			}
-			else {
-				feeds.push(line.value);
-			}
-		} while (stillInFile);
-		
-		lineStream.close();
-		inputStream.close();
-		
-		return feeds;
-	},
-	
-	getProfilePath : function () {
-		if (!RSSTICKER.profilePath){
-			var DIR_SERVICE = new Components.Constructor("@mozilla.org/file/directory_service;1", "nsIProperties");
-			RSSTICKER.profilePath = (new DIR_SERVICE()).get("ProfD", Components.interfaces.nsIFile).path; 
-		
-			if (RSSTICKER.profilePath.search(/\\/) != -1) RSSTICKER.profilePath += "\\";
-			else RSSTICKER.profilePath += "/";
-		}
-		
-		return RSSTICKER.profilePath;
 	},
 	
 	itemsInTicker : function (feed) {
