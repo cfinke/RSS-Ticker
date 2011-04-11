@@ -244,7 +244,7 @@ var RSSTICKER_UTIL = {
 		var ostream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance(Components.interfaces.nsIFileOutputStream);
 		ostream.init(file, -1, -1, 0);
 		
-		var data = RSSTICKER_UTIL.ignoreList.join("\r\n") + "\r\n";
+		var data = RSSTICKER_UTIL.ignoreList.join("\r\n");
 		
 		let istream = Components.classes["@mozilla.org/io/string-input-stream;1"].createInstance(Components.interfaces.nsIStringInputStream);
 		istream.setData(data, data.length);
