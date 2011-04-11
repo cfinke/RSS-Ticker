@@ -276,7 +276,7 @@ var TICKER_PREFS = {
 		for (var i = 0; i < len; i++){
 			var node = feedList.childNodes[i];
 
-			if (ignore.indexOf(node.getAttribute("value") != -1){
+			if (ignore.indexOf(node.getAttribute("value")) != -1){
 				node.setAttribute("ignored","true");
 			}
 		}
