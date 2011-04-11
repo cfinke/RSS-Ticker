@@ -16,10 +16,10 @@
 	<script type="application/x-javascript">
 		<![CDATA[
 		
-		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker.");
+		Components.utils.import("resource://rss-ticker-modules/ticker-utility.js");
 		
 		function dontShowMsgAgain(){
-			prefs.setBoolPref("noFeedsFoundFlag.1.7", document.getElementById("showWarningNextTime").checked);
+			RSSTICKER_UTIL.prefs.setBoolPref("noFeedsFoundFlag.1.7", document.getElementById("showWarningNextTime").checked);
 		}
 		
 		]]>
