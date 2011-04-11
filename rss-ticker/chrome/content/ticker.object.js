@@ -169,7 +169,9 @@ var RSSTICKER = {
 			db.executeSimpleSQL("CREATE TABLE IF NOT EXISTS history (id TEXT PRIMARY KEY, date INTEGER)");
 		}
 		
-		RSSTICKER.customizeContextMenus();
+		document.getElementById("RSSTICKERItemCM").addEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
+		document.getElementById("RSSTICKERCM").addEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
+		document.getElementById("RSSTICKERButtonCM").addEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
 		
 		RSSTICKER.rtl = RSSTICKER.prefs.getBoolPref("rtl");
 		
@@ -515,6 +517,10 @@ var RSSTICKER = {
 	},
 	
 	customizeContextMenus : function () {
+		document.getElementById("RSSTICKERItemCM").removeEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
+		document.getElementById("RSSTICKERCM").removeEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
+		document.getElementById("RSSTICKERButtonCM").removeEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
+		
 		RSSTICKER.customizeContextMenu("RSSTICKERItemCM");
 		RSSTICKER.customizeContextMenu("RSSTICKERCM");
 		RSSTICKER.customizeContextMenu("RSSTICKERButtonCM");
