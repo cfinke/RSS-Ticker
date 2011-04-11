@@ -156,8 +156,6 @@ var TICKER_PREFS = {
 	},
 	
 	getFeeds : function () {
-		var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService);
-		
 		var feedList = document.getElementById('feeds');
 		
 		var livemarks = [];
@@ -170,7 +168,7 @@ var TICKER_PREFS = {
 		for (var i = 0; i < len; i++){
 			var livemarkId = livemarkIds[i];
 
-			var feedURL = livemarkService.getFeedURI(livemarkId).spec;
+			var feedURL = RSSTICKER_UTIL.livemarkService.getFeedURI(livemarkId).spec;
 			var feedTitle = RSSTICKER_UTIL.bookmarkService.getItemTitle(livemarkId);
 
 			livemarks.push(
@@ -244,21 +242,19 @@ var TICKER_PREFS = {
 	
 	subscribe : function (title, feedUrl, siteUrl, description) {
 		var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
-		var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService);
 		var menu = Application.bookmarks.menu;
 		var uri = RSSTICKER_UTIL.ioService.newURI(siteUrl, null, null);
 		var feedUri = RSSTICKER_UTIL.ioService.newURI(feedUrl, null, null);
-		var lm = livemarkService.createLivemarkFolderOnly(Application.bookmarks.menu.id, title, uri, feedUri, -1);
+		var lm = RSSTICKER_UTIL.livemarkService.createLivemarkFolderOnly(Application.bookmarks.menu.id, title, uri, feedUri, -1);
 		annotationService.setItemAnnotation(lm, "bookmarkProperties/description", description, 0, Components.interfaces.nsIAnnotationService.EXPIRE_NEVER);
 	},
 	
 	unsubscribe : function (url) {
 		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
 		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
-		var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService);
 		
 		for (var i = 0; i < livemarkIds.length; i++){
-			var feedURL = livemarkService.getFeedURI(livemarkIds[i]).spec;
+			var feedURL = RSSTICKER_UTIL.livemarkService.getFeedURI(livemarkIds[i]).spec;
 			
 			if (feedURL == url) {
 				var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
