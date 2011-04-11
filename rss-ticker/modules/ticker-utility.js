@@ -84,7 +84,7 @@ var RSSTICKER_UTIL = {
 			try {
 				RSSTICKER_UTIL.history.URI = RSSTICKER_UTIL.ioService.newURI(url, null, null);
 				var visited = RSSTICKER_UTIL.historyService.isVisited(RSSTICKER_UTIL.history.URI);
-				var db = RSSTICKER.getDB();
+				var db = RSSTICKER_UTIL.getDB();
 				
 				if (!visited) {
 					var select = db.createStatement("SELECT id FROM history WHERE id=?1");
@@ -116,7 +116,7 @@ var RSSTICKER_UTIL = {
 		},
 		
 		addToHistory : function (guid) {
-			var db = RSSTICKER.getDB();
+			var db = RSSTICKER_UTIL.getDB();
 		
 			// Add to DB
 			var insert = db.createStatement("INSERT INTO history (id, date) VALUES (?1, ?2)");
@@ -124,6 +124,33 @@ var RSSTICKER_UTIL = {
 			insert.bindInt64Parameter(1, (new Date().getTime()));
 			insert.executeAsync();
 		}
+	},
+	
+	dbConnection : null,
+	
+	getDB : function () {
+		if (!RSSTICKER_UTIL.dbConnection) {
+			var dbFile = Components.classes["@mozilla.org/file/directory_service;1"]
+			                     .getService(Components.interfaces.nsIProperties)
+			                     .get("ProfD", Components.interfaces.nsIFile)
+			                     .append("rssticker.sqlite");
+		
+			RSSTICKER_UTIL.dbConnection = Components.classes["@mozilla.org/storage/service;1"]
+			                                      .getService(Components.interfaces.mozIStorageService)
+			                                      .openDatabase(dbFile);
+			
+			if (!RSSTICKER_UTIL.dbConnection.tableExists("history")) {
+				RSSTICKER_UTIL.dbConnection.executeSimpleSQL("CREATE TABLE history (id TEXT PRIMARY KEY, date INTEGER)");
+			}
+		}
+		
+		return RSSTICKER_UTIL.dbConnection;
+	},
+	
+	closeDB : function () {
+		RSSTICKER_UTIL.dbConnection.close();
+		delete RSSTICKER_UTIL.dbConnection;
+		RSSTICKER_UTIL.dbConnection = null;
 	},
 	
 	ignoreList : null,

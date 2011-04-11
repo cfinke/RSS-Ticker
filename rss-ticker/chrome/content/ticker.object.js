@@ -98,12 +98,6 @@ var RSSTICKER = {
 		
 		RSSTICKER.tickLength = RSSTICKER.prefs.getIntPref("tickSpeed") * (500 / RSSTICKER.prefs.getIntPref("ticksPerItem"));
 		
-		var db = RSSTICKER.getDB();
-		
-		if (!db.tableExists("history")) {
-			db.executeSimpleSQL("CREATE TABLE IF NOT EXISTS history (id TEXT PRIMARY KEY, date INTEGER)");
-		}
-		
 		document.getElementById("RSSTICKERItemCM").addEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
 		document.getElementById("RSSTICKERCM").addEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
 		document.getElementById("RSSTICKERButtonCM").addEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
@@ -1502,31 +1496,6 @@ var RSSTICKER = {
 		}
   
 		return true;
-	},
-	
-	theFile : null,
-	theDB : null,
-	
-	getDB : function () {
-		if (!RSSTICKER.theFile) {
-			RSSTICKER.theFile = Components.classes["@mozilla.org/file/directory_service;1"]
-		                     .getService(Components.interfaces.nsIProperties)
-		                     .get("ProfD", Components.interfaces.nsIFile);
-			RSSTICKER.theFile.append("rssticker.sqlite");
-		}
-		
-		if (!RSSTICKER.theDB) {
-			RSSTICKER.theDB = Components.classes["@mozilla.org/storage/service;1"]
-		                 .getService(Components.interfaces.mozIStorageService).openDatabase(RSSTICKER.theFile);
-		}
-		
-		return RSSTICKER.theDB;
-	},
-	
-	closeDB : function () {
-		RSSTICKER.theDB.close();
-		delete RSSTICKER.theDB;
-		RSSTICKER.theDB = null;
 	},
 	
 	browser : {
