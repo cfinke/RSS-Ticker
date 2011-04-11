@@ -179,7 +179,7 @@ TickerParseListener.prototype = {
 				
 							feedObject.items.push(itemObject);
 						} catch (e) {
-							RSSTICKER.logMessage(e);
+							RSSTICKER_UTIL.log(e);
 						}
 			
 						delete item;
@@ -193,7 +193,7 @@ TickerParseListener.prototype = {
 					delete numItems;
 					delete result;
 				} catch (e) {
-					RSSTICKER.logMessage(e);
+					RSSTICKER_UTIL.log(e);
 				}
 			}
 		}

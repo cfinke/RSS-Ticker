@@ -63,7 +63,7 @@ var RSSTICKER = {
 	ticker : null,
 	
 	// Toggles on/off debugging messages in the console.
-	DEBUG : false,
+	DEBUG : true,
 	
 	// Current width of the first feed item (the one that is being shrunk)
 	currentFirstItemMargin : 0,
@@ -77,7 +77,7 @@ var RSSTICKER = {
 		
 		addEventListener("unload", RSSTICKER.unload, false);
 
-		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Loading prefs.");
+		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Loading prefs.");
 	
 		RSSTICKER.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker.");
 		RSSTICKER.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
@@ -371,6 +371,25 @@ var RSSTICKER = {
 				}
 			break;
 			case "updateToggle":
+				RSSTICKER.internalPause = true;
+				
+				for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+					var node = RSSTICKER.toolbar.childNodes[i];
+					
+					if (node.nodeName == 'toolbarbutton') {
+						RSSTICKER_UTIL.log(node.feedURL + " " + RSSTICKER_UTIL.isFeedIgnored(node.feedURL));
+						
+						if (RSSTICKER_UTIL.isFeedIgnored(node.feedURL)) {
+							RSSTICKER_UTIL.log("Removing");
+							RSSTICKER.toolbar.removeChild(node);
+						}
+					}
+				}
+				
+				RSSTICKER.checkForEmptiness();
+				
+				RSSTICKER.internalPause = false;
+			
 				RSSTICKER.updateAllFeeds();
 			break;
 			case "rtl":
@@ -395,12 +414,12 @@ var RSSTICKER = {
 		if (tickerPlacement == 1){
 			// Beneath the status bar
 			document.getElementById('browser-bottombox').appendChild(RSSTICKER.ticker);
-			if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Placed after status bar.");
+			if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Placed after status bar.");
 		}
 		else if (tickerPlacement == 2){
 			// Up by the Bookmarks Toolbar
 			document.getElementById('navigator-toolbox').appendChild(RSSTICKER.ticker);
-			if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Placed in navigator toolbox.");
+			if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Placed in navigator toolbox.");
 		}
 	},
 	
@@ -429,7 +448,7 @@ var RSSTICKER = {
 		removeEventListener("resize", RSSTICKER.adjustSpacerWidth, false);
 		removeEventListener("DOMMouseScroll", RSSTICKER.scrollTicker, false)
 		
-		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Ticker disabled.");
+		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Ticker disabled.");
 		
 		RSSTICKER.disabled = true;
 		
@@ -605,9 +624,11 @@ var RSSTICKER = {
 	startFetchingFeeds : function () {
 		// RSSTICKER.showFeaturedFeeds();
 		
-		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Updating feeds " + new Date().toString());
+		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Updating feeds " + new Date().toString());
 		
 		if (RSSTICKER.disabled) {
+			if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Ticker is disabled.");
+			
 			return;
 		}
 		
@@ -630,8 +651,7 @@ var RSSTICKER = {
 	    RSSTICKER.feedsToFetch = [];
 	    RSSTICKER.feedIndex = 0;
 	    
-		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
-		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
+		var livemarkIds = RSSTICKER_UTIL.annotationService.getItemsWithAnnotation("livemark/feedURI", {});
 		
 		var len = livemarkIds.length;
 		
@@ -641,15 +661,17 @@ var RSSTICKER = {
 			var feedURL = RSSTICKER_UTIL.livemarkService.getFeedURI(livemarkId).spec;
 			
 			var feedName = RSSTICKER_UTIL.bookmarkService.getItemTitle(livemarkId);
-		
-			if (!RSSTICKER_UTIL.isFeedIgnored(feedURL)){
-				RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
-			}
+			
+			RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
 		}
 		
 		if (RSSTICKER.feedsToFetch.length == 0) {
+			if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("No feeds found.");
+			
 		    RSSTICKER.setTimeout(RSSTICKER.notifyNoFeeds, 3000);
 		}
+		
+		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Setting reload interval.");
 		
 		RSSTICKER.setTimeout(RSSTICKER.setReloadInterval, 5000, RSSTICKER.prefs.getIntPref("updateFrequency"));
     },
@@ -729,7 +751,7 @@ var RSSTICKER = {
                 
         var feedIndex = RSSTICKER.feedIndex;
         
-		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("indexOverride: " + indexOverride);
+		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("indexOverride: " + indexOverride);
 
         if (typeof(indexOverride) != "undefined") {
             feedIndex = indexOverride;
@@ -742,19 +764,24 @@ var RSSTICKER = {
             RSSTICKER.prefs.setIntPref("lastUpdate", Math.round(new Date().getTime() / 1000));
         }
         
-		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("feedIndex: " + feedIndex);
-		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("feedsToFetch: " + RSSTICKER.feedsToFetch);
-		
+		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("feedIndex: " + feedIndex);
+		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("feedsToFetch: " + RSSTICKER.feedsToFetch);
 
         var feed = RSSTICKER.feedsToFetch[feedIndex];
 
-		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Feed: " + feed.toSource());
+		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Feed: " + feed.toSource());
 		
 	    var url = feed.feed;
 			
-		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Url: " + url);
+		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Url: " + url);
 		
-		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Loading " + url);
+		if (RSSTICKER_UTIL.isFeedIgnored(url)) {
+			if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Ignoring " + url);
+			setTimeoutForNext();
+			return;
+		}
+		
+		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Loading " + url);
 		
 		var req = new XMLHttpRequest();
 	
@@ -790,13 +817,13 @@ var RSSTICKER = {
 									converter.charset = encoding_matches[1];
 									data = converter.ConvertToUnicode(data);
 								} catch (e) {
-									RSSTICKER.logMessage(e);
+									RSSTICKER_UTIL.log(e);
 								}
 								
 								RSSTICKER.queueForParsing(data.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
 							} catch (e) {
 								// Parse error
-								RSSTICKER.logMessage(e);
+								RSSTICKER_UTIL.log(e);
 							}
 						}
 						else {
@@ -1210,7 +1237,7 @@ var RSSTICKER = {
 			} catch (e) {
 				// Tried to adjust spacer when there wasn't one.
 				// Could happen depending on when the disable button was pressed
-				if (RSSTICKER.DEBUG) RSSTICKER.logMessage(e);
+				if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log(e);
 			}
 		}
 	},
@@ -1477,11 +1504,6 @@ var RSSTICKER = {
 		return true;
 	},
 	
-	logMessage : function (message) {
-		var consoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
-		consoleService.logStringMessage("RSSTICKER: " + message);
-	},
-	
 	theFile : null,
 	theDB : null,
 	
@@ -1529,7 +1551,7 @@ var RSSTICKER = {
 							break;
 						}
 					} catch (e) {
-						RSSTICKER.logMessage(e);
+						RSSTICKER_UTIL.log(e);
 					} finally {
 						select.reset();
 					}
@@ -1547,7 +1569,7 @@ var RSSTICKER = {
 				return visited;
 			} catch (e) {
 				// Malformed URI, probably
-				RSSTICKER.logMessage(e + " " + url);
+				RSSTICKER_UTIL.log(e + " " + url);
 				return false;
 			}
 		},
@@ -1683,8 +1705,16 @@ var RSSTICKER = {
 	},
 	
 	setTimeout : function (callback, timeout, arg1, arg2, arg3, arg4) {
+		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Setting timeout (" + timeout + ").");
+		
+		return setTimeout(callback, timeout, arg1, arg2, arg3, arg4);
+		/*
 		var cb = {
 			notify : function (timer) {
+				if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Executing timer.");
+				
+				RSSTICKER.clearTimeout(timer);
+				
 				callback(arg1, arg2, arg3, arg4);
 			}
 		};
@@ -1692,11 +1722,15 @@ var RSSTICKER = {
 		var timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
 		timer.initWithCallback(cb, timeout, timer.TYPE_ONE_SHOT);
 		return timer;
+		*/
 	},
 	
 	clearTimeout : function (timer) {
+		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Clearing timeout.");
+		
 		if (timer) {
-			timer.cancel();
+			clearTimeout(timer);
+			// timer.cancel();
 		}
 	}
 };

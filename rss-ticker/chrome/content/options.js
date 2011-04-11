@@ -90,13 +90,6 @@ var TICKER_PREFS = {
 				sizeToContent();
 			}
 		}
-		/*
-		if (window.arguments[0]) {
-			setTimeout(function () {
-				document.documentElement.showPane(document.getElementById(window.arguments[0]));
-			}, 1000);
-		}
-		*/
 	},
 	
 	unload : function () {
@@ -158,8 +151,7 @@ var TICKER_PREFS = {
 		
 		var livemarks = [];
 		
-		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
-		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
+		var livemarkIds = RSSTICKER_UTIL.annotationService.getItemsWithAnnotation("livemark/feedURI", {});
 
 		var len = livemarkIds.length;
 
@@ -220,8 +212,7 @@ var TICKER_PREFS = {
 	},
 	
 	isSubscribed : function (url) {
-		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
-		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
+		var livemarkIds = RSSTICKER_UTIL.annotationService.getItemsWithAnnotation("livemark/feedURI", {});
 		
 		var len = livemarkIds.length;
 		
@@ -239,17 +230,15 @@ var TICKER_PREFS = {
 	},
 	
 	subscribe : function (title, feedUrl, siteUrl, description) {
-		var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
 		var menu = Application.bookmarks.menu;
 		var uri = RSSTICKER_UTIL.ioService.newURI(siteUrl, null, null);
 		var feedUri = RSSTICKER_UTIL.ioService.newURI(feedUrl, null, null);
 		var lm = RSSTICKER_UTIL.livemarkService.createLivemarkFolderOnly(Application.bookmarks.menu.id, title, uri, feedUri, -1);
-		annotationService.setItemAnnotation(lm, "bookmarkProperties/description", description, 0, Components.interfaces.nsIAnnotationService.EXPIRE_NEVER);
+		RSSTICKER_UTIL.annotationService.setItemAnnotation(lm, "bookmarkProperties/description", description, 0, Components.interfaces.nsIAnnotationService.EXPIRE_NEVER);
 	},
 	
 	unsubscribe : function (url) {
-		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
-		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
+		var livemarkIds = RSSTICKER_UTIL.annotationService.getItemsWithAnnotation("livemark/feedURI", {});
 		
 		for (var i = 0; i < livemarkIds.length; i++){
 			var feedURL = RSSTICKER_UTIL.livemarkService.getFeedURI(livemarkIds[i]).spec;

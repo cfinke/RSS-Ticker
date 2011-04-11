@@ -5,6 +5,9 @@ var RSSTICKER_UTIL = {
 	_livemarkService : null,
 	get livemarkService() { if (!RSSTICKER_UTIL._livemarkService) { RSSTICKER_UTIL._livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService); } return RSSTICKER_UTIL._livemarkService; },
 
+	_annotationService : null,
+	get annotationService() { if (!RSSTICKER_UTIL._annotationService) { RSSTICKER_UTIL._annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService); } return RSSTICKER_UTIL._annotationService; },
+
 	_bookmarkService : null,
 	get bookmarkService() { if (!RSSTICKER_UTIL._bookmarkService) { RSSTICKER_UTIL._bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService); } return RSSTICKER_UTIL._bookmarkService; },
 
@@ -167,6 +170,11 @@ var RSSTICKER_UTIL = {
 			
 			RSSTICKER_UTIL.writeIgnoreFile();
 		}
+	},
+	
+	log : function (message) {
+		var consoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
+		consoleService.logStringMessage("RSSTICKER: " + message);
 	}
 };
 
