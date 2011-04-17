@@ -200,7 +200,6 @@ var RSSTICKER_UTIL = {
 		RSSTICKER_UTIL.ignoreList = [];
 		
 		var file, inputStream, lineStream, stillInFile, parts;
-		var feeds = [];
 		var line = { value: "" };
 		
 		file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
@@ -224,14 +223,12 @@ var RSSTICKER_UTIL = {
 				continue;
 			}
 			else {
-				feeds.push(line.value);
+				RSSTICKER_UTIL.ignoreList.push(line.value);
 			}
 		} while (stillInFile);
 		
 		lineStream.close();
 		inputStream.close();
-		
-		return feeds;
 	},
 	
 	writeIgnoreFile : function () {
