@@ -236,7 +236,10 @@ var RSSTICKER_UTIL = {
 		
 		var file = Components.classes["@mozilla.org/file/directory_service;1"].getService(Components.interfaces.nsIProperties).get("ProfD", Components.interfaces.nsIFile);
 		file.append(RSSTICKER_UTIL.ignoreListFilename);
-		file.create(Components.interfaces.nsIFile.NORMAL_FILE_TYPE, 0600);
+		
+		if (!file.exists()) {
+			file.create(Components.interfaces.nsIFile.NORMAL_FILE_TYPE, 0600);
+		}
 		
 		var ostream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance(Components.interfaces.nsIFileOutputStream);
 		ostream.init(file, -1, -1, 0);
