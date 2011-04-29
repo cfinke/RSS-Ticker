@@ -1,14 +1,103 @@
+var ticker;
+
+function observeFeeds(){
+	var items = document.getElementById('feeds').selectedItems;
+	
+	var len = items.length;
+	
+	for (var i = 0; i < len; i++){
+		var item = items[i];
+		
+		if (item.nodeName == 'listitem'){
+			ticker.observeFeed(item.getAttribute("value"));
+			item.setAttribute("ignored","false");
+		}
+	}
+	
+	ticker.prefs.setBoolPref("updateToggle", !ticker.prefs.getBoolPref("updateToggle"));
+}
+
+function ignoreFeeds(){
+	var items = document.getElementById('feeds').selectedItems;
+	
+	var len = items.length;
+	
+	for (var i = 0; i < len; i++){
+		var item = items[i];
+		
+		if (item.nodeName == 'listitem'){
+			ticker.ignoreFeed(item.getAttribute("value"));
+			item.setAttribute("ignored","true");
+		}
+	}
+	
+	ticker.prefs.setBoolPref("updateToggle", !ticker.prefs.getBoolPref("updateToggle"));
+}
+
 var TICKER_PREFS = {
+	prefs : null,
 	browserPrefs : null,
 	
+	strings : {
+		_backup : null,
+		_main : null,
+		
+		initStrings : function () {
+			if (!this._backup) { this._backup = document.getElementById("RSSTICKER-backup-bundle"); }
+			if (!this._main) { this._main = document.getElementById("RSSTICKER-bundle"); }
+		},
+		
+		getString : function (key) {
+			this.initStrings();
+			
+			var rv = "";
+			
+			try {
+				rv = this._main.getString(key);
+			} catch (e) {
+			}
+			
+			if (!rv) {
+				try {
+					rv = this._backup.getString(key);
+				} catch (e) {
+				}
+			}
+			
+			return rv;
+		},
+		
+		getFormattedString : function (key, args) {
+			this.initStrings();
+			
+			var rv = "";
+			
+			try {
+				rv = this._main.getFormattedString(key, args);
+			} catch (e) {
+			}
+			
+			if (!rv) {
+				try {
+					rv = this._backup.getFormattedString(key, args);
+				} catch (e) {
+				}
+			}
+			
+			return rv;
+		}
+	},
+	
 	onload : function () {
+		TICKER_PREFS.findTicker();
 		TICKER_PREFS.getFeeds();
 		
+		TICKER_PREFS.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker.");
 		TICKER_PREFS.browserPrefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("browser.preferences.");
 		
 		TICKER_PREFS.scales();
 		
-		var featuredFeeds = RSSTICKER_UTIL.prefs.getCharPref("featuredFeeds");
+		var featuredFeeds = TICKER_PREFS.prefs.getCharPref("featuredFeeds");
 		
 		if (!featuredFeeds) {
 			document.getElementById("featured-pane").style.display = "none";
@@ -70,13 +159,13 @@ var TICKER_PREFS = {
 					button.description = featuredFeeds[i].description;
 					
 					if (isSubscribed) {
-						button.setAttribute("label", RSSTICKER_UTIL.strings.getString("rssticker.featured.unsubscribe"));
+						button.setAttribute("label", TICKER_PREFS.strings.getString("rssticker.featured.unsubscribe"));
 					}
 					else {
-						button.setAttribute("label", RSSTICKER_UTIL.strings.getString("rssticker.featured.subscribe"));
+						button.setAttribute("label", TICKER_PREFS.strings.getString("rssticker.featured.subscribe"));
 					}
 					
-					button.setAttribute("oncommand", "if (TICKER_PREFS.isSubscribed(this.feedUrl)) { this.setAttribute('label', RSSTICKER_UTIL.strings.getString('rssticker.featured.subscribe')); TICKER_PREFS.unsubscribe(this.feedUrl); } else { this.setAttribute('label', RSSTICKER_UTIL.strings.getString('rssticker.featured.unsubscribe')); TICKER_PREFS.subscribe(this.name, this.feedUrl, this.siteUrl, this.description); }");
+					button.setAttribute("oncommand", "if (TICKER_PREFS.isSubscribed(this.feedUrl)) { this.setAttribute('label', TICKER_PREFS.strings.getString('rssticker.featured.subscribe')); TICKER_PREFS.unsubscribe(this.feedUrl); } else { this.setAttribute('label', TICKER_PREFS.strings.getString('rssticker.featured.unsubscribe')); TICKER_PREFS.subscribe(this.name, this.feedUrl, this.siteUrl, this.description); }");
 					
 					vbox.appendChild(label);
 					vbox.appendChild(description);
@@ -90,6 +179,13 @@ var TICKER_PREFS = {
 				sizeToContent();
 			}
 		}
+		/*
+		if (window.arguments[0]) {
+			setTimeout(function () {
+				document.documentElement.showPane(document.getElementById(window.arguments[0]));
+			}, 1000);
+		}
+		*/
 	},
 	
 	unload : function () {
@@ -110,56 +206,42 @@ var TICKER_PREFS = {
 				}
 			}
 		}
+		
+		// @todo
 	},
 	
-	observeFeeds : function () {
-		var items = document.getElementById('feeds').selectedItems;
+	findTicker : function () {
+		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+		var enumerator = wm.getEnumerator(null);
 
-		var len = items.length;
+		while(enumerator.hasMoreElements()) {
+			var win = enumerator.getNext();
 
-		for (var i = 0; i < len; i++){
-			var item = items[i];
-
-			if (item.nodeName == 'listitem'){
-				RSSTICKER_UTIL.unignoreFeed(item.getAttribute("value"));
-				item.setAttribute("ignored","false");
+			if (win.RSSTICKER) {
+				ticker = win.RSSTICKER;
+				break;
 			}
 		}
-		
-		RSSTICKER_UTIL.prefs.setBoolPref("updateToggle", !RSSTICKER_UTIL.prefs.getBoolPref("updateToggle"));
-	},
-	
-	ignoreFeeds : function () {
-		var items = document.getElementById('feeds').selectedItems;
-
-		var len = items.length;
-
-		for (var i = 0; i < len; i++){
-			var item = items[i];
-
-			if (item.nodeName == 'listitem'){
-				RSSTICKER_UTIL.ignoreFeed(item.getAttribute("value"));
-				item.setAttribute("ignored","true");
-			}
-		}
-		
-		RSSTICKER_UTIL.prefs.setBoolPref("updateToggle", !RSSTICKER_UTIL.prefs.getBoolPref("updateToggle"));
 	},
 	
 	getFeeds : function () {
+		var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService);
+		
 		var feedList = document.getElementById('feeds');
 		
 		var livemarks = [];
 		
-		var livemarkIds = RSSTICKER_UTIL.annotationService.getItemsWithAnnotation("livemark/feedURI", {});
+		var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
+		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
+		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
 
 		var len = livemarkIds.length;
 
 		for (var i = 0; i < len; i++){
 			var livemarkId = livemarkIds[i];
 
-			var feedURL = RSSTICKER_UTIL.livemarkService.getFeedURI(livemarkId).spec;
-			var feedTitle = RSSTICKER_UTIL.bookmarkService.getItemTitle(livemarkId);
+			var feedURL = livemarkService.getFeedURI(livemarkId).spec;
+			var feedTitle = bookmarkService.getItemTitle(livemarkId);
 
 			livemarks.push(
 				{
@@ -187,13 +269,15 @@ var TICKER_PREFS = {
 
 			feedList.appendChild(opt);
 		}
-		
+
+		var ignore = ticker.readIgnoreFile();
+
 		var len = feedList.childNodes.length;
 
 		for (var i = 0; i < len; i++){
 			var node = feedList.childNodes[i];
 
-			if (RSSTICKER_UTIL.isFeedIgnored(node.getAttribute("value"))) {
+			if (ticker.inArray(ignore, node.getAttribute("value"))){
 				node.setAttribute("ignored","true");
 			}
 		}
@@ -212,14 +296,15 @@ var TICKER_PREFS = {
 	},
 	
 	isSubscribed : function (url) {
-		var livemarkIds = RSSTICKER_UTIL.annotationService.getItemsWithAnnotation("livemark/feedURI", {});
+		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
+		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
 		
 		var len = livemarkIds.length;
 		
 		for (var i = 0; i < len; i++){
 			var livemarkId = livemarkIds[i];
 			
-			var feedURL = RSSTICKER_UTIL.livemarkService.getFeedURI(livemarkId).spec;
+			var feedURL = ticker.livemarkService.getFeedURI(livemarkId).spec;
 			
 			if (url == feedURL) {
 				return true;
@@ -230,18 +315,24 @@ var TICKER_PREFS = {
 	},
 	
 	subscribe : function (title, feedUrl, siteUrl, description) {
+		var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
+		var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
+		var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
+		var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService);
 		var menu = Application.bookmarks.menu;
-		var uri = RSSTICKER_UTIL.ioService.newURI(siteUrl, null, null);
-		var feedUri = RSSTICKER_UTIL.ioService.newURI(feedUrl, null, null);
-		var lm = RSSTICKER_UTIL.livemarkService.createLivemarkFolderOnly(Application.bookmarks.menu.id, title, uri, feedUri, -1);
-		RSSTICKER_UTIL.annotationService.setItemAnnotation(lm, "bookmarkProperties/description", description, 0, Components.interfaces.nsIAnnotationService.EXPIRE_NEVER);
+		var uri = ioService.newURI(siteUrl, null, null);
+		var feedUri = ioService.newURI(feedUrl, null, null);
+		var lm = livemarkService.createLivemarkFolderOnly(Application.bookmarks.menu.id, title, uri, feedUri, -1);
+		annotationService.setItemAnnotation(lm, "bookmarkProperties/description", description, 0, Components.interfaces.nsIAnnotationService.EXPIRE_NEVER);
 	},
 	
 	unsubscribe : function (url) {
-		var livemarkIds = RSSTICKER_UTIL.annotationService.getItemsWithAnnotation("livemark/feedURI", {});
+		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
+		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
+		var livemarkService = Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService);
 		
 		for (var i = 0; i < livemarkIds.length; i++){
-			var feedURL = RSSTICKER_UTIL.livemarkService.getFeedURI(livemarkIds[i]).spec;
+			var feedURL = livemarkService.getFeedURI(livemarkIds[i]).spec;
 			
 			if (feedURL == url) {
 				var bookmarkService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);

@@ -11,19 +11,23 @@
 	<script type="application/x-javascript" src="chrome://rss-ticker/content/bookmark-observer.js"></script>
 	<script type="application/x-javascript">
 		<![CDATA[
-		
-		Components.utils.import("resource://rss-ticker-modules/ticker-utility.js");
-		addEventListener("load", function () { removeEventListener("load", arguments.callee, false); RSSTICKER_UTIL.load(); }, false);
-		addEventListener("unload", function () { removeEventListener("unload", arguments.callee, false); RSSTICKER_UTIL.unload(); }, false);
-		
-		addEventListener("load", RSSTICKER.onload, false);
-		
-		Components.utils.import("resource://rss-ticker-modules/featured-feeds.js");
-		addEventListener("load", function () { removeEventListener("load", arguments.callee, false); FEATURED_TICKER_FEEDS.load(); }, false);
-		addEventListener("unload", function () { removeEventListener("unload", arguments.callee, false); FEATURED_TICKER_FEEDS.unload(); }, false);
-		
+			
+			Components.utils.import("resource://rss-ticker-modules/featured-feeds.js");
+			
+			window.addEventListener("load", function () { RSSTICKER.onload(); }, false);
+			window.addEventListener("unload", function () { RSSTICKER.unload(); }, false);
+			window.addEventListener("resize", function () { RSSTICKER.adjustSpacerWidth(); }, false);
+			window.addEventListener("DOMMouseScroll", function (event) { RSSTICKER.scrollTicker(event); }, false)
+			
+			addEventListener("load", FEATURED_TICKER_FEEDS.load, false);
+			addEventListener("unload", FEATURED_TICKER_FEEDS.unload, false);
+			
 		]]>
 	</script>
+	<stringbundleset id="stringbundleset">
+		<stringbundle id="RSSTICKER-backup-bundle" src="chrome://rss-ticker-default-locale/content/locale.properties" />
+		<stringbundle id="RSSTICKER-bundle" src="chrome://rss-ticker/locale/locale.properties" />
+	</stringbundleset>
 	<commandset id="mainCommandSet">
 		<command id="rss-ticker_cmd_open" oncommand="RSSTICKER.onContextOpen(document.popupNode);" label="&cm.open;"/>
 		<command id="rss-ticker_cmd_openInNewWindow" oncommand="RSSTICKER.onContextOpen(document.popupNode, 'window');" label="&cm.openInNewWindow;"/>
@@ -32,8 +36,8 @@
 		<command id="rss-ticker_cmd_openUnreadInTabs" oncommand="RSSTICKER.openAllInTabs(true);" label="&cm.openUnreadInTabs;"/>
 		<command id="rss-ticker_cmd_openFeedInTabs" oncommand="RSSTICKER.openAllInTabs(false, document.popupNode.feed);" label="&cm.openFeedInTabs;"/>
 		<command id="rss-ticker_cmd_openFeedUnreadInTabs" oncommand="RSSTICKER.openAllInTabs(true, document.popupNode.feed);" label="&cm.openFeedUnreadInTabs;"/>
-		<command id="rss-ticker_cmd_copyLinkTitle" oncommand="RSSTICKER_UTIL.clipboard.copyString(document.popupNode.attributes['label'].value);" label="&cm.copyLinkTitle;"/>
-		<command id="rss-ticker_cmd_copyLinkURL" oncommand="RSSTICKER_UTIL.clipboard.copyString(document.popupNode.href);" label="&cm.copyLinkURL;"/>
+		<command id="rss-ticker_cmd_copyLinkTitle" oncommand="RSSTICKER.clipboard.copyString(document.popupNode.attributes['label'].value);" label="&cm.copyLinkTitle;"/>
+		<command id="rss-ticker_cmd_copyLinkURL" oncommand="RSSTICKER.clipboard.copyString(document.popupNode.href);" label="&cm.copyLinkURL;"/>
 		<command id="rss-ticker_cmd_refreshFeeds" oncommand="RSSTICKER.updateAllFeeds(); RSSTICKER.mouseOverFlag = false;" label="&cm.refreshFeeds;"/>
 		<command id="rss-ticker_cmd_manageFeeds" oncommand="RSSTICKER.options('manage-pane');" label="&cm.manageFeeds;"/>
 		<command id="rss-ticker_cmd_markAsRead" oncommand="RSSTICKER.markAsRead(document.popupNode);" label="&cm.markAsRead;"/>
@@ -98,6 +102,11 @@
 				<description id="RSSTICKERTooltipSummary"></description>
 			</groupbox>
 		</tooltip>
+		<!--
+		<tooltip id="RSSTICKERLoadingNoticeTooltip" noautohide="true" orient="vertical">
+			<description id="RSSTICKERLoadingNoticeText"></description>
+		</tooltip>
+		-->
 	</popupset>
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="RSSTICKER-button" contextmenu="RSSTICKERButtonCM" tooltiptext="&toggleTicker;" class="toolbarbutton-1" label="&extension.title;" oncommand="RSSTICKER.toggleDisabled();" />

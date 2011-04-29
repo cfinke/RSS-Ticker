@@ -1,4 +1,62 @@
 var RSSTICKER = {
+	livemarkService : Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService),
+	bookmarkService : Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService),
+	ioService : Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService),
+	
+	strings : {
+		_backup : null,
+		_main : null,
+		
+		initStrings : function () {
+			if (!this._backup) { this._backup = document.getElementById("RSSTICKER-backup-bundle"); }
+			if (!this._main) { this._main = document.getElementById("RSSTICKER-bundle"); }
+		},
+		
+		getString : function (key) {
+			this.initStrings();
+			
+			var rv = "";
+			
+			try {
+				rv = this._main.getString(key);
+			} catch (e) {
+			}
+			
+			if (!rv) {
+				try {
+					rv = this._backup.getString(key);
+				} catch (e) {
+				}
+			}
+			
+			return rv;
+		},
+		
+		getFormattedString : function (key, args) {
+			this.initStrings();
+			
+			var rv = "";
+			
+			try {
+				rv = this._main.getFormattedString(key, args);
+			} catch (e) {
+			}
+			
+			if (!rv) {
+				try {
+					rv = this._backup.getFormattedString(key, args);
+				} catch (e) {
+				}
+			}
+			
+			return rv;
+		}
+	},
+	
+	ignoreFilename : "rss-ticker.ignore.txt",
+	
+	profilePath : null,
+	
 	tickTimer : null,
 	internalPause : false,
 	
@@ -42,6 +100,31 @@ var RSSTICKER = {
 		itemWidth : 250
 	},
 	
+	// Context Menu options
+	cmOptions : {
+		open : true,
+		openInTab : true,
+		openInWindow : false,
+		
+		openAllInTabs : true,
+		openUnreadInTabs : false,
+		openFeedInTabs : true,
+		openFeedUnreadInTabs : false,
+		
+		copyLinkTitle : false,
+		copyLinkURL : true,
+		
+		refreshFeeds : true,
+		manageFeeds : true,
+		
+		markAsRead : true,
+		markFeedAsRead : true,
+		markAllAsRead : true,
+		
+		options : true,
+		disableTicker : false
+	},
+	
 	// Always open in new tab
 	alwaysOpenInNewTab : false,
 	
@@ -65,6 +148,9 @@ var RSSTICKER = {
 	// Toggles on/off debugging messages in the console.
 	DEBUG : false,
 	
+	// Button on the toolbar that shows status messages when the feeds are loading
+	// loadingNotice : null,
+	
 	// Current width of the first feed item (the one that is being shrunk)
 	currentFirstItemMargin : 0,
 	
@@ -73,34 +159,15 @@ var RSSTICKER = {
 	rtl : false,
 	
 	onload : function () {
-		removeEventListener("load", RSSTICKER.onload, false);
+		RSSTICKER.loadPrefs();
 		
-		addEventListener("unload", RSSTICKER.unload, false);
-
-		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Loading prefs.");
-	
-		RSSTICKER.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker.");
-		RSSTICKER.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
-		RSSTICKER.prefs.addObserver("", RSSTICKER, false);
-	
-		RSSTICKER.disabled = RSSTICKER.prefs.getBoolPref("disabled");
-		RSSTICKER.hideWhenEmpty = RSSTICKER.prefs.getBoolPref("hideWhenEmpty");
-		RSSTICKER.randomizeItems = RSSTICKER.prefs.getBoolPref("randomizeItems");
-		RSSTICKER.ticksPerItem = RSSTICKER.prefs.getIntPref("ticksPerItem");
-		RSSTICKER.displayWidth.itemWidth = RSSTICKER.prefs.getIntPref("dw.itemWidth");
-		RSSTICKER.limitItemsPerFeed = RSSTICKER.prefs.getBoolPref("limitItemsPerFeed");
-		RSSTICKER.itemsPerFeed = RSSTICKER.prefs.getIntPref("itemsPerFeed");
-		RSSTICKER.boldUnvisited = RSSTICKER.prefs.getBoolPref("boldUnvisited");
-		RSSTICKER.hideVisited = RSSTICKER.prefs.getBoolPref("hideVisited");
-		RSSTICKER.alwaysOpenInNewTab = RSSTICKER.prefs.getBoolPref("alwaysOpenInNewTab");
-		RSSTICKER.displayWidth.limitWidth = RSSTICKER.prefs.getBoolPref("dw.limitWidth");
-		RSSTICKER.displayWidth.isMaxWidth = RSSTICKER.prefs.getBoolPref("dw.isMaxWidth");
+		var db = RSSTICKER.getDB();
 		
-		RSSTICKER.tickLength = RSSTICKER.prefs.getIntPref("tickSpeed") * (500 / RSSTICKER.prefs.getIntPref("ticksPerItem"));
+		if (!db.tableExists("history")) {
+			db.executeSimpleSQL("CREATE TABLE IF NOT EXISTS history (id TEXT PRIMARY KEY, date INTEGER)");
+		}
 		
-		document.getElementById("RSSTICKERItemCM").addEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
-		document.getElementById("RSSTICKERCM").addEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
-		document.getElementById("RSSTICKERButtonCM").addEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
+		RSSTICKER.customizeContextMenus();
 		
 		RSSTICKER.rtl = RSSTICKER.prefs.getBoolPref("rtl");
 		
@@ -112,7 +179,7 @@ var RSSTICKER = {
 		RSSTICKER.ticker.setAttribute("inherits", "collapsed,hidden");
 		RSSTICKER.ticker.setAttribute("mode", "full");
 		RSSTICKER.ticker.setAttribute("persist", "collapsed,hidden");
-		RSSTICKER.ticker.setAttribute("toolbarname", RSSTICKER_UTIL.strings.getString("extension.name"));
+		RSSTICKER.ticker.setAttribute("toolbarname", RSSTICKER.strings.getString("extension.name"));
 		RSSTICKER.ticker.style.maxHeight = '24px';
 	
 		RSSTICKER.toolbar = document.createElement('hbox');
@@ -133,12 +200,34 @@ var RSSTICKER = {
 	
 		RSSTICKER.ticker.appendChild(RSSTICKER.toolbar);
 		
+		/*
+		RSSTICKER.loadingNoticeParent = document.createElement('toolbaritem');
+		RSSTICKER.loadingNoticeParent.setAttribute("tooltip","RSSTICKERLoadingNoticeTooltip");
+		RSSTICKER.loadingNoticeParent.id = "RSSTICKER-throbber-box";
+		RSSTICKER.loadingNoticeParent.setAttribute("title","RSS Ticker Activity Indicator");
+		RSSTICKER.loadingNoticeParent.setAttribute("align","center");
+		RSSTICKER.loadingNoticeParent.setAttribute("pack","center");
+		
+		RSSTICKER.loadingNotice = document.createElement('image');
+		RSSTICKER.loadingNotice.setAttribute("src","chrome://rss-ticker/content/skin-common/throbber.gif");
+		RSSTICKER.loadingNotice.id = "RSSTICKER-throbber";
+		RSSTICKER.loadingNotice.setAttribute("busy","false");
+		RSSTICKER.loadingNotice.style.marginRight = '4px';
+		RSSTICKER.loadingNoticeParent.appendChild(RSSTICKER.loadingNotice);
+		
+		try {
+			document.getElementById("nav-bar").appendChild(RSSTICKER.loadingNoticeParent);
+		} catch (e) {
+			if (RSSTICKER.DEBUG) RSSTICKER.logMessage(e);
+		}
+		*/
+		
 		if (RSSTICKER.prefs.getBoolPref("disabled")){
 			RSSTICKER.disable();
 			return;
 		}
 		else {
-			RSSTICKER.enable(3000);
+			RSSTICKER.enable();
 		}
 		
 		RSSTICKER.showFirstRun();
@@ -148,12 +237,6 @@ var RSSTICKER = {
 			
 			RSSTICKER.addToolbarButton("feed-button");
 		}
-	},
-	
-	unload : function () {
-		removeEventListener("unload", RSSTICKER.unload, false);
-		
-		RSSTICKER.prefs.setIntPref("lastUpdate", 0);
 	},
 	
 	addToolbarButton : function (buttonId) {
@@ -176,7 +259,7 @@ var RSSTICKER = {
 			var toolboxDocument = toolbox.ownerDocument;
 
 			function getIndex(array, val){
-				for (var i = 0, _len = array.length; i < _len; i++){
+				for (var i = 0; i < array.length; i++){
 					if (array[i] == val) {
 						return i;
 					}
@@ -284,7 +367,7 @@ var RSSTICKER = {
 			return;
 		}
 		
-		switch (data) {
+		switch(data) {
 			case "boldUnvisited":
 				RSSTICKER.boldUnvisited = RSSTICKER.prefs.getBoolPref("boldUnvisited");
 				RSSTICKER.ticker.setAttribute("boldUnvisited", RSSTICKER.boldUnvisited);
@@ -313,8 +396,9 @@ var RSSTICKER = {
 				
 				var data = 'data:text/css;charset=utf-8,' + encodeURI(css);
 				var sss = Components.classes["@mozilla.org/content/style-sheet-service;1"].getService(Components.interfaces.nsIStyleSheetService);
+				var ios = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
 				
-				var u = RSSTICKER_UTIL.ioService.newURI(data, null, null);
+				var u = ios.newURI(data, null, null);
 				
 				if (sss.sheetRegistered(u, sss.USER_SHEET)) {
 					sss.unregisterSheet(u, sss.USER_SHEET);
@@ -371,25 +455,6 @@ var RSSTICKER = {
 				}
 			break;
 			case "updateToggle":
-				RSSTICKER.internalPause = true;
-				
-				for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
-					var node = RSSTICKER.toolbar.childNodes[i];
-					
-					if (node.nodeName == 'toolbarbutton') {
-						RSSTICKER_UTIL.log(node.feedURL + " " + RSSTICKER_UTIL.isFeedIgnored(node.feedURL));
-						
-						if (RSSTICKER_UTIL.isFeedIgnored(node.feedURL)) {
-							RSSTICKER_UTIL.log("Removing");
-							RSSTICKER.toolbar.removeChild(node);
-						}
-					}
-				}
-				
-				RSSTICKER.checkForEmptiness();
-				
-				RSSTICKER.internalPause = false;
-			
 				RSSTICKER.updateAllFeeds();
 			break;
 			case "rtl":
@@ -397,10 +462,7 @@ var RSSTICKER = {
 			break;
 		}
 		
-		if (data.indexOf("cm.") === 0) {
-			RSSTICKER.customizeContextMenus();
-		}
-		
+		RSSTICKER.customizeContextMenus();
 		RSSTICKER.checkForEmptiness();
 	},
 	
@@ -414,19 +476,16 @@ var RSSTICKER = {
 		if (tickerPlacement == 1){
 			// Beneath the status bar
 			document.getElementById('browser-bottombox').appendChild(RSSTICKER.ticker);
-			if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Placed after status bar.");
+			if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Placed after status bar.");
 		}
 		else if (tickerPlacement == 2){
 			// Up by the Bookmarks Toolbar
 			document.getElementById('navigator-toolbox').appendChild(RSSTICKER.ticker);
-			if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Placed in navigator toolbox.");
+			if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Placed in navigator toolbox.");
 		}
 	},
 	
-	enable : function (deferLength) {
-		addEventListener("resize", RSSTICKER.adjustSpacerWidth, false);
-		addEventListener("DOMMouseScroll", RSSTICKER.scrollTicker, false)
-		
+	enable : function () {
 		RSSTICKER.disabled = false;
 		
 		if (document.getElementById("RSSTICKER-button")){
@@ -435,20 +494,11 @@ var RSSTICKER = {
 		
 		RSSTICKER.attachTicker();
 		RSSTICKER.adjustSpacerWidth();
-		
-		if (deferLength) {
-			RSSTICKER.setTimeout(RSSTICKER.startFetchingFeeds, deferLength);
-		}
-		else {
-			RSSTICKER.startFetchingFeeds();
-		}
+		RSSTICKER.startFetchingFeeds();
 	},
 	
 	disable : function () {
-		removeEventListener("resize", RSSTICKER.adjustSpacerWidth, false);
-		removeEventListener("DOMMouseScroll", RSSTICKER.scrollTicker, false)
-		
-		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Ticker disabled.");
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Ticker disabled.");
 		
 		RSSTICKER.disabled = true;
 		
@@ -470,11 +520,74 @@ var RSSTICKER = {
 		RSSTICKER.stopFetchingFeeds();
 	},
 	
-	customizeContextMenus : function () {
-		document.getElementById("RSSTICKERItemCM").removeEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
-		document.getElementById("RSSTICKERCM").removeEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
-		document.getElementById("RSSTICKERButtonCM").removeEventListener("popupshowing", RSSTICKER.customizeContextMenus, false);
+	// loadingNoticeTimeout : null,
+	
+	/*
+	addLoadingNotice : function (message) {
+		clearTimeout(RSSTICKER.loadingNoticeTimeout);
 		
+		if (!message || RSSTICKER.disabled) {
+			RSSTICKER.loadingNotice.setAttribute("busy", "false");
+		}
+		else {
+			if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Setting loading notice.");
+			
+			var text = document.createTextNode(message);
+			
+			while (document.getElementById("RSSTICKERLoadingNoticeText").childNodes.length > 0){
+				document.getElementById("RSSTICKERLoadingNoticeText").removeChild(document.getElementById("RSSTICKERLoadingNoticeText").lastChild);
+			}
+			
+			document.getElementById("RSSTICKERLoadingNoticeText").appendChild(text);
+			
+			RSSTICKER.loadingNotice.setAttribute("busy", "true");
+		}
+		
+		RSSTICKER.loadingNoticeTimeout = setTimeout(function () { RSSTICKER.addLoadingNotice(); }, 5000);
+	},
+	*/
+	
+	loadPrefs : function () {
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Loading prefs.");
+	
+		RSSTICKER.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.rssticker.");
+		RSSTICKER.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
+		RSSTICKER.prefs.addObserver("", this, false);
+	
+		RSSTICKER.disabled = RSSTICKER.prefs.getBoolPref("disabled");
+		RSSTICKER.hideWhenEmpty = RSSTICKER.prefs.getBoolPref("hideWhenEmpty");
+		RSSTICKER.randomizeItems = RSSTICKER.prefs.getBoolPref("randomizeItems");
+		RSSTICKER.ticksPerItem = RSSTICKER.prefs.getIntPref("ticksPerItem");
+		RSSTICKER.displayWidth.itemWidth = RSSTICKER.prefs.getIntPref("dw.itemWidth");
+		RSSTICKER.limitItemsPerFeed = RSSTICKER.prefs.getBoolPref("limitItemsPerFeed");
+		RSSTICKER.itemsPerFeed = RSSTICKER.prefs.getIntPref("itemsPerFeed");
+		RSSTICKER.boldUnvisited = RSSTICKER.prefs.getBoolPref("boldUnvisited");
+		RSSTICKER.hideVisited = RSSTICKER.prefs.getBoolPref("hideVisited");
+		RSSTICKER.alwaysOpenInNewTab = RSSTICKER.prefs.getBoolPref("alwaysOpenInNewTab");
+		RSSTICKER.displayWidth.limitWidth = RSSTICKER.prefs.getBoolPref("dw.limitWidth");
+		RSSTICKER.displayWidth.isMaxWidth = RSSTICKER.prefs.getBoolPref("dw.isMaxWidth");
+		
+		RSSTICKER.tickLength = RSSTICKER.prefs.getIntPref("tickSpeed") * (500 / RSSTICKER.prefs.getIntPref("ticksPerItem"));
+	},
+	
+	customizeContextMenus : function () {
+		RSSTICKER.cmOptions.open = RSSTICKER.prefs.getBoolPref("cm.open");
+		RSSTICKER.cmOptions.openInTab = RSSTICKER.prefs.getBoolPref("cm.openInTab");
+		RSSTICKER.cmOptions.openInWindow = RSSTICKER.prefs.getBoolPref("cm.openInWindow");
+		RSSTICKER.cmOptions.openAllInTabs = RSSTICKER.prefs.getBoolPref("cm.openAllInTabs");
+		RSSTICKER.cmOptions.openUnreadInTabs = RSSTICKER.prefs.getBoolPref("cm.openUnreadInTabs");
+		RSSTICKER.cmOptions.openFeedInTabs = RSSTICKER.prefs.getBoolPref("cm.openFeedInTabs");
+		RSSTICKER.cmOptions.openFeedUnreadInTabs = RSSTICKER.prefs.getBoolPref("cm.openFeedUnreadInTabs");
+		RSSTICKER.cmOptions.copyLinkTitle = RSSTICKER.prefs.getBoolPref("cm.copyLinkTitle");
+		RSSTICKER.cmOptions.copyLinkURL = RSSTICKER.prefs.getBoolPref("cm.copyLinkURL");
+		RSSTICKER.cmOptions.refreshFeeds = RSSTICKER.prefs.getBoolPref("cm.refreshFeeds");
+		RSSTICKER.cmOptions.manageFeeds = RSSTICKER.prefs.getBoolPref("cm.manageFeeds");
+		RSSTICKER.cmOptions.markAsRead = RSSTICKER.prefs.getBoolPref("cm.markAsRead");
+		RSSTICKER.cmOptions.markFeedAsRead = RSSTICKER.prefs.getBoolPref("cm.markFeedAsRead");
+		RSSTICKER.cmOptions.markAllAsRead = RSSTICKER.prefs.getBoolPref("cm.markAllAsRead");
+		RSSTICKER.cmOptions.options = RSSTICKER.prefs.getBoolPref("cm.options");
+		RSSTICKER.cmOptions.disableTicker = RSSTICKER.prefs.getBoolPref("cm.disableTicker");
+			
 		RSSTICKER.customizeContextMenu("RSSTICKERItemCM");
 		RSSTICKER.customizeContextMenu("RSSTICKERCM");
 		RSSTICKER.customizeContextMenu("RSSTICKERButtonCM");
@@ -491,7 +604,7 @@ var RSSTICKER = {
 			var option = menu.childNodes[i];
 			
 			if (option.nodeName == 'menuitem'){
-				if (!RSSTICKER.prefs.getBoolPref("cm." + option.getAttribute("option"))){
+				if (RSSTICKER.cmOptions[option.getAttribute("option")] == false){
 					option.style.display = 'none';
 				}
 				else {
@@ -513,6 +626,10 @@ var RSSTICKER = {
 				}
 			}
 		}
+	},
+	
+	unload : function () {
+		RSSTICKER.prefs.setIntPref("lastUpdate", 0);
 	},
 	
 	options : function (panel) {
@@ -556,15 +673,15 @@ var RSSTICKER = {
 						var tbb = document.createElement('toolbarbutton');
 						tbb.uri = "chrome://rss-ticker/content/options.xul";
 						tbb.id = "RSSTICKER-feature-feeds-subscribe";
-						tbb.description = RSSTICKER_UTIL.strings.getString("rssticker.featured.description");
-						tbb.feed = RSSTICKER_UTIL.strings.getString("rssticker.specialItem.feedName");
+						tbb.description = RSSTICKER.strings.getString("rssticker.featured.description");
+						tbb.feed = RSSTICKER.strings.getString("rssticker.specialItem.feedName");
 						tbb.feedURL = "rssticker";
 						tbb.href = "chrome://rss-ticker/content/options.xul";
-						tbb.displayHref = RSSTICKER_UTIL.strings.getString("rssticker.specialItem.displayHref");
+						tbb.displayHref = RSSTICKER.strings.getString("rssticker.specialItem.displayHref");
 						tbb.published = "";
 						tbb.guid = "RSSTICKER-feature-feeds-subscribe";
 						
-						tbb.setAttribute("label", RSSTICKER_UTIL.strings.getString("rssticker.featured.label"));
+						tbb.setAttribute("label", RSSTICKER.strings.getString("rssticker.featured.label"));
 						tbb.setAttribute("tooltip", "RSSTICKERTooltip");
 						tbb.setAttribute("image", "chrome://rss-ticker/content/skin-common/thumbs-up.png");
 						tbb.setAttribute("onclick", "RSSTICKER.openFeaturedFeeds();");
@@ -609,30 +726,30 @@ var RSSTICKER = {
 	secondsBetweenFeeds : 0,
 	
 	stopFetchingFeeds : function () {
-		RSSTICKER.clearTimeout(RSSTICKER.feedUpdateTimeout);
+		clearTimeout(RSSTICKER.feedUpdateTimeout);
 		
 		RSSTICKER.feedsToFetch = [];
 		RSSTICKER.feedIndex = 0;
 	},
 	
 	startFetchingFeeds : function () {
-		// RSSTICKER.showFeaturedFeeds();
+//		RSSTICKER.showFeaturedFeeds();
 		
-		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Updating feeds " + new Date().toString());
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Updating feeds " + new Date().toString());
 		
 		if (RSSTICKER.disabled) {
-			if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Ticker is disabled.");
-			
 			return;
 		}
 		
+		var ignore = RSSTICKER.readIgnoreFile();
+
 		RSSTICKER.internalPause = true;
 		
 		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
 			var node = RSSTICKER.toolbar.childNodes[i];
 			
 			if (node.nodeName == 'toolbarbutton'){
-				if (RSSTICKER_UTIL.isFeedIgnored(node.feedURL)) {
+				if (RSSTICKER.inArray(ignore, node.feedURL)){
 					RSSTICKER.toolbar.removeChild(node);
 				}
 			}
@@ -645,29 +762,30 @@ var RSSTICKER = {
 	    RSSTICKER.feedsToFetch = [];
 	    RSSTICKER.feedIndex = 0;
 	    
-		var livemarkIds = RSSTICKER_UTIL.annotationService.getItemsWithAnnotation("livemark/feedURI", {});
+		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
+		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
 		
 		var len = livemarkIds.length;
 		
 		for (var i = 0; i < len; i++){
 			var livemarkId = livemarkIds[i];
 			
-			var feedURL = RSSTICKER_UTIL.livemarkService.getFeedURI(livemarkId).spec;
+			var feedURL = RSSTICKER.livemarkService.getFeedURI(livemarkId).spec;
 			
-			var feedName = RSSTICKER_UTIL.bookmarkService.getItemTitle(livemarkId);
-			
-			RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
+			var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkId);
+		
+			if (!RSSTICKER.inArray(ignore, feedURL)){
+				RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
+			}
 		}
 		
 		if (RSSTICKER.feedsToFetch.length == 0) {
-			if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("No feeds found.");
-			
-		    RSSTICKER.setTimeout(RSSTICKER.notifyNoFeeds, 3000);
+		    setTimeout(RSSTICKER.notifyNoFeeds, 3000);
 		}
 		
-		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Setting reload interval.");
-		
-		RSSTICKER.setTimeout(RSSTICKER.setReloadInterval, 5000, RSSTICKER.prefs.getIntPref("updateFrequency"));
+		setTimeout(function () {
+		    RSSTICKER.setReloadInterval(RSSTICKER.prefs.getIntPref("updateFrequency"));
+		}, 5000);
     },
 	
 	notifyNoFeeds : function () {
@@ -682,7 +800,7 @@ var RSSTICKER = {
 	},
 	
 	setReloadInterval : function (minutes) {
-    	RSSTICKER.clearTimeout(RSSTICKER.feedUpdateTimeout);
+    	clearTimeout(RSSTICKER.feedUpdateTimeout);
     	
     	var numFeeds = RSSTICKER.feedsToFetch.length;
 		var interval = minutes;
@@ -721,10 +839,10 @@ var RSSTICKER = {
                 }
             }
             
-		    RSSTICKER.feedUpdateTimeout = RSSTICKER.setTimeout(RSSTICKER.updateAFeed, interval * 1000);
+		    RSSTICKER.feedUpdateTimeout = setTimeout(function () { RSSTICKER.updateAFeed(); }, interval * 1000);
 	    }
 		
-        RSSTICKER.clearTimeout(RSSTICKER.feedUpdateTimeout);
+        clearTimeout(RSSTICKER.feedUpdateTimeout);
 		
         if (RSSTICKER.disabled || RSSTICKER.feedsToFetch.length == 0 || (!RSSTICKER.rapidUpdate && RSSTICKER.secondsBetweenFeeds == 0)){
 		    setTimeoutForNext();
@@ -745,7 +863,7 @@ var RSSTICKER = {
                 
         var feedIndex = RSSTICKER.feedIndex;
         
-		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("indexOverride: " + indexOverride);
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("indexOverride: " + indexOverride);
 
         if (typeof(indexOverride) != "undefined") {
             feedIndex = indexOverride;
@@ -758,26 +876,23 @@ var RSSTICKER = {
             RSSTICKER.prefs.setIntPref("lastUpdate", Math.round(new Date().getTime() / 1000));
         }
         
-		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("feedIndex: " + feedIndex);
-		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("feedsToFetch: " + RSSTICKER.feedsToFetch);
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("feedIndex: " + feedIndex);
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("feedsToFetch: " + RSSTICKER.feedsToFetch);
+		
 
         var feed = RSSTICKER.feedsToFetch[feedIndex];
 
-		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Feed: " + feed.toSource());
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Feed: " + feed.toSource());
 		
 	    var url = feed.feed;
 			
-		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Url: " + url);
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Url: " + url);
 		
-		if (RSSTICKER_UTIL.isFeedIgnored(url)) {
-			if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Ignoring " + url);
-			setTimeoutForNext();
-			return;
-		}
-		
-		if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Loading " + url);
+		if (RSSTICKER.DEBUG) RSSTICKER.logMessage("Loading " + url);
 		
 		var req = new XMLHttpRequest();
+		req.parent = this;
+		// req.parent.addLoadingNotice("Updating " + feed.name + " (" + parseInt(feedIndex + 1, 10) + ")...");
 	
 		RSSTICKER.currentRequest = req;
 		
@@ -787,49 +902,49 @@ var RSSTICKER = {
 			req.open("GET", url, true);
 			req.overrideMimeType('text/plain; charset=x-user-defined');
 			
-			req.onload = function () {
-				RSSTICKER.clearTimeout(RSSTICKER.loadTimer);
-			
-				RSSTICKER.currentRequest = null;
-				setTimeoutForNext();
+			req.onreadystatechange = function (event) {
+				if (req.readyState == 4) {
+					clearTimeout(req.parent.loadTimer);
 				
-				if (req.status == 200){
+					req.parent.currentRequest = null;
+					setTimeoutForNext();
+					
 					try {
-						var data = req.responseText;
-						
-						var encoding_matches = data.match(/<?xml[^>]+encoding=['"]([^"']+)["']/i); //"
-						
-						if (!encoding_matches) {
-							encoding_matches = [null, "UTF-8"];
+						if (req.status == 200){
+							try {
+								var data = req.responseText;
+								
+								var encoding_matches = data.match(/<?xml[^>]+encoding=['"]([^"']+)["']/i); //"
+								
+								if (!encoding_matches) {
+									encoding_matches = [null, "UTF-8"];
+								}
+								
+								var converter = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
+								
+								try {
+									converter.charset = encoding_matches[1];
+									data = converter.ConvertToUnicode(data);
+								} catch (e) {
+									RSSTICKER.logMessage(e);
+								}
+								
+								req.parent.queueForParsing(data.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
+							} catch (e) {
+								// Parse error
+								RSSTICKER.logMessage(e);
+							}
 						}
-						
-						var converter = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
-						
-						try {
-							converter.charset = encoding_matches[1];
-							data = converter.ConvertToUnicode(data);
-						} catch (e) {
-							RSSTICKER_UTIL.log(e);
+						else {
 						}
-						
-						RSSTICKER.queueForParsing(data.replace(/^\s\s*/, '').replace(/\s\s*$/, ''), url);
-					} catch (e) {
-						// Parse error
-						RSSTICKER_UTIL.log(e);
+					}
+					catch (e) {
 					}
 				}
 			};
-			
-			req.onerror = function () {
-				RSSTICKER.clearTimeout(RSSTICKER.loadTimer);
-			
-				RSSTICKER.currentRequest = null;
-				setTimeoutForNext();
-			};
 		
 			req.send(null);
-			
-			RSSTICKER.loadTimer = RSSTICKER.setTimeout(RSSTICKER.killCurrentRequest, 1000 * 15);
+			RSSTICKER.loadTimer = setTimeout(function () { RSSTICKER.killCurrentRequest(); }, 1000 * 15);
 		}
 		catch (e) {
 			setTimeoutForNext();
@@ -838,7 +953,7 @@ var RSSTICKER = {
 		RSSTICKER.checkForEmptiness();
 		RSSTICKER.tick();
     },
-	
+
 	removeFeed : function (livemarkId) {
 		var len = RSSTICKER.feedsToFetch.length;
 		
@@ -867,8 +982,8 @@ var RSSTICKER = {
 	},
 	
 	updateSingleFeed : function (livemarkId) {
-		var feedURL = RSSTICKER_UTIL.livemarkService.getFeedURI(livemarkId).spec;
-		var feedName = RSSTICKER_UTIL.bookmarkService.getItemTitle(livemarkId);
+		var feedURL = RSSTICKER.livemarkService.getFeedURI(livemarkId).spec;
+		var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkId);
 		
 		RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
 	    RSSTICKER.updateAFeed(RSSTICKER.feedsToFetch.length - 1);
@@ -893,7 +1008,7 @@ var RSSTICKER = {
 	queueForParsing : function (feedText, feedURL) {
 		var data = feedText;
 		
-		var uri = RSSTICKER_UTIL.ioService.newURI(feedURL, null, null);
+		var uri = RSSTICKER.ioService.newURI(feedURL, null, null);
 
 		if (data.length) {
 			var parser = Components.classes["@mozilla.org/feed-processor;1"]
@@ -907,6 +1022,8 @@ var RSSTICKER = {
 				throw (e);
 			}
 		}
+
+		return this;
 	},
 	
 	markAsRead : function (node, dontAdjustSpacer) {
@@ -923,7 +1040,7 @@ var RSSTICKER = {
 			if (!dontAdjustSpacer) RSSTICKER.adjustSpacerWidth();
 		}
 		
-		RSSTICKER_UTIL.history.addToHistory(node.guid);
+		RSSTICKER.history.addToHistory(node.guid);
 	},
 	
 	onContextOpen : function (node, target) {
@@ -992,7 +1109,7 @@ var RSSTICKER = {
 					}
 				}
 				
-				var itemIsVisited = RSSTICKER_UTIL.history.isVisitedURL(feedItem.uri, feedItem.id, 1);
+				var itemIsVisited = RSSTICKER.history.isVisitedURL(feedItem.uri, feedItem.id, 1);
 				
 				if (itemIsVisited && RSSTICKER.hideVisited) {
 					continue;
@@ -1230,7 +1347,7 @@ var RSSTICKER = {
 			} catch (e) {
 				// Tried to adjust spacer when there wasn't one.
 				// Could happen depending on when the disable button was pressed
-				if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log(e);
+				if (RSSTICKER.DEBUG) RSSTICKER.logMessage(e);
 			}
 		}
 	},
@@ -1240,10 +1357,10 @@ var RSSTICKER = {
 			return;
 		}
 		
-		RSSTICKER.clearTimeout(RSSTICKER.tickTimer);
+		clearTimeout(RSSTICKER.tickTimer);
 		
 		if (RSSTICKER.internalPause){
-			RSSTICKER.tickTimer = RSSTICKER.setTimeout(RSSTICKER.tick, RSSTICKER.tickLength);
+			RSSTICKER.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, RSSTICKER.tickLength);
 		}
 		else {
 			var node, nodeWidth, marginLeft;
@@ -1265,7 +1382,7 @@ var RSSTICKER = {
 						RSSTICKER.toolbar.insertBefore(node, RSSTICKER.toolbar.firstChild);
 
 						if (node.nodeName == 'toolbarbutton' && (node.getAttribute("visited") == "false")) {
-							if (RSSTICKER_UTIL.history.isVisitedURL(node.uri, node.guid, 3)){
+							if (RSSTICKER.history.isVisitedURL(node.uri, node.guid, 3)){
 								RSSTICKER.markAsRead(node);
 							}
 						}
@@ -1299,7 +1416,7 @@ var RSSTICKER = {
 						RSSTICKER.toolbar.appendChild(node);
 					
 						if (node.nodeName == 'toolbarbutton' && (node.getAttribute("visited") == "false")) {
-							if (RSSTICKER_UTIL.history.isVisitedURL(node.uri, node.guid, 3)){
+							if (RSSTICKER.history.isVisitedURL(node.uri, node.guid, 3)){
 								RSSTICKER.markAsRead(node);
 							}
 						}
@@ -1328,7 +1445,7 @@ var RSSTICKER = {
 				}
 			}
 			
-			RSSTICKER.tickTimer = RSSTICKER.setTimeout(RSSTICKER.tick, RSSTICKER.tickLength);
+			RSSTICKER.tickTimer = setTimeout(function () { RSSTICKER.tick(); }, RSSTICKER.tickLength);
 		}
 	},
 	
@@ -1340,7 +1457,7 @@ var RSSTICKER = {
 			
 			if (node.nodeName == 'toolbarbutton'){
 				if (!feed || (node.feed == feed)){
-					RSSTICKER_UTIL.history.addToHistory(node.guid);
+					RSSTICKER.history.addToHistory(node.guid);
 					RSSTICKER.markAsRead(node, true);
 				}
 			}
@@ -1456,7 +1573,7 @@ var RSSTICKER = {
 		
 		document.getElementById("RSSTICKERTooltipImage").src = image;
 		
-		document.getElementById("RSSTICKERTooltipURL").value = RSSTICKER_UTIL.strings.getString("URL") + ": " + url;
+		document.getElementById("RSSTICKERTooltipURL").value = RSSTICKER.strings.getString("URL") + ": " + url;
 		
 		var maxw = document.getElementById("RSSTICKERTooltipURL").boxObject.width;
 		
@@ -1497,6 +1614,103 @@ var RSSTICKER = {
 		return true;
 	},
 	
+	logMessage : function (message) {
+		var consoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
+		consoleService.logStringMessage("RSSTICKER: " + message);
+	},
+	
+	theFile : null,
+	theDB : null,
+	
+	getDB : function () {
+		if (!RSSTICKER.theFile) {
+			RSSTICKER.theFile = Components.classes["@mozilla.org/file/directory_service;1"]
+		                     .getService(Components.interfaces.nsIProperties)
+		                     .get("ProfD", Components.interfaces.nsIFile);
+			RSSTICKER.theFile.append("rssticker.sqlite");
+		}
+		
+		if (!RSSTICKER.theDB) {
+			RSSTICKER.theDB = Components.classes["@mozilla.org/storage/service;1"]
+		                 .getService(Components.interfaces.mozIStorageService).openDatabase(RSSTICKER.theFile);
+		}
+		
+		return RSSTICKER.theDB;
+	},
+	
+	closeDB : function () {
+		RSSTICKER.theDB.close();
+		delete RSSTICKER.theDB;
+		RSSTICKER.theDB = null;
+	},
+	
+	history : {
+		hService : Components.classes["@mozilla.org/browser/global-history;2"].getService(Components.interfaces.nsIGlobalHistory2),
+		ioService : Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService),
+		
+		URI : null,
+		
+		isVisitedURL : function(url, guid){
+			try {
+				RSSTICKER.history.URI = this.ioService.newURI(url, null, null);
+				var visited = RSSTICKER.history.hService.isVisited(RSSTICKER.history.URI);
+				var db = RSSTICKER.getDB();
+				
+				if (!visited) {
+					var select = db.createStatement("SELECT id FROM history WHERE id=?1");
+					select.bindStringParameter(0, guid);
+					
+					try {
+						while (select.executeStep()) {
+							visited = true;
+							break;
+						}
+					} catch (e) {
+						RSSTICKER.logMessage(e);
+					} finally {
+						select.reset();
+					}
+					
+					select.finalize();
+				}
+				else {
+					// Add to DB
+					var insert = db.createStatement("INSERT INTO history (id, date) VALUES (?1, ?2)");
+					insert.bindUTF8StringParameter(0, guid);
+					insert.bindInt64Parameter(1, (new Date().getTime()));
+					try { insert.execute(); } catch (alreadyExists) { }
+				}
+				
+				return visited;
+			} catch (e) {
+				// Malformed URI, probably
+				RSSTICKER.logMessage(e + " " + url);
+				return false;
+			}
+		},
+		
+		addToHistory : function (guid) {
+			var db = RSSTICKER.getDB();
+		
+			// Add to DB
+			var insert = db.createStatement("INSERT INTO history (id, date) VALUES (?1, ?2)");
+			insert.bindUTF8StringParameter(0, guid);
+			insert.bindInt64Parameter(1, (new Date().getTime()));
+		
+			try { insert.execute(); } catch (alreadyExists) { }
+		},
+	},
+	
+	clipboard : {
+		copyString : function (str){
+			try {
+				var oClipBoard = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
+				oClipBoard.copyString(str);
+			} catch (e) {
+			}
+		}
+	},
+	
 	browser : {
 		openInNewTab : function(url){
 			var browser = window.gBrowser || window.parent.gBrowser;
@@ -1516,6 +1730,154 @@ var RSSTICKER = {
 				browser.selectedTab = theTab;
 			}
 		}
+	},
+	
+	observeFeed : function (url) {
+		var feeds = RSSTICKER.readIgnoreFile();
+		var newFeeds = [];
+		
+		var foundFeed = false;
+		
+		var len = feeds.length;
+		
+		for (var i = 0; i < len; i++){
+			var feed = feeds[i];
+			
+			if (feed == url){
+				foundFeed = true;
+			}
+			else {
+				newFeeds.push(feed);
+			}
+		}
+	
+		if (foundFeed){
+			// Rewrite the ignore file.
+			var DIR_SERVICE = new Components.Constructor("@mozilla.org/file/directory_service;1", "nsIProperties");
+			var profilePath = (new DIR_SERVICE()).get("ProfD", Components.interfaces.nsIFile).path; 
+		
+			if (profilePath.search(/\\/) != -1) profilePath += "\\";
+			else profilePath += "/";
+						
+			var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+			file.initWithPath(profilePath + RSSTICKER.ignoreFilename);
+
+			var outputStream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance( Components.interfaces.nsIFileOutputStream );
+
+			outputStream.init(file, 0x02 | 0x08 | 0x20, 0600, null);
+		
+			var data = "";
+			
+			var len = newFeeds.length;
+			
+			for (var i = 0; i < len; i++){
+				data += newFeeds[i] + "\r\n";
+			}
+			
+			RSSTICKER.writeBytes(outputStream, data);
+			
+			outputStream.close();
+		}
+	},
+
+	writeBytes : function (outputStream, data) {
+		var bytes, bytesWritten, bytesRemaining = data.length;
+		var offset = 0;
+		
+		while (bytesRemaining) {
+			bytesWritten = outputStream.write(data.substring(offset), bytesRemaining);
+			bytesRemaining -= bytesWritten;
+			offset += bytesWritten;
+		}
+	},
+	
+	ignoreFeed : function (url) {
+		var feeds = RSSTICKER.readIgnoreFile();
+		var foundFeed = false;
+		
+		var len = feeds.length;
+		
+		for (var i = 0; i < len; i++){
+			if (feeds[i] == url){
+				foundFeed = true;
+				break;
+			}
+		}
+		
+		if (!foundFeed){
+			var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+			file.initWithPath(RSSTICKER.getProfilePath() + RSSTICKER.ignoreFilename);
+
+			var outputStream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance( Components.interfaces.nsIFileOutputStream );
+			outputStream.init(file, 0x02 | 0x08 | 0x10, 0600, null);
+		
+			var data = url + "\r\n";
+			
+			RSSTICKER.writeBytes(outputStream, data);
+			
+			outputStream.close();
+		}
+	},
+	
+	readIgnoreFile : function () {
+		var file, inputStream, lineStream, stillInFile, parts;
+		var feeds = [];
+		var line = { value: "" };
+		
+		file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+		
+		file.initWithPath(RSSTICKER.getProfilePath() + RSSTICKER.ignoreFilename);
+		
+		if (!file.exists()) {
+			// File doesn't exist yet
+			return [];
+		}
+
+		inputStream = Components.classes["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
+		inputStream.init(file, 0x01, 0600, null);
+		
+		lineStream = inputStream.QueryInterface(Components.interfaces.nsILineInputStream);
+		
+		do {
+			stillInFile = lineStream.readLine(line);
+			
+			if (line.value == "") {
+				continue;
+			}
+			else {
+				feeds.push(line.value);
+			}
+		} while (stillInFile);
+		
+		lineStream.close();
+		inputStream.close();
+		
+		return feeds;
+	},
+	
+	getProfilePath : function () {
+		if (!RSSTICKER.profilePath){
+			var DIR_SERVICE = new Components.Constructor("@mozilla.org/file/directory_service;1", "nsIProperties");
+			RSSTICKER.profilePath = (new DIR_SERVICE()).get("ProfD", Components.interfaces.nsIFile).path; 
+		
+			if (RSSTICKER.profilePath.search(/\\/) != -1) RSSTICKER.profilePath += "\\";
+			else RSSTICKER.profilePath += "/";
+		}
+		
+		return RSSTICKER.profilePath;
+	},
+	
+	inArray : function (arr, needle){
+		var i;
+		var len = arr.length;
+		
+		for (i = 0; i < len; i++){
+			if (arr[i] == needle){
+				return true;
+			}
+		}
+		
+		return false;
 	},
 	
 	itemsInTicker : function (feed) {
@@ -1602,32 +1964,6 @@ var RSSTICKER = {
 		}
 		else {
 			return atime - btime;
-		}
-	},
-	
-	setTimeout : function (callback, timeout, arg1, arg2, arg3, arg4) {
-		return setTimeout(callback, timeout, arg1, arg2, arg3, arg4);
-		/*
-		var cb = {
-			notify : function (timer) {
-				if (RSSTICKER.DEBUG) RSSTICKER_UTIL.log("Executing timer.");
-				
-				RSSTICKER.clearTimeout(timer);
-				
-				callback(arg1, arg2, arg3, arg4);
-			}
-		};
-		
-		var timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-		timer.initWithCallback(cb, timeout, timer.TYPE_ONE_SHOT);
-		return timer;
-		*/
-	},
-	
-	clearTimeout : function (timer) {
-		if (timer) {
-			clearTimeout(timer);
-			// timer.cancel();
 		}
 	}
 };

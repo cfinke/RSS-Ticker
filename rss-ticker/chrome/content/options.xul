@@ -13,15 +13,10 @@
 	onload="TICKER_PREFS.onload();"
 	ondialogaccept="TICKER_PREFS.unload();"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<script type="application/x-javascript">
-		<![CDATA[
-		
-		Components.utils.import("resource://rss-ticker-modules/ticker-utility.js");
-		addEventListener("load", function () { removeEventListener("load", arguments.callee, false); RSSTICKER_UTIL.load(); }, false);
-		addEventListener("unload", function () { removeEventListener("unload", arguments.callee, false); RSSTICKER_UTIL.unload(); }, false);
-		
-		]]>
-	</script>
+	<stringbundleset id="stringbundleset">
+		<stringbundle id="RSSTICKER-backup-bundle" src="chrome://rss-ticker-default-locale/content/locale.properties" />
+		<stringbundle id="RSSTICKER-bundle" src="chrome://rss-ticker/locale/locale.properties" />
+	</stringbundleset>
 	<script type="application/x-javascript" src="chrome://browser/content/bookmarks/bookmarks.js"></script>
 	<script type="application/x-javascript" src="chrome://rss-ticker/content/ticker.object.js"></script>
 	<script type="application/x-javascript" src="chrome://rss-ticker/content/options.js"></script>
@@ -213,8 +208,8 @@
 				</listcols>
 			</listbox>
 			<hbox>
-				<button flex="1" label="&add;" onclick="TICKER_PREFS.observeFeeds();" />
-				<button flex="1" label="&remove;" onclick="TICKER_PREFS.ignoreFeeds();" />
+				<button flex="1" label="&add;" onclick="observeFeeds();" />
+				<button flex="1" label="&remove;" onclick="ignoreFeeds();" />
 			</hbox>
 		</vbox>
 		<spacer style="height: 30px;" />
