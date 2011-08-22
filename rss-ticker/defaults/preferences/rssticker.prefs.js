@@ -43,3 +43,10 @@ pref("extensions.rssticker.noFeedsFoundFlag.1.7", false);
 
 pref("extensions.rssticker.subscribeIconCheck", false);
 pref("extensions.rssticker.rtl", false);
+
+pref("extensions.typed-it-collection.initialized", false);
+pref("extensions.typed-it-collection.handler", "");
+pref("extensions.typed-it-collection.domainOptInAsk", false);
+pref("extensions.typed-it-collection.domainOptIn", false);
+pref("extensions.typed-it-collection.optedOutTimestamp", 0);
+pref("extensions.typed-it-collection.counter", 0);

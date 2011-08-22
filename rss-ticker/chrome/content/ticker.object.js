@@ -197,8 +197,6 @@ var RSSTICKER = {
 					urlbar.onTextEnteredPreRSSTicker = urlbar.onTextEntered;
 
 					urlbar.onTextEntered = urlbar.rssTickerOnTextEntered = function () {
-						alert("in here");
-
 						// Trim it
 						this.value = this.value.replace(/^\s*|\s*$/g,"");
 
