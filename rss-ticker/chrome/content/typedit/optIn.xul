@@ -18,9 +18,12 @@
 	buttonlabeldisclosure="&typedIt.optInLater;"
 	defaultButton="cancel">
 	<hbox>
-		<vbox style="width: 350px;" align="center" pack="center">
-			<description>&typedIt.optInDescription;</description>
-			<description>&typedIt.optInDescription2;</description>
+		<vbox>
+			<image src="chrome://rss-ticker/content/skin-common/feed-icon-64.png" style="padding: 20px;"/>
+		</vbox>
+		<vbox style="width: 350px; padding-left: 20px;" align="center" pack="center">
+			<description>&typedIt.optInDescription1;</description>
+			<description>&typedIt.optInDescription2; &typedIt.optInDescription3;</description>
 		</vbox>
 	</hbox>
 </dialog>

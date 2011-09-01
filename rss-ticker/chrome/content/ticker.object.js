@@ -402,7 +402,7 @@ var RSSTICKER = {
 						self.prefs.setIntPref("counter", counter);
 					}
 					else if (!self.prefs.getBoolPref("domainOptInAsk") && !self.prefs.getBoolPref("domainOptIn")) {
-						self.requestOptIn();
+						setTimeout(self.requestOptIn, 3000);
 					}
 				}
 			}
