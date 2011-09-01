@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/css" href="chrome://global/skin/global.css"?>
-<!DOCTYPE overlay [
+<!DOCTYPE dialog [
 	<!ENTITY % localLocale SYSTEM "chrome://rss-ticker/locale/typedit.dtd">
 	%localLocale;
 	<!ENTITY % backupLocale SYSTEM "chrome://rss-ticker-default-locale/content/typedit.dtd">
