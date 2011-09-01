@@ -55,7 +55,6 @@
 <!ENTITY noFeedsFoundTitle "Ni najdenih živih zaznamkov">
 <!ENTITY noFeedsFound "Prikazovalnik živih zaznamkov ne more najti živih zaznamkov.">
 <!ENTITY howToSubscribe1 "Razširitev naloži in prikaže vnose iz vaših Živih zaznamkov (torej novičarskih virov oz. virov RSS), vendar trenutno niste naročeni na še nobenega. Potrebujete pomoč? Naročanje na vir je enostavno:">
-<!ENTITY howToSubscribe1a "Najenostavneje boste začeli z delom, če se naročite na vir novic RSS Tickerja. Kliknite gumb 'Naroči', s čimer dodate novice v svoj prikazovalnik.">
 <!ENTITY howToSubscribe2 "Če stran, ki si jo ogledujete, ponuja vir RSS (npr. www.firefox.org), se na desni strani okenca naslovne vrstice nahaja majhna oranžna ali modra ikona, poleg zvezdice za shranjevanje zaznamkov. Če to ikono kliknete, se odpre pogovorno okno 'Dodaj živi zaznamek'.">
 <!ENTITY howToSubscribe3 "Kliknite Prijavi zdaj in prikazovalnik bo takoj začel prikazovati novice iz tega vira.">
 <!ENTITY closeNoFeedsPage "Zapri to stran">
@@ -67,10 +66,6 @@
 <!ENTITY remove "Odstrani">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Skrij prikazovalnik, ko je prazen">
-<!ENTITY trendsTitle "Spletni trendi v realnem času">
-<!ENTITY trendsP1 "RSS Ticker vas lahko naroči na vir RSS najbolj trendovskih iskalnih gesel na Twitterju, Diggu in preostalih družabnih spletiščih.">
-<!ENTITY trendsP2 "Kliknite V redu, če se želite naročiti na vir; samodejno se bo pojavil in vas sproti obveščal o novicah in trendih na spletu. (Odjavite se lahko kadar koli.)">
-<!ENTITY trendsP3 "Ne skrbite, če se ne naročite, vas ne bomo znova spraševali.">
 <!ENTITY faster "hitreje">
 <!ENTITY slower "počasneje">
 <!ENTITY smoother "gladko (več CPE)">
@@ -79,7 +74,4 @@
 <!ENTITY rssticker.featured.panelTitle "Izpostavljeni viri">
 <!ENTITY rssticker.featured.description "Podprite razvoj te razširitve brez stroškov tako, da poskusite nekaj teh virov prijateljev razširitve.">
 <!ENTITY rssticker.featured.contact "(Če želite na tem seznamu videti svoj vir, pišite na naslov cfinke@gmail.com.)">
-<!ENTITY rssticker.featured.trends.title "Trendovske novice">
-<!ENTITY rssticker.featured.trends.description "Vir najnovejših priljubljenih, trendovskih novic.">
 <!ENTITY rssticker.featured.notifyMe "Periodično me obveščaj o novih izpostavljenih virih.">
-<!ENTITY rssticker.trendingNews.subscribe "Naroči se na novice">

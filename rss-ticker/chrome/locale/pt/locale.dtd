@@ -65,10 +65,6 @@
 <!ENTITY remove "Remover">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Ocultar o Letreiro quando estiver Vazio">
-<!ENTITY trendsTitle "Tendências da Web em Tempo Real">
-<!ENTITY trendsP1 "O RSS Ticker deseja saber se pretende subscrever uma fonte com as tendências de busca mais recentes no Twitter, no Digg e outros locais da Web social.">
-<!ENTITY trendsP2 "Pressione OK para subscrever a fonte; aparecerá automaticamente no letreiro, mantendo-o a par das notícias e tendências mais recentes na Web. (Pode cancelar a subscrição a qualquer momento.)">
-<!ENTITY trendsP3 "Não se preocupe; não voltará a ser incomodado caso opte por não subscrever.">
 <!ENTITY faster "Mais rápido">
 <!ENTITY slower "Mais lento">
 <!ENTITY smoother "Suave (Usa mais recursos)">
@@ -77,6 +73,4 @@
 <!ENTITY rssticker.featured.panelTitle "Fontes Recomendadas">
 <!ENTITY rssticker.featured.description "Apoie o desenvolvimento do RSS Ticker sem gastar um único cêntimo. Basta subscrever algumas destas fontes de parceiros do RSS Ticker.">
 <!ENTITY rssticker.featured.contact "(Se deseja ter a sua fonte incluída nesta lista, envie um e-mail para cfinke@gmail.com.)">
-<!ENTITY rssticker.featured.trends.title "Notícias em Destaque">
-<!ENTITY rssticker.featured.trends.description "Uma fonte com as notícias recentes com maior destaque e popularidade.">
 <!ENTITY rssticker.featured.notifyMe "Avisar-me regularmente de novas fontes recomendadas.">

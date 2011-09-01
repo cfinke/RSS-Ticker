@@ -65,10 +65,6 @@
 <!ENTITY remove "Fjern">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Skjul ticker når tom">
-<!ENTITY trendsTitle "Realtids Trending-nyheder">
-<!ENTITY trendsP1 "RSS Ticker vil gerne vide om du ønsker at abonnere på et feed med seneste trends-nyhedshistorier.">
-<!ENTITY trendsP2 "Klik OK for at abonnere; feedet vil automatisk blive vist i tickeren og holde dig up-to-date på seneste nyheder og trends fra rundt om på nettet.">
-<!ENTITY trendsP3 "Bare rolig, du bliver ikke spurgt igen hvis du vælger ikke at abonnere.">
 <!ENTITY faster "Hurtigere">
 <!ENTITY slower "Langsommere">
 <!ENTITY smoother "Glattere (mere CPU)">

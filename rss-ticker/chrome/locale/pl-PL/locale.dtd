@@ -1,51 +1,51 @@
 <!ENTITY extension.title "RSS Ticker">
-<!ENTITY cm.open "Otw&#243;rz">
+<!ENTITY cm.open "Otwórz">
 <!ENTITY cm.open.key "O">
-<!ENTITY cm.openInNewWindow "Otw&#243;rz w nowym oknie">
+<!ENTITY cm.openInNewWindow "Otwórz w nowym oknie">
 <!ENTITY cm.openInNewWindow.key "n">
-<!ENTITY cm.openInNewTab "Otw&#243;rz w nowej zak&#322;adce">
+<!ENTITY cm.openInNewTab "Otwórz w nowej zak&amp;#322;adce">
 <!ENTITY cm.openInNewTab.key "t">
-<!ENTITY cm.openAllInTabs "Otw&#243;rz wszystkie w zak&#322;adkach">
-<!ENTITY cm.openUnreadInTabs "Otw&#243;rz nieprzeczytane w zak&#322;adkach">
-<!ENTITY cm.openFeedInTabs "Otw&#243;rz kana&#322; w zak&#322;adkach">
-<!ENTITY cm.openFeedUnreadInTabs "Otw&#243;rz nieprzeczytane elementy z kana&#322;u w zak&#322;adkach">
-<!ENTITY cm.copyLinkTitle "Kopiuj tytu&#322; odno&#347;nika">
+<!ENTITY cm.openAllInTabs "Otwórz wszystkie w zak&amp;#322;adkach">
+<!ENTITY cm.openUnreadInTabs "Otwórz nieprzeczytane w zak&amp;#322;adkach">
+<!ENTITY cm.openFeedInTabs "Otwórz kana&amp;#322; w zak&amp;#322;adkach">
+<!ENTITY cm.openFeedUnreadInTabs "Otwórz nieprzeczytane elementy z kana&amp;#322;u w zak&amp;#322;adkach">
+<!ENTITY cm.copyLinkTitle "Kopiuj tytu&amp;#322; odno&amp;#347;nika">
 <!ENTITY cm.copyLinkTitle.key "l">
-<!ENTITY cm.copyLinkURL "Kopiuj adres odno&#347;nika">
+<!ENTITY cm.copyLinkURL "Kopiuj adres odno&amp;#347;nika">
 <!ENTITY cm.copyLinkURL.key "K">
-<!ENTITY cm.refreshFeeds "Od&#347;wie&#380; kana&#322;y">
+<!ENTITY cm.refreshFeeds "Od&amp;#347;wie&amp;#380; kana&amp;#322;y">
 <!ENTITY cm.refreshFeeds.key "d">
 <!ENTITY cm.manageFeeds "Manage Feeds">
 <!ENTITY cm.manageFeeds.key "G">
 <!ENTITY cm.markAsRead "Oznacz jako przeczytane">
 <!ENTITY cm.markAsRead.key "p">
-<!ENTITY cm.markFeedAsRead "Oznacz kana&#322; jako przeczytany">
+<!ENTITY cm.markFeedAsRead "Oznacz kana&amp;#322; jako przeczytany">
 <!ENTITY cm.markFeedAsRead.key "a">
 <!ENTITY cm.markAllAsRead "Oznacz wszystkie jako przeczytane">
 <!ENTITY cm.markAllAsRead.key "w">
-<!ENTITY options.updateInterval "Cz&#281;stotliwo&#347;&#263; od&#347;wie&#380;ania">
-<!ENTITY options.speed "Szybko&#347;&#263; przewijania">
-<!ENTITY options.dw.itemWidth "Szeroko&#347;&#263; elementu">
+<!ENTITY options.updateInterval "Cz&amp;#281;stotliwo&amp;#347;&amp;#263; od&amp;#347;wie&amp;#380;ania">
+<!ENTITY options.speed "Szybko&amp;#347;&amp;#263; przewijania">
+<!ENTITY options.dw.itemWidth "Szeroko&amp;#347;&amp;#263; elementu">
 <!ENTITY pixelAbbrev "px">
-<!ENTITY options.smooothness "P&#322;ynno&#347;&#263; przewijania">
-<!ENTITY cmOptionsDescription "Dostosuj menu kontekstowe poprzez zaznaczenie lub odznaczenie poni&#380;szych opcji.">
+<!ENTITY options.smooothness "P&amp;#322;ynno&amp;#347;&amp;#263; przewijania">
+<!ENTITY cmOptionsDescription "Dostosuj menu kontekstowe poprzez zaznaczenie lub odznaczenie poni&amp;#380;szych opcji.">
 <!ENTITY tt.summary "Podsumowanie">
 <!ENTITY options "Opcje">
-<!ENTITY options.restartNotice "Opcje oznaczone * nie b&#281;d&#261; zmienione a&#380; do ponownego otworzenia okna przegl&#261;darki.">
-<!ENTITY options.general "Og&#243;lne">
+<!ENTITY options.restartNotice "Opcje oznaczone * nie b&amp;#281;d&amp;#261; zmienione a&amp;#380; do ponownego otworzenia okna przegl&amp;#261;darki.">
+<!ENTITY options.general "Ogólne">
 <!ENTITY options.advanced "Zaawansowane">
 <!ENTITY options.contextMenu "Menu Kontekstowe">
-<!ENTITY disableTicker "Wy&#322;&#261;cz RSS Ticker">
-<!ENTITY options.tickerPlacement "Po&#322;o&#380;enie tickera">
+<!ENTITY disableTicker "Wy&amp;#322;&amp;#261;cz RSS Ticker">
+<!ENTITY options.tickerPlacement "Po&amp;#322;o&amp;#380;enie tickera">
 <!ENTITY tickerPlacement.belowStatusBar "Pod paskiem stanu">
-<!ENTITY tickerPlacement.belowBMTB "Pod paskiem zak&#322;adek">
-<!ENTITY options.random "Ustaw losowo wiadomo&#347;ci.">
+<!ENTITY tickerPlacement.belowBMTB "Pod paskiem zak&amp;#322;adek">
+<!ENTITY options.random "Ustaw losowo wiadomo&amp;#347;ci.">
 <!ENTITY options.hide "Ukryj przeczytane.">
 <!ENTITY options.bold "Pogrub nieprzeczytane.">
-<!ENTITY options.openInNewTab "Zawsze otwieraj odno&#347;niki w nowej zak&#322;adce.">
-<!ENTITY toggleTicker "W&#322;&#261;cz/wy&#322;&#261;cz ticker">
-<!ENTITY options.dw.limitWidth "Ogranicz szeroko&#347;&#263; element&#243;w tickera">
-<!ENTITY options.dw.isMaxWidth "Ustaw jako maksymaln&#261; szeroko&#347;&#263;">
+<!ENTITY options.openInNewTab "Zawsze otwieraj odno&amp;#347;niki w nowej zak&amp;#322;adce.">
+<!ENTITY toggleTicker "W&amp;#322;&amp;#261;cz/wy&amp;#322;&amp;#261;cz ticker">
+<!ENTITY options.dw.limitWidth "Ogranicz szeroko&amp;#347;&amp;#263; elementów tickera">
+<!ENTITY options.dw.isMaxWidth "Ustaw jako maksymaln&amp;#261; szeroko&amp;#347;&amp;#263;">
 <!ENTITY options.limitItemsPerFeed "Ogranicz iloÅ›Ä‡ elementÃ³w kanaÅ‚u">
 <!ENTITY options.itemsPerFeed "IloÅ›Ä‡ elementÃ³w w kanale">
 <!ENTITY about "O RSS Ticker">

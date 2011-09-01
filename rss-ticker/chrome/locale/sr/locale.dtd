@@ -40,6 +40,14 @@
 
 
 
+
+
+
+
+
+
+
+
 док год поново не отворите прозор прегледача.">
 <!ENTITY options.general "Опште">
 <!ENTITY options.advanced "Напредно">
@@ -72,10 +80,6 @@
 <!ENTITY remove "Уклони">
 <!ENTITY URL "Адреса">
 <!ENTITY hideWhenEmpty "Сакриј тикер када је празан">
-<!ENTITY trendsTitle "Актуелне вести">
-<!ENTITY trendsP1 "RSS Ticker жели да зна да ли бисте желели да се претплатите на довод најновијих актуелних вести.">
-<!ENTITY trendsP2 "Кликните на „У реду“ да бисте се претплатили; довод ће се аутоматски појавити у тикеру обавештавајући Вас уз помоћ најновијих вести и трендова са целог интернета.">
-<!ENTITY trendsP3 "Не брините, нећемо Вас поново питати уколико се не претплатите.">
 <!ENTITY faster "Брже">
 <!ENTITY slower "Спорије">
 <!ENTITY smoother "Глађе (за брже процесоре)">
@@ -84,6 +88,4 @@
 <!ENTITY rssticker.featured.panelTitle "Одвојени доводи">
 <!ENTITY rssticker.featured.description "Подржите развој програма без иједног цента преузимајући неке од довода са списка „Пријатељи од RSS Ticker-а“.">
 <!ENTITY rssticker.featured.contact "(Ако желите да видите свој довод на овом списку, пошаљите поруку на cfinke@gmail.com.)">
-<!ENTITY rssticker.featured.trends.title "Актуелне вести">
-<!ENTITY rssticker.featured.trends.description "Довод најновијих популарних и актуелних вести.">
 <!ENTITY rssticker.featured.notifyMe "С времена на време ме подсећај о новим издвојеним доводима.">

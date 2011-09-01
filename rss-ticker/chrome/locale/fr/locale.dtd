@@ -66,10 +66,6 @@
 <!ENTITY remove "Supprimer">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Masquer la bande déroulante quand elle est vide">
-<!ENTITY trendsTitle "Les tendances Web en temps réel">
-<!ENTITY trendsP1 "RSS Ticker veut savoir si vous souhaiteriez vous abonner à un flux des dernières recherches de tendances sur Twitter, Digg et le reste du Web social.">
-<!ENTITY trendsP2 "Cliquez sur OK pour vous abonnez au flux; il apparaitra automatiquement dans la bande déroulante, et vous tiendra au courant des dernières nouveautés et tendances du Web. (Vous pourrez vous désabonner quand vous le souhaiterez.)">
-<!ENTITY trendsP3 "Nous ne vous poserons plus la question si vous choisissez de ne pas vous abonner.">
 <!ENTITY faster "Plus rapide">
 <!ENTITY slower "Plus lent">
 <!ENTITY smoother "Plus doux (plus de processeur)">
@@ -78,6 +74,4 @@
 <!ENTITY rssticker.featured.panelTitle "Flux à la une">
 <!ENTITY rssticker.featured.description "Aider le développement de RSS Ticker sans dépenser un centime en essayant certains de ces flux partenaires.">
 <!ENTITY rssticker.featured.contact "(si vous aimeriez voir votre flux dans cette liste, écrivez à cfinke@gmail.com)">
-<!ENTITY rssticker.featured.trends.title "Nouvelles tendances">
-<!ENTITY rssticker.featured.trends.description "Un flux avec les dernières nouvelles tendances populaires.">
 <!ENTITY rssticker.featured.notifyMe "Me notifier périodiquement les nouveaux flux.">

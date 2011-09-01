@@ -55,7 +55,6 @@
 <!ENTITY noFeedsFoundTitle "Ingen Live bogmærker fundet">
 <!ENTITY noFeedsFound "RSS Ticker kunne ikke finde nogen Live bogmærker (nyheds-feeds, RSS-feeds)">
 <!ENTITY howToSubscribe1 "RSS Ticker indlæser og viser elementerne fra dine Live bogmærker (også kendt som nyheds-feeds eller RSS-feeds), men du abonnerer ikke på nogen Live bogmærker. Brug for hjælp? Det er nemt at abonnere på et feed:">
-<!ENTITY howToSubscribe1a "Den letteste måde at starte på, er at abonnere på RSS Tickers Trending News feed. Tryk på knappen 'Abonner' nedenunder for øjeblikkeligt at få trending-nyheder i din ticker.">
 <!ENTITY howToSubscribe2 "Hvis siden du læser i din browser tilbyder et RSS-feed (f.eks. www.mozilla.org) vil der være et lille orange eller blåt ikon i højre side af adresselinjen, ved siden af stjernen som bruges til at lave et bogmærke. Hvis du klikker på dette ikon, vil dialogboksen 'Abonner på denne side' blive åbnet.">
 <!ENTITY howToSubscribe3 "Klik på knappen Abonner nu, så vil RSS Ticker straks begynde at vise elementer fra dette feed.">
 <!ENTITY closeNoFeedsPage "Luk denne side">
@@ -67,10 +66,6 @@
 <!ENTITY remove "Fjern">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Skjul ticker når tom">
-<!ENTITY trendsTitle "Realtids Trending-nyheder">
-<!ENTITY trendsP1 "RSS Ticker vil gerne vide, om du ønsker at abonnere på et feed med seneste trends-nyhedshistorier.">
-<!ENTITY trendsP2 "Klik OK for at abonnere; feedet vil automatisk blive vist i tickeren og holde dig opdateret med de seneste nyheder og trends fra rundt om på nettet.">
-<!ENTITY trendsP3 "Bare rolig, du bliver ikke spurgt igen hvis du vælger ikke at abonnere.">
 <!ENTITY faster "Hurtigere">
 <!ENTITY slower "Langsommere">
 <!ENTITY smoother "Glattere (mere CPU)">
@@ -79,7 +74,4 @@
 <!ENTITY rssticker.featured.panelTitle "Udvalgte feeds">
 <!ENTITY rssticker.featured.description "Ved at prøve nogle af disse feeds fra Friends of RSS Ticker, kan du støtte udviklingen af RSS Ticker uden at bruge en krone.">
 <!ENTITY rssticker.featured.contact "(Hvis du ønsker at se dit feed på denne liste, send en mail til cfinke@gmail.com.)">
-<!ENTITY rssticker.featured.trends.title "Trending-nyheder">
-<!ENTITY rssticker.featured.trends.description "Et feed med de seneste populære og trends-nyhedshistorier.">
 <!ENTITY rssticker.featured.notifyMe "Giv mig periodisk besked om nye udvalgte feeds.">
-<!ENTITY rssticker.trendingNews.subscribe "Abonner på Trending-nyheder">

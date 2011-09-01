@@ -55,7 +55,6 @@
 <!ENTITY noFeedsFoundTitle "Non sono stati trovati segnalibri Live">
 <!ENTITY noFeedsFound "RSS Ticker non ha trovato alcun tipo di segnalibro Live">
 <!ENTITY howToSubscribe1 "RSS Ticker permette di caricare e visualizzare tramite scorrimento nella propria barra di visualizzazione i feed salvati come segnalibri Live">
-<!ENTITY howToSubscribe1a "Il modo più semplice per iniziare ad utilizzare l'estensione è aggiungere a tale barra il feed 'Ultime notizie e tendenze dal web' facendo clic sul relativo pulsante qui sotto">
 <!ENTITY howToSubscribe2 "Se nella pagina che si sta visualizzando nel browser è disponibile un feed RSS (ad esempio: www.mozilla.org), sarà presente una piccola icona arancione oppure blu vicino all'icona a forma di stella posizionata nel lato destro della barra degli indirizzi. Facendo clic su tale icona si aprirà la finestra di dialogo per l'aggiunta del feed">
 <!ENTITY howToSubscribe3 "Confermare facendo clic sul relativo pulsante per visualizzare istantaneamente gli elementi del feed aggiunto nella barra di RSS Ticker">
 <!ENTITY closeNoFeedsPage "Chiudi">
@@ -67,10 +66,6 @@
 <!ENTITY remove "Elimina">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Nascondi la barra di RSS Ticker quando è vuota">
-<!ENTITY trendsTitle "Ultime notizie e tendenze dal web">
-<!ENTITY trendsP1 "È possibile aggiungere un feed relativo alle ultime notizie e tendenze dal web">
-<!ENTITY trendsP2 "Fare clic su OK per aggiungere tale feed, che verrà visualizzato automaticamente nella barra di RSS Ticker permettendo di rimanere aggiornati sulle ultime notizie e tendenze dal web">
-<!ENTITY trendsP3 "Questo avviso non verrà più mostrato">
 <!ENTITY faster "Maggiore">
 <!ENTITY slower "Minore">
 <!ENTITY smoother "Maggiore (maggior uso CPU)">
@@ -79,7 +74,4 @@
 <!ENTITY rssticker.featured.panelTitle "Feed proposti">
 <!ENTITY rssticker.featured.description "È possibile supportare gratuitamente lo sviluppo di RSS Ticker sottoscrivendo uno o più feed tra quelli proposti qui sotto">
 <!ENTITY rssticker.featured.contact "Per aggiungere un proprio feed alla lista inviare un'e-mail all'indirizzo cfinke@gmail.com">
-<!ENTITY rssticker.featured.trends.title "Ultime notizie e tendenze dal web">
-<!ENTITY rssticker.featured.trends.description "Feed relativo alle ultime notizie e tendenze dal web">
 <!ENTITY rssticker.featured.notifyMe "Avvisa periodicamente della disponibilità di nuovi feed proposti">
-<!ENTITY rssticker.trendingNews.subscribe "Aggiungi 'Ultime notizie e tendenze dal web'">

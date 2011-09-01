@@ -65,10 +65,6 @@
 <!ENTITY remove "隐藏">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "没有条目时隐藏跑马灯">
-<!ENTITY trendsTitle "实时趋势新闻">
-<!ENTITY trendsP1 "RSS Ticker 希望知道你是否愿意订阅最新的趋势新闻。">
-<!ENTITY trendsP2 "订阅后将自动出现在跑马灯里，即时跟踪网络上的最新的新闻和趋势。">
-<!ENTITY trendsP3 "如果你选择不订阅，我们不会再次询问。">
 <!ENTITY faster "快">
 <!ENTITY slower "慢">
 <!ENTITY smoother "平滑 (占用更多CPU)">
@@ -77,6 +73,4 @@
 <!ENTITY rssticker.featured.panelTitle "特色 Feed">
 <!ENTITY rssticker.featured.description "不用花一分钱，订阅这些 RSS Ticker 推荐的 feed 来支持我们。">
 <!ENTITY rssticker.featured.contact "（如果你希望将你的 Feed 列到这里，请发邮件给 cfinke@gmail.com 。)">
-<!ENTITY rssticker.featured.trends.title "趋势新闻">
-<!ENTITY rssticker.featured.trends.description "提供最新的流行趋势和最新报道。">
 <!ENTITY rssticker.featured.notifyMe "定期通知我有新的特色 Feed。">

@@ -65,10 +65,6 @@
 <!ENTITY remove "Loại Bỏ">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Ẩn Bộ Cuộn Khi Nó Rỗng">
-<!ENTITY trendsTitle "Xu Hướng Web Thời Gian Thực">
-<!ENTITY trendsP1 "Bộ Cuộn Tin RSS muốn biết liệu bạn có muốn nhận tin về xu hướng tìm kiếm mới nhất trên Twitter, Digg, và các trang mạng xã hội khác.">
-<!ENTITY trendsP2 "Nhấp OK để đăng ký nhận nguồn tin; nó sẽ tự động xuất hiện trên bộ cuộn tin, luôn cập nhật tin mới nhất và xu hướng trên Web. (Bạn có thể bỏ đăng ký bất cứ lúc nào.)">
-<!ENTITY trendsP3 "Đừng lo lăng, bạn sẽ không bị hỏi lần nữa nếu bạn chọn không đăng ký tin.">
 <!ENTITY faster "Nhanh hơn">
 <!ENTITY slower "Chậm hơn">
 <!ENTITY smoother "Mượt hơn (Tốn CPU)">
@@ -77,6 +73,4 @@
 <!ENTITY rssticker.featured.panelTitle "Nguồn Tin Đặc Sắc">
 <!ENTITY rssticker.featured.description "Hỗ trợ việc phát triển RSS Ticker mà không mất xu nào bằng việc thử vài nguồn tin từ Bạn của RSS Ticker.">
 <!ENTITY rssticker.featured.contact "(Nếu bạn muốn xem nguồn tin của bạn trong danh sách này, hãy e-mail đến cfinke@gmail.com.)">
-<!ENTITY rssticker.featured.trends.title "Tin Theo Xu Hướng">
-<!ENTITY rssticker.featured.trends.description "Một tin của các mẩu tin theo xu hướng và phổ biến mới nhất.">
 <!ENTITY rssticker.featured.notifyMe "Định kỳ thông báo cho tôi về các nguồn tin đặc sắc mới.">

@@ -54,7 +54,6 @@
 <!ENTITY noFeedsFoundTitle "Geen livebladwijzers gevonden">
 <!ENTITY noFeedsFound "RSS Ticker kan geen livebladwijzers (ofwel newsfeeds, RSS-feeds) vinden.">
 <!ENTITY howToSubscribe1 "RSS Ticker laadt en scrollt de berichten uit uw Livebladwijzers (ook wel bekend als nieuwsfeeds of RSS-feeds), maar u bent niet geabonneerd op een Livebladwijzer. Abonneren op een feed is eenvoudig:">
-<!ENTITY howToSubscribe1a "De eenvoudigste manier om van start te gaan is u abonneren op de Trendnieuwsfeed van RSS Ticker. Klik hieronder op de knop ‘Abonneren’ om direct trendnieuws aan uw lezer toe te voegen.">
 <!ENTITY howToSubscribe2 "Als de door u in uw browser bekeken pagina een RSS-feed biedt (bijvoorbeeld www.mozilla.org) verschijnt er een klein oranje of blauw pictogram aan de rechterkant van de adresbalk, naast de ster die voor Bladwijzer maken wordt gebruikt. Als u op dat pictogram klikt wordt het dialoogvenster ‘Livebladwijzer toevoegen’ geopend.">
 <!ENTITY howToSubscribe3 "Klik op Nu abonneren en RSS Ticker begint meteen met scrollen van de berichten in die feed.">
 <!ENTITY closeNoFeedsPage "Deze pagina sluiten">
@@ -66,10 +65,6 @@
 <!ENTITY remove "Verwijderen">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Ticker verbergen indien leeg">
-<!ENTITY trendsTitle "Realtime webtrends">
-<!ENTITY trendsP1 "RSS Ticker wil weten of u zich wilt abonneren op een feed met de laatste trendzoektermen op Twitter, Digg en de rest van het sociale web.">
-<!ENTITY trendsP2 "Klik OK om u te abonneren op de feed; deze zal automatisch in de ticker verschijnen en u up-to-date houden met het laatste nieuws en trends op het web. (U kunt uw abonnement op elk gewenst moment opzeggen.)">
-<!ENTITY trendsP3 "Wees gerust, u wordt niet meer lastiggevallen als u zich niet abonneert.">
 <!ENTITY faster "Sneller">
 <!ENTITY slower "Langzamer">
 <!ENTITY smoother "Soepeler (meer CPU)">
@@ -78,7 +73,4 @@
 <!ENTITY rssticker.featured.panelTitle "Gepresenteerde feeds">
 <!ENTITY rssticker.featured.description "Ondersteun de ontwikkeling van RSS Ticker zonder een cent uit te geven door een paar van deze feeds van de vrienden van RSS Ticker uit te proberen.">
 <!ENTITY rssticker.featured.contact "(Als u uw feed in deze lijst wilt zien, stuur dan een e-mailbericht naar cfinke@gmail.com).">
-<!ENTITY rssticker.featured.trends.title "Trendnieuws">
-<!ENTITY rssticker.featured.trends.description "Een feed met de laatste populaire en trendy nieuwsberichten.">
 <!ENTITY rssticker.featured.notifyMe "Informeer mij periodiek over nieuwe gepresenteerde feeds.">
-<!ENTITY rssticker.trendingNews.subscribe "Abonneren op Trendnieuws">

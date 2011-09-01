@@ -65,10 +65,6 @@
 <!ENTITY remove "Ta bort">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Göm textremsan när den är tom">
-<!ENTITY trendsTitle "Realtids trendnyheter">
-<!ENTITY trendsP1 "RSS Ticker vill veta om du vill prenumerera på ett flöde med de senaste trendnyheterna.">
-<!ENTITY trendsP2 "Klicka OK för att prenumerera; flödet kommer genast att dyka upp i tickern, och håller dig uppdaterad på de senaste trenderna och nyheterna från webben.">
-<!ENTITY trendsP3 "Var inte orolig, du kommer inte att få frågan igen om du inte vill prenumerera.">
 <!ENTITY faster "Snabbare">
 <!ENTITY slower "Saktare">
 <!ENTITY smoother "Mjukare (Mer processor)">
@@ -77,6 +73,4 @@
 <!ENTITY rssticker.featured.panelTitle "Rekommenderade flöden">
 <!ENTITY rssticker.featured.description "Stöd RSS Tickers utveckling utan att spendera ett öre genom att testa några av dess flöden från RSS Tickers vänner.">
 <!ENTITY rssticker.featured.contact "(Om du vill ha ditt flöde i den här listan, skicka ett mail till cfinke@gmail.com).">
-<!ENTITY rssticker.featured.trends.title "Trendnyheter">
-<!ENTITY rssticker.featured.trends.description "Ett flöde med de senaste populära och trendiga nyheterna.">
 <!ENTITY rssticker.featured.notifyMe "Visa mig nya rekommenderade flöden då och då.">
