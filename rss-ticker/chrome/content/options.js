@@ -287,7 +287,7 @@ var TICKER_PREFS = {
 		for (var i = 0; i < len; i++){
 			var node = feedList.childNodes[i];
 
-			if (ticker.inArray(ignore, node.getAttribute("value"))){
+			if (~ignore.indexOf(node.getAttribute("value"))){
 				node.setAttribute("ignored","true");
 			}
 		}

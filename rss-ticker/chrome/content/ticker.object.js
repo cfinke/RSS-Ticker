@@ -668,32 +668,26 @@ var RSSTICKER = {
 					// Add an item.
 					
 					if (!document.getElementById("RSSTICKER-feature-feeds-subscribe")){
-						RSSTICKER.internalPause = true;
+						RSSTICKER.doFunctionWhilePaused(function () {
+							var tbb = document.createElement('toolbarbutton');
+							tbb.uri = "chrome://rss-ticker/content/options.xul";
+							tbb.id = "RSSTICKER-feature-feeds-subscribe";
+							tbb.description = RSSTICKER.strings.getString("rssticker.featured.description");
+							tbb.feed = RSSTICKER.strings.getString("rssticker.specialItem.feedName");
+							tbb.feedURL = "rssticker";
+							tbb.href = "chrome://rss-ticker/content/options.xul";
+							tbb.displayHref = RSSTICKER.strings.getString("rssticker.specialItem.displayHref");
+							tbb.published = "";
+							tbb.guid = "RSSTICKER-feature-feeds-subscribe";
 						
-						var tbb = document.createElement('toolbarbutton');
-						tbb.uri = "chrome://rss-ticker/content/options.xul";
-						tbb.id = "RSSTICKER-feature-feeds-subscribe";
-						tbb.description = RSSTICKER.strings.getString("rssticker.featured.description");
-						tbb.feed = RSSTICKER.strings.getString("rssticker.specialItem.feedName");
-						tbb.feedURL = "rssticker";
-						tbb.href = "chrome://rss-ticker/content/options.xul";
-						tbb.displayHref = RSSTICKER.strings.getString("rssticker.specialItem.displayHref");
-						tbb.published = "";
-						tbb.guid = "RSSTICKER-feature-feeds-subscribe";
+							tbb.setAttribute("label", RSSTICKER.strings.getString("rssticker.featured.label"));
+							tbb.setAttribute("tooltip", "RSSTICKERTooltip");
+							tbb.setAttribute("image", "chrome://rss-ticker/content/skin-common/thumbs-up.png");
+							tbb.setAttribute("onclick", "RSSTICKER.openFeaturedFeeds();");
+							tbb.setAttribute("visited", "false");
 						
-						tbb.setAttribute("label", RSSTICKER.strings.getString("rssticker.featured.label"));
-						tbb.setAttribute("tooltip", "RSSTICKERTooltip");
-						tbb.setAttribute("image", "chrome://rss-ticker/content/skin-common/thumbs-up.png");
-						tbb.setAttribute("onclick", "RSSTICKER.openFeaturedFeeds();");
-						tbb.setAttribute("visited", "false");
-						
-						RSSTICKER.toolbar.appendChild(tbb);
-						
-						RSSTICKER.internalPause = false;
-						
-						RSSTICKER.adjustSpacerWidth();
-						RSSTICKER.checkForEmptiness();
-						RSSTICKER.tick();
+							RSSTICKER.toolbar.appendChild(tbb);
+						});
 					}
 				}
 			}
@@ -706,15 +700,9 @@ var RSSTICKER = {
 		var tickerItem = document.getElementById("RSSTICKER-feature-feeds-subscribe");
 		
 		if (tickerItem) {
-			RSSTICKER.internalPause = true;
-			
-			tickerItem.parentNode.removeChild(tickerItem);
-			
-			RSSTICKER.internalPause = false;
-			
-			RSSTICKER.adjustSpacerWidth();
-			RSSTICKER.checkForEmptiness();
-			RSSTICKER.tick();
+			RSSTICKER.doFunctionWhilePaused(function () {
+				tickerItem.parentNode.removeChild(tickerItem);
+			});
 		}
 		
 		RSSTICKER.options('featured-pane');
@@ -743,21 +731,17 @@ var RSSTICKER = {
 		
 		var ignore = RSSTICKER.readIgnoreFile();
 
-		RSSTICKER.internalPause = true;
-		
-		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
-			var node = RSSTICKER.toolbar.childNodes[i];
+		RSSTICKER.doFunctionWhilePaused(function() {
+			for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+				var node = RSSTICKER.toolbar.childNodes[i];
 			
-			if (node.nodeName == 'toolbarbutton'){
-				if (RSSTICKER.inArray(ignore, node.feedURL)){
-					RSSTICKER.toolbar.removeChild(node);
+				if (node.nodeName == 'toolbarbutton'){
+					if (~ignore.indexOf(node.feedURL)){
+						RSSTICKER.toolbar.removeChild(node);
+					}
 				}
 			}
-		}
-
-		RSSTICKER.checkForEmptiness();
-
-		RSSTICKER.internalPause = false;
+		});
 
 	    RSSTICKER.feedsToFetch = [];
 	    RSSTICKER.feedIndex = 0;
@@ -774,7 +758,7 @@ var RSSTICKER = {
 			
 			var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkId);
 		
-			if (!RSSTICKER.inArray(ignore, feedURL)){
+			if (!~ignore.indexOf(feedURL)){
 				RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
 			}
 		}
@@ -1066,185 +1050,179 @@ var RSSTICKER = {
 		
 		var feedItems = feed.items;
 		
-		RSSTICKER.internalPause = true;
-		
-		// Remove items that are no longer in the feed.
-		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
-			var item = RSSTICKER.toolbar.childNodes[i];
+		RSSTICKER.doFunctionWhilePaused(function () {
+			// Remove items that are no longer in the feed.
+			for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+				var item = RSSTICKER.toolbar.childNodes[i];
 			
-			if ((item.nodeName == 'toolbarbutton') && (item.feed == feed.label)){
-				var itemFound = false;
+				if ((item.nodeName == 'toolbarbutton') && (item.feed == feed.label)){
+					var itemFound = false;
 				
-				var len = feedItems.length;
+					var len = feedItems.length;
 				
-				for (var j = 0; j < len; j++){
-					if ((feedItems[j].uri == item.uri) && (feedItems[j].id == item.guid)){
-						itemFound = true;
-						break;
+					for (var j = 0; j < len; j++){
+						if ((feedItems[j].uri == item.uri) && (feedItems[j].id == item.guid)){
+							itemFound = true;
+							break;
+						}
 					}
-				}
 				
-				if (!itemFound){
-					RSSTICKER.toolbar.removeChild(item);
+					if (!itemFound){
+						RSSTICKER.toolbar.removeChild(item);
+					}
 				}
 			}
-		}
 		
-		var itemsShowing = RSSTICKER.itemsInTicker(feed.label);
+			var itemsShowing = RSSTICKER.itemsInTicker(feed.label);
 		
-		var len = feedItems.length;
+			var len = feedItems.length;
 		
-		for (var j = 0; j < len; j++){
-			var feedItem = feedItems[j];
+			for (var j = 0; j < len; j++){
+				var feedItem = feedItems[j];
 			
-			if (!document.getElementById("RSSTICKER" + feedItem.uri)){
-				if (RSSTICKER.limitItemsPerFeed && (RSSTICKER.itemsPerFeed <= itemsShowing.length)){
-					// Determine if this item is newer than the oldest item showing.
-					if ((RSSTICKER.itemsPerFeed > 0) && feedItem.published && itemsShowing[0].published && (feedItem.published > itemsShowing[0].published)){
-						RSSTICKER.toolbar.removeChild(document.getElementById("RSSTICKER" + itemsShowing[0].href));
-						itemsShowing.shift();
+				if (!document.getElementById("RSSTICKER" + feedItem.uri)){
+					if (RSSTICKER.limitItemsPerFeed && (RSSTICKER.itemsPerFeed <= itemsShowing.length)){
+						// Determine if this item is newer than the oldest item showing.
+						if ((RSSTICKER.itemsPerFeed > 0) && feedItem.published && itemsShowing[0].published && (feedItem.published > itemsShowing[0].published)){
+							RSSTICKER.toolbar.removeChild(document.getElementById("RSSTICKER" + itemsShowing[0].href));
+							itemsShowing.shift();
+						}
+						else {
+							continue;
+						}
 					}
-					else {
+				
+					var itemIsVisited = RSSTICKER.history.isVisitedURL(feedItem.uri, feedItem.id, 1);
+				
+					if (itemIsVisited && RSSTICKER.hideVisited) {
 						continue;
 					}
-				}
 				
-				var itemIsVisited = RSSTICKER.history.isVisitedURL(feedItem.uri, feedItem.id, 1);
+					feedItem.description = feedItem.description.replace(/<[^>]+>/g, "");
 				
-				if (itemIsVisited && RSSTICKER.hideVisited) {
-					continue;
-				}
-				
-				feedItem.description = feedItem.description.replace(/<[^>]+>/g, "");
-				
-				if ((feedItem.label == '') && (feedItem.description != '')){
-					if (feedItem.description.length > 40){
-						feedItem.label = feedItem.description.substr(0,40) + "...";
-					}
-					else {
-						feedItem.label = feedItem.description;
-					}
-				}
-				
-				var tbb = document.createElement('toolbarbutton');
-				tbb.uri = feedItem.uri;
-				tbb.id = "RSSTICKER" + feedItem.uri;
-				tbb.description = feedItem.description;
-				tbb.feed = feed.label;
-				tbb.feedURL = feed.uri;
-				tbb.href = feedItem.uri;
-				tbb.displayHref = feedItem.displayUri;
-				tbb.published = feedItem.published;
-				tbb.guid = feedItem.id;
-				
-				tbb.setAttribute("label", feedItem.label);
-				tbb.setAttribute("tooltip", "RSSTICKERTooltip");
-				tbb.setAttribute("image", feedItem.image);
-				tbb.setAttribute("contextmenu", "RSSTICKERItemCM");
-				tbb.setAttribute("onclick", "return RSSTICKER.onTickerItemClick(event, this.uri, this);");
-				
-				tbb.onclick = function (event) {
-					return RSSTICKER.onTickerItemClick(event, this.uri, this);
-				};
-				
-				tbb.setAttribute("visited", itemIsVisited);
-				
-				if (feedItem.trackingUri) {
-					tbb.style.background = 'url('+feedItem.trackingUri+') no-repeat';
-				}
-				
-				// Determine where to add the item
-				if (RSSTICKER.randomizeItems){
-					if (RSSTICKER.toolbar.childNodes.length == 1){
-						// Only the spacer is showing
-						RSSTICKER.toolbar.appendChild(tbb);
-					}
-					else {
-						if ((RSSTICKER.toolbar.firstChild.nodeName == 'spacer') && ((RSSTICKER.currentFirstItemMargin * -1) < (RSSTICKER.toolbar.firstChild.nextSibling.boxObject.width))){
-							var randomPlace = Math.floor(Math.random() * (RSSTICKER.toolbar.childNodes.length - 1)) + 1;
+					if ((feedItem.label == '') && (feedItem.description != '')){
+						if (feedItem.description.length > 40){
+							feedItem.label = feedItem.description.substr(0,40) + "...";
 						}
 						else {
-							// Add after the 5th one just to avoid some jumpiness
-							var randomPlace = Math.floor(Math.random() * (RSSTICKER.toolbar.childNodes.length - 1)) + 6;
+							feedItem.label = feedItem.description;
 						}
-						
-						if (randomPlace >= RSSTICKER.toolbar.childNodes.length){
+					}
+				
+					var tbb = document.createElement('toolbarbutton');
+					tbb.uri = feedItem.uri;
+					tbb.id = "RSSTICKER" + feedItem.uri;
+					tbb.description = feedItem.description;
+					tbb.feed = feed.label;
+					tbb.feedURL = feed.uri;
+					tbb.href = feedItem.uri;
+					tbb.displayHref = feedItem.displayUri;
+					tbb.published = feedItem.published;
+					tbb.guid = feedItem.id;
+				
+					tbb.setAttribute("label", feedItem.label);
+					tbb.setAttribute("tooltip", "RSSTICKERTooltip");
+					tbb.setAttribute("image", feedItem.image);
+					tbb.setAttribute("contextmenu", "RSSTICKERItemCM");
+					tbb.setAttribute("onclick", "return RSSTICKER.onTickerItemClick(event, this.uri, this);");
+				
+					tbb.onclick = function (event) {
+						return RSSTICKER.onTickerItemClick(event, this.uri, this);
+					};
+				
+					tbb.setAttribute("visited", itemIsVisited);
+				
+					if (feedItem.trackingUri) {
+						tbb.style.background = 'url('+feedItem.trackingUri+') no-repeat';
+					}
+				
+					// Determine where to add the item
+					if (RSSTICKER.randomizeItems){
+						if (RSSTICKER.toolbar.childNodes.length == 1){
+							// Only the spacer is showing
 							RSSTICKER.toolbar.appendChild(tbb);
 						}
 						else {
-							RSSTICKER.toolbar.insertBefore(tbb, RSSTICKER.toolbar.childNodes[randomPlace]);
-						}
-					}
-				}
-				else {
-					// Check for another item from this feed, if so place at end of that feed.
-					if (itemsShowing.length > 0){
-						for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
-							var node = RSSTICKER.toolbar.childNodes[i];
-							
-							if (node.nodeName == 'toolbarbutton'){
-								if (node.feed == tbb.feed){
-									if (i == (RSSTICKER.toolbar.childNodes.length - 1)){
-										RSSTICKER.toolbar.appendChild(tbb);
-										addedButton = true;
-									}
-									else {
-										RSSTICKER.toolbar.insertBefore(tbb, node.nextSibling);
-										addedButton = true;
-									}
-									
-									break;
-								}
+							if ((RSSTICKER.toolbar.firstChild.nodeName == 'spacer') && ((RSSTICKER.currentFirstItemMargin * -1) < (RSSTICKER.toolbar.firstChild.nextSibling.boxObject.width))){
+								var randomPlace = Math.floor(Math.random() * (RSSTICKER.toolbar.childNodes.length - 1)) + 1;
 							}
-						}
-					}
-					else {
-						// None of this feed is showing; add after another feed.
-						if ((RSSTICKER.toolbar.firstChild.nodeName == 'spacer') || (RSSTICKER.toolbar.lastChild.nodeName == 'spacer')){
-							RSSTICKER.toolbar.appendChild(tbb);
-						}
-						else {
-							if (RSSTICKER.toolbar.firstChild.feed != RSSTICKER.toolbar.lastChild.feed){
-								// We're in luck - a feed just finished scrolling
+							else {
+								// Add after the 5th one just to avoid some jumpiness
+								var randomPlace = Math.floor(Math.random() * (RSSTICKER.toolbar.childNodes.length - 1)) + 6;
+							}
+						
+							if (randomPlace >= RSSTICKER.toolbar.childNodes.length){
 								RSSTICKER.toolbar.appendChild(tbb);
 							}
 							else {
-								var addedButton = false;
-								
-								for (var i = RSSTICKER.toolbar.childNodes.length - 2; i >= 0; i--){
-									var node = RSSTICKER.toolbar.childNodes[i];
+								RSSTICKER.toolbar.insertBefore(tbb, RSSTICKER.toolbar.childNodes[randomPlace]);
+							}
+						}
+					}
+					else {
+						// Check for another item from this feed, if so place at end of that feed.
+						if (itemsShowing.length > 0){
+							for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+								var node = RSSTICKER.toolbar.childNodes[i];
+							
+								if (node.nodeName == 'toolbarbutton'){
+									if (node.feed == tbb.feed){
+										if (i == (RSSTICKER.toolbar.childNodes.length - 1)){
+											RSSTICKER.toolbar.appendChild(tbb);
+											addedButton = true;
+										}
+										else {
+											RSSTICKER.toolbar.insertBefore(tbb, node.nextSibling);
+											addedButton = true;
+										}
 									
-									if (node.nodeName == 'spacer'){
-										RSSTICKER.toolbar.insertBefore(tbb, node.nextSibling);
-										addedButton = true;
-										break;
-									}
-									else if (node.feed != node.nextSibling.feed){
-										RSSTICKER.toolbar.insertBefore(tbb, node.nextSibling);
-										addedButton = true;
 										break;
 									}
 								}
-								
-								if (!addedButton){
+							}
+						}
+						else {
+							// None of this feed is showing; add after another feed.
+							if ((RSSTICKER.toolbar.firstChild.nodeName == 'spacer') || (RSSTICKER.toolbar.lastChild.nodeName == 'spacer')){
+								RSSTICKER.toolbar.appendChild(tbb);
+							}
+							else {
+								if (RSSTICKER.toolbar.firstChild.feed != RSSTICKER.toolbar.lastChild.feed){
+									// We're in luck - a feed just finished scrolling
 									RSSTICKER.toolbar.appendChild(tbb);
+								}
+								else {
+									var addedButton = false;
+								
+									for (var i = RSSTICKER.toolbar.childNodes.length - 2; i >= 0; i--){
+										var node = RSSTICKER.toolbar.childNodes[i];
+									
+										if (node.nodeName == 'spacer'){
+											RSSTICKER.toolbar.insertBefore(tbb, node.nextSibling);
+											addedButton = true;
+											break;
+										}
+										else if (node.feed != node.nextSibling.feed){
+											RSSTICKER.toolbar.insertBefore(tbb, node.nextSibling);
+											addedButton = true;
+											break;
+										}
+									}
+								
+									if (!addedButton){
+										RSSTICKER.toolbar.appendChild(tbb);
+									}
 								}
 							}
 						}
 					}
+				
+					itemsShowing.push(tbb);
+				
+					itemsShowing.sort(RSSTICKER.sortByPubDate);
 				}
-				
-				itemsShowing.push(tbb);
-				
-				itemsShowing.sort(RSSTICKER.sortByPubDate);
 			}
-		}
-		
-		RSSTICKER.internalPause = false;
-		
-		RSSTICKER.adjustSpacerWidth();
-		RSSTICKER.checkForEmptiness();
-		RSSTICKER.tick();
+		});
 	},
 	
 	onTickerItemClick : function (event, url, node) {
@@ -1450,22 +1428,18 @@ var RSSTICKER = {
 	},
 	
 	markAllAsRead : function (feed) {
-		RSSTICKER.internalPause = true;
-		
-		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
-			var node = RSSTICKER.toolbar.childNodes[i];
+		RSSTICKER.doFunctionWhilePaused(function() {
+			for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+				var node = RSSTICKER.toolbar.childNodes[i];
 			
-			if (node.nodeName == 'toolbarbutton'){
-				if (!feed || (node.feed == feed)){
-					RSSTICKER.history.addToHistory(node.guid);
-					RSSTICKER.markAsRead(node, true);
+				if (node.nodeName == 'toolbarbutton'){
+					if (!feed || (node.feed == feed)){
+						RSSTICKER.history.addToHistory(node.guid);
+						RSSTICKER.markAsRead(node, true);
+					}
 				}
 			}
-		}
-		
-		RSSTICKER.internalPause = false;
-		
-		RSSTICKER.adjustSpacerWidth();
+		});
 	},
 	
 	openAllInTabs : function (unreadOnly, feed) {
@@ -1861,47 +1835,28 @@ var RSSTICKER = {
 		return RSSTICKER.profilePath;
 	},
 	
-	inArray : function (arr, needle){
-		var i;
-		var len = arr.length;
-		
-		for (i = 0; i < len; i++){
-			if (arr[i] == needle){
-				return true;
-			}
-		}
-		
-		return false;
-	},
-	
 	itemsInTicker : function (feed) {
-		var items = [];
-		var ip = RSSTICKER.internalPause;
-		
-		RSSTICKER.internalPause = true;
-		
-		for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
-			var tbb = RSSTICKER.toolbar.childNodes[i];
+		return RSSTICKER.doFunctionWhilePaused(function () {
+			var items = [];
 			
-			if (tbb.nodeName != "spacer" && tbb.feed == feed){
-				if (RSSTICKER.limitItemsPerFeed && (items.length == RSSTICKER.itemsPerFeed)){
-					RSSTICKER.toolbar.removeChild(tbb);
-				}
-				else {
-					items.push(tbb);
+			for (var i = RSSTICKER.toolbar.childNodes.length - 1; i >= 0; i--){
+				var tbb = RSSTICKER.toolbar.childNodes[i];
+			
+				if (tbb.nodeName != "spacer" && tbb.feed == feed){
+					if (RSSTICKER.limitItemsPerFeed && (items.length == RSSTICKER.itemsPerFeed)){
+						RSSTICKER.toolbar.removeChild(tbb);
+					}
+					else {
+						items.push(tbb);
+					}
 				}
 			}
-		}
 		
-		// Sort the array by time
+			// Sort the array by time
+			items.sort(RSSTICKER.sortByPubDate);
 		
-		items.sort(RSSTICKER.sortByPubDate);
-		
-		RSSTICKER.internalPause = ip;
-		
-		RSSTICKER.checkForEmptiness();
-		
-		return items;
+			return items;
+		});
 	},
 	
 	checkForEmptiness : function(){
@@ -1962,14 +1917,19 @@ var RSSTICKER = {
 	},
 	
 	doFunctionWhilePaused : function ( callback ) {
+		var paused = RSSTICKER.internalPause;
+		
 		RSSTICKER.internalPause = true;
 		
-		callback();
+		var rv = callback();
 
-		RSSTICKER.internalPause = false;
-
-		RSSTICKER.adjustSpacerWidth();
-		RSSTICKER.checkForEmptiness();
-		RSSTICKER.tick();
+		if (!paused) {
+			RSSTICKER.adjustSpacerWidth();
+			RSSTICKER.checkForEmptiness();
+		}
+		
+		RSSTICKER.internalPause = paused;
+		
+		return rv;
 	}
 };
