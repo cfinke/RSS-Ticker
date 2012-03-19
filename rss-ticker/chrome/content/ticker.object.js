@@ -1793,30 +1793,24 @@ var RSSTICKER = {
 	
 	ignoreFeed : function (url) {
 		var feeds = RSSTICKER.readIgnoreFile();
-		var foundFeed = false;
 		
-		var len = feeds.length;
-		
-		for (var i = 0; i < len; i++){
+		for (var i = 0, _len = feeds.length; i < _len; i++){
 			if (feeds[i] == url){
-				foundFeed = true;
-				break;
+				return;
 			}
 		}
 		
-		if (!foundFeed){
-			var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-			file.initWithPath(RSSTICKER.getProfilePath() + RSSTICKER.ignoreFilename);
+		var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+		file.initWithPath(RSSTICKER.getProfilePath() + RSSTICKER.ignoreFilename);
 
-			var outputStream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance( Components.interfaces.nsIFileOutputStream );
-			outputStream.init(file, 0x02 | 0x08 | 0x10, 0600, null);
+		var outputStream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance( Components.interfaces.nsIFileOutputStream );
+		outputStream.init(file, 0x02 | 0x08 | 0x10, 0600, null);
+	
+		var data = url + "\r\n";
 		
-			var data = url + "\r\n";
-			
-			RSSTICKER.writeBytes(outputStream, data);
-			
-			outputStream.close();
-		}
+		RSSTICKER.writeBytes(outputStream, data);
+		
+		outputStream.close();
 	},
 	
 	readIgnoreFile : function () {
@@ -1965,5 +1959,17 @@ var RSSTICKER = {
 		else {
 			return atime - btime;
 		}
+	},
+	
+	doFunctionWhilePaused : function ( callback ) {
+		RSSTICKER.internalPause = true;
+		
+		callback();
+
+		RSSTICKER.internalPause = false;
+
+		RSSTICKER.adjustSpacerWidth();
+		RSSTICKER.checkForEmptiness();
+		RSSTICKER.tick();
 	}
 };

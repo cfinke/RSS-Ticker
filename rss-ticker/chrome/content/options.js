@@ -19,19 +19,29 @@ function observeFeeds(){
 
 function ignoreFeeds(){
 	var items = document.getElementById('feeds').selectedItems;
-	
 	var len = items.length;
+	
+	var ignoreFeeds = [];
 	
 	for (var i = 0; i < len; i++){
 		var item = items[i];
-		
 		if (item.nodeName == 'listitem'){
 			ticker.ignoreFeed(item.getAttribute("value"));
 			item.setAttribute("ignored","true");
+			
+			ignoreFeeds.push(item.getAttribute("value"));
 		}
 	}
 	
-	ticker.prefs.setBoolPref("updateToggle", !ticker.prefs.getBoolPref("updateToggle"));
+	ticker.doFunctionWhilePaused( function () {
+		for (var i = ticker.toolbar.childNodes.length - 1; i >= 0; i--) {
+			var item = ticker.toolbar.childNodes[i];
+		
+			if ((item.nodeName == 'toolbarbutton') && (ignoreFeeds.indexOf(item.feedURL) != -1)) {
+				ticker.toolbar.removeChild(item);
+			}
+		}
+	} );
 }
 
 var TICKER_PREFS = {
