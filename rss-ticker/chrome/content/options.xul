@@ -77,7 +77,6 @@
 			<preference id="p_dw_itemWidth" name="extensions.rssticker.dw.itemWidth" type="int" />
 			<preference id="p_ticksPerItem" name="extensions.rssticker.ticksPerItem" type="int" />
 			<preference id="p_direction" name="extensions.rssticker.rtl" type="bool" />
-			<preference id="p_optin" name="extensions.typed-it-collection.domainOptIn" type="bool" />
 		</preferences>
 		<vbox>
 			<groupbox>
@@ -119,10 +118,6 @@
 			</groupbox>
 			<groupbox>
 				<checkbox preference="p_direction" label="&options.reverseDirection;" />
-			</groupbox>
-			<groupbox>
-				<checkbox label="&rssticker.options.optIn;" preference="p_optin" />
-				<label class="text-link" href="http://data-rssticker.efinke.com/">&rssticker.options.optIn.learnMore;</label>
 			</groupbox>
 		</vbox>
 		<spacer style="height: 30px;" />
