@@ -4,7 +4,6 @@
 <!ENTITY cm.openInNewWindow "In neuem Fenster öffnen">
 <!ENTITY cm.openInNewWindow.key "F">
 <!ENTITY cm.openInNewTab "In neuem Tab öffnen">
-<!ENTITY cm.openInNewTab.key "T">
 <!ENTITY cm.openAllInTabs "Alle in Tabs öffnen">
 <!ENTITY cm.openUnreadInTabs "Alle ungelesenen in Tabs öffnen">
 <!ENTITY cm.openFeedInTabs "Feed in Tabs öffnen">
@@ -20,7 +19,6 @@
 <!ENTITY cm.markAsRead "Als gelesenen markieren">
 <!ENTITY cm.markAsRead.key "g">
 <!ENTITY cm.markFeedAsRead "Feed als gelesenen markieren">
-<!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "Alle als gelesenen markieren">
 <!ENTITY cm.markAllAsRead.key "l">
 <!ENTITY options.updateInterval "Aktualisierungsintervall (in Minuten)">
@@ -28,7 +26,6 @@
 <!ENTITY options.update.2 "Minuten aktualisieren.">
 <!ENTITY options.speed "Laufgeschwindigkeit">
 <!ENTITY options.dw.itemWidth "Breite der Einträge">
-<!ENTITY pixelAbbrev "px">
 <!ENTITY options.smooothness "Laufruhe des Tickers">
 <!ENTITY cmOptionsDescription "Einträge auswählen, die im Kontextmenü des Tickers angezeigt werden sollen:">
 <!ENTITY tt.summary "Zusammenfassung">
@@ -55,9 +52,7 @@
 <!ENTITY noFeedsFound "RSS Ticker konnte keine dynamischen Lesezeichen (d.h. Newsfeeds, RSS-Feeds) finden.">
 <!ENTITY closeNoFeedsPage "Diese Seite schließen">
 <!ENTITY dontShowAgain "Diese Meldung nicht mehr anzeigen">
-<!ENTITY feed "Feed">
-<!ENTITY feeds "Feeds">
-<!ENTITY feedManagement "Um Feeds zum Ticker hinzuzufügen oder daraus zu entfernen, wählen Sie die Einträge aus untenstehender Liste aus und klicken Sie entweder auf die Schaltfläche 'Hinzufügen' oder 'Entfernen'.">
+<!ENTITY feedManagement "Um Feeds zum Ticker hinzuzufügen oder daraus zu entfernen, wählen Sie die Einträge aus untenstehender Liste aus und klicken Sie entweder auf die Schaltfläche \'Hinzufügen\' oder \'Entfernen\'.">
 <!ENTITY add "Hinzufügen">
 <!ENTITY remove "Entfernen">
 <!ENTITY URL "Adresse">

@@ -1,34 +1,23 @@
 <!ENTITY extension.title "Bộ Cuộn Tin RSS">
 <!ENTITY cm.open "Mở">
-<!ENTITY cm.open.key "O">
 <!ENTITY cm.openInNewWindow "Mở trong Cửa Sổ Mới">
-<!ENTITY cm.openInNewWindow.key "N">
 <!ENTITY cm.openInNewTab "Mở trong Thẻ Mới">
-<!ENTITY cm.openInNewTab.key "T">
 <!ENTITY cm.openAllInTabs "Mở Tất Cả trong Thẻ">
 <!ENTITY cm.openUnreadInTabs "Mở Chưa Đọc trong Thẻ">
 <!ENTITY cm.openFeedInTabs "Mở Nguồn Tin trong Thẻ">
 <!ENTITY cm.openFeedUnreadInTabs "Mở Nguồn Tin Chưa Đọc trong Thẻ">
 <!ENTITY cm.copyLinkTitle "Chép Tiêu Đề Liên Kết">
-<!ENTITY cm.copyLinkTitle.key "L">
 <!ENTITY cm.copyLinkURL "Chép URL Liên Kết">
-<!ENTITY cm.copyLinkURL.key "C">
 <!ENTITY cm.refreshFeeds "Làm Mới Nguồn Tin">
-<!ENTITY cm.refreshFeeds.key "R">
 <!ENTITY cm.manageFeeds "Quản Lý Nguồn Tin">
-<!ENTITY cm.manageFeeds.key "G">
 <!ENTITY cm.markAsRead "Đánh Dấu Đã Đọc">
-<!ENTITY cm.markAsRead.key "M">
 <!ENTITY cm.markFeedAsRead "Đánh Dấu Đã Đọc Nguồn Tin">
-<!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "Đánh Dấu Đã Đọc Tất Cả">
-<!ENTITY cm.markAllAsRead.key "A">
 <!ENTITY options.updateInterval "Mức Thường Xuyên Cập Nhật Nguồn Tin">
 <!ENTITY options.update.1 "Cập nhật nguồn tin của tôi mỗi">
 <!ENTITY options.update.2 "phút.">
 <!ENTITY options.speed "Tốc Độ Lướt Tin">
 <!ENTITY options.dw.itemWidth "Chiều rộng mục tin">
-<!ENTITY pixelAbbrev "px">
 <!ENTITY options.smooothness "Độ Mượt Bộ Cuộn Tin">
 <!ENTITY cmOptionsDescription "Tùy chỉnh trình đơn ngữ cảnh của bộ cuộn tin bằng việc chọn hoặc bỏ chọn các tùy chọn bên dưới.">
 <!ENTITY tt.summary "Tóm Tắt">
@@ -63,7 +52,6 @@
 <!ENTITY feedManagement "Bạn có thể thêm hoặc loại bỏ nguồn tin khỏi bộ cuộn bằng việc chọn chúng trong danh sách bên dưới và nhấp vào nút Thêm hoặc Loại Bỏ. Lưu ý: Để thật sự ngừng nhận tin khỏi một nguồn, hãy sử dụng Đánh Dấu của Firefox. Danh sách này chỉ cho phép bạn thiết lập một Đánh Dấu của bạn xuất hiện trên bộ cuộn; nó không làm bạn ngừng nhận một nguồn tin nào.">
 <!ENTITY add "Thêm">
 <!ENTITY remove "Loại Bỏ">
-<!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Ẩn Bộ Cuộn Khi Nó Rỗng">
 <!ENTITY faster "Nhanh hơn">
 <!ENTITY slower "Chậm hơn">

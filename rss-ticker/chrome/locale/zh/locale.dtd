@@ -1,28 +1,17 @@
-<!ENTITY extension.title "RSS Ticker">
 <!ENTITY cm.open "打开">
-<!ENTITY cm.open.key "O">
 <!ENTITY cm.openInNewWindow "在新窗口打开">
-<!ENTITY cm.openInNewWindow.key "N">
 <!ENTITY cm.openInNewTab "在新标签页打开">
-<!ENTITY cm.openInNewTab.key "T">
 <!ENTITY cm.openAllInTabs "在标签页里打开全部条目">
 <!ENTITY cm.openUnreadInTabs "在标签页里打开未读条目">
 <!ENTITY cm.openFeedInTabs "用标签页打开 Feed">
 <!ENTITY cm.openFeedUnreadInTabs "用标签页打开未读 Feed">
 <!ENTITY cm.copyLinkTitle "复制链接标题">
-<!ENTITY cm.copyLinkTitle.key "L">
 <!ENTITY cm.copyLinkURL "复制链接地址">
-<!ENTITY cm.copyLinkURL.key "C">
 <!ENTITY cm.refreshFeeds "更新 Feed">
-<!ENTITY cm.refreshFeeds.key "R">
 <!ENTITY cm.manageFeeds "管理 Feed">
-<!ENTITY cm.manageFeeds.key "G">
 <!ENTITY cm.markAsRead "设为已读">
-<!ENTITY cm.markAsRead.key "M">
 <!ENTITY cm.markFeedAsRead "将 Feed 设为已读">
-<!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "全部设为已读">
-<!ENTITY cm.markAllAsRead.key "A">
 <!ENTITY options.updateInterval "更新频率">
 <!ENTITY options.update.1 "Feed 更新频率：间隔">
 <!ENTITY options.update.2 "分钟更新">
@@ -58,12 +47,10 @@
 <!ENTITY howToSubscribe3 "点击“订阅”后，RSS Ticker就开始显示这个 feed 的内容。">
 <!ENTITY closeNoFeedsPage "关闭本页">
 <!ENTITY dontShowAgain "不要再显示这个提示">
-<!ENTITY feed "Feed">
 <!ENTITY feeds "Feed">
 <!ENTITY feedManagement "你可以隐藏或显示跑马灯中的各个 feed。只需选择下列 feed，在点击“显示”按钮或“隐藏”按钮即可。">
 <!ENTITY add "显示">
 <!ENTITY remove "隐藏">
-<!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "没有条目时隐藏跑马灯">
 <!ENTITY faster "快">
 <!ENTITY slower "慢">

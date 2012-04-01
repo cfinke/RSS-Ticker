@@ -1,8 +1,6 @@
-<!ENTITY extension.title "RSS Ticker">
 <!ENTITY cm.open "Öppna">
 <!ENTITY cm.open.key "Ö">
 <!ENTITY cm.openInNewWindow "Öppna i Nytt Fönster">
-<!ENTITY cm.openInNewWindow.key "N">
 <!ENTITY cm.openInNewTab "Öppna i Ny Flik">
 <!ENTITY cm.openInNewTab.key "F">
 <!ENTITY cm.openAllInTabs "Öppna Alla i Flikar">
@@ -12,23 +10,19 @@
 <!ENTITY cm.copyLinkTitle "Kopiera Länkens Titel">
 <!ENTITY cm.copyLinkTitle.key "T">
 <!ENTITY cm.copyLinkURL "Kopiera Länkens URL">
-<!ENTITY cm.copyLinkURL.key "C">
 <!ENTITY cm.refreshFeeds "Uppdatera Flöden">
 <!ENTITY cm.refreshFeeds.key "U">
 <!ENTITY cm.manageFeeds "Hantera Flöden">
 <!ENTITY cm.manageFeeds.key "H">
 <!ENTITY cm.markAsRead "Markera som Läst">
-<!ENTITY cm.markAsRead.key "M">
 <!ENTITY cm.markFeedAsRead "Markera Flödet som Läst">
 <!ENTITY cm.markFeedAsRead.key "L">
 <!ENTITY cm.markAllAsRead "Markera Alla som Lästa">
-<!ENTITY cm.markAllAsRead.key "A">
 <!ENTITY options.updateInterval "Uppdateringsfrekvens">
 <!ENTITY options.update.1 "Uppdatera mina flöden var">
 <!ENTITY options.update.2 "minut.">
 <!ENTITY options.speed "Rullningshastighet">
 <!ENTITY options.dw.itemWidth "Objektbredd">
-<!ENTITY pixelAbbrev "px">
 <!ENTITY options.smooothness "Textremsans rullningsmjukhet">
 <!ENTITY cmOptionsDescription "Anpassa textremsans snabbvalsmeny genom att välja alternativ nedan.">
 <!ENTITY tt.summary "Sammanfattning">
@@ -63,7 +57,6 @@
 <!ENTITY feedManagement "Du kan lägga till eller ta bort flöden från textremsan genom att välja dem i listan nedan och trycka på antingen Lägg till- eller Ta bort-knappen.">
 <!ENTITY add "Lägg till">
 <!ENTITY remove "Ta bort">
-<!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Göm textremsan när den är tom">
 <!ENTITY faster "Snabbare">
 <!ENTITY slower "Saktare">

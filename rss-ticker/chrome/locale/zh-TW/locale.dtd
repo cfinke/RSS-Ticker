@@ -1,28 +1,17 @@
-<!ENTITY extension.title "RSS Ticker">
 <!ENTITY cm.open "開啟">
-<!ENTITY cm.open.key "O">
 <!ENTITY cm.openInNewWindow "用新視窗開啟">
-<!ENTITY cm.openInNewWindow.key "N">
 <!ENTITY cm.openInNewTab "用新分頁開啟">
-<!ENTITY cm.openInNewTab.key "T">
 <!ENTITY cm.openAllInTabs "用分頁開啟所有項目">
 <!ENTITY cm.openUnreadInTabs "用分頁開啟未讀項目">
 <!ENTITY cm.openFeedInTabs "用分頁開啟 Feed">
 <!ENTITY cm.openFeedUnreadInTabs "用分頁開啟未讀的 Feed">
 <!ENTITY cm.copyLinkTitle "複製鏈結標題">
-<!ENTITY cm.copyLinkTitle.key "L">
 <!ENTITY cm.copyLinkURL "複製鏈結位址">
-<!ENTITY cm.copyLinkURL.key "C">
 <!ENTITY cm.refreshFeeds "更新 Feed">
-<!ENTITY cm.refreshFeeds.key "R">
 <!ENTITY cm.manageFeeds "管理 Feed">
-<!ENTITY cm.manageFeeds.key "G">
 <!ENTITY cm.markAsRead "設為已讀">
-<!ENTITY cm.markAsRead.key "M">
 <!ENTITY cm.markFeedAsRead "將 Feed 設為已讀">
-<!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "全部設為已讀">
-<!ENTITY cm.markAllAsRead.key "A">
 <!ENTITY options.updateInterval "更新頻率">
 <!ENTITY options.speed "捲動速度">
 <!ENTITY options.dw.itemWidth "項目寬度">
@@ -52,7 +41,6 @@
 <!ENTITY noFeedsFoundTitle "找不到即時書籤">
 <!ENTITY noFeedsFound "RSS Ticker 找不到即時書籤 (或稱「newsfeed」、「RSS feed」)。">
 <!ENTITY dontShowAgain "不要再顯示這個訊息。">
-<!ENTITY feed "Feed">
 <!ENTITY feeds "Feed">
 <!ENTITY feedManagement "您可以隱藏或顯示跑馬燈中的各個 feed。只需選擇下列項目，再按下「顯示」或「隱藏」鈕即可。">
 <!ENTITY add "顯示">

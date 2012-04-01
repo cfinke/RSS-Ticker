@@ -1,8 +1,6 @@
-<!ENTITY extension.title "RSS Ticker">
 <!ENTITY cm.open "Abrir">
 <!ENTITY cm.open.key "A">
 <!ENTITY cm.openInNewWindow "Abrir en Nueva Ventana">
-<!ENTITY cm.openInNewWindow.key "N">
 <!ENTITY cm.openInNewTab "Abrir en Nueva Pestaña">
 <!ENTITY cm.openInNewTab.key "P">
 <!ENTITY cm.openAllInTabs "Abrir Todas en Pestañas">
@@ -12,27 +10,19 @@
 <!ENTITY cm.copyLinkTitle "Copiar Título del Enlace">
 <!ENTITY cm.copyLinkTitle.key "T">
 <!ENTITY cm.copyLinkURL "Copiar Dirección del Enlace">
-<!ENTITY cm.copyLinkURL.key "C">
 <!ENTITY cm.refreshFeeds "Actualizar Fuentes">
-<!ENTITY cm.refreshFeeds.key "R">
-<!ENTITY cm.manageFeeds "Manage Feeds">
-<!ENTITY cm.manageFeeds.key "G">
 <!ENTITY cm.markAsRead "Marcar como Leido">
-<!ENTITY cm.markAsRead.key "M">
 <!ENTITY cm.markFeedAsRead "Marcar Fuente como Leido">
-<!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "Marcar Todo como Leido">
 <!ENTITY cm.markAllAsRead.key "L">
 <!ENTITY options.updateInterval "Frecuencia de Actualización">
 <!ENTITY options.speed "Velocidad del ticker">
 <!ENTITY options.dw.itemWidth "Ancho de noticias">
-<!ENTITY pixelAbbrev "px">
 <!ENTITY options.smooothness "Suavidad de movimiento del ticker">
 <!ENTITY cmOptionsDescription "Parametriza el menú contextual del lector marcando o no las opciones de abajo.">
 <!ENTITY tt.summary "Sumario">
 <!ENTITY options "Opciones">
 <!ENTITY options.restartNotice "Las opciones marcadas con * no cambiarán hasta que no vuelvas a abrir el navegador.">
-<!ENTITY options.general "General">
 <!ENTITY options.advanced "Avanzado">
 <!ENTITY options.contextMenu "Menú Contextual">
 <!ENTITY disableTicker "Deshabilitar ticker">

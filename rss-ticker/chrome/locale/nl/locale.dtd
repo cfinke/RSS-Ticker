@@ -14,7 +14,7 @@
 <!ENTITY cm.copyLinkURL "Koppelingslocatie kopiëren">
 <!ENTITY cm.copyLinkURL.key "P">
 <!ENTITY cm.refreshFeeds "Feeds verversen">
-<!ENTITY cm.refreshFeeds.key "R">
+<!ENTITY cm.refreshFeeds.key "V">
 <!ENTITY cm.manageFeeds "Feeds beheren">
 <!ENTITY cm.manageFeeds.key "B">
 <!ENTITY cm.markAsRead "Markeren als gelezen">
@@ -45,6 +45,7 @@
 <!ENTITY options.hide "Ongelezen berichten verbergen.">
 <!ENTITY options.bold "Vette ongelezen berichten.">
 <!ENTITY options.openInNewTab "Koppelingen altijd in nieuwe tabbladen openen.">
+<!ENTITY options.reverseDirection "Tickervolgorde omdraaien">
 <!ENTITY toggleTicker "Ticker in-/uitschakelen">
 <!ENTITY options.dw.limitWidth "De breedte van de berichten in de ticker beperken">
 <!ENTITY options.dw.isMaxWidth "Alleen als maximumbreedte gebruiken">
@@ -70,7 +71,9 @@
 <!ENTITY smoother "Soepeler (meer CPU)">
 <!ENTITY choppier "Hakkeriger (minder CPU)">
 <!ENTITY rssticker.featured.subscribe "Abonneren">
-<!ENTITY rssticker.featured.panelTitle "Gepresenteerde feeds">
+<!ENTITY rssticker.featured.panelTitle "Aanbevolen feeds">
 <!ENTITY rssticker.featured.description "Ondersteun de ontwikkeling van RSS Ticker zonder een cent uit te geven door een paar van deze feeds van de vrienden van RSS Ticker uit te proberen.">
 <!ENTITY rssticker.featured.contact "(Als u uw feed in deze lijst wilt zien, stuur dan een e-mailbericht naar cfinke@gmail.com).">
-<!ENTITY rssticker.featured.notifyMe "Informeer mij periodiek over nieuwe gepresenteerde feeds.">
+<!ENTITY rssticker.featured.notifyMe "Informeer mij periodiek over nieuwe aanbevolen feeds.">
+<!ENTITY rssticker.options.optIn "RSS Ticker toestaan om de door mij ingegeven URL’s te gebruiken voor onderzoek en statistische analyse.">
+<!ENTITY rssticker.options.optIn.learnMore "Meer over deze optie.">

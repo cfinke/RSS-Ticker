@@ -1,0 +1,48 @@
+<!ENTITY cm.open "Avaa">
+<!ENTITY cm.openInNewWindow "Avaa uudessa ikkunassa">
+<!ENTITY cm.openInNewTab "Avaa uuteen välilehteen">
+<!ENTITY cm.openAllInTabs "Avaa kaikki välilehtiin">
+<!ENTITY cm.openUnreadInTabs "Avaa lukemattomat välilehtiin">
+<!ENTITY cm.openFeedInTabs "Avaa syöte välilehtiin">
+<!ENTITY cm.openFeedUnreadInTabs "Avaa lukematon syöte välilehtiin">
+<!ENTITY cm.copyLinkTitle "Kopioi linkin nimi">
+<!ENTITY cm.copyLinkURL "Kopioi linkin osoite">
+<!ENTITY cm.refreshFeeds "Päivitä syötteet">
+<!ENTITY cm.manageFeeds "Hallinnoi syötteitä">
+<!ENTITY cm.markAsRead "Merkitse luetuksi">
+<!ENTITY cm.markFeedAsRead "Merkitse syöte luetuksi">
+<!ENTITY cm.markAllAsRead "Merkitse kaikki luetuksi">
+<!ENTITY options.updateInterval "Päivitystiheys">
+<!ENTITY options.speed "Vieritysnopeus">
+<!ENTITY options.dw.itemWidth "Leveys">
+<!ENTITY options.smooothness "Syötenauhan vierityksen tasaisuus">
+<!ENTITY cmOptionsDescription "Valitse syötenauhan aihevalikossa näytettävät kohteet. Aihevalikon saat esille klikkaamalla syötenauhaa hiiren oikealla näppäimellä.">
+<!ENTITY tt.summary "Yhteenveto">
+<!ENTITY options "Asetukset">
+<!ENTITY options.restartNotice "Tähdellä (*) merkityt asetukset tulevat voimaan vasta kun suljet ja avaat uudelleen selainikkunan.">
+<!ENTITY options.general "Yleiset">
+<!ENTITY options.advanced "Lisäasetukset">
+<!ENTITY options.contextMenu "Aihevalikko">
+<!ENTITY disableTicker "Kytke syötenauha pois päältä">
+<!ENTITY options.tickerPlacement "Syötenauhan sijainti">
+<!ENTITY tickerPlacement.belowStatusBar "Tilapalkin alapuolella">
+<!ENTITY tickerPlacement.belowBMTB "Kirjanmerkkipalkin alapuolella">
+<!ENTITY options.random "Sekoita syötteen kohteet">
+<!ENTITY options.hide "Piilota luetut kohteet.">
+<!ENTITY options.bold "Lihavoi kohteet, joita ei ole luettu.">
+<!ENTITY options.openInNewTab "Avaa linkit aina uuteen välilehteen.">
+<!ENTITY toggleTicker "Syötenauha päälle/pois">
+<!ENTITY options.dw.limitWidth "Rajoita kohteiden leveys">
+<!ENTITY options.dw.isMaxWidth "Käytä enimmäisleveyttä">
+<!ENTITY options.limitItemsPerFeed "Rajoita kohteiden lukumäärä syötteissä">
+<!ENTITY options.itemsPerFeed "Kohteita syötteessä">
+<!ENTITY about "Tietoja">
+<!ENTITY noFeedsFoundTitle "Live-kirjanmerkkejä ei ole">
+<!ENTITY noFeedsFound "Live-kirjanmerkkejä (uutissyötteitä, RSS-syötteitä) ei löytynyt">
+<!ENTITY dontShowAgain "Älä näytä tätä viestiä enää.">
+<!ENTITY feed "Syöte">
+<!ENTITY feeds "Syötteet">
+<!ENTITY feedManagement "Lisää (poista) syöte valitsemalla se alla olevasta luettelosta ja klikkaamalla Lisää (Poista) .">
+<!ENTITY add "Lisää">
+<!ENTITY remove "Poista">
+<!ENTITY hideWhenEmpty "Piilota syötenauha jos se on tyhjä">

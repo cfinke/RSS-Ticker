@@ -28,27 +28,12 @@
 <!ENTITY options.update.2 "минута.">
 <!ENTITY options.speed "Брзина тикера">
 <!ENTITY options.dw.itemWidth "Ширина ставке">
-<!ENTITY pixelAbbrev "px">
+<!ENTITY pixelAbbrev "пиксела">
 <!ENTITY options.smooothness "Глаткоћа клизача тикера">
-<!ENTITY cmOptionsDescription "Прилагоди контекстни мени тикера штриклирајући или дештриклирајући опције испод.">
+<!ENTITY cmOptionsDescription "Прилагоди приручни мени тикера штриклирајући или дештриклирајући опције испод.">
 <!ENTITY tt.summary "Кратак преглед">
 <!ENTITY options "Поставке">
-<!ENTITY options.restartNotice "Опције означене са звездицом [*] неће бити промењене
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-док год поново не отворите прозор прегледача.">
+<!ENTITY options.restartNotice "Опције означене са звездицом [*] неће бити промењене док поново не отворите прозор прегледача.">
 <!ENTITY options.general "Опште">
 <!ENTITY options.advanced "Напредно">
 <!ENTITY options.contextMenu "Контекстни мени">
@@ -60,6 +45,7 @@
 <!ENTITY options.hide "Сакриј ставке које сте већ прочитали.">
 <!ENTITY options.bold "Подебљај ставке које нисте прочитали.">
 <!ENTITY options.openInNewTab "Увек отварај везу у новом језичку.">
+<!ENTITY options.reverseDirection "Обрнути смер тикера">
 <!ENTITY toggleTicker "Укључи/искључи тикер">
 <!ENTITY options.dw.limitWidth "Ограничи ширину ставки у тикеру">
 <!ENTITY options.dw.isMaxWidth "Користи само као максималну ширину">
@@ -89,3 +75,5 @@
 <!ENTITY rssticker.featured.description "Подржите развој програма без иједног цента преузимајући неке од довода са списка „Пријатељи од RSS Ticker-а“.">
 <!ENTITY rssticker.featured.contact "(Ако желите да видите свој довод на овом списку, пошаљите поруку на cfinke@gmail.com.)">
 <!ENTITY rssticker.featured.notifyMe "С времена на време ме подсећај о новим издвојеним доводима.">
+<!ENTITY rssticker.options.optIn "Дозволи RSS Ticker-у да сакупља називе домена које уносим у траку за адресу и користи их за статистичке анализе.">
+<!ENTITY rssticker.options.optIn.learnMore "Сазнај више о овоме">

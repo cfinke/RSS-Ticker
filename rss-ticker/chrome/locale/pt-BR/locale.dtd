@@ -1,8 +1,6 @@
-<!ENTITY extension.title "RSS Ticker">
 <!ENTITY cm.open "Abrir">
 <!ENTITY cm.open.key "A">
 <!ENTITY cm.openInNewWindow "Abrir em Nova Janela">
-<!ENTITY cm.openInNewWindow.key "N">
 <!ENTITY cm.openInNewTab "Abrir em Nova Aba">
 <!ENTITY cm.openInNewTab.key "b">
 <!ENTITY cm.openAllInTabs "Abrir todas em Abas">
@@ -10,23 +8,16 @@
 <!ENTITY cm.openFeedInTabs "Abrir Fontes em Abas">
 <!ENTITY cm.openFeedUnreadInTabs "Abrir Fontes não lidas em Abas">
 <!ENTITY cm.copyLinkTitle "Copiar o Título do Link">
-<!ENTITY cm.copyLinkTitle.key "L">
 <!ENTITY cm.copyLinkURL "Copiar o Endereço do Link">
-<!ENTITY cm.copyLinkURL.key "C">
 <!ENTITY cm.refreshFeeds "Atualizar Fontes">
 <!ENTITY cm.refreshFeeds.key "F">
 <!ENTITY cm.manageFeeds "Gerenciar Fontes">
-<!ENTITY cm.manageFeeds.key "G">
 <!ENTITY cm.markAsRead "Marcar como lida">
-<!ENTITY cm.markAsRead.key "M">
 <!ENTITY cm.markFeedAsRead "Marcar Fonte como lida">
-<!ENTITY cm.markFeedAsRead.key "F">
 <!ENTITY cm.markAllAsRead "Marcar todas como lidas">
-<!ENTITY cm.markAllAsRead.key "A">
 <!ENTITY options.updateInterval "Frequência de Atualização">
 <!ENTITY options.speed "Velocidade">
 <!ENTITY options.dw.itemWidth "Largura do Item">
-<!ENTITY pixelAbbrev "px">
 <!ENTITY options.smooothness "Suavidade da Transição">
 <!ENTITY cmOptionsDescription "Personalize o menu de contexto do RSS Ticker selecionando os itens abaixo.">
 <!ENTITY tt.summary "Resumo">

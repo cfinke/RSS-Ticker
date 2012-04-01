@@ -45,6 +45,7 @@
 <!ENTITY options.hide "Ocultar itens lidos.">
 <!ENTITY options.bold "Itens não lidos a negrito.">
 <!ENTITY options.openInNewTab "Abrir ligações em novos separadores.">
+<!ENTITY options.reverseDirection "Inverter direcção do letreiro">
 <!ENTITY toggleTicker "Alternar entre letreiro ligado ou desligado">
 <!ENTITY options.dw.limitWidth "Limitar a largura dos itens no letreiro">
 <!ENTITY options.dw.isMaxWidth "Usar somente largura máxima">
@@ -74,3 +75,5 @@
 <!ENTITY rssticker.featured.description "Apoie o desenvolvimento do RSS Ticker sem gastar um único cêntimo. Basta subscrever algumas destas fontes de parceiros do RSS Ticker.">
 <!ENTITY rssticker.featured.contact "(Se deseja ter a sua fonte incluída nesta lista, envie um e-mail para cfinke@gmail.com.)">
 <!ENTITY rssticker.featured.notifyMe "Avisar-me regularmente de novas fontes recomendadas.">
+<!ENTITY rssticker.options.optIn "Permitir que o RSS Ticker recolha, para efeitos de análise estatística, as URLs que são introduzidas na barra de endereço.">
+<!ENTITY rssticker.options.optIn.learnMore "Saber mais acerca desta opção.">

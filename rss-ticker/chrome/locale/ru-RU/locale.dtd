@@ -1,4 +1,3 @@
-<!ENTITY extension.title "RSS Ticker">
 <!ENTITY cm.open "Открыть">
 <!ENTITY cm.open.key "О">
 <!ENTITY cm.openInNewWindow "Открыть в новом окне">
@@ -28,7 +27,6 @@
 <!ENTITY options.update.2 "минут.">
 <!ENTITY options.speed "Скорость бегущей строки">
 <!ENTITY options.dw.itemWidth "Ширина элементов">
-<!ENTITY pixelAbbrev "px">
 <!ENTITY options.smooothness "Плавность прокрутки">
 <!ENTITY cmOptionsDescription "Настройка контекстного меню бегущей строки">
 <!ENTITY tt.summary "Содержание">
@@ -63,7 +61,6 @@
 <!ENTITY feedManagement "Вы можете добавлять или удалять ленты из бегущей строки, выбирая их из списка и нажимая кнопки Добавить или Удалить. Примечание: Чтобы подписаться на ленту, используйте Живые закладки в Firefox. Этот список контролирует отображение закладок в RSS Ticker.">
 <!ENTITY add "Добавить">
 <!ENTITY remove "Удалить">
-<!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Скрыть бегущую строку, если нечего показывать">
 <!ENTITY faster "Быстрее">
 <!ENTITY slower "Медленее">
