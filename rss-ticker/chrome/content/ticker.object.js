@@ -1,6 +1,4 @@
 var RSSTICKER = {
-	livemarkService : Components.classes["@mozilla.org/browser/livemark-service;2"].getService(Components.interfaces.nsILivemarkService),
-	bookmarkService : Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService),
 	ioService : Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService),
 	
 	strings : {
@@ -199,28 +197,6 @@ var RSSTICKER = {
 		document.getElementById("RSSTICKERItemCM").setAttribute("onmouseout","RSSTICKER.mouseOverFlag = false;");
 	
 		RSSTICKER.ticker.appendChild(RSSTICKER.toolbar);
-		
-		/*
-		RSSTICKER.loadingNoticeParent = document.createElement('toolbaritem');
-		RSSTICKER.loadingNoticeParent.setAttribute("tooltip","RSSTICKERLoadingNoticeTooltip");
-		RSSTICKER.loadingNoticeParent.id = "RSSTICKER-throbber-box";
-		RSSTICKER.loadingNoticeParent.setAttribute("title","RSS Ticker Activity Indicator");
-		RSSTICKER.loadingNoticeParent.setAttribute("align","center");
-		RSSTICKER.loadingNoticeParent.setAttribute("pack","center");
-		
-		RSSTICKER.loadingNotice = document.createElement('image');
-		RSSTICKER.loadingNotice.setAttribute("src","chrome://rss-ticker/content/skin-common/throbber.gif");
-		RSSTICKER.loadingNotice.id = "RSSTICKER-throbber";
-		RSSTICKER.loadingNotice.setAttribute("busy","false");
-		RSSTICKER.loadingNotice.style.marginRight = '4px';
-		RSSTICKER.loadingNoticeParent.appendChild(RSSTICKER.loadingNotice);
-		
-		try {
-			document.getElementById("nav-bar").appendChild(RSSTICKER.loadingNoticeParent);
-		} catch (e) {
-			if (RSSTICKER.DEBUG) RSSTICKER.logMessage(e);
-		}
-		*/
 		
 		if (RSSTICKER.prefs.getBoolPref("disabled")){
 			RSSTICKER.disable();
@@ -736,7 +712,7 @@ var RSSTICKER = {
 				var node = RSSTICKER.toolbar.childNodes[i];
 			
 				if (node.nodeName == 'toolbarbutton'){
-					if (~ignore.indexOf(node.feedURL)){
+					if (ignore.indexOf(node.feedURL) != -1){
 						RSSTICKER.toolbar.removeChild(node);
 					}
 				}
@@ -746,30 +722,23 @@ var RSSTICKER = {
 	    RSSTICKER.feedsToFetch = [];
 	    RSSTICKER.feedIndex = 0;
 	    
-		var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
-		var livemarkIds = anno.getItemsWithAnnotation("livemark/feedURI", {});
+		var livemarkIds = PlacesUtils.annotations.getItemsWithAnnotation("livemark/feedURI", {});
 		
-		var len = livemarkIds.length;
-		
-		for (var i = 0; i < len; i++){
-			var livemarkId = livemarkIds[i];
-			
-			var feedURL = RSSTICKER.livemarkService.getFeedURI(livemarkId).spec;
-			
-			var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkId);
-		
-			if (!~ignore.indexOf(feedURL)){
-				RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
+		RSSTICKER.getLivemarks(livemarkIds, function (livemarks) {
+			for (var i = 0; i < livemarks.length; i++) {
+				if (ignore.indexOf(livemarks[i].feedURI.spec) == -1){
+					RSSTICKER.feedsToFetch.push({ name : livemarks[i].title, feed : livemarks[i].feedURI.spec, livemarkId : livemarks[i].id });
+				}
 			}
-		}
-		
-		if (RSSTICKER.feedsToFetch.length == 0) {
-		    setTimeout(RSSTICKER.notifyNoFeeds, 3000);
-		}
-		
-		setTimeout(function () {
-		    RSSTICKER.setReloadInterval(RSSTICKER.prefs.getIntPref("updateFrequency"));
-		}, 5000);
+			
+			if (RSSTICKER.feedsToFetch.length == 0) {
+			    setTimeout(RSSTICKER.notifyNoFeeds, 3000);
+			}
+
+			setTimeout(function () {
+			    RSSTICKER.setReloadInterval(RSSTICKER.prefs.getIntPref("updateFrequency"));
+			}, 5000);
+		});
     },
 	
 	notifyNoFeeds : function () {
@@ -966,11 +935,14 @@ var RSSTICKER = {
 	},
 	
 	updateSingleFeed : function (livemarkId) {
-		var feedURL = RSSTICKER.livemarkService.getFeedURI(livemarkId).spec;
-		var feedName = RSSTICKER.bookmarkService.getItemTitle(livemarkId);
-		
-		RSSTICKER.feedsToFetch.push({ name : feedName, feed : feedURL, livemarkId : livemarkId });
-	    RSSTICKER.updateAFeed(RSSTICKER.feedsToFetch.length - 1);
+		PlacesUtils.livemarks.getLivemark( { id : livemarkId }, function (status, livemark) {
+			var ignore = RSSTICKER.readIgnoreFile();
+			
+			if (ignore.indexOf(livemark.feedURI.spec) == -1){
+				RSSTICKER.feedsToFetch.push({ name : livemark.title, feed : livemark.feedURI.spec, livemarkId : livemark.id });
+		    	RSSTICKER.updateAFeed(RSSTICKER.feedsToFetch.length - 1);
+			}
+		});
 	},
 
 	rapidUpdate : 0,
@@ -1931,5 +1903,24 @@ var RSSTICKER = {
 		RSSTICKER.internalPause = paused;
 		
 		return rv;
+	},
+	
+	getLivemarks : function (livemarkIds, callback) {
+		var livemarks = [];
+		
+		function getNextLivemark() {
+			PlacesUtils.livemarks.getLivemark( { id : livemarkIds.shift() }, function (status, livemark) {
+				livemarks.push(livemark);
+				
+				if (livemarkIds.length == 0) {
+					callback(livemarks);
+				}
+				else {
+					getNextLivemark();
+				}
+			});
+		}
+		
+		getNextLivemark();
 	}
 };
