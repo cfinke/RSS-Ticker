@@ -13,15 +13,11 @@ var FEATURED_TICKER_FEEDS = {
 			
 			var feeds = FEATURED_TICKER_FEEDS.prefs.getCharPref("featuredFeeds");
 			
-			if (!feeds) {
-				var lastAttempt = FEATURED_TICKER_FEEDS.prefs.getCharPref("featuredFeeds.lastUpdate");
+			if (!feeds || FEATURED_TICKER_FEEDS.prefs.getCharPref("featuredFeeds.lastUpdate") < (new Date().getTime() - (1000 * 60 * 60 * 24 * 3))) {
+				FEATURED_TICKER_FEEDS.prefs.setCharPref("featuredFeeds.lastUpdate", (new Date().getTime()));
 				
-				if (lastAttempt < (new Date().getTime() - (1000 * 60 * 60 * 24 * 3))) {
-					FEATURED_TICKER_FEEDS.prefs.setCharPref("featuredFeeds.lastUpdate", (new Date().getTime()));
-					
-					// Get feeds.
-					FEATURED_TICKER_FEEDS.fetchTimer = FEATURED_TICKER_FEEDS.setTimeout(FEATURED_TICKER_FEEDS.fetchFeaturedFeeds, 15000);
-				}
+				// Get feeds.
+				FEATURED_TICKER_FEEDS.fetchTimer = FEATURED_TICKER_FEEDS.setTimeout(FEATURED_TICKER_FEEDS.fetchFeaturedFeeds, 15000);
 			}
 		}
 	},
