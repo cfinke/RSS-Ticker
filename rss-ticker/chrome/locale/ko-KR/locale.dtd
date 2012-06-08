@@ -75,5 +75,3 @@
 <!ENTITY rssticker.featured.description "RSS Ticker의 친구들 로부터의 이들 피드 중 몇개를 시도하는 것만으로 한푼도 지출하지않고 RSS Ticker의 개발을 지원할 수 있습니다.">
 <!ENTITY rssticker.featured.contact "(만약 이 목록 내 당신의 피드를 보길 원하면, cfinke@gmail.com로 메일 주세요.)">
 <!ENTITY rssticker.featured.notifyMe "새로운 중요 피드에 대해 정기적으로 알림">
-<!ENTITY rssticker.options.optIn "연구 및 통계 분석을 위해 URL 막대에 입력한 URL들을 RSS Ticker가 사용하도록 허용합니다.">
-<!ENTITY rssticker.options.optIn.learnMore "이 선택사항에 대해 더 알기.">

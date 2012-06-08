@@ -75,5 +75,3 @@
 <!ENTITY rssticker.featured.description "Podprite razvoj te razširitve brez stroškov tako, da poskusite nekaj teh virov prijateljev razširitve.">
 <!ENTITY rssticker.featured.contact "(Če želite na tem seznamu videti svoj vir, pišite na naslov cfinke@gmail.com.)">
 <!ENTITY rssticker.featured.notifyMe "Periodično me obveščaj o novih izpostavljenih virih.">
-<!ENTITY rssticker.options.optIn "Dovolite, da Prikazovalnik živih zaznamkov uporablja URL-je, ki jih vnesete v naslovno vrstico, za raziskovalno in statistično analizo.">
-<!ENTITY rssticker.options.optIn.learnMore "Preberite več o tej možnosti.">

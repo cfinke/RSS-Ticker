@@ -41,7 +41,7 @@
 <!ENTITY options.tickerPlacement "Ticker Placement">
 <!ENTITY tickerPlacement.belowStatusBar "Below status bar">
 <!ENTITY tickerPlacement.belowBMTB "Below bookmarks toolbar">
-<!ENTITY options.random "Randomize ticker items ">
+<!ENTITY options.random "Randomize ticker items">
 <!ENTITY options.hide "Hide items you've already read.">
 <!ENTITY options.bold "Bold items you haven't read.">
 <!ENTITY options.openInNewTab "Always open links in new tabs.">
@@ -66,13 +66,10 @@
 <!ENTITY remove "Remove">
 <!ENTITY URL "URL">
 <!ENTITY hideWhenEmpty "Hide Ticker When Empty">
-
 <!ENTITY faster "Faster">
 <!ENTITY slower "Slower">
-
 <!ENTITY smoother "Smoother (More CPU)">
 <!ENTITY choppier "Choppier (Less CPU)">
-
 <!ENTITY rssticker.featured.subscribe "Subscribe">
 <!ENTITY rssticker.featured.panelTitle "Featured Feeds">
 <!ENTITY rssticker.featured.description "Support RSS Ticker's development without spending a cent by trying out some of these feeds from the Friends of RSS Ticker.">

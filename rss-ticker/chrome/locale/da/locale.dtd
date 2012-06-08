@@ -75,5 +75,3 @@
 <!ENTITY rssticker.featured.description "Ved at prøve nogle af disse feeds fra Friends of RSS Ticker, kan du støtte udviklingen af RSS Ticker uden at bruge en krone.">
 <!ENTITY rssticker.featured.contact "(Hvis du ønsker at se dit feed på denne liste, send en mail til cfinke@gmail.com.)">
 <!ENTITY rssticker.featured.notifyMe "Giv mig periodisk besked om nye udvalgte feeds.">
-<!ENTITY rssticker.options.optIn "Tillad RSS Ticker at anvende de URLs jeg indtaster i adressefeltet til research og statistisk analyse.">
-<!ENTITY rssticker.options.optIn.learnMore "Lær mere om denne indstilling.">

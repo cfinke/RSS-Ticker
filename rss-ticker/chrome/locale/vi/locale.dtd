@@ -43,7 +43,7 @@
 <!ENTITY noFeedsFoundTitle "Không Tìm Thấy Đánh Dấu Trực Tiếp">
 <!ENTITY noFeedsFound "Bộ Cuộn Tin RSS không định vị bất cứ Đánh Dấu Trực Tiếp nào">
 <!ENTITY howToSubscribe1 "Bộ cuộn RSS tải và cuộn các mục tin từ Đánh Dấu Trực Tiếp của bạn (vd newsfeed hoặc nguồn RSS), nhưng bạn chưa đăng ký bất kỳ Đánh Dấu Trực Tiếp nào. Cần trợ giúp? Việc đăng ký một nguồn tin thật dễ dàng:">
-<!ENTITY howToSubscribe2 "Nếu trang bạn đang xem trên trình duyệt cung cấp nguồn tin RSS (ví dụ, www.mozilla.org), sẽ có một biểu tượng nhỏ màu cam hoặc xanh ở bên phải thanh địa chỉ, bên cạnh ngôi sao được dùng để đánh dấu trang. Nếu bạn nhấp vào biểu tượng này, nó sẽ mở khung &apos;Thêm Đánh Dấu Trực Tiếp&apos;.">
+<!ENTITY howToSubscribe2 "Nếu trang bạn đang xem trên trình duyệt cung cấp nguồn tin RSS (ví dụ, www.mozilla.org), sẽ có một biểu tượng nhỏ màu cam hoặc xanh ở bên phải thanh địa chỉ, bên cạnh ngôi sao được dùng để đánh dấu trang. Nếu bạn nhấp vào biểu tượng này, nó sẽ mở khung 'Thêm Đánh Dấu Trực Tiếp'.">
 <!ENTITY howToSubscribe3 "Hãy nhấp Đăng Ký Ngay, và Bộ Cuộn RSS sẽ bắt đầu cuộn các tin trên nguồn tin ngay.">
 <!ENTITY closeNoFeedsPage "Đóng trang này">
 <!ENTITY dontShowAgain "Không hiển thị thông báo này nữa.">
