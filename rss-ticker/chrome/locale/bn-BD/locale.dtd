@@ -1,0 +1,23 @@
+<!ENTITY extension.title "RSS Ticker">
+<!ENTITY cm.open "খুলুন">
+<!ENTITY cm.open.key "O">
+<!ENTITY cm.openInNewWindow "নতুন উইন্ডোতে খুলুন">
+<!ENTITY cm.openInNewWindow.key "N">
+<!ENTITY cm.openInNewTab "নতুন ট্যাবে খুলুন">
+<!ENTITY cm.openInNewTab.key "T">
+<!ENTITY cm.openAllInTabs "সবগুলো ট্যাবে খুলুন">
+<!ENTITY cm.copyLinkTitle.key "L">
+<!ENTITY cm.copyLinkURL.key "C">
+<!ENTITY cm.refreshFeeds.key "R">
+<!ENTITY cm.manageFeeds.key "G">
+<!ENTITY cm.markAsRead.key "M">
+<!ENTITY cm.markFeedAsRead.key "F">
+<!ENTITY cm.markAllAsRead.key "A">
+<!ENTITY options.update.2 "মিনিট।">
+<!ENTITY tt.summary "সারাংশ">
+<!ENTITY options.general "সাধারণ">
+<!ENTITY about "সম্পর্কে">
+<!ENTITY add "যোগ">
+<!ENTITY remove "অপসারণ">
+<!ENTITY faster "দ্রুত">
+<!ENTITY slower "ধীর">
