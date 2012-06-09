@@ -935,7 +935,10 @@ var RSSTICKER = {
 	},
 	
 	updateSingleFeed : function (livemarkId) {
-		PlacesUtils.livemarks.getLivemark( { id : livemarkId }, function (status, livemark) {
+		PlacesUtils.livemarks.getLivemark( { id : livemarkId }, function (result, livemark) {
+			if (result != Components.results.NS_OK)
+				return;
+			
 			var ignore = RSSTICKER.readIgnoreFile();
 			
 			if (ignore.indexOf(livemark.feedURI.spec) == -1){
@@ -1909,16 +1912,18 @@ var RSSTICKER = {
 		var livemarks = [];
 		
 		function getNextLivemark() {
-			PlacesUtils.livemarks.getLivemark( { id : livemarkIds.shift() }, function (status, livemark) {
-				livemarks.push(livemark);
+			if (livemarkIds.length == 0) {
+				callback(livemarks);
+			}
+			else {
+				PlacesUtils.livemarks.getLivemark( { id : livemarkIds.shift() }, function (result, livemark) {
+					if (result == Components.results.NS_OK) {
+						livemarks.push(livemark);
+					}
 				
-				if (livemarkIds.length == 0) {
-					callback(livemarks);
-				}
-				else {
 					getNextLivemark();
-				}
-			});
+				});
+			}
 		}
 		
 		getNextLivemark();

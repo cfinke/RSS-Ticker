@@ -300,13 +300,18 @@ var TICKER_PREFS = {
 	
 	subscribe : function (title, feedUrl, siteUrl, description) {
 		var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
-		var menu = Application.bookmarks.menu;
-		var uri = ioService.newURI(siteUrl, null, null);
-		var feedUri = ioService.newURI(feedUrl, null, null);
-		var lm = PlacesUtils.livemarks.createLivemarkFolderOnly(Application.bookmarks.menu.id, title, uri, feedUri, -1);
-		PlacesUtils.annotations.setItemAnnotation(lm, "bookmarkProperties/description", description, 0, PlacesUtils.annotations.EXPIRE_NEVER);
+		
+		PlacesUtils.livemarks.addLivemark(
+			{
+				title : title,
+				parentId : Application.bookmarks.menu.id,
+				feedURI : ioService.newURI(feedUrl, null, null),
+				siteURI : ioService.newURI(siteUrl, null, null),
+				index : 0
+			}
+		);
 	},
-	
+		
 	unsubscribe : function (url) {
 		var livemarkIds = PlacesUtils.annotations.getItemsWithAnnotation("livemark/feedURI", {});
 		
