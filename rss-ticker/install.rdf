@@ -4,7 +4,7 @@
 		<em:id>{1f91cde0-c040-11da-a94d-0800200c9a66}</em:id>
 		<em:name>RSS Ticker</em:name>
 		<em:type>2</em:type>
-		<em:version>10</em:version>
+		<em:version>11</em:version>
 		<em:description>Scrolls your RSS feeds (Live Bookmarks) in a toolbar.</em:description>
 		<em:creator>Christopher Finke</em:creator>
 		<em:iconURL>chrome://rss-ticker/content/skin-common/feed-icon.gif</em:iconURL>
