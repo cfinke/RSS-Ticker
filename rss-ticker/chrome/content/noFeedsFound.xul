@@ -9,7 +9,7 @@
 ]>
 <window
 	id="rssticker-noFeedsFound-window"
-	title="&extension.title; - &noFeedsFoundTitle;"
+	title="&rssticker.title; - &rssticker.noFeedsFoundTitle;"
 	orient="vertical"
 	onload="dontShowMsgAgain();"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
@@ -29,13 +29,13 @@
 		<hbox id="warningBox" align="top">
 			<image id="exclam" />
 			<vbox id="warningInnerBox" flex="1">
-				<label id="warningTitle">&noFeedsFound;</label>
-				<label id="warningText">&howToSubscribe1;</label>
-				<label id="warningText">&howToSubscribe2;</label>
-				<label id="warningText">&howToSubscribe3;</label>
-				<checkbox id="showWarningNextTime" label="&dontShowAgain;" checked="true" oncommand="dontShowMsgAgain();" />
+				<label id="warningTitle">&rssticker.noFeedsFound;</label>
+				<label id="warningText">&rssticker.howToSubscribe1;</label>
+				<label id="warningText">&rssticker.howToSubscribe2;</label>
+				<label id="warningText">&rssticker.howToSubscribe3;</label>
+				<checkbox id="showWarningNextTime" label="&rssticker.dontShowAgain;" checked="true" oncommand="dontShowMsgAgain();" />
 				<hbox pack="center">
-					<button id="warningButton" oncommand="window.close();" label="&closeNoFeedsPage;"/>
+					<button id="warningButton" oncommand="window.close();" label="&rssticker.closeNoFeedsPage;"/>
 				</hbox>
 			</vbox>
 		</hbox>

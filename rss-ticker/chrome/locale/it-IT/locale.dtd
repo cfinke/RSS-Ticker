@@ -1,75 +1,75 @@
-<!ENTITY extension.title "RSS Ticker">
-<!ENTITY cm.open "Apri">
-<!ENTITY cm.open.key "A">
-<!ENTITY cm.openInNewWindow "Apri in una nuova finestra">
-<!ENTITY cm.openInNewWindow.key "f">
-<!ENTITY cm.openInNewTab "Apri in una nuova scheda">
-<!ENTITY cm.openInNewTab.key "s">
-<!ENTITY cm.openAllInTabs "Apri tutti in schede">
-<!ENTITY cm.openUnreadInTabs "Apri non letti in schede">
-<!ENTITY cm.openFeedInTabs "Apri feed in schede">
-<!ENTITY cm.openFeedUnreadInTabs "Apri feed non letti in schede">
-<!ENTITY cm.copyLinkTitle "Copia titolo del link">
-<!ENTITY cm.copyLinkTitle.key "C">
-<!ENTITY cm.copyLinkURL "Copia URL del link">
-<!ENTITY cm.copyLinkURL.key "U">
-<!ENTITY cm.refreshFeeds "Ricarica feed">
-<!ENTITY cm.refreshFeeds.key "R">
-<!ENTITY cm.manageFeeds "Gestisci feed">
-<!ENTITY cm.manageFeeds.key "G">
-<!ENTITY cm.markAsRead "Segna come letto">
-<!ENTITY cm.markAsRead.key "M">
-<!ENTITY cm.markFeedAsRead "Segna feed come letto">
-<!ENTITY cm.markFeedAsRead.key "o">
-<!ENTITY cm.markAllAsRead "Segna tutti come letti">
-<!ENTITY cm.markAllAsRead.key "e">
-<!ENTITY options.updateInterval "Frequenza di aggiornamento">
-<!ENTITY options.update.1 "Minuti prima dell'aggiornamento successivo:">
-<!ENTITY options.update.2 " ">
-<!ENTITY options.speed "Velocità di visualizzazione">
-<!ENTITY options.dw.itemWidth "Larghezza degli elementi">
-<!ENTITY pixelAbbrev "px">
-<!ENTITY options.smooothness "Scorrevolezza di movimento">
-<!ENTITY cmOptionsDescription "Personalizzare il menu contestuale della barra di RSS Ticker selezionando o deselezionando le opzioni qui sotto">
-<!ENTITY tt.summary "Sommario">
-<!ENTITY options "Opzioni">
-<!ENTITY options.restartNotice "Le opzioni contrassegnate da * verranno attivate/disattivate dopo il riavvio del browser">
-<!ENTITY options.general "Generali">
-<!ENTITY options.advanced "Avanzate">
-<!ENTITY options.contextMenu "Menu contestuale">
-<!ENTITY disableTicker "Disattiva la barra di RSS Ticker">
-<!ENTITY options.tickerPlacement "Posizionamento della barra di RSS Ticker">
-<!ENTITY tickerPlacement.belowStatusBar "Sotto la barra di stato">
-<!ENTITY tickerPlacement.belowBMTB "Sotto la barra dei segnalibri">
-<!ENTITY options.random "Visualizza gli elementi in modo casuale ">
-<!ENTITY options.hide "Nascondi gli elementi già letti">
-<!ENTITY options.bold "Visualizza gli elementi non letti in grassetto">
-<!ENTITY options.openInNewTab "Apri sempre i link in nuove schede">
-<!ENTITY options.reverseDirection "Inverti la direzione di scorrimento degli elementi">
-<!ENTITY toggleTicker "Attiva/disattiva la barra di RSS Ticker">
-<!ENTITY options.dw.limitWidth "Imposta la larghezza degli elementi nella barra di RSS Ticker">
-<!ENTITY options.dw.isMaxWidth "Utilizza solo come larghezza massima">
-<!ENTITY options.limitItemsPerFeed "Imposta il numero di elementi visualizzabili per ogni feed">
-<!ENTITY options.itemsPerFeed "Elementi per feed">
-<!ENTITY about "Informazioni">
-<!ENTITY noFeedsFoundTitle "Non sono stati trovati segnalibri Live">
-<!ENTITY noFeedsFound "RSS Ticker non ha trovato alcun tipo di segnalibro Live">
-<!ENTITY howToSubscribe1 "RSS Ticker permette di caricare e visualizzare tramite scorrimento nella propria barra di visualizzazione i feed salvati come segnalibri Live">
-<!ENTITY howToSubscribe2 "Se nella pagina che si sta visualizzando nel browser è disponibile un feed RSS (ad esempio: www.mozilla.org), sarà presente una piccola icona arancione oppure blu vicino all'icona a forma di stella posizionata nel lato destro della barra degli indirizzi. Facendo clic su tale icona si aprirà la finestra di dialogo per l'aggiunta del feed">
-<!ENTITY howToSubscribe3 "Confermare facendo clic sul relativo pulsante per visualizzare istantaneamente gli elementi del feed aggiunto nella barra di RSS Ticker">
-<!ENTITY closeNoFeedsPage "Chiudi">
-<!ENTITY dontShowAgain "Non mostrare questo messaggio ancora">
-<!ENTITY feed "Feed">
-<!ENTITY feeds "Feed">
-<!ENTITY feedManagement "È possibile aggiungere o eliminare i feed dalla barra di RSS Ticker selezionandoli nella lista qui sotto e facendo clic sui pulsanti 'Aggiungi' o 'Elimina'. Nota: attualmente tramite la lista è possibile la sola selezione dei feed da visualizzare nella barra. Per aggiungere nuovi feed è necessario utilizzare la relativa funzione dei segnalibri Live di Firefox">
-<!ENTITY add "Aggiungi">
-<!ENTITY remove "Elimina">
-<!ENTITY URL "URL">
-<!ENTITY hideWhenEmpty "Nascondi la barra di RSS Ticker quando è vuota">
-<!ENTITY faster "Maggiore">
-<!ENTITY slower "Minore">
-<!ENTITY smoother "Maggiore (maggior uso CPU)">
-<!ENTITY choppier "Minore (minor uso CPU)">
+<!ENTITY rssticker.title "RSS Ticker">
+<!ENTITY rssticker.cm.open "Apri">
+<!ENTITY rssticker.cm.open.key "A">
+<!ENTITY rssticker.cm.openInNewWindow "Apri in una nuova finestra">
+<!ENTITY rssticker.cm.openInNewWindow.key "f">
+<!ENTITY rssticker.cm.openInNewTab "Apri in una nuova scheda">
+<!ENTITY rssticker.cm.openInNewTab.key "s">
+<!ENTITY rssticker.cm.openAllInTabs "Apri tutti in schede">
+<!ENTITY rssticker.cm.openUnreadInTabs "Apri non letti in schede">
+<!ENTITY rssticker.cm.openFeedInTabs "Apri feed in schede">
+<!ENTITY rssticker.cm.openFeedUnreadInTabs "Apri feed non letti in schede">
+<!ENTITY rssticker.cm.copyLinkTitle "Copia titolo del link">
+<!ENTITY rssticker.cm.copyLinkTitle.key "C">
+<!ENTITY rssticker.cm.copyLinkURL "Copia URL del link">
+<!ENTITY rssticker.cm.copyLinkURL.key "U">
+<!ENTITY rssticker.cm.refreshFeeds "Ricarica feed">
+<!ENTITY rssticker.cm.refreshFeeds.key "R">
+<!ENTITY rssticker.cm.manageFeeds "Gestisci feed">
+<!ENTITY rssticker.cm.manageFeeds.key "G">
+<!ENTITY rssticker.cm.markAsRead "Segna come letto">
+<!ENTITY rssticker.cm.markAsRead.key "M">
+<!ENTITY rssticker.cm.markFeedAsRead "Segna feed come letto">
+<!ENTITY rssticker.cm.markFeedAsRead.key "o">
+<!ENTITY rssticker.cm.markAllAsRead "Segna tutti come letti">
+<!ENTITY rssticker.cm.markAllAsRead.key "e">
+<!ENTITY rssticker.options.updateInterval "Frequenza di aggiornamento">
+<!ENTITY rssticker.options.update.1 "Minuti prima dell'aggiornamento successivo:">
+<!ENTITY rssticker.options.update.2 " ">
+<!ENTITY rssticker.options.speed "Velocità di visualizzazione">
+<!ENTITY rssticker.options.dw.itemWidth "Larghezza degli elementi">
+<!ENTITY rssticker.pixelAbbrev "px">
+<!ENTITY rssticker.options.smooothness "Scorrevolezza di movimento">
+<!ENTITY rssticker.cmOptionsDescription "Personalizzare il menu contestuale della barra di RSS Ticker selezionando o deselezionando le opzioni qui sotto">
+<!ENTITY rssticker.tt.summary "Sommario">
+<!ENTITY rssticker.options "Opzioni">
+<!ENTITY rssticker.options.restartNotice "Le opzioni contrassegnate da * verranno attivate/disattivate dopo il riavvio del browser">
+<!ENTITY rssticker.options.general "Generali">
+<!ENTITY rssticker.options.advanced "Avanzate">
+<!ENTITY rssticker.options.contextMenu "Menu contestuale">
+<!ENTITY rssticker.disableTicker "Disattiva la barra di RSS Ticker">
+<!ENTITY rssticker.options.tickerPlacement "Posizionamento della barra di RSS Ticker">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Sotto la barra di stato">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Sotto la barra dei segnalibri">
+<!ENTITY rssticker.options.random "Visualizza gli elementi in modo casuale ">
+<!ENTITY rssticker.options.hide "Nascondi gli elementi già letti">
+<!ENTITY rssticker.options.bold "Visualizza gli elementi non letti in grassetto">
+<!ENTITY rssticker.options.openInNewTab "Apri sempre i link in nuove schede">
+<!ENTITY rssticker.options.reverseDirection "Inverti la direzione di scorrimento degli elementi">
+<!ENTITY rssticker.toggleTicker "Attiva/disattiva la barra di RSS Ticker">
+<!ENTITY rssticker.options.dw.limitWidth "Imposta la larghezza degli elementi nella barra di RSS Ticker">
+<!ENTITY rssticker.options.dw.isMaxWidth "Utilizza solo come larghezza massima">
+<!ENTITY rssticker.options.limitItemsPerFeed "Imposta il numero di elementi visualizzabili per ogni feed">
+<!ENTITY rssticker.options.itemsPerFeed "Elementi per feed">
+<!ENTITY rssticker.about "Informazioni">
+<!ENTITY rssticker.noFeedsFoundTitle "Non sono stati trovati segnalibri Live">
+<!ENTITY rssticker.noFeedsFound "RSS Ticker non ha trovato alcun tipo di segnalibro Live">
+<!ENTITY rssticker.howToSubscribe1 "RSS Ticker permette di caricare e visualizzare tramite scorrimento nella propria barra di visualizzazione i feed salvati come segnalibri Live">
+<!ENTITY rssticker.howToSubscribe2 "Se nella pagina che si sta visualizzando nel browser è disponibile un feed RSS (ad esempio: www.mozilla.org), sarà presente una piccola icona arancione oppure blu vicino all'icona a forma di stella posizionata nel lato destro della barra degli indirizzi. Facendo clic su tale icona si aprirà la finestra di dialogo per l'aggiunta del feed">
+<!ENTITY rssticker.howToSubscribe3 "Confermare facendo clic sul relativo pulsante per visualizzare istantaneamente gli elementi del feed aggiunto nella barra di RSS Ticker">
+<!ENTITY rssticker.closeNoFeedsPage "Chiudi">
+<!ENTITY rssticker.dontShowAgain "Non mostrare questo messaggio ancora">
+<!ENTITY rssticker.feed "Feed">
+<!ENTITY rssticker.feeds "Feed">
+<!ENTITY rssticker.feedManagement "È possibile aggiungere o eliminare i feed dalla barra di RSS Ticker selezionandoli nella lista qui sotto e facendo clic sui pulsanti 'Aggiungi' o 'Elimina'. Nota: attualmente tramite la lista è possibile la sola selezione dei feed da visualizzare nella barra. Per aggiungere nuovi feed è necessario utilizzare la relativa funzione dei segnalibri Live di Firefox">
+<!ENTITY rssticker.add "Aggiungi">
+<!ENTITY rssticker.remove "Elimina">
+<!ENTITY rssticker.URL "URL">
+<!ENTITY rssticker.hideWhenEmpty "Nascondi la barra di RSS Ticker quando è vuota">
+<!ENTITY rssticker.faster "Maggiore">
+<!ENTITY rssticker.slower "Minore">
+<!ENTITY rssticker.smoother "Maggiore (maggior uso CPU)">
+<!ENTITY rssticker.choppier "Minore (minor uso CPU)">
 <!ENTITY rssticker.featured.subscribe "Sottoscrivi">
 <!ENTITY rssticker.featured.panelTitle "Feed proposti">
 <!ENTITY rssticker.featured.description "È possibile supportare gratuitamente lo sviluppo di RSS Ticker sottoscrivendo uno o più feed tra quelli proposti qui sotto">

@@ -1,73 +1,73 @@
-<!ENTITY cm.open "Ouvrir">
-<!ENTITY cm.open.key "O">
-<!ENTITY cm.openInNewWindow "Ouvrir dans une nouvelle fenêtre">
-<!ENTITY cm.openInNewWindow.key "f">
-<!ENTITY cm.openInNewTab "Ouvrir dans un nouvel onglet">
-<!ENTITY cm.openInNewTab.key "t">
-<!ENTITY cm.openAllInTabs "Ouvrir tous les éléments dans des onglets">
-<!ENTITY cm.openUnreadInTabs "Ouvrir les éléments non lus dans des onglets">
-<!ENTITY cm.openFeedInTabs "Ouvrir le flux dans des onglets">
-<!ENTITY cm.openFeedUnreadInTabs "Ouvrir le flux non lu dans des onglets">
-<!ENTITY cm.copyLinkTitle "Copier le titre du lien">
-<!ENTITY cm.copyLinkTitle.key "C">
-<!ENTITY cm.copyLinkURL "Copier l'URL du lien">
-<!ENTITY cm.copyLinkURL.key "U">
-<!ENTITY cm.refreshFeeds "Rafraîchir les flux">
-<!ENTITY cm.refreshFeeds.key "R">
-<!ENTITY cm.manageFeeds "Gérer les flux">
-<!ENTITY cm.manageFeeds.key "G">
-<!ENTITY cm.markAsRead "Marquer comme lu">
-<!ENTITY cm.markAsRead.key "M">
-<!ENTITY cm.markFeedAsRead "Marquer le flux comme lu">
-<!ENTITY cm.markFeedAsRead.key "a">
-<!ENTITY cm.markAllAsRead "Marquer tous comme lus">
-<!ENTITY cm.markAllAsRead.key "l">
-<!ENTITY options.updateInterval "Fréquence des mises à jour">
-<!ENTITY options.update.1 "Mettre à jour mes flux toutes les">
-<!ENTITY options.update.2 "minutes">
-<!ENTITY options.speed "Vitesse du défilement de la bande déroulante">
-<!ENTITY options.dw.itemWidth "Largeur des éléments">
-<!ENTITY pixelAbbrev "px">
-<!ENTITY options.smooothness "Fluidité du défilement de la bande déroulante">
-<!ENTITY cmOptionsDescription "Personnaliser le menu contextuel de la bande en activant ou désactivant les options ci-dessous.">
-<!ENTITY tt.summary "Sommaire">
-<!ENTITY options.restartNotice "Les changements sur les options marquées d'une astérisque (*) ne seront effectifs qu'après le redémarrage de votre navigateur.">
-<!ENTITY options.general "Général">
-<!ENTITY options.advanced "Avancé">
-<!ENTITY options.contextMenu "Menu contextuel">
-<!ENTITY disableTicker "Désactiver la bande défilante">
-<!ENTITY options.tickerPlacement "Emplacement de la bande défilante">
-<!ENTITY tickerPlacement.belowStatusBar "Sous la barre d\'état">
-<!ENTITY tickerPlacement.belowBMTB "Sous la barre personnelle">
-<!ENTITY options.random "Afficher au hasard les éléments dans la bande défilante">
-<!ENTITY options.hide "Masquer les éléments que vous avez déjà lus.">
-<!ENTITY options.bold "Mettre en gras les éléments que vous n\'avez pas lus.">
-<!ENTITY options.openInNewTab "Toujours ouvrir les liens dans de nouveaux onglets.">
-<!ENTITY options.reverseDirection "Inverser le sens de défilement">
-<!ENTITY toggleTicker "Activer / désactiver la bande défilante">
-<!ENTITY options.dw.limitWidth "Limiter la largeur des éléments dans la bande défilante">
-<!ENTITY options.dw.isMaxWidth "Utiliser seulement comme largeur maximale">
-<!ENTITY options.limitItemsPerFeed "Limiter le nombre d'éléments par fil">
-<!ENTITY options.itemsPerFeed "Éléments par fil">
-<!ENTITY about "À propos">
-<!ENTITY noFeedsFoundTitle "Aucun marque-page dynamique trouvé">
-<!ENTITY noFeedsFound "RSS Ticker n'a pas pu localiser de marque-page dynamique (fils de news, fils RSS)">
-<!ENTITY howToSubscribe1 "RSS Ticker charge et fait défiler les éléments de vos marque-pages dynamiques (alimentation de nouvelles Usenet, flux RSS), mais vous n'avez aucun marque-page dynamique. Besoin d'aide ? S'abonner à un flux est facile :">
-<!ENTITY howToSubscribe2 "Si la page que vous regardez dans votre navigateur, offre un flux RSS (www.mozilla.org, par exemple), une petite icône orange ou bleue apparaitra sur le côté droit de la barre d\'adresse, à côté de l\'étoile utilisée pour marquer une page. Si vous cliquez sur cette icône, cela ouvrira la page 'Abonnement aux marque-pages dynamiques'.">
-<!ENTITY howToSubscribe3 "Cliquez sur S'abonner maintenant et RSS Ticker commencera instantanément à faire défiler les éléments de ce flux.">
-<!ENTITY closeNoFeedsPage "Fermer cette page">
-<!ENTITY dontShowAgain "Ne plus afficher ce message.">
-<!ENTITY feed "Fil">
-<!ENTITY feeds "Fils">
-<!ENTITY feedManagement "Vous pouvez ajouter ou supprimer des fils en les sélectionnant dans la liste ci-dessous et en cliquant sur les boutons  Ajouter ou Supprimer.">
-<!ENTITY add "Ajouter">
-<!ENTITY remove "Supprimer">
-<!ENTITY URL "URL">
-<!ENTITY hideWhenEmpty "Masquer la bande déroulante quand elle est vide">
-<!ENTITY faster "Plus rapide">
-<!ENTITY slower "Plus lent">
-<!ENTITY smoother "Plus doux (plus de processeur)">
-<!ENTITY choppier "Plus saccadé (moins de processeur)">
+<!ENTITY rssticker.cm.open "Ouvrir">
+<!ENTITY rssticker.cm.open.key "O">
+<!ENTITY rssticker.cm.openInNewWindow "Ouvrir dans une nouvelle fenêtre">
+<!ENTITY rssticker.cm.openInNewWindow.key "f">
+<!ENTITY rssticker.cm.openInNewTab "Ouvrir dans un nouvel onglet">
+<!ENTITY rssticker.cm.openInNewTab.key "t">
+<!ENTITY rssticker.cm.openAllInTabs "Ouvrir tous les éléments dans des onglets">
+<!ENTITY rssticker.cm.openUnreadInTabs "Ouvrir les éléments non lus dans des onglets">
+<!ENTITY rssticker.cm.openFeedInTabs "Ouvrir le flux dans des onglets">
+<!ENTITY rssticker.cm.openFeedUnreadInTabs "Ouvrir le flux non lu dans des onglets">
+<!ENTITY rssticker.cm.copyLinkTitle "Copier le titre du lien">
+<!ENTITY rssticker.cm.copyLinkTitle.key "C">
+<!ENTITY rssticker.cm.copyLinkURL "Copier l'URL du lien">
+<!ENTITY rssticker.cm.copyLinkURL.key "U">
+<!ENTITY rssticker.cm.refreshFeeds "Rafraîchir les flux">
+<!ENTITY rssticker.cm.refreshFeeds.key "R">
+<!ENTITY rssticker.cm.manageFeeds "Gérer les flux">
+<!ENTITY rssticker.cm.manageFeeds.key "G">
+<!ENTITY rssticker.cm.markAsRead "Marquer comme lu">
+<!ENTITY rssticker.cm.markAsRead.key "M">
+<!ENTITY rssticker.cm.markFeedAsRead "Marquer le flux comme lu">
+<!ENTITY rssticker.cm.markFeedAsRead.key "a">
+<!ENTITY rssticker.cm.markAllAsRead "Marquer tous comme lus">
+<!ENTITY rssticker.cm.markAllAsRead.key "l">
+<!ENTITY rssticker.options.updateInterval "Fréquence des mises à jour">
+<!ENTITY rssticker.options.update.1 "Mettre à jour mes flux toutes les">
+<!ENTITY rssticker.options.update.2 "minutes">
+<!ENTITY rssticker.options.speed "Vitesse du défilement de la bande déroulante">
+<!ENTITY rssticker.options.dw.itemWidth "Largeur des éléments">
+<!ENTITY rssticker.pixelAbbrev "px">
+<!ENTITY rssticker.options.smooothness "Fluidité du défilement de la bande déroulante">
+<!ENTITY rssticker.cmOptionsDescription "Personnaliser le menu contextuel de la bande en activant ou désactivant les options ci-dessous.">
+<!ENTITY rssticker.tt.summary "Sommaire">
+<!ENTITY rssticker.options.restartNotice "Les changements sur les options marquées d'une astérisque (*) ne seront effectifs qu'après le redémarrage de votre navigateur.">
+<!ENTITY rssticker.options.general "Général">
+<!ENTITY rssticker.options.advanced "Avancé">
+<!ENTITY rssticker.options.contextMenu "Menu contextuel">
+<!ENTITY rssticker.disableTicker "Désactiver la bande défilante">
+<!ENTITY rssticker.options.tickerPlacement "Emplacement de la bande défilante">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Sous la barre d\'état">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Sous la barre personnelle">
+<!ENTITY rssticker.options.random "Afficher au hasard les éléments dans la bande défilante">
+<!ENTITY rssticker.options.hide "Masquer les éléments que vous avez déjà lus.">
+<!ENTITY rssticker.options.bold "Mettre en gras les éléments que vous n\'avez pas lus.">
+<!ENTITY rssticker.options.openInNewTab "Toujours ouvrir les liens dans de nouveaux onglets.">
+<!ENTITY rssticker.options.reverseDirection "Inverser le sens de défilement">
+<!ENTITY rssticker.toggleTicker "Activer / désactiver la bande défilante">
+<!ENTITY rssticker.options.dw.limitWidth "Limiter la largeur des éléments dans la bande défilante">
+<!ENTITY rssticker.options.dw.isMaxWidth "Utiliser seulement comme largeur maximale">
+<!ENTITY rssticker.options.limitItemsPerFeed "Limiter le nombre d'éléments par fil">
+<!ENTITY rssticker.options.itemsPerFeed "Éléments par fil">
+<!ENTITY rssticker.about "À propos">
+<!ENTITY rssticker.noFeedsFoundTitle "Aucun marque-page dynamique trouvé">
+<!ENTITY rssticker.noFeedsFound "RSS Ticker n'a pas pu localiser de marque-page dynamique (fils de news, fils RSS)">
+<!ENTITY rssticker.howToSubscribe1 "RSS Ticker charge et fait défiler les éléments de vos marque-pages dynamiques (alimentation de nouvelles Usenet, flux RSS), mais vous n'avez aucun marque-page dynamique. Besoin d'aide ? S'abonner à un flux est facile :">
+<!ENTITY rssticker.howToSubscribe2 "Si la page que vous regardez dans votre navigateur, offre un flux RSS (www.mozilla.org, par exemple), une petite icône orange ou bleue apparaitra sur le côté droit de la barre d\'adresse, à côté de l\'étoile utilisée pour marquer une page. Si vous cliquez sur cette icône, cela ouvrira la page 'Abonnement aux marque-pages dynamiques'.">
+<!ENTITY rssticker.howToSubscribe3 "Cliquez sur S'abonner maintenant et RSS Ticker commencera instantanément à faire défiler les éléments de ce flux.">
+<!ENTITY rssticker.closeNoFeedsPage "Fermer cette page">
+<!ENTITY rssticker.dontShowAgain "Ne plus afficher ce message.">
+<!ENTITY rssticker.feed "Fil">
+<!ENTITY rssticker.feeds "Fils">
+<!ENTITY rssticker.feedManagement "Vous pouvez ajouter ou supprimer des fils en les sélectionnant dans la liste ci-dessous et en cliquant sur les boutons  Ajouter ou Supprimer.">
+<!ENTITY rssticker.add "Ajouter">
+<!ENTITY rssticker.remove "Supprimer">
+<!ENTITY rssticker.URL "URL">
+<!ENTITY rssticker.hideWhenEmpty "Masquer la bande déroulante quand elle est vide">
+<!ENTITY rssticker.faster "Plus rapide">
+<!ENTITY rssticker.slower "Plus lent">
+<!ENTITY rssticker.smoother "Plus doux (plus de processeur)">
+<!ENTITY rssticker.choppier "Plus saccadé (moins de processeur)">
 <!ENTITY rssticker.featured.subscribe "S'abonner">
 <!ENTITY rssticker.featured.panelTitle "Flux à la une">
 <!ENTITY rssticker.featured.description "Aider le développement de RSS Ticker sans dépenser un centime en essayant certains de ces flux partenaires.">

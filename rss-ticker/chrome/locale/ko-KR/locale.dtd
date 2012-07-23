@@ -1,75 +1,75 @@
-<!ENTITY extension.title "RSS Ticker">
-<!ENTITY cm.open "열기">
-<!ENTITY cm.open.key "O">
-<!ENTITY cm.openInNewWindow "새 창으로 열기">
-<!ENTITY cm.openInNewWindow.key "N">
-<!ENTITY cm.openInNewTab "새 탭으로 열기">
-<!ENTITY cm.openInNewTab.key "T">
-<!ENTITY cm.openAllInTabs "탭에 모두 열기">
-<!ENTITY cm.openUnreadInTabs "탭에 읽지 않은 것을 열기">
-<!ENTITY cm.openFeedInTabs "탭에 피드 열기">
-<!ENTITY cm.openFeedUnreadInTabs "탭에 읽지 않은 피드 열기">
-<!ENTITY cm.copyLinkTitle "링크 제목 복사">
-<!ENTITY cm.copyLinkTitle.key "L">
-<!ENTITY cm.copyLinkURL "링크 URL 복사">
-<!ENTITY cm.copyLinkURL.key "C">
-<!ENTITY cm.refreshFeeds "피드 새로고침">
-<!ENTITY cm.refreshFeeds.key "R">
-<!ENTITY cm.manageFeeds "피드 관리">
-<!ENTITY cm.manageFeeds.key "G">
-<!ENTITY cm.markAsRead "읽은 것으로 표시">
-<!ENTITY cm.markAsRead.key "M">
-<!ENTITY cm.markFeedAsRead "피드를 읽은 것으로 표시">
-<!ENTITY cm.markFeedAsRead.key "F">
-<!ENTITY cm.markAllAsRead "모두 읽은 것으로 표시">
-<!ENTITY cm.markAllAsRead.key "A">
-<!ENTITY options.updateInterval "갱신 주기">
-<!ENTITY options.update.1 "피드 갱신 주기:">
-<!ENTITY options.update.2 "분">
-<!ENTITY options.speed "틱 속도">
-<!ENTITY options.dw.itemWidth "항목 폭">
-<!ENTITY pixelAbbrev "픽셀">
-<!ENTITY options.smooothness "티커 스크롤 유연도">
-<!ENTITY cmOptionsDescription "환경설정에서의 선택/비선택를 통해 티커 문맥메뉴를 자신에 맞춥니다.">
-<!ENTITY tt.summary "개요">
-<!ENTITY options "환경설정">
-<!ENTITY options.restartNotice "*로 표시된 설정은 브라우저 창을 다시 열 때까지 변경되지 않습니다.">
-<!ENTITY options.general "일반">
-<!ENTITY options.advanced "고급">
-<!ENTITY options.contextMenu "문맥 메뉴">
-<!ENTITY disableTicker "티커 끔">
-<!ENTITY options.tickerPlacement "티커 배치">
-<!ENTITY tickerPlacement.belowStatusBar "상태막대 밑에">
-<!ENTITY tickerPlacement.belowBMTB "북마크 도구상자 밑에">
-<!ENTITY options.random "티커 항목 무작위">
-<!ENTITY options.hide "이미 읽은 항목 숨기기">
-<!ENTITY options.bold "읽지 않은 항목 강조">
-<!ENTITY options.openInNewTab "언제나 새 탭으로 링크 열기">
-<!ENTITY options.reverseDirection "티커 글 방향을 반대로">
-<!ENTITY toggleTicker "티커 끄기/켜기 전환">
-<!ENTITY options.dw.limitWidth "티커내 항목의 폭을 제한">
-<!ENTITY options.dw.isMaxWidth "최대 폭으로만 사용">
-<!ENTITY options.limitItemsPerFeed "피드 당 항목의 수를 제한">
-<!ENTITY options.itemsPerFeed "피드 당 항목">
-<!ENTITY about "이 확장기능에 대하여">
-<!ENTITY noFeedsFoundTitle "발견된 라이브 북마크 없음">
-<!ENTITY noFeedsFound "RSS 티커는 (뉴스 피드, RSS 피드 같은) 어떤 라이브 북마크도 찾아낼 수 없었습니다.">
-<!ENTITY howToSubscribe1 "RSS Ticker는 당신의 라이브 북마크(예를들어, 뉴스피드, RSS피드)로 부터 항목을 불러와 스크롤합니다.하지만, 귀하는 어떠한 라이브 북마크도 구독하지 않고 있습니다. 도움이 필요하십니까?피드 구독은 쉽습니다:">
-<!ENTITY howToSubscribe2 "만약 브라우저 안에 보고있는 페이지가 RSS피드를 제공(예를 들면, www.mozilla.org)하고 있다면, 주소창 오른쪽 구석위에 작은 오렌지색 또는 파란색 아이콘과, 그 옆에 북마크를 위한 사용되는 별이 있을 겁니다. 만약 아이콘을 클릭한다면, \'라이브 북마크 추가\' 화면이 열릴겁니다.">
-<!ENTITY howToSubscribe3 "바로 구독하기를 클릭 후, RSS Ticker는 곧바로 Feed로 부터 뉴스를 스크롤하기 시작합니다.">
-<!ENTITY closeNoFeedsPage "이 페이지 닫기">
-<!ENTITY dontShowAgain "이 메시지를 다시 표시 하지 않음.">
-<!ENTITY feed "피드">
-<!ENTITY feeds "피드">
-<!ENTITY feedManagement "추가 또는 삭제 버튼을 눌러 목록내에서 선택한 피드를 티커에 추가하거나 삭제할 수 있습니다">
-<!ENTITY add "추가">
-<!ENTITY remove "삭제">
-<!ENTITY URL "URL">
-<!ENTITY hideWhenEmpty "아무것도 없을 경우 티커 숨김.">
-<!ENTITY faster "빠르게">
-<!ENTITY slower "느리게">
-<!ENTITY smoother "부드럽게(더좋은 CPU)">
-<!ENTITY choppier "급하게(낮은 CPU)">
+<!ENTITY rssticker.title "RSS Ticker">
+<!ENTITY rssticker.cm.open "열기">
+<!ENTITY rssticker.cm.open.key "O">
+<!ENTITY rssticker.cm.openInNewWindow "새 창으로 열기">
+<!ENTITY rssticker.cm.openInNewWindow.key "N">
+<!ENTITY rssticker.cm.openInNewTab "새 탭으로 열기">
+<!ENTITY rssticker.cm.openInNewTab.key "T">
+<!ENTITY rssticker.cm.openAllInTabs "탭에 모두 열기">
+<!ENTITY rssticker.cm.openUnreadInTabs "탭에 읽지 않은 것을 열기">
+<!ENTITY rssticker.cm.openFeedInTabs "탭에 피드 열기">
+<!ENTITY rssticker.cm.openFeedUnreadInTabs "탭에 읽지 않은 피드 열기">
+<!ENTITY rssticker.cm.copyLinkTitle "링크 제목 복사">
+<!ENTITY rssticker.cm.copyLinkTitle.key "L">
+<!ENTITY rssticker.cm.copyLinkURL "링크 URL 복사">
+<!ENTITY rssticker.cm.copyLinkURL.key "C">
+<!ENTITY rssticker.cm.refreshFeeds "피드 새로고침">
+<!ENTITY rssticker.cm.refreshFeeds.key "R">
+<!ENTITY rssticker.cm.manageFeeds "피드 관리">
+<!ENTITY rssticker.cm.manageFeeds.key "G">
+<!ENTITY rssticker.cm.markAsRead "읽은 것으로 표시">
+<!ENTITY rssticker.cm.markAsRead.key "M">
+<!ENTITY rssticker.cm.markFeedAsRead "피드를 읽은 것으로 표시">
+<!ENTITY rssticker.cm.markFeedAsRead.key "F">
+<!ENTITY rssticker.cm.markAllAsRead "모두 읽은 것으로 표시">
+<!ENTITY rssticker.cm.markAllAsRead.key "A">
+<!ENTITY rssticker.options.updateInterval "갱신 주기">
+<!ENTITY rssticker.options.update.1 "피드 갱신 주기:">
+<!ENTITY rssticker.options.update.2 "분">
+<!ENTITY rssticker.options.speed "틱 속도">
+<!ENTITY rssticker.options.dw.itemWidth "항목 폭">
+<!ENTITY rssticker.pixelAbbrev "픽셀">
+<!ENTITY rssticker.options.smooothness "티커 스크롤 유연도">
+<!ENTITY rssticker.cmOptionsDescription "환경설정에서의 선택/비선택를 통해 티커 문맥메뉴를 자신에 맞춥니다.">
+<!ENTITY rssticker.tt.summary "개요">
+<!ENTITY rssticker.options "환경설정">
+<!ENTITY rssticker.options.restartNotice "*로 표시된 설정은 브라우저 창을 다시 열 때까지 변경되지 않습니다.">
+<!ENTITY rssticker.options.general "일반">
+<!ENTITY rssticker.options.advanced "고급">
+<!ENTITY rssticker.options.contextMenu "문맥 메뉴">
+<!ENTITY rssticker.disableTicker "티커 끔">
+<!ENTITY rssticker.options.tickerPlacement "티커 배치">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "상태막대 밑에">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "북마크 도구상자 밑에">
+<!ENTITY rssticker.options.random "티커 항목 무작위">
+<!ENTITY rssticker.options.hide "이미 읽은 항목 숨기기">
+<!ENTITY rssticker.options.bold "읽지 않은 항목 강조">
+<!ENTITY rssticker.options.openInNewTab "언제나 새 탭으로 링크 열기">
+<!ENTITY rssticker.options.reverseDirection "티커 글 방향을 반대로">
+<!ENTITY rssticker.toggleTicker "티커 끄기/켜기 전환">
+<!ENTITY rssticker.options.dw.limitWidth "티커내 항목의 폭을 제한">
+<!ENTITY rssticker.options.dw.isMaxWidth "최대 폭으로만 사용">
+<!ENTITY rssticker.options.limitItemsPerFeed "피드 당 항목의 수를 제한">
+<!ENTITY rssticker.options.itemsPerFeed "피드 당 항목">
+<!ENTITY rssticker.about "이 확장기능에 대하여">
+<!ENTITY rssticker.noFeedsFoundTitle "발견된 라이브 북마크 없음">
+<!ENTITY rssticker.noFeedsFound "RSS 티커는 (뉴스 피드, RSS 피드 같은) 어떤 라이브 북마크도 찾아낼 수 없었습니다.">
+<!ENTITY rssticker.howToSubscribe1 "RSS Ticker는 당신의 라이브 북마크(예를들어, 뉴스피드, RSS피드)로 부터 항목을 불러와 스크롤합니다.하지만, 귀하는 어떠한 라이브 북마크도 구독하지 않고 있습니다. 도움이 필요하십니까?피드 구독은 쉽습니다:">
+<!ENTITY rssticker.howToSubscribe2 "만약 브라우저 안에 보고있는 페이지가 RSS피드를 제공(예를 들면, www.mozilla.org)하고 있다면, 주소창 오른쪽 구석위에 작은 오렌지색 또는 파란색 아이콘과, 그 옆에 북마크를 위한 사용되는 별이 있을 겁니다. 만약 아이콘을 클릭한다면, \'라이브 북마크 추가\' 화면이 열릴겁니다.">
+<!ENTITY rssticker.howToSubscribe3 "바로 구독하기를 클릭 후, RSS Ticker는 곧바로 Feed로 부터 뉴스를 스크롤하기 시작합니다.">
+<!ENTITY rssticker.closeNoFeedsPage "이 페이지 닫기">
+<!ENTITY rssticker.dontShowAgain "이 메시지를 다시 표시 하지 않음.">
+<!ENTITY rssticker.feed "피드">
+<!ENTITY rssticker.feeds "피드">
+<!ENTITY rssticker.feedManagement "추가 또는 삭제 버튼을 눌러 목록내에서 선택한 피드를 티커에 추가하거나 삭제할 수 있습니다">
+<!ENTITY rssticker.add "추가">
+<!ENTITY rssticker.remove "삭제">
+<!ENTITY rssticker.URL "URL">
+<!ENTITY rssticker.hideWhenEmpty "아무것도 없을 경우 티커 숨김.">
+<!ENTITY rssticker.faster "빠르게">
+<!ENTITY rssticker.slower "느리게">
+<!ENTITY rssticker.smoother "부드럽게(더좋은 CPU)">
+<!ENTITY rssticker.choppier "급하게(낮은 CPU)">
 <!ENTITY rssticker.featured.subscribe "구독하기">
 <!ENTITY rssticker.featured.panelTitle "특종 피드">
 <!ENTITY rssticker.featured.description "RSS Ticker의 친구들 로부터의 이들 피드 중 몇개를 시도하는 것만으로 한푼도 지출하지않고 RSS Ticker의 개발을 지원할 수 있습니다.">

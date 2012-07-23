@@ -1,47 +1,47 @@
-<!ENTITY extension.title "RSS Κυλιόμενο μήνυμα">
-<!ENTITY cm.open "Άνοιγμα">
-<!ENTITY cm.openInNewWindow "Άνοιγμα σε νέο παράθυρο">
-<!ENTITY cm.openInNewTab "Άνοιγμα σε νέα καρτέλα">
-<!ENTITY cm.openAllInTabs "Άνοιγμα όλων σε καρτέλες">
-<!ENTITY cm.openUnreadInTabs "Άνοιγμα αδιάβαστων σε καρτέλες">
-<!ENTITY cm.manageFeeds "Διαχείριση τροφοδοσίας">
-<!ENTITY cm.markAsRead "Σημείωσέ το ως αναγνωσμένο">
-<!ENTITY cm.markFeedAsRead "Σημείωσε την τροφοδοσία ώς αναγνωσμένη">
-<!ENTITY cm.markAllAsRead "Σημείωσέ τα όλα ως διαβασμένα">
-<!ENTITY options.updateInterval "Συχνότητα ενημέρωσης τροφοδοσίας">
-<!ENTITY options.update.1 "Ενημέρωσε την τροφοδοσία κάθε">
-<!ENTITY options.update.2 "λεπτά">
-<!ENTITY options.speed "Ταχύτητα κυλιόμενου μηνύματος">
-<!ENTITY options.dw.itemWidth "Πλάτος αντικειμένου">
-<!ENTITY pixelAbbrev "εικονοστοιχεία">
-<!ENTITY options.smooothness "Απαλότητα κυλιόμενου μηνύματος">
-<!ENTITY cmOptionsDescription "Προσαρμόστε το μενού περιβάλλοντος του κυλιόμενου μηνύματος επιλέγοντας ή απενεργοποιώντας τις παρακάτω επιλογές">
-<!ENTITY tt.summary "Περίληψη">
-<!ENTITY options "Επιλογές">
-<!ENTITY options.restartNotice "Οι επιλογές με * δεν θα αλλάξουν μέχρι να επανακινήσετε τον φυλλομετρητή">
-<!ENTITY options.general "Γενικά">
-<!ENTITY options.advanced "Προηγμένο">
-<!ENTITY options.contextMenu "Μενού περιβάλλοντος">
-<!ENTITY disableTicker "Απενεργοποίησε το κυλιόμενο μήνυμα">
-<!ENTITY options.tickerPlacement "Θέση κυλιόμενου μηνύματος">
-<!ENTITY tickerPlacement.belowStatusBar "Κάτω από την γραμμή κατάστασης">
-<!ENTITY tickerPlacement.belowBMTB "κάτω από την εργαλειοθήκη σελιδοδεικτών">
-<!ENTITY options.random "Κάνε τυχαία τα στοιχεία του κυλιόμενου μηνύματος">
-<!ENTITY options.hide "Απόκρυψε τα στοιχεία που έχεις ήδη διαβάσει">
-<!ENTITY options.bold "Τόνισε τα στοιχεία που δεν έχεις διαβάσει">
-<!ENTITY options.openInNewTab "Πάντα άνοιξε συνδέσεις σε καινούργια καρτέλα">
-<!ENTITY options.reverseDirection "Ανέστρεψε την ροή κύλισης του μηνύματος">
-<!ENTITY toggleTicker "Εναλλαγή του κυλιόμενου μηνύματος από ανοικτό σε κλειστό">
-<!ENTITY options.dw.limitWidth "Περιόρισε το πλάτος των στοιχείων στο κυλιόμενο μήνυμα">
-<!ENTITY options.dw.isMaxWidth "Χρησιμοποίησέ το μόνο με το μέγιστο πλάτος">
-<!ENTITY options.limitItemsPerFeed "Περιόρισε τον αριθμό των στοιχείων ανά τροφοδοσία">
-<!ENTITY options.itemsPerFeed "Στοιχεία ανά τροφοδοσία">
-<!ENTITY about "Περί..">
-<!ENTITY noFeedsFoundTitle "Δεν βρέθηκαν Ενεργεί Σελιδοδείκτες">
-<!ENTITY noFeedsFound "το κυλιόμενο RSS μήνυμα δεν βρίσκει κανένα ενεργό σελιδοδείκτη">
-<!ENTITY faster "Ταχύτερα">
-<!ENTITY slower "Πιό αργά">
-<!ENTITY smoother "Ηπιότερα">
+<!ENTITY rssticker.title "RSS Κυλιόμενο μήνυμα">
+<!ENTITY rssticker.cm.open "Άνοιγμα">
+<!ENTITY rssticker.cm.openInNewWindow "Άνοιγμα σε νέο παράθυρο">
+<!ENTITY rssticker.cm.openInNewTab "Άνοιγμα σε νέα καρτέλα">
+<!ENTITY rssticker.cm.openAllInTabs "Άνοιγμα όλων σε καρτέλες">
+<!ENTITY rssticker.cm.openUnreadInTabs "Άνοιγμα αδιάβαστων σε καρτέλες">
+<!ENTITY rssticker.cm.manageFeeds "Διαχείριση τροφοδοσίας">
+<!ENTITY rssticker.cm.markAsRead "Σημείωσέ το ως αναγνωσμένο">
+<!ENTITY rssticker.cm.markFeedAsRead "Σημείωσε την τροφοδοσία ώς αναγνωσμένη">
+<!ENTITY rssticker.cm.markAllAsRead "Σημείωσέ τα όλα ως διαβασμένα">
+<!ENTITY rssticker.options.updateInterval "Συχνότητα ενημέρωσης τροφοδοσίας">
+<!ENTITY rssticker.options.update.1 "Ενημέρωσε την τροφοδοσία κάθε">
+<!ENTITY rssticker.options.update.2 "λεπτά">
+<!ENTITY rssticker.options.speed "Ταχύτητα κυλιόμενου μηνύματος">
+<!ENTITY rssticker.options.dw.itemWidth "Πλάτος αντικειμένου">
+<!ENTITY rssticker.pixelAbbrev "εικονοστοιχεία">
+<!ENTITY rssticker.options.smooothness "Απαλότητα κυλιόμενου μηνύματος">
+<!ENTITY rssticker.cmOptionsDescription "Προσαρμόστε το μενού περιβάλλοντος του κυλιόμενου μηνύματος επιλέγοντας ή απενεργοποιώντας τις παρακάτω επιλογές">
+<!ENTITY rssticker.tt.summary "Περίληψη">
+<!ENTITY rssticker.options "Επιλογές">
+<!ENTITY rssticker.options.restartNotice "Οι επιλογές με * δεν θα αλλάξουν μέχρι να επανακινήσετε τον φυλλομετρητή">
+<!ENTITY rssticker.options.general "Γενικά">
+<!ENTITY rssticker.options.advanced "Προηγμένο">
+<!ENTITY rssticker.options.contextMenu "Μενού περιβάλλοντος">
+<!ENTITY rssticker.disableTicker "Απενεργοποίησε το κυλιόμενο μήνυμα">
+<!ENTITY rssticker.options.tickerPlacement "Θέση κυλιόμενου μηνύματος">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Κάτω από την γραμμή κατάστασης">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "κάτω από την εργαλειοθήκη σελιδοδεικτών">
+<!ENTITY rssticker.options.random "Κάνε τυχαία τα στοιχεία του κυλιόμενου μηνύματος">
+<!ENTITY rssticker.options.hide "Απόκρυψε τα στοιχεία που έχεις ήδη διαβάσει">
+<!ENTITY rssticker.options.bold "Τόνισε τα στοιχεία που δεν έχεις διαβάσει">
+<!ENTITY rssticker.options.openInNewTab "Πάντα άνοιξε συνδέσεις σε καινούργια καρτέλα">
+<!ENTITY rssticker.options.reverseDirection "Ανέστρεψε την ροή κύλισης του μηνύματος">
+<!ENTITY rssticker.toggleTicker "Εναλλαγή του κυλιόμενου μηνύματος από ανοικτό σε κλειστό">
+<!ENTITY rssticker.options.dw.limitWidth "Περιόρισε το πλάτος των στοιχείων στο κυλιόμενο μήνυμα">
+<!ENTITY rssticker.options.dw.isMaxWidth "Χρησιμοποίησέ το μόνο με το μέγιστο πλάτος">
+<!ENTITY rssticker.options.limitItemsPerFeed "Περιόρισε τον αριθμό των στοιχείων ανά τροφοδοσία">
+<!ENTITY rssticker.options.itemsPerFeed "Στοιχεία ανά τροφοδοσία">
+<!ENTITY rssticker.about "Περί..">
+<!ENTITY rssticker.noFeedsFoundTitle "Δεν βρέθηκαν Ενεργεί Σελιδοδείκτες">
+<!ENTITY rssticker.noFeedsFound "το κυλιόμενο RSS μήνυμα δεν βρίσκει κανένα ενεργό σελιδοδείκτη">
+<!ENTITY rssticker.faster "Ταχύτερα">
+<!ENTITY rssticker.slower "Πιό αργά">
+<!ENTITY rssticker.smoother "Ηπιότερα">
 <!ENTITY rssticker.featured.subscribe "Γίνε συνδρομητής">
 <!ENTITY rssticker.featured.panelTitle "Προτεινόμενες τροφοδοσίες">
 <!ENTITY rssticker.featured.notifyMe "Περιοδικά ενημέρωσέ με για προτεινόμενες τροφοδοσίες">

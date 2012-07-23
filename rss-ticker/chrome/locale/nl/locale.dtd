@@ -1,75 +1,75 @@
-<!ENTITY extension.title "RSS Ticker">
-<!ENTITY cm.open "Openen">
-<!ENTITY cm.open.key "O">
-<!ENTITY cm.openInNewWindow "In nieuw venster openen">
-<!ENTITY cm.openInNewWindow.key "V">
-<!ENTITY cm.openInNewTab "In nieuw tabblad openen">
-<!ENTITY cm.openInNewTab.key "T">
-<!ENTITY cm.openAllInTabs "Alles in tabbladen openen">
-<!ENTITY cm.openUnreadInTabs "Ongelezen in tabbladen openen">
-<!ENTITY cm.openFeedInTabs "Feed in tabbladen openen">
-<!ENTITY cm.openFeedUnreadInTabs "Ongelezen feed in tabbladen openen">
-<!ENTITY cm.copyLinkTitle "Koppelingstitel kopiëren">
-<!ENTITY cm.copyLinkTitle.key "K">
-<!ENTITY cm.copyLinkURL "Koppelingslocatie kopiëren">
-<!ENTITY cm.copyLinkURL.key "P">
-<!ENTITY cm.refreshFeeds "Feeds verversen">
-<!ENTITY cm.refreshFeeds.key "V">
-<!ENTITY cm.manageFeeds "Feeds beheren">
-<!ENTITY cm.manageFeeds.key "B">
-<!ENTITY cm.markAsRead "Markeren als gelezen">
-<!ENTITY cm.markAsRead.key "M">
-<!ENTITY cm.markFeedAsRead "Feed als gelezen markeren">
-<!ENTITY cm.markFeedAsRead.key "F">
-<!ENTITY cm.markAllAsRead "Alles als gelezen markeren">
-<!ENTITY cm.markAllAsRead.key "A">
-<!ENTITY options.updateInterval "Updatefrequentie">
-<!ENTITY options.update.1 "Mijn feeds elke">
-<!ENTITY options.update.2 "minuten bijwerken.">
-<!ENTITY options.speed "Tickersnelheid">
-<!ENTITY options.dw.itemWidth "Berichtbreedte">
-<!ENTITY pixelAbbrev "px">
-<!ENTITY options.smooothness "Vlotheid scrollen ticker">
-<!ENTITY cmOptionsDescription "Het contextmenu van de ticker aanpassen door onderstaande opties te selecteren of te deselecteren.">
-<!ENTITY tt.summary "Samenvatting">
-<!ENTITY options "Opties">
-<!ENTITY options.restartNotice "Opties aangeduid met * zullen niet veranderd worden totdat u uw browservenster heropent.">
-<!ENTITY options.general "Algemeen">
-<!ENTITY options.advanced "Geavanceerd">
-<!ENTITY options.contextMenu "Contextmenu">
-<!ENTITY disableTicker "Ticker uitschakelen">
-<!ENTITY options.tickerPlacement "Tickerpositie">
-<!ENTITY tickerPlacement.belowStatusBar "Onder de statusbalk">
-<!ENTITY tickerPlacement.belowBMTB "Onder de bladwijzerwerkbalk">
-<!ENTITY options.random "Tickerberichten in willekeurige volgorde">
-<!ENTITY options.hide "Ongelezen berichten verbergen.">
-<!ENTITY options.bold "Vette ongelezen berichten.">
-<!ENTITY options.openInNewTab "Koppelingen altijd in nieuwe tabbladen openen.">
-<!ENTITY options.reverseDirection "Tickervolgorde omdraaien">
-<!ENTITY toggleTicker "Ticker in-/uitschakelen">
-<!ENTITY options.dw.limitWidth "De breedte van de berichten in de ticker beperken">
-<!ENTITY options.dw.isMaxWidth "Alleen als maximumbreedte gebruiken">
-<!ENTITY options.limitItemsPerFeed "Aantal berichten per feed beperken">
-<!ENTITY options.itemsPerFeed "Berichten per feed">
-<!ENTITY about "Over">
-<!ENTITY noFeedsFoundTitle "Geen livebladwijzers gevonden">
-<!ENTITY noFeedsFound "RSS Ticker kan geen livebladwijzers (ofwel newsfeeds, RSS-feeds) vinden.">
-<!ENTITY howToSubscribe1 "RSS Ticker laadt en scrollt de berichten uit uw Livebladwijzers (ook wel bekend als nieuwsfeeds of RSS-feeds), maar u bent niet geabonneerd op een Livebladwijzer. Abonneren op een feed is eenvoudig:">
-<!ENTITY howToSubscribe2 "Als de door u in uw browser bekeken pagina een RSS-feed biedt (bijvoorbeeld www.mozilla.org) verschijnt er een klein oranje of blauw pictogram aan de rechterkant van de adresbalk, naast de ster die voor Bladwijzer maken wordt gebruikt. Als u op dat pictogram klikt wordt het dialoogvenster ‘Livebladwijzer toevoegen’ geopend.">
-<!ENTITY howToSubscribe3 "Klik op Nu abonneren en RSS Ticker begint meteen met scrollen van de berichten in die feed.">
-<!ENTITY closeNoFeedsPage "Deze pagina sluiten">
-<!ENTITY dontShowAgain "Dit bericht niet opnieuw weergeven.">
-<!ENTITY feed "Feed">
-<!ENTITY feeds "Feeds">
-<!ENTITY feedManagement "U kunt feeds toevoegen of verwijderen door ze in onderstaande lijst te selecteren en door op de knoppen Toevoegen of Verwijderen te klikken.">
-<!ENTITY add "Toevoegen">
-<!ENTITY remove "Verwijderen">
-<!ENTITY URL "URL">
-<!ENTITY hideWhenEmpty "Ticker verbergen indien leeg">
-<!ENTITY faster "Sneller">
-<!ENTITY slower "Langzamer">
-<!ENTITY smoother "Soepeler (meer CPU)">
-<!ENTITY choppier "Hakkeriger (minder CPU)">
+<!ENTITY rssticker.title "RSS Ticker">
+<!ENTITY rssticker.cm.open "Openen">
+<!ENTITY rssticker.cm.open.key "O">
+<!ENTITY rssticker.cm.openInNewWindow "In nieuw venster openen">
+<!ENTITY rssticker.cm.openInNewWindow.key "V">
+<!ENTITY rssticker.cm.openInNewTab "In nieuw tabblad openen">
+<!ENTITY rssticker.cm.openInNewTab.key "T">
+<!ENTITY rssticker.cm.openAllInTabs "Alles in tabbladen openen">
+<!ENTITY rssticker.cm.openUnreadInTabs "Ongelezen in tabbladen openen">
+<!ENTITY rssticker.cm.openFeedInTabs "Feed in tabbladen openen">
+<!ENTITY rssticker.cm.openFeedUnreadInTabs "Ongelezen feed in tabbladen openen">
+<!ENTITY rssticker.cm.copyLinkTitle "Koppelingstitel kopiëren">
+<!ENTITY rssticker.cm.copyLinkTitle.key "K">
+<!ENTITY rssticker.cm.copyLinkURL "Koppelingslocatie kopiëren">
+<!ENTITY rssticker.cm.copyLinkURL.key "P">
+<!ENTITY rssticker.cm.refreshFeeds "Feeds verversen">
+<!ENTITY rssticker.cm.refreshFeeds.key "V">
+<!ENTITY rssticker.cm.manageFeeds "Feeds beheren">
+<!ENTITY rssticker.cm.manageFeeds.key "B">
+<!ENTITY rssticker.cm.markAsRead "Markeren als gelezen">
+<!ENTITY rssticker.cm.markAsRead.key "M">
+<!ENTITY rssticker.cm.markFeedAsRead "Feed als gelezen markeren">
+<!ENTITY rssticker.cm.markFeedAsRead.key "F">
+<!ENTITY rssticker.cm.markAllAsRead "Alles als gelezen markeren">
+<!ENTITY rssticker.cm.markAllAsRead.key "A">
+<!ENTITY rssticker.options.updateInterval "Updatefrequentie">
+<!ENTITY rssticker.options.update.1 "Mijn feeds elke">
+<!ENTITY rssticker.options.update.2 "minuten bijwerken.">
+<!ENTITY rssticker.options.speed "Tickersnelheid">
+<!ENTITY rssticker.options.dw.itemWidth "Berichtbreedte">
+<!ENTITY rssticker.pixelAbbrev "px">
+<!ENTITY rssticker.options.smooothness "Vlotheid scrollen ticker">
+<!ENTITY rssticker.cmOptionsDescription "Het contextmenu van de ticker aanpassen door onderstaande opties te selecteren of te deselecteren.">
+<!ENTITY rssticker.tt.summary "Samenvatting">
+<!ENTITY rssticker.options "Opties">
+<!ENTITY rssticker.options.restartNotice "Opties aangeduid met * zullen niet veranderd worden totdat u uw browservenster heropent.">
+<!ENTITY rssticker.options.general "Algemeen">
+<!ENTITY rssticker.options.advanced "Geavanceerd">
+<!ENTITY rssticker.options.contextMenu "Contextmenu">
+<!ENTITY rssticker.disableTicker "Ticker uitschakelen">
+<!ENTITY rssticker.options.tickerPlacement "Tickerpositie">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Onder de statusbalk">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Onder de bladwijzerwerkbalk">
+<!ENTITY rssticker.options.random "Tickerberichten in willekeurige volgorde">
+<!ENTITY rssticker.options.hide "Ongelezen berichten verbergen.">
+<!ENTITY rssticker.options.bold "Vette ongelezen berichten.">
+<!ENTITY rssticker.options.openInNewTab "Koppelingen altijd in nieuwe tabbladen openen.">
+<!ENTITY rssticker.options.reverseDirection "Tickervolgorde omdraaien">
+<!ENTITY rssticker.toggleTicker "Ticker in-/uitschakelen">
+<!ENTITY rssticker.options.dw.limitWidth "De breedte van de berichten in de ticker beperken">
+<!ENTITY rssticker.options.dw.isMaxWidth "Alleen als maximumbreedte gebruiken">
+<!ENTITY rssticker.options.limitItemsPerFeed "Aantal berichten per feed beperken">
+<!ENTITY rssticker.options.itemsPerFeed "Berichten per feed">
+<!ENTITY rssticker.about "Over">
+<!ENTITY rssticker.noFeedsFoundTitle "Geen livebladwijzers gevonden">
+<!ENTITY rssticker.noFeedsFound "RSS Ticker kan geen livebladwijzers (ofwel newsfeeds, RSS-feeds) vinden.">
+<!ENTITY rssticker.howToSubscribe1 "RSS Ticker laadt en scrollt de berichten uit uw Livebladwijzers (ook wel bekend als nieuwsfeeds of RSS-feeds), maar u bent niet geabonneerd op een Livebladwijzer. Abonneren op een feed is eenvoudig:">
+<!ENTITY rssticker.howToSubscribe2 "Als de door u in uw browser bekeken pagina een RSS-feed biedt (bijvoorbeeld www.mozilla.org) verschijnt er een klein oranje of blauw pictogram aan de rechterkant van de adresbalk, naast de ster die voor Bladwijzer maken wordt gebruikt. Als u op dat pictogram klikt wordt het dialoogvenster ‘Livebladwijzer toevoegen’ geopend.">
+<!ENTITY rssticker.howToSubscribe3 "Klik op Nu abonneren en RSS Ticker begint meteen met scrollen van de berichten in die feed.">
+<!ENTITY rssticker.closeNoFeedsPage "Deze pagina sluiten">
+<!ENTITY rssticker.dontShowAgain "Dit bericht niet opnieuw weergeven.">
+<!ENTITY rssticker.feed "Feed">
+<!ENTITY rssticker.feeds "Feeds">
+<!ENTITY rssticker.feedManagement "U kunt feeds toevoegen of verwijderen door ze in onderstaande lijst te selecteren en door op de knoppen Toevoegen of Verwijderen te klikken.">
+<!ENTITY rssticker.add "Toevoegen">
+<!ENTITY rssticker.remove "Verwijderen">
+<!ENTITY rssticker.URL "URL">
+<!ENTITY rssticker.hideWhenEmpty "Ticker verbergen indien leeg">
+<!ENTITY rssticker.faster "Sneller">
+<!ENTITY rssticker.slower "Langzamer">
+<!ENTITY rssticker.smoother "Soepeler (meer CPU)">
+<!ENTITY rssticker.choppier "Hakkeriger (minder CPU)">
 <!ENTITY rssticker.featured.subscribe "Abonneren">
 <!ENTITY rssticker.featured.panelTitle "Aanbevolen feeds">
 <!ENTITY rssticker.featured.description "Ondersteun de ontwikkeling van RSS Ticker zonder een cent uit te geven door een paar van deze feeds van de vrienden van RSS Ticker uit te proberen.">

@@ -1,75 +1,75 @@
-<!ENTITY extension.title "RSS Ticker">
-<!ENTITY cm.open "Open">
-<!ENTITY cm.open.key "O">
-<!ENTITY cm.openInNewWindow "Open in New Window">
-<!ENTITY cm.openInNewWindow.key "N">
-<!ENTITY cm.openInNewTab "Open in New Tab">
-<!ENTITY cm.openInNewTab.key "T">
-<!ENTITY cm.openAllInTabs "Open All in Tabs">
-<!ENTITY cm.openUnreadInTabs "Open Unread in Tabs">
-<!ENTITY cm.openFeedInTabs "Open Feed in Tabs">
-<!ENTITY cm.openFeedUnreadInTabs "Open Feed Unread in Tabs">
-<!ENTITY cm.copyLinkTitle "Copy Link Title">
-<!ENTITY cm.copyLinkTitle.key "L">
-<!ENTITY cm.copyLinkURL "Copy Link URL">
-<!ENTITY cm.copyLinkURL.key "C">
-<!ENTITY cm.refreshFeeds "Refresh Feeds">
-<!ENTITY cm.refreshFeeds.key "R">
-<!ENTITY cm.manageFeeds "Manage Feeds">
-<!ENTITY cm.manageFeeds.key "G">
-<!ENTITY cm.markAsRead "Mark as Read">
-<!ENTITY cm.markAsRead.key "M">
-<!ENTITY cm.markFeedAsRead "Mark Feed as Read">
-<!ENTITY cm.markFeedAsRead.key "F">
-<!ENTITY cm.markAllAsRead "Mark All as Read">
-<!ENTITY cm.markAllAsRead.key "A">
-<!ENTITY options.updateInterval "Feed Update Frequency">
-<!ENTITY options.update.1 "Update my feeds every">
-<!ENTITY options.update.2 "minutes.">
-<!ENTITY options.speed "Ticker Speed">
-<!ENTITY options.dw.itemWidth "Item width">
-<!ENTITY pixelAbbrev "px">
-<!ENTITY options.smooothness "Ticker Scroll Smoothness">
-<!ENTITY cmOptionsDescription "Customize the ticker's context menu by selecting or deselecting options below.">
-<!ENTITY tt.summary "Summary">
-<!ENTITY options "Options">
-<!ENTITY options.restartNotice "Options denoted by * will not be changed until you reopen your browser window.">
-<!ENTITY options.general "General">
-<!ENTITY options.advanced "Advanced">
-<!ENTITY options.contextMenu "Context Menu">
-<!ENTITY disableTicker "Disable ticker">
-<!ENTITY options.tickerPlacement "Ticker Placement">
-<!ENTITY tickerPlacement.belowStatusBar "Below status bar">
-<!ENTITY tickerPlacement.belowBMTB "Below bookmarks toolbar">
-<!ENTITY options.random "Randomize ticker items">
-<!ENTITY options.hide "Hide items you've already read.">
-<!ENTITY options.bold "Bold items you haven't read.">
-<!ENTITY options.openInNewTab "Always open links in new tabs.">
-<!ENTITY options.reverseDirection "Reverse ticker direction">
-<!ENTITY toggleTicker "Toggle ticker on/off">
-<!ENTITY options.dw.limitWidth "Limit the width of the items in the ticker">
-<!ENTITY options.dw.isMaxWidth "Use only as a maximum width">
-<!ENTITY options.limitItemsPerFeed "Limit the number of items per feed">
-<!ENTITY options.itemsPerFeed "Items per feed">
-<!ENTITY about "About">
-<!ENTITY noFeedsFoundTitle "No Live Bookmarks Found">
-<!ENTITY noFeedsFound "RSS Ticker could not locate any Live Bookmarks">
-<!ENTITY howToSubscribe1 "RSS Ticker loads and scrolls the items from your Live Bookmarks (a.k.a. newsfeeds or RSS feeds), but you haven't subscribed to any Live Bookmarks.  Need some help?  Subscribing to a feed is easy:">
-<!ENTITY howToSubscribe2 "If the page you are looking at in your browser offers an RSS feed (www.mozilla.org, for example), there will be a small orange or blue icon on the right side of the address bar, next to the star used for bookmarking. If you click on that icon, it will open the 'Add Live Bookmark' dialog.">
-<!ENTITY howToSubscribe3 "Click Subscribe Now, and RSS Ticker will instantly begin scrolling the items from that feed.">
-<!ENTITY closeNoFeedsPage "Close this page">
-<!ENTITY dontShowAgain "Don't show this message again.">
-<!ENTITY feed "Feed">
-<!ENTITY feeds "Feeds">
-<!ENTITY feedManagement "You can add or remove feeds from the ticker by selecting them in the list below and pressing either the Add or Remove button. Note: To actually subscribe to a feed, use Firefox's Live Bookmarks.  This list only allows you to set which of your Live Bookmarks appear in the ticker; it doesn't allow you to subscribe to a new feed.">
-<!ENTITY add "Add">
-<!ENTITY remove "Remove">
-<!ENTITY URL "URL">
-<!ENTITY hideWhenEmpty "Hide Ticker When Empty">
-<!ENTITY faster "Faster">
-<!ENTITY slower "Slower">
-<!ENTITY smoother "Smoother (More CPU)">
-<!ENTITY choppier "Choppier (Less CPU)">
+<!ENTITY rssticker.title "RSS Ticker">
+<!ENTITY rssticker.cm.open "Open">
+<!ENTITY rssticker.cm.open.key "O">
+<!ENTITY rssticker.cm.openInNewWindow "Open in New Window">
+<!ENTITY rssticker.cm.openInNewWindow.key "N">
+<!ENTITY rssticker.cm.openInNewTab "Open in New Tab">
+<!ENTITY rssticker.cm.openInNewTab.key "T">
+<!ENTITY rssticker.cm.openAllInTabs "Open All in Tabs">
+<!ENTITY rssticker.cm.openUnreadInTabs "Open Unread in Tabs">
+<!ENTITY rssticker.cm.openFeedInTabs "Open Feed in Tabs">
+<!ENTITY rssticker.cm.openFeedUnreadInTabs "Open Feed Unread in Tabs">
+<!ENTITY rssticker.cm.copyLinkTitle "Copy Link Title">
+<!ENTITY rssticker.cm.copyLinkTitle.key "L">
+<!ENTITY rssticker.cm.copyLinkURL "Copy Link URL">
+<!ENTITY rssticker.cm.copyLinkURL.key "C">
+<!ENTITY rssticker.cm.refreshFeeds "Refresh Feeds">
+<!ENTITY rssticker.cm.refreshFeeds.key "R">
+<!ENTITY rssticker.cm.manageFeeds "Manage Feeds">
+<!ENTITY rssticker.cm.manageFeeds.key "G">
+<!ENTITY rssticker.cm.markAsRead "Mark as Read">
+<!ENTITY rssticker.cm.markAsRead.key "M">
+<!ENTITY rssticker.cm.markFeedAsRead "Mark Feed as Read">
+<!ENTITY rssticker.cm.markFeedAsRead.key "F">
+<!ENTITY rssticker.cm.markAllAsRead "Mark All as Read">
+<!ENTITY rssticker.cm.markAllAsRead.key "A">
+<!ENTITY rssticker.options.updateInterval "Feed Update Frequency">
+<!ENTITY rssticker.options.update.1 "Update my feeds every">
+<!ENTITY rssticker.options.update.2 "minutes.">
+<!ENTITY rssticker.options.speed "Ticker Speed">
+<!ENTITY rssticker.options.dw.itemWidth "Item width">
+<!ENTITY rssticker.pixelAbbrev "px">
+<!ENTITY rssticker.options.smooothness "Ticker Scroll Smoothness">
+<!ENTITY rssticker.cmOptionsDescription "Customize the ticker's context menu by selecting or deselecting options below.">
+<!ENTITY rssticker.tt.summary "Summary">
+<!ENTITY rssticker.options "Options">
+<!ENTITY rssticker.options.restartNotice "Options denoted by * will not be changed until you reopen your browser window.">
+<!ENTITY rssticker.options.general "General">
+<!ENTITY rssticker.options.advanced "Advanced">
+<!ENTITY rssticker.options.contextMenu "Context Menu">
+<!ENTITY rssticker.disableTicker "Disable ticker">
+<!ENTITY rssticker.options.tickerPlacement "Ticker Placement">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Below status bar">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Below bookmarks toolbar">
+<!ENTITY rssticker.options.random "Randomize ticker items">
+<!ENTITY rssticker.options.hide "Hide items you've already read.">
+<!ENTITY rssticker.options.bold "Bold items you haven't read.">
+<!ENTITY rssticker.options.openInNewTab "Always open links in new tabs.">
+<!ENTITY rssticker.options.reverseDirection "Reverse ticker direction">
+<!ENTITY rssticker.toggleTicker "Toggle ticker on/off">
+<!ENTITY rssticker.options.dw.limitWidth "Limit the width of the items in the ticker">
+<!ENTITY rssticker.options.dw.isMaxWidth "Use only as a maximum width">
+<!ENTITY rssticker.options.limitItemsPerFeed "Limit the number of items per feed">
+<!ENTITY rssticker.options.itemsPerFeed "Items per feed">
+<!ENTITY rssticker.about "About">
+<!ENTITY rssticker.noFeedsFoundTitle "No Live Bookmarks Found">
+<!ENTITY rssticker.noFeedsFound "RSS Ticker could not locate any Live Bookmarks">
+<!ENTITY rssticker.howToSubscribe1 "RSS Ticker loads and scrolls the items from your Live Bookmarks (a.k.a. newsfeeds or RSS feeds), but you haven't subscribed to any Live Bookmarks.  Need some help?  Subscribing to a feed is easy:">
+<!ENTITY rssticker.howToSubscribe2 "If the page you are looking at in your browser offers an RSS feed (www.mozilla.org, for example), there will be a small orange or blue icon on the right side of the address bar, next to the star used for bookmarking. If you click on that icon, it will open the 'Add Live Bookmark' dialog.">
+<!ENTITY rssticker.howToSubscribe3 "Click Subscribe Now, and RSS Ticker will instantly begin scrolling the items from that feed.">
+<!ENTITY rssticker.closeNoFeedsPage "Close this page">
+<!ENTITY rssticker.dontShowAgain "Don't show this message again.">
+<!ENTITY rssticker.feed "Feed">
+<!ENTITY rssticker.feeds "Feeds">
+<!ENTITY rssticker.feedManagement "You can add or remove feeds from the ticker by selecting them in the list below and pressing either the Add or Remove button. Note: To actually subscribe to a feed, use Firefox's Live Bookmarks.  This list only allows you to set which of your Live Bookmarks appear in the ticker; it doesn't allow you to subscribe to a new feed.">
+<!ENTITY rssticker.add "Add">
+<!ENTITY rssticker.remove "Remove">
+<!ENTITY rssticker.URL "URL">
+<!ENTITY rssticker.hideWhenEmpty "Hide Ticker When Empty">
+<!ENTITY rssticker.faster "Faster">
+<!ENTITY rssticker.slower "Slower">
+<!ENTITY rssticker.smoother "Smoother (More CPU)">
+<!ENTITY rssticker.choppier "Choppier (Less CPU)">
 <!ENTITY rssticker.featured.subscribe "Subscribe">
 <!ENTITY rssticker.featured.panelTitle "Featured Feeds">
 <!ENTITY rssticker.featured.description "Support RSS Ticker's development without spending a cent by trying out some of these feeds from the Friends of RSS Ticker.">

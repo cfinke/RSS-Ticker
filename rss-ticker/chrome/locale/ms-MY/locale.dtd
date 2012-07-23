@@ -1,53 +1,53 @@
-<!ENTITY cm.open "Buka">
-<!ENTITY cm.open.key "B">
-<!ENTITY cm.openInNewWindow "Buka dalam tetingkap baru">
-<!ENTITY cm.openInNewTab "Buka dalam tab baru">
-<!ENTITY cm.openAllInTabs "Buka semua dalam tab">
-<!ENTITY cm.openUnreadInTabs "Buka yang belum dibaca dalam tab">
-<!ENTITY cm.openFeedInTabs "Buka feed dalam tab">
-<!ENTITY cm.openFeedUnreadInTabs "Buka feed yang belum dibaca dalam tab">
-<!ENTITY cm.copyLinkTitle "Salin Tajuk Pautan">
-<!ENTITY cm.copyLinkTitle.key "S">
-<!ENTITY cm.copyLinkURL "Salin URL Pautan">
-<!ENTITY cm.copyLinkURL.key "P">
-<!ENTITY cm.refreshFeeds "Segarkan semula feed">
-<!ENTITY cm.refreshFeeds.key "G">
-<!ENTITY cm.manageFeeds "Uruskan feed">
-<!ENTITY cm.manageFeeds.key "R">
-<!ENTITY cm.markAsRead "Tanda sebagai sudah dibaca">
-<!ENTITY cm.markAsRead.key "D">
-<!ENTITY cm.markFeedAsRead "Tanda feed sebagai sudah dibaca">
-<!ENTITY cm.markAllAsRead "Tanda semua sebagai sudah dibaca">
-<!ENTITY options.updateInterval "Frekuensi Kemaskini">
-<!ENTITY options.speed "Kelajuan Tik">
-<!ENTITY options.dw.itemWidth "Lebar item">
-<!ENTITY options.smooothness "Kelicinan Skrol Ticker">
-<!ENTITY cmOptionsDescription "Ubah menu konteks ticker dengan memilih atau tidak memilih opsyen dibawah.">
-<!ENTITY tt.summary "Ringkasan">
-<!ENTITY options "Opsyen">
-<!ENTITY options.restartNotice "Opsyen ditanda dengan * tidak akan diubah melainkan anda membuka semula browser anda.">
-<!ENTITY options.general "Am">
-<!ENTITY options.advanced "Lanjutan">
-<!ENTITY options.contextMenu "Menu konteks">
-<!ENTITY disableTicker "Nyah aktifkan ticker.">
-<!ENTITY options.tickerPlacement "Kedudukan Ticker">
-<!ENTITY tickerPlacement.belowStatusBar "Dibawah bar status">
-<!ENTITY tickerPlacement.belowBMTB "Diabwah bar alatan tanda baca">
-<!ENTITY options.random "Pelbagaikan item ticker.">
-<!ENTITY options.hide "Sembunyika item yang telah anda baca.">
-<!ENTITY options.bold "Tebalkan item yang belum anda baca.">
-<!ENTITY options.openInNewTab "Selalu buka pautan dalam tab baru.">
-<!ENTITY toggleTicker "Tukar ticker buka/tutup.">
-<!ENTITY options.dw.limitWidth "Hadkan lebar item dalam ticker.">
-<!ENTITY options.dw.isMaxWidth "Hanya guna lebar maksimum.">
-<!ENTITY options.limitItemsPerFeed "Hadkan bilangan item dalam satu feed">
-<!ENTITY options.itemsPerFeed "Item dalam satu feed">
-<!ENTITY about "Perihal">
-<!ENTITY noFeedsFoundTitle "Tiada Tandabuku Langsung dijumpai.">
-<!ENTITY noFeedsFound "RSS Ticker tidak dapat mengesan satu pun Tandabuku Langsung (newsfeeds, RSS feeds).">
-<!ENTITY dontShowAgain "Jangan paparkan masej ini lagi.">
-<!ENTITY feeds "Feed">
-<!ENTITY feedManagement "Anda boleh menambah atau membuang feed dari ticker dengan memilih mereka dari senarai di bawah dan tekan butang Tambah atau Buang.">
-<!ENTITY add "Tambah">
-<!ENTITY remove "Buang">
-<!ENTITY hideWhenEmpty "Sembunyikan ticker jika kosong">
+<!ENTITY rssticker.cm.open "Buka">
+<!ENTITY rssticker.cm.open.key "B">
+<!ENTITY rssticker.cm.openInNewWindow "Buka dalam tetingkap baru">
+<!ENTITY rssticker.cm.openInNewTab "Buka dalam tab baru">
+<!ENTITY rssticker.cm.openAllInTabs "Buka semua dalam tab">
+<!ENTITY rssticker.cm.openUnreadInTabs "Buka yang belum dibaca dalam tab">
+<!ENTITY rssticker.cm.openFeedInTabs "Buka feed dalam tab">
+<!ENTITY rssticker.cm.openFeedUnreadInTabs "Buka feed yang belum dibaca dalam tab">
+<!ENTITY rssticker.cm.copyLinkTitle "Salin Tajuk Pautan">
+<!ENTITY rssticker.cm.copyLinkTitle.key "S">
+<!ENTITY rssticker.cm.copyLinkURL "Salin URL Pautan">
+<!ENTITY rssticker.cm.copyLinkURL.key "P">
+<!ENTITY rssticker.cm.refreshFeeds "Segarkan semula feed">
+<!ENTITY rssticker.cm.refreshFeeds.key "G">
+<!ENTITY rssticker.cm.manageFeeds "Uruskan feed">
+<!ENTITY rssticker.cm.manageFeeds.key "R">
+<!ENTITY rssticker.cm.markAsRead "Tanda sebagai sudah dibaca">
+<!ENTITY rssticker.cm.markAsRead.key "D">
+<!ENTITY rssticker.cm.markFeedAsRead "Tanda feed sebagai sudah dibaca">
+<!ENTITY rssticker.cm.markAllAsRead "Tanda semua sebagai sudah dibaca">
+<!ENTITY rssticker.options.updateInterval "Frekuensi Kemaskini">
+<!ENTITY rssticker.options.speed "Kelajuan Tik">
+<!ENTITY rssticker.options.dw.itemWidth "Lebar item">
+<!ENTITY rssticker.options.smooothness "Kelicinan Skrol Ticker">
+<!ENTITY rssticker.cmOptionsDescription "Ubah menu konteks ticker dengan memilih atau tidak memilih opsyen dibawah.">
+<!ENTITY rssticker.tt.summary "Ringkasan">
+<!ENTITY rssticker.options "Opsyen">
+<!ENTITY rssticker.options.restartNotice "Opsyen ditanda dengan * tidak akan diubah melainkan anda membuka semula browser anda.">
+<!ENTITY rssticker.options.general "Am">
+<!ENTITY rssticker.options.advanced "Lanjutan">
+<!ENTITY rssticker.options.contextMenu "Menu konteks">
+<!ENTITY rssticker.disableTicker "Nyah aktifkan ticker.">
+<!ENTITY rssticker.options.tickerPlacement "Kedudukan Ticker">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Dibawah bar status">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Diabwah bar alatan tanda baca">
+<!ENTITY rssticker.options.random "Pelbagaikan item ticker.">
+<!ENTITY rssticker.options.hide "Sembunyika item yang telah anda baca.">
+<!ENTITY rssticker.options.bold "Tebalkan item yang belum anda baca.">
+<!ENTITY rssticker.options.openInNewTab "Selalu buka pautan dalam tab baru.">
+<!ENTITY rssticker.toggleTicker "Tukar ticker buka/tutup.">
+<!ENTITY rssticker.options.dw.limitWidth "Hadkan lebar item dalam ticker.">
+<!ENTITY rssticker.options.dw.isMaxWidth "Hanya guna lebar maksimum.">
+<!ENTITY rssticker.options.limitItemsPerFeed "Hadkan bilangan item dalam satu feed">
+<!ENTITY rssticker.options.itemsPerFeed "Item dalam satu feed">
+<!ENTITY rssticker.about "Perihal">
+<!ENTITY rssticker.noFeedsFoundTitle "Tiada Tandabuku Langsung dijumpai.">
+<!ENTITY rssticker.noFeedsFound "RSS Ticker tidak dapat mengesan satu pun Tandabuku Langsung (newsfeeds, RSS feeds).">
+<!ENTITY rssticker.dontShowAgain "Jangan paparkan masej ini lagi.">
+<!ENTITY rssticker.feeds "Feed">
+<!ENTITY rssticker.feedManagement "Anda boleh menambah atau membuang feed dari ticker dengan memilih mereka dari senarai di bawah dan tekan butang Tambah atau Buang.">
+<!ENTITY rssticker.add "Tambah">
+<!ENTITY rssticker.remove "Buang">
+<!ENTITY rssticker.hideWhenEmpty "Sembunyikan ticker jika kosong">

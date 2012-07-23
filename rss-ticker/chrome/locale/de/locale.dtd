@@ -1,66 +1,66 @@
-<!ENTITY extension.title "RSS-Ticker">
-<!ENTITY cm.open "Öffnen">
-<!ENTITY cm.open.key "Ö">
-<!ENTITY cm.openInNewWindow "In neuem Fenster öffnen">
-<!ENTITY cm.openInNewWindow.key "F">
-<!ENTITY cm.openInNewTab "In neuem Tab öffnen">
-<!ENTITY cm.openAllInTabs "Alle in Tabs öffnen">
-<!ENTITY cm.openUnreadInTabs "Alle ungelesenen in Tabs öffnen">
-<!ENTITY cm.openFeedInTabs "Feed in Tabs öffnen">
-<!ENTITY cm.openFeedUnreadInTabs "Ungelesene dieses Feeds in Tabs öffnen">
-<!ENTITY cm.copyLinkTitle "Link-Titel kopieren">
-<!ENTITY cm.copyLinkTitle.key "i">
-<!ENTITY cm.copyLinkURL "Link-Adresse kopieren">
-<!ENTITY cm.copyLinkURL.key "k">
-<!ENTITY cm.refreshFeeds "Feeds aktualisieren">
-<!ENTITY cm.refreshFeeds.key "u">
-<!ENTITY cm.manageFeeds "Feeds verwalten">
-<!ENTITY cm.manageFeeds.key "v">
-<!ENTITY cm.markAsRead "Als gelesenen markieren">
-<!ENTITY cm.markAsRead.key "g">
-<!ENTITY cm.markFeedAsRead "Feed als gelesenen markieren">
-<!ENTITY cm.markAllAsRead "Alle als gelesenen markieren">
-<!ENTITY cm.markAllAsRead.key "l">
-<!ENTITY options.updateInterval "Aktualisierungsintervall (in Minuten)">
-<!ENTITY options.update.1 "Meine Feeds alle">
-<!ENTITY options.update.2 "Minuten aktualisieren.">
-<!ENTITY options.speed "Laufgeschwindigkeit">
-<!ENTITY options.dw.itemWidth "Breite der Einträge">
-<!ENTITY options.smooothness "Laufruhe des Tickers">
-<!ENTITY cmOptionsDescription "Einträge auswählen, die im Kontextmenü des Tickers angezeigt werden sollen:">
-<!ENTITY tt.summary "Zusammenfassung">
-<!ENTITY options "Einstellungen">
-<!ENTITY options.restartNotice "Die mit * markierten Optionen werden erst für neue Fenster übernommen.">
-<!ENTITY options.general "Allgemein">
-<!ENTITY options.advanced "Erweitert">
-<!ENTITY options.contextMenu "Kontextmenü">
-<!ENTITY disableTicker "Ticker deaktivieren">
-<!ENTITY options.tickerPlacement "Ticker-Platzierung">
-<!ENTITY tickerPlacement.belowStatusBar "Unterhalb der Statusleiste">
-<!ENTITY tickerPlacement.belowBMTB "Unterhalb der Lesezeichen-Symbolleiste">
-<!ENTITY options.random "Ticker-Einträge in zufälliger Reihenfolge anzeigen">
-<!ENTITY options.hide "Gelesene Einträge ausblenden">
-<!ENTITY options.bold "Ungelesene Einträge fett markieren">
-<!ENTITY options.openInNewTab "Links immer in neuen Tabs öffnen">
-<!ENTITY toggleTicker "Ticker ein-/ausschalten">
-<!ENTITY options.dw.limitWidth "Breite der Einträge im Ticker begrenzen">
-<!ENTITY options.dw.isMaxWidth "Flexible Breite mit Wert als Maximum benutzen">
-<!ENTITY options.limitItemsPerFeed "Anzahl der Einträge pro Feed begrenzen">
-<!ENTITY options.itemsPerFeed "Einträge pro Feed">
-<!ENTITY about "Über">
-<!ENTITY noFeedsFoundTitle "Keine dynamischen Lesezeichen gefunden">
-<!ENTITY noFeedsFound "RSS Ticker konnte keine dynamischen Lesezeichen (d.h. Newsfeeds, RSS-Feeds) finden.">
-<!ENTITY closeNoFeedsPage "Diese Seite schließen">
-<!ENTITY dontShowAgain "Diese Meldung nicht mehr anzeigen">
-<!ENTITY feedManagement "Um Feeds zum Ticker hinzuzufügen oder daraus zu entfernen, wählen Sie die Einträge aus untenstehender Liste aus und klicken Sie entweder auf die Schaltfläche \'Hinzufügen\' oder \'Entfernen\'.">
-<!ENTITY add "Hinzufügen">
-<!ENTITY remove "Entfernen">
-<!ENTITY URL "Adresse">
-<!ENTITY hideWhenEmpty "Ticker ausblenden, wenn keine Einträge vorhanden sind">
-<!ENTITY faster "Schneller">
-<!ENTITY slower "Langsamer">
-<!ENTITY smoother "Feiner (Mehr CPU)">
-<!ENTITY choppier "Grober (Weniger CPU)">
+<!ENTITY rssticker.title "RSS-Ticker">
+<!ENTITY rssticker.cm.open "Öffnen">
+<!ENTITY rssticker.cm.open.key "Ö">
+<!ENTITY rssticker.cm.openInNewWindow "In neuem Fenster öffnen">
+<!ENTITY rssticker.cm.openInNewWindow.key "F">
+<!ENTITY rssticker.cm.openInNewTab "In neuem Tab öffnen">
+<!ENTITY rssticker.cm.openAllInTabs "Alle in Tabs öffnen">
+<!ENTITY rssticker.cm.openUnreadInTabs "Alle ungelesenen in Tabs öffnen">
+<!ENTITY rssticker.cm.openFeedInTabs "Feed in Tabs öffnen">
+<!ENTITY rssticker.cm.openFeedUnreadInTabs "Ungelesene dieses Feeds in Tabs öffnen">
+<!ENTITY rssticker.cm.copyLinkTitle "Link-Titel kopieren">
+<!ENTITY rssticker.cm.copyLinkTitle.key "i">
+<!ENTITY rssticker.cm.copyLinkURL "Link-Adresse kopieren">
+<!ENTITY rssticker.cm.copyLinkURL.key "k">
+<!ENTITY rssticker.cm.refreshFeeds "Feeds aktualisieren">
+<!ENTITY rssticker.cm.refreshFeeds.key "u">
+<!ENTITY rssticker.cm.manageFeeds "Feeds verwalten">
+<!ENTITY rssticker.cm.manageFeeds.key "v">
+<!ENTITY rssticker.cm.markAsRead "Als gelesenen markieren">
+<!ENTITY rssticker.cm.markAsRead.key "g">
+<!ENTITY rssticker.cm.markFeedAsRead "Feed als gelesenen markieren">
+<!ENTITY rssticker.cm.markAllAsRead "Alle als gelesenen markieren">
+<!ENTITY rssticker.cm.markAllAsRead.key "l">
+<!ENTITY rssticker.options.updateInterval "Aktualisierungsintervall (in Minuten)">
+<!ENTITY rssticker.options.update.1 "Meine Feeds alle">
+<!ENTITY rssticker.options.update.2 "Minuten aktualisieren.">
+<!ENTITY rssticker.options.speed "Laufgeschwindigkeit">
+<!ENTITY rssticker.options.dw.itemWidth "Breite der Einträge">
+<!ENTITY rssticker.options.smooothness "Laufruhe des Tickers">
+<!ENTITY rssticker.cmOptionsDescription "Einträge auswählen, die im Kontextmenü des Tickers angezeigt werden sollen:">
+<!ENTITY rssticker.tt.summary "Zusammenfassung">
+<!ENTITY rssticker.options "Einstellungen">
+<!ENTITY rssticker.options.restartNotice "Die mit * markierten Optionen werden erst für neue Fenster übernommen.">
+<!ENTITY rssticker.options.general "Allgemein">
+<!ENTITY rssticker.options.advanced "Erweitert">
+<!ENTITY rssticker.options.contextMenu "Kontextmenü">
+<!ENTITY rssticker.disableTicker "Ticker deaktivieren">
+<!ENTITY rssticker.options.tickerPlacement "Ticker-Platzierung">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Unterhalb der Statusleiste">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Unterhalb der Lesezeichen-Symbolleiste">
+<!ENTITY rssticker.options.random "Ticker-Einträge in zufälliger Reihenfolge anzeigen">
+<!ENTITY rssticker.options.hide "Gelesene Einträge ausblenden">
+<!ENTITY rssticker.options.bold "Ungelesene Einträge fett markieren">
+<!ENTITY rssticker.options.openInNewTab "Links immer in neuen Tabs öffnen">
+<!ENTITY rssticker.toggleTicker "Ticker ein-/ausschalten">
+<!ENTITY rssticker.options.dw.limitWidth "Breite der Einträge im Ticker begrenzen">
+<!ENTITY rssticker.options.dw.isMaxWidth "Flexible Breite mit Wert als Maximum benutzen">
+<!ENTITY rssticker.options.limitItemsPerFeed "Anzahl der Einträge pro Feed begrenzen">
+<!ENTITY rssticker.options.itemsPerFeed "Einträge pro Feed">
+<!ENTITY rssticker.about "Über">
+<!ENTITY rssticker.noFeedsFoundTitle "Keine dynamischen Lesezeichen gefunden">
+<!ENTITY rssticker.noFeedsFound "RSS Ticker konnte keine dynamischen Lesezeichen (d.h. Newsfeeds, RSS-Feeds) finden.">
+<!ENTITY rssticker.closeNoFeedsPage "Diese Seite schließen">
+<!ENTITY rssticker.dontShowAgain "Diese Meldung nicht mehr anzeigen">
+<!ENTITY rssticker.feedManagement "Um Feeds zum Ticker hinzuzufügen oder daraus zu entfernen, wählen Sie die Einträge aus untenstehender Liste aus und klicken Sie entweder auf die Schaltfläche \'Hinzufügen\' oder \'Entfernen\'.">
+<!ENTITY rssticker.add "Hinzufügen">
+<!ENTITY rssticker.remove "Entfernen">
+<!ENTITY rssticker.URL "Adresse">
+<!ENTITY rssticker.hideWhenEmpty "Ticker ausblenden, wenn keine Einträge vorhanden sind">
+<!ENTITY rssticker.faster "Schneller">
+<!ENTITY rssticker.slower "Langsamer">
+<!ENTITY rssticker.smoother "Feiner (Mehr CPU)">
+<!ENTITY rssticker.choppier "Grober (Weniger CPU)">
 <!ENTITY rssticker.featured.subscribe "Abonnieren">
 <!ENTITY rssticker.featured.panelTitle "Empfohlene Feeds">
 <!ENTITY rssticker.featured.contact "(Wenn Sie Ihren Feed in dieser Liste sehen möchten, schreiben Sie eine E-Mail an cfinke@gmail.com.)">

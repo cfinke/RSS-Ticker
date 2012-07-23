@@ -1,61 +1,61 @@
-<!ENTITY cm.open "Aç">
-<!ENTITY cm.openInNewWindow "Yeni Pencerede Aç">
-<!ENTITY cm.openInNewTab "Yeni Sekmede Aç">
-<!ENTITY cm.openAllInTabs "Tümünü Sekmelerde Aç">
-<!ENTITY cm.openUnreadInTabs "Okunmayanları Sekmelerde Aç">
-<!ENTITY cm.openFeedInTabs "Yayını Sekmede Aç">
-<!ENTITY cm.openFeedUnreadInTabs "Okunmayan Yayını Sekmede Aç">
-<!ENTITY cm.copyLinkTitle "Bağlantının Başlığını Kopyala">
-<!ENTITY cm.copyLinkURL "Bağlantı URL\'sini Kopyala">
-<!ENTITY cm.refreshFeeds "Yayınları Tazele">
-<!ENTITY cm.manageFeeds "Yayınları Yönet">
-<!ENTITY cm.markAsRead "Okunmuş Olarak İşaretle">
-<!ENTITY cm.markFeedAsRead "Yayını Okunmuş Olarak İşaretle">
-<!ENTITY cm.markAllAsRead "Tümünü Okunmuş Olarak İşaretle">
-<!ENTITY options.updateInterval "Güncelleme Sıklığı">
-<!ENTITY options.update.1 "Yayının güncellenme sıklığı">
-<!ENTITY options.update.2 "dakika">
-<!ENTITY options.speed "Şerit Hızı">
-<!ENTITY options.dw.itemWidth "Öğe genişliği">
-<!ENTITY options.smooothness "Şeritteki Kayma Yumuşaklığı">
-<!ENTITY cmOptionsDescription "Şeritin içerik menüsünü aşağıdaki seçenekleri onaylayarak veya iptal ederek değiştirebilirsiniz.">
-<!ENTITY tt.summary "Özet">
-<!ENTITY options "Seçenekler">
-<!ENTITY options.restartNotice "Seçeneklerde * ile belirtilenler tarayıcınızı tekrar başlatana kadar etkili olmayacaktır.">
-<!ENTITY options.general "Genel">
-<!ENTITY options.advanced "Gelişmiş">
-<!ENTITY options.contextMenu "İçerik Menüsü">
-<!ENTITY disableTicker "Şeridi iptal et">
-<!ENTITY options.tickerPlacement "Şerit Yerleşimi">
-<!ENTITY tickerPlacement.belowStatusBar "Durum çubuğunun altında">
-<!ENTITY tickerPlacement.belowBMTB "Yerimleri çubuğunun altında">
-<!ENTITY options.random "Rastgele şerit öğeleri">
-<!ENTITY options.hide "Zaten okuduğunuz öğeleri gizle.">
-<!ENTITY options.bold "Okunmamış öğeleri kalın harflerle göster.">
-<!ENTITY options.openInNewTab "Bağlantıları herzaman yeni sekmede aç.">
-<!ENTITY toggleTicker "Şerit aç/kapa geçiş tuşu">
-<!ENTITY options.dw.limitWidth "Şerit içinde öğe genişliğini sınırla">
-<!ENTITY options.dw.isMaxWidth "Yalnızca en fazla değerleri kullan">
-<!ENTITY options.limitItemsPerFeed "Her yayın için görülen öğeyi sınırla">
-<!ENTITY options.itemsPerFeed "Her yayın için öğeler">
-<!ENTITY about "Hakkında">
-<!ENTITY noFeedsFoundTitle "Hiçbir Canlı Yerimi Bulunamadı">
-<!ENTITY noFeedsFound "RSS Ticker herhangi bir canlı yerimi bulamadı (aka newsfeeds, RSS feed vb.)">
-<!ENTITY howToSubscribe1 "RSS Ticker, Canlı Yerimlerinizdeki öğeleri alır ve kaydırarak gösterir (haber akışı veya RSS beslemeleri), fakat Canlı Yerimlerinizde herhangi bir aboneliğiniz yok. Yardıma ihtiyacınız varmı? Bir beslemeye abone olmak çok kolaydır.">
-<!ENTITY howToSubscribe2 "Eğer baktığınız web sayfası bir RSS beslemesi içeriyorsa (örneğin www.mozilla.org gibi), adres çubuğunuzun sağ tarafında, yıldızından sonra küçük turuncu veya mavi bir simge görülecektir. Eğer bu simgeye tıklarsanız, &apos;Canlı Yerimi Ekle&apos; seçeneği görülecektir.">
-<!ENTITY howToSubscribe3 "Abone olmak için tıklayın ve RSS Ticker bu yayındaki elemanları almaya başlayacaktır.">
-<!ENTITY closeNoFeedsPage "Bu sayfayı kapat">
-<!ENTITY dontShowAgain "Bu iletiyi tekrar gösterme.">
-<!ENTITY feed "Yayın">
-<!ENTITY feeds "Yayınlar">
-<!ENTITY feedManagement "Şeride yayınları eklemek veya çıkarmak için aşağıdaki listede Ekle veya Kaldır tuşlarını kullanabilirsiniz.">
-<!ENTITY add "Ekle">
-<!ENTITY remove "Kaldır">
-<!ENTITY hideWhenEmpty "Boş olduğunda Şeridi gizle">
-<!ENTITY faster "Hızlı">
-<!ENTITY slower "Yavaş">
-<!ENTITY smoother "Akıllıca (Daha Fazla CPU)">
-<!ENTITY choppier "Basit (Daha Az CPU)">
+<!ENTITY rssticker.cm.open "Aç">
+<!ENTITY rssticker.cm.openInNewWindow "Yeni Pencerede Aç">
+<!ENTITY rssticker.cm.openInNewTab "Yeni Sekmede Aç">
+<!ENTITY rssticker.cm.openAllInTabs "Tümünü Sekmelerde Aç">
+<!ENTITY rssticker.cm.openUnreadInTabs "Okunmayanları Sekmelerde Aç">
+<!ENTITY rssticker.cm.openFeedInTabs "Yayını Sekmede Aç">
+<!ENTITY rssticker.cm.openFeedUnreadInTabs "Okunmayan Yayını Sekmede Aç">
+<!ENTITY rssticker.cm.copyLinkTitle "Bağlantının Başlığını Kopyala">
+<!ENTITY rssticker.cm.copyLinkURL "Bağlantı URL\'sini Kopyala">
+<!ENTITY rssticker.cm.refreshFeeds "Yayınları Tazele">
+<!ENTITY rssticker.cm.manageFeeds "Yayınları Yönet">
+<!ENTITY rssticker.cm.markAsRead "Okunmuş Olarak İşaretle">
+<!ENTITY rssticker.cm.markFeedAsRead "Yayını Okunmuş Olarak İşaretle">
+<!ENTITY rssticker.cm.markAllAsRead "Tümünü Okunmuş Olarak İşaretle">
+<!ENTITY rssticker.options.updateInterval "Güncelleme Sıklığı">
+<!ENTITY rssticker.options.update.1 "Yayının güncellenme sıklığı">
+<!ENTITY rssticker.options.update.2 "dakika">
+<!ENTITY rssticker.options.speed "Şerit Hızı">
+<!ENTITY rssticker.options.dw.itemWidth "Öğe genişliği">
+<!ENTITY rssticker.options.smooothness "Şeritteki Kayma Yumuşaklığı">
+<!ENTITY rssticker.cmOptionsDescription "Şeritin içerik menüsünü aşağıdaki seçenekleri onaylayarak veya iptal ederek değiştirebilirsiniz.">
+<!ENTITY rssticker.tt.summary "Özet">
+<!ENTITY rssticker.options "Seçenekler">
+<!ENTITY rssticker.options.restartNotice "Seçeneklerde * ile belirtilenler tarayıcınızı tekrar başlatana kadar etkili olmayacaktır.">
+<!ENTITY rssticker.options.general "Genel">
+<!ENTITY rssticker.options.advanced "Gelişmiş">
+<!ENTITY rssticker.options.contextMenu "İçerik Menüsü">
+<!ENTITY rssticker.disableTicker "Şeridi iptal et">
+<!ENTITY rssticker.options.tickerPlacement "Şerit Yerleşimi">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Durum çubuğunun altında">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Yerimleri çubuğunun altında">
+<!ENTITY rssticker.options.random "Rastgele şerit öğeleri">
+<!ENTITY rssticker.options.hide "Zaten okuduğunuz öğeleri gizle.">
+<!ENTITY rssticker.options.bold "Okunmamış öğeleri kalın harflerle göster.">
+<!ENTITY rssticker.options.openInNewTab "Bağlantıları herzaman yeni sekmede aç.">
+<!ENTITY rssticker.toggleTicker "Şerit aç/kapa geçiş tuşu">
+<!ENTITY rssticker.options.dw.limitWidth "Şerit içinde öğe genişliğini sınırla">
+<!ENTITY rssticker.options.dw.isMaxWidth "Yalnızca en fazla değerleri kullan">
+<!ENTITY rssticker.options.limitItemsPerFeed "Her yayın için görülen öğeyi sınırla">
+<!ENTITY rssticker.options.itemsPerFeed "Her yayın için öğeler">
+<!ENTITY rssticker.about "Hakkında">
+<!ENTITY rssticker.noFeedsFoundTitle "Hiçbir Canlı Yerimi Bulunamadı">
+<!ENTITY rssticker.noFeedsFound "RSS Ticker herhangi bir canlı yerimi bulamadı (aka newsfeeds, RSS feed vb.)">
+<!ENTITY rssticker.howToSubscribe1 "RSS Ticker, Canlı Yerimlerinizdeki öğeleri alır ve kaydırarak gösterir (haber akışı veya RSS beslemeleri), fakat Canlı Yerimlerinizde herhangi bir aboneliğiniz yok. Yardıma ihtiyacınız varmı? Bir beslemeye abone olmak çok kolaydır.">
+<!ENTITY rssticker.howToSubscribe2 "Eğer baktığınız web sayfası bir RSS beslemesi içeriyorsa (örneğin www.mozilla.org gibi), adres çubuğunuzun sağ tarafında, yıldızından sonra küçük turuncu veya mavi bir simge görülecektir. Eğer bu simgeye tıklarsanız, &apos;Canlı Yerimi Ekle&apos; seçeneği görülecektir.">
+<!ENTITY rssticker.howToSubscribe3 "Abone olmak için tıklayın ve RSS Ticker bu yayındaki elemanları almaya başlayacaktır.">
+<!ENTITY rssticker.closeNoFeedsPage "Bu sayfayı kapat">
+<!ENTITY rssticker.dontShowAgain "Bu iletiyi tekrar gösterme.">
+<!ENTITY rssticker.feed "Yayın">
+<!ENTITY rssticker.feeds "Yayınlar">
+<!ENTITY rssticker.feedManagement "Şeride yayınları eklemek veya çıkarmak için aşağıdaki listede Ekle veya Kaldır tuşlarını kullanabilirsiniz.">
+<!ENTITY rssticker.add "Ekle">
+<!ENTITY rssticker.remove "Kaldır">
+<!ENTITY rssticker.hideWhenEmpty "Boş olduğunda Şeridi gizle">
+<!ENTITY rssticker.faster "Hızlı">
+<!ENTITY rssticker.slower "Yavaş">
+<!ENTITY rssticker.smoother "Akıllıca (Daha Fazla CPU)">
+<!ENTITY rssticker.choppier "Basit (Daha Az CPU)">
 <!ENTITY rssticker.featured.subscribe "Abone ol">
 <!ENTITY rssticker.featured.panelTitle "Gösterilen Beslemeler">
 <!ENTITY rssticker.featured.description "RSS Ticker\'in geliştirilmesini tek kuruş ödemeden RSS Ticker\'in Arkadaşlarından beslemeleri deneyerek destekleyebilirsiniz.">

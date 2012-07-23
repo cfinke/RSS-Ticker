@@ -1,75 +1,75 @@
-<!ENTITY extension.title "RSS Ticker">
-<!ENTITY cm.open "Отвори">
-<!ENTITY cm.open.key "О">
-<!ENTITY cm.openInNewWindow "Отвори у новом прозору">
-<!ENTITY cm.openInNewWindow.key "п">
-<!ENTITY cm.openInNewTab "Отвори у новом језичку">
-<!ENTITY cm.openInNewTab.key "ј">
-<!ENTITY cm.openAllInTabs "Отвори све у језичцима">
-<!ENTITY cm.openUnreadInTabs "Отвори непрочитано у језичке">
-<!ENTITY cm.openFeedInTabs "Отвори доводе у језичке">
-<!ENTITY cm.openFeedUnreadInTabs "Отвори непрочитане доводе у језичке">
-<!ENTITY cm.copyLinkTitle "Умножи наслов везе">
-<!ENTITY cm.copyLinkTitle.key "в">
-<!ENTITY cm.copyLinkURL "Умножи адресу везе">
-<!ENTITY cm.copyLinkURL.key "а">
-<!ENTITY cm.refreshFeeds "Освежи доводе">
-<!ENTITY cm.refreshFeeds.key "О">
-<!ENTITY cm.manageFeeds "Управљај доводима">
-<!ENTITY cm.manageFeeds.key "У">
-<!ENTITY cm.markAsRead "Означи као прочитано">
-<!ENTITY cm.markAsRead.key "з">
-<!ENTITY cm.markFeedAsRead "Означи довод као прочитан">
-<!ENTITY cm.markFeedAsRead.key "д">
-<!ENTITY cm.markAllAsRead "Означи све као прочитано">
-<!ENTITY cm.markAllAsRead.key "с">
-<!ENTITY options.updateInterval "Учесталост ажурирања довода">
-<!ENTITY options.update.1 "Ажурирај моје доводе сваких">
-<!ENTITY options.update.2 "минута.">
-<!ENTITY options.speed "Брзина тикера">
-<!ENTITY options.dw.itemWidth "Ширина ставке">
-<!ENTITY pixelAbbrev "пиксела">
-<!ENTITY options.smooothness "Глаткоћа клизача тикера">
-<!ENTITY cmOptionsDescription "Прилагоди приручни мени тикера штриклирајући или дештриклирајући опције испод.">
-<!ENTITY tt.summary "Кратак преглед">
-<!ENTITY options "Поставке">
-<!ENTITY options.restartNotice "Опције означене са звездицом [*] неће бити промењене док поново не отворите прозор прегледача.">
-<!ENTITY options.general "Опште">
-<!ENTITY options.advanced "Напредно">
-<!ENTITY options.contextMenu "Контекстни мени">
-<!ENTITY disableTicker "Онемогући тикер">
-<!ENTITY options.tickerPlacement "Постављање тикера">
-<!ENTITY tickerPlacement.belowStatusBar "Испод статусне траке">
-<!ENTITY tickerPlacement.belowBMTB "Испод траке забелешки">
-<!ENTITY options.random "Насумичне ставке тикера">
-<!ENTITY options.hide "Сакриј ставке које сте већ прочитали.">
-<!ENTITY options.bold "Подебљај ставке које нисте прочитали.">
-<!ENTITY options.openInNewTab "Увек отварај везу у новом језичку.">
-<!ENTITY options.reverseDirection "Обрнути смер тикера">
-<!ENTITY toggleTicker "Укључи/искључи тикер">
-<!ENTITY options.dw.limitWidth "Ограничи ширину ставки у тикеру">
-<!ENTITY options.dw.isMaxWidth "Користи само као максималну ширину">
-<!ENTITY options.limitItemsPerFeed "Ограничи број ставки по доводу">
-<!ENTITY options.itemsPerFeed "Ставки по доводу">
-<!ENTITY about "О">
-<!ENTITY noFeedsFoundTitle "Нису пронађене живе забелешке">
-<!ENTITY noFeedsFound "RSS Ticker није пронашао ниједну живу забелешку">
-<!ENTITY howToSubscribe1 "RSS Ticker учитава и прегледа ставке из Ваших живих забележака (илити RSS довода, али Ви се нисте уписали ни у једну живу забелешку. Треба ли Вам помоћ? Уписивање у довод је веома лако:">
-<!ENTITY howToSubscribe2 "Ако Вам страница коју прегледате у прегледачу нуди RSS довод (www.mozilla.org, на пример), мала наранџаста или плава икона ће се појавити с десне стране траке за навигацију, поред звездице која се користи за забелешке. Ако кликнете на ту икону, отвориће се прозорче „Додај живу забелешку“.">
-<!ENTITY howToSubscribe3 "Кликните на „Претплати се одмах“ и RSS Ticker ће истог тренутка почети да претражује ставке с тог довода.">
-<!ENTITY closeNoFeedsPage "Затвори ову страницу">
-<!ENTITY dontShowAgain "Не приказуј ову поруку поново.">
-<!ENTITY feed "Довод">
-<!ENTITY feeds "Доводи">
-<!ENTITY feedManagement "Можете додати или уклонити доводе из тикера тако што ћете их изабрати са списка испод, или кликнути на „Додај“ односно „Уклони“ дугме. Напомена: Да бисте се претплатили на довод, користите фајерфоксове живе забелешке. Овај списак Вам само омогућава да подесите које од Ваших живих забелешки желите у тикеру; не дозвољава Вам да се претплатите на нови довод.">
-<!ENTITY add "Додај">
-<!ENTITY remove "Уклони">
-<!ENTITY URL "Адреса">
-<!ENTITY hideWhenEmpty "Сакриј тикер када је празан">
-<!ENTITY faster "Брже">
-<!ENTITY slower "Спорије">
-<!ENTITY smoother "Глађе (за брже процесоре)">
-<!ENTITY choppier "Узбурканије (за спорије процесоре)">
+<!ENTITY rssticker.title "RSS Ticker">
+<!ENTITY rssticker.cm.open "Отвори">
+<!ENTITY rssticker.cm.open.key "О">
+<!ENTITY rssticker.cm.openInNewWindow "Отвори у новом прозору">
+<!ENTITY rssticker.cm.openInNewWindow.key "п">
+<!ENTITY rssticker.cm.openInNewTab "Отвори у новом језичку">
+<!ENTITY rssticker.cm.openInNewTab.key "ј">
+<!ENTITY rssticker.cm.openAllInTabs "Отвори све у језичцима">
+<!ENTITY rssticker.cm.openUnreadInTabs "Отвори непрочитано у језичке">
+<!ENTITY rssticker.cm.openFeedInTabs "Отвори доводе у језичке">
+<!ENTITY rssticker.cm.openFeedUnreadInTabs "Отвори непрочитане доводе у језичке">
+<!ENTITY rssticker.cm.copyLinkTitle "Умножи наслов везе">
+<!ENTITY rssticker.cm.copyLinkTitle.key "в">
+<!ENTITY rssticker.cm.copyLinkURL "Умножи адресу везе">
+<!ENTITY rssticker.cm.copyLinkURL.key "а">
+<!ENTITY rssticker.cm.refreshFeeds "Освежи доводе">
+<!ENTITY rssticker.cm.refreshFeeds.key "О">
+<!ENTITY rssticker.cm.manageFeeds "Управљај доводима">
+<!ENTITY rssticker.cm.manageFeeds.key "У">
+<!ENTITY rssticker.cm.markAsRead "Означи као прочитано">
+<!ENTITY rssticker.cm.markAsRead.key "з">
+<!ENTITY rssticker.cm.markFeedAsRead "Означи довод као прочитан">
+<!ENTITY rssticker.cm.markFeedAsRead.key "д">
+<!ENTITY rssticker.cm.markAllAsRead "Означи све као прочитано">
+<!ENTITY rssticker.cm.markAllAsRead.key "с">
+<!ENTITY rssticker.options.updateInterval "Учесталост ажурирања довода">
+<!ENTITY rssticker.options.update.1 "Ажурирај моје доводе сваких">
+<!ENTITY rssticker.options.update.2 "минута.">
+<!ENTITY rssticker.options.speed "Брзина тикера">
+<!ENTITY rssticker.options.dw.itemWidth "Ширина ставке">
+<!ENTITY rssticker.pixelAbbrev "пиксела">
+<!ENTITY rssticker.options.smooothness "Глаткоћа клизача тикера">
+<!ENTITY rssticker.cmOptionsDescription "Прилагоди приручни мени тикера штриклирајући или дештриклирајући опције испод.">
+<!ENTITY rssticker.tt.summary "Кратак преглед">
+<!ENTITY rssticker.options "Поставке">
+<!ENTITY rssticker.options.restartNotice "Опције означене са звездицом [*] неће бити промењене док поново не отворите прозор прегледача.">
+<!ENTITY rssticker.options.general "Опште">
+<!ENTITY rssticker.options.advanced "Напредно">
+<!ENTITY rssticker.options.contextMenu "Контекстни мени">
+<!ENTITY rssticker.disableTicker "Онемогући тикер">
+<!ENTITY rssticker.options.tickerPlacement "Постављање тикера">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Испод статусне траке">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Испод траке забелешки">
+<!ENTITY rssticker.options.random "Насумичне ставке тикера">
+<!ENTITY rssticker.options.hide "Сакриј ставке које сте већ прочитали.">
+<!ENTITY rssticker.options.bold "Подебљај ставке које нисте прочитали.">
+<!ENTITY rssticker.options.openInNewTab "Увек отварај везу у новом језичку.">
+<!ENTITY rssticker.options.reverseDirection "Обрнути смер тикера">
+<!ENTITY rssticker.toggleTicker "Укључи/искључи тикер">
+<!ENTITY rssticker.options.dw.limitWidth "Ограничи ширину ставки у тикеру">
+<!ENTITY rssticker.options.dw.isMaxWidth "Користи само као максималну ширину">
+<!ENTITY rssticker.options.limitItemsPerFeed "Ограничи број ставки по доводу">
+<!ENTITY rssticker.options.itemsPerFeed "Ставки по доводу">
+<!ENTITY rssticker.about "О">
+<!ENTITY rssticker.noFeedsFoundTitle "Нису пронађене живе забелешке">
+<!ENTITY rssticker.noFeedsFound "RSS Ticker није пронашао ниједну живу забелешку">
+<!ENTITY rssticker.howToSubscribe1 "RSS Ticker учитава и прегледа ставке из Ваших живих забележака (илити RSS довода, али Ви се нисте уписали ни у једну живу забелешку. Треба ли Вам помоћ? Уписивање у довод је веома лако:">
+<!ENTITY rssticker.howToSubscribe2 "Ако Вам страница коју прегледате у прегледачу нуди RSS довод (www.mozilla.org, на пример), мала наранџаста или плава икона ће се појавити с десне стране траке за навигацију, поред звездице која се користи за забелешке. Ако кликнете на ту икону, отвориће се прозорче „Додај живу забелешку“.">
+<!ENTITY rssticker.howToSubscribe3 "Кликните на „Претплати се одмах“ и RSS Ticker ће истог тренутка почети да претражује ставке с тог довода.">
+<!ENTITY rssticker.closeNoFeedsPage "Затвори ову страницу">
+<!ENTITY rssticker.dontShowAgain "Не приказуј ову поруку поново.">
+<!ENTITY rssticker.feed "Довод">
+<!ENTITY rssticker.feeds "Доводи">
+<!ENTITY rssticker.feedManagement "Можете додати или уклонити доводе из тикера тако што ћете их изабрати са списка испод, или кликнути на „Додај“ односно „Уклони“ дугме. Напомена: Да бисте се претплатили на довод, користите фајерфоксове живе забелешке. Овај списак Вам само омогућава да подесите које од Ваших живих забелешки желите у тикеру; не дозвољава Вам да се претплатите на нови довод.">
+<!ENTITY rssticker.add "Додај">
+<!ENTITY rssticker.remove "Уклони">
+<!ENTITY rssticker.URL "Адреса">
+<!ENTITY rssticker.hideWhenEmpty "Сакриј тикер када је празан">
+<!ENTITY rssticker.faster "Брже">
+<!ENTITY rssticker.slower "Спорије">
+<!ENTITY rssticker.smoother "Глађе (за брже процесоре)">
+<!ENTITY rssticker.choppier "Узбурканије (за спорије процесоре)">
 <!ENTITY rssticker.featured.subscribe "Претплати се">
 <!ENTITY rssticker.featured.panelTitle "Одвојени доводи">
 <!ENTITY rssticker.featured.description "Подржите развој програма без иједног цента преузимајући неке од довода са списка „Пријатељи од RSS Ticker-а“.">
