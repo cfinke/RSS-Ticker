@@ -92,7 +92,7 @@
 				<caption label="&rssticker.options.speed;" />
 				<hbox align="center">
 					<label value="&rssticker.faster;" />
-					<scale flex="1" id="speed" min="1" max="75" increment="1" pageIncrement="5" />
+					<scale flex="1" id="speed" min="1" max="75" increment="1" pageincrement="5" />
 					<label value="&rssticker.slower;" />
 				</hbox>
 			</groupbox>
@@ -101,7 +101,7 @@
 				<caption label="&rssticker.options.smooothness;" />
 				<hbox align="center">
 					<label value="&rssticker.choppier;" />
-					<scale flex="1" id="smoothness" min="1" max="300" increment="1" pageIncrement="25" />
+					<scale flex="1" id="smoothness" min="1" max="300" increment="1" pageincrement="25" />
 					<label value="&rssticker.smoother;" />
 				</hbox>
 			</groupbox>
