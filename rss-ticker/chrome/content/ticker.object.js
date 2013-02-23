@@ -413,7 +413,7 @@ var RSSTICKER = {
 				}
 			break;
 			case "alwaysOpenInNewTab":
-				RSSTICKER.alwaysOpenInNewTab = RSSTICKER.prefs.getBooPref("alwaysOpenInNewTab");
+				RSSTICKER.alwaysOpenInNewTab = RSSTICKER.prefs.getBoolPref("alwaysOpenInNewTab");
 			break;
 			case "tickSpeed":
 				RSSTICKER.tickLength = RSSTICKER.prefs.getIntPref("tickSpeed") * (500 / RSSTICKER.ticksPerItem);
