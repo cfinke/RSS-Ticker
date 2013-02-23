@@ -65,7 +65,7 @@ TickerParseListener.prototype = {
 					feedObject.label = tickerEntityDecode(feedObject.label);
 					
 					feedObject.image = feedObject.siteUri.substr(0, (feedObject.siteUri.indexOf("/", 9) + 1)) + "favicon.ico";
-		
+
 					var numItems = feed.items.length;
 		
 					for (var i = 0; i < numItems; i++) {
@@ -77,7 +77,7 @@ TickerParseListener.prototype = {
 							label : "",
 							description : "",
 							image : "",
-							id : ""
+							id : "",
 						};
 			
 						try {
@@ -169,8 +169,8 @@ TickerParseListener.prototype = {
 					
 								itemObject.description = itemObject.description + imgs;
 					
-								delete len;
-								delete imgs;
+								len = null;
+								imgs = null;
 							}
 				
 							itemObject.description = itemObject.description.replace(/<script[^>]*>[\s\S]+<\/script>/gim, "");
@@ -182,16 +182,15 @@ TickerParseListener.prototype = {
 							RSSTICKER.logMessage(e);
 						}
 			
-						delete item;
-						delete itemObject;
+						item = null;
+						itemObject = null;
 					}
 	
-					delete unread;
-					delete resolvedUri;
-					delete feedDataKey;
-					delete feed;
-					delete numItems;
-					delete result;
+					resolvedUri = null;
+					feedDataKey = null;
+					feed = null;
+					numItems = null;
+					result = null;
 				} catch (e) {
 					RSSTICKER.logMessage(e);
 				}
@@ -200,7 +199,7 @@ TickerParseListener.prototype = {
 		
 		RSSTICKER.writeFeed(feedObject);
 		
-		delete feedObject;
+		feedObject = null;
 	}
 };
 
