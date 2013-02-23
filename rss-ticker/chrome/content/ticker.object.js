@@ -1633,7 +1633,7 @@ var RSSTICKER = {
 				return visited;
 			} catch (e) {
 				// Malformed URI, probably
-				RSSTICKER.logMessage(e + " " + url);
+				// RSSTICKER.logMessage(e + " " + url);
 				return false;
 			}
 		},
