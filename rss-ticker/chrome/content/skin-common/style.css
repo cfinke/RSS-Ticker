@@ -13,11 +13,6 @@
 	height: 16px;
 }
 
-#feeds listitem[ignored="true"] {
-	text-decoration: line-through;
-	background-color: #e00;
-}
-
 #RSSTICKERToolbar[boldUnvisited="true"] toolbarbutton {
 	font-weight: bold;
 }
@@ -25,3 +20,22 @@
 #RSSTICKERToolbar[boldUnvisited="true"] toolbarbutton[visited="true"] {
 	font-weight: normal;
 }
+
+treechildren::-moz-tree-checkbox {
+	list-style-image: url("")
+}
+treechildren::-moz-tree-checkbox(checked) {
+	list-style-image: url("chrome://global/skin/checkbox/cbox-check.gif");
+}
+treechildren::-moz-tree-checkbox(disabled) {
+	list-style-image: url("chrome://global/skin/checkbox/cbox-check-dis.gif")
+}
+treechildren::moz-tree-indentation {
+	width: 10px;
+}
+treechildren::-moz-tree-row(selected), treechildren::-moz-tree-cell(selected) {
+	background-color: Highlight;
+	color: HighlightText;
+}
+
+

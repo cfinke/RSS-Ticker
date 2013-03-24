@@ -193,24 +193,23 @@
 			</grid>
 		</vbox>
 		<spacer style="height: 30px;" />
-	</prefpane>		
+	</prefpane>
 	<prefpane id="manage-pane" label="&rssticker.feeds;" image="chrome://rss-ticker/content/skin-common/feed-icon.gif">
 		<vbox>
 			<description style="max-width: 40em;">&rssticker.feedManagement;</description>
-			<listbox id="feeds" flex="1" seltype="multiple">
-				<listhead>
-					<listheader label="&rssticker.feed;"/>
-					<listheader label="&rssticker.URL;"/>
-				</listhead>
-				<listcols>
-					<listcol flex="1" />
-					<listcol flex="1" />
-				</listcols>
-			</listbox>
 			<hbox>
-				<button flex="1" label="&rssticker.add;" onclick="observeFeeds();" />
-				<button flex="1" label="&rssticker.remove;" onclick="ignoreFeeds();" />
+				<button flex="1" label="&rssticker.add;" onclick="RSSTICKER_FEED_MANAGER_TREE_VIEW.observeSelectedFeeds();" />
+				<button flex="1" label="&rssticker.remove;" onclick="RSSTICKER_FEED_MANAGER_TREE_VIEW.ignoreSelectedFeeds();" />
 			</hbox>
+			
+			<tree id="rssticker-feed-manager" flex="1" style="min-height: 200px;" seltype="multiple" editable="true">
+				<treecols>
+					<treecol label="Active" type="checkbox" id="rssticker-feed-manager-checkboxcol" editable="true" />
+					<treecol label="Feed" flex="1" id="rssticker-feed-manager-feedcol" primary="true" />
+					<treecol label="Feed URL" flex="1" id="rssticker-feed-manager-feedurlcol" />
+				</treecols>
+				<treechildren id="rssticker-feed-manager-children"/>
+			</tree>
 		</vbox>
 		<spacer style="height: 30px;" />
 	</prefpane>
