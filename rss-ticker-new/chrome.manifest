@@ -1,0 +1,20 @@
+content    rss-ticker                                 chrome/content/
+content    rss-ticker-default-locale                  chrome/locale/en-US/
+locale     rss-ticker                 en-US           chrome/locale/en-US/
+skin       rss-ticker                 classic         chrome/skin/
+
+overlay   chrome://browser/content/browser.xul                       chrome://rss-ticker/content/overlay.xul
+
+
+#style     chrome://rss-ticker/content/noFeedsFound.xul               chrome://global/skin/global.css
+#style     chrome://rss-ticker/content/noFeedsFound.xul               chrome://browser/skin/browser.css
+#style     chrome://rss-ticker/content/options.xul                    chrome://rss-ticker/content/skin-common/style.css
+#style     chrome://rss-ticker/content/options.xul                    chrome://browser/skin/browser.css
+#style     chrome://rss-ticker/content/options.xul                    chrome://global/skin/global.css
+#style     chrome://browser/content/browser.xul                       chrome://rss-ticker/content/skin-common/style.css
+#style     chrome://global/content/customizeToolbar.xul               chrome://rss-ticker/content/skin-common/style.css
+#style     chrome://rss-ticker/content/options.xul                    chrome://rss-ticker/skin/style.css
+#style     chrome://browser/content/browser.xul                       chrome://rss-ticker/skin/style.css
+#style     chrome://global/content/customizeToolbar.xul               chrome://rss-ticker/skin/style.css
+#override    chrome://rss-ticker/skin/toolbar-icon.png chrome://rss-ticker/skin/toolbar-icon-4.png os=Darwin appversion>=4.0b1
+#override    chrome://rss-ticker/skin/style.css chrome://rss-ticker/skin/style-4.css os=Darwin appversion>=4.0b1
