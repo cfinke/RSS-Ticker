@@ -6,4 +6,23 @@
 	%backupLocale;
 ]>
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript">
+		<![CDATA[
+		
+		Components.utils.import( "resource://rss-ticker-modules/feed-manager.js" );
+		
+		addEventListener( "load", function () {
+			removeEventListener( "load", arguments.callee, false );
+			
+			RSS_TICKER_FEED_MANAGER.load();
+		}, false );
+		
+		addEventListener( "unload", function () {
+			removeEventListener( "unload", arguments.callee, false );
+			
+			RSS_TICKER_FEED_MANAGER.unload();
+		}, false );
+		
+		]]>
+	</script>
 </overlay>
