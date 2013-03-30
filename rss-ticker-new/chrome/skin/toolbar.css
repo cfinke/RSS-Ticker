@@ -1,0 +1,20 @@
+#rss-ticker-toolbar-item {
+	max-width: 100%;
+	overflow: hidden;
+}
+
+#rss-ticker-toolbar-item toolbarbutton[image] {
+	min-height: 16px;
+	max-height: 16px;
+	border-width: 1px;
+	padding: 1px 2px;
+}
+
+#rss-ticker-toolbar-item toolbarbutton image {
+	width: 16px;
+	height: 16px;
+}
+
+#rss-ticker-toolbar-item toolbarbutton label {
+	display: block !important;
+}

@@ -6,14 +6,15 @@ resource   rss-ticker-modules         modules/
 
 overlay   chrome://browser/content/browser.xul                       chrome://rss-ticker/content/overlay.xul
 
+style     chrome://global/content/customizeToolbar.xul               chrome://rss-ticker/skin/toolbar.css
+style     chrome://browser/content/browser.xul                       chrome://rss-ticker/skin/toolbar.css
 
 #style     chrome://rss-ticker/content/noFeedsFound.xul               chrome://global/skin/global.css
 #style     chrome://rss-ticker/content/noFeedsFound.xul               chrome://browser/skin/browser.css
 #style     chrome://rss-ticker/content/options.xul                    chrome://rss-ticker/content/skin-common/style.css
 #style     chrome://rss-ticker/content/options.xul                    chrome://browser/skin/browser.css
 #style     chrome://rss-ticker/content/options.xul                    chrome://global/skin/global.css
-#style     chrome://browser/content/browser.xul                       chrome://rss-ticker/content/skin-common/style.css
-#style     chrome://global/content/customizeToolbar.xul               chrome://rss-ticker/content/skin-common/style.css
+#
 #style     chrome://rss-ticker/content/options.xul                    chrome://rss-ticker/skin/style.css
 #style     chrome://browser/content/browser.xul                       chrome://rss-ticker/skin/style.css
 #style     chrome://global/content/customizeToolbar.xul               chrome://rss-ticker/skin/style.css

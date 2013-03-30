@@ -11,6 +11,7 @@
 		<![CDATA[
 		
 		Components.utils.import( "resource://rss-ticker-modules/feed-manager.js" );
+		Components.utils.import( "resource://rss-ticker-modules/ticker-utils.js" );
 		
 		addEventListener( "load", function () {
 			removeEventListener( "load", arguments.callee, false );
@@ -28,4 +29,9 @@
 		
 		]]>
 	</script>
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbaritem id="rss-ticker-toolbar-item" class="chromeclass-toolbar-additional" label="RSS Ticker" flex="1">
+			<hbox id="rss-ticker-item-container" />
+		</toolbaritem>
+	</toolbarpalette>
 </overlay>
