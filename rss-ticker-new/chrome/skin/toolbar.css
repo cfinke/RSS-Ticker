@@ -18,3 +18,25 @@
 #rss-ticker-toolbar-item toolbarbutton label {
 	display: block !important;
 }
+
+#rss-ticker-tooltip {
+	-moz-appearance: none;
+	background-color: #fff;
+	max-width: 400px;
+}
+
+#rss-ticker-tooltip-image {
+	width: 16px;
+	height: 16px;
+	max-width: 16px;
+	max-height: 16px;
+	margin: 0 1ex;
+}
+
+#rss-ticker-tooltip-feed-name {
+	font-weight: bold;
+}
+
+#rss-ticker-tooltip-item-name {
+	text-decoration: underline;
+}

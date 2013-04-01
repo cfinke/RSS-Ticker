@@ -21,6 +21,31 @@ var RSS_TICKER_FEED_MANAGER = {
 
 		if ( 1 == RSS_TICKER_FEED_MANAGER.loadCount ) {
 			RSS_TICKER_FEED_MANAGER.setTimeout( function __delayedStartup() {
+				var file = this.getCacheFile();
+				
+				if ( file.exists() ) {
+					var data = new String();
+					var fiStream = Cc['@mozilla.org/network/file-input-stream;1'].createInstance( Ci.nsIFileInputStream );
+					var siStream = Cc['@mozilla.org/scriptableinputstream;1'].createInstance( Ci.nsIScriptableInputStream );
+					fiStream.init( file, 1, 0, false );
+					siStream.init( fiStream );
+					data += siStream.read( -1 );
+					siStream.close();
+
+					// The JSON is stored as UTF-8, but JSON only works properly with Unicode
+					var unicodeConverter = Cc["@mozilla.org/intl/scriptableunicodeconverter"].createInstance( Ci.nsIScriptableUnicodeConverter );
+					unicodeConverter.charset = "UTF-8";
+					data = unicodeConverter.ConvertToUnicode( data );
+
+					try {
+						this.feeds = JSON.parse( data );
+					} catch ( e ) {
+						// Syntax error
+					} finally {
+						file.remove( false );
+					}
+				}
+				
 				Cc["@mozilla.org/browser/nav-bookmarks-service;1"]
 					.getService( Ci.nsINavBookmarksService )
 					.addObserver( RSS_TICKER_FEED_MANAGER, false );
@@ -41,6 +66,22 @@ var RSS_TICKER_FEED_MANAGER = {
 		if ( 0 == RSS_TICKER_FEED_MANAGER.loadCount ) {
 			for ( var timerKey in this.timers )
 				this.clearTimeout( timerKey );
+			
+			var file = this.getCacheFile();
+			var data = JSON.stringify( this.feeds );
+
+			if ( data ) {
+				// Store the data as UTF-8, not the Unicode that JSON outputs.
+				var unicodeConverter = Cc["@mozilla.org/intl/scriptableunicodeconverter"].createInstance( Ci.nsIScriptableUnicodeConverter );
+				unicodeConverter.charset = "UTF-8";
+				data = unicodeConverter.ConvertFromUnicode( data );
+
+				var foStream = Cc['@mozilla.org/network/file-output-stream;1'].createInstance( Ci.nsIFileOutputStream );
+				var flags = 0x02 | 0x08 | 0x20; // wronly | create | truncate
+				foStream.init( file, flags, 0664, 0 );
+				foStream.write( data, data.length );
+				foStream.close();
+			}
 			
 			this.updateIndex = 0;
 			this.livemarks = [];
@@ -115,6 +156,13 @@ var RSS_TICKER_FEED_MANAGER = {
 	unregisterView : function ( viewKey ) {
 		delete this.views[viewKey];
 	},
+	
+	getCacheFile : function () {
+		var file = Cc['@mozilla.org/file/directory_service;1'].getService( Ci.nsIProperties ).get( 'ProfD', Ci.nsIFile );
+		file.append( "rss-ticker.cache" );
+		
+		return file;
+	},
 
 	addLivemark : function ( livemark ) {
 		PlacesUtils.livemarks.getLivemark( { id : livemark }, function ( status, livemark ) {
@@ -134,14 +182,14 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 
 	updateNextFeed : function () {
-		this.log( "updateNextFeed" );
+		RSS_TICKER_FEED_MANAGER.log( "updateNextFeed" );
 		if ( 0 == this.livemarks.length )
 			return;
 
 		if ( this.updateIndex >= this.livemarks.length ) {
 			this.updateIndex = 0;
 			this.initialFetch = false;
-			this.log( "Not initial fetch" );
+			RSS_TICKER_FEED_MANAGER.log( "Not initial fetch" );
 		}
 
 		var feedURL = this.livemarks[this.updateIndex].feedURI.spec;
@@ -185,12 +233,12 @@ var RSS_TICKER_FEED_MANAGER = {
 		
 		if ( RSS_TICKER_FEED_MANAGER.initialFetch )
 			interval = 1000 * 5;
-		this.log( interval );
+		RSS_TICKER_FEED_MANAGER.log( interval );
 		RSS_TICKER_FEED_MANAGER.setTimeout( RSS_TICKER_FEED_MANAGER.updateNextFeed, interval );
 	},
 
 	queueForParsing : function ( feedText, feedURL ) {
-		this.log( "queueForParsing" );
+		RSS_TICKER_FEED_MANAGER.log( "queueForParsing" );
 		if ( feedText.length ) {
 			var parser = Cc["@mozilla.org/feed-processor;1"].createInstance( Ci.nsIFeedProcessor );
 			var listener = new TickerParseListener();
@@ -199,7 +247,7 @@ var RSS_TICKER_FEED_MANAGER = {
 				parser.listener = listener;
 				parser.parseFromString( feedText, PlacesUtils._uri( feedURL, null, null ) );
 			} catch ( e ) {
-				this.log( "Parse error for " + feedURL + ": " + e );
+				RSS_TICKER_FEED_MANAGER.log( "Parse error for " + feedURL + ": " + e );
 			}
 		}
 
@@ -235,14 +283,15 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 	
 	markAsRead : function ( url, guid ) {
-		this.log( "GUID: " + guid );
+		RSS_TICKER_FEED_MANAGER.log( "GUID: " + guid );
+		
 		let place = {
 			uri : PlacesUtils._uri( url, null, null ),
 			title : url,
 			visits : [ { visitDate : Date.now() * 1000, transitionType : Ci.nsINavHistoryService.TRANSITION_LINK } ],
 		};
 		
-		this.log( place );
+		RSS_TICKER_FEED_MANAGER.log( place );
 		
 		Cc["@mozilla.org/browser/history;1"]
 			.getService( Ci.mozIAsyncHistory )
@@ -265,7 +314,7 @@ var RSS_TICKER_FEED_MANAGER = {
 				try {
 					message = JSON.stringify( message );
 				} catch ( e ) {
-					this.log( 'Exception in logging.' );
+					RSS_TICKER_FEED_MANAGER.log( 'Exception in logging.' );
 					continue;
 				}
 			}
@@ -288,7 +337,7 @@ var RSS_TICKER_FEED_MANAGER = {
 	_nsINavBookmarksService_inBatch : false,
 
 	onBeginUpdateBatch : function () {
-		this.log( 'onBeginUpdateBatch', arguments );
+		RSS_TICKER_FEED_MANAGER.log( 'onBeginUpdateBatch', arguments );
 
 		// This method is notified when a batch of changes are about to occur.
 		// Observers can use this to suspend updates to the user-interface, for example
@@ -298,7 +347,7 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 
 	onEndUpdateBatch : function () {
-		this.log( 'onEndUpdateBatch', arguments );
+		RSS_TICKER_FEED_MANAGER.log( 'onEndUpdateBatch', arguments );
 		this._nsINavBookmarksService_inBatch = false;
 	},
 
@@ -307,20 +356,20 @@ var RSS_TICKER_FEED_MANAGER = {
 	onBeforeItemRemoved : function ( id, type, folder, guid, parentGUID ) { },
 
 	onItemRemoved : function ( id, folder, index ) {
-		this.log( 'onItemRemoved', arguments );
+		RSS_TICKER_FEED_MANAGER.log( 'onItemRemoved', arguments );
 
 		this.removeLivemark( id );
 	},
 
 	onItemChanged : function ( id, property, isAnnotationProperty, value ) {
-		this.log( 'onItemChanged', arguments );
+		RSS_TICKER_FEED_MANAGER.log( 'onItemChanged', arguments );
 
 		if ( property == "livemark/feedURI" )
 			this.addLivemark( id );
 	},
 
 	onItemVisited : function ( id, visitID, time ) {
-		this.log( 'onItemVisited', arguments );
+		RSS_TICKER_FEED_MANAGER.log( 'onItemVisited', arguments );
 
 		// The visit id can be used with the History service to access other properties of the visit.
 		// The time is the time at which the visit occurred, in microseconds.
@@ -341,7 +390,7 @@ TickerParseListener.prototype = {
 			var feed = result.doc;
 
 			if ( feed ) {
-				feed.QueryInterface( Components.interfaces.nsIFeed );
+				feed.QueryInterface( Ci.nsIFeed );
 				
 				// @todo Check lastBuildDate and sy:updatePeriod+sy:updateFrequency to determine the next update time.
 
@@ -352,10 +401,12 @@ TickerParseListener.prototype = {
 					image : "",
 					description : "",
 					items : [],
+					guid : "",
 				};
 
 				feedObject.uri = resolvedUri;
-
+				feedObject.guid = resolvedUri;
+				
 				try {
 					feedObject.siteUri = feed.link.resolve( "" );
 				} catch ( e ) {
@@ -377,11 +428,10 @@ TickerParseListener.prototype = {
 				feedObject.image = feedObject.siteUri.substr( 0, ( feedObject.siteUri.indexOf( "/", 9 ) + 1 ) ) + "favicon.ico";
 
 				for ( var i = 0, _len = feed.items.length; i < _len; i++ ) {
-					var item = feed.items.queryElementAt( i, Components.interfaces.nsIFeedEntry );
+					var item = feed.items.queryElementAt( i, Ci.nsIFeedEntry );
 
 					var itemObject = {
 						url : "",
-						published : "",
 						label : "",
 						description : "",
 						image : "",
@@ -407,11 +457,6 @@ TickerParseListener.prototype = {
 							itemObject.image = itemObject.url.substr( 0, ( itemObject.url.indexOf( "/", 9 ) + 1 ) ) + "favicon.ico";
 					}
 
-					itemObject.published = Date.parse( item.updated );
-
-					if ( ! itemObject.published )
-						itemObject.published = ( new Date() ).getTime();
-
 					if ( item.title )
 						itemObject.label = item.title.plainText();
 					else
@@ -427,11 +472,15 @@ TickerParseListener.prototype = {
 						itemObject.description = "No summary.";
 
 					itemObject.description = this.entityDecode( itemObject.description );
+					
+					if ( itemObject.description.length > 300 )
+						itemObject.description = itemObject.description.substr( 0, 300 ) + '...';
+					
 					itemObject.label = this.entityDecode( itemObject.label );
 
 					if ( item.enclosures && item.enclosures.length > 0 ) {
 						for ( var j = 0, _len = item.enclosures.length; j < _len; j++ ) {
-							var enc = item.enclosures.queryElementAt( j, Components.interfaces.nsIWritablePropertyBag2 );
+							var enc = item.enclosures.queryElementAt( j, Ci.nsIWritablePropertyBag2 );
 
 							if ( enc.hasKey( "type" ) && enc.get( "type" ).indexOf( "image" ) != 0 )
 								itemObject.description += '<br /><a href="' + enc.get("url") + '">Download</a>';
@@ -451,10 +500,10 @@ TickerParseListener.prototype = {
 	},
 
 	entityDecode : function ( aStr ) {
-		var formatConverter = Components.classes["@mozilla.org/widget/htmlformatconverter;1"]
-			.createInstance( Components.interfaces.nsIFormatConverter );
-		var fromStr = Components.classes["@mozilla.org/supports-string;1"]
-			.createInstance( Components.interfaces.nsISupportsString );
+		var formatConverter = Cc["@mozilla.org/widget/htmlformatconverter;1"]
+			.createInstance( Ci.nsIFormatConverter );
+		var fromStr = Cc["@mozilla.org/supports-string;1"]
+			.createInstance( Ci.nsISupportsString );
 		fromStr.data = aStr;
 		var toStr = { value: null };
 
@@ -465,7 +514,7 @@ TickerParseListener.prototype = {
 		}
 
 		if ( toStr.value )
-			return toStr.value.QueryInterface(Components.interfaces.nsISupportsString).toString();
+			return toStr.value.QueryInterface(Ci.nsISupportsString).toString();
 
 		return aStr;
 	}

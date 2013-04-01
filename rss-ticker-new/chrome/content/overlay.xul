@@ -34,4 +34,53 @@
 			<hbox id="rss-ticker-item-container" />
 		</toolbaritem>
 	</toolbarpalette>
+	<popupset id="mainPopupSet">
+		<menupopup id="rss-ticker-context-menu">
+			<menuitem context="toolbarbutton" accesskey="&rssticker.cm.open.key;" command="rss-ticker_cmd_open" onclick="checkForMiddleClick( this, event );" />
+			<menuitem context="toolbarbutton" accesskey="&rssticker.cm.openInNewWindow.key;" command="rss-ticker_cmd_openInNewWindow"/>
+			<menuitem context="toolbarbutton" accesskey="&rssticker.cm.openInNewTab.key;" command="rss-ticker_cmd_openInTab"/>
+			<menuseparator context="toolbarbutton" />
+			<menuitem option="openAllInTabs" command="rss-ticker_cmd_openAllInTabs"/>
+			<menuitem context="toolbarbutton" command="rss-ticker_cmd_openFeedInTabs"/>
+			<menuseparator />
+			<menuitem context="toolbarbutton" accesskey="&rssticker.cm.copyLinkTitle.key;" command="rss-ticker_cmd_copyLinkTitle"/>
+			<menuitem context="toolbarbutton" accesskey="&rssticker.cm.copyLinkURL.key;" command="rss-ticker_cmd_copyLinkURL"/>
+			<menuseparator context="toolbarbutton" />
+			<menuitem context="toolbarbutton" accesskey="&rssticker.cm.markAsRead.key;" command="rss-ticker_cmd_markAsRead"/>
+			<menuitem context="toolbarbutton" accesskey="&rssticker.cm.markFeedAsRead.key;" command="rss-ticker_cmd_markFeedAsRead"/>
+			<menuitem accesskey="&rssticker.cm.markAllAsRead.key;" command="rss-ticker_cmd_markAllAsRead"/>
+<!--			<menuseparator />
+			<menuitem command="rss-ticker_cmd_options"/>
+			<menuitem command="rss-ticker_cmd_disableTicker"/>
+			-->
+		</menupopup>
+		<tooltip id="rss-ticker-tooltip" noautohide="true">
+			<hbox align="center">
+				<image id="rss-ticker-tooltip-image" />
+				<vbox>
+					<label id="rss-ticker-tooltip-feed-name" />
+					<label id="rss-ticker-tooltip-item-name" />
+					<label id="rss-ticker-tooltip-url" />
+				</vbox>
+			</hbox>
+			<groupbox id="rss-ticker-tooltip-summary-container">
+				<caption label="&rssticker.tt.summary;" />
+				<description id="rss-ticker-tooltip-summary" />
+			</groupbox>
+		</tooltip>
+	</popupset>
+	<commandset id="mainCommandSet">
+		<command id="rss-ticker_cmd_open" label="&rssticker.cm.open;"/>
+		<command id="rss-ticker_cmd_openInNewWindow" label="&rssticker.cm.openInNewWindow;"/>
+		<command id="rss-ticker_cmd_openInTab" label="&rssticker.cm.openInNewTab;"/>
+		<command id="rss-ticker_cmd_openAllInTabs" label="&rssticker.cm.openAllInTabs;"/>
+		<command id="rss-ticker_cmd_openFeedInTabs" label="&rssticker.cm.openFeedInTabs;"/>
+		<command id="rss-ticker_cmd_copyLinkTitle" label="&rssticker.cm.copyLinkTitle;"/>
+		<command id="rss-ticker_cmd_copyLinkURL" label="&rssticker.cm.copyLinkURL;"/>
+		<command id="rss-ticker_cmd_markAsRead" label="&rssticker.cm.markAsRead;"/>
+		<command id="rss-ticker_cmd_markFeedAsRead" label="&rssticker.cm.markFeedAsRead;"/>
+		<command id="rss-ticker_cmd_markAllAsRead" label="&rssticker.cm.markAllAsRead;"/>
+		<command id="rss-ticker_cmd_options" label="&rssticker.options;" />
+		<command id="rss-ticker_cmd_disableTicker" label="&rssticker.disableTicker;"/>
+	</commandset>
 </overlay>

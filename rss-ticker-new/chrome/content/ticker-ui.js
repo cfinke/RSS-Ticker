@@ -1,21 +1,28 @@
 var RSS_TICKER_UI = {
 	viewKey : null,
+	ticker : null,
 	
 	load : function () {
-		var ticker = document.getElementById( 'rss-ticker-item-container' );
+		this.ticker = document.getElementById( 'rss-ticker-item-container' );
+		this.ticker.parentNode.setAttribute( 'contextmenu', 'rss-ticker-context-menu' );
 		
-		ticker.addEventListener( 'mouseover', function () {
-			this.hover = true;
+		this.ticker.parentNode.addEventListener( 'mouseover', function () {
+			RSS_TICKER_UI.ticker.hover = true;
 		}, false );
 		
-		ticker.addEventListener( 'mouseout', function () {
-			this.hover = false;
+		this.ticker.parentNode.addEventListener( 'mouseout', function () {
+			RSS_TICKER_UI.ticker.hover = false;
 		}, false );
 		
-		ticker.addEventListener( 'click', function ( event ) {
-			if ( event.target.nodeName != 'toolbarbutton' )
-				return;
-			
+		document.getElementById( 'rss-ticker-context-menu' ).addEventListener( 'mouseover', function () {
+			RSS_TICKER_UI.ticker.hover = true;
+		}, false );
+		
+		document.getElementById( 'rss-ticker-context-menu' ).addEventListener( 'mouseout', function () {
+			RSS_TICKER_UI.ticker.hover = false;
+		}, false );
+		
+		this.ticker.addEventListener( 'click', function ( event ) {
 			var element = event.target;
 			
 			if ( event.ctrlKey ) {
@@ -24,17 +31,57 @@ var RSS_TICKER_UI = {
 			}
 			else if ( event.which != 3 ) {
 				// Not a right-click.
-				if (event.which == 4 || event.shiftKey){
-					// Shift
-					window.open( element.url );
-				}
-				else {
-					// Left-click
-					RSS_TICKER_UI.launchUrl( element.url, event );
-					RSS_TICKER_FEED_MANAGER.markAsRead( element.url, element.guid );
-				}
+				RSS_TICKER_UI.launchURL( element.url, event );
+				RSS_TICKER_FEED_MANAGER.markAsRead( element.url, element.guid );
 			}
 		}, false );
+		
+		window.addEventListener( 'DOMMouseScroll', function ( event ) {
+			if ( document.getElementById( 'rss-ticker-item-container' ).hover ) {
+				if ( event.detail > 0 ) {
+					// Scroll Down
+					RSS_TICKER_UI.scrollTicker( 40 );
+				}
+				else if ( event.detail < 0 ) {
+					// Scroll Up
+					RSS_TICKER_UI.scrollTicker( -40 );
+				}
+			}
+		}, false)
+		
+		document.getElementById( 'rss-ticker-tooltip' ).addEventListener( 'popupshowing', function ( event ) {
+			var tickerItem = document.tooltipNode;
+			
+			document.getElementById( 'rss-ticker-tooltip-url' ).setAttribute( 'value', tickerItem.itemData.url );
+			document.getElementById( 'rss-ticker-tooltip-item-name' ).setAttribute( 'value', tickerItem.itemData.label ); 
+			document.getElementById( 'rss-ticker-tooltip-image' ).setAttribute( 'src', tickerItem.getAttribute( 'image' ) );
+			document.getElementById( 'rss-ticker-tooltip-feed-name' ).setAttribute( 'value', tickerItem.feedData.label );
+			
+			if ( tickerItem.itemData.description ) {
+				var summary = document.getElementById( 'rss-ticker-tooltip-summary' );
+				while ( summary.lastChild )
+					summary.removeChild( summary.lastChild );
+				summary.appendChild( document.createTextNode( tickerItem.itemData.description ) );
+				document.getElementById( 'rss-ticker-tooltip-summary' ).style.display = '';
+			}
+			else {
+				document.getElementById( 'rss-ticker-tooltip-summary' ).style.display = 'none';
+			}
+		} );
+		
+		document.getElementById( 'rss-ticker-context-menu' ).addEventListener( 'popupshowing', function ( event ) {
+			var context = document.popupNode;
+			var menuitems = this.childNodes;
+			
+			for ( var i = 0, _len = menuitems.length; i < _len; i++ ) {
+				if ( menuitems[i].getAttribute( 'context' ) && menuitems[i].getAttribute( 'context' ) != context.nodeName )
+					menuitems[i].style.display = 'none';
+				else
+					menuitems[i].style.display = '';
+			}
+		} );
+		
+		this.loadCommands();
 		
 		this.tick();
 		
@@ -45,33 +92,146 @@ var RSS_TICKER_UI = {
 		RSS_TICKER_FEED_MANAGER.unregisterView( this.viewKey );
 	},
 	
-	launchUrl : function ( url, event ) {
-		if ( RSS_TICKER_UTILS.prefs.getBoolPref( "alwaysOpenInNewTab" ) || ( event.which == 2 ) || ( event.which == 1 && ( event.ctrlKey || event.metaKey ) && ( event.ctrlKey || event.metaKey ) ) )
-			this._addTab( url );
-		else if ( event.which == 1 || ( event.which == 13 && ! event.shiftKey ) )
-			this._inTab( url );
-		else if ( event.which == 4 || ( event.which == 13 && event.shiftKey ) )
-			window.open( url );
-	},
-	
-	_addTab : function ( url ) {
-		var browser = gBrowser;
-		var theTab = browser.addTab( url );
-		
-		var loadInBackground = false;
+	loadCommands : function () {
+		document.getElementById( 'rss-ticker_cmd_open' ).addEventListener( 'command', function ( event ) {
+			openUILink( document.popupNode.url, event );
 			
-		try {
-			loadInBackground = Cc["@mozilla.org/preferences-service;1"]
-				.getService( Ci.nsIPrefBranch )
-				.getBoolPref( "browser.tabs.loadInBackground" );
-		} catch (e) { }
+			RSS_TICKER_FEED_MANAGER.markAsRead( document.popupNode.url, document.popupNode.guid );
+		} );
+
+		document.getElementById( 'rss-ticker_cmd_openInNewWindow' ).addEventListener( 'command', function ( event ) {
+			openUILinkIn( document.popupNode.url, 'window' );
+			
+			RSS_TICKER_FEED_MANAGER.markAsRead( document.popupNode.url, document.popupNode.guid );
+		} );
+
+		document.getElementById( 'rss-ticker_cmd_openInTab' ).addEventListener( 'command', function ( event ) {
+			openUILinkIn( document.popupNode.url, 'tab' );
+			
+			RSS_TICKER_FEED_MANAGER.markAsRead( document.popupNode.url, document.popupNode.guid ); 
+		} );
+
+		document.getElementById( 'rss-ticker_cmd_openAllInTabs' ).addEventListener( 'command', function ( event ) {
+			if ( PlacesUIUtils._confirmOpenInTabs( RSS_TICKER_UI.ticker.childNodes.length, window ) ) {
+				// Open all in tabs.
+				var itemsToOpen = [];
+				
+				// Save the URLs first, since items may disappear during the opening process.
+				for ( var i = 0, _len = RSS_TICKER_UI.ticker.childNodes.length; i < _len; i++ ) {
+					var element = RSS_TICKER_UI.ticker.childNodes[i];
+					itemsToOpen.push( [ element.url, element.guid ] );
+				}
+				
+				for ( var i = 0, _len = itemsToOpen.length; i < _len; i++ ) {
+					openUILinkIn( itemsToOpen[i][0], 'tab' );
+					RSS_TICKER_FEED_MANAGER.markAsRead.apply( itemsToOpen[i] );
+				}
+			}
+		} );
 		
-		if ( ! loadInBackground )
-			browser.selectedTab = theTab;
+		document.getElementById( 'rss-ticker_cmd_openFeedInTabs' ).addEventListener( 'command', function ( event ) {
+			var feed = document.popupNode.feedGUID;
+			
+			// Open all in tabs.
+			var itemsToOpen = [];
+			
+			// Save the URLs first, since items may disappear during the opening process.
+			for ( var i = 0, _len = RSS_TICKER_UI.ticker.childNodes.length; i < _len; i++ ) {
+				var element = RSS_TICKER_UI.ticker.childNodes[i];
+				
+				if ( feed == element.feedGUID )
+					itemsToOpen.push( [ element.url, element.guid ] );
+			}
+			
+			if ( PlacesUIUtils._confirmOpenInTabs( itemsToOpen.length, window ) ) {
+				for ( var i = 0, _len = itemsToOpen.length; i < _len; i++ ) {
+					openUILinkIn( itemsToOpen[i][0], 'tab' );
+					RSS_TICKER_FEED_MANAGER.markAsRead( itemsToOpen[i][0], itemsToOpen[i][1] );
+				}
+			}
+		} );
+		
+		document.getElementById( 'rss-ticker_cmd_copyLinkTitle' ).addEventListener( 'command', function ( event ) {
+			Cc["@mozilla.org/widget/clipboardhelper;1"]
+				.getService( Ci.nsIClipboardHelper )
+				.copyString( document.popupNode.getAttribute( 'label' ) );
+		} );
+		
+		document.getElementById( 'rss-ticker_cmd_copyLinkURL' ).addEventListener( 'command', function ( event ) {
+			Cc["@mozilla.org/widget/clipboardhelper;1"]
+				.getService( Ci.nsIClipboardHelper )
+				.copyString( document.popupNode.url );
+		} );
+
+		document.getElementById( 'rss-ticker_cmd_markAsRead' ).addEventListener( 'command', function ( event ) {
+			RSS_TICKER_FEED_MANAGER.markAsRead( document.popupNode.url, document.popupNode.guid );
+		} );
+
+		document.getElementById( 'rss-ticker_cmd_markFeedAsRead' ).addEventListener( 'command', function ( event ) {
+			var feed = document.popupNode.feedGUID;
+			
+			for ( var i = RSS_TICKER_UI.ticker.childNodes.length - 1; i >= 0; i-- ) {
+				var element = RSS_TICKER_UI.ticker.childNodes[i];
+				
+				if ( feed == element.feedGUID )
+					RSS_TICKER_FEED_MANAGER.markAsRead( element.url, element.guid );
+			}
+		} );
+
+		document.getElementById( 'rss-ticker_cmd_markAllAsRead' ).addEventListener( 'command', function ( event ) {
+			for ( var i = RSS_TICKER_UI.ticker.childNodes.length - 1; i >= 0; i-- ) {
+				var element = RSS_TICKER_UI.ticker.childNodes[i];
+				RSS_TICKER_FEED_MANAGER.markAsRead( element.url, element.guid );
+			}
+		} );
+
+		document.getElementById( 'rss-ticker_cmd_options' ).addEventListener( 'command', function ( event ) {
+			// @todo RSSTICKER.options();
+		} );
+
+		document.getElementById( 'rss-ticker_cmd_disableTicker' ).addEventListener( 'command', function ( event ) {
+			// @todo RSSTICKER.toggleDisabled();
+		} );
 	},
 	
-	_inTab : function ( url ) {
-		content.document.location.href = url;
+	launchURL : function ( url, event ) {
+		if ( RSS_TICKER_UTILS.prefs.getBoolPref( "alwaysOpenInNewTab" ) )
+			openUILinkIn( url, 'tab' )
+		else
+			openUILink( url, event );
+	},
+	
+	confirmOpenTabs : function ( numTabs ) {
+		var pref = Cc["@mozilla.org/preferences-service;1"].getService( Ci.nsIPrefBranch );
+
+		const kWarnOnOpenPref = "browser.tabs.warnOnOpen";
+
+		var reallyOpen = true;
+
+		if (pref.getBoolPref(kWarnOnOpenPref)) {
+			if (numTabs >= pref.getIntPref("browser.tabs.maxOpenBeforeWarn")) {
+				var promptService = Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService);
+
+				// default to true: if it were false, we wouldn't get this far
+				var warnOnOpen = { value: true };
+
+				var buttonPressed = promptService.confirmEx(null,
+					FEEDBAR.strings.getString("feedbar.confirmOpenInTabs"),
+					FEEDBAR.strings.getFormattedString("feedbar.warnOnTabsMessage", [ numTabs ]),
+					(promptService.BUTTON_TITLE_IS_STRING * promptService.BUTTON_POS_0) + (promptService.BUTTON_TITLE_CANCEL * promptService.BUTTON_POS_1), 
+					FEEDBAR.strings.getString("feedbar.openConfirmText"), null, null,
+					FEEDBAR.strings.getString("feedbar.warnOnTabs"),
+					warnOnOpen);
+
+				reallyOpen = (buttonPressed == 0);
+
+				// don't set the pref unless they press OK and it's false
+				if (reallyOpen && !warnOnOpen.value)
+					pref.setBoolPref(kWarnOnOpenPref, false);
+			}
+		}
+
+		return reallyOpen;
 	},
 	
 	/* RSS_TICKER_FEED_MANAGER view interface */
@@ -90,11 +250,7 @@ var RSS_TICKER_UI = {
 	/* End interface */
 	
 	writeFeed : function ( feed ) {
-		var feedItems = feed.items,
-			ticker = document.getElementById( 'rss-ticker-item-container' );
-
-		if ( ! ticker )
-			return;
+		var feedItems = feed.items;
 
 		for ( var i = 0, _len = feedItems.length; i < _len; i++ ) {
 			var item = feedItems[i];
@@ -107,33 +263,52 @@ var RSS_TICKER_UI = {
 			
 			var element = document.createElement( 'toolbarbutton' );
 			element.id = 'rss-ticker-item-' + item.guid;
+			
+			
+			
 			element.guid = item.guid;
 			element.url = item.url;
+			element.feedGUID = feed.guid;
+			
+			element.itemData = item;
+			element.feedData = feed;
+			
 			element.setAttribute( 'label', item.label );
 			element.setAttribute( 'image', item.image );
+			element.setAttribute( 'tooltip', 'rss-ticker-tooltip' );
 			
-			ticker.appendChild( element );
+			this.ticker.appendChild( element );
 		}
 	},
 	
 	tick : function () {
-		var ticker = document.getElementById( 'rss-ticker-item-container' );
-		
-		if ( ticker && ! ticker.hover ) {
-			// Animation!
-			var currentMargin = parseInt( ticker.style.marginLeft, 10 );
-			
-			if ( ! currentMargin )
-				currentMargin = 0;
-			
-			if ( currentMargin < ( ticker.scrollWidth * -1 ) ) {
-				ticker.style.marginLeft = document.getElementById( 'rss-ticker-toolbar-item' ).scrollWidth + 'px';
-			}
-			else {
-				ticker.style.marginLeft = currentMargin - 1 + 'px';
-			}
-		}
+		if ( ! RSS_TICKER_UI.ticker.hover )
+			RSS_TICKER_UI.scrollTicker();
 		
 		setTimeout( RSS_TICKER_UI.tick, 50 );
-	}
+	},
+	
+	scrollTicker : function ( distance ) {
+		if ( ! distance )
+			distance = 1;
+		else
+			RSS_TICKER_FEED_MANAGER.log( "Manually scrolling: " + distance );
+
+		// Animation!
+		var currentMargin = parseInt( this.ticker.style.marginLeft, 10 );
+
+		if ( ! currentMargin )
+			currentMargin = 0;
+
+		if ( currentMargin < ( this.ticker.scrollWidth * -1 ) ) {
+			this.ticker.style.marginLeft = document.getElementById( 'rss-ticker-toolbar-item' ).scrollWidth + ( 1 - distance ) + 'px';
+		}
+		else if ( currentMargin > this.ticker.scrollWidth ) {
+			// Being scrolled back manually.
+			this.ticker.style.marginLeft = ( this.ticker.scrollWidth * -1 ) + ( currentMargin - this.ticker.scrollWidth ) + 'px';
+		}
+		else {
+			this.ticker.style.marginLeft = currentMargin - distance + 'px';
+		}
+	},
 };
