@@ -399,7 +399,6 @@ TickerParseListener.prototype = {
 					siteUri : "",
 					label : "",
 					image : "",
-					description : "",
 					items : [],
 					guid : "",
 				};
@@ -415,16 +414,6 @@ TickerParseListener.prototype = {
 
 				feedObject.label = this.entityDecode( feed.title.plainText() );
 
-				if ( feed.summary && feed.summary.text )
-					feedObject.description = feed.summary.text;
-				else if ( feed.content && feed.content.text )
-					feedObject.description = feed.content.text;
-				else if ( feed.subtitle && feed.subtitle.text )
-					feedObject.description = feed.subtitle.text;
-				else
-					feedObject.description = "No summary."; // @todo Localize
-
-				feedObject.description = this.entityDecode( feedObject.description );
 				feedObject.image = feedObject.siteUri.substr( 0, ( feedObject.siteUri.indexOf( "/", 9 ) + 1 ) ) + "favicon.ico";
 
 				for ( var i = 0, _len = feed.items.length; i < _len; i++ ) {
@@ -471,27 +460,14 @@ TickerParseListener.prototype = {
 					else
 						itemObject.description = "No summary.";
 
-					itemObject.description = this.entityDecode( itemObject.description );
+					itemObject.description = this.entityDecode( itemObject.description ).replace( /<[^>]+>/g, '' );
 					
-					if ( itemObject.description.length > 300 )
-						itemObject.description = itemObject.description.substr( 0, 300 ) + '...';
+					if ( itemObject.description.length > 305 )
+						itemObject.description = itemObject.description.substr( 0, itemObject.description.indexOf( ' ', 300 ) - 1 ) + '...';
 					
 					itemObject.label = this.entityDecode( itemObject.label );
-
-					if ( item.enclosures && item.enclosures.length > 0 ) {
-						for ( var j = 0, _len = item.enclosures.length; j < _len; j++ ) {
-							var enc = item.enclosures.queryElementAt( j, Ci.nsIWritablePropertyBag2 );
-
-							if ( enc.hasKey( "type" ) && enc.get( "type" ).indexOf( "image" ) != 0 )
-								itemObject.description += '<br /><a href="' + enc.get("url") + '">Download</a>';
-							else if ( enc.hasKey( "url" ) )
-								itemObject.description += '<br /><img src="' + enc.get("url") + '" />';
-						}
-					}
-
-					itemObject.description = itemObject.description.replace( /<script[^>]*>[\s\S]+<\/script>/gim, "" );
-
-					feedObject.items.push(itemObject);
+					
+					feedObject.items.push( itemObject );
 				}
 			}
 		}
