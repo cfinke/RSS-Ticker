@@ -33,12 +33,12 @@ var RSS_TICKER_UI = {
 			
 			if ( event.ctrlKey ) {
 				// Mark as read.
-				RSS_TICKER_FEED_MANAGER.markAsRead( element.url, element.guid );
+				RSS_TICKER_FEED_MANAGER.markAsRead( element.itemData );
 			}
 			else if ( event.which != 3 ) {
 				// Not a right-click.
 				RSS_TICKER_UI.launchURL( element.url, event );
-				RSS_TICKER_FEED_MANAGER.markAsRead( element.url, element.guid );
+				RSS_TICKER_FEED_MANAGER.markAsRead( element.itemData );
 			}
 		}, false );
 		
@@ -102,19 +102,19 @@ var RSS_TICKER_UI = {
 		document.getElementById( 'rss-ticker_cmd_open' ).addEventListener( 'command', function ( event ) {
 			openUILink( document.popupNode.url, event );
 			
-			RSS_TICKER_FEED_MANAGER.markAsRead( document.popupNode.url, document.popupNode.guid );
+			RSS_TICKER_FEED_MANAGER.markAsRead( document.popupNode.itemData );
 		} );
 
 		document.getElementById( 'rss-ticker_cmd_openInNewWindow' ).addEventListener( 'command', function ( event ) {
 			openUILinkIn( document.popupNode.url, 'window' );
 			
-			RSS_TICKER_FEED_MANAGER.markAsRead( document.popupNode.url, document.popupNode.guid );
+			RSS_TICKER_FEED_MANAGER.markAsRead( document.popupNode.itemData );
 		} );
 
 		document.getElementById( 'rss-ticker_cmd_openInTab' ).addEventListener( 'command', function ( event ) {
 			openUILinkIn( document.popupNode.url, 'tab' );
 			
-			RSS_TICKER_FEED_MANAGER.markAsRead( document.popupNode.url, document.popupNode.guid ); 
+			RSS_TICKER_FEED_MANAGER.markAsRead( document.popupNode.itemData ); 
 		} );
 
 		document.getElementById( 'rss-ticker_cmd_openAllInTabs' ).addEventListener( 'command', function ( event ) {
@@ -125,12 +125,12 @@ var RSS_TICKER_UI = {
 				// Save the URLs first, since items may disappear during the opening process.
 				for ( var i = 0, _len = RSS_TICKER_UI.ticker.childNodes.length; i < _len; i++ ) {
 					var element = RSS_TICKER_UI.ticker.childNodes[i];
-					itemsToOpen.push( [ element.url, element.guid ] );
+					itemsToOpen.push( element.itemData );
 				}
 				
 				for ( var i = 0, _len = itemsToOpen.length; i < _len; i++ ) {
 					openUILinkIn( itemsToOpen[i][0], 'tab' );
-					RSS_TICKER_FEED_MANAGER.markAsRead.apply( itemsToOpen[i] );
+					RSS_TICKER_FEED_MANAGER.markAsRead( itemsToOpen[i] );
 				}
 			}
 		} );
@@ -146,13 +146,13 @@ var RSS_TICKER_UI = {
 				var element = RSS_TICKER_UI.ticker.childNodes[i];
 				
 				if ( feed == element.feedGUID )
-					itemsToOpen.push( [ element.url, element.guid ] );
+					itemsToOpen.push( element.itemData );
 			}
 			
 			if ( PlacesUIUtils._confirmOpenInTabs( itemsToOpen.length, window ) ) {
 				for ( var i = 0, _len = itemsToOpen.length; i < _len; i++ ) {
 					openUILinkIn( itemsToOpen[i][0], 'tab' );
-					RSS_TICKER_FEED_MANAGER.markAsRead( itemsToOpen[i][0], itemsToOpen[i][1] );
+					RSS_TICKER_FEED_MANAGER.markAsRead( itemsToOpen[i] );
 				}
 			}
 		} );
@@ -170,7 +170,7 @@ var RSS_TICKER_UI = {
 		} );
 
 		document.getElementById( 'rss-ticker_cmd_markAsRead' ).addEventListener( 'command', function ( event ) {
-			RSS_TICKER_FEED_MANAGER.markAsRead( document.popupNode.url, document.popupNode.guid );
+			RSS_TICKER_FEED_MANAGER.markAsRead( document.popupNode.itemData );
 		} );
 
 		document.getElementById( 'rss-ticker_cmd_markFeedAsRead' ).addEventListener( 'command', function ( event ) {
@@ -180,14 +180,14 @@ var RSS_TICKER_UI = {
 				var element = RSS_TICKER_UI.ticker.childNodes[i];
 				
 				if ( feed == element.feedGUID )
-					RSS_TICKER_FEED_MANAGER.markAsRead( element.url, element.guid );
+					RSS_TICKER_FEED_MANAGER.markAsRead( element.itemData );
 			}
 		} );
 
 		document.getElementById( 'rss-ticker_cmd_markAllAsRead' ).addEventListener( 'command', function ( event ) {
 			for ( var i = RSS_TICKER_UI.ticker.childNodes.length - 1; i >= 0; i-- ) {
 				var element = RSS_TICKER_UI.ticker.childNodes[i];
-				RSS_TICKER_FEED_MANAGER.markAsRead( element.url, element.guid );
+				RSS_TICKER_FEED_MANAGER.markAsRead( element.itemData );
 			}
 		} );
 

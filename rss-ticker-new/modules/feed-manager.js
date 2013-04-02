@@ -4,6 +4,7 @@ var Ci = Components.interfaces,
 	Cu = Components.utils;
 
 Cu.import("resource://gre/modules/PlacesUtils.jsm");
+Cu.import("resource://gre/modules/PlacesUIUtils.jsm");
 
 var RSS_TICKER_FEED_MANAGER = {
 	loadCount : 0,
@@ -46,9 +47,7 @@ var RSS_TICKER_FEED_MANAGER = {
 					}
 				}
 				
-				Cc["@mozilla.org/browser/nav-bookmarks-service;1"]
-					.getService( Ci.nsINavBookmarksService )
-					.addObserver( RSS_TICKER_FEED_MANAGER, false );
+				PlacesUtils.bookmarks.addObserver( RSS_TICKER_FEED_MANAGER, false );
 
 				var livemarkIDs = PlacesUtils.annotations.getItemsWithAnnotation( "livemark/feedURI", {} );
 
@@ -88,9 +87,7 @@ var RSS_TICKER_FEED_MANAGER = {
 			this.livemarks = [];
 			this.feeds = {};
 			
-			Cc["@mozilla.org/browser/nav-bookmarks-service;1"]
-				.getService( Ci.nsINavBookmarksService )
-				.removeObserver( this );
+			PlacesUtils.bookmarks.removeObserver( this );
 		}
 	},
 
@@ -268,7 +265,7 @@ var RSS_TICKER_FEED_MANAGER = {
 
 			try {
 				parser.listener = listener;
-				parser.parseFromString( feedText, PlacesUtils._uri( feedURL, null, null ) );
+				parser.parseFromString( feedText, PlacesUIUtils.createFixedURI( feedURL ) );
 			} catch ( e ) {
 				RSS_TICKER_FEED_MANAGER.log( "Parse error for " + feedURL + ": " + e );
 			}
@@ -293,8 +290,8 @@ var RSS_TICKER_FEED_MANAGER = {
 				return;
 			}
 			
-			Cc["@mozilla.org/browser/history;1"].getService( Ci.mozIAsyncHistory ).isURIVisited(
-				PlacesUtils._uri( feed.items[itemIndex].url, null, null ),
+			PlacesUtils.asyncHistory.isURIVisited(
+				PlacesUIUtils.createFixedURI( feed.items[itemIndex].url ),
 				function ( uri, visited ) {
 					feed.items[itemIndex].visited = visited;
 					markNextVisited( itemIndex + 1 );
@@ -305,35 +302,35 @@ var RSS_TICKER_FEED_MANAGER = {
 		markNextVisited( 0 );
 	},
 	
-	markAsRead : function ( url, guid ) {
-		// @todo Update this.feeds too so that the restart cache stays in sync
-		RSS_TICKER_FEED_MANAGER.log( "GUID: " + guid );
-		
+	markAsRead : function ( item ) {
+		// Add the URL to the browser history.
 		let place = {
-			uri : PlacesUtils._uri( url, null, null ),
-			title : url,
+			uri : PlacesUIUtils.createFixedURI( item.url ),
+			title : item.label,
 			visits : [ { visitDate : Date.now() * 1000, transitionType : Ci.nsINavHistoryService.TRANSITION_LINK } ],
 		};
 		
-		RSS_TICKER_FEED_MANAGER.log( place );
+		PlacesUtils.asyncHistory.updatePlaces( place, {
+			handleError : function () { },
+			handleResult : function () { },
+			handleCompletion : function () {
+				for ( var viewKey in RSS_TICKER_FEED_MANAGER.views )
+					RSS_TICKER_FEED_MANAGER.views[viewKey].itemVisited( item.url, item.guid );
+			}
+		} );
 		
-		Cc["@mozilla.org/browser/history;1"]
-			.getService( Ci.mozIAsyncHistory )
-			.updatePlaces( place, {
-				handleError : function () { },
-				handleResult : function () { },
-				handleCompletion : function () {
-					for ( var viewKey in RSS_TICKER_FEED_MANAGER.views ) {
-						RSS_TICKER_FEED_MANAGER.views[viewKey].itemVisited( url, guid );
-					}
-				}
-			} );
+		// Update this.feeds too so that the restart cache stays in sync
+		for ( var i = 0, _len = this.feeds[item.feedGUID].items.length; i < _len; i++ ) {
+			if ( this.feeds[item.feedGUID].items[i].guid == item.guid ) {
+				this.feeds[item.feedGUID].items[i].visited = true;
+				break;
+			}
+		}
 	},
 	
 	notifyNoFeeds : function () {
-		for ( var viewKey in RSS_TICKER_FEED_MANAGER.views ) {
+		for ( var viewKey in RSS_TICKER_FEED_MANAGER.views )
 			RSS_TICKER_FEED_MANAGER.views[viewKey].notifyNoFeeds();
-		}
 	},
 
 	log : function () {
@@ -367,44 +364,25 @@ var RSS_TICKER_FEED_MANAGER = {
 	_nsINavBookmarksService_inBatch : false,
 
 	onBeginUpdateBatch : function () {
-		RSS_TICKER_FEED_MANAGER.log( 'onBeginUpdateBatch', arguments );
-
-		// This method is notified when a batch of changes are about to occur.
-		// Observers can use this to suspend updates to the user-interface, for example
-		// while a batch change is occurring.
-
 		this._nsINavBookmarksService_inBatch = true;
 	},
 
 	onEndUpdateBatch : function () {
-		RSS_TICKER_FEED_MANAGER.log( 'onEndUpdateBatch', arguments );
 		this._nsINavBookmarksService_inBatch = false;
 	},
 
-	onItemAdded : function ( id, folder, index, type, uri, title, time, guid, parentGUID ) { },
-
-	onBeforeItemRemoved : function ( id, type, folder, guid, parentGUID ) { },
-
 	onItemRemoved : function ( id, folder, index ) {
-		RSS_TICKER_FEED_MANAGER.log( 'onItemRemoved', arguments );
-		
 		this.removeLivemark( id );
 	},
 
 	onItemChanged : function ( id, property, isAnnotationProperty, value ) {
-		RSS_TICKER_FEED_MANAGER.log( 'onItemChanged', arguments );
-
 		if ( property == "livemark/feedURI" )
 			this.addLivemark( id );
 	},
 
-	onItemVisited : function ( id, visitID, time ) {
-		RSS_TICKER_FEED_MANAGER.log( 'onItemVisited', arguments );
-
-		// The visit id can be used with the History service to access other properties of the visit.
-		// The time is the time at which the visit occurred, in microseconds.
-	},
-
+	onItemAdded : function ( id, folder, index, type, uri, title, time, guid, parentGUID ) { },
+	onBeforeItemRemoved : function ( id, type, folder, guid, parentGUID ) { },
+	onItemVisited : function ( id, visitID, time ) { },
 	onItemMoved : function ( id, oldParent, oldIndex, newParent, newIndex ) { },
 };
 
@@ -455,10 +433,12 @@ TickerParseListener.prototype = {
 						description : "",
 						image : "",
 						guid : "",
+						feedGUID : "",
 					};
 
 					itemObject.guid = item.id;
 					itemObject.url = item.link.resolve( "" );
+					itemObject.feedGUID = feedObject.guid;
 					itemObject.displayUri = item.displayUri ? item.displayUri : itemObject.url;
 					itemObject.trackingUri = item.trackingUri ? item.trackingUri : "";
 
