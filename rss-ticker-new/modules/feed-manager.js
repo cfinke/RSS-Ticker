@@ -188,7 +188,8 @@ var RSS_TICKER_FEED_MANAGER = {
 					this.views[viewKey].removeFeed( feedGUID );
 				}
 				
-				delete this.feeds[feedGUID];
+				if ( feedGUID in this.feeds )
+					delete this.feeds[feedGUID];
 				
 				this.livemarks.splice( i, 1 );
 				
