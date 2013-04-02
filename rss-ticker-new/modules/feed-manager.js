@@ -176,6 +176,8 @@ var RSS_TICKER_FEED_MANAGER = {
 		PlacesUtils.livemarks.getLivemark( { id : livemark }, function ( status, livemark ) {
 			if ( Components.isSuccessCode( status ) ) {
 				RSS_TICKER_FEED_MANAGER.livemarks.push( livemark );
+				
+				RSS_TICKER_FEED_MANAGER.updateSingleFeed( livemark.feedURI.spec );
 			}
 		} );
 	},
@@ -183,7 +185,16 @@ var RSS_TICKER_FEED_MANAGER = {
 	removeLivemark : function ( livemarkId ) {
 		for ( var i = 0, _len = this.livemarks.length; i < _len; i++ ) {
 			if ( livemarkId == this.livemarks[i].id ) {
+				var feedGUID = this.livemarks[i].feedURI.spec;
+				
+				for ( var viewKey in this.views ) {
+					this.views[viewKey].removeFeed( feedGUID );
+				}
+				
+				delete this.feeds[feedGUID];
+				
 				this.livemarks.splice( i, 1 );
+				
 				break;
 			}
 		}
@@ -191,19 +202,30 @@ var RSS_TICKER_FEED_MANAGER = {
 
 	updateNextFeed : function () {
 		RSS_TICKER_FEED_MANAGER.log( "updateNextFeed" );
-		if ( 0 == this.livemarks.length )
-			return;
-
+		
 		if ( this.updateIndex >= this.livemarks.length ) {
 			this.updateIndex = 0;
 			this.initialFetch = false;
 			RSS_TICKER_FEED_MANAGER.log( "Not initial fetch" );
 		}
 
-		var feedURL = this.livemarks[this.updateIndex].feedURI.spec;
+		if ( this.livemarks.length > 0 ) {
+			var feedURL = this.livemarks[this.updateIndex].feedURI.spec;
 
-		++this.updateIndex;
-
+			++this.updateIndex;
+		
+			this.updateSingleFeed( feedURL );
+		}
+		
+		var interval = 1000 * 60 * 5;
+	
+		if ( RSS_TICKER_FEED_MANAGER.initialFetch )
+			interval = 1000 * 5;
+		
+		RSS_TICKER_FEED_MANAGER.setTimeout( RSS_TICKER_FEED_MANAGER.updateNextFeed, interval );
+	},
+	
+	updateSingleFeed : function ( feedURL ) {
 		var req = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance( Ci.nsIXMLHttpRequest );
 		req.open( "GET", feedURL, true );
 		req.timeout = 15000;
@@ -236,13 +258,6 @@ var RSS_TICKER_FEED_MANAGER = {
 		};
 		
 		req.send( null );
-		
-		var interval = 1000 * 60 * 5;
-		
-		if ( RSS_TICKER_FEED_MANAGER.initialFetch )
-			interval = 1000 * 5;
-		RSS_TICKER_FEED_MANAGER.log( interval );
-		RSS_TICKER_FEED_MANAGER.setTimeout( RSS_TICKER_FEED_MANAGER.updateNextFeed, interval );
 	},
 
 	queueForParsing : function ( feedText, feedURL ) {
@@ -373,7 +388,6 @@ var RSS_TICKER_FEED_MANAGER = {
 	onItemRemoved : function ( id, folder, index ) {
 		RSS_TICKER_FEED_MANAGER.log( 'onItemRemoved', arguments );
 		
-		// @todo This doesn't work.
 		this.removeLivemark( id );
 	},
 

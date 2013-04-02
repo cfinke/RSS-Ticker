@@ -253,6 +253,15 @@ var RSS_TICKER_UI = {
 		RSS_TICKER_FEED_MANAGER.log( "Front-end visit: " + url + " " + guid );
 	},
 	
+	removeFeed : function ( feedGUID ) {
+		for ( var i = RSS_TICKER_UI.ticker.childNodes.length - 1; i >= 0; i-- ) {
+			var element = RSS_TICKER_UI.ticker.childNodes[i];
+			
+			if ( feedGUID == element.feedGUID )
+				RSS_TICKER_UI.ticker.removeChild( element );
+		}
+	},
+	
 	notifyNoFeeds : function () {
 		if ( ! RSS_TICKER_UTILS.prefs.getBoolPref( 'noFeedsFoundFlag.1.7' ) ) {
 			openUILinkIn( "chrome://rss-ticker/content/noFeedsFound.xul", 'tab' );
