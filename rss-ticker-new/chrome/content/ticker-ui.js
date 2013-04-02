@@ -4,6 +4,12 @@ var RSS_TICKER_UI = {
 	
 	load : function () {
 		this.ticker = document.getElementById( 'rss-ticker-item-container' );
+		
+		if ( ! this.ticker ) {
+			// @todo Watch for browser customization.
+			return;
+		}
+		
 		this.ticker.parentNode.setAttribute( 'contextmenu', 'rss-ticker-context-menu' );
 		
 		this.ticker.parentNode.addEventListener( 'mouseover', function () {
@@ -245,6 +251,12 @@ var RSS_TICKER_UI = {
 			document.getElementById( 'rss-ticker-item-container' ).removeChild( document.getElementById( 'rss-ticker-item-' + guid ) );
 		
 		RSS_TICKER_FEED_MANAGER.log( "Front-end visit: " + url + " " + guid );
+	},
+	
+	notifyNoFeeds : function () {
+		if ( ! RSS_TICKER_UTILS.prefs.getBoolPref( 'noFeedsFoundFlag.1.7' ) ) {
+			openUILinkIn( "chrome://rss-ticker/content/noFeedsFound.xul", 'tab' );
+		}
 	},
 	
 	/* End interface */

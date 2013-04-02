@@ -67,10 +67,11 @@ var RSS_TICKER_FEED_MANAGER = {
 			for ( var timerKey in this.timers )
 				this.clearTimeout( timerKey );
 			
-			var file = this.getCacheFile();
 			var data = JSON.stringify( this.feeds );
 
-			if ( data ) {
+			if ( '{}' != data ) {
+				var file = this.getCacheFile();
+				
 				// Store the data as UTF-8, not the Unicode that JSON outputs.
 				var unicodeConverter = Cc["@mozilla.org/intl/scriptableunicodeconverter"].createInstance( Ci.nsIScriptableUnicodeConverter );
 				unicodeConverter.charset = "UTF-8";
@@ -146,8 +147,15 @@ var RSS_TICKER_FEED_MANAGER = {
 			view.feedParsed( this.feeds[feedId] );
 		
 		this.setTimeout( function __delayFeedNotificationUntilRegistrationCompletes() {
-			for ( var feedId in RSS_TICKER_FEED_MANAGER.feeds )
+			var notifyNoFeeds = true;
+			
+			for ( var feedId in RSS_TICKER_FEED_MANAGER.feeds ) {
 				view.feedParsed( RSS_TICKER_FEED_MANAGER.feeds[feedId] );
+				notifyNoFeeds = false;
+			}
+			
+			if ( notifyNoFeeds )
+				view.notifyNoFeeds();
 		}, 0 );
 		
 		return viewKey;
@@ -283,6 +291,7 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 	
 	markAsRead : function ( url, guid ) {
+		// @todo Update this.feeds too so that the restart cache stays in sync
 		RSS_TICKER_FEED_MANAGER.log( "GUID: " + guid );
 		
 		let place = {
@@ -304,6 +313,12 @@ var RSS_TICKER_FEED_MANAGER = {
 					}
 				}
 			} );
+	},
+	
+	notifyNoFeeds : function () {
+		for ( var viewKey in RSS_TICKER_FEED_MANAGER.views ) {
+			RSS_TICKER_FEED_MANAGER.views[viewKey].notifyNoFeeds();
+		}
 	},
 
 	log : function () {
@@ -357,7 +372,8 @@ var RSS_TICKER_FEED_MANAGER = {
 
 	onItemRemoved : function ( id, folder, index ) {
 		RSS_TICKER_FEED_MANAGER.log( 'onItemRemoved', arguments );
-
+		
+		// @todo This doesn't work.
 		this.removeLivemark( id );
 	},
 

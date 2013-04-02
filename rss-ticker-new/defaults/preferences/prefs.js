@@ -1,4 +1,6 @@
 pref( "extensions.rssticker.alwaysOpenInNewTab", false );
+pref("extensions.rssticker.noFeedsFoundFlag.1.7", false);
+
 
 /*
 pref("extensions.rssticker.disabled", false);
