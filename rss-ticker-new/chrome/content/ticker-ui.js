@@ -166,7 +166,7 @@ var RSS_TICKER_UI = {
 			
 			if ( PlacesUIUtils._confirmOpenInTabs( itemsToOpen.length, window ) ) {
 				for ( var i = 0, _len = itemsToOpen.length; i < _len; i++ ) {
-					openUILinkIn( itemsToOpen[i][0], 'tab' );
+					openUILinkIn( itemsToOpen[i].url, 'tab' );
 					RSS_TICKER_FEED_MANAGER.markAsRead( itemsToOpen[i] );
 				}
 			}
