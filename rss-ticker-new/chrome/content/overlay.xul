@@ -30,7 +30,7 @@
 		]]>
 	</script>
 	<toolbarpalette id="BrowserToolbarPalette">
-		<toolbaritem id="rss-ticker-toolbar-item" class="chromeclass-toolbar-additional" label="RSS Ticker" flex="1">
+		<toolbaritem id="rss-ticker-toolbar-item" class="chromeclass-toolbar-additional" title="&rssticker.title;" flex="1">
 			<hbox id="rss-ticker-item-container" />
 		</toolbaritem>
 	</toolbarpalette>
