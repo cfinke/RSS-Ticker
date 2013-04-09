@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay [
+	<!ENTITY % localLocale SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+	%localLocale;
+	<!ENTITY % backupLocale SYSTEM "chrome://rss-ticker-default-locale/content/locale.dtd">
+	%backupLocale;
+]>
+<vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <setting pref="extensions.rssticker.alwaysOpenInNewTab" type="bool" title="&rssticker.options.openInNewTab;" />
+</vbox>

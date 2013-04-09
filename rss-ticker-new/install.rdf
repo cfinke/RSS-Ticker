@@ -10,6 +10,7 @@
 		<em:iconURL>chrome://rss-ticker/skin/feed-icon-64.png</em:iconURL>
 		<em:homepageURL>http://www.chrisfinke.com/addons/rss-ticker/</em:homepageURL>
 		<em:optionsURL>chrome://rss-ticker/content/options.xul</em:optionsURL>    
+		<em:optionsType>2</em:optionsType>
 		
 		<!-- Firefox -->
 		
