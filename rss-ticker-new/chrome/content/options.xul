@@ -6,5 +6,7 @@
 	%backupLocale;
 ]>
 <vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <setting pref="extensions.rssticker.alwaysOpenInNewTab" type="bool" title="&rssticker.options.openInNewTab;" />
+	<setting pref="extensions.rssticker.tickSpeed" type="integer" title="&rssticker.options.speed;" />
+	<setting pref="extensions.rssticker.alwaysOpenInNewTab" type="bool" title="&rssticker.options.openInNewTab;" />
+	<setting pref="extensions.rssticker.rtl" type="bool" title="&rssticker.options.reverseDirection;" />
 </vbox>

@@ -6,7 +6,16 @@ var RSS_TICKER_UI = {
 	viewKey : null,
 	ticker : null,
 	
+	tickLength : null,
+	rtl : false,
+	
 	load : function () {
+		RSS_TICKER_UTILS.prefs.QueryInterface( Ci.nsIPrefBranch2 );
+		RSS_TICKER_UTILS.prefs.addObserver( "", this, false );
+		
+		RSS_TICKER_UI.observe( null, "nsPref:changed", "tickSpeed" );
+		RSS_TICKER_UI.observe( null, "nsPref:changed", "rtl" );
+		
 		Application.getExtensions( function ( extensions ) {
 			let extension = extensions.get( '{1f91cde0-c040-11da-a94d-0800200c9a66}' );
 
@@ -109,6 +118,8 @@ var RSS_TICKER_UI = {
 	
 	unload : function () {
 		RSS_TICKER_FEED_MANAGER.unregisterView( this.viewKey );
+		
+		RSS_TICKER_UTILS.prefs.removeObserver( "", this );
 	},
 	
 	loadCommands : function () {
@@ -240,37 +251,18 @@ var RSS_TICKER_UI = {
 			openUILink( url, event );
 	},
 	
-	confirmOpenTabs : function ( numTabs ) {
-		var pref = Cc["@mozilla.org/preferences-service;1"].getService( Ci.nsIPrefBranch );
-
-		const kWarnOnOpenPref = "browser.tabs.warnOnOpen";
-
-		var reallyOpen = true;
-
-		if (pref.getBoolPref(kWarnOnOpenPref)) {
-			if (numTabs >= pref.getIntPref("browser.tabs.maxOpenBeforeWarn")) {
-				var promptService = Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService);
-
-				// default to true: if it were false, we wouldn't get this far
-				var warnOnOpen = { value: true };
-
-				var buttonPressed = promptService.confirmEx(null,
-					FEEDBAR.strings.getString("feedbar.confirmOpenInTabs"),
-					FEEDBAR.strings.getFormattedString("feedbar.warnOnTabsMessage", [ numTabs ]),
-					(promptService.BUTTON_TITLE_IS_STRING * promptService.BUTTON_POS_0) + (promptService.BUTTON_TITLE_CANCEL * promptService.BUTTON_POS_1), 
-					FEEDBAR.strings.getString("feedbar.openConfirmText"), null, null,
-					FEEDBAR.strings.getString("feedbar.warnOnTabs"),
-					warnOnOpen);
-
-				reallyOpen = (buttonPressed == 0);
-
-				// don't set the pref unless they press OK and it's false
-				if (reallyOpen && !warnOnOpen.value)
-					pref.setBoolPref(kWarnOnOpenPref, false);
-			}
+	observe : function ( subject, topic, data ) {
+		if ( topic != "nsPref:changed" )
+			return;
+		
+		switch ( data ) {
+			case 'tickSpeed':
+				RSS_TICKER_UI.tickLength = RSS_TICKER_UTILS.prefs.getIntPref( 'tickSpeed' ) * ( 500 / 200 ); // 200 = ticks per item
+			break;
+			case 'rtl':
+				RSS_TICKER_UI.rtl = RSS_TICKER_UTILS.prefs.getBoolPref( 'rtl' );
+			break;
 		}
-
-		return reallyOpen;
 	},
 	
 	/* RSS_TICKER_FEED_MANAGER view interface */
@@ -339,7 +331,7 @@ var RSS_TICKER_UI = {
 		if ( ! RSS_TICKER_UI.ticker.hover )
 			RSS_TICKER_UI.scrollTicker();
 		
-		setTimeout( RSS_TICKER_UI.tick, 50 );
+		setTimeout( RSS_TICKER_UI.tick, RSS_TICKER_UI.tickLength );
 	},
 	
 	scrollTicker : function ( distance ) {
@@ -348,21 +340,38 @@ var RSS_TICKER_UI = {
 		else
 			RSS_TICKER_FEED_MANAGER.log( "Manually scrolling: " + distance );
 
-		// Animation!
 		var currentMargin = parseInt( this.ticker.style.marginLeft, 10 );
 
 		if ( ! currentMargin )
 			currentMargin = 0;
 
-		if ( currentMargin < ( this.ticker.scrollWidth * -1 ) ) {
-			this.ticker.style.marginLeft = document.getElementById( 'rss-ticker-toolbar-item' ).scrollWidth + ( 1 - distance ) + 'px';
-		}
-		else if ( currentMargin > this.ticker.scrollWidth ) {
-			// Being scrolled back manually.
-			this.ticker.style.marginLeft = ( this.ticker.scrollWidth * -1 ) + ( currentMargin - this.ticker.scrollWidth ) + 'px';
+		if ( RSS_TICKER_UI.rtl ) {
+			currentMargin += distance;
+			
+			if ( currentMargin > document.getElementById( 'rss-ticker-toolbar-item' ).clientWidth ) {
+				this.ticker.style.marginLeft = ( this.ticker.scrollWidth * -1 ) + 'px';
+			}
+			else if ( currentMargin < ( this.ticker.scrollWidth * -1 ) ) {
+				// Being scrolled back manually.
+				this.ticker.style.marginLeft = ( document.getElementById( 'rss-ticker-toolbar-item' ).clientWidth * -1 ) + 'px';
+			}
+			else {
+				this.ticker.style.marginLeft = currentMargin + 'px';
+			}
 		}
 		else {
-			this.ticker.style.marginLeft = currentMargin - distance + 'px';
+			currentMargin -= distance;
+			
+			if ( currentMargin < ( this.ticker.scrollWidth * -1 ) ) {
+				this.ticker.style.marginLeft = document.getElementById( 'rss-ticker-toolbar-item' ).clientWidth + ( 1 - distance ) + 'px';
+			}
+			else if ( currentMargin > this.ticker.scrollWidth ) {
+				// Being scrolled back manually.
+				this.ticker.style.marginLeft = ( this.ticker.scrollWidth * -1 ) + ( currentMargin - this.ticker.scrollWidth ) + 'px';
+			}
+			else {
+				this.ticker.style.marginLeft = currentMargin + 'px';
+			}
 		}
 	},
 };
