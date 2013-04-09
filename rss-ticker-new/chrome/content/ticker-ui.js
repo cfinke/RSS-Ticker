@@ -1,8 +1,21 @@
+// @todo When the ticker is empty, shrink it to an optimal size.
+// @todo Have the context menu appear when right-clicking an empty ticker.
+// @todo Ticker shrinks as items scroll.
+
 var RSS_TICKER_UI = {
 	viewKey : null,
 	ticker : null,
 	
 	load : function () {
+		Application.getExtensions( function ( extensions ) {
+			let extension = extensions.get( '{1f91cde0-c040-11da-a94d-0800200c9a66}' );
+
+			if ( extension.firstRun ) {
+				// Add the subscribe toolbar button, as Firefox 4 removes it.
+				RSS_TICKER_UI.addToolbarButton( "feed-button" );
+			}
+		})
+
 		this.ticker = document.getElementById( 'rss-ticker-item-container' );
 		
 		if ( ! this.ticker ) {
@@ -198,6 +211,24 @@ var RSS_TICKER_UI = {
 		document.getElementById( 'rss-ticker_cmd_disableTicker' ).addEventListener( 'command', function ( event ) {
 			// @todo RSSTICKER.toggleDisabled();
 		} );
+	},
+	
+	addToolbarButton : function ( buttonId ) {
+		if ( document.getElementById( buttonId ) )
+			return;
+		
+		var toolbar = document.getElementById( "nav-bar" );
+			
+		if ( toolbar.getAttribute( "collapsed" ) == "true" )
+			return;
+
+		toolbar.currentSet = toolbar.currentSet + ',' + buttonId;
+		toolbar.setAttribute( "currentset", newSet );
+		document.getElementById( "navigator-toolbox" ).ownerDocument.persist( toolbar.id, "currentset" );
+
+		try {
+			BrowserToolboxCustomizeDone(true);
+		} catch ( e ) { }
 	},
 	
 	launchURL : function ( url, event ) {
