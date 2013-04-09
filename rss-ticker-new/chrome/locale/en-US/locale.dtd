@@ -27,6 +27,7 @@
 <!ENTITY rssticker.options.update.1 "Update my feeds every">
 <!ENTITY rssticker.options.update.2 "minutes.">
 <!ENTITY rssticker.options.speed "Ticker Speed">
+<!ENTITY rssticker.options.speed.description "(1 is fastest; 12 is default)">
 <!ENTITY rssticker.options.dw.itemWidth "Item width">
 <!ENTITY rssticker.pixelAbbrev "px">
 <!ENTITY rssticker.options.smooothness "Ticker Scroll Smoothness">

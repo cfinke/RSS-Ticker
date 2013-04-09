@@ -10,12 +10,6 @@ var RSS_TICKER_UI = {
 	rtl : false,
 	
 	load : function () {
-		RSS_TICKER_UTILS.prefs.QueryInterface( Ci.nsIPrefBranch2 );
-		RSS_TICKER_UTILS.prefs.addObserver( "", this, false );
-		
-		RSS_TICKER_UI.observe( null, "nsPref:changed", "tickSpeed" );
-		RSS_TICKER_UI.observe( null, "nsPref:changed", "rtl" );
-		
 		Application.getExtensions( function ( extensions ) {
 			let extension = extensions.get( '{1f91cde0-c040-11da-a94d-0800200c9a66}' );
 
@@ -110,6 +104,13 @@ var RSS_TICKER_UI = {
 		} );
 		
 		this.loadCommands();
+		
+		RSS_TICKER_UTILS.prefs.QueryInterface( Ci.nsIPrefBranch2 );
+		RSS_TICKER_UTILS.prefs.addObserver( "", this, false );
+		
+		RSS_TICKER_UI.observe( null, "nsPref:changed", "hideWhenEmpty" );
+		RSS_TICKER_UI.observe( null, "nsPref:changed", "tickSpeed" );
+		RSS_TICKER_UI.observe( null, "nsPref:changed", "rtl" );
 		
 		this.tick();
 		
@@ -262,6 +263,12 @@ var RSS_TICKER_UI = {
 			case 'rtl':
 				RSS_TICKER_UI.rtl = RSS_TICKER_UTILS.prefs.getBoolPref( 'rtl' );
 			break;
+			case 'hideWhenEmpty':
+				if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'hideWhenEmpty' ) )
+					RSS_TICKER_UI.maybeHideTicker();
+				else
+					RSS_TICKER_UI.showTicker();
+			break;
 		}
 	},
 	
@@ -272,10 +279,11 @@ var RSS_TICKER_UI = {
 	},
 	
 	itemVisited : function ( url, guid ) {
-		if ( document.getElementById( 'rss-ticker-item-' + guid ) )
+		if ( document.getElementById( 'rss-ticker-item-' + guid ) ) {
 			document.getElementById( 'rss-ticker-item-container' ).removeChild( document.getElementById( 'rss-ticker-item-' + guid ) );
-		
-		RSS_TICKER_FEED_MANAGER.log( "Front-end visit: " + url + " " + guid );
+			
+			this.maybeHideTicker();
+		}
 	},
 	
 	removeFeed : function ( feedGUID ) {
@@ -285,12 +293,13 @@ var RSS_TICKER_UI = {
 			if ( feedGUID == element.feedGUID )
 				RSS_TICKER_UI.ticker.removeChild( element );
 		}
+		
+		this.maybeHideTicker();
 	},
 	
 	notifyNoFeeds : function () {
-		if ( ! RSS_TICKER_UTILS.prefs.getBoolPref( 'noFeedsFoundFlag.1.7' ) ) {
+		if ( ! RSS_TICKER_UTILS.prefs.getBoolPref( 'noFeedsFoundFlag.1.7' ) )
 			openUILinkIn( "chrome://rss-ticker/content/noFeedsFound.xul", 'tab' );
-		}
 	},
 	
 	/* End interface */
@@ -309,9 +318,6 @@ var RSS_TICKER_UI = {
 			
 			var element = document.createElement( 'toolbarbutton' );
 			element.id = 'rss-ticker-item-' + item.guid;
-			
-			
-			
 			element.guid = item.guid;
 			element.url = item.url;
 			element.feedGUID = feed.guid;
@@ -325,6 +331,33 @@ var RSS_TICKER_UI = {
 			
 			this.ticker.appendChild( element );
 		}
+		
+		if ( this.ticker.firstChild )
+			this.showTicker();
+	},
+	
+	showTicker : function () {
+		var tickerContainer = RSS_TICKER_UI.ticker.parentNode;
+		
+		tickerContainer.style.display = '';
+		tickerContainer.parentNode.collapsed = false;
+	},
+	
+	hideTickerTimer : null,
+	
+	maybeHideTicker : function () {
+		clearTimeout( this.hideTickerTimer );
+		
+		this.hideTickerTimer = setTimeout( function () {
+			var ticker = RSS_TICKER_UI.ticker;
+			
+			if ( ! ticker.firstChild && RSS_TICKER_UTILS.prefs.getBoolPref( 'hideWhenEmpty' ) ) {
+				ticker.parentNode.style.display = 'none';
+				
+				if ( ticker.parentNode.parentNode.childNodes.length == 1 )
+					ticker.parentNode.parentNode.collapsed = true;
+			}
+		}, 200 );
 	},
 	
 	tick : function () {
@@ -337,8 +370,6 @@ var RSS_TICKER_UI = {
 	scrollTicker : function ( distance ) {
 		if ( ! distance )
 			distance = 1;
-		else
-			RSS_TICKER_FEED_MANAGER.log( "Manually scrolling: " + distance );
 
 		var currentMargin = parseInt( this.ticker.style.marginLeft, 10 );
 
