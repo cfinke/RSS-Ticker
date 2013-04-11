@@ -3,8 +3,9 @@ var Ci = Components.interfaces,
 	Cr = Components.results,
 	Cu = Components.utils;
 
-Cu.import("resource://gre/modules/PlacesUtils.jsm");
-Cu.import("resource://gre/modules/PlacesUIUtils.jsm");
+Cu.import( "resource://gre/modules/PlacesUtils.jsm" );
+Cu.import( "resource://gre/modules/PlacesUIUtils.jsm" );
+Cu.import( "resource://rss-ticker-modules/ticker-utils.js" );
 
 var RSS_TICKER_FEED_MANAGER = {
 	loadCount : 0,
@@ -199,12 +200,12 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 
 	updateNextFeed : function () {
-		RSS_TICKER_FEED_MANAGER.log( "updateNextFeed" );
+		RSS_TICKER_UTILS.log( "updateNextFeed" );
 		
 		if ( this.updateIndex >= this.livemarks.length ) {
 			this.updateIndex = 0;
 			this.initialFetch = false;
-			RSS_TICKER_FEED_MANAGER.log( "Not initial fetch" );
+			RSS_TICKER_UTILS.log( "Not initial fetch" );
 		}
 
 		if ( this.livemarks.length > 0 ) {
@@ -244,13 +245,13 @@ var RSS_TICKER_FEED_MANAGER = {
 						converter.charset = encoding_matches[1];
 						data = converter.ConvertToUnicode( data );
 					} catch ( e ) {
-						RSS_TICKER_FEED_MANAGER.log( e );
+						RSS_TICKER_UTILS.log( e );
 					}
 
 					RSS_TICKER_FEED_MANAGER.queueForParsing( data.replace( /^\s\s*/, '' ).replace( /\s\s*$/, '' ), feedURL );
 				}
 				else {
-					RSS_TICKER_FEED_MANAGER.log( "Received a status " + req.status + " for " + feedURL );
+					RSS_TICKER_UTILS.log( "Received a status " + req.status + " for " + feedURL );
 				}
 			}
 		};
@@ -259,7 +260,7 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 
 	queueForParsing : function ( feedText, feedURL ) {
-		RSS_TICKER_FEED_MANAGER.log( "queueForParsing" );
+		RSS_TICKER_UTILS.log( "queueForParsing" );
 		if ( feedText.length ) {
 			var parser = Cc["@mozilla.org/feed-processor;1"].createInstance( Ci.nsIFeedProcessor );
 			var listener = new TickerParseListener();
@@ -268,7 +269,7 @@ var RSS_TICKER_FEED_MANAGER = {
 				parser.listener = listener;
 				parser.parseFromString( feedText, PlacesUIUtils.createFixedURI( feedURL ) );
 			} catch ( e ) {
-				RSS_TICKER_FEED_MANAGER.log( "Parse error for " + feedURL + ": " + e );
+				RSS_TICKER_UTILS.log( "Parse error for " + feedURL + ": " + e );
 			}
 		}
 
@@ -332,25 +333,6 @@ var RSS_TICKER_FEED_MANAGER = {
 	notifyNoFeeds : function () {
 		for ( var viewKey in RSS_TICKER_FEED_MANAGER.views )
 			RSS_TICKER_FEED_MANAGER.views[viewKey].notifyNoFeeds();
-	},
-
-	log : function () {
-		for ( var i = 0, _len = arguments.length; i < _len; i++ ) {
-			var message = arguments[i];
-
-			if ( typeof message !== 'string' ) {
-				try {
-					message = JSON.stringify( message );
-				} catch ( e ) {
-					RSS_TICKER_FEED_MANAGER.log( 'Exception in logging.' );
-					continue;
-				}
-			}
-
-			Cc["@mozilla.org/consoleservice;1"]
-				.getService(Ci.nsIConsoleService)
-				.logStringMessage( "RSSTICKER: " + message );
-		}
 	},
 
 	QueryInterface : function ( iid ) {

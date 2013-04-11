@@ -20,8 +20,13 @@
 			RSS_TICKER_UI.load();
 		}, false );
 		
+		addEventListener( "beforecustomization", RSS_TICKER_UI.beforeCustomization, false );
+		addEventListener( "aftercustomization", RSS_TICKER_UI.afterCustomization, false );
+		
 		addEventListener( "unload", function () {
 			removeEventListener( "unload", arguments.callee, false );
+			removeEventListener( "aftercustomization", RSS_TICKER_UI.afterCustomization, false );
+			removeEventListener( "beforecustomization", RSS_TICKER_UI.beforeCustomization, false );
 			
 			RSS_TICKER_UI.unload();
 			RSS_TICKER_FEED_MANAGER.unload();
@@ -30,8 +35,9 @@
 		]]>
 	</script>
 	<toolbarpalette id="BrowserToolbarPalette">
-		<toolbaritem id="rss-ticker-toolbar-item" class="chromeclass-toolbar-additional" title="&rssticker.title;" flex="1">
-			<hbox id="rss-ticker-item-container" />
+		<toolbaritem id="rss-ticker-toolbar-item" class="chromeclass-toolbar-additional" title="&rssticker.title;" width="200">
+			<toolbarbutton label="&rssticker.title;" id="rss-ticker-customizing-placeholder" />
+			<hbox id="rss-ticker-item-container" class="rss-ticker-live-only" />
 		</toolbaritem>
 	</toolbarpalette>
 	<popupset id="mainPopupSet">
@@ -49,15 +55,11 @@
 			<menuitem context="toolbarbutton" accesskey="&rssticker.cm.markAsRead.key;" command="rss-ticker_cmd_markAsRead"/>
 			<menuitem context="toolbarbutton" accesskey="&rssticker.cm.markFeedAsRead.key;" command="rss-ticker_cmd_markFeedAsRead"/>
 			<menuitem accesskey="&rssticker.cm.markAllAsRead.key;" command="rss-ticker_cmd_markAllAsRead"/>
-<!--			<menuseparator />
-			<menuitem command="rss-ticker_cmd_options"/>
-			<menuitem command="rss-ticker_cmd_disableTicker"/>
-			-->
 		</menupopup>
 		<tooltip id="rss-ticker-tooltip" noautohide="true">
 			<hbox align="center">
 				<image id="rss-ticker-tooltip-image" />
-				<vbox>
+				<vbox class="rss-ticker-tooltip-header">
 					<label id="rss-ticker-tooltip-feed-name" />
 					<label id="rss-ticker-tooltip-item-name" />
 					<label id="rss-ticker-tooltip-url" />
@@ -80,7 +82,6 @@
 		<command id="rss-ticker_cmd_markAsRead" label="&rssticker.cm.markAsRead;"/>
 		<command id="rss-ticker_cmd_markFeedAsRead" label="&rssticker.cm.markFeedAsRead;"/>
 		<command id="rss-ticker_cmd_markAllAsRead" label="&rssticker.cm.markAllAsRead;"/>
-		<command id="rss-ticker_cmd_options" label="&rssticker.options;" />
 		<command id="rss-ticker_cmd_disableTicker" label="&rssticker.disableTicker;"/>
 	</commandset>
 </overlay>

@@ -3,6 +3,30 @@
 	overflow: hidden;
 }
 
+.rss-ticker-live-preview-only {
+	display: none;
+}
+
+toolbarpaletteitem .rss-ticker-live-preview-only {
+	display: block;
+}
+
+#palette-box .rss-ticker-live-preview-only {
+	display: none;
+}
+
+toolbarpaletteitem .rss-ticker-live-only {
+	display: none;
+}
+
+#rss-ticker-customizing-placeholder {
+	display: none;
+}
+
+toolbarpaletteitem #rss-ticker-customizing-placeholder {
+	display: block;
+}
+
 #rss-ticker-toolbar-item toolbarbutton[image] {
 	min-height: 16px;
 	max-height: 16px;
@@ -22,7 +46,18 @@
 #rss-ticker-tooltip {
 	-moz-appearance: none;
 	background-color: #fff;
+	width: 400px;
+	min-width: 400px;
 	max-width: 400px;
+}
+
+.rss-ticker-tooltip-header label {
+	max-width: 350px;
+	text-overflow: ellipsis;
+}
+
+#rss-ticker-tooltip-summary-container {
+	max-width: 380px;
 }
 
 #rss-ticker-tooltip-image {
@@ -30,7 +65,7 @@
 	height: 16px;
 	max-width: 16px;
 	max-height: 16px;
-	margin: 0 1ex;
+	margin: 0 5px;
 }
 
 #rss-ticker-tooltip-feed-name {
@@ -39,4 +74,8 @@
 
 #rss-ticker-tooltip-item-name {
 	text-decoration: underline;
+}
+
+#rss-ticker-customizing-placeholder {
+	list-style-image: url(chrome://rss-ticker/skin/feed-icon-16.png);
 }
