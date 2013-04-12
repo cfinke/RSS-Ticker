@@ -17,6 +17,7 @@ var RSS_TICKER_FEED_MANAGER = {
 	timers : {},
 
 	initialFetch : true,
+	feedFetchTimeout : null,
 	
 	load : function () {
 		++RSS_TICKER_FEED_MANAGER.loadCount;
@@ -54,8 +55,6 @@ var RSS_TICKER_FEED_MANAGER = {
 
 				for ( var i = 0, _len = livemarkIDs.length; i < _len; i++ )
 					RSS_TICKER_FEED_MANAGER.addLivemark( livemarkIDs[i] );
-
-				RSS_TICKER_FEED_MANAGER.setTimeout( RSS_TICKER_FEED_MANAGER.updateNextFeed, 1000 * 5 );
 			}, 0 );
 		}
 	},
@@ -154,6 +153,9 @@ var RSS_TICKER_FEED_MANAGER = {
 			
 			if ( notifyNoFeeds )
 				view.notifyNoFeeds();
+			
+			if ( RSS_TICKER_FEED_MANAGER.viewCount() == 1 )
+				RSS_TICKER_FEED_MANAGER.feedFetchTimeout = RSS_TICKER_FEED_MANAGER.setTimeout( RSS_TICKER_FEED_MANAGER.updateNextFeed, 1000 * 5 );
 		}, 0 );
 		
 		return viewKey;
@@ -161,6 +163,18 @@ var RSS_TICKER_FEED_MANAGER = {
 	
 	unregisterView : function ( viewKey ) {
 		delete this.views[viewKey];
+		
+		if ( RSS_TICKER_FEED_MANAGER.viewCount() == 0 )
+			RSS_TICKER_FEED_MANAGER.clearTimeout( RSS_TICKER_FEED_MANAGER.feedFetchTimeout );
+	},
+	
+	viewCount : function () {
+		var count = 0;
+		
+		for ( var view in RSS_TICKER_FEED_MANAGER.views )
+			count++;
+		
+		return count;
 	},
 	
 	getCacheFile : function () {
@@ -221,7 +235,7 @@ var RSS_TICKER_FEED_MANAGER = {
 		if ( RSS_TICKER_FEED_MANAGER.initialFetch )
 			interval = 1000 * 5;
 		
-		RSS_TICKER_FEED_MANAGER.setTimeout( RSS_TICKER_FEED_MANAGER.updateNextFeed, interval );
+		RSS_TICKER_FEED_MANAGER.feedFetchTimeout = RSS_TICKER_FEED_MANAGER.setTimeout( RSS_TICKER_FEED_MANAGER.updateNextFeed, interval );
 	},
 	
 	updateSingleFeed : function ( feedURL ) {
