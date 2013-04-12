@@ -38,7 +38,6 @@ var RSS_TICKER_UI = {
 		
 		RSS_TICKER_UI.loadCommands();
 		
-		RSS_TICKER_UTILS.prefs.QueryInterface( Ci.nsIPrefBranch2 );
 		RSS_TICKER_UTILS.prefs.addObserver( "", this, false );
 		
 		RSS_TICKER_UI.observe( null, "nsPref:changed", "hideWhenEmpty" );

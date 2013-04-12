@@ -26,4 +26,7 @@ var RSS_TICKER_UTILS = {
 	},
 };
 
+RSS_TICKER_UTILS.prefs.QueryInterface( Ci.nsIPrefBranch2 );
+
+
 var EXPORTED_SYMBOLS = ["RSS_TICKER_UTILS"];
