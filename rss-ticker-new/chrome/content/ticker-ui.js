@@ -456,11 +456,15 @@ var RSS_TICKER_UI = {
 	},
 	
 	scrollTicker : function ( distance ) {
-		if ( ! distance )
+		if ( distance )
+			RSS_TICKER_UTILS.log( "Scroll distance: " + distance );
+			
+		if ( ! distance ) {
 			distance = 200 / RSS_TICKER_UI.tickSmoothness;
 			
-		if ( distance < 1 )
-			distance = 1;
+			if ( distance < 1 )
+				distance = 1;
+		}
 
 		var currentMargin = parseInt( RSS_TICKER_UI.ticker.style.marginLeft, 10 );
 
@@ -475,7 +479,7 @@ var RSS_TICKER_UI = {
 			}
 			else if ( currentMargin < ( RSS_TICKER_UI.ticker.scrollWidth * -1 ) ) {
 				// Being scrolled back manually.
-				RSS_TICKER_UI.ticker.style.marginLeft = ( document.getElementById( 'rss-ticker-toolbar-item' ).clientWidth * -1 ) + 'px';
+				RSS_TICKER_UI.ticker.style.marginLeft = ( document.getElementById( 'rss-ticker-toolbar-item' ).clientWidth ) + 'px';
 			}
 			else {
 				RSS_TICKER_UI.ticker.style.marginLeft = currentMargin + 'px';
@@ -483,17 +487,23 @@ var RSS_TICKER_UI = {
 		}
 		else {
 			currentMargin -= distance;
+			if ( arguments.length )
+				RSS_TICKER_UTILS.log( currentMargin + " vs " + document.getElementById( 'rss-ticker-toolbar-item' ).clientWidth );
 			
 			if ( currentMargin < ( RSS_TICKER_UI.ticker.scrollWidth * -1 ) ) {
 				RSS_TICKER_UI.ticker.style.marginLeft = document.getElementById( 'rss-ticker-toolbar-item' ).clientWidth + ( 1 - distance ) + 'px';
 			}
-			else if ( currentMargin > RSS_TICKER_UI.ticker.scrollWidth ) {
+			else if ( currentMargin > document.getElementById( 'rss-ticker-toolbar-item' ).clientWidth ) {
 				// Being scrolled back manually.
-				RSS_TICKER_UI.ticker.style.marginLeft = ( RSS_TICKER_UI.ticker.scrollWidth * -1 ) + ( currentMargin - RSS_TICKER_UI.ticker.scrollWidth ) + 'px';
+				RSS_TICKER_UI.ticker.style.marginLeft = ( RSS_TICKER_UI.ticker.scrollWidth * -1 ) + ( currentMargin - document.getElementById( 'rss-ticker-toolbar-item' ).clientWidth ) + 'px';
 			}
 			else {
 				RSS_TICKER_UI.ticker.style.marginLeft = currentMargin + 'px';
 			}
 		}
+		
+		if ( arguments.length > 0 )
+			RSS_TICKER_UTILS.log( "Scrolled to: " + RSS_TICKER_UI.ticker.style.marginLeft );
+		
 	},
 };
