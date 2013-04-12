@@ -272,22 +272,27 @@ var RSS_TICKER_UI = {
 			document.getElementById( commandId ).removeEventListener( 'command', RSS_TICKER_UI.commands[commandId], false );
 	},
 	
-	addToolbarButton : function ( buttonId ) {
+	addToolbarButton : function ( buttonId, toolbarId ) {
 		if ( document.getElementById( buttonId ) )
-			return;
+			return false;
 		
-		var toolbar = document.getElementById( "nav-bar" );
+		if ( ! toolbarId )
+			toolbarId = 'nav-bar';
+		
+		var toolbar = document.getElementById( toolbarId );
 			
-		if ( toolbar.getAttribute( "collapsed" ) == "true" )
-			return;
+		if ( ! toolbar || toolbar.getAttribute( "collapsed" ) == "true" )
+			return false;
 
-		toolbar.currentSet = toolbar.currentSet + ',' + buttonId;
-		toolbar.setAttribute( "currentset", newSet );
+		toolbar.currentSet += ',' + buttonId;
+		toolbar.setAttribute( "currentset", toolbar.currentSet );
 		document.getElementById( "navigator-toolbox" ).ownerDocument.persist( toolbar.id, "currentset" );
 
 		try {
 			BrowserToolboxCustomizeDone(true);
 		} catch ( e ) { }
+		
+		return true;
 	},
 	
 	launchURL : function ( url, event ) {
