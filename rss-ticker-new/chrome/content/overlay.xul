@@ -34,6 +34,14 @@
 		
 		]]>
 	</script>
+	<toolbox id="navigator-toolbox">
+		<toolbar id="rss-ticker-replacement-toolbar"
+			toolbarname="&rssticker.title;"
+			customizable="true"
+			mode="icons"
+			defaultset="feed-button"
+			insertbefore="PersonalToolbar" />
+	</toolbox>
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbaritem id="rss-ticker-toolbar-item" class="chromeclass-toolbar-additional" title="&rssticker.title;" width="200">
 			<toolbarbutton label="&rssticker.title;" id="rss-ticker-customizing-placeholder" />

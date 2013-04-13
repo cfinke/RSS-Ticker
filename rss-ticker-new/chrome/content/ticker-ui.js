@@ -9,15 +9,49 @@ var RSS_TICKER_UI = {
 	rtl : false,
 	
 	load : function () {
-		Application.getExtensions( function ( extensions ) {
-			let extension = extensions.get( '{1f91cde0-c040-11da-a94d-0800200c9a66}' );
+		setTimeout( RSS_TICKER_UI.showFirstRun, 5000 );
 
-			if ( extension.firstRun ) {
-				// Add the subscribe toolbar button, as Firefox 4 removes it.
-				RSS_TICKER_UI.addToolbarButton( "feed-button" );
+		setTimeout( function () {
+		if ( ! RSS_TICKER_UTILS.prefs.getBoolPref( "subscribeIconCheck" ) ) {
+			RSS_TICKER_UTILS.prefs.setBoolPref( "subscribeIconCheck", true );
+
+			RSS_TICKER_UI.addToolbarButton( "feed-button" );
+		}
+		
+		// Upgrade from previous version.
+		if ( RSS_TICKER_UTILS.prefs.getIntPref( 'tickerPlacement' ) ) {
+			if ( ! RSS_TICKER_UTILS.prefs.getBoolPref( 'disabled' ) ) {
+				if ( ! document.getElementById( 'rss-ticker-item-container' ) ) {
+					switch ( RSS_TICKER_UTILS.prefs.getIntPref( 'tickerPlacement' ) ) {
+						case 1:
+							// Addon bar
+							if ( document.getElementById( 'addon-bar' ).getAttribute( 'collapsed' ) ) {
+								document.getElementById( 'addon-bar' ).collapsed = false;
+								document.getElementById( 'addon-bar' ).ownerDocument.persist( 'addon-bar', 'collapsed' );
+							}
+							
+							RSS_TICKER_UI.addToolbarButton( 'rss-ticker-toolbar-item', 'addon-bar' );
+						break;
+						case 2:
+							RSS_TICKER_UTILS.log( "Trying." );
+							RSS_TICKER_UTILS.log( RSS_TICKER_UI.addToolbarButton( 'rss-ticker-toolbar-item', 'rss-ticker-replacement-toolbar' ) );
+						break;
+					}
+					
+				}
 			}
-		})
-
+			
+			RSS_TICKER_UTILS.prefs.setIntPref( 'tickerPlacement', 0 );
+		}
+		
+		if ( document.getElementById( 'rss-ticker-replacement-toolbar' ).childNodes.length == 0 )
+			document.getElementById( 'rss-ticker-replacement-toolbar' ).parentNode.removeChild( document.getElementById( 'rss-ticker-replacement-toolbar' ) );
+		
+		RSS_TICKER_UI.loadTicker();
+	}, 3000 );
+	},
+	
+	loadTicker : function () {
 		RSS_TICKER_UI.ticker = document.getElementById( 'rss-ticker-item-container' );
 		
 		if ( ! RSS_TICKER_UI.ticker )
@@ -51,6 +85,9 @@ var RSS_TICKER_UI = {
 	},
 	
 	unload : function () {
+	},
+	
+	unloadTicker : function () {
 		RSS_TICKER_FEED_MANAGER.unregisterView( this.viewKey );
 		
 		clearTimeout( this.tickTimeout );
@@ -71,19 +108,71 @@ var RSS_TICKER_UI = {
 		RSS_TICKER_UI.ticker = null;
 	},
 	
+	showFirstRun : function () {
+		var lastVersion = RSS_TICKER_UTILS.prefs.getCharPref( "lastVersion" );
+		var lastMajorVersion = lastVersion.split( '.' ).shift();
+		
+		if ( lastMajorVersion < 13 )
+			openUILinkIn( "http://www.chrisfinke.com/addons/rss-ticker/firstrun-rewrite", "tab" );
+		
+		Cu.import( "resource://gre/modules/AddonManager.jsm" );  
+		
+		AddonManager.getAddonByID( "{1f91cde0-c040-11da-a94d-0800200c9a66}", function ( addon ) {
+			if ( addon.version == lastVersion )
+				return;
+
+			RSS_TICKER_UTILS.prefs.setCharPref( "lastVersion", addon.version );
+
+			if ( lastMajorVersion >= 13 ) {
+				function isMajorUpdate( oldVersion, newVersion ) {
+					if ( ! oldVersion )
+						return true;
+
+					var oldParts = oldVersion.split( "." );
+					var newParts = newVersion.split( "." );
+
+					if ( newParts[0] != oldParts[0] )
+						return true;
+
+					return false;
+				}
+
+				if ( isMajorUpdate ( lastVersion, addon.version ) )
+					openUILinkIn( "http://www.chrisfinke.com/firstrun/rss-ticker.php?v=" + addon.version, 'tab' );
+			}
+		} );
+	},
+	
+	oldHideWhenEmpty : null,
+	
 	beforeCustomization : function () {
+		RSS_TICKER_UI.oldHideWhenEmpty = RSS_TICKER_UTILS.prefs.getBoolPref( 'hideWhenEmpty' );
+		RSS_TICKER_UTILS.prefs.setBoolPref( 'hideWhenEmpty', false );
+		
 		if ( document.getElementById( 'rss-ticker-toolbar-item' ) )
 			document.getElementById( 'rss-ticker-toolbar-item' ).setAttribute( 'customizing', 'true' );
 	},
 	
 	afterCustomization : function () {
-		if ( document.getElementById( 'rss-ticker-toolbar-item' ) )
+		clearTimeout( RSS_TICKER_UI.tickTimeout );
+		
+		RSS_TICKER_UTILS.prefs.setBoolPref( 'hideWhenEmpty', RSS_TICKER_UI.oldHideWhenEmpty );
+		RSS_TICKER_UI.oldHideWhenEmpty = null;
+		
+		if ( document.getElementById( 'rss-ticker-toolbar-item' ) ) {
 			document.getElementById( 'rss-ticker-toolbar-item' ).removeAttribute( 'customizing' );
-
-		if ( ! RSS_TICKER_UI.ticker && document.getElementById( 'rss-ticker-toolbar-item' ) )
-			RSS_TICKER_UI.load();
-		else if ( RSS_TICKER_UI.ticker && ! document.getElementById( 'rss-ticker-toolbar-item' ) )
-			RSS_TICKER_UI.unload();
+			
+			if ( ! RSS_TICKER_UI.ticker )
+				RSS_TICKER_UI.loadTicker();
+			else
+				RSS_TICKER_UI.tick();
+		}
+		else if ( RSS_TICKER_UI.ticker ) {
+			RSS_TICKER_UI.unloadTicker();
+		}
+			
+		if ( document.getElementById( 'rss-ticker-replacement-toolbar' ).childNodes.length == 0 )
+			document.getElementById( 'rss-ticker-replacement-toolbar' ).parentNode.removeChild( document.getElementById( 'rss-ticker-replacement-toolbar' ) );
 	},
 	
 	events : {
@@ -456,9 +545,6 @@ var RSS_TICKER_UI = {
 	},
 	
 	scrollTicker : function ( distance ) {
-		if ( distance )
-			RSS_TICKER_UTILS.log( "Scroll distance: " + distance );
-			
 		if ( ! distance ) {
 			distance = 200 / RSS_TICKER_UI.tickSmoothness;
 			
@@ -487,8 +573,6 @@ var RSS_TICKER_UI = {
 		}
 		else {
 			currentMargin -= distance;
-			if ( arguments.length )
-				RSS_TICKER_UTILS.log( currentMargin + " vs " + document.getElementById( 'rss-ticker-toolbar-item' ).clientWidth );
 			
 			if ( currentMargin < ( RSS_TICKER_UI.ticker.scrollWidth * -1 ) ) {
 				RSS_TICKER_UI.ticker.style.marginLeft = document.getElementById( 'rss-ticker-toolbar-item' ).clientWidth + ( 1 - distance ) + 'px';
@@ -501,9 +585,5 @@ var RSS_TICKER_UI = {
 				RSS_TICKER_UI.ticker.style.marginLeft = currentMargin + 'px';
 			}
 		}
-		
-		if ( arguments.length > 0 )
-			RSS_TICKER_UTILS.log( "Scrolled to: " + RSS_TICKER_UI.ticker.style.marginLeft );
-		
 	},
 };
