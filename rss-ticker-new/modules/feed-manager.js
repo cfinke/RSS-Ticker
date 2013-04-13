@@ -13,19 +13,19 @@ var RSS_TICKER_FEED_MANAGER = {
 	livemarks : [],
 	feeds : {},
 	views : {},
-	
+
 	timers : {},
 
 	initialFetch : true,
 	feedFetchTimeout : null,
-	
+
 	load : function () {
 		++RSS_TICKER_FEED_MANAGER.loadCount;
 
 		if ( 1 == RSS_TICKER_FEED_MANAGER.loadCount ) {
 			RSS_TICKER_FEED_MANAGER.setTimeout( function __delayedStartup() {
 				var file = this.getCacheFile();
-				
+
 				if ( file.exists() ) {
 					var data = new String();
 					var fiStream = Cc['@mozilla.org/network/file-input-stream;1'].createInstance( Ci.nsIFileInputStream );
@@ -48,7 +48,7 @@ var RSS_TICKER_FEED_MANAGER = {
 						file.remove( false );
 					}
 				}
-				
+
 				PlacesUtils.bookmarks.addObserver( RSS_TICKER_FEED_MANAGER, false );
 
 				var livemarkIDs = PlacesUtils.annotations.getItemsWithAnnotation( "livemark/feedURI", {} );
@@ -65,12 +65,12 @@ var RSS_TICKER_FEED_MANAGER = {
 		if ( 0 == RSS_TICKER_FEED_MANAGER.loadCount ) {
 			for ( var timerKey in this.timers )
 				this.clearTimeout( timerKey );
-			
+
 			var data = JSON.stringify( this.feeds );
 
 			if ( '{}' != data ) {
 				var file = this.getCacheFile();
-				
+
 				// Store the data as UTF-8, not the Unicode that JSON outputs.
 				var unicodeConverter = Cc["@mozilla.org/intl/scriptableunicodeconverter"].createInstance( Ci.nsIScriptableUnicodeConverter );
 				unicodeConverter.charset = "UTF-8";
@@ -82,18 +82,18 @@ var RSS_TICKER_FEED_MANAGER = {
 				foStream.write( data, data.length );
 				foStream.close();
 			}
-			
+
 			this.updateIndex = 0;
 			this.livemarks = [];
 			this.feeds = {};
-			
+
 			PlacesUtils.bookmarks.removeObserver( this );
 		}
 	},
 
 	setTimeout : function ( callback, interval ) {
 		var timerKey = callback.name + ":" + Date.now();
-		
+
 		var cb = {
 			notify : function () {
 				callback.apply( RSS_TICKER_FEED_MANAGER, arguments );
@@ -110,7 +110,7 @@ var RSS_TICKER_FEED_MANAGER = {
 
 	setInterval : function ( callback, interval ) {
 		var timerKey = callback.name + ":" + Date.now();
-		
+
 		var cb = {
 			notify : function () {
 				callback.apply( RSS_TICKER_FEED_MANAGER, arguments );
@@ -134,53 +134,53 @@ var RSS_TICKER_FEED_MANAGER = {
 	clearInterval : function ( timerKey ) {
 		return RSS_TICKER_FEED_MANAGER.clearTimeout( timerKey );
 	},
-	
+
 	registerView : function ( view ) {
 		var viewKey = (new Date()).getTime();
-		
+
 		this.views[viewKey] = view;
-		
+
 		for ( var feedId in this.feeds )
 			view.feedParsed( this.feeds[feedId] );
-		
+
 		this.setTimeout( function __delayFeedNotificationUntilRegistrationCompletes() {
 			var notifyNoFeeds = true;
-			
+
 			for ( var feedId in RSS_TICKER_FEED_MANAGER.feeds ) {
 				view.feedParsed( RSS_TICKER_FEED_MANAGER.feeds[feedId] );
 				notifyNoFeeds = false;
 			}
-			
+
 			if ( notifyNoFeeds )
 				view.notifyNoFeeds();
-			
+
 			if ( RSS_TICKER_FEED_MANAGER.viewCount() == 1 )
 				RSS_TICKER_FEED_MANAGER.feedFetchTimeout = RSS_TICKER_FEED_MANAGER.setTimeout( RSS_TICKER_FEED_MANAGER.updateNextFeed, 1000 * 5 );
 		}, 0 );
-		
+
 		return viewKey;
 	},
-	
+
 	unregisterView : function ( viewKey ) {
 		delete this.views[viewKey];
-		
+
 		if ( RSS_TICKER_FEED_MANAGER.viewCount() == 0 )
 			RSS_TICKER_FEED_MANAGER.clearTimeout( RSS_TICKER_FEED_MANAGER.feedFetchTimeout );
 	},
-	
+
 	viewCount : function () {
 		var count = 0;
-		
+
 		for ( var view in RSS_TICKER_FEED_MANAGER.views )
 			count++;
-		
+
 		return count;
 	},
-	
+
 	getCacheFile : function () {
 		var file = Cc['@mozilla.org/file/directory_service;1'].getService( Ci.nsIProperties ).get( 'ProfD', Ci.nsIFile );
 		file.append( "rss-ticker.cache" );
-		
+
 		return file;
 	},
 
@@ -188,7 +188,7 @@ var RSS_TICKER_FEED_MANAGER = {
 		PlacesUtils.livemarks.getLivemark( { id : livemark }, function ( status, livemark ) {
 			if ( Components.isSuccessCode( status ) ) {
 				RSS_TICKER_FEED_MANAGER.livemarks.push( livemark );
-				
+
 				RSS_TICKER_FEED_MANAGER.updateSingleFeed( livemark.feedURI.spec );
 			}
 		} );
@@ -198,16 +198,16 @@ var RSS_TICKER_FEED_MANAGER = {
 		for ( var i = 0, _len = this.livemarks.length; i < _len; i++ ) {
 			if ( livemarkId == this.livemarks[i].id ) {
 				var feedGUID = this.livemarks[i].feedURI.spec;
-				
+
 				for ( var viewKey in this.views ) {
 					this.views[viewKey].removeFeed( feedGUID );
 				}
-				
+
 				if ( feedGUID in this.feeds )
 					delete this.feeds[feedGUID];
-				
+
 				this.livemarks.splice( i, 1 );
-				
+
 				break;
 			}
 		}
@@ -223,18 +223,18 @@ var RSS_TICKER_FEED_MANAGER = {
 			var feedURL = this.livemarks[this.updateIndex].feedURI.spec;
 
 			++this.updateIndex;
-		
+
 			this.updateSingleFeed( feedURL );
 		}
-		
+
 		var interval = 1000 * 60 * 5;
-	
+
 		if ( RSS_TICKER_FEED_MANAGER.initialFetch )
 			interval = 1000 * 5;
-		
+
 		RSS_TICKER_FEED_MANAGER.feedFetchTimeout = RSS_TICKER_FEED_MANAGER.setTimeout( RSS_TICKER_FEED_MANAGER.updateNextFeed, interval );
 	},
-	
+
 	updateSingleFeed : function ( feedURL ) {
 		var req = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance( Ci.nsIXMLHttpRequest );
 		req.open( "GET", feedURL, true );
@@ -266,7 +266,7 @@ var RSS_TICKER_FEED_MANAGER = {
 				}
 			}
 		};
-		
+
 		req.send( null );
 	},
 
@@ -293,15 +293,15 @@ var RSS_TICKER_FEED_MANAGER = {
 				// Done. Alert the views if anything changed.
 				if ( ! ( feed.uri in RSS_TICKER_FEED_MANAGER.feeds ) || ( JSON.stringify( feed ) != JSON.stringify( RSS_TICKER_FEED_MANAGER.feeds[feed.uri] ) ) ) {
 					RSS_TICKER_FEED_MANAGER.feeds[feed.uri] = feed;
-				
+
 					for ( var viewKey in RSS_TICKER_FEED_MANAGER.views ) {
 						RSS_TICKER_FEED_MANAGER.views[viewKey].feedParsed( feed );
 					}
 				}
-				
+
 				return;
 			}
-			
+
 			PlacesUtils.asyncHistory.isURIVisited(
 				PlacesUIUtils.createFixedURI( feed.items[itemIndex].url ),
 				function ( uri, visited ) {
@@ -310,10 +310,10 @@ var RSS_TICKER_FEED_MANAGER = {
 				}
 			);
 		}
-		
+
 		markNextVisited( 0 );
 	},
-	
+
 	markAsRead : function ( item ) {
 		// Add the URL to the browser history.
 		let place = {
@@ -321,7 +321,7 @@ var RSS_TICKER_FEED_MANAGER = {
 			title : item.label,
 			visits : [ { visitDate : Date.now() * 1000, transitionType : Ci.nsINavHistoryService.TRANSITION_LINK } ],
 		};
-		
+
 		PlacesUtils.asyncHistory.updatePlaces( place, {
 			handleError : function () { },
 			handleResult : function () { },
@@ -330,7 +330,7 @@ var RSS_TICKER_FEED_MANAGER = {
 					RSS_TICKER_FEED_MANAGER.views[viewKey].itemVisited( item.url, item.guid );
 			}
 		} );
-		
+
 		// Update this.feeds too so that the restart cache stays in sync
 		for ( var i = 0, _len = this.feeds[item.feedGUID].items.length; i < _len; i++ ) {
 			if ( this.feeds[item.feedGUID].items[i].guid == item.guid ) {
@@ -339,7 +339,7 @@ var RSS_TICKER_FEED_MANAGER = {
 			}
 		}
 	},
-	
+
 	notifyNoFeeds : function () {
 		for ( var viewKey in RSS_TICKER_FEED_MANAGER.views )
 			RSS_TICKER_FEED_MANAGER.views[viewKey].notifyNoFeeds();
@@ -392,7 +392,7 @@ TickerParseListener.prototype = {
 
 			if ( feed ) {
 				feed.QueryInterface( Ci.nsIFeed );
-				
+
 				// @todo Check lastBuildDate and sy:updatePeriod+sy:updateFrequency to determine the next update time.
 
 				var feedObject = {
@@ -406,7 +406,7 @@ TickerParseListener.prototype = {
 
 				feedObject.uri = resolvedUri;
 				feedObject.guid = resolvedUri;
-				
+
 				try {
 					feedObject.siteUri = feed.link.resolve( "" );
 				} catch ( e ) {
@@ -464,12 +464,12 @@ TickerParseListener.prototype = {
 						itemObject.description = "No summary.";
 
 					itemObject.description = this.entityDecode( itemObject.description ).replace( /<[^>]+>/g, '' );
-					
+
 					if ( itemObject.description.length > 305 )
 						itemObject.description = itemObject.description.substr( 0, itemObject.description.indexOf( ' ', 300 ) - 1 ) + '...';
-					
+
 					itemObject.label = this.entityDecode( itemObject.label );
-					
+
 					feedObject.items.push( itemObject );
 				}
 			}
