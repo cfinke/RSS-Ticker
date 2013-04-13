@@ -33,8 +33,7 @@ var RSS_TICKER_UI = {
 							RSS_TICKER_UI.addToolbarButton( 'rss-ticker-toolbar-item', 'addon-bar' );
 						break;
 						case 2:
-							RSS_TICKER_UTILS.log( "Trying." );
-							RSS_TICKER_UTILS.log( RSS_TICKER_UI.addToolbarButton( 'rss-ticker-toolbar-item', 'rss-ticker-replacement-toolbar' ) );
+							RSS_TICKER_UI.addToolbarButton( 'rss-ticker-toolbar-item', 'rss-ticker-replacement-toolbar' );
 						break;
 					}
 					

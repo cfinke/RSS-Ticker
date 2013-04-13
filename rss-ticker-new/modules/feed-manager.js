@@ -214,12 +214,9 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 
 	updateNextFeed : function () {
-		RSS_TICKER_UTILS.log( "updateNextFeed" );
-		
 		if ( this.updateIndex >= this.livemarks.length ) {
 			this.updateIndex = 0;
 			this.initialFetch = false;
-			RSS_TICKER_UTILS.log( "Not initial fetch" );
 		}
 
 		if ( this.livemarks.length > 0 ) {
@@ -274,7 +271,6 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 
 	queueForParsing : function ( feedText, feedURL ) {
-		RSS_TICKER_UTILS.log( "queueForParsing" );
 		if ( feedText.length ) {
 			var parser = Cc["@mozilla.org/feed-processor;1"].createInstance( Ci.nsIFeedProcessor );
 			var listener = new TickerParseListener();
