@@ -1,5 +1,3 @@
-// @todo When the ticker is empty, shrink it to an optimal size.
-
 var RSS_TICKER_UI = {
 	viewKey : null,
 	ticker : null,
@@ -345,9 +343,9 @@ var RSS_TICKER_UI = {
 			}
 		},
 		
-		'rss-ticker_cmd_disableTicker' : function ( event ) {
-			// @todo RSSTICKER.toggleDisabled();
-		},
+		'rss-ticker_cmd_ignore' : function ( event ) {
+			RSS_TICKER_FEED_MANAGER.removeLivemark( document.popupNode.itemData.guid );
+		}
 	},
 	
 	loadCommands : function () {

@@ -19,12 +19,13 @@
 <!ENTITY rssticker.cm.markFeedAsRead.key "F">
 <!ENTITY rssticker.cm.markAllAsRead "Mark All as Read">
 <!ENTITY rssticker.cm.markAllAsRead.key "A">
+<!ENTITY rssticker.cm.ignore "Ignore this feed">
+<!ENTITY rssticker.cm.ignore.key "I">
 <!ENTITY rssticker.options.speed "Ticker Speed">
 <!ENTITY rssticker.options.speed.description "(1 is fastest; 12 is default)">
 <!ENTITY rssticker.options.smooothness "Ticker Scroll Smoothness">
 <!ENTITY rssticker.options.smooothness.description "200 is smoothest (and the default) but takes the most resources. Turn this down if your computer is having problems keeping up.">
 <!ENTITY rssticker.tt.summary "Summary">
-<!ENTITY rssticker.disableTicker "Disable ticker">
 <!ENTITY rssticker.options.openInNewTab "Always open links in new tabs.">
 <!ENTITY rssticker.options.reverseDirection "Reverse ticker direction">
 <!ENTITY rssticker.toggleTicker "Toggle ticker on/off">

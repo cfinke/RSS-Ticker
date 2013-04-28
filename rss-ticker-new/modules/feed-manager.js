@@ -51,6 +51,9 @@ var RSS_TICKER_FEED_MANAGER = {
 
 				PlacesUtils.bookmarks.addObserver( RSS_TICKER_FEED_MANAGER, false );
 
+				// Upgrade from the old ignore file.
+				RSS_TICKER_FEED_MANAGER.upgradeIgnoreFile();
+
 				var livemarkIDs = PlacesUtils.annotations.getItemsWithAnnotation( "livemark/feedURI", {} );
 
 				for ( var i = 0, _len = livemarkIDs.length; i < _len; i++ )
@@ -178,18 +181,72 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 
 	getCacheFile : function () {
-		var file = Cc['@mozilla.org/file/directory_service;1'].getService( Ci.nsIProperties ).get( 'ProfD', Ci.nsIFile );
-		file.append( "rss-ticker.cache" );
+		Cu.import( "resource://gre/modules/FileUtils.jsm" );
+		
+		return FileUtils.getFile( "ProfD", [ "rss-ticker.cache" ]);
+	},
 
-		return file;
+	upgradeIgnoreFile : function () {
+		if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'ignoreFileUpgraded' ) )
+			return;
+		
+		RSS_TICKER_UTILS.prefs.setBoolPref( 'ignoreFileUpgraded', true );
+		
+		var line = { value: "" };
+		var feeds = [];
+		
+		Cu.import( "resource://gre/modules/FileUtils.jsm" );
+		
+		var ignoreFile = FileUtils.getFile( "ProfD", [ "rss-ticker.ignore.txt" ]);
+		
+		if ( ! ignoreFile.exists() )
+			return;
+		
+		var inputStream = Cc["@mozilla.org/network/file-input-stream;1"].createInstance( Ci.nsIFileInputStream );
+		inputStream.init( ignoreFile, 0x01, 0600, null );
+		
+		var lineStream = inputStream.QueryInterface( Ci.nsILineInputStream );
+
+		var stillInFile = false;
+
+		do {
+			stillInFile = lineStream.readLine( line );
+
+			if ( "" == line.value )
+				continue;
+			else
+				feeds.push( line.value );
+		} while ( stillInFile );
+
+		lineStream.close();
+		inputStream.close();
+
+		ignoreFile.remove( false );
+
+		var livemarkIds = PlacesUtils.annotations.getItemsWithAnnotation( "livemark/feedURI", {} );
+		
+		for ( var i = 0, _len = livemarkIds.length; i < _len; i++ ) {
+			PlacesUtils.livemarks.getLivemark( { id : livemarkIds[i] }, function ( status, livemark ) {
+				if ( ! Components.isSuccessCode( status ) )
+					return;
+				
+				if ( feeds.indexOf( livemark.feedURI.spec ) > -1 )
+					PlacesUtils.annotations.setItemAnnotation( livemark.id, 'rss-ticker/ignored', true, 0, PlacesUtils.annotations.EXPIRE_NEVER );
+			} );
+		}
 	},
 
 	addLivemark : function ( livemark ) {
 		PlacesUtils.livemarks.getLivemark( { id : livemark }, function ( status, livemark ) {
 			if ( Components.isSuccessCode( status ) ) {
-				RSS_TICKER_FEED_MANAGER.livemarks.push( livemark );
+				RSS_TICKER_FEED_MANAGER.isLivemarkIgnored( livemark, function ( ignored ) {
+					if ( ignored )
+						return;
 
-				RSS_TICKER_FEED_MANAGER.updateSingleFeed( livemark.feedURI.spec );
+					RSS_TICKER_FEED_MANAGER.livemarks.push( livemark );
+
+					RSS_TICKER_FEED_MANAGER.updateSingleFeed( livemark.feedURI.spec );
+				} );
 			}
 		} );
 	},
@@ -285,7 +342,11 @@ var RSS_TICKER_FEED_MANAGER = {
 
 		return this;
 	},
-
+	
+	isLivemarkIgnored : function ( livemark, callback ) {
+		callback( PlacesUtils.annotations.itemHasAnnotation( livemark.id, 'rss-ticker/ignored' ) );
+	},
+	
 	feedParsed : function ( feed ) {
 		// Set visited states.
 		function markNextVisited( itemIndex ) {
@@ -369,8 +430,15 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 
 	onItemChanged : function ( id, property, isAnnotationProperty, value ) {
-		if ( property == "livemark/feedURI" )
+		if ( "livemark/feedURI" == property ) {
 			this.addLivemark( id );
+		}
+		else if ( "rss-ticker/ignored" == property ) {
+			if ( PlacesUtils.annotations.itemHasAnnotation( id, 'rss-ticker/ignored' ) ) 
+				this.removeLivemark( id );
+			else
+				this.addLivemark( id );
+		}
 	},
 
 	onItemAdded : function ( id, folder, index, type, uri, title, time, guid, parentGUID ) { },
