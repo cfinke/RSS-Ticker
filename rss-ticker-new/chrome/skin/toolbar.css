@@ -1,35 +1,19 @@
+.rss-ticker-toolbar {
+	padding: 5px 0;
+}
+
+.rss-ticker-hidden-toolbar {
+	display: none !important;
+}
+
 #rss-ticker-toolbar-item {
 	max-width: 100%;
 	overflow: hidden;
 }
 
-.rss-ticker-live-preview-only {
-	display: none;
-}
-
-toolbarpaletteitem .rss-ticker-live-preview-only {
-	display: block;
-}
-
-#palette-box .rss-ticker-live-preview-only {
-	display: none;
-}
-
-toolbarpaletteitem .rss-ticker-live-only {
-	display: none;
-}
-
-#rss-ticker-customizing-placeholder {
-	display: none;
-}
-
-toolbarpaletteitem #rss-ticker-customizing-placeholder {
-	display: block;
-}
-
 #rss-ticker-toolbar-item toolbarbutton[image] {
-	min-height: 16px;
-	max-height: 16px;
+	min-height: 18px;
+	max-height: 18px;
 	border-width: 1px;
 	padding: 1px 2px;
 }
@@ -74,8 +58,4 @@ toolbarpaletteitem #rss-ticker-customizing-placeholder {
 
 #rss-ticker-tooltip-item-name {
 	text-decoration: underline;
-}
-
-#rss-ticker-customizing-placeholder {
-	list-style-image: url(chrome://rss-ticker/skin/feed-icon-16.png);
 }

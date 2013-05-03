@@ -39,3 +39,6 @@
 <!ENTITY rssticker.hideWhenEmpty "Hide the ticker when it's empty">
 <!ENTITY rssticker.options.width "Ticker width (in pixels)">
 <!ENTITY rssticker.options.width.description "When the ticker isn't the only item in a toolbar, this option determines how much space it takes up.">
+<!ENTITY rssticker.options.tickerPlacement "Ticker Placement">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Below status bar">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Below bookmarks toolbar">

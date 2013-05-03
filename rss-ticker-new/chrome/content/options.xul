@@ -6,10 +6,15 @@
 	%backupLocale;
 ]>
 <vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<setting pref="extensions.rssticker.tickerPlacement" type="radio" title="&rssticker.options.tickerPlacement;">
+		<radiogroup>
+			<radio value="1" label="&rssticker.tickerPlacement.belowStatusBar;" />
+			<radio value="2" label="&rssticker.tickerPlacement.belowBMTB;" />
+		</radiogroup>
+	</setting>
 	<setting pref="extensions.rssticker.tickSpeed" type="integer" title="&rssticker.options.speed;" desc="&rssticker.options.speed.description;" />
 	<setting pref="extensions.rssticker.ticksPerItem" type="integer" title="&rssticker.options.smooothness;" desc="&rssticker.options.smooothness.description;" />
 	<setting pref="extensions.rssticker.alwaysOpenInNewTab" type="bool" title="&rssticker.options.openInNewTab;" />
 	<setting pref="extensions.rssticker.rtl" type="bool" title="&rssticker.options.reverseDirection;" />
 	<setting pref="extensions.rssticker.hideWhenEmpty" type="bool" title="&rssticker.hideWhenEmpty;" />
-	<setting pref="extensions.rssticker.width" type="integer" title="&rssticker.options.width;" desc="&rssticker.options.width.description;" />
 </vbox>
