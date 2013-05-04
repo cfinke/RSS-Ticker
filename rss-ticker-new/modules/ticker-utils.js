@@ -12,10 +12,39 @@ var RSS_TICKER_UTILS = {
 
 			if ( typeof message !== 'string' ) {
 				try {
-					message = JSON.stringify( message );
+					var tryAgain = false;
+					
+					var children = '';
+
+					for ( var j in message ) {
+						try {
+							children += j + ": " + message[j] + "\n";
+						} catch ( e ) {
+							tryAgain = true;
+						}
+					}
+					
+					if ( tryAgain ) {
+						this.log( children );
+						throw "Trying again...";
+					}
+					
+					message = children;
 				} catch ( e ) {
-					this.log( 'Exception in logging.' );
-					continue;
+					this.log( 'First exception in logging: ' + e);
+					
+					try {
+						message = JSON.stringify( message );
+					} catch ( e ) {
+						this.log( 'JSON exception in logging: ' + e);
+						
+						try {
+							message = message.toSource();
+						} catch ( e ) {
+							this.log( 'Final exception in logging: ' + e);
+							continue;
+						}
+					}
 				}
 			}
 
@@ -27,6 +56,5 @@ var RSS_TICKER_UTILS = {
 };
 
 RSS_TICKER_UTILS.prefs.QueryInterface( Ci.nsIPrefBranch2 );
-
 
 var EXPORTED_SYMBOLS = ["RSS_TICKER_UTILS"];

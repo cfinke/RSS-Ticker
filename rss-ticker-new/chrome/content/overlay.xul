@@ -44,7 +44,6 @@
 			<menuitem context="toolbarbutton" accesskey="&rssticker.cm.markAsRead.key;" command="rss-ticker_cmd_markAsRead"/>
 			<menuitem context="toolbarbutton" accesskey="&rssticker.cm.markFeedAsRead.key;" command="rss-ticker_cmd_markFeedAsRead"/>
 			<menuitem accesskey="&rssticker.cm.markAllAsRead.key;" command="rss-ticker_cmd_markAllAsRead"/>
-			<menuitem context="toolbarbutton" accesskey="&rssticker.cm.ignore.key;" command="rss-ticker_cmd_ignore"/>
 		</menupopup>
 		<tooltip id="rss-ticker-tooltip" noautohide="true">
 			<hbox align="center">
@@ -72,6 +71,5 @@
 		<command id="rss-ticker_cmd_markAsRead" label="&rssticker.cm.markAsRead;"/>
 		<command id="rss-ticker_cmd_markFeedAsRead" label="&rssticker.cm.markFeedAsRead;"/>
 		<command id="rss-ticker_cmd_markAllAsRead" label="&rssticker.cm.markAllAsRead;"/>
-		<command id="rss-ticker_cmd_ignore" label="&rssticker.cm.ignore;"/>
 	</commandset>
 </overlay>

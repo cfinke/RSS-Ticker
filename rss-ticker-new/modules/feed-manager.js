@@ -347,6 +347,15 @@ var RSS_TICKER_FEED_MANAGER = {
 		callback( PlacesUtils.annotations.itemHasAnnotation( livemark.id, 'rss-ticker/ignored' ) );
 	},
 	
+	setIgnoredStatus : function ( livemarkId, ignore ) {
+		RSS_TICKER_UTILS.log( "Setting ignore for " + livemarkId + " (" + ignore + ")" );
+		
+		if ( ignore )
+			PlacesUtils.annotations.setItemAnnotation( livemarkId, 'rss-ticker/ignored', true, 0, PlacesUtils.annotations.EXPIRE_NEVER );
+		else
+			PlacesUtils.annotations.removeItemAnnotation( livemarkId, 'rss-ticker/ignored' );
+	},
+	
 	feedParsed : function ( feed ) {
 		// Set visited states.
 		function markNextVisited( itemIndex ) {
@@ -405,7 +414,7 @@ var RSS_TICKER_FEED_MANAGER = {
 		for ( var viewKey in RSS_TICKER_FEED_MANAGER.views )
 			RSS_TICKER_FEED_MANAGER.views[viewKey].notifyNoFeeds();
 	},
-
+	
 	QueryInterface : function ( iid ) {
 		if ( iid.equals( Ci.nsINavBookmarkObserver ) || iid.equals( Ci.nsISupports ) )
 			return this;

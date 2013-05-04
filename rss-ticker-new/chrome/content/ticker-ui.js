@@ -97,13 +97,14 @@ var RSS_TICKER_UI = {
 	},
 	
 	unload : function () {
-		document.getElementById( 'viewToolbarsMenu' ).removeEventListener( "command", RSS_TICKER_UI.toolbarMenuEvent, false );
-		
 		RSS_TICKER_UI.unloadTicker();
 		
 		RSS_TICKER_UTILS.prefs.removeObserver( "", this );
 		
 		RSS_TICKER_UI.ticker = null;
+		RSS_TICKER_UI.toolbar = null;
+		
+		document.getElementById( 'viewToolbarsMenu' ).removeEventListener( "command", RSS_TICKER_UI.toolbarMenuEvent, false );
 	},
 	
 	unloadTicker : function () {
@@ -360,10 +361,6 @@ var RSS_TICKER_UI = {
 				var element = RSS_TICKER_UI.ticker.childNodes[i];
 				RSS_TICKER_FEED_MANAGER.markAsRead( element.itemData );
 			}
-		},
-		
-		'rss-ticker_cmd_ignore' : function ( event ) {
-			RSS_TICKER_FEED_MANAGER.removeLivemark( document.popupNode.itemData.guid );
 		}
 	},
 	

@@ -8,6 +8,7 @@ locale     rss-ticker     en-US            chrome/locale/en-US/
 skin       rss-ticker                 classic         chrome/skin/
 
 overlay   chrome://browser/content/browser.xul                       chrome://rss-ticker/content/overlay.xul
+overlay   chrome://browser/content/places/placesOverlay.xul          chrome://rss-ticker/content/placesOverlay.xul
 
 style     chrome://global/content/customizeToolbar.xul               chrome://rss-ticker/skin/toolbar.css
 style     chrome://browser/content/browser.xul                       chrome://rss-ticker/skin/toolbar.css
