@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay [
+	<!ENTITY % localLocale SYSTEM "chrome://rss-ticker/locale/locale.dtd">
+	%localLocale;
+	<!ENTITY % backupLocale SYSTEM "chrome://rss-ticker-default-locale/content/locale.dtd">
+	%backupLocale;
+]>
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript">
+		<![CDATA[
+		
+		Components.utils.import( "resource://rss-ticker-modules/feed-manager.js" );
+		Components.utils.import( "resource://rss-ticker-modules/ticker-utils.js" );
+		Components.utils.import( "resource://gre/modules/PlacesUIUtils.jsm" );
+		
+		addEventListener( 'load', function () {
+			removeEventListener( 'load', arguments.callee, false );
+			
+			if ( ! document.getElementById( 'placesContext' ) )
+				return;
+			
+			document.getElementById( 'placesContext' ).addEventListener( 'popupshowing', function ( event ) {
+				var livemarkId = parseInt( PlacesUIUtils.getViewForNode( document.popupNode ).selectedNode.uri.replace( 'place:folder=', '' ), 10 );
+				
+				RSS_TICKER_FEED_MANAGER.isLivemarkIgnored( { id : livemarkId }, function ( ignored ) {
+					if ( ignored )
+						document.getElementById( 'rss-ticker-show-in-ticker' ).removeAttribute( 'checked' );
+					else
+						document.getElementById( 'rss-ticker-show-in-ticker' ).setAttribute( 'checked', 'true' );
+				} );
+			}, false );
+		}, false );
+		]]>
+	</script>
+	<menupopup id="placesContext">
+		<menuitem id="rss-ticker-show-in-ticker"
+			type="checkbox"
+			checked="true"
+			oncommand="RSS_TICKER_FEED_MANAGER.setIgnoredStatus( parseInt( PlacesUIUtils.getViewForNode( document.popupNode ).selectedNode.uri.replace( 'place:folder=', '' ), 10 ), this.getAttribute( 'checked' ) != 'true' );"
+			label="&rssticker.showInTicker;"
+			accesskey="&rssticker.showInTicker.key;"
+			insertafter="placesContext_reload"
+			closemenu="single"
+			selection="livemark/feedURI" />
+	</menupopup>
+</overlay>
