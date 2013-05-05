@@ -221,8 +221,6 @@ var RSS_TICKER_FEED_MANAGER = {
 		lineStream.close();
 		inputStream.close();
 
-		ignoreFile.remove( false );
-
 		var livemarkIds = PlacesUtils.annotations.getItemsWithAnnotation( "livemark/feedURI", {} );
 		
 		for ( var i = 0, _len = livemarkIds.length; i < _len; i++ ) {
