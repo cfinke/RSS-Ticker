@@ -11,7 +11,7 @@
 		
 		Components.utils.import( "resource://rss-ticker-modules/feed-manager.js" );
 		Components.utils.import( "resource://rss-ticker-modules/ticker-utils.js" );
-		Components.utils.import( "resource://gre/modules/PlacesUIUtils.jsm" );
+		Components.utils.import( "resource:///modules/PlacesUIUtils.jsm" );
 		
 		addEventListener( 'load', function () {
 			removeEventListener( 'load', arguments.callee, false );

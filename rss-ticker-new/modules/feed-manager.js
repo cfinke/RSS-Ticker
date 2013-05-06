@@ -4,7 +4,7 @@ var Ci = Components.interfaces,
 	Cu = Components.utils;
 
 Cu.import( "resource://gre/modules/PlacesUtils.jsm" );
-Cu.import( "resource://gre/modules/PlacesUIUtils.jsm" );
+Cu.import( "resource:///modules/PlacesUIUtils.jsm" );
 Cu.import( "resource://rss-ticker-modules/ticker-utils.js" );
 
 var RSS_TICKER_FEED_MANAGER = {
