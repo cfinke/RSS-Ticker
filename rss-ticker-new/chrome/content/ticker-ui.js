@@ -32,15 +32,17 @@ var RSS_TICKER_UI = {
 		
 		RSS_TICKER_UTILS.prefs.addObserver( "", this, false );
 		
-		RSS_TICKER_UI.loadTicker();
-		
-		if ( ! RSS_TICKER_UTILS.prefs.getBoolPref( "subscribeIconCheck" ) ) {
-			RSS_TICKER_UTILS.prefs.setBoolPref( "subscribeIconCheck", true );
+		setTimeout( function acceptableDelayedStartup() {
+			RSS_TICKER_UI.loadTicker();
+			
+			if ( ! RSS_TICKER_UTILS.prefs.getBoolPref( "subscribeIconCheck" ) ) {
+				RSS_TICKER_UTILS.prefs.setBoolPref( "subscribeIconCheck", true );
 
-			RSS_TICKER_UI.addToolbarButton( "feed-button" );
-		}
-
-		setTimeout( RSS_TICKER_UI.showFirstRun, 5000 );
+				RSS_TICKER_UI.addToolbarButton( "feed-button" );
+			}
+			
+			RSS_TICKER_UI.showFirstRun();
+		}, 3000 );
 	},
 	
 	loadTicker : function () {
