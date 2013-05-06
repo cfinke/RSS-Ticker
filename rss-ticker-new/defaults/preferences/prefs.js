@@ -10,5 +10,7 @@ pref( "extensions.rssticker.lastVersion", "" );
 pref( "extensions.rssticker.noFeedsFoundFlag.1.7", false );
 pref( "extensions.rssticker.width", 500 );
 
+pref( "extensions.rssticker.ignoreFileUpgraded", false );
+
 /* Deprecated */
 pref( "extensions.rssticker.disabled", false );
