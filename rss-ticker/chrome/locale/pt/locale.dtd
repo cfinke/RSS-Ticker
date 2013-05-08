@@ -1,0 +1,77 @@
+<!ENTITY rssticker.title "RSS Ticker">
+<!ENTITY rssticker.cm.open "Abrir">
+<!ENTITY rssticker.cm.open.key "O">
+<!ENTITY rssticker.cm.openInNewWindow "Abrir numa Nova Janela">
+<!ENTITY rssticker.cm.openInNewWindow.key "N">
+<!ENTITY rssticker.cm.openInNewTab "Abrir num Novo Separador">
+<!ENTITY rssticker.cm.openInNewTab.key "T">
+<!ENTITY rssticker.cm.openAllInTabs "Abrir Todos em Separadores">
+<!ENTITY rssticker.cm.openUnreadInTabs "Abrir Não Lidas em Separadores">
+<!ENTITY rssticker.cm.openFeedInTabs "Abrir Fonte em Separadores">
+<!ENTITY rssticker.cm.openFeedUnreadInTabs "Abrir Não Lidos da Fonte em Separadores">
+<!ENTITY rssticker.cm.copyLinkTitle "Copiar Título da Ligação">
+<!ENTITY rssticker.cm.copyLinkTitle.key "L">
+<!ENTITY rssticker.cm.copyLinkURL "Copiar URL da Ligação">
+<!ENTITY rssticker.cm.copyLinkURL.key "C">
+<!ENTITY rssticker.cm.refreshFeeds "Actualizar Fontes">
+<!ENTITY rssticker.cm.refreshFeeds.key "R">
+<!ENTITY rssticker.cm.manageFeeds "Gerir Fontes">
+<!ENTITY rssticker.cm.manageFeeds.key "G">
+<!ENTITY rssticker.cm.markAsRead "Marcar como Lida">
+<!ENTITY rssticker.cm.markAsRead.key "M">
+<!ENTITY rssticker.cm.markFeedAsRead "Marcar Fonte como lida">
+<!ENTITY rssticker.cm.markFeedAsRead.key "F">
+<!ENTITY rssticker.cm.markAllAsRead "Marcar Todas como Lidas">
+<!ENTITY rssticker.cm.markAllAsRead.key "A">
+<!ENTITY rssticker.options.updateInterval "Frequência de Actualização">
+<!ENTITY rssticker.options.update.1 "Actualizar as minhas fontes a cada">
+<!ENTITY rssticker.options.update.2 "minutos.">
+<!ENTITY rssticker.options.speed "Velocidade">
+<!ENTITY rssticker.options.dw.itemWidth "Largura do Item">
+<!ENTITY rssticker.pixelAbbrev "px">
+<!ENTITY rssticker.options.smooothness "Suavidade do Deslocamento">
+<!ENTITY rssticker.cmOptionsDescription "Configure o menu de contexto do RSS Ticker seleccionando os itens abaixo.">
+<!ENTITY rssticker.tt.summary "Resumo">
+<!ENTITY rssticker.options "Opções">
+<!ENTITY rssticker.options.restartNotice "As opções com * só serão válidas depois de reiniciado o browser.">
+<!ENTITY rssticker.options.general "Geral">
+<!ENTITY rssticker.options.advanced "Avançado">
+<!ENTITY rssticker.options.contextMenu "Menu Contextual">
+<!ENTITY rssticker.disableTicker "Desactivar o RSS Ticker">
+<!ENTITY rssticker.options.tickerPlacement "Localização do Letreiro">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Abaixo da barra de estado">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Abaixo da barra de marcadores">
+<!ENTITY rssticker.options.random "Itens aleatórios">
+<!ENTITY rssticker.options.hide "Ocultar itens lidos.">
+<!ENTITY rssticker.options.bold "Itens não lidos a negrito.">
+<!ENTITY rssticker.options.openInNewTab "Abrir ligações em novos separadores.">
+<!ENTITY rssticker.options.reverseDirection "Inverter direcção do letreiro">
+<!ENTITY rssticker.toggleTicker "Alternar entre letreiro ligado ou desligado">
+<!ENTITY rssticker.options.dw.limitWidth "Limitar a largura dos itens no letreiro">
+<!ENTITY rssticker.options.dw.isMaxWidth "Usar somente largura máxima">
+<!ENTITY rssticker.options.limitItemsPerFeed "Limitar o número de itens por fonte">
+<!ENTITY rssticker.options.itemsPerFeed "Itens por fonte">
+<!ENTITY rssticker.about "Sobre">
+<!ENTITY rssticker.noFeedsFoundTitle "Não foram encontrados Marcadores Dinâmicos">
+<!ENTITY rssticker.noFeedsFound "O RSS Ticker não encontrou nenhum Marcador Dinâmico">
+<!ENTITY rssticker.howToSubscribe1 "O RSS Ticker carrega e exibe numa barra rolante os itens dos seus Marcadores Dinâmicos (também conhecidos como feeds RSS ou fontes de notícias), mas ainda não subscreveu nenhum. Precisa de ajuda? Subscrever uma fonte é simples:">
+<!ENTITY rssticker.howToSubscribe2 "Se a página que está a ver no browser disponibiliza uma fonte RSS (www.mozilla.org, por exemplo), surge um pequeno ícone laranja ou azul no lado direito da barra de endereço, junto à estrela usada para adicionar marcadores. Se clicar nesse ícone, surgirá o menu para adicionar a fonte como marcador dinâmico.">
+<!ENTITY rssticker.howToSubscribe3 "Clique «Subscrever», e o RSS Ticker começará a exibir na barra os itens dessa fonte.">
+<!ENTITY rssticker.closeNoFeedsPage "Fechar esta página">
+<!ENTITY rssticker.dontShowAgain "Não voltar a exibir esta mensagem.">
+<!ENTITY rssticker.feed "Fonte">
+<!ENTITY rssticker.feeds "Fontes">
+<!ENTITY rssticker.feedManagement "Pode adicionar ou remover fontes do letreiro seleccionando-as na lista abaixo e pressionando os botões de Adicionar e Remover. Nota: Para subscrever uma fonte, use os Marcadores Dinâmicos do Firefox. Esta lista apenas permite que seleccione quais aparecem no Ticker; não permite subscrever novas fontes.">
+<!ENTITY rssticker.add "Adicionar">
+<!ENTITY rssticker.remove "Remover">
+<!ENTITY rssticker.URL "URL">
+<!ENTITY rssticker.hideWhenEmpty "Ocultar o Letreiro quando estiver Vazio">
+<!ENTITY rssticker.faster "Mais rápido">
+<!ENTITY rssticker.slower "Mais lento">
+<!ENTITY rssticker.smoother "Suave (Usa mais recursos)">
+<!ENTITY rssticker.choppier "Brusco (Usa menos recursos)">
+<!ENTITY rssticker.featured.subscribe "Subscrever">
+<!ENTITY rssticker.featured.panelTitle "Fontes Recomendadas">
+<!ENTITY rssticker.featured.description "Apoie o desenvolvimento do RSS Ticker sem gastar um único cêntimo. Basta subscrever algumas destas fontes de parceiros do RSS Ticker.">
+<!ENTITY rssticker.featured.contact "(Se deseja ter a sua fonte incluída nesta lista, envie um e-mail para cfinke@gmail.com.)">
+<!ENTITY rssticker.featured.notifyMe "Avisar-me regularmente de novas fontes recomendadas.">

@@ -1,0 +1,77 @@
+<!ENTITY rssticker.title "Prikazovalnik živih zaznamkov">
+<!ENTITY rssticker.cm.open "Odpri">
+<!ENTITY rssticker.cm.open.key "O">
+<!ENTITY rssticker.cm.openInNewWindow "Odpri v novem oknu">
+<!ENTITY rssticker.cm.openInNewWindow.key "n">
+<!ENTITY rssticker.cm.openInNewTab "Odpri v novem zavihku">
+<!ENTITY rssticker.cm.openInNewTab.key "z">
+<!ENTITY rssticker.cm.openAllInTabs "Odpri v vseh zavihkih">
+<!ENTITY rssticker.cm.openUnreadInTabs "Odpri neprebrano v zavihkih">
+<!ENTITY rssticker.cm.openFeedInTabs "Odpri živi zaznamek v zavihkih">
+<!ENTITY rssticker.cm.openFeedUnreadInTabs "Odpri neprebrano živega zaznamka v zavihkih">
+<!ENTITY rssticker.cm.copyLinkTitle "Kopiraj naslov povezave">
+<!ENTITY rssticker.cm.copyLinkTitle.key "p">
+<!ENTITY rssticker.cm.copyLinkURL "Kopiraj povezavo URL">
+<!ENTITY rssticker.cm.copyLinkURL.key "K">
+<!ENTITY rssticker.cm.refreshFeeds "Posodobi žive zaznamke">
+<!ENTITY rssticker.cm.refreshFeeds.key "P">
+<!ENTITY rssticker.cm.manageFeeds "Upravljaj žive zaznamke">
+<!ENTITY rssticker.cm.manageFeeds.key "U">
+<!ENTITY rssticker.cm.markAsRead "Označi kot prebrano">
+<!ENTITY rssticker.cm.markAsRead.key "O">
+<!ENTITY rssticker.cm.markFeedAsRead "Označi živ zaznamek kot prebran">
+<!ENTITY rssticker.cm.markFeedAsRead.key "ž">
+<!ENTITY rssticker.cm.markAllAsRead "Označi vse kot prebrano">
+<!ENTITY rssticker.cm.markAllAsRead.key "v">
+<!ENTITY rssticker.options.updateInterval "Frekvenca posodabljanja">
+<!ENTITY rssticker.options.update.1 "Posodobi vire vsakih">
+<!ENTITY rssticker.options.update.2 "minut.">
+<!ENTITY rssticker.options.speed "Hitrost prikazovalnika">
+<!ENTITY rssticker.options.dw.itemWidth "Širina elementa">
+<!ENTITY rssticker.pixelAbbrev "točk">
+<!ENTITY rssticker.options.smooothness "Gladkost drsenja prikazovalnika">
+<!ENTITY rssticker.cmOptionsDescription "Prilagodite pojavni meni prikazovalnika z izbiranjem možnosti spodaj.">
+<!ENTITY rssticker.tt.summary "Povzetek">
+<!ENTITY rssticker.options "Možnosti">
+<!ENTITY rssticker.options.restartNotice "Možnosti, označene z zvezdico, bodo nespremenjene do naslednjega zagona brskalnika.">
+<!ENTITY rssticker.options.general "Splošno">
+<!ENTITY rssticker.options.advanced "Napredno">
+<!ENTITY rssticker.options.contextMenu "Pojavni meni">
+<!ENTITY rssticker.disableTicker "Onemogoči prikazovalnik">
+<!ENTITY rssticker.options.tickerPlacement "Postavitev prikazovalnika">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Pod vrstico stanja">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Pod orodno vrstico zaznamkov">
+<!ENTITY rssticker.options.random "Naključno prikaži elemente prikazovalnika">
+<!ENTITY rssticker.options.hide "Skrij že prebrano.">
+<!ENTITY rssticker.options.bold "Neprebrano prikaži v krepki pisavi.">
+<!ENTITY rssticker.options.openInNewTab "Vedno odpri povezave v novih zavihkih.">
+<!ENTITY rssticker.options.reverseDirection "Obrni smer prikazovanja">
+<!ENTITY rssticker.toggleTicker "Prikazovalnik vključen/izključen">
+<!ENTITY rssticker.options.dw.limitWidth "Omeji širino elementov v prikazovalniku">
+<!ENTITY rssticker.options.dw.isMaxWidth "Uporabi samo kot največjo širino">
+<!ENTITY rssticker.options.limitItemsPerFeed "Omeji število novic na živ zaznamek">
+<!ENTITY rssticker.options.itemsPerFeed "Elementov na živ zaznamek">
+<!ENTITY rssticker.about "O razširitvi">
+<!ENTITY rssticker.noFeedsFoundTitle "Ni najdenih živih zaznamkov">
+<!ENTITY rssticker.noFeedsFound "Prikazovalnik živih zaznamkov ne more najti živih zaznamkov.">
+<!ENTITY rssticker.howToSubscribe1 "Razširitev naloži in prikaže vnose iz vaših Živih zaznamkov (torej novičarskih virov oz. virov RSS), vendar trenutno niste naročeni na še nobenega. Potrebujete pomoč? Naročanje na vir je enostavno:">
+<!ENTITY rssticker.howToSubscribe2 "Če stran, ki si jo ogledujete, ponuja vir RSS (npr. www.firefox.org), se na desni strani okenca naslovne vrstice nahaja majhna oranžna ali modra ikona, poleg zvezdice za shranjevanje zaznamkov. Če to ikono kliknete, se odpre pogovorno okno \'Dodaj živi zaznamek\'.">
+<!ENTITY rssticker.howToSubscribe3 "Kliknite Prijavi zdaj in prikazovalnik bo takoj začel prikazovati novice iz tega vira.">
+<!ENTITY rssticker.closeNoFeedsPage "Zapri to stran">
+<!ENTITY rssticker.dontShowAgain "Tega sporočila ne prikaži več.">
+<!ENTITY rssticker.feed "Živ zaznamek">
+<!ENTITY rssticker.feeds "Živi zaznamki">
+<!ENTITY rssticker.feedManagement "Žive zaznamke lahko dodate ali odstranite iz prikazovalnika z izbiranjem s spodnjega seznama in pritiskom na gumb Dodaj ali Odstrani.">
+<!ENTITY rssticker.add "Dodaj">
+<!ENTITY rssticker.remove "Odstrani">
+<!ENTITY rssticker.URL "URL">
+<!ENTITY rssticker.hideWhenEmpty "Skrij prikazovalnik, ko je prazen">
+<!ENTITY rssticker.faster "hitreje">
+<!ENTITY rssticker.slower "počasneje">
+<!ENTITY rssticker.smoother "gladko (več CPE)">
+<!ENTITY rssticker.choppier "odsekano (manj CPE)">
+<!ENTITY rssticker.featured.subscribe "Naroči">
+<!ENTITY rssticker.featured.panelTitle "Izpostavljeni viri">
+<!ENTITY rssticker.featured.description "Podprite razvoj te razširitve brez stroškov tako, da poskusite nekaj teh virov prijateljev razširitve.">
+<!ENTITY rssticker.featured.contact "(Če želite na tem seznamu videti svoj vir, pišite na naslov cfinke@gmail.com.)">
+<!ENTITY rssticker.featured.notifyMe "Periodično me obveščaj o novih izpostavljenih virih.">

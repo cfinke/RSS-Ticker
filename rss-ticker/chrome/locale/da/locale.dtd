@@ -1,0 +1,77 @@
+<!ENTITY rssticker.title "RSS Ticker">
+<!ENTITY rssticker.cm.open "Åbn">
+<!ENTITY rssticker.cm.open.key "b">
+<!ENTITY rssticker.cm.openInNewWindow "Åbn i nyt vindue">
+<!ENTITY rssticker.cm.openInNewWindow.key "n">
+<!ENTITY rssticker.cm.openInNewTab "Åbn i nyt faneblad">
+<!ENTITY rssticker.cm.openInNewTab.key "t">
+<!ENTITY rssticker.cm.openAllInTabs "Åbn alle i faneblade">
+<!ENTITY rssticker.cm.openUnreadInTabs "Åbn ulæste i faneblade">
+<!ENTITY rssticker.cm.openFeedInTabs "Åbn feeds i faneblade">
+<!ENTITY rssticker.cm.openFeedUnreadInTabs "Åbn ulæste feeds i faneblade">
+<!ENTITY rssticker.cm.copyLinkTitle "Kopier link-titel">
+<!ENTITY rssticker.cm.copyLinkTitle.key "l">
+<!ENTITY rssticker.cm.copyLinkURL "Kopier link-URL">
+<!ENTITY rssticker.cm.copyLinkURL.key "K">
+<!ENTITY rssticker.cm.refreshFeeds "Genindlæs feeds">
+<!ENTITY rssticker.cm.refreshFeeds.key "G">
+<!ENTITY rssticker.cm.manageFeeds "Administrer feeds">
+<!ENTITY rssticker.cm.manageFeeds.key "d">
+<!ENTITY rssticker.cm.markAsRead "Marker som læst">
+<!ENTITY rssticker.cm.markAsRead.key "M">
+<!ENTITY rssticker.cm.markFeedAsRead "Marker feed som værende læst">
+<!ENTITY rssticker.cm.markFeedAsRead.key "f">
+<!ENTITY rssticker.cm.markAllAsRead "Marker alle som læste">
+<!ENTITY rssticker.cm.markAllAsRead.key "a">
+<!ENTITY rssticker.options.updateInterval "Opdateringsfrekvens">
+<!ENTITY rssticker.options.update.1 "Opdater mine feeds hver">
+<!ENTITY rssticker.options.update.2 "minut.">
+<!ENTITY rssticker.options.speed "Ticker-hastighed">
+<!ENTITY rssticker.options.dw.itemWidth "Emnebredde">
+<!ENTITY rssticker.pixelAbbrev "px">
+<!ENTITY rssticker.options.smooothness "Ticker-rulningsglathed">
+<!ENTITY rssticker.cmOptionsDescription "Tilpas tickerens genvejsmenu ved at vælge eller fravælge indstillingerne nedenunder.">
+<!ENTITY rssticker.tt.summary "Sammendrag">
+<!ENTITY rssticker.options "Indstillinger">
+<!ENTITY rssticker.options.restartNotice "Indstillinger mærket med * vil ikke træde i kraft før browservinduet genåbnes.">
+<!ENTITY rssticker.options.general "Generelt">
+<!ENTITY rssticker.options.advanced "Avanceret">
+<!ENTITY rssticker.options.contextMenu "Genvejsmenu">
+<!ENTITY rssticker.disableTicker "Slå ticker fra">
+<!ENTITY rssticker.options.tickerPlacement "Placering af ticker">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Under statuslinjen">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Under bogmærkelinjen">
+<!ENTITY rssticker.options.random "Tilfældige ticker-emner">
+<!ENTITY rssticker.options.hide "Skjul emner du allerede har læst.">
+<!ENTITY rssticker.options.bold "Fremhæv ulæste emner.">
+<!ENTITY rssticker.options.openInNewTab "Åbn altid links i nye faneblade.">
+<!ENTITY rssticker.options.reverseDirection "Vend ticker-retningen om">
+<!ENTITY rssticker.toggleTicker "Slå ticker til/fra">
+<!ENTITY rssticker.options.dw.limitWidth "Begræns bredden på emner i tickeren">
+<!ENTITY rssticker.options.dw.isMaxWidth "Brug kun som maksimumsbredde">
+<!ENTITY rssticker.options.limitItemsPerFeed "Begræns antallet af emner pr. feed">
+<!ENTITY rssticker.options.itemsPerFeed "Emner pr. feed">
+<!ENTITY rssticker.about "Om">
+<!ENTITY rssticker.noFeedsFoundTitle "Ingen Live bogmærker fundet">
+<!ENTITY rssticker.noFeedsFound "RSS Ticker kunne ikke finde nogen Live bogmærker (nyheds-feeds, RSS-feeds)">
+<!ENTITY rssticker.howToSubscribe1 "RSS Ticker indlæser og viser elementerne fra dine Live bogmærker (også kendt som nyheds-feeds eller RSS-feeds), men du abonnerer ikke på nogen Live bogmærker. Brug for hjælp? Det er nemt at abonnere på et feed:">
+<!ENTITY rssticker.howToSubscribe2 "Hvis siden du læser i din browser tilbyder et RSS-feed (f.eks. www.mozilla.org) vil der være et lille orange eller blåt ikon i højre side af adresselinjen, ved siden af stjernen som bruges til at lave et bogmærke. Hvis du klikker på dette ikon, vil dialogboksen 'Abonner på denne side' blive åbnet.">
+<!ENTITY rssticker.howToSubscribe3 "Klik på knappen Abonner nu, så vil RSS Ticker straks begynde at vise elementer fra dette feed.">
+<!ENTITY rssticker.closeNoFeedsPage "Luk denne side">
+<!ENTITY rssticker.dontShowAgain "Vis ikke denne meddelelse igen.">
+<!ENTITY rssticker.feed "Feed">
+<!ENTITY rssticker.feeds "Feeds">
+<!ENTITY rssticker.feedManagement "Du kan tilføje eller fjerne feeds fra tickeren, ved at vælge dem i nedenstående liste og trykke på enten Tilføj eller Fjern. Bemærk: Brug Firefox Live bogmærker til at abonnere på et feed. Listen lader dig kun vælge, hvilke af dine Live bogmærker der vises i tickeren; den lader dig ikke abonnere på et nyt feed.">
+<!ENTITY rssticker.add "Tilføj">
+<!ENTITY rssticker.remove "Fjern">
+<!ENTITY rssticker.URL "URL">
+<!ENTITY rssticker.hideWhenEmpty "Skjul ticker når den er tom">
+<!ENTITY rssticker.faster "Hurtigere">
+<!ENTITY rssticker.slower "Langsommere">
+<!ENTITY rssticker.smoother "Glattere (mere CPU)">
+<!ENTITY rssticker.choppier "Mindre glat (mindre CPU)">
+<!ENTITY rssticker.featured.subscribe "Abonner">
+<!ENTITY rssticker.featured.panelTitle "Udvalgte feeds">
+<!ENTITY rssticker.featured.description "Ved at prøve nogle af disse feeds fra Friends of RSS Ticker, kan du støtte udviklingen af RSS Ticker uden at bruge en krone.">
+<!ENTITY rssticker.featured.contact "(Hvis du ønsker at se dit feed på denne liste, send en mail til cfinke@gmail.com.)">
+<!ENTITY rssticker.featured.notifyMe "Giv mig periodisk besked om nye udvalgte feeds.">

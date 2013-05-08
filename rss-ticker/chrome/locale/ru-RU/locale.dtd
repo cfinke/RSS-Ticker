@@ -1,0 +1,73 @@
+<!ENTITY rssticker.cm.open "Открыть">
+<!ENTITY rssticker.cm.open.key "О">
+<!ENTITY rssticker.cm.openInNewWindow "Открыть в новом окне">
+<!ENTITY rssticker.cm.openInNewWindow.key "Н">
+<!ENTITY rssticker.cm.openInNewTab "Открыть в новой вкладке">
+<!ENTITY rssticker.cm.openInNewTab.key "в">
+<!ENTITY rssticker.cm.openAllInTabs "Открыть всё во вкладках">
+<!ENTITY rssticker.cm.openUnreadInTabs "Открыть непрочитанные во вкладках">
+<!ENTITY rssticker.cm.openFeedInTabs "Открыть ленту во вкладках">
+<!ENTITY rssticker.cm.openFeedUnreadInTabs "Открыть непрочитанные в ленте во вкладках">
+<!ENTITY rssticker.cm.copyLinkTitle "Копировать заголовок новости">
+<!ENTITY rssticker.cm.copyLinkTitle.key "з">
+<!ENTITY rssticker.cm.copyLinkURL "Копировать ссылку">
+<!ENTITY rssticker.cm.copyLinkURL.key "с">
+<!ENTITY rssticker.cm.refreshFeeds "Обновить ленты">
+<!ENTITY rssticker.cm.refreshFeeds.key "б">
+<!ENTITY rssticker.cm.manageFeeds "Управление лентами">
+<!ENTITY rssticker.cm.manageFeeds.key "У">
+<!ENTITY rssticker.cm.markAsRead "Пометить как Прочитанное">
+<!ENTITY rssticker.cm.markAsRead.key "П">
+<!ENTITY rssticker.cm.markFeedAsRead "Пометить ленту как Прочитанную">
+<!ENTITY rssticker.cm.markFeedAsRead.key "л">
+<!ENTITY rssticker.cm.markAllAsRead "Пометить всё как Прочитанное">
+<!ENTITY rssticker.cm.markAllAsRead.key "ё">
+<!ENTITY rssticker.options.updateInterval "Частота обновлений">
+<!ENTITY rssticker.options.update.1 "Обновлять новости каждые">
+<!ENTITY rssticker.options.update.2 "минут.">
+<!ENTITY rssticker.options.speed "Скорость бегущей строки">
+<!ENTITY rssticker.options.dw.itemWidth "Ширина элементов">
+<!ENTITY rssticker.options.smooothness "Плавность прокрутки">
+<!ENTITY rssticker.cmOptionsDescription "Настройка контекстного меню бегущей строки">
+<!ENTITY rssticker.tt.summary "Содержание">
+<!ENTITY rssticker.options "Настройки">
+<!ENTITY rssticker.options.restartNotice "Опции, помеченные *, вступят в силу только после перезагрузки окна браузера.">
+<!ENTITY rssticker.options.general "Основные">
+<!ENTITY rssticker.options.advanced "Дополнительно">
+<!ENTITY rssticker.options.contextMenu "Контекстное меню">
+<!ENTITY rssticker.disableTicker "Отключить Rss Ticker">
+<!ENTITY rssticker.options.tickerPlacement "Расположение бегущей строки">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Под строкой состояния">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Над панелью вкладок">
+<!ENTITY rssticker.options.random "Новости в произвольном порядке">
+<!ENTITY rssticker.options.hide "Скрывать прочитанные новости">
+<!ENTITY rssticker.options.bold "Выделять жирным шрифтом непрочитанные новости">
+<!ENTITY rssticker.options.openInNewTab "Всегда открывать ссылки в новых вкладках">
+<!ENTITY rssticker.toggleTicker "Включение/Выключение бегущей строки">
+<!ENTITY rssticker.options.dw.limitWidth "Ограничить ширину элементов бегущей строки">
+<!ENTITY rssticker.options.dw.isMaxWidth "Фиксированная ширина элементов">
+<!ENTITY rssticker.options.limitItemsPerFeed "Отображать только N последних новостей">
+<!ENTITY rssticker.options.itemsPerFeed "Показывать только">
+<!ENTITY rssticker.about "О расширении">
+<!ENTITY rssticker.noFeedsFoundTitle "Закладки на ленты новостей не найдены">
+<!ENTITY rssticker.noFeedsFound "RSS Ticker не может найти закладки на ленты новостей">
+<!ENTITY rssticker.howToSubscribe1 "RSS Ticker загружает и отображает новости из лент новостей (живых закладок), но вы не подписались ни на одну ленту. Вам нужна помощь? Подписаться на новость очень просто:">
+<!ENTITY rssticker.howToSubscribe2 "Если на странице, которая открыта в вашем браузере, есть поток RSS (например, www.mozilla.org), справа в адресной строке, рядом со звездочкой для добавления в Закладки появится небольшая синяя или оранжевая иконка. При нажатии на эту иконку появится диалог &apos;Подписаться на ленту новостей&apos;.">
+<!ENTITY rssticker.howToSubscribe3 "Щелкните Подписаться сейчас и RSS Ticker начнет отображать новости из этой ленты.">
+<!ENTITY rssticker.closeNoFeedsPage "Закрыть страницу">
+<!ENTITY rssticker.dontShowAgain "Не показывать это сообщение в дальнейшем">
+<!ENTITY rssticker.feed "Лента">
+<!ENTITY rssticker.feeds "Ленты">
+<!ENTITY rssticker.feedManagement "Вы можете добавлять или удалять ленты из бегущей строки, выбирая их из списка и нажимая кнопки Добавить или Удалить. Примечание: Чтобы подписаться на ленту, используйте Живые закладки в Firefox. Этот список контролирует отображение закладок в RSS Ticker.">
+<!ENTITY rssticker.add "Добавить">
+<!ENTITY rssticker.remove "Удалить">
+<!ENTITY rssticker.hideWhenEmpty "Скрыть бегущую строку, если нечего показывать">
+<!ENTITY rssticker.faster "Быстрее">
+<!ENTITY rssticker.slower "Медленее">
+<!ENTITY rssticker.smoother "Более гладко">
+<!ENTITY rssticker.choppier "Менее гладко">
+<!ENTITY rssticker.featured.subscribe "Подписаться">
+<!ENTITY rssticker.featured.panelTitle "Подборка новостей">
+<!ENTITY rssticker.featured.description "Поддержите развитие RSS Ticker, попробовав ленты из подборки друзей RSS Ticker.">
+<!ENTITY rssticker.featured.contact "(Если Вы хотите увидеть Вашу ленту в этом списке, напишите на адрес cfinke@gmail.com.)">
+<!ENTITY rssticker.featured.notifyMe "Периодически оповещать меня о новых новостей в подборке.">

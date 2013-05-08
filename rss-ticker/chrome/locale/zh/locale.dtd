@@ -1,0 +1,63 @@
+<!ENTITY rssticker.cm.open "打开">
+<!ENTITY rssticker.cm.openInNewWindow "在新窗口打开">
+<!ENTITY rssticker.cm.openInNewTab "在新标签页打开">
+<!ENTITY rssticker.cm.openAllInTabs "在标签页里打开全部条目">
+<!ENTITY rssticker.cm.openUnreadInTabs "在标签页里打开未读条目">
+<!ENTITY rssticker.cm.openFeedInTabs "用标签页打开 Feed">
+<!ENTITY rssticker.cm.openFeedUnreadInTabs "用标签页打开未读 Feed">
+<!ENTITY rssticker.cm.copyLinkTitle "复制链接标题">
+<!ENTITY rssticker.cm.copyLinkURL "复制链接地址">
+<!ENTITY rssticker.cm.refreshFeeds "更新 Feed">
+<!ENTITY rssticker.cm.manageFeeds "管理 Feed">
+<!ENTITY rssticker.cm.markAsRead "设为已读">
+<!ENTITY rssticker.cm.markFeedAsRead "将 Feed 设为已读">
+<!ENTITY rssticker.cm.markAllAsRead "全部设为已读">
+<!ENTITY rssticker.options.updateInterval "更新频率">
+<!ENTITY rssticker.options.update.1 "Feed 更新频率：间隔">
+<!ENTITY rssticker.options.update.2 "分钟更新">
+<!ENTITY rssticker.options.speed "滚动速度">
+<!ENTITY rssticker.options.dw.itemWidth "条目宽度">
+<!ENTITY rssticker.pixelAbbrev "像素">
+<!ENTITY rssticker.options.smooothness "滚动平滑度">
+<!ENTITY rssticker.cmOptionsDescription "将下列才对显示在右键菜单上。">
+<!ENTITY rssticker.tt.summary "内容摘要">
+<!ENTITY rssticker.options "选项">
+<!ENTITY rssticker.options.restartNotice "标有星号 (*) 的选项需要重启浏览器才能生效。">
+<!ENTITY rssticker.options.general "常规">
+<!ENTITY rssticker.options.advanced "高级">
+<!ENTITY rssticker.options.contextMenu "右键菜单">
+<!ENTITY rssticker.disableTicker "隐藏跑马灯">
+<!ENTITY rssticker.options.tickerPlacement "跑马灯显示位置">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "状态条之下">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "书签之下">
+<!ENTITY rssticker.options.random "在跑马灯上随机显示条目">
+<!ENTITY rssticker.options.hide "隐藏已读条目">
+<!ENTITY rssticker.options.bold "未读条目显示为黑体">
+<!ENTITY rssticker.options.openInNewTab "永远在新标签页里打开新条目">
+<!ENTITY rssticker.toggleTicker "显示/隐藏跑马灯">
+<!ENTITY rssticker.options.dw.limitWidth "限制跑马灯上的各个条目的宽度">
+<!ENTITY rssticker.options.dw.isMaxWidth "设为最大宽度">
+<!ENTITY rssticker.options.limitItemsPerFeed "限制每个 feed 所显示的最大条目数">
+<!ENTITY rssticker.options.itemsPerFeed "每个 feed 的条目数">
+<!ENTITY rssticker.about "关于">
+<!ENTITY rssticker.noFeedsFoundTitle "找不到实时书签">
+<!ENTITY rssticker.noFeedsFound "RSS Ticker 找不到实时书签 (也叫做“newsfeed”、“RSS feed”)。">
+<!ENTITY rssticker.howToSubscribe1 "RSS Ticker 会从你的实时书签 (也叫做“newsfeed”、“RSS feed”)里载入并滚动显示条目，但是你并未订阅任何实时书签。该怎么办？订阅 feed 其实很简单：">
+<!ENTITY rssticker.howToSubscribe2 "如果你当前浏览的页面提供了RSS feed (如：www.mozilla.org)，那么在地址栏的右侧会出现一个桔色或蓝色的图标，它的旁边有一个用于订阅的星状图标。如果点击星状图标，就会打开“订阅到实时书签”对话框。">
+<!ENTITY rssticker.howToSubscribe3 "点击“订阅”后，RSS Ticker就开始显示这个 feed 的内容。">
+<!ENTITY rssticker.closeNoFeedsPage "关闭本页">
+<!ENTITY rssticker.dontShowAgain "不要再显示这个提示">
+<!ENTITY rssticker.feeds "Feed">
+<!ENTITY rssticker.feedManagement "你可以隐藏或显示跑马灯中的各个 feed。只需选择下列 feed，在点击“显示”按钮或“隐藏”按钮即可。">
+<!ENTITY rssticker.add "显示">
+<!ENTITY rssticker.remove "隐藏">
+<!ENTITY rssticker.hideWhenEmpty "没有条目时隐藏跑马灯">
+<!ENTITY rssticker.faster "快">
+<!ENTITY rssticker.slower "慢">
+<!ENTITY rssticker.smoother "平滑 (占用更多CPU)">
+<!ENTITY rssticker.choppier "间歇 (占用较少 CPU)">
+<!ENTITY rssticker.featured.subscribe "订阅">
+<!ENTITY rssticker.featured.panelTitle "特色 Feed">
+<!ENTITY rssticker.featured.description "不用花一分钱，订阅这些 RSS Ticker 推荐的 feed 来支持我们。">
+<!ENTITY rssticker.featured.contact "（如果你希望将你的 Feed 列到这里，请发邮件给 cfinke@gmail.com 。)">
+<!ENTITY rssticker.featured.notifyMe "定期通知我有新的特色 Feed。">
