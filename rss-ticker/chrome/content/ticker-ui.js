@@ -456,7 +456,16 @@ var RSS_TICKER_UI = {
 	/* RSS_TICKER_FEED_MANAGER view interface */
 	
 	feedParsed : function ( feed ) {
+		for ( var i = RSS_TICKER_UI.ticker.childNodes.length - 1; i >= 0; i-- ) {
+			var element = RSS_TICKER_UI.ticker.childNodes[i];
+			
+			if ( feed.guid == element.feedGUID )
+				RSS_TICKER_UI.ticker.removeChild( element );
+		}
+		
 		this.writeFeed( feed );
+		
+		this.maybeHideTicker();
 	},
 	
 	itemVisited : function ( url, guid ) {
