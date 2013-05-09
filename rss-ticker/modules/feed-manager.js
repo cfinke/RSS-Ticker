@@ -282,10 +282,20 @@ var RSS_TICKER_FEED_MANAGER = {
 			this.updateSingleFeed( feedURL );
 		}
 
-		var interval = 1000 * 60 * 5;
+		if ( RSS_TICKER_FEED_MANAGER.initialFetch ) {
+			// On the initial fetch, grab a feed every 15 seconds.
+			var secondsUntilNextFeedUpdated = 1000 * 15;
+		}
+		else {
+			// By default, get every feed updated within two hours.
+			var secondsUntilNextFeedUpdated = 60 * ( 120 / this.livemarks.length );
 
-		if ( RSS_TICKER_FEED_MANAGER.initialFetch )
-			interval = 1000 * 5;
+			// But if there are few enough feeds, update them as often as every 8 minutes.
+			if ( secondsUntilNextFeedUpdated > ( 60 * 8 ) )
+			 	secondsUntilNextFeedUpdated = 60 * 8;
+		}
+		
+		var interval = secondsUntilNextFeedUpdated * 1000;
 
 		RSS_TICKER_FEED_MANAGER.feedFetchTimeout = RSS_TICKER_FEED_MANAGER.setTimeout( RSS_TICKER_FEED_MANAGER.updateNextFeed, interval );
 	},
