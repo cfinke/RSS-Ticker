@@ -274,6 +274,8 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 
 	updateNextFeed : function () {
+		RSS_TICKER_UTILS.log( "updateNextFeed" );
+		
 		if ( this.updateIndex >= this.livemarks.length ) {
 			this.updateIndex = 0;
 			this.initialFetch = false;
@@ -306,6 +308,8 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 
 	updateSingleFeed : function ( feedURL ) {
+		RSS_TICKER_UTILS.log( "Updating " + feedURL );
+		
 		var req = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance( Ci.nsIXMLHttpRequest );
 		req.open( "GET", feedURL, true );
 		req.timeout = 15000;
@@ -313,6 +317,8 @@ var RSS_TICKER_FEED_MANAGER = {
 		req.onreadystatechange = function ( event ) {
 			if ( req.readyState == 4 ) {
 				if ( req.status == 200 ){
+					RSS_TICKER_UTILS.log( "Received " + feedURL );
+					
 					var data = req.responseText;
 
 					var encoding_matches = data.match( /<?xml[^>]+encoding=['"]([^"']+)["']/i ); //"
@@ -370,6 +376,8 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 	
 	feedParsed : function ( feed ) {
+		RSS_TICKER_UTILS.log( "Feed parsed: " + feed.uri );
+		
 		// Set visited states.
 		function markNextVisited( itemIndex ) {
 			if ( itemIndex == feed.items.length ) {
