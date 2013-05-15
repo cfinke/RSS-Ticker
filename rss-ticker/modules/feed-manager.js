@@ -291,7 +291,7 @@ var RSS_TICKER_FEED_MANAGER = {
 
 		if ( RSS_TICKER_FEED_MANAGER.initialFetch ) {
 			// On the initial fetch, grab a feed every 15 seconds.
-			var secondsUntilNextFeedUpdated = 1000 * 15;
+			var secondsUntilNextFeedUpdated = 15;
 		}
 		else {
 			// By default, get every feed updated within two hours.
