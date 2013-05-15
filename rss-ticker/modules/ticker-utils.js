@@ -7,6 +7,9 @@ var RSS_TICKER_UTILS = {
 	prefs : Cc["@mozilla.org/preferences-service;1"].getService( Ci.nsIPrefService ).getBranch( "extensions.rssticker." ),
 	
 	log : function () {
+		if ( ! this.prefs.getBoolPref( 'debug' ) )
+			return;
+
 		for ( var i = 0, _len = arguments.length; i < _len; i++ ) {
 			var message = arguments[i];
 
@@ -50,7 +53,7 @@ var RSS_TICKER_UTILS = {
 
 			Cc["@mozilla.org/consoleservice;1"]
 				.getService(Ci.nsIConsoleService)
-				.logStringMessage( "RSSTICKER: " + message );
+				.logStringMessage( "RSSTICKER: (" + ( new Date() ).toUTCString() + ") " + message );
 		}
 	},
 };
