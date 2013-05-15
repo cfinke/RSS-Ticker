@@ -57,7 +57,7 @@ var RSS_TICKER_FEED_MANAGER = {
 				var livemarkIDs = PlacesUtils.annotations.getItemsWithAnnotation( "livemark/feedURI", {} );
 
 				for ( var i = 0, _len = livemarkIDs.length; i < _len; i++ )
-					RSS_TICKER_FEED_MANAGER.addLivemark( livemarkIDs[i] );
+					RSS_TICKER_FEED_MANAGER.addLivemark( livemarkIDs[i], true );
 			}, 0 );
 		}
 	},
@@ -234,16 +234,21 @@ var RSS_TICKER_FEED_MANAGER = {
 		}
 	},
 
-	addLivemark : function ( livemark ) {
-		PlacesUtils.livemarks.getLivemark( { id : livemark }, function ( status, livemark ) {
+	addLivemark : function ( livemarkId, startup ) {
+		RSS_TICKER_UTILS.log( "addLivemark: " + livemarkId );
+		
+		PlacesUtils.livemarks.getLivemark( { id : livemarkId }, function ( status, livemark ) {
 			if ( Components.isSuccessCode( status ) ) {
 				RSS_TICKER_FEED_MANAGER.isLivemarkIgnored( livemark, function ( ignored ) {
 					if ( ignored )
 						return;
 
+					RSS_TICKER_UTILS.log( "addLivemark callback: " + livemark.feedURI.spec );
+
 					RSS_TICKER_FEED_MANAGER.livemarks.push( livemark );
 
-					RSS_TICKER_FEED_MANAGER.updateSingleFeed( livemark.feedURI.spec );
+					if ( ! startup )
+						RSS_TICKER_FEED_MANAGER.updateSingleFeed( livemark.feedURI.spec );
 				} );
 			}
 		} );
