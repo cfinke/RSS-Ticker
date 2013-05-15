@@ -5,6 +5,33 @@ content rss-ticker-default-locale chrome/locale/en-US/
 
 locale     rss-ticker     en-US            chrome/locale/en-US/
 
+locale     rss-ticker     bn-BD            chrome/locale/bn-BD/
+locale     rss-ticker     da               chrome/locale/da/
+locale     rss-ticker     da-DK            chrome/locale/da-DK/
+locale     rss-ticker     de               chrome/locale/de/
+locale     rss-ticker     el               chrome/locale/el/
+locale     rss-ticker     es-ES            chrome/locale/es-ES/
+locale     rss-ticker     fi               chrome/locale/fi/
+locale     rss-ticker     fi-FI            chrome/locale/fi-FI/
+locale     rss-ticker     fr               chrome/locale/fr/
+locale     rss-ticker     it-IT            chrome/locale/it-IT/
+locale     rss-ticker     ko-KR            chrome/locale/ko-KR/
+locale     rss-ticker     ms-MY            chrome/locale/ms-MY/
+locale     rss-ticker     nl               chrome/locale/nl/
+locale     rss-ticker     pl-PL            chrome/locale/pl-PL/
+locale     rss-ticker     pt               chrome/locale/pt/
+locale     rss-ticker     pt-BR            chrome/locale/pt-BR/
+locale     rss-ticker     ru               chrome/locale/ru/
+locale     rss-ticker     ru-RU            chrome/locale/ru-RU/
+locale     rss-ticker     sl-SI            chrome/locale/sl-SI/
+locale     rss-ticker     sr               chrome/locale/sr/
+locale     rss-ticker     sv-SE            chrome/locale/sv-SE/
+locale     rss-ticker     tr               chrome/locale/tr/
+locale     rss-ticker     tr-TR            chrome/locale/tr-TR/
+locale     rss-ticker     vi               chrome/locale/vi/
+locale     rss-ticker     zh               chrome/locale/zh/
+locale     rss-ticker     zh-TW            chrome/locale/zh-TW/
+
 skin       rss-ticker                 classic         chrome/skin/
 
 overlay   chrome://browser/content/browser.xul                       chrome://rss-ticker/content/overlay.xul
