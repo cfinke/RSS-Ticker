@@ -472,7 +472,6 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 
 	onItemAdded : function ( id, folder, index, type, uri, title, time, guid, parentGUID ) { },
-	onBeforeItemRemoved : function ( id, type, folder, guid, parentGUID ) { },
 	onItemVisited : function ( id, visitID, time ) { },
 	onItemMoved : function ( id, oldParent, oldIndex, newParent, newIndex ) { },
 };
