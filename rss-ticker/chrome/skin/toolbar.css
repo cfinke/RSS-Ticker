@@ -28,8 +28,6 @@
 }
 
 #rss-ticker-tooltip {
-	-moz-appearance: none;
-	background-color: #fff;
 	width: 400px;
 	min-width: 400px;
 	max-width: 400px;
