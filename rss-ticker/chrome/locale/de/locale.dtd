@@ -2,11 +2,14 @@
 <!ENTITY rssticker.cm.open "Öffnen">
 <!ENTITY rssticker.cm.open.key "Ö">
 <!ENTITY rssticker.cm.openInNewWindow "In neuem Fenster öffnen">
-<!ENTITY rssticker.cm.openInNewWindow.key "F">
+<!ENTITY rssticker.cm.openInNewWindow.key "n">
 <!ENTITY rssticker.cm.openInNewTab "In neuem Tab öffnen">
+<!ENTITY rssticker.cm.openInNewTab.key "T">
 <!ENTITY rssticker.cm.openAllInTabs "Alle in Tabs öffnen">
+<!ENTITY rssticker.cm.openAllInTabs.key "A">
 <!ENTITY rssticker.cm.openUnreadInTabs "Alle ungelesenen in Tabs öffnen">
 <!ENTITY rssticker.cm.openFeedInTabs "Feed in Tabs öffnen">
+<!ENTITY rssticker.cm.openFeedInTabs.key "e">
 <!ENTITY rssticker.cm.openFeedUnreadInTabs "Ungelesene dieses Feeds in Tabs öffnen">
 <!ENTITY rssticker.cm.copyLinkTitle "Link-Titel kopieren">
 <!ENTITY rssticker.cm.copyLinkTitle.key "i">
