@@ -249,7 +249,7 @@ var RSS_TICKER_UI = {
 				var summary = document.getElementById( 'rss-ticker-tooltip-summary' );
 				while ( summary.lastChild )
 					summary.removeChild( summary.lastChild );
-				summary.appendChild( document.createTextNode( tickerItem.itemData.description ) );
+				summary.appendChild( document.createTextNode( tickerItem.itemData.description.replace( /\s+/g, ' ' ).replace( /^\s+|\s+$/g, '' ) ) );
 				document.getElementById( 'rss-ticker-tooltip-summary' ).style.display = '';
 			}
 			else {
