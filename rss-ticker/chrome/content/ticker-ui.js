@@ -284,7 +284,7 @@ var RSS_TICKER_UI = {
 		},
 		
 		'rss-ticker_cmd_openInTab' : function ( event ) {
-			openUILinkIn( document.popupNode.url, 'tab' );
+			openUILinkIn( document.popupNode.url, 'tabshifted' );
 			
 			RSS_TICKER_FEED_MANAGER.markAsRead( document.popupNode.itemData ); 
 		},
@@ -302,7 +302,7 @@ var RSS_TICKER_UI = {
 				
 				if ( PlacesUIUtils._confirmOpenInTabs( itemsToOpen.length, window ) ) {
 					for ( var i = 0, _len = itemsToOpen.length; i < _len; i++ ) {
-						openUILinkIn( itemsToOpen[i].url, 'tab' );
+						openUILinkIn( itemsToOpen[i].url, 'tabshifted' );
 						RSS_TICKER_FEED_MANAGER.markAsRead( itemsToOpen[i] );
 					}
 				}
@@ -325,7 +325,7 @@ var RSS_TICKER_UI = {
 			
 			if ( PlacesUIUtils._confirmOpenInTabs( itemsToOpen.length, window ) ) {
 				for ( var i = 0, _len = itemsToOpen.length; i < _len; i++ ) {
-					openUILinkIn( itemsToOpen[i].url, 'tab' );
+					openUILinkIn( itemsToOpen[i].url, 'tabshifted' );
 					RSS_TICKER_FEED_MANAGER.markAsRead( itemsToOpen[i] );
 				}
 			}
@@ -401,7 +401,7 @@ var RSS_TICKER_UI = {
 	
 	launchURL : function ( url, event ) {
 		if ( RSS_TICKER_UTILS.prefs.getBoolPref( "alwaysOpenInNewTab" ) )
-			openUILinkIn( url, 'tab' )
+			openUILinkIn( url, 'tabshifted' )
 		else
 			openUILink( url, event );
 	},
