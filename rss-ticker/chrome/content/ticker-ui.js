@@ -258,6 +258,11 @@ var RSS_TICKER_UI = {
 		},
 	
 		ticker_context : function ( event ) {
+			if ( ! RSS_TICKER_UI.ticker.firstChild ) {
+				event.preventDefault();
+				return false;
+			}
+				
 			var context = document.popupNode;
 			var menuitems = this.childNodes;
 		
