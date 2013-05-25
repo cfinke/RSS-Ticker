@@ -166,9 +166,13 @@ var RSS_TICKER_UI = {
 
 			if ( lastMajorVersion >= 13 ) {
 				function isMajorUpdate( oldVersion, newVersion ) {
+					// No firstrun page for updates.
+					if ( oldVersion )
+						return false;
+					
 					if ( ! oldVersion )
 						return true;
-
+					
 					var oldParts = oldVersion.split( "." );
 					var newParts = newVersion.split( "." );
 
