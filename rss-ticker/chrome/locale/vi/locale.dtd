@@ -3,43 +3,18 @@
 <!ENTITY rssticker.cm.openInNewWindow "Mở trong Cửa Sổ Mới">
 <!ENTITY rssticker.cm.openInNewTab "Mở trong Thẻ Mới">
 <!ENTITY rssticker.cm.openAllInTabs "Mở Tất Cả trong Thẻ">
-<!ENTITY rssticker.cm.openUnreadInTabs "Mở Chưa Đọc trong Thẻ">
 <!ENTITY rssticker.cm.openFeedInTabs "Mở Nguồn Tin trong Thẻ">
-<!ENTITY rssticker.cm.openFeedUnreadInTabs "Mở Nguồn Tin Chưa Đọc trong Thẻ">
 <!ENTITY rssticker.cm.copyLinkTitle "Chép Tiêu Đề Liên Kết">
 <!ENTITY rssticker.cm.copyLinkURL "Chép URL Liên Kết">
-<!ENTITY rssticker.cm.refreshFeeds "Làm Mới Nguồn Tin">
 <!ENTITY rssticker.cm.manageFeeds "Quản Lý Nguồn Tin">
 <!ENTITY rssticker.cm.markAsRead "Đánh Dấu Đã Đọc">
 <!ENTITY rssticker.cm.markFeedAsRead "Đánh Dấu Đã Đọc Nguồn Tin">
 <!ENTITY rssticker.cm.markAllAsRead "Đánh Dấu Đã Đọc Tất Cả">
-<!ENTITY rssticker.options.updateInterval "Mức Thường Xuyên Cập Nhật Nguồn Tin">
-<!ENTITY rssticker.options.update.1 "Cập nhật nguồn tin của tôi mỗi">
-<!ENTITY rssticker.options.update.2 "phút.">
 <!ENTITY rssticker.options.speed "Tốc Độ Lướt Tin">
-<!ENTITY rssticker.options.dw.itemWidth "Chiều rộng mục tin">
 <!ENTITY rssticker.options.smooothness "Độ Mượt Bộ Cuộn Tin">
-<!ENTITY rssticker.cmOptionsDescription "Tùy chỉnh trình đơn ngữ cảnh của bộ cuộn tin bằng việc chọn hoặc bỏ chọn các tùy chọn bên dưới.">
 <!ENTITY rssticker.tt.summary "Tóm Tắt">
-<!ENTITY rssticker.options "Tùy Chọn">
-<!ENTITY rssticker.options.restartNotice "Tùy chọn biểu thị bằng dấu * sẽ không thay đổi tới khi bạn mở lại cửa sổ trình duyệt.">
-<!ENTITY rssticker.options.general "Chung">
-<!ENTITY rssticker.options.advanced "Nâng Cao">
-<!ENTITY rssticker.options.contextMenu "Trình Đơn Ngữ Cảnh">
-<!ENTITY rssticker.disableTicker "Tắt bộ cuộn tin">
-<!ENTITY rssticker.options.tickerPlacement "Vị Trí Bộ Cuộn Tin">
-<!ENTITY rssticker.tickerPlacement.belowStatusBar "Dưới thanh trạng thái">
-<!ENTITY rssticker.tickerPlacement.belowBMTB "Dưới thanh đánh dấu">
-<!ENTITY rssticker.options.random "Ngẫu nhiên hóa các mục cuộn tin">
-<!ENTITY rssticker.options.hide "Ẩn mục tin bạn đã đọc.">
-<!ENTITY rssticker.options.bold "Tô đậm mục tin bạn chưa đọc.">
 <!ENTITY rssticker.options.openInNewTab "Luôn mở liên kết trong thẻ mới.">
 <!ENTITY rssticker.toggleTicker "Bật bộ cuộn tắt/mở">
-<!ENTITY rssticker.options.dw.limitWidth "Giới hạn chiều rộng cho mục tin trong bộ cuộn">
-<!ENTITY rssticker.options.dw.isMaxWidth "Chỉ dùng độ rộng tối đa">
-<!ENTITY rssticker.options.limitItemsPerFeed "Giới hạn số mục tin trên một nguồn">
-<!ENTITY rssticker.options.itemsPerFeed "Mục trên một nguồn">
-<!ENTITY rssticker.about "Giới Thiệu">
 <!ENTITY rssticker.noFeedsFoundTitle "Không Tìm Thấy Đánh Dấu Trực Tiếp">
 <!ENTITY rssticker.noFeedsFound "Bộ Cuộn Tin RSS không định vị bất cứ Đánh Dấu Trực Tiếp nào">
 <!ENTITY rssticker.howToSubscribe1 "Bộ cuộn RSS tải và cuộn các mục tin từ Đánh Dấu Trực Tiếp của bạn (vd newsfeed hoặc nguồn RSS), nhưng bạn chưa đăng ký bất kỳ Đánh Dấu Trực Tiếp nào. Cần trợ giúp? Việc đăng ký một nguồn tin thật dễ dàng:">
@@ -47,18 +22,7 @@
 <!ENTITY rssticker.howToSubscribe3 "Hãy nhấp Đăng Ký Ngay, và Bộ Cuộn RSS sẽ bắt đầu cuộn các tin trên nguồn tin ngay.">
 <!ENTITY rssticker.closeNoFeedsPage "Đóng trang này">
 <!ENTITY rssticker.dontShowAgain "Không hiển thị thông báo này nữa.">
-<!ENTITY rssticker.feed "Nguồn Tin">
-<!ENTITY rssticker.feeds "Nguồn Tin">
-<!ENTITY rssticker.feedManagement "Bạn có thể thêm hoặc loại bỏ nguồn tin khỏi bộ cuộn bằng việc chọn chúng trong danh sách bên dưới và nhấp vào nút Thêm hoặc Loại Bỏ. Lưu ý: Để thật sự ngừng nhận tin khỏi một nguồn, hãy sử dụng Đánh Dấu của Firefox. Danh sách này chỉ cho phép bạn thiết lập một Đánh Dấu của bạn xuất hiện trên bộ cuộn; nó không làm bạn ngừng nhận một nguồn tin nào.">
-<!ENTITY rssticker.add "Thêm">
-<!ENTITY rssticker.remove "Loại Bỏ">
 <!ENTITY rssticker.hideWhenEmpty "Ẩn Bộ Cuộn Khi Nó Rỗng">
-<!ENTITY rssticker.faster "Nhanh hơn">
-<!ENTITY rssticker.slower "Chậm hơn">
-<!ENTITY rssticker.smoother "Mượt hơn (Tốn CPU)">
-<!ENTITY rssticker.choppier "Giật hơn (Ít CPU)">
-<!ENTITY rssticker.featured.subscribe "Nhận Tin">
-<!ENTITY rssticker.featured.panelTitle "Nguồn Tin Đặc Sắc">
-<!ENTITY rssticker.featured.description "Hỗ trợ việc phát triển RSS Ticker mà không mất xu nào bằng việc thử vài nguồn tin từ Bạn của RSS Ticker.">
-<!ENTITY rssticker.featured.contact "(Nếu bạn muốn xem nguồn tin của bạn trong danh sách này, hãy e-mail đến cfinke@gmail.com.)">
-<!ENTITY rssticker.featured.notifyMe "Định kỳ thông báo cho tôi về các nguồn tin đặc sắc mới.">
+<!ENTITY rssticker.options.tickerPlacement "Vị Trí Bộ Cuộn Tin">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Dưới thanh trạng thái">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Dưới thanh đánh dấu">

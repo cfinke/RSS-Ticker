@@ -6,15 +6,11 @@
 <!ENTITY rssticker.cm.openInNewTab "Avaa uuteen välilehteen">
 <!ENTITY rssticker.cm.openInNewTab.key "T">
 <!ENTITY rssticker.cm.openAllInTabs "Avaa kaikki välilehtiin">
-<!ENTITY rssticker.cm.openUnreadInTabs "Avaa lukemattomat välilehtiin">
 <!ENTITY rssticker.cm.openFeedInTabs "Avaa syöte välilehtiin">
-<!ENTITY rssticker.cm.openFeedUnreadInTabs "Avaa lukematon syöte välilehtiin">
 <!ENTITY rssticker.cm.copyLinkTitle "Kopioi linkin nimi">
 <!ENTITY rssticker.cm.copyLinkTitle.key "L">
 <!ENTITY rssticker.cm.copyLinkURL "Kopioi linkin osoite">
 <!ENTITY rssticker.cm.copyLinkURL.key "C">
-<!ENTITY rssticker.cm.refreshFeeds "Päivitä syötteet">
-<!ENTITY rssticker.cm.refreshFeeds.key "R">
 <!ENTITY rssticker.cm.manageFeeds "Hallinnoi syötteitä">
 <!ENTITY rssticker.cm.manageFeeds.key "G">
 <!ENTITY rssticker.cm.markAsRead "Merkitse luetuksi">
@@ -23,39 +19,15 @@
 <!ENTITY rssticker.cm.markFeedAsRead.key "F">
 <!ENTITY rssticker.cm.markAllAsRead "Merkitse kaikki luetuksi">
 <!ENTITY rssticker.cm.markAllAsRead.key "A">
-<!ENTITY rssticker.options.updateInterval "Päivitystiheys">
 <!ENTITY rssticker.options.speed "Vieritysnopeus">
-<!ENTITY rssticker.options.dw.itemWidth "Leveys">
-<!ENTITY rssticker.pixelAbbrev "px">
 <!ENTITY rssticker.options.smooothness "Syötenauhan vierityksen tasaisuus">
-<!ENTITY rssticker.cmOptionsDescription "Valitse syötenauhan aihevalikossa näytettävät kohteet. Aihevalikon saat esille klikkaamalla syötenauhaa hiiren oikealla näppäimellä.">
 <!ENTITY rssticker.tt.summary "Yhteenveto">
-<!ENTITY rssticker.options "Asetukset">
-<!ENTITY rssticker.options.restartNotice "Tähdellä (*) merkityt asetukset tulevat voimaan vasta kun suljet ja avaat uudelleen selainikkunan.">
-<!ENTITY rssticker.options.general "Yleiset">
-<!ENTITY rssticker.options.advanced "Lisäasetukset">
-<!ENTITY rssticker.options.contextMenu "Aihevalikko">
-<!ENTITY rssticker.disableTicker "Kytke syötenauha pois päältä">
-<!ENTITY rssticker.options.tickerPlacement "Syötenauhan sijainti">
-<!ENTITY rssticker.tickerPlacement.belowStatusBar "Tilapalkin alapuolella">
-<!ENTITY rssticker.tickerPlacement.belowBMTB "Kirjanmerkkipalkin alapuolella">
-<!ENTITY rssticker.options.random "Sekoita syötteen kohteet">
-<!ENTITY rssticker.options.hide "Piilota luetut kohteet.">
-<!ENTITY rssticker.options.bold "Lihavoi kohteet, joita ei ole luettu.">
 <!ENTITY rssticker.options.openInNewTab "Avaa linkit aina uuteen välilehteen.">
 <!ENTITY rssticker.toggleTicker "Syötenauha päälle/pois">
-<!ENTITY rssticker.options.dw.limitWidth "Rajoita kohteiden leveys">
-<!ENTITY rssticker.options.dw.isMaxWidth "Käytä enimmäisleveyttä">
-<!ENTITY rssticker.options.limitItemsPerFeed "Rajoita kohteiden lukumäärä syötteissä">
-<!ENTITY rssticker.options.itemsPerFeed "Kohteita syötteessä">
-<!ENTITY rssticker.about "Tietoja">
 <!ENTITY rssticker.noFeedsFoundTitle "Live-kirjanmerkkejä ei ole">
 <!ENTITY rssticker.noFeedsFound "Live-kirjanmerkkejä (uutissyötteitä, RSS-syötteitä) ei löytynyt">
 <!ENTITY rssticker.dontShowAgain "Älä näytä tätä viestiä enää.">
-<!ENTITY rssticker.feed "Syöte">
-<!ENTITY rssticker.feeds "Syötteet">
-<!ENTITY rssticker.feedManagement "Lisää (poista) syöte valitsemalla se alla olevasta luettelosta ja klikkaamalla Lisää (Poista) .">
-<!ENTITY rssticker.add "Lisää">
-<!ENTITY rssticker.remove "Poista">
-<!ENTITY rssticker.URL "URL">
 <!ENTITY rssticker.hideWhenEmpty "Piilota syötenauha jos se on tyhjä">
+<!ENTITY rssticker.options.tickerPlacement "Syötenauhan sijainti">
+<!ENTITY rssticker.tickerPlacement.belowStatusBar "Tilapalkin alapuolella">
+<!ENTITY rssticker.tickerPlacement.belowBMTB "Kirjanmerkkipalkin alapuolella">
