@@ -179,7 +179,7 @@ var RSS_TICKER_UI = {
 				}
 
 				if ( isMajorUpdate ( lastVersion, addon.version ) )
-					openUILinkIn( "http://www.chrisfinke.com/firstrun/rss-ticker.php?v=" + addon.version, 'tab' );
+					openUILinkIn( "http://www.chrisfinke.com/addons/rss-ticker/firstrun/?v=" + addon.version, 'tab' );
 			}
 		} );
 	},
