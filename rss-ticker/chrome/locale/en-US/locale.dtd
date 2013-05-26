@@ -42,5 +42,9 @@
 <!ENTITY rssticker.options.tickerPlacement "Ticker Placement">
 <!ENTITY rssticker.tickerPlacement.belowStatusBar "Below status bar">
 <!ENTITY rssticker.tickerPlacement.belowBMTB "Below bookmarks toolbar">
-<!ENTITY rssticker.showInTicker "Show in RSS Ticker">
-<!ENTITY rssticker.showInTicker.key "T">
+<!ENTITY rssticker.options.itemWidth "Item width"> 
+<!ENTITY rssticker.options.limitWidth "Limit the width of the items in the ticker">
+<!ENTITY rssticker.options.isMaxWidth "Use only as a maximum width"> 
+<!ENTITY rssticker.options.itemWidth.description "Size used as limit width or maximum width."> 
+<!ENTITY rssticker.options.limitWidth.description "Limit the width of the items in the ticker.">
+<!ENTITY rssticker.options.isMaxWidth.description "The item cannot exceed the width limit."> 
