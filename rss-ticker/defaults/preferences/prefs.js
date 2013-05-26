@@ -15,3 +15,5 @@ pref( "extensions.rssticker.ignoreFileUpgraded", false );
 pref( "extensions.rssticker.debug", false );
 
 pref( "extensions.rssticker.disabled", false );
+
+pref( "extensions.rssticker.subscribeIconCheck", true );
