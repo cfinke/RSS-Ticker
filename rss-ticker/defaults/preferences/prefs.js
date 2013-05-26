@@ -17,3 +17,7 @@ pref( "extensions.rssticker.debug", false );
 pref( "extensions.rssticker.disabled", false );
 
 pref( "extensions.rssticker.subscribeIconCheck", true );
+
+pref( "extensions.rssticker.itemWidth", 250 );
+pref( "extensions.rssticker.isMaxWidth", false );
+pref( "extensions.rssticker.limitWidth", true );
