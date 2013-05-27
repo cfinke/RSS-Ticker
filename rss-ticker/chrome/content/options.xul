@@ -14,6 +14,9 @@
 	</setting>
 	<setting pref="extensions.rssticker.tickSpeed" type="integer" title="&rssticker.options.speed;" desc="&rssticker.options.speed.description;" />
 	<setting pref="extensions.rssticker.ticksPerItem" type="integer" title="&rssticker.options.smooothness;" desc="&rssticker.options.smooothness.description;" />
+	<setting pref="extensions.rssticker.limitWidth" type="bool" title="&rssticker.options.limitWidth;" desc="&rssticker.options.limitWidth.description;" />
+	<setting pref="extensions.rssticker.isMaxWidth" type="bool" title="&rssticker.options.isMaxWidth;" desc="&rssticker.options.isMaxWidth.description;" />
+	<setting pref="extensions.rssticker.itemWidth" type="integer" title="&rssticker.options.itemWidth;" desc="&rssticker.options.itemWidth.description;" />
 	<setting pref="extensions.rssticker.alwaysOpenInNewTab" type="bool" title="&rssticker.options.openInNewTab;" />
 	<setting pref="extensions.rssticker.rtl" type="bool" title="&rssticker.options.reverseDirection;" />
 	<setting pref="extensions.rssticker.hideWhenEmpty" type="bool" title="&rssticker.hideWhenEmpty;" />

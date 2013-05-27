@@ -92,6 +92,9 @@ var RSS_TICKER_UI = {
 		RSS_TICKER_UI.observe( null, "nsPref:changed", "tickSpeed" );
 		RSS_TICKER_UI.observe( null, "nsPref:changed", "ticksPerItem" );
 		RSS_TICKER_UI.observe( null, "nsPref:changed", "rtl" );
+		RSS_TICKER_UI.observe( null, "nsPref:changed", "limitWidth" );
+		RSS_TICKER_UI.observe( null, "nsPref:changed", "isMaxWidth" );
+		RSS_TICKER_UI.observe( null, "nsPref:changed", "itemWidth" );
 		
 		this.tick();
 		
@@ -459,6 +462,23 @@ var RSS_TICKER_UI = {
 				RSS_TICKER_UI.unloadTicker();
 				RSS_TICKER_UI.loadTicker();
 			break;
+			case 'isMaxWidth':
+			case 'limitWidth':
+			case 'itemWidth':
+				for ( var i = RSS_TICKER_UI.ticker.childNodes.length - 1; i >= 0; i-- ) {
+					var element = RSS_TICKER_UI.ticker.childNodes[i];
+					if ( ! RSS_TICKER_UTILS.prefs.getBoolPref( 'limitWidth' ) ) {
+						element.style.width = 'auto';
+						element.style.maxWidth = 'none';
+					} else if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'isMaxWidth' ) ) {
+						element.style.width = 'auto';
+						element.style.maxWidth = RSS_TICKER_UTILS.prefs.getIntPref( 'itemWidth' ) + 'px' ;
+					} else {
+						element.style.width = RSS_TICKER_UTILS.prefs.getIntPref( 'itemWidth' ) + 'px';
+						element.style.maxWidth = 'none';
+					}
+				}
+			break;
 		}
 	},
 	
@@ -527,7 +547,18 @@ var RSS_TICKER_UI = {
 			element.setAttribute( 'label', item.label );
 			element.setAttribute( 'image', item.image );
 			element.setAttribute( 'tooltip', 'rss-ticker-tooltip' );
-			
+
+			if ( ! RSS_TICKER_UTILS.prefs.getBoolPref( 'limitWidth' ) ) {
+				element.style.width = 'auto';
+				element.style.maxWidth = 'none';
+			} else if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'isMaxWidth' ) ) {
+				element.style.width = 'auto';
+				element.style.maxWidth = RSS_TICKER_UTILS.prefs.getIntPref( 'itemWidth' ) + 'px' ;
+			} else {
+				element.style.width = RSS_TICKER_UTILS.prefs.getIntPref( 'itemWidth' ) + 'px';
+				element.style.maxWidth = 'none';
+			}
+
 			RSS_TICKER_UI.ticker.appendChild( element );
 		}
 		
