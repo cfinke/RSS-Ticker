@@ -1,9 +1,0 @@
-/* @todo Optimize these rules; use a sprite and -moz-image-region */
-
-#RSSTICKER-button {
-	list-style-image: url(chrome://rss-ticker/skin/toolbar-icon.png);
-}
-
-#RSSTICKER-button[greyed="true"] {
-	list-style-image: url(chrome://rss-ticker/skin/toolbar-icon-4-gray.png);
-}
