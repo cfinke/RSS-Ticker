@@ -14,6 +14,11 @@
 	</setting>
 	<setting pref="extensions.rssticker.tickSpeed" type="integer" title="&rssticker.options.speed;" desc="&rssticker.options.speed.description;" />
 	<setting pref="extensions.rssticker.ticksPerItem" type="integer" title="&rssticker.options.smooothness;" desc="&rssticker.options.smooothness.description;" />
+	<setting pref="extensions.rssticker.unvisitedColor" type="color" title="&rssticker.options.unvisitedColor;" />
+	<setting pref="extensions.rssticker.unvisitedBold" type="bool" title="&rssticker.options.unvisitedBold;" />
+	<setting pref="extensions.rssticker.visitedColor" type="color" title="&rssticker.options.visitedColor;" />
+	<setting pref="extensions.rssticker.visitedBold" type="bool" title="&rssticker.options.visitedBold;" />
+	<setting pref="extensions.rssticker.hideVisited" type="bool" title="&rssticker.options.hideVisited;" desc="&rssticker.options.hideVisited.description;" />
 	<setting pref="extensions.rssticker.alwaysOpenInNewTab" type="bool" title="&rssticker.options.openInNewTab;" />
 	<setting pref="extensions.rssticker.rtl" type="bool" title="&rssticker.options.reverseDirection;" />
 	<setting pref="extensions.rssticker.hideWhenEmpty" type="bool" title="&rssticker.hideWhenEmpty;" />
