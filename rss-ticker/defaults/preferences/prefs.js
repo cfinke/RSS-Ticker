@@ -17,3 +17,10 @@ pref( "extensions.rssticker.debug", false );
 pref( "extensions.rssticker.disabled", false );
 
 pref( "extensions.rssticker.subscribeIconCheck", true );
+
+pref( "extensions.rssticker.unvisitedColor", "#0000FF" );
+pref( "extensions.rssticker.visitedColor", "#000000" );
+pref( "extensions.rssticker.unvisitedBold", true );
+pref( "extensions.rssticker.visitedBold", false );
+
+pref( "extensions.rssticker.hideVisited", true );
