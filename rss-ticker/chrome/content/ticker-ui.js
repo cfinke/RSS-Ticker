@@ -467,16 +467,15 @@ var RSS_TICKER_UI = {
 			case 'itemWidth':
 				for ( var i = RSS_TICKER_UI.ticker.childNodes.length - 1; i >= 0; i-- ) {
 					var element = RSS_TICKER_UI.ticker.childNodes[i];
-					
 					if ( ! RSS_TICKER_UTILS.prefs.getBoolPref( 'limitWidth' ) ) {
-						element.removeAttribute( 'width' );
-						element.removeAttribute( 'max-width' );
+						element.style.width = 'auto';
+						element.style.maxWidth = 'none';
 					} else if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'isMaxWidth' ) ) {
-						element.removeAttribute( 'width' );
-						element.setAttribute( 'max-width', RSS_TICKER_UTILS.prefs.getIntPref( 'itemWidth' ) + 'px' );
+						element.style.width = 'auto';
+						element.style.maxWidth = RSS_TICKER_UTILS.prefs.getIntPref( 'itemWidth' ) + 'px' ;
 					} else {
-						element.setAttribute( 'width', RSS_TICKER_UTILS.prefs.getIntPref( 'itemWidth' ) + 'px' );
-						element.removeAttribute( 'max-width' );
+						element.style.width = RSS_TICKER_UTILS.prefs.getIntPref( 'itemWidth' ) + 'px';
+						element.style.maxWidth = 'none';
 					}
 				}
 			break;
@@ -550,14 +549,14 @@ var RSS_TICKER_UI = {
 			element.setAttribute( 'tooltip', 'rss-ticker-tooltip' );
 
 			if ( ! RSS_TICKER_UTILS.prefs.getBoolPref( 'limitWidth' ) ) {
-				element.removeAttribute( 'width' );
-				element.removeAttribute( 'max-width' );
+				element.style.width = 'auto';
+				element.style.maxWidth = 'none';
 			} else if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'isMaxWidth' ) ) {
-				element.removeAttribute( 'width' );
-				element.setAttribute( 'max-width', RSS_TICKER_UTILS.prefs.getIntPref( 'itemWidth' ) + 'px' );
+				element.style.width = 'auto';
+				element.style.maxWidth = RSS_TICKER_UTILS.prefs.getIntPref( 'itemWidth' ) + 'px' ;
 			} else {
-				element.setAttribute( 'width', RSS_TICKER_UTILS.prefs.getIntPref( 'itemWidth' ) + 'px' );
-				element.removeAttribute( 'max-width' );
+				element.style.width = RSS_TICKER_UTILS.prefs.getIntPref( 'itemWidth' ) + 'px';
+				element.style.maxWidth = 'none';
 			}
 
 			RSS_TICKER_UI.ticker.appendChild( element );
