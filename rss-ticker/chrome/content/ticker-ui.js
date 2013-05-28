@@ -549,6 +549,16 @@ var RSS_TICKER_UI = {
 			if ( item.visited )
 				if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'hideVisited' ) )
 					continue;
+				else {
+					var element = document.createElement( 'toolbarbutton' );
+					element.style.color = RSS_TICKER_UTILS.prefs.getCharPref( 'visitedColor' );
+					element.style.fontWeight = ( RSS_TICKER_UTILS.prefs.getBoolPref( 'visitedBold' ) ) ? 'bold' : 'normal';
+				}
+			else {
+				var element = document.createElement( 'toolbarbutton' );
+				element.style.color = RSS_TICKER_UTILS.prefs.getCharPref( 'unvisitedColor' );
+				element.style.fontWeight = ( RSS_TICKER_UTILS.prefs.getBoolPref( 'unvisitedBold' ) ) ? 'bold' : 'normal';
+			}
 			
 			var element = document.createElement( 'toolbarbutton' );
 			element.id = 'rss-ticker-item-' + item.guid;
@@ -563,19 +573,6 @@ var RSS_TICKER_UI = {
 			element.setAttribute( 'image', item.image );
 			element.setAttribute( 'tooltip', 'rss-ticker-tooltip' );
 			
-			var currentFeed = RSS_TICKER_FEED_MANAGER.feeds[element.feedGUID];
-			for ( var item in currentFeed.items ) {
-				if ( currentFeed.items[item].guid == element.guid ) {
-					if ( currentFeed.items[item].visited ) {
-						element.style.color = RSS_TICKER_UTILS.prefs.getCharPref( 'visitedColor' );
-						element.style.fontWeight = ( RSS_TICKER_UTILS.prefs.getBoolPref( 'visitedBold' ) ) ? 'bold' : 'normal';
-					} else {
-						element.style.color = RSS_TICKER_UTILS.prefs.getCharPref( 'unvisitedColor' );
-						element.style.fontWeight = ( RSS_TICKER_UTILS.prefs.getBoolPref( 'unvisitedBold' ) ) ? 'bold' : 'normal';
-					}
-				}
-			}
-
 			RSS_TICKER_UI.ticker.appendChild( element );
 		}
 		
