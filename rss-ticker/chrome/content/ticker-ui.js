@@ -92,6 +92,7 @@ var RSS_TICKER_UI = {
 		RSS_TICKER_UI.observe( null, "nsPref:changed", "tickSpeed" );
 		RSS_TICKER_UI.observe( null, "nsPref:changed", "ticksPerItem" );
 		RSS_TICKER_UI.observe( null, "nsPref:changed", "rtl" );
+		RSS_TICKER_UI.observe( null, "nsPref:changed", "dw.limitWidth" );
 		
 		this.tick();
 		
@@ -487,6 +488,12 @@ var RSS_TICKER_UI = {
 					for ( var i = 0, _len = feeds.length; i < _len; i++ )
 						RSS_TICKER_UI.feedParsed( feeds[i] );
 				}
+			break;
+			case 'dw.limitWidth':
+				if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'dw.limitWidth' ) )
+					RSS_TICKER_UI.toolbar.setAttribute( 'class', RSS_TICKER_UI.toolbar.getAttribute( 'class' ) + ' condensed' );
+				else
+					RSS_TICKER_UI.toolbar.setAttribute( 'class', RSS_TICKER_UI.toolbar.getAttribute( 'class' ).replace( /\bcondensed\b/, '' ) );
 			break;
 		}
 	},

@@ -53,3 +53,7 @@
 #rss-ticker-tooltip-item-name {
 	text-decoration: underline;
 }
+
+.rss-ticker-toolbar.condensed toolbarbutton {
+	max-width: 250px;
+} 
