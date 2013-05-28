@@ -527,8 +527,21 @@ var RSS_TICKER_UI = {
 			element.setAttribute( 'label', item.label );
 			element.setAttribute( 'image', item.image );
 			element.setAttribute( 'tooltip', 'rss-ticker-tooltip' );
-			
-			RSS_TICKER_UI.ticker.appendChild( element );
+
+			var length = RSS_TICKER_UI.ticker.childNodes.length;
+			if ( length == 0 )
+				RSS_TICKER_UI.ticker.appendChild( element );
+			else {
+				if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'randomizeItems' ) ) {
+					// Add after the 5th one just to avoid some jumpiness
+					var randomPlace = Math.floor( Math.random() * ( length - 1 ) ) + 6;
+					if ( randomPlace >= length )
+						RSS_TICKER_UI.ticker.appendChild( element );
+					else 
+						RSS_TICKER_UI.ticker.insertBefore( element, RSS_TICKER_UI.ticker.childNodes[randomPlace] );
+				} else
+					RSS_TICKER_UI.ticker.appendChild( element );
+			}
 		}
 		
 		if ( RSS_TICKER_UI.ticker.firstChild )
