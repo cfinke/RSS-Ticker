@@ -44,3 +44,4 @@
 <!ENTITY rssticker.tickerPlacement.belowBMTB "Below bookmarks toolbar">
 <!ENTITY rssticker.showInTicker "Show in RSS Ticker">
 <!ENTITY rssticker.showInTicker.key "T">
+<!ENTITY rssticker.options.random "Randomize ticker items">
