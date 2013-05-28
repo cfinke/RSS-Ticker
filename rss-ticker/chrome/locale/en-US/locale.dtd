@@ -37,11 +37,10 @@
 <!ENTITY rssticker.closeNoFeedsPage "Close this page">
 <!ENTITY rssticker.dontShowAgain "Don't show this message again.">
 <!ENTITY rssticker.hideWhenEmpty "Hide the ticker when it's empty">
-<!ENTITY rssticker.options.width "Ticker width (in pixels)">
-<!ENTITY rssticker.options.width.description "When the ticker isn't the only item in a toolbar, this option determines how much space it takes up.">
 <!ENTITY rssticker.options.tickerPlacement "Ticker Placement">
 <!ENTITY rssticker.tickerPlacement.belowStatusBar "Below status bar">
 <!ENTITY rssticker.tickerPlacement.belowBMTB "Below bookmarks toolbar">
 <!ENTITY rssticker.showInTicker "Show in RSS Ticker">
 <!ENTITY rssticker.showInTicker.key "T">
 <!ENTITY rssticker.options.random "Randomize ticker items">
+<!ENTITY rssticker.options.limitWidth "Limit the width of ticker items">
