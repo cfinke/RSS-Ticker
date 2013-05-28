@@ -459,6 +459,35 @@ var RSS_TICKER_UI = {
 				RSS_TICKER_UI.unloadTicker();
 				RSS_TICKER_UI.loadTicker();
 			break;
+			case 'randomizeItems':
+				if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'randomizeItems' ) ) {
+					// Shuffle all of the ticker items.
+					var itemCount = RSS_TICKER_UI.ticker.childNodes.length;
+					
+					// Move the first half of items into the second half.
+					for ( var i = 0; i < itemCount / 2; i++ ) {
+						// Remove the first item.
+						var element = RSS_TICKER_UI.ticker.childNodes[0];
+						RSS_TICKER_UI.ticker.removeChild( element );
+						
+						// Find it a new location somewhere amongst the second half of items.
+						var newLocation = Math.floor( ( Math.random() * ( itemCount / 2 ) ) + ( itemCount / 2 ) );
+						RSS_TICKER_UI.ticker.insertBefore( element, RSS_TICKER_UI.ticker.childNodes[newLocation - 1] );
+					}
+				}
+				else {
+					// Unshuffle the ticker items.
+					var feeds = RSS_TICKER_FEED_MANAGER.getAllFeeds();
+					
+					// Remove all items
+					while ( RSS_TICKER_UI.ticker.lastChild )
+						RSS_TICKER_UI.ticker.removeChild( RSS_TICKER_UI.ticker.lastChild );
+					
+					// Reinstate all items.
+					for ( var i = 0, _len = feeds.length; i < _len; i++ )
+						RSS_TICKER_UI.feedParsed( feeds[i] );
+				}
+			break;
 		}
 	},
 	
@@ -528,19 +557,18 @@ var RSS_TICKER_UI = {
 			element.setAttribute( 'image', item.image );
 			element.setAttribute( 'tooltip', 'rss-ticker-tooltip' );
 
-			var length = RSS_TICKER_UI.ticker.childNodes.length;
-			if ( length == 0 )
+			if ( ! RSS_TICKER_UTILS.prefs.getBoolPref( 'randomizeItems' ) )
 				RSS_TICKER_UI.ticker.appendChild( element );
 			else {
-				if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'randomizeItems' ) ) {
-					// Add after the 5th one just to avoid some jumpiness
-					var randomPlace = Math.floor( Math.random() * ( length - 1 ) ) + 6;
-					if ( randomPlace >= length )
-						RSS_TICKER_UI.ticker.appendChild( element );
-					else 
-						RSS_TICKER_UI.ticker.insertBefore( element, RSS_TICKER_UI.ticker.childNodes[randomPlace] );
-				} else
+				var length = RSS_TICKER_UI.ticker.childNodes.length;
+				
+				if ( ! length )
 					RSS_TICKER_UI.ticker.appendChild( element );
+				else {
+					var randomPlace = Math.floor( Math.random() * ( length - 1 ) );
+					
+					RSS_TICKER_UI.ticker.insertBefore( element, RSS_TICKER_UI.ticker.childNodes[randomPlace] );
+				}
 			}
 		}
 		
