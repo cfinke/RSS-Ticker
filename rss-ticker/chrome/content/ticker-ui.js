@@ -92,6 +92,10 @@ var RSS_TICKER_UI = {
 		RSS_TICKER_UI.observe( null, "nsPref:changed", "tickSpeed" );
 		RSS_TICKER_UI.observe( null, "nsPref:changed", "ticksPerItem" );
 		RSS_TICKER_UI.observe( null, "nsPref:changed", "rtl" );
+		RSS_TICKER_UI.observe( null, "nsPref:changed", "unvisitedColor" );
+		RSS_TICKER_UI.observe( null, "nsPref:changed", "visitedColor" );
+		RSS_TICKER_UI.observe( null, "nsPref:changed", "unvisitedBold" );
+		RSS_TICKER_UI.observe( null, "nsPref:changed", "visitedBold" );
 		
 		this.tick();
 		
@@ -459,6 +463,26 @@ var RSS_TICKER_UI = {
 				RSS_TICKER_UI.unloadTicker();
 				RSS_TICKER_UI.loadTicker();
 			break;
+			case 'unvisitedColor':
+			case 'visitedColor':
+			case 'unvisitedBold':
+			case 'visitedBold':
+				for ( var i = RSS_TICKER_UI.ticker.childNodes.length - 1; i >= 0; i-- ) {
+					var element = RSS_TICKER_UI.ticker.childNodes[i];
+					var feed = RSS_TICKER_FEED_MANAGER.feeds[element.feedGUID];
+					for ( var item in feed.items ) {
+						if ( feed.items[item].guid == element.guid ) {
+							if ( feed.items[item].visited ) {
+								element.style.color = RSS_TICKER_UTILS.prefs.getCharPref( 'visitedColor' );
+								element.style.fontWeight = ( RSS_TICKER_UTILS.prefs.getBoolPref( 'visitedBold' ) ) ? 'bold' : 'normal';
+							} else {
+								element.style.color = RSS_TICKER_UTILS.prefs.getCharPref( 'unvisitedColor' );
+								element.style.fontWeight = ( RSS_TICKER_UTILS.prefs.getBoolPref( 'unvisitedBold' ) ) ? 'bold' : 'normal';
+							}
+						}
+					}
+				}
+			break;
 		}
 	},
 	
@@ -478,8 +502,18 @@ var RSS_TICKER_UI = {
 	},
 	
 	itemVisited : function ( url, guid ) {
-		if ( document.getElementById( 'rss-ticker-item-' + guid ) ) {
-			document.getElementById( 'rss-ticker-item-container' ).removeChild( document.getElementById( 'rss-ticker-item-' + guid ) );
+		var element = document.getElementById( 'rss-ticker-item-' + guid );
+		if ( element ) {
+			element.style.color = RSS_TICKER_UTILS.prefs.getCharPref( 'visitedColor' );
+			element.style.fontWeight = ( RSS_TICKER_UTILS.prefs.getBoolPref( 'visitedBold' ) ) ? 'bold' : 'normal';
+
+			var feed = RSS_TICKER_FEED_MANAGER.feeds[element.feedGUID];
+			for (var i = 0; i < feed.items.length; i++) {
+				if ( feed.items[i].guid == element.guid ) {
+					RSS_TICKER_UTILS.log ( element.guid + " was visited" );
+					RSS_TICKER_FEED_MANAGER.feeds[element.feedGUID].items[i].visited = true;
+				}
+			}
 			
 			this.maybeHideTicker();
 		}
@@ -513,7 +547,18 @@ var RSS_TICKER_UI = {
 				continue;
 			
 			if ( item.visited )
-				continue;
+				if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'hideVisited' ) )
+					continue;
+				else {
+					var element = document.createElement( 'toolbarbutton' );
+					element.style.color = RSS_TICKER_UTILS.prefs.getCharPref( 'visitedColor' );
+					element.style.fontWeight = ( RSS_TICKER_UTILS.prefs.getBoolPref( 'visitedBold' ) ) ? 'bold' : 'normal';
+				}
+			else {
+				var element = document.createElement( 'toolbarbutton' );
+				element.style.color = RSS_TICKER_UTILS.prefs.getCharPref( 'unvisitedColor' );
+				element.style.fontWeight = ( RSS_TICKER_UTILS.prefs.getBoolPref( 'unvisitedBold' ) ) ? 'bold' : 'normal';
+			}
 			
 			var element = document.createElement( 'toolbarbutton' );
 			element.id = 'rss-ticker-item-' + item.guid;
