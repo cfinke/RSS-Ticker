@@ -65,5 +65,5 @@
 <!ENTITY rssticker.featured.subscribe "Prenumerera">
 <!ENTITY rssticker.featured.panelTitle "Rekommenderade flöden">
 <!ENTITY rssticker.featured.description "Stöd RSS Tickers utveckling utan att spendera ett öre genom att testa några av dess flöden från RSS Tickers vänner.">
-<!ENTITY rssticker.featured.contact "(Om du vill ha ditt flöde i den här listan, skicka ett mail till cfinke@gmail.com).">
+<!ENTITY rssticker.featured.contact "(Om du vill ha ditt flöde i den här listan, skicka ett mail till chris@efinke.com).">
 <!ENTITY rssticker.featured.notifyMe "Visa mig nya rekommenderade flöden då och då.">
