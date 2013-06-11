@@ -290,6 +290,8 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 
 	addLivemark : function ( livemarkId, startup ) {
+		RSS_TICKER_UTILS.log( "addLivemark: " + livemarkId );
+		
 		PlacesUtils.livemarks.getLivemark( { id : livemarkId }, function ( status, livemark ) {
 			if ( Components.isSuccessCode( status ) ) {
 				if ( RSS_TICKER_FEED_MANAGER.livemarks.indexOf( livemark ) < 0 ) {
