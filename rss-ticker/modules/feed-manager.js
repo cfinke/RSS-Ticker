@@ -15,6 +15,8 @@ var RSS_TICKER_FEED_MANAGER = {
 	views : {},
 
 	timers : {},
+	
+	rootFolderId : null,
 
 	initialFetch : true,
 	feedFetchTimeout : null,
@@ -51,10 +53,7 @@ var RSS_TICKER_FEED_MANAGER = {
 
 				PlacesUtils.bookmarks.addObserver( RSS_TICKER_FEED_MANAGER, false );
 
-				// Upgrade from the old ignore file.
-				RSS_TICKER_FEED_MANAGER.upgradeIgnoreFile();
-
-				var livemarkIDs = PlacesUtils.annotations.getItemsWithAnnotation( "livemark/feedURI", {} );
+				var livemarkIDs = RSS_TICKER_FEED_MANAGER.getLivemarks();
 
 				for ( var i = 0, _len = livemarkIDs.length; i < _len; i++ )
 					RSS_TICKER_FEED_MANAGER.addLivemark( livemarkIDs[i], true );
@@ -186,70 +185,121 @@ var RSS_TICKER_FEED_MANAGER = {
 		return FileUtils.getFile( "ProfD", [ "rss-ticker.cache" ]);
 	},
 
-	upgradeIgnoreFile : function () {
-		if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'ignoreFileUpgraded' ) )
-			return;
-		
-		RSS_TICKER_UTILS.prefs.setBoolPref( 'ignoreFileUpgraded', true );
-		
-		var line = { value: "" };
-		var feeds = [];
-		
-		Cu.import( "resource://gre/modules/FileUtils.jsm" );
-		
-		var ignoreFile = FileUtils.getFile( "ProfD", [ "rss-ticker.ignore.txt" ]);
-		
-		if ( ! ignoreFile.exists() )
-			return;
-		
-		var inputStream = Cc["@mozilla.org/network/file-input-stream;1"].createInstance( Ci.nsIFileInputStream );
-		inputStream.init( ignoreFile, 0x01, 0600, null );
-		
-		var lineStream = inputStream.QueryInterface( Ci.nsILineInputStream );
+    getLivemarks : function () {
+		//return PlacesUtils.annotations.getItemsWithAnnotation( "livemark/feedURI", {} )
 
-		var stillInFile = false;
+		var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].getService( Ci.nsINavBookmarksService );
+		var gBundle = Cc["@mozilla.org/intl/stringbundle;1"].getService( Ci.nsIStringBundleService );
+		var strings = gBundle.createBundle( "chrome://rss-ticker/locale/locale.properties" );
+		var folderName = strings.GetStringFromName( "extension.root" );
+		var folderId = RSS_TICKER_FEED_MANAGER.findFolderId( folderName );
 
-		do {
-			stillInFile = lineStream.readLine( line );
-
-			if ( "" == line.value )
-				continue;
-			else
-				feeds.push( line.value );
-		} while ( stillInFile );
-
-		lineStream.close();
-		inputStream.close();
-
-		var livemarkIds = PlacesUtils.annotations.getItemsWithAnnotation( "livemark/feedURI", {} );
+		var annotationService = Cc["@mozilla.org/browser/annotation-service;1"].getService( Ci.nsIAnnotationService );
+		var results = annotationService.getItemsWithAnnotation( "rss-ticker/root" , {} );
+			
+		if (results.length == 0) {
+			// Root folder doesn't exists			
+			
+			if (folderId == null)
+				var folderId = bookmarksService.createFolder( bookmarksService.bookmarksMenuFolder, folderName, bookmarksService.DEFAULT_INDEX );
+			
+			annotationService.setItemAnnotation( folderId, "rss-ticker/root", "RSS Ticker Root Folder", 0, annotationService.EXPIRE_NEVER );
+			rootFolderId = folderId;
+		} else {
+			// Duplicated root folders
+			for (var i = 1; i < results.length; i++)
+				annotationService.removeItemAnnotation( results[i], "rss-ticker/root" );
+			
+			rootFolderId = results[0];
 		
-		for ( var i = 0, _len = livemarkIds.length; i < _len; i++ ) {
-			PlacesUtils.livemarks.getLivemark( { id : livemarkIds[i] }, function ( status, livemark ) {
-				if ( ! Components.isSuccessCode( status ) )
-					return;
+			if ( rootFolderId != folderId ) {
+				annotationService.removeItemAnnotation( results[0], "rss-ticker/root" );
+				if (folderId == null)
+					var folderId = bookmarksService.createFolder( bookmarksService.bookmarksMenuFolder, folderName, bookmarksService.DEFAULT_INDEX );
 				
-				if ( feeds.indexOf( livemark.feedURI.spec ) > -1 )
-					PlacesUtils.annotations.setItemAnnotation( livemark.id, 'rss-ticker/ignored', true, 0, PlacesUtils.annotations.EXPIRE_NEVER );
-			} );
+				annotationService.setItemAnnotation( folderId, "rss-ticker/root", "RSS Ticker Root Folder", 0, annotationService.EXPIRE_NEVER );
+				rootFolderId = folderId;
+			}
 		}
+		
+		var historyService = Cc["@mozilla.org/browser/nav-history-service;1"].getService( Ci.nsINavHistoryService );
+		var options = historyService.getNewQueryOptions();
+		var query = historyService.getNewQuery();
+		query.setFolders( [rootFolderId], 1 );
+		var result = historyService.executeQuery( query, options );
+
+		return RSS_TICKER_FEED_MANAGER.getLivemarkIds ( result.root, [] );
+	},
+
+	getLivemarkIds : function ( rootNode, livemarksIds ) {
+		// iterate over the immediate children of this folder
+		rootNode.containerOpen = true;
+		
+		var j = rootNode.childCount;
+		
+		for (var i = 0; i < rootNode.childCount; i ++) {
+			var node = rootNode.getChild( i );
+			
+			var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].getService( Ci.nsINavBookmarksService );
+			var livemarkService = Cc["@mozilla.org/browser/livemark-service;2"].getService( Ci.mozIAsyncLivemarks );
+			var annotationService = Cc["@mozilla.org/browser/annotation-service;1"].getService( Ci.nsIAnnotationService );
+			if (bookmarksService.getItemType(node.itemId) == bookmarksService.TYPE_FOLDER) {
+				if (annotationService.itemHasAnnotation(node.itemId, "livemark/feedURI") || annotationService.itemHasAnnotation( node.itemId, "livemark/siteURI" )) 
+					livemarksIds.push(node.itemId);
+				else {
+					var historyService = Cc["@mozilla.org/browser/nav-history-service;1"].getService( Ci.nsINavHistoryService );
+					var options = historyService.getNewQueryOptions();
+					var query = historyService.getNewQuery();
+					var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].getService( Ci.nsINavBookmarksService );
+					query.setFolders( [node.itemId], 1 );
+					var result = historyService.executeQuery( query, options );
+					livemarksIds = RSS_TICKER_FEED_MANAGER.getLivemarkIds( result.root, livemarksIds );
+				}						
+			}    
+		}
+		rootNode.containerOpen = false;
+		return livemarksIds;
+	},
+	
+	findFolderId : function ( folderName ) {
+		var historyService = Cc["@mozilla.org/browser/nav-history-service;1"].getService( Ci.nsINavHistoryService );
+		var options = historyService.getNewQueryOptions();
+		var query = historyService.getNewQuery();
+
+		var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].getService( Ci.nsINavBookmarksService );
+		var bookmarksMenuFolder = bookmarksService.bookmarksMenuFolder;
+
+		query.setFolders([bookmarksMenuFolder], 1);
+
+		var result = historyService.executeQuery( query, options );
+		var rootNode = result.root;
+		rootNode.containerOpen = true;
+
+		// iterate over the immediate children of this folder
+		for (var i = 0; i < rootNode.childCount; i ++) {
+			var node = rootNode.getChild( i );
+			if ( node.title == folderName ) {
+				rootNode.containerOpen = false;
+				return node.itemId;
+			}
+		}
+
+		// close a container after using it!
+		rootNode.containerOpen = false;
+		return null;
 	},
 
 	addLivemark : function ( livemarkId, startup ) {
-		RSS_TICKER_UTILS.log( "addLivemark: " + livemarkId );
-		
 		PlacesUtils.livemarks.getLivemark( { id : livemarkId }, function ( status, livemark ) {
 			if ( Components.isSuccessCode( status ) ) {
-				RSS_TICKER_FEED_MANAGER.isLivemarkIgnored( livemark, function ( ignored ) {
-					if ( ignored )
-						return;
-
+				if ( RSS_TICKER_FEED_MANAGER.livemarks.indexOf( livemark ) < 0 ) {
 					RSS_TICKER_UTILS.log( "addLivemark callback: " + livemark.feedURI.spec );
 
 					RSS_TICKER_FEED_MANAGER.livemarks.push( livemark );
 
 					if ( ! startup )
 						RSS_TICKER_FEED_MANAGER.updateSingleFeed( livemark.feedURI.spec );
-				} );
+				}
 			}
 		} );
 	},
@@ -362,19 +412,6 @@ var RSS_TICKER_FEED_MANAGER = {
 		return this;
 	},
 	
-	isLivemarkIgnored : function ( livemark, callback ) {
-		callback( PlacesUtils.annotations.itemHasAnnotation( livemark.id, 'rss-ticker/ignored' ) );
-	},
-	
-	setIgnoredStatus : function ( livemarkId, ignore ) {
-		RSS_TICKER_UTILS.log( "Setting ignore for " + livemarkId + " (" + ignore + ")" );
-		
-		if ( ignore )
-			PlacesUtils.annotations.setItemAnnotation( livemarkId, 'rss-ticker/ignored', true, 0, PlacesUtils.annotations.EXPIRE_NEVER );
-		else
-			PlacesUtils.annotations.removeItemAnnotation( livemarkId, 'rss-ticker/ignored' );
-	},
-	
 	feedParsed : function ( feed ) {
 		RSS_TICKER_UTILS.log( "Feed parsed: " + feed.uri );
 		
@@ -436,6 +473,15 @@ var RSS_TICKER_FEED_MANAGER = {
 			RSS_TICKER_FEED_MANAGER.views[viewKey].notifyNoFeeds();
 	},
 	
+	getAllFeeds : function () {
+		var feedArray = [];
+		
+		for ( feedKey in RSS_TICKER_FEED_MANAGER.feeds )
+			feedArray.push( RSS_TICKER_FEED_MANAGER.feeds[feedKey] );
+		
+		return feedArray;
+	},
+
 	QueryInterface : function ( iid ) {
 		if ( iid.equals( Ci.nsINavBookmarkObserver ) || iid.equals( Ci.nsISupports ) )
 			return this;
@@ -460,15 +506,10 @@ var RSS_TICKER_FEED_MANAGER = {
 	},
 
 	onItemChanged : function ( id, property, isAnnotationProperty, value ) {
-		if ( "livemark/feedURI" == property ) {
-			this.addLivemark( id );
-		}
-		else if ( "rss-ticker/ignored" == property ) {
-			if ( PlacesUtils.annotations.itemHasAnnotation( id, 'rss-ticker/ignored' ) ) 
-				this.removeLivemark( id );
-			else
-				this.addLivemark( id );
-		}
+		var livemarkIDs = RSS_TICKER_FEED_MANAGER.getLivemarks();
+
+		for ( var i = 0, _len = livemarkIDs.length; i < _len; i++ )
+			RSS_TICKER_FEED_MANAGER.addLivemark( livemarkIDs[i], false );
 	},
 
 	onItemAdded : function ( id, folder, index, type, uri, title, time, guid, parentGUID ) { },
