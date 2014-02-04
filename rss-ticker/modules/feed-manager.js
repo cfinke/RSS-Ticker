@@ -524,7 +524,7 @@ TickerParseListener.prototype = {
 						image : "",
 						guid : "",
 						feedGUID : "",
-						published : "",
+						time : "",
 					};
 
 					itemObject.guid = item.id;
@@ -532,7 +532,7 @@ TickerParseListener.prototype = {
 					itemObject.feedGUID = feedObject.guid;
 					itemObject.displayUri = item.displayUri ? item.displayUri : itemObject.url;
 					itemObject.trackingUri = item.trackingUri ? item.trackingUri : "";
-					itemObject.published = item.published ? item.published : "";
+					itemObject.time = item.updated ? item.updated : ( item.published ? item.published : "" );
 
 					if ( ! itemObject.guid )
 						itemObject.guid = itemObject.url;
