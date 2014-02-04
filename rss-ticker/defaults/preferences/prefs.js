@@ -17,3 +17,5 @@ pref( "extensions.rssticker.debug", false );
 pref( "extensions.rssticker.disabled", false );
 
 pref( "extensions.rssticker.subscribeIconCheck", true );
+
+pref( "extensions.rssticker.maxHours", 48 );
