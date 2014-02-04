@@ -44,3 +44,5 @@
 <!ENTITY rssticker.tickerPlacement.belowBMTB "Below bookmarks toolbar">
 <!ENTITY rssticker.showInTicker "Show in RSS Ticker">
 <!ENTITY rssticker.showInTicker.key "T">
+<!ENTITY rssticker.options.maxHours "Hide items older than (in hours)">
+<!ENTITY rssticker.options.maxHours.description "This options will not be changed until you reopen your browser window.">
