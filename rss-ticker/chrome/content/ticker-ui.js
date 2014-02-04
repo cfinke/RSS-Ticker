@@ -514,8 +514,8 @@ var RSS_TICKER_UI = {
 			
 			// Only show items within n hours
 			var maxHours = RSS_TICKER_UTILS.prefs.getIntPref( 'maxHours' );
-			if ( !isNaN( Date.parse ( item.published ) ) ) 
-				if ( Date.now( ) - Date.parse( item.published ) > maxHours * 3600000 )
+			if ( !isNaN( Date.parse ( item.time ) ) ) 
+				if ( Date.now( ) - Date.parse( item.time ) > maxHours * 3600000 )
 					continue;
 				
 			if ( item.visited )
