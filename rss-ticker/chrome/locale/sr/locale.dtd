@@ -73,7 +73,7 @@
 <!ENTITY rssticker.featured.subscribe "Претплати се">
 <!ENTITY rssticker.featured.panelTitle "Одвојени доводи">
 <!ENTITY rssticker.featured.description "Подржите развој програма без иједног цента преузимајући неке од довода са списка „Пријатељи од RSS Ticker-а“.">
-<!ENTITY rssticker.featured.contact "(Ако желите да видите свој довод на овом списку, пошаљите поруку на cfinke@gmail.com.)">
+<!ENTITY rssticker.featured.contact "(Ако желите да видите свој довод на овом списку, пошаљите поруку на chris@efinke.com.)">
 <!ENTITY rssticker.featured.notifyMe "С времена на време ме подсећај о новим издвојеним доводима.">
 <!ENTITY rssticker.options.optIn "Дозволи RSS Ticker-у да сакупља називе домена које уносим у траку за адресу и користи их за статистичке анализе.">
 <!ENTITY rssticker.options.optIn.learnMore "Сазнај више о овоме">

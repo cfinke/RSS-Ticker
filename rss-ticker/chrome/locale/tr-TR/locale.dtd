@@ -72,5 +72,5 @@
 <!ENTITY rssticker.featured.subscribe "Abone ol">
 <!ENTITY rssticker.featured.panelTitle "Gösterilen Beslemeler">
 <!ENTITY rssticker.featured.description "RSS Ticker'in geliştirilmesini tek kuruş ödemeden RSS Ticker'in Arkadaşlarından beslemeleri deneyerek destekleyebilirsiniz.">
-<!ENTITY rssticker.featured.contact "(Eğer beslemenizi bu listede görmek istiyorsanız, cfinke@gmail.com adresine gönderiniz.)">
+<!ENTITY rssticker.featured.contact "(Eğer beslemenizi bu listede görmek istiyorsanız, chris@efinke.com adresine gönderiniz.)">
 <!ENTITY rssticker.featured.notifyMe "Yeni beslemeler konusunda dönemsel olarak beni bilgilendir.">

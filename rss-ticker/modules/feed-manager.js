@@ -436,6 +436,15 @@ var RSS_TICKER_FEED_MANAGER = {
 			RSS_TICKER_FEED_MANAGER.views[viewKey].notifyNoFeeds();
 	},
 	
+	getAllFeeds : function () {
+		var feedArray = [];
+		
+		for ( feedKey in RSS_TICKER_FEED_MANAGER.feeds )
+			feedArray.push( RSS_TICKER_FEED_MANAGER.feeds[feedKey] );
+		
+		return feedArray;
+	},
+	
 	QueryInterface : function ( iid ) {
 		if ( iid.equals( Ci.nsINavBookmarkObserver ) || iid.equals( Ci.nsISupports ) )
 			return this;

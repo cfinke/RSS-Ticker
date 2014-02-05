@@ -16,5 +16,7 @@
 	<setting pref="extensions.rssticker.ticksPerItem" type="integer" title="&rssticker.options.smooothness;" desc="&rssticker.options.smooothness.description;" />
 	<setting pref="extensions.rssticker.alwaysOpenInNewTab" type="bool" title="&rssticker.options.openInNewTab;" />
 	<setting pref="extensions.rssticker.rtl" type="bool" title="&rssticker.options.reverseDirection;" />
+	<setting pref="extensions.rssticker.randomizeItems" type="bool" title="&rssticker.options.random;" />
+	<setting pref="extensions.rssticker.dw.limitWidth" type="bool" title="&rssticker.options.limitWidth;" />
 	<setting pref="extensions.rssticker.hideWhenEmpty" type="bool" title="&rssticker.hideWhenEmpty;" />
 </vbox>

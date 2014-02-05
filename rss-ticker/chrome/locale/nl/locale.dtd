@@ -73,7 +73,7 @@
 <!ENTITY rssticker.featured.subscribe "Abonneren">
 <!ENTITY rssticker.featured.panelTitle "Aanbevolen feeds">
 <!ENTITY rssticker.featured.description "Ondersteun de ontwikkeling van RSS Ticker zonder een cent uit te geven door een paar van deze feeds van de vrienden van RSS Ticker uit te proberen.">
-<!ENTITY rssticker.featured.contact "(Als u uw feed in deze lijst wilt zien, stuur dan een e-mailbericht naar cfinke@gmail.com).">
+<!ENTITY rssticker.featured.contact "(Als u uw feed in deze lijst wilt zien, stuur dan een e-mailbericht naar chris@efinke.com).">
 <!ENTITY rssticker.featured.notifyMe "Informeer mij periodiek over nieuwe aanbevolen feeds.">
 <!ENTITY rssticker.options.optIn "RSS Ticker toestaan om de door mij ingegeven URL’s te gebruiken voor onderzoek en statistische analyse.">
 <!ENTITY rssticker.options.optIn.learnMore "Meer over deze optie.">
