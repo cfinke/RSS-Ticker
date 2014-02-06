@@ -491,9 +491,9 @@ var RSS_TICKER_UI = {
 			break;
 			case 'dw.limitWidth':
 				if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'dw.limitWidth' ) )
-					RSS_TICKER_UI.toolbar.setAttribute( 'class', RSS_TICKER_UI.toolbar.getAttribute( 'class' ) + ' condensed' );
+					RSS_TICKER_UI.toolbar.setAttribute( 'class', RSS_TICKER_UI.toolbar.getAttribute( 'class' ) + '-condensed' );
 				else
-					RSS_TICKER_UI.toolbar.setAttribute( 'class', RSS_TICKER_UI.toolbar.getAttribute( 'class' ).replace( /\bcondensed\b/, '' ) );
+					RSS_TICKER_UI.toolbar.setAttribute( 'class', RSS_TICKER_UI.toolbar.getAttribute( 'class' ).replace( /\b-condensed\b/, '' ) );
 			break;
 		}
 	},
