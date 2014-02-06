@@ -54,6 +54,19 @@
 	text-decoration: underline;
 }
 
-.rss-ticker-toolbar.condensed toolbarbutton {
+.rss-ticker-toolbar-condensed toolbarbutton  {
 	max-width: 250px;
 } 
+
+.rss-ticker-toolbar-condensed toolbarbutton[image] {
+	-moz-box-sizing: content-box;
+	min-height: 16px;
+	max-height: 2em;
+	border-width: 1px;
+	padding: 1px 2px;
+}
+
+.rss-ticker-toolbar-condensed toolbarbutton image {
+	width: 16px;
+	height: 16px;
+}
