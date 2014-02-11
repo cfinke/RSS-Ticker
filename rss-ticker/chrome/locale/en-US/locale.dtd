@@ -44,3 +44,4 @@
 <!ENTITY rssticker.showInTicker.key "T">
 <!ENTITY rssticker.options.random "Randomize ticker items">
 <!ENTITY rssticker.options.limitWidth "Limit the width of ticker items">
+<!ENTITY rssticker.options.maxItems "Number of items from each feed">
