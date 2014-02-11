@@ -20,3 +20,5 @@ pref( "extensions.rssticker.subscribeIconCheck", true );
 
 pref( "extensions.rssticker.randomizeItems", false );
 pref( "extensions.rssticker.dw.limitWidth", false );
+
+pref( "extensions.rssticker.maxItems", 0 );
