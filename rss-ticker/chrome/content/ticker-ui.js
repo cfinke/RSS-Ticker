@@ -93,6 +93,7 @@ var RSS_TICKER_UI = {
 		RSS_TICKER_UI.observe( null, "nsPref:changed", "ticksPerItem" );
 		RSS_TICKER_UI.observe( null, "nsPref:changed", "rtl" );
 		RSS_TICKER_UI.observe( null, "nsPref:changed", "dw.limitWidth" );
+		RSS_TICKER_UI.observe( null, "nsPref:changed", "maxItems" );
 		
 		this.tick();
 		
@@ -495,6 +496,34 @@ var RSS_TICKER_UI = {
 				else
 					RSS_TICKER_UI.toolbar.setAttribute( 'class', RSS_TICKER_UI.toolbar.getAttribute( 'class' ).replace( /\bcondensed\b/, '' ) );
 			break;
+			case 'maxItems':
+				// Unshuffle the ticker items.
+				var feeds = RSS_TICKER_FEED_MANAGER.getAllFeeds();
+					
+				// Remove all items
+				while ( RSS_TICKER_UI.ticker.lastChild )
+					RSS_TICKER_UI.ticker.removeChild( RSS_TICKER_UI.ticker.lastChild );
+					
+				// Reinstate all items.
+				for ( var i = 0, _len = feeds.length; i < _len; i++ )
+					RSS_TICKER_UI.feedParsed( feeds[i] );
+
+				if ( RSS_TICKER_UTILS.prefs.getBoolPref( 'randomizeItems' ) ) {
+					// Shuffle all of the ticker items.
+					var itemCount = RSS_TICKER_UI.ticker.childNodes.length;
+					
+					// Move the first half of items into the second half.
+					for ( var i = 0; i < itemCount / 2; i++ ) {
+						// Remove the first item.
+						var element = RSS_TICKER_UI.ticker.childNodes[0];
+						RSS_TICKER_UI.ticker.removeChild( element );
+						
+						// Find it a new location somewhere amongst the second half of items.
+						var newLocation = Math.floor( ( Math.random() * ( itemCount / 2 ) ) + ( itemCount / 2 ) );
+						RSS_TICKER_UI.ticker.insertBefore( element, RSS_TICKER_UI.ticker.childNodes[newLocation - 1] );
+					}
+				}
+			break;
 		}
 	},
 	
@@ -542,7 +571,11 @@ var RSS_TICKER_UI = {
 	writeFeed : function ( feed ) {
 		var feedItems = feed.items;
 
-		for ( var i = 0, _len = feedItems.length; i < _len; i++ ) {
+		var maxItemsByFeed = RSS_TICKER_UTILS.prefs.getIntPref( 'maxItems' );
+		if ( maxItemsByFeed == 0 )
+			maxItemsByFeed = feedItems.length;
+		
+		for ( var i = 0, _len = maxItemsByFeed; i < _len; i++ ) {
 			var item = feedItems[i];
 			
 			if ( document.getElementById( 'rss-ticker-item-' + item.guid ) )
