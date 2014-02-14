@@ -27,7 +27,7 @@
 				<label id="warningText">&rssticker.howToSubscribe1;</label>
 				<label id="warningText">&rssticker.howToSubscribe2;</label>
 				<label id="warningText">&rssticker.howToSubscribe3;</label>
-				<checkbox id="showWarningNextTime" label="&rssticker.dontShowAgain;" checked="true" onchange="RSS_TICKER_UTILS.prefs.setBoolPref( 'noFeedsFoundFlag.1.7', this.checked );" />
+				<checkbox id="showWarningNextTime" label="&rssticker.dontShowAgain;" checked="false" oncommand="RSS_TICKER_UTILS.prefs.setBoolPref( 'noFeedsFoundFlag.1.7', this.checked );" />
 				<hbox pack="center">
 					<button id="warningButton" oncommand="window.close();" label="&rssticker.closeNoFeedsPage;"/>
 				</hbox>
